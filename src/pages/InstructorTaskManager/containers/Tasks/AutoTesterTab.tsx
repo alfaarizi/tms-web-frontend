@@ -1,0 +1,162 @@
+import { useTranslation } from 'react-i18next';
+import { TestCaseFormModal } from 'pages/InstructorTaskManager/components/Tasks/TestCaseFormModal';
+import React, { useState } from 'react';
+
+import { Task } from 'resources/instructor/Task';
+import { useSetupTesterMutation, useTesterFormData, useToggleAutoTesterMutation } from 'hooks/instructor/TaskHooks';
+import { ToggleCard } from 'components/ToggleCard';
+import { TestCaseList } from 'pages/InstructorTaskManager/components/Tasks/TestCasesList';
+import {
+    useCreateTestCaseMutation,
+    useRemoveTestCaseMutation,
+    useTestCases,
+    useUpdateTestCaseMutation,
+} from 'hooks/instructor/TestCasesHooks';
+import { TestCase } from 'resources/instructor/TestCase';
+import { useShow } from 'ui-hooks/useShow';
+import { AutoTesterForm } from 'pages/InstructorTaskManager/components/Tasks/AutoTesterForm';
+import { SetupTester } from 'resources/instructor/SetupTester';
+import { useActualSemester } from 'hooks/common/SemesterHooks';
+
+type Props = {
+    task: Task
+}
+
+/**
+ * Displays auto tester settings and test cases for the given task
+ * @param task
+ * @constructor
+ */
+export function AutoTesterTab({ task }: Props) {
+    const { t } = useTranslation();
+    const actualSemester = useActualSemester();
+
+    // Tester hooks
+    const toggleTesterMutation = useToggleAutoTesterMutation();
+
+    // Test settings hooks
+    const testerFormData = useTesterFormData(task.id, task.autoTest === 1);
+    const setupMutation = useSetupTesterMutation(task.id);
+
+    // Test case hooks
+    const testCases = useTestCases(task.id, task.autoTest === 1);
+    const createTestCaseMutation = useCreateTestCaseMutation();
+    const updateTestCaseMutation = useUpdateTestCaseMutation();
+    const removeTestCaseMutation = useRemoveTestCaseMutation();
+    const showNewTestCaseModal = useShow();
+    const [testCaseToEdit, setTestCaseToEdit] = useState<TestCase | null>(null);
+
+    // Turn testing on/off
+    const handleToggle = () => {
+        toggleTesterMutation.mutate(task.id);
+    };
+
+    // Save new test case
+    const handleSaveNewTestCase = async (data: TestCase) => {
+        try {
+            await createTestCaseMutation.mutateAsync({
+                ...data,
+                taskID: task.id,
+            });
+            showNewTestCaseModal.toHide();
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    // Select test case to edit
+    const handleTestCaseEditShow = (testCase: TestCase) => {
+        setTestCaseToEdit(testCase);
+    };
+
+    // Clear selected test case
+    const handleTestCaseEditClose = () => {
+        setTestCaseToEdit(null);
+    };
+
+    // Save edited test case
+    const handleTestCaseEditSave = async (data: TestCase) => {
+        if (!testCaseToEdit) {
+            throw new Error('No test case selected');
+        }
+        try {
+            await updateTestCaseMutation.mutateAsync({
+                ...data,
+                id: testCaseToEdit.id,
+            });
+            handleTestCaseEditClose();
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    // Delete test case
+    const handleTestCaseDelete = (testCase: TestCase) => {
+        removeTestCaseMutation.mutate(testCase);
+    };
+
+    // Update tester settings
+    const handleTestUpdate = async (data: SetupTester) => {
+        try {
+            await setupMutation.mutateAsync(data);
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    // Render
+    return (
+        <>
+            {/* Display toggle */}
+            <ToggleCard
+                status={task.autoTest === 1}
+                toggleID="auto-tester-toggle"
+                onToggle={handleToggle}
+                disabled={!actualSemester.check(task.semesterID)}
+                label={t('task.autoTester.activate')}
+            />
+
+            {/* Display tester settings */}
+            {task.autoTest && testerFormData.data
+                ? (
+                    <AutoTesterForm
+                        task={task}
+                        formData={testerFormData.data}
+                        onSave={handleTestUpdate}
+                        inProgress={setupMutation.isLoading}
+                        isActualSemester={actualSemester.check(task.semesterID)}
+                    />
+                )
+                : null}
+
+            {/* Display test cases */}
+            {task.autoTest
+                ? (
+                    <TestCaseList
+                        testCases={testCases.data}
+                        onNew={showNewTestCaseModal.toShow}
+                        onEdit={handleTestCaseEditShow}
+                        onDelete={handleTestCaseDelete}
+                        isActualSemester={actualSemester.check(task.semesterID)}
+                    />
+                ) : null}
+
+            {/* Modal to create new test case */}
+            <TestCaseFormModal
+                title={t('task.autoTester.newTestCase')}
+                show={showNewTestCaseModal.show}
+                onSave={handleSaveNewTestCase}
+                onCancel={showNewTestCaseModal.toHide}
+            />
+
+            {/* Modal to edit existing test case */}
+            <TestCaseFormModal
+                title={t('task.autoTester.editTestCase')}
+                show={!!testCaseToEdit}
+                editData={testCaseToEdit}
+                onSave={handleTestCaseEditSave}
+                onCancel={handleTestCaseEditClose}
+            />
+        </>
+    );
+}

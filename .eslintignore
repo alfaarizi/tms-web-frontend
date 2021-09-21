@@ -1,0 +1,6 @@
+/node_modules
+
+/src/App.test.tsx
+/src/reportWebVitals.ts
+/src/service-worker.ts
+/src/serviceWorkerRegistration.ts

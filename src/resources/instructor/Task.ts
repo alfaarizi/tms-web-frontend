@@ -1,0 +1,25 @@
+import { Group } from 'resources/instructor/Group';
+import { Semester } from 'resources/common/Semester';
+
+export interface Task {
+    id: number;
+    name: string;
+    category: string;
+    translatedCategory: string;
+    description: string;
+    softDeadline: string;
+    hardDeadline: string;
+    available?: any;
+    autoTest: number;
+    isVersionControlled?: boolean;
+    groupID: number;
+    semesterID: number;
+    creatorName: string;
+    testOS: string;
+    showFullErrorMsg: number;
+    imageName?: string;
+    compileInstructions: string;
+    runInstructions?: string;
+    group?: Group,
+    semester?: Semester
+}

@@ -1,0 +1,60 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { ButtonGroup } from 'react-bootstrap';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
+import { DataRow } from 'components/DataRow';
+import { Task } from 'resources/instructor/Task';
+import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { CustomCard } from 'components/CustomCard/CustomCard';
+import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+
+type Props = {
+    task: Task,
+    isActualSemester: boolean,
+    onEdit: () => void,
+    onRemove: () => void,
+    showVersionControl: boolean
+}
+
+export const TaskDetails = ({
+    isActualSemester,
+    onRemove,
+    onEdit,
+    task,
+    showVersionControl,
+}: Props) => {
+    const { t } = useTranslation();
+
+    return (
+        <CustomCard>
+            <CustomCardHeader>
+                <CustomCardTitle>{task.name}</CustomCardTitle>
+                {isActualSemester && task.category !== 'Canvas tasks'
+                    ? (
+                        <ButtonGroup>
+                            <ToolbarButton icon={faEdit} onClick={onEdit} text={t('common.edit')} />
+                            <DeleteButton showText onDelete={onRemove} />
+                        </ButtonGroup>
+                    )
+                    : null}
+            </CustomCardHeader>
+
+            <DataRow label="ID">{task.id}</DataRow>
+            <DataRow label={t('task.category')}>{task.translatedCategory}</DataRow>
+            <DataRow label={t('task.available')}>{task.available}</DataRow>
+            <DataRow label={t('task.softDeadLine')}>{task.softDeadline}</DataRow>
+            <DataRow label={t('task.hardDeadLine')}>{task.hardDeadline}</DataRow>
+            <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
+            <DataRow label={t('task.description')}><MarkdownRenderer source={task.description} /></DataRow>
+            {showVersionControl ? (
+                <DataRow label={t('task.isVersionControlled')}>
+                    {task.isVersionControlled ? t('common.yes') : t('common.no')}
+                </DataRow>
+            ) : null}
+        </CustomCard>
+    );
+};

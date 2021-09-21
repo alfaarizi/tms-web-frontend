@@ -1,0 +1,109 @@
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Tab } from 'react-bootstrap';
+import { useHistory } from 'react-router';
+
+import { useRemoveTaskMutation, useTask, useUpdateTaskMutation } from 'hooks/instructor/TaskHooks';
+import { Task } from 'resources/instructor/Task';
+import { TaskDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskDetails';
+import { useTranslation } from 'react-i18next';
+import { TaskForm } from 'pages/InstructorTaskManager/components/Tasks/TaskForm';
+import { InstructorFilesTab } from 'pages/InstructorTaskManager/containers/Tasks/InstructorFilesTab';
+import { StudentFilesListTab } from 'pages/InstructorTaskManager/containers/Tasks/StudentFilesListTab';
+import { useActualSemester } from 'hooks/common/SemesterHooks';
+import { useShow } from 'ui-hooks/useShow';
+import { TabbedInterface } from 'components/TabbedInterface';
+import { AutoTesterTab } from 'pages/InstructorTaskManager/containers/Tasks/AutoTesterTab';
+import { useUserInfo } from 'hooks/common/UserHooks';
+import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+
+type Params = {
+    id?: string
+}
+
+export const TaskDetailsPage = () => {
+    const { t } = useTranslation();
+    const { id } = useParams<Params>();
+    const history = useHistory();
+    const task = useTask(parseInt(id || '-1', 10));
+    const updateMutation = useUpdateTaskMutation();
+    const removeMutation = useRemoveTaskMutation();
+    const actualSemester = useActualSemester();
+    const userInfo = useUserInfo();
+    const showEdit = useShow();
+    const [updateErrorBody, setUpdateErrorBody] = useState<ValidationErrorBody | null>(null);
+
+    if (!task.data) {
+        return null;
+    }
+
+    const handleEditSave = async (data: Task) => {
+        try {
+            await updateMutation.mutateAsync({
+                ...data,
+                id: task.data.id,
+            });
+            showEdit.toHide();
+            setUpdateErrorBody(null);
+        } catch (e) {
+            if (e instanceof ServerSideValidationError) {
+                setUpdateErrorBody(e.body);
+            }
+        }
+    };
+
+    const handleEditCancel = () => {
+        showEdit.toHide();
+        setUpdateErrorBody(null);
+    };
+
+    const handleRemove = async () => {
+        try {
+            await removeMutation.mutateAsync(task.data);
+            history.push(`../groups/${task.data.groupID}`);
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    return (
+        <>
+            {showEdit.show ? (
+                <TaskForm
+                    title={t('task.editTask')}
+                    onSave={handleEditSave}
+                    onCancel={handleEditCancel}
+                    editData={task.data}
+                    showVersionControl={false}
+                    serverSideError={updateErrorBody}
+                />
+            )
+                : (
+                    <TaskDetails
+                        isActualSemester={actualSemester.check(task.data.semesterID)}
+                        onEdit={showEdit.toShow}
+                        onRemove={handleRemove}
+                        task={task.data}
+                        showVersionControl={!!userInfo.data && userInfo.data.isVersionControlEnabled}
+                    />
+                )}
+
+            <TabbedInterface defaultActiveKey="solutions" id="group-tabs">
+                <Tab eventKey="solutions" title={t('task.solutions')}>
+                    <StudentFilesListTab task={task.data} />
+                </Tab>
+                <Tab eventKey="instructorFiles" title={t('task.instructorFiles')}>
+                    <InstructorFilesTab task={task.data} />
+                </Tab>
+                {!!userInfo.data && userInfo.data.isAutoTestEnabled
+                    ? (
+                        <Tab eventKey="tester" title={t('task.tester')}>
+                            <AutoTesterTab task={task.data} />
+                        </Tab>
+                    )
+                    : null}
+
+            </TabbedInterface>
+        </>
+    );
+};
