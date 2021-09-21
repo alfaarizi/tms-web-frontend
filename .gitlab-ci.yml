@@ -1,0 +1,34 @@
+# Default image (https://hub.docker.com/r/mcserep/php)
+image: node:10.24
+
+# Stages: lint -> test -> deploy
+stages:
+  - lint
+  - test
+
+# Cached files between builds
+cache:
+  key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+  paths:
+    - node_modules/
+
+# Dependency scanning
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+
+# ESLint
+eslint:
+  stage: lint
+  before_script:
+    - npm install
+  script:
+    - npm run lint
+  allow_failure: true
+
+# Build
+build:
+  stage: test
+  before_script:
+    - npm install
+  script:
+    - npm run build
