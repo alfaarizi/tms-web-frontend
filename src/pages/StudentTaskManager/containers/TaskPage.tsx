@@ -61,9 +61,9 @@ export const TaskPage = () => {
         <>
             <TaskDetails task={task.data} />
 
-            {new Date(task?.data.hardDeadline) >= new Date()
-                && studentFile?.isAccepted !== 'Accepted'
-                && task.data.category !== 'Canvas tasks'
+            {((new Date(task?.data.hardDeadline) >= new Date() && studentFile?.isAccepted !== 'Accepted')
+                || studentFile?.isAccepted !== 'Late Submission')
+              && task.data.category !== 'Canvas tasks'
                 ? (
                     <FileUpload
                         multiple={false}
