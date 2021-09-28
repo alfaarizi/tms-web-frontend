@@ -47,19 +47,23 @@ export function AnswerFormModal({
         }
     }, [textError]);
 
-    useEffect(() => {
+    const handleShow = () => {
+        // Set edit data or clear form fields
         if (editData) {
             setValue('text', editData.text);
             setValue('correct', editData.correct);
+        } else {
+            setValue('text', '');
+            setValue('correct', 0);
         }
-    }, [editData]);
+    };
 
     const onSubmit = handleSubmit((data: ExamAnswer) => {
         onSave(data);
     });
 
     return (
-        <Modal show={show} onHide={onCancel} animation size="lg">
+        <Modal show={show} onHide={onCancel} onShow={handleShow} animation size="lg">
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
