@@ -14,6 +14,7 @@ import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Params = {
     id?: string
@@ -83,7 +84,9 @@ export function StudentFilePage() {
                             <DataRow label={t('task.status')}>{item.translatedIsAccepted}</DataRow>
                             <DataRow label={t('task.grade')}>{item.grade}</DataRow>
                             <DataRow label={t('task.graderName')}>{item.graderName}</DataRow>
-                            <DataRow label={t('task.notes')}>{item.notes}</DataRow>
+                            <DataRow label={t('task.notes')}>
+                                <MultiLineTextBlock text={item.notes} />
+                            </DataRow>
                             {item.gitRepo ? <DataRow label={t('task.git.gitRepo')}>{item.gitRepo}</DataRow> : null}
                         </>
                     )}

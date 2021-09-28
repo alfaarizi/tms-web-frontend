@@ -9,6 +9,7 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
     studentFile?: StudentFile,
@@ -41,7 +42,9 @@ export const StudentFileDetails = ({
             <DataRow label={t('task.name')}>{studentFile?.name}</DataRow>
             <DataRow label={t('task.uploadTime')}>{studentFile?.uploadTime}</DataRow>
             <DataRow label={t('task.grade')}>{studentFile?.grade}</DataRow>
-            <DataRow label={t('task.notes')}>{studentFile?.notes}</DataRow>
+            <DataRow label={t('task.notes')}>
+                <MultiLineTextBlock text={studentFile?.notes} />
+            </DataRow>
             <DataRow label={t('task.status')}>{studentFile?.translatedIsAccepted}</DataRow>
             <DataRow label={t('task.graderName')}>{studentFile?.graderName}</DataRow>
 
