@@ -10,6 +10,7 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
     report: Plagiarism,
@@ -47,7 +48,9 @@ export function RequestDetails({
                     : null}
             </CustomCardHeader>
             <DataRow label={t('plagiarism.ignoreThreshold')}>{report.ignoreThreshold}</DataRow>
-            <DataRow label={t('common.description')}>{report.description}</DataRow>
+            <DataRow label={t('common.description')}>
+                <MultiLineTextBlock text={report.description} />
+            </DataRow>
         </CustomCard>
     );
 }
