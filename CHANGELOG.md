@@ -7,13 +7,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* show the file upload form for tasks where the submission is in late submission status ([d9666c4](https://gitlab.com/tms-elte/frontend-react/commit/d9666c413be01e6bf8c0eb9d21a1ccdef0c66c2f))
-
-### [2.0.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.0.0...v2.0.1) (2021-09-26)
-
-
-### Bug Fixes
-
-* show the file upload form for tasks where the submission in in late submission status ([b8ea521](https://gitlab.com/tms-elte/frontend-react/commit/b8ea52154a9705e53680ce8511cc1bb751d7150a))
+* show the file upload form for tasks where the submission is in late submission status ([d9666c4](https://gitlab.com/tms-elte/frontend-react/commit/d9666c413be01e6bf8c0eb9d21a1ccdef0c66c2f), [b8ea521](https://gitlab.com/tms-elte/frontend-react/commit/b8ea52154a9705e53680ce8511cc1bb751d7150a))
 
 ## 2.0.0 (2021-09-22)
+
+
+Initial public release.
