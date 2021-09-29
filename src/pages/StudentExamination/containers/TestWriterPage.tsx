@@ -100,12 +100,14 @@ export function TestWriterPage() {
         handleStartWrite();
     }, [id]);
 
-    // Cleanup interval and timeout
+    // Cleanup interval and timeout when the user leaves the test writer page
     useEffect(() => (() => {
-        window.clearInterval(intervalID);
-        window.clearTimeout(timeoutID);
+        if (intervalID !== null && timeoutID !== null) {
+            window.clearInterval(intervalID);
+            window.clearTimeout(timeoutID);
+        }
     }),
-    [id]);
+    [timeoutID, intervalID]);
 
     // Render
     if (!isStarted) {
