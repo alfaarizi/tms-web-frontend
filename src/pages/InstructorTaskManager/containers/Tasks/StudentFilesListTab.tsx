@@ -16,6 +16,7 @@ import { DataRow } from 'components/DataRow';
 import { StudentFilesList } from 'pages/InstructorTaskManager/containers/StudentFiles/StudentFilesList';
 import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
 import { SpreadsheetFormat } from 'api/instructor/StudentFilesService';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
     task: Task
@@ -79,7 +80,9 @@ export function StudentFilesListTab({ task }: Props) {
                         <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
                         <DataRow label={t('task.grade')}>{file.grade}</DataRow>
                         <DataRow label={t('task.graderName')}>{file.graderName}</DataRow>
-                        <DataRow label={t('task.notes')}>{file.notes}</DataRow>
+                        <DataRow label={t('task.notes')}>
+                            <MultiLineTextBlock text={file.notes} />
+                        </DataRow>
                         {file.gitRepo ? <DataRow label={t('task.git.gitRepo')}>{file.gitRepo}</DataRow> : null}
                     </>
                 )}
