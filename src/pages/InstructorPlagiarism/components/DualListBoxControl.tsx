@@ -32,14 +32,6 @@ const icons = {
     moveBottom: <FontAwesomeIcon icon={faChevronCircleDown} />,
 };
 
-function filterCallback(option: any, filterInput: any) {
-    if (filterInput === '') {
-        return true;
-    }
-
-    return (new RegExp(filterInput, 'i')).test(option.label);
-}
-
 type Props = {
     control: any,
     name: string,
@@ -66,7 +58,6 @@ export function DualListBoxControl({
                     canFilter
                     alignActions="top"
                     filterPlaceholder={t('common.search')}
-                    filterCallback={filterCallback}
                     options={options}
                     selected={field.value}
                     onChange={field.onChange}
