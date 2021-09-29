@@ -79,7 +79,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts --ext .tsx",
     "lint-fix": "eslint . --ext .ts --ext .tsx --fix",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prerelease": "standard-version --prerelease alpha --skip.changelog"
   },
   "browserslist": {
     "production": [
