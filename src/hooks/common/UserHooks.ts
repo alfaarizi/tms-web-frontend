@@ -19,12 +19,23 @@ export const USER_INFO_QUERY_KEY = 'userinfo';
  */
 export function useClientSideLocaleChange() {
     const { i18n } = useTranslation();
+    const queryClient = useQueryClient();
 
     const change = async (locale: string) => {
-        // Change i18next language
-        await i18n.changeLanguage(locale);
-        // Update header
+        // Always update the header, to make sure it is not undefined
         axiosInstance.defaults.headers.common['Accept-Language'] = locale;
+
+        // Change i18next language, if the new locale is different
+        if (locale !== i18n.language) {
+            await i18n.changeLanguage(locale);
+
+            // Reload all content to change dynamic content language
+            // Cancel all fetching queries,
+            // to make sure the next invalidate call will trigger a refetch with the updated header
+            await queryClient.cancelQueries({ fetching: true });
+            // Then invalidate all queries, to trigger a refetch
+            await queryClient.invalidateQueries();
+        }
     };
 
     return {
@@ -38,17 +49,11 @@ export function useClientSideLocaleChange() {
  */
 export function useChangeUserLocaleMutation() {
     const clientSideLocale = useClientSideLocaleChange();
-    const queryClient = useQueryClient();
 
     return useMutation((locale: string) => AuthService.updateUserLocale(locale), {
         onSuccess: async (_data, locale) => {
             // Also change clientside locale
             await clientSideLocale.change(locale);
-
-            // Invalidate all queries, this will trigger refetch for all loaded content
-            await queryClient.invalidateQueries({
-                predicate: () => true,
-            });
         },
     });
 }
@@ -57,9 +62,8 @@ export function useChangeUserLocaleMutation() {
  * Provides information about the current user
  */
 export function useUserInfo(enabled: boolean = true) {
-    const { i18n } = useTranslation();
-    const clientSideLocale = useClientSideLocaleChange();
     const appContext = useAppContext();
+    const clientSideLocale = useClientSideLocaleChange();
 
     return useQuery<UserInfo>(USER_INFO_QUERY_KEY, () => AuthService.userinfo(), {
         enabled,
@@ -67,10 +71,9 @@ export function useUserInfo(enabled: boolean = true) {
             if (!data) {
                 return;
             }
+
             // Update language based on userinfo
-            if (data.locale !== i18n.language) {
-                await clientSideLocale.change(data.locale);
-            }
+            await clientSideLocale.change(data.locale);
 
             // Set selected semester to actual semester, if it is null
             if (appContext.selectedSemester === null) {
