@@ -34,11 +34,12 @@ build:
   script:
     - npm run build
 
-# Deployment over SSH to staging environment of ELTE
-# All v* tags, including prereleases
-deploy_staging:
+# Deployment over SSH
+.deploy:
   stage: deploy
   image: ubuntu:20.04
+  variables:
+    DEPLOY_PATH: /var/www/html
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - mkdir -p ~/.ssh
@@ -51,15 +52,34 @@ deploy_staging:
         set -e
         set -x
         umask 002
-        cd /var/www/tms_dev/frontend-react/
+        cd $DEPLOY_PATH
         git status
         git fetch origin
         git checkout tags/$CI_COMMIT_TAG
         npm install
         npm run build
       CMD
+
+# Deployment to staging environment of ELTE
+# All v* tags, including prereleases
+deploy_staging:
+  extends: .deploy
+  variables:
+    DEPLOY_PATH: /var/www/tms_dev/frontend-react/
   environment:
     name: staging
     url: https://tms.inf.elte.hu/dev/
   rules:
     - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v.*$/ && $CI_PROJECT_NAMESPACE == "tms-elte"'
+
+# Deployment to production environment of ELTE
+# All v* tags, excluding prereleases
+deploy_production:
+  extends: .deploy
+  variables:
+    DEPLOY_PATH: /var/www/tms/frontend-react/
+  environment:
+    name: production
+    url: https://tms.inf.elte.hu/
+  rules:
+    - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v[^-]*$/ && $CI_PROJECT_NAMESPACE == "tms-elte"'
