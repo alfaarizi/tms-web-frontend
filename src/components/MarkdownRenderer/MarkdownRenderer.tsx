@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { createImageUrl } from 'utils/createImageUrl';
+
 import styles from 'components/MarkdownRenderer/MarkdownRenderer.module.css';
 
 type Props = {
@@ -20,8 +22,10 @@ export function MarkdownRenderer({ source }: Props) {
     return (
         <ReactMarkdown
             className={styles.markdownRenderer}
-            source={source}
             transformImageUri={transformImgUrl}
-        />
+            remarkPlugins={[remarkGfm]}
+        >
+            {source}
+        </ReactMarkdown>
     );
 }
