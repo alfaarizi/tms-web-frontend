@@ -32,7 +32,7 @@ const insertImageCommand: Command = {
 export type InsertFunc = (url: string) => void;
 
 interface Props extends ReactMdeProps {
-    renderGallery: (insertFunc: InsertFunc) => React.ReactNode
+    renderGallery?: (insertFunc: InsertFunc) => React.ReactNode
 }
 
 /**
@@ -82,16 +82,20 @@ export function ReactMdeWithCommands(props: Props) {
                 }}
             />
 
-            <div className="my-1 py-1 border-bottom">
-                <Button onClick={toggle} variant="outline-secondary" size="sm" className="mb-2">
-                    <FontAwesomeIcon icon={faImages} />
-                    {' '}
-                    {show ? t('reactMde.closeImageManager') : t('reactMde.openImageManager')}
-                </Button>
+            {props.renderGallery
+                ? (
+                    <div className="my-1 py-1 border-bottom">
+                        {/* Render show gallery button */}
+                        <Button onClick={toggle} variant="outline-secondary" size="sm" className="mb-2">
+                            <FontAwesomeIcon icon={faImages} />
+                            {' '}
+                            {show ? t('reactMde.closeImageManager') : t('reactMde.openImageManager')}
+                        </Button>
 
-                {/* Render gallery and pass handleImageInsert function */}
-                {show && props.renderGallery(handleImageInsert)}
-            </div>
+                        {/* Render gallery and pass handleImageInsert function */}
+                        {show && props.renderGallery(handleImageInsert)}
+                    </div>
+                ) : null}
         </>
     );
 }

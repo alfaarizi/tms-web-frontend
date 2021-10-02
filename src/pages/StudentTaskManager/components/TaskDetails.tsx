@@ -26,12 +26,11 @@ export const TaskDetails = ({ task }: Props) => {
             <DataRow label={t('task.softDeadLine')}>{task.softDeadline}</DataRow>
             <DataRow label={t('task.hardDeadLine')}>{task.hardDeadline}</DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
+            <hr />
             <DataRow label={t('task.description')}>
-                <DataRow label={t('task.description')}>
-                    {task.category === 'Canvas tasks'
-                        ? <MultiLineTextBlock text={task.description} />
-                        : <MarkdownRenderer source={task.description} />}
-                </DataRow>
+                {task.category === 'Canvas tasks'
+                    ? <MultiLineTextBlock text={task.description} />
+                    : <MarkdownRenderer source={task.description} />}
             </DataRow>
         </CustomCard>
     );

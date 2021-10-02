@@ -12,6 +12,7 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { DateTimeControl } from 'components/DateTimeControl/DateTimeControl';
 import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
+import { MarkdownFormControl } from 'components/MarkdownFormControl';
 
 type Props = {
     title: string,
@@ -89,7 +90,13 @@ export function TaskForm({
                         {t('task.description')}
                         :
                     </Form.Label>
-                    <Form.Control as="textarea" {...register('description', { required: false })} size="sm" />
+                    <MarkdownFormControl
+                        name="description"
+                        control={control}
+                        rules={{
+                            required: false,
+                        }}
+                    />
                     {errors.description && <FormError message={errors.description.message} />}
                 </Form.Group>
 

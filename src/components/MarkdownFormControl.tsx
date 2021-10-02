@@ -9,7 +9,7 @@ interface Props {
     name: string,
     control: any,
     rules: object,
-    renderGallery: (insertFunc: InsertFunc) => ReactNode
+    renderGallery?: (insertFunc: InsertFunc) => ReactNode
 }
 
 /**
