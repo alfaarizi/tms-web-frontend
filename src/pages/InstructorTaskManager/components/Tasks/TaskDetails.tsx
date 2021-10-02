@@ -11,6 +11,7 @@ import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { DeleteButton } from 'components/Buttons/DeleteButton';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
     task: Task,
@@ -49,7 +50,11 @@ export const TaskDetails = ({
             <DataRow label={t('task.softDeadLine')}>{task.softDeadline}</DataRow>
             <DataRow label={t('task.hardDeadLine')}>{task.hardDeadline}</DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
-            <DataRow label={t('task.description')}><MarkdownRenderer source={task.description} /></DataRow>
+            <DataRow label={t('task.description')}>
+                {task.category === 'Canvas tasks'
+                    ? <MultiLineTextBlock text={task.description} />
+                    : <MarkdownRenderer source={task.description} />}
+            </DataRow>
             {showVersionControl ? (
                 <DataRow label={t('task.isVersionControlled')}>
                     {task.isVersionControlled ? t('common.yes') : t('common.no')}
