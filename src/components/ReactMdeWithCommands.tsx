@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ReactMde, { Command, CommandContext, ExecuteOptions } from 'react-mde';
 import { useTranslation } from 'react-i18next';
-import { faImages } from '@fortawesome/free-solid-svg-icons';
+import { faImages, faTable } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useShow } from 'ui-hooks/useShow';
@@ -21,7 +21,7 @@ interface InsertImageCommandContext extends CommandContext {
 }
 
 /**
- * Replaces selection with image
+ * Replaces selection with an image
  */
 const insertImageCommand: Command = {
     execute: (options: ExecuteOptions) => {
@@ -33,9 +33,34 @@ const insertImageCommand: Command = {
     },
 };
 
+/**
+ * Replaces selection with a table
+ */
+const insertTableCommand: Command = {
+    icon: () => (
+        <FontAwesomeIcon icon={faTable} />
+    ),
+    execute: (opts) => {
+        const text = `
+| header | header |
+| ------ | ------ |
+| cell | cell |
+| cell | cell |
+
+`;
+        opts.textApi.replaceSelection(text);
+    },
+};
+
+const toolbarButtons = [
+    ['header', 'bold', 'italic', 'strikethrough'],
+    ['link', 'quote', 'code', 'image', 'table'],
+    ['unordered-list', 'ordered-list', 'checked-list'],
+];
+
 export type InsertFunc = (url: string) => void;
 
-interface Props {
+type Props = {
     value: string;
     onChange: (value: string) => void;
     renderGallery?: (insertFunc: InsertFunc) => React.ReactNode;
@@ -93,7 +118,9 @@ export function ReactMdeWithCommands({ value, onChange, renderGallery }: Props) 
                 }}
                 commands={{
                     'insert-image': insertImageCommand,
+                    table: insertTableCommand,
                 }}
+                toolbarCommands={toolbarButtons}
                 ref={(c) => {
                     mdeRef.current = c;
                 }}
