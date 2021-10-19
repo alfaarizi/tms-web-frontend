@@ -42,13 +42,12 @@ export const StudentFileDetails = ({
             <DataRow label={t('task.name')}>{studentFile?.name}</DataRow>
             <DataRow label={t('task.uploadTime')}>{studentFile?.uploadTime}</DataRow>
             <DataRow label={t('task.grade')}>{studentFile?.grade}</DataRow>
+            <DataRow label={t('task.status')}>{studentFile?.translatedIsAccepted}</DataRow>
+            <DataRow label={t('task.graderName')}>{studentFile?.graderName}</DataRow>
             <DataRow label={t('task.notes')}>
                 <MultiLineTextBlock text={studentFile?.notes} />
             </DataRow>
-            <DataRow label={t('task.status')}>{studentFile?.translatedIsAccepted}</DataRow>
-            <DataRow label={t('task.graderName')}>{studentFile?.graderName}</DataRow>
-
-            {autoTest === 1
+            {autoTest === 1 && studentFile?.errorMsg
                 ? <AutoTestResultAlert isAccepted={studentFile?.isAccepted} errorMsg={studentFile?.errorMsg} /> : null}
         </CustomCard>
     );
