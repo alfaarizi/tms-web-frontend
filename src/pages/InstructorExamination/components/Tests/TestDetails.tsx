@@ -10,6 +10,7 @@ import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { faCopy, faEdit, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { DeleteButton } from 'components/Buttons/DeleteButton';
 import { ButtonGroup } from 'react-bootstrap';
+import { DateTimeInterval } from 'pages/InstructorExamination/components/Tests/DateTimeInterval';
 
 type Params = {
     test: ExamTest;
@@ -47,11 +48,11 @@ export function TestDetails({
                 )
             </DataRow>
             <DataRow label={t('examTests.available')}>
-                {test.availablefrom}
-                {' '}
-                -
-                {' '}
-                {test.availableuntil}
+                <DateTimeInterval
+                    from={test.availablefrom}
+                    to={test.availableuntil}
+                    timezone={test.timezone}
+                />
             </DataRow>
             <DataRow label={t('examTests.duration')}>{test.duration}</DataRow>
             <DataRow label={t('examTests.questionAmount')}>{test.questionamount}</DataRow>

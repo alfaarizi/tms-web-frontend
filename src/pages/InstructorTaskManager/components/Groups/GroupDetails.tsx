@@ -61,6 +61,7 @@ export function GroupDetails({
             <DataRow label="ID">{group.id}</DataRow>
             <DataRow label={t('course.code')}>{group.course.code}</DataRow>
             <DataRow label={t('group.number')}>{group.number}</DataRow>
+            <DataRow label={t('common.timezone')}>{group.timezone}</DataRow>
             <DataRow label={t('group.examGroup')}>
                 {group.isExamGroup ? t('common.yes') : t('common.no')}
             </DataRow>

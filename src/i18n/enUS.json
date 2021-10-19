@@ -46,7 +46,8 @@
     "fileUploadFailed": "File upload failed",
     "fileUploadSuccess": "{{count}} file(s) uploaded successfully",
     "elteFI": "ELTE Faculty of Informatics",
-    "export": "Export"
+    "export": "Export",
+    "timezone": "Timezone"
   },
   "errorPage": {
     "genericMessage": "Something went wrong",
@@ -119,7 +120,9 @@
     "canvasSection": "Canvas section",
     "studentCount": "{{count}} students",
     "successfulCanvasSync": "Successful Canvas synchronization",
-    "waitingForCanvas": "Waiting for Canvas..."
+    "waitingForCanvas": "Waiting for Canvas...",
+    "localTime": "Local time",
+    "groupTime": "Group time"
   },
   "task": {
     "task": "Assignment",
@@ -139,6 +142,7 @@
     "downloadSolutions": "Download Solutions",
     "status": "Status",
     "uploadTime": "Upload Time",
+    "delay": "Delay",
     "graderName": "Grader",
     "newSolution": "Upload new solution",
     "solutions": "Solutions",

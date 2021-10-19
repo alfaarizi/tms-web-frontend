@@ -7,6 +7,7 @@ import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { ExamTest } from 'resources/instructor/ExamTest';
+import { DateTimeInterval } from 'pages/InstructorExamination/components/Tests/DateTimeInterval';
 
 type Props = {
     tests: ExamTest[] | undefined,
@@ -35,11 +36,11 @@ export function TestList({
                         )
                     </DataRow>
                     <DataRow label={t('examTests.available')}>
-                        {test.availablefrom}
-                        {' '}
-                        -
-                        {' '}
-                        {test.availableuntil}
+                        <DateTimeInterval
+                            from={test.availablefrom}
+                            to={test.availableuntil}
+                            timezone={test.timezone}
+                        />
                     </DataRow>
                     <DataRow label={t('examTests.duration')}>{test.duration}</DataRow>
                     <DataRow label={t('examTests.questionAmount')}>{test.questionamount}</DataRow>

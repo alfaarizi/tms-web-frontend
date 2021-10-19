@@ -12,4 +12,5 @@ export interface ExamTest {
     groupID: number;
     questionsetID: number;
     courseID: number;
+    timezone: string;
 }

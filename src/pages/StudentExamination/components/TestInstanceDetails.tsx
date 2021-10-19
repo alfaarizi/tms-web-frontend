@@ -9,6 +9,7 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ExamTestInstance } from 'resources/student/ExamTestInstance';
+import { LocaleDateTime } from 'components/LocaleDateTime';
 
 type Props = {
     testInstance: ExamTestInstance
@@ -31,7 +32,9 @@ export function TestInstanceDetails({ testInstance }: Props) {
 
             </CustomCardHeader>
             <DataRow label={t('course.course')}>{testInstance.test.courseName}</DataRow>
-            <DataRow label={t('examTests.availableuntil')}>{testInstance.test.availableuntil}</DataRow>
+            <DataRow label={t('examTests.availableuntil')}>
+                <LocaleDateTime value={testInstance.test.availableuntil} />
+            </DataRow>
             <DataRow label={t('examTests.duration')}>
                 {testInstance.test.duration}
                 {' '}

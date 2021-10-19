@@ -9,4 +9,5 @@ export interface Group {
     semesterID: number;
     canvasCanBeSynchronized: boolean;
     isCanvasCourse: boolean;
+    timezone: string;
 }

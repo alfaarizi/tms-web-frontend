@@ -46,7 +46,8 @@
     "fileUploadSuccess": "{{count}} fájl feltöltése sikeres",
     "fileUploadFailed": "Sikertelen fájlfeltöltés",
     "elteFI": "ELTE Informatikai Kar",
-    "export": "Exportálás"
+    "export": "Exportálás",
+    "timezone": "Időzóna"
   },
   "errorPage": {
     "genericMessage": "Hiba történt",
@@ -120,7 +121,9 @@
     "canvasSection": "Canvas kurzusszekció",
     "studentCount": "{{count}} hallgató",
     "successfulCanvasSync": "A Canvas szinkronizáció sikeres volt",
-    "waitingForCanvas": "Várakozás a Canvas szerverre..."
+    "waitingForCanvas": "Várakozás a Canvas szerverre...",
+    "localTime": "Helyi idő",
+    "groupTime": "Csoport idő"
   },
   "task": {
     "task": "Beadandó",
@@ -140,6 +143,7 @@
     "downloadSolutions": "Megoldások letöltése",
     "status": "Státusz",
     "uploadTime": "Feltöltés ideje",
+    "delay": "Késés",
     "graderName": "Értékelte",
     "newSolution": "Új megoldás feltöltése",
     "solutions": "Megoldások",
