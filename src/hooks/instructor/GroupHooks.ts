@@ -18,7 +18,7 @@ export function useGroups(semesterID: number, enabled: boolean = true) {
 }
 
 export function useGroupsForCourse(semesterID: number, courseID: number, enabled: boolean = true) {
-    return useQuery<Group[]>([QUERY_KEY, {
+    return useQuery<Group[]>([QUERY_KEY, 'forCourse', {
         semesterID,
         courseID,
     }], () => GroupService.index(semesterID, courseID), {
@@ -40,6 +40,8 @@ export function useCreateGroupMutation() {
             } else {
                 queryClient.setQueryData(key, [data]);
             }
+
+            await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
         },
     });
 }
@@ -48,7 +50,7 @@ export function useUpdateGroupMutation() {
     const queryClient = useQueryClient();
 
     return useMutation<Group, AxiosError, Group>((uploadData) => GroupService.update(uploadData), {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
             // Update group info with the returned data
             const key = [QUERY_KEY, { groupID: data.id }];
             const oldGroup = queryClient.getQueryData<Group[]>(key);
@@ -64,6 +66,7 @@ export function useUpdateGroupMutation() {
                 const newList = oldGroups.map((group) => (group.id === data.id ? data : group));
                 queryClient.setQueryData(groupsKey, newList);
             }
+            await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
         },
     });
 }
@@ -79,6 +82,8 @@ export function useRemoveGroupMutation() {
             if (oldGroups) {
                 queryClient.setQueryData(key, oldGroups.filter((group) => group.id !== variable.id));
             }
+
+            await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
         },
     });
 }
@@ -94,6 +99,8 @@ export function useDuplicateGroupMutation() {
             if (oldGroups) {
                 queryClient.setQueryData(key, [...oldGroups, data]);
             }
+
+            await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
         },
     });
 }

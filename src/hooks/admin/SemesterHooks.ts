@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as SemestersService from 'api/admin/SemestersSerivce';
 import { USER_INFO_QUERY_KEY } from 'hooks/common/UserHooks';
-
-export const SEMESTERS_QUERY_KEY = 'semesters';
+import { QUERY_KEY as SEMESTERS_QUERY_KEY } from 'hooks/common/SemesterHooks';
 
 export function useNextSemester() {
     return useQuery([SEMESTERS_QUERY_KEY, 'next'], SemestersService.getNext);

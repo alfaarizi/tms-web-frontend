@@ -1,5 +1,5 @@
 import * as ExamTestInstancesService from 'api/student/ExamTestInstancesService';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { ExamTestInstanceAnswer } from 'resources/student/ExamTestInstanceAnswer';
 
 export const QUERY_KEY = 'student/exam-test-instances';
@@ -26,5 +26,15 @@ export function useStartWriteMutation() {
 }
 
 export function useFinishWriteMutation(id: number) {
-    return useMutation((arr: ExamTestInstanceAnswer[]) => ExamTestInstancesService.finishWrite(id, arr));
+    const queryClient = useQueryClient();
+
+    return useMutation(
+        (arr: ExamTestInstanceAnswer[]) => ExamTestInstancesService.finishWrite(id, arr),
+        {
+            onSuccess: async () => {
+                // Invalidate all queries starting with QUERY_KEY
+                await queryClient.invalidateQueries(QUERY_KEY);
+            },
+        },
+    );
 }

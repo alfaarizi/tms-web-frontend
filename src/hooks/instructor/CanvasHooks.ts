@@ -17,7 +17,7 @@ async function afterSync(queryClient: QueryClient, groupID: number) {
     await queryClient.invalidateQueries([GROUP_QUERY_KEY, { groupID }]);
     await queryClient.invalidateQueries([GROUP_QUERY_KEY, 'students', { groupID }]);
     await queryClient.invalidateQueries([GROUP_QUERY_KEY, 'instructors', { groupID }]);
-    await queryClient.invalidateQueries([GROUP_QUERY_KEY, 'stats', { groupID }]);
+    await queryClient.invalidateQueries([GROUP_QUERY_KEY, 'stats']);
 }
 
 /**

@@ -13,6 +13,7 @@ import { ProtectedRoute } from 'components/ProtectedRoute';
 
 import Logout from 'pages/Logout';
 import ErrorPage from 'pages/ErrorPage';
+import { useQueryClient } from 'react-query';
 // Lazy load bigger page groups
 const StudentTaskManager = lazy(() => import('pages/StudentTaskManager'));
 const StudentExamination = lazy(() => import('pages/StudentExamination'));
@@ -30,6 +31,7 @@ export function PrivateApp() {
     const localeSetMutation = useChangeUserLocaleMutation();
     const history = useHistory();
     const location = useLocation();
+    const queryClient = useQueryClient();
 
     // Redirect user to the correct homepage from the root path
     useEffect(() => {
@@ -44,6 +46,10 @@ export function PrivateApp() {
         }
     }, [location.pathname]);
 
+    const clearInactiveQueries = () => {
+        queryClient.removeQueries({ inactive: true });
+    };
+
     if (!userInfo.data) {
         return <FullScreenSpinner />;
     }
@@ -57,6 +63,7 @@ export function PrivateApp() {
                 selectedSemester={appContext.selectedSemester}
                 setLocale={(key: string) => localeSetMutation.mutate(key)}
                 setSelectedSemester={appContext.setSelectedSemester}
+                clearInactiveQueries={clearInactiveQueries}
             />
             <Suspense fallback={<FullScreenSpinner />}>
                 <Switch>
