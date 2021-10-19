@@ -12,6 +12,7 @@ import { DeleteButton } from 'components/Buttons/DeleteButton';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
     task: Task,
@@ -56,12 +57,17 @@ export const TaskDetails = ({
                 <GroupDateTime value={task.hardDeadline} timezone={task.group?.timezone || ''} />
             </DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
-            <DataRow label={t('task.description')}><MarkdownRenderer source={task.description} /></DataRow>
             {showVersionControl ? (
                 <DataRow label={t('task.isVersionControlled')}>
                     {task.isVersionControlled ? t('common.yes') : t('common.no')}
                 </DataRow>
             ) : null}
+            <hr />
+            <DataRow label={t('task.description')}>
+                {task.category === 'Canvas tasks'
+                    ? <MultiLineTextBlock text={task.description} />
+                    : <MarkdownRenderer source={task.description} />}
+            </DataRow>
         </CustomCard>
     );
 };

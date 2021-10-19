@@ -1,15 +1,19 @@
-/* eslint react/destructuring-assignment: 0 */
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ReactMde, { Command, CommandContext, ExecuteOptions } from 'react-mde';
-import { ReactMdeProps } from 'react-mde/lib/definitions/components/ReactMde';
 import { useTranslation } from 'react-i18next';
-import { faImages } from '@fortawesome/free-solid-svg-icons';
+import { faImages, faTable } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import 'react-mde/lib/styles/css/react-mde-all.css';
-
 import { useShow } from 'ui-hooks/useShow';
+import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+
+// Import all react-mde styles expect react-mde-preview
+// The MarkdownRenderer component will import the stylesheet for markdown content
+import 'react-mde/lib/styles/css/react-mde-toolbar.css';
+import 'react-mde/lib/styles/css/react-mde-editor.css';
+import 'react-mde/lib/styles/css/react-mde.css';
+import 'react-mde/lib/styles/css/react-mde-suggestions.css';
 
 interface InsertImageCommandContext extends CommandContext {
     type: 'insert-image';
@@ -17,7 +21,7 @@ interface InsertImageCommandContext extends CommandContext {
 }
 
 /**
- * Replaces selection with image
+ * Replaces selection with an image
  */
 const insertImageCommand: Command = {
     execute: (options: ExecuteOptions) => {
@@ -29,18 +33,48 @@ const insertImageCommand: Command = {
     },
 };
 
+/**
+ * Replaces selection with a table
+ */
+const insertTableCommand: Command = {
+    icon: () => (
+        <FontAwesomeIcon icon={faTable} />
+    ),
+    execute: (opts) => {
+        const text = `
+| header | header |
+| ------ | ------ |
+| cell | cell |
+| cell | cell |
+
+`;
+        opts.textApi.replaceSelection(text);
+    },
+};
+
+const toolbarButtons = [
+    ['header', 'bold', 'italic', 'strikethrough'],
+    ['link', 'quote', 'code', 'image', 'table'],
+    ['unordered-list', 'ordered-list', 'checked-list'],
+];
+
 export type InsertFunc = (url: string) => void;
 
-interface Props extends ReactMdeProps {
-    renderGallery: (insertFunc: InsertFunc) => React.ReactNode
+type Props = {
+    value: string;
+    onChange: (value: string) => void;
+    renderGallery?: (insertFunc: InsertFunc) => React.ReactNode;
 }
 
 /**
- * This is a workaround for inserting images from an external gallery
+ * This component extends ReactMde with custom commands
+ * Also, it includes a workaround for inserting images from an external gallery
  * @param props
  * @constructor
  */
-export function ReactMdeWithCommands(props: Props) {
+export function ReactMdeWithCommands({ value, onChange, renderGallery }: Props) {
+    const [selectedTab, setSelectedTab] = useState<'write' | 'preview'>('write');
+
     // We will access ReactMde editor with a ref
     const mdeRef = useRef<any>(null);
     const {
@@ -66,32 +100,46 @@ export function ReactMdeWithCommands(props: Props) {
         <>
             {/* Pass original props to ReactMde, and add insert-image command */}
             <ReactMde
-                {...props}
+                value={value}
+                onChange={onChange}
                 l18n={{
                     write: t('reactMde.write'),
                     preview: t('reactMde.preview'),
                     uploadingImage: t('reactMde.uploadingImage'),
                     pasteDropSelect: t('reactMde.pasteDropSelect'),
                 }}
-                commands={{
-                    ...props.commands,
-                    'insert-image': insertImageCommand,
+                selectedTab={selectedTab}
+                onTabChange={setSelectedTab}
+                generateMarkdownPreview={(markdown) => Promise.resolve(<MarkdownRenderer source={markdown} />)}
+                childProps={{
+                    writeButton: {
+                        tabIndex: -1,
+                    },
                 }}
+                commands={{
+                    'insert-image': insertImageCommand,
+                    table: insertTableCommand,
+                }}
+                toolbarCommands={toolbarButtons}
                 ref={(c) => {
                     mdeRef.current = c;
                 }}
             />
 
-            <div className="my-1 py-1 border-bottom">
-                <Button onClick={toggle} variant="outline-secondary" size="sm" className="mb-2">
-                    <FontAwesomeIcon icon={faImages} />
-                    {' '}
-                    {show ? t('reactMde.closeImageManager') : t('reactMde.openImageManager')}
-                </Button>
+            {renderGallery
+                ? (
+                    <div className="my-1 py-1 border-bottom">
+                        {/* Render show gallery button */}
+                        <Button onClick={toggle} variant="outline-secondary" size="sm" className="mb-2">
+                            <FontAwesomeIcon icon={faImages} />
+                            {' '}
+                            {show ? t('reactMde.closeImageManager') : t('reactMde.openImageManager')}
+                        </Button>
 
-                {/* Render gallery and pass handleImageInsert function */}
-                {show && props.renderGallery(handleImageInsert)}
-            </div>
+                        {/* Render gallery and pass handleImageInsert function */}
+                        {show && renderGallery(handleImageInsert)}
+                    </div>
+                ) : null}
         </>
     );
 }

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Form, Modal } from 'react-bootstrap';
 
 import { FormError } from 'components/FormError';
-import { MarkdownFormControl } from 'pages/InstructorExamination/components/QuestionSets/MarkdownFormControl';
+import { MarkdownFormControl } from 'components/MarkdownFormControl';
 import { ExamAnswer } from 'resources/instructor/ExamAnswer';
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { InsertFunc } from 'components/ReactMdeWithCommands';

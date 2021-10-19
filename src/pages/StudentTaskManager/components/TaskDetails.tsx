@@ -7,6 +7,7 @@ import { Task } from 'resources/student/Task';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 
 type Props = {
@@ -32,7 +33,12 @@ export const TaskDetails = ({ task }: Props) => {
                 <LocaleDateTime value={task.hardDeadline} />
             </DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
-            <DataRow label={t('task.description')}><MarkdownRenderer source={task.description} /></DataRow>
+            <hr />
+            <DataRow label={t('task.description')}>
+                {task.category === 'Canvas tasks'
+                    ? <MultiLineTextBlock text={task.description} />
+                    : <MarkdownRenderer source={task.description} />}
+            </DataRow>
         </CustomCard>
     );
 };

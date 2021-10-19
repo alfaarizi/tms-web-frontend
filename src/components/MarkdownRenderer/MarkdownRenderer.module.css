@@ -1,4 +1,140 @@
+/**
+This is a customized version of the react-mde preview stylesheet, so it can be used for all markdown blocks
+(https://github.com/andrerpena/react-mde/blob/master/src/styles/react-mde-preview.scss)
+
+React-mde is MIT licensed (https://github.com/andrerpena/react-mde/blob/master/LICENSE), Copyright (c) 2016 André Pena
+GitHub repository: https://github.com/andrerpena/react-mde
+ */
+
+.markdownRenderer {
+    padding: 3px;
+    margin: 3px;
+}
+
 .markdownRenderer img {
     max-width: 100%;
     max-height: 100%;
+    border: 1px solid #eee;
 }
+
+.markdownRenderer p,
+.markdownRenderer blockquote,
+.markdownRenderer ul,
+.markdownRenderer ol,
+.markdownRenderer dl,
+.markdownRenderer table,
+.markdownRenderer pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+.markdownRenderer h1,
+.markdownRenderer h2,
+.markdownRenderer h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.3em;
+}
+.markdownRenderer h1 {
+    font-size: 1.6em;
+}
+.markdownRenderer h2 {
+    font-size: 1.4em;
+}
+.markdownRenderer h3 {
+    font-size: 1.2em;
+}
+.markdownRenderer ul,
+.markdownRenderer ol {
+    padding-left: 2em;
+}
+.markdownRenderer blockquote {
+    margin-left: 0;
+    padding: 0 1em;
+    color: #777;
+    border-left: 0.25em solid #ddd;
+}
+.markdownRenderer blockquote > :first-child {
+    margin-top: 0;
+}
+.markdownRenderer blockquote > :last-child {
+    margin-bottom: 0;
+}
+.markdownRenderer code {
+    padding: 0.2em 0 0.2em 0;
+    margin: 0;
+    font-size: 90%;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 3px;
+}
+.markdownRenderer code::before,
+.markdownRenderer code::after {
+    letter-spacing: -0.2em;
+    content: "\00a0";
+}
+.markdownRenderer pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+}
+.markdownRenderer pre code {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+}
+.markdownRenderer pre code::before,
+.markdownRenderer pre code::after {
+    content: none;
+}
+.markdownRenderer pre > code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+}
+.markdownRenderer a {
+    color: #4078c0;
+    text-decoration: none;
+}
+.markdownRenderer a:hover {
+    text-decoration: underline;
+}
+.markdownRenderer > *:first-child {
+    margin-top: 0 !important;
+}
+.markdownRenderer > *:last-child {
+    margin-bottom: 0 !important;
+}
+.markdownRenderer::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+.markdownRenderer table {
+    display: block;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.markdownRenderer table thead th {
+    font-weight: bold;
+}
+.markdownRenderer table th,
+.markdownRenderer table td {
+    padding: 6px 13px;
+    border: 1px solid #c8ccd0;
+}
+

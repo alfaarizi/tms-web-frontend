@@ -1,15 +1,13 @@
 import { Controller } from 'react-hook-form';
-import React, { ReactNode, useState } from 'react';
-import 'react-mde/lib/styles/css/react-mde-all.css';
+import React, { ReactNode } from 'react';
 
 import { InsertFunc, ReactMdeWithCommands } from 'components/ReactMdeWithCommands';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
 
 interface Props {
     name: string,
     control: any,
     rules: object,
-    renderGallery: (insertFunc: InsertFunc) => ReactNode
+    renderGallery?: (insertFunc: InsertFunc) => ReactNode
 }
 
 /**
@@ -20,8 +18,6 @@ interface Props {
 export function MarkdownFormControl({
     name, control, rules, renderGallery,
 }: Props) {
-    const [selectedTab, setSelectedTab] = useState<'write' | 'preview'>('write');
-
     return (
         <Controller
             name={name}
@@ -33,14 +29,6 @@ export function MarkdownFormControl({
                     value={field.value}
                     onChange={field.onChange}
                     renderGallery={renderGallery}
-                    selectedTab={selectedTab}
-                    onTabChange={setSelectedTab}
-                    generateMarkdownPreview={(markdown) => Promise.resolve(<MarkdownRenderer source={markdown} />)}
-                    childProps={{
-                        writeButton: {
-                            tabIndex: -1,
-                        },
-                    }}
                 />
             )}
         />
