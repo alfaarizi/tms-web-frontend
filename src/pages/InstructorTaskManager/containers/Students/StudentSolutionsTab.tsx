@@ -9,6 +9,7 @@ import { StudentFilesList } from 'pages/InstructorTaskManager/containers/Student
 import { DataRow } from 'components/DataRow';
 import { useStudentFilesForStudent } from 'hooks/instructor/StudentFileHooks';
 import { User } from 'resources/common/User';
+import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
@@ -45,7 +46,12 @@ export function StudentSolutionsTab({
                 renderItem={(file) => (
                     <>
                         <DataRow label={t('task.task')}>{file.task?.name}</DataRow>
-                        <DataRow label={t('task.uploadTime')}>{file.uploadTime}</DataRow>
+                        <DataRow label={t('task.uploadTime')}>
+                            <GroupDateTime value={file.uploadTime} timezone={file.task?.group?.timezone || ''} />
+                        </DataRow>
+                        <DataRow label={t('task.delay')}>
+                            {file.delay}
+                        </DataRow>
                         <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
                         <DataRow label={t('task.grade')}>{file.grade}</DataRow>
                         <DataRow label={t('task.graderName')}>{file.graderName}</DataRow>

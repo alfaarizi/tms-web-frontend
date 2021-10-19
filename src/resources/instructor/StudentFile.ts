@@ -17,4 +17,5 @@ export interface StudentFile {
     groupID: number;
     task?: Task;
     gitRepo?: string;
+    delay?: string;
 }

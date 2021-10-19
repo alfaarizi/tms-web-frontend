@@ -12,6 +12,8 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { Course } from 'resources/common/Course';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
+import timezones from 'i18n/timezones.json';
+import { getUserTimezone } from 'utils/getUserTimezone';
 
 type Props = {
     title: string,
@@ -41,9 +43,7 @@ export function GroupForm({
         formState: {
             errors,
         },
-    } = useForm<Group>({
-        defaultValues: editData,
-    });
+    } = useForm<Group>();
     useServersideFormErrors<Group>(clearErrors, setError, serverSideError);
 
     useEffect(() => {
@@ -51,6 +51,15 @@ export function GroupForm({
             setValue('courseID', courses[0].id);
         }
     }, [courses]);
+
+    useEffect(() => {
+        if (editData) {
+            setValue('number', editData.number);
+            setValue('timezone', editData.timezone);
+        } else {
+            setValue('timezone', getUserTimezone());
+        }
+    }, [editData]);
 
     const onSubmit = handleSubmit(async (data) => {
         const newData = { ...data };
@@ -103,6 +112,19 @@ export function GroupForm({
                         })}
                         size="sm"
                     />
+                    {errors.number && <FormError message={errors.number.message} />}
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('common.timezone')}
+                        :
+                    </Form.Label>
+                    <Form.Control as="select" size="sm" {...register('timezone', { required: true })}>
+                        {
+                            timezones.map((timezone) => <option key={timezone} value={timezone}>{timezone}</option>)
+                        }
+                    </Form.Control>
                     {errors.number && <FormError message={errors.number.message} />}
                 </Form.Group>
 

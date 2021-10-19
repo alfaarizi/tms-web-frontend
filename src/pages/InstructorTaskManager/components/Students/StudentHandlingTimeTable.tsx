@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { DateTime } from 'luxon';
 import { StudentStats } from 'resources/instructor/StudentStats';
 
 type Props = {
@@ -8,12 +9,12 @@ type Props = {
 }
 
 function calcValue(hardDeadLine: string, submittingTime?: string, softDeadLine?: string): string {
-    const submittingTimeDate = submittingTime ? new Date(submittingTime) : null;
-    const softDeadLineDate = softDeadLine ? new Date(softDeadLine) : null;
-    const hardDeadLineDate = new Date(hardDeadLine);
+    const submittingTimeDate = submittingTime ? DateTime.fromISO(submittingTime) : null;
+    const softDeadLineDate = softDeadLine ? DateTime.fromISO(softDeadLine) : null;
+    const hardDeadLineDate = DateTime.fromISO(hardDeadLine);
 
     if (submittingTimeDate === null) {
-        if (new Date() <= hardDeadLineDate) {
+        if (DateTime.now() <= hardDeadLineDate) {
             return 'group.stats.due';
         }
         return 'group.stats.missed';

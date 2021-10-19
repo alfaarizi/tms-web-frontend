@@ -14,6 +14,7 @@ import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Params = {
@@ -79,6 +80,12 @@ export function StudentFilePage() {
                             </DataRow>
                             <DataRow label={t('task.uploader')}>
                                 {`${item.uploader.name} (${item.uploader.neptun})`}
+                            </DataRow>
+                            <DataRow label={t('task.uploadTime')}>
+                                <GroupDateTime value={item.uploadTime} timezone={item.task?.group?.timezone || ''} />
+                            </DataRow>
+                            <DataRow label={t('task.delay')}>
+                                {item.delay}
                             </DataRow>
                             <DataRow label={t('task.uploadTime')}>{item.uploadTime}</DataRow>
                             <DataRow label={t('task.status')}>{item.translatedIsAccepted}</DataRow>

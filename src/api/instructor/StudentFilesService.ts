@@ -16,7 +16,7 @@ export async function listForStudent(groupID: number, uploaderID: number) {
         params: {
             groupID,
             uploaderID,
-            expand: 'task',
+            expand: 'task, task.group',
         },
     });
     return res.data;

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ExamTestInstance } from 'resources/student/ExamTestInstance';
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { DataRow } from 'components/DataRow';
+import { LocaleDateTime } from 'components/LocaleDateTime';
 
 type Props = {
     testInstance: ExamTestInstance,
@@ -19,7 +20,9 @@ export function AvailableTestListItem({
         <ListCardItem onClick={onClick}>
             <DataRow label={t('course.course')}>{testInstance.test.courseName}</DataRow>
             <DataRow label={t('examTests.testName')}>{testInstance.test.name}</DataRow>
-            <DataRow label={t('examTests.availableuntil')}>{testInstance.test.availableuntil}</DataRow>
+            <DataRow label={t('examTests.availableuntil')}>
+                <LocaleDateTime value={testInstance.test.availableuntil} />
+            </DataRow>
             <DataRow label={t('examTests.duration')}>
                 {testInstance.test.duration}
                 {' '}
