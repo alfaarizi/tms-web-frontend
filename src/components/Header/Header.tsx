@@ -19,7 +19,8 @@ type Props = {
     selectedSemester: Semester | null,
     setSelectedSemester: (semester: Semester) => void,
     userInfo: UserInfo,
-    setLocale: (key: string) => void
+    setLocale: (key: string) => void,
+    clearInactiveQueries: () => void,
 }
 
 export function Header({
@@ -29,6 +30,7 @@ export function Header({
     fetchSemesters,
     setSelectedSemester,
     userInfo,
+    clearInactiveQueries,
 }: Props) {
     const { t } = useTranslation();
 
@@ -44,6 +46,7 @@ export function Header({
                         isStudent={userInfo.isStudent}
                         isFaculty={userInfo.isFaculty}
                         isAdmin={userInfo.isAdmin}
+                        clearInactiveQueries={clearInactiveQueries}
                     />
 
                     <NavigationLinks />

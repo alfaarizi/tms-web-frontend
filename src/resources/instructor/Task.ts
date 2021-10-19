@@ -20,6 +20,6 @@ export interface Task {
     imageName?: string;
     compileInstructions: string;
     runInstructions?: string;
-    group?: Group,
-    semester?: Semester
+    group?: Group;
+    semester?: Semester;
 }

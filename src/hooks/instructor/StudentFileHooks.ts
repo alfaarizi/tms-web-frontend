@@ -28,11 +28,27 @@ export function useGradeMutation() {
 
     return useMutation((file: StudentFile) => StudentFilesService.grade(file), {
         onSuccess: async (data) => {
-            await queryClient.invalidateQueries([QUERY_KEY, { taskID: data.taskID }]);
-            await queryClient.invalidateQueries([QUERY_KEY, {
+            // Replace existing StudentFile with the returned data
+            queryClient.setQueryData([QUERY_KEY, { id: data.id }], data);
+
+            // Update lists
+            const forTask = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, { taskID: data.taskID }]);
+            if (forTask) {
+                const newList = forTask.map((file) => (file.id === data.id ? data : file));
+                queryClient.setQueryData([QUERY_KEY, { taskID: data.taskID }], newList);
+            }
+
+            const forUploader = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, {
                 groupID: data.groupID,
                 uploaderID: data.uploaderID,
             }]);
+            if (forUploader) {
+                const newList = forUploader.map((file) => (file.id === data.id ? data : file));
+                queryClient.setQueryData([QUERY_KEY, {
+                    groupID: data.groupID,
+                    uploaderID: data.uploaderID,
+                }], newList);
+            }
 
             // Invalidate stat queries
             await queryClient.invalidateQueries([GROUP_QUERY_KEY, 'stats', { groupID: data.groupID }]);

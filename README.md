@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://create-react-app.d
 
 In the project directory, you can run:
 
+### `npm install`
+
+Installs the dependencies of the frontend.
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -80,4 +84,5 @@ Also, you should provide type definitions to `src/react-app-env.d.ts`.
 * [React Markdown](https://github.com/remarkjs/react-markdown)
 * [react-dual-listbox](https://www.npmjs.com/package/react-dual-listbox)
 * [Victory](https://formidable.com/open-source/victory/)
+* [Luxon](https://moment.github.io/luxon/)
 

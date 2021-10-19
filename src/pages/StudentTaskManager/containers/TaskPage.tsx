@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { DateTime } from 'luxon';
 
 import {
     useDownloadInstructorFile,
@@ -61,7 +62,7 @@ export const TaskPage = () => {
         <>
             <TaskDetails task={task.data} />
 
-            {((new Date(task?.data.hardDeadline) >= new Date() && studentFile?.isAccepted !== 'Accepted')
+            {((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile?.isAccepted !== 'Accepted')
                 || studentFile?.isAccepted === 'Late Submission')
               && task.data.category !== 'Canvas tasks'
                 ? (

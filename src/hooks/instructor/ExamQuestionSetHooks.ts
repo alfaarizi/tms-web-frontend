@@ -63,7 +63,7 @@ export function useDuplicateQuestionSetMutation() {
 
     return useMutation((id: number) => ExamQuestionSetsService.duplicate(id), {
         onSuccess: (data) => {
-            // queryClient.setQueryData([QUERY_KEY, {id: data.id}], data);
+            queryClient.setQueryData([QUERY_KEY, { id: data.id }], data);
 
             const oldData = queryClient.getQueryData<ExamQuestionSet[]>(QUERY_KEY);
             if (oldData) {

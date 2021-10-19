@@ -16,7 +16,7 @@ export async function listForStudent(groupID: number, uploaderID: number) {
         params: {
             groupID,
             uploaderID,
-            expand: 'task',
+            expand: 'task, task.group',
         },
     });
     return res.data;
@@ -65,6 +65,9 @@ export async function downloadAllFiles(taskID: number, onlyUngraded: boolean) {
 }
 
 export async function grade(file: StudentFile) {
-    const res = await axiosInstance.patch(`/instructor/student-files/${file.id}`, file);
+    const res = await axiosInstance.patch(
+        `/instructor/student-files/${file.id}?expand=uploader,task,task.group`,
+        file,
+    );
     return res.data;
 }

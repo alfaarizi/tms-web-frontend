@@ -10,6 +10,7 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { DeleteButton } from 'components/Buttons/DeleteButton';
 import { CustomCard } from 'components/CustomCard/CustomCard';
+import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
@@ -46,9 +47,15 @@ export const TaskDetails = ({
 
             <DataRow label="ID">{task.id}</DataRow>
             <DataRow label={t('task.category')}>{task.translatedCategory}</DataRow>
-            <DataRow label={t('task.available')}>{task.available}</DataRow>
-            <DataRow label={t('task.softDeadLine')}>{task.softDeadline}</DataRow>
-            <DataRow label={t('task.hardDeadLine')}>{task.hardDeadline}</DataRow>
+            <DataRow label={t('task.available')}>
+                <GroupDateTime value={task.available} timezone={task.group?.timezone || ''} />
+            </DataRow>
+            <DataRow label={t('task.softDeadLine')}>
+                <GroupDateTime value={task.softDeadline} timezone={task.group?.timezone || ''} />
+            </DataRow>
+            <DataRow label={t('task.hardDeadLine')}>
+                <GroupDateTime value={task.hardDeadline} timezone={task.group?.timezone || ''} />
+            </DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
             {showVersionControl ? (
                 <DataRow label={t('task.isVersionControlled')}>

@@ -10,7 +10,7 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { Group } from 'resources/instructor/Group';
-import { DateTimeControl } from 'components/DateTimeControl/DateTimeControl';
+import { DateTimePickerControl } from 'components/DateTimePickerControl';
 import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
 
@@ -39,6 +39,7 @@ export function TestForm({
         clearErrors,
         setError,
         setValue,
+        watch,
 
         formState: {
             errors,
@@ -63,6 +64,11 @@ export function TestForm({
             setValue('unique', editData.unique);
         }
     }, [groups, editData]);
+
+    const selectedGroupID = watch('groupID');
+    // watch('groupID') should return a number, but it returns a string
+    // eslint-disable-next-line eqeqeq
+    const selectedGroupTimezone = groups?.find((group) => group.id == selectedGroupID)?.timezone || '';
 
     const onSubmit = handleSubmit((data) => onSave(data));
 
@@ -107,11 +113,12 @@ export function TestForm({
                         {t('examTests.availablefrom')}
                         :
                     </Form.Label>
-                    <DateTimeControl
+                    <DateTimePickerControl
                         rules={{
                             required: t('common.fieldRequired').toString(),
                         }}
                         control={control}
+                        timezone={selectedGroupTimezone}
                         name="availablefrom"
                     />
                     {errors.availablefrom && <FormError message={errors.availablefrom.message} />}
@@ -122,11 +129,12 @@ export function TestForm({
                         {t('examTests.availableuntil')}
                         :
                     </Form.Label>
-                    <DateTimeControl
+                    <DateTimePickerControl
                         rules={{
                             required: t('common.fieldRequired')
                                 .toString(),
                         }}
+                        timezone={selectedGroupTimezone}
                         control={control}
                         name="availableuntil"
                     />

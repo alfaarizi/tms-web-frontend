@@ -32,7 +32,7 @@ export function StudentFileListItem({
                 </Col>
                 <Col md={2} className="d-flex align-items-start justify-content-end">
                     <ButtonGroup>
-                        {file.isAccepted === 'Passed' || file.isAccepted === 'Failed'
+                        {file.errorMsg
                             ? <ToolbarButton onClick={showAutoTesterResults.toShow} icon={faList} />
                             : null}
                         <ToolbarButton onClick={() => onDownload(file)} icon={faDownload} />

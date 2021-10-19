@@ -5,7 +5,6 @@ import { useHistory } from 'react-router';
 
 import { useRemoveTaskMutation, useTask, useUpdateTaskMutation } from 'hooks/instructor/TaskHooks';
 import { Task } from 'resources/instructor/Task';
-import { TaskDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskDetails';
 import { useTranslation } from 'react-i18next';
 import { TaskForm } from 'pages/InstructorTaskManager/components/Tasks/TaskForm';
 import { InstructorFilesTab } from 'pages/InstructorTaskManager/containers/Tasks/InstructorFilesTab';
@@ -15,6 +14,7 @@ import { useShow } from 'ui-hooks/useShow';
 import { TabbedInterface } from 'components/TabbedInterface';
 import { AutoTesterTab } from 'pages/InstructorTaskManager/containers/Tasks/AutoTesterTab';
 import { useUserInfo } from 'hooks/common/UserHooks';
+import { TaskDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskDetails';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 
 type Params = {
@@ -71,6 +71,7 @@ export const TaskDetailsPage = () => {
             {showEdit.show ? (
                 <TaskForm
                     title={t('task.editTask')}
+                    timezone={task.data.group?.timezone || ''}
                     onSave={handleEditSave}
                     onCancel={handleEditCancel}
                     editData={task.data}

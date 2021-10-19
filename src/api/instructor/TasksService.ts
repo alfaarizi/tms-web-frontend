@@ -5,24 +5,29 @@ import { User } from 'resources/common/User';
 import { SetupTester } from 'resources/instructor/SetupTester';
 
 export async function index(groupID: number) {
-    const res = await axiosInstance.get<Task[][]>('/instructor/tasks', { params: { groupID } });
+    const res = await axiosInstance.get<Task[][]>('/instructor/tasks', {
+        params: {
+            groupID,
+            expand: 'group',
+        },
+    });
     return res.data;
 }
 
 export async function one(taskID: number) {
     const res = await axiosInstance.get<Task>(`/instructor/tasks/${taskID}`, {
-        params: { expand: 'studentFiles, instructorFiles' },
+        params: { expand: 'studentFiles, instructorFiles, group' },
     });
     return res.data;
 }
 
 export async function create(task: Task) {
-    const res = await axiosInstance.post<Task>('/instructor/tasks', task);
+    const res = await axiosInstance.post<Task>('/instructor/tasks?expand=group', task);
     return res.data;
 }
 
 export async function update(task: Task) {
-    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${task.id}`, task);
+    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${task.id}??expand=group`, task);
     return res.data;
 }
 

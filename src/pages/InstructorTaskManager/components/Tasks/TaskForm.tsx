@@ -9,13 +9,14 @@ import { FormButtons } from 'components/Buttons/FormButtons';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { DateTimeControl } from 'components/DateTimeControl/DateTimeControl';
+import { DateTimePickerControl } from 'components/DateTimePickerControl';
 import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
 import { MarkdownFormControl } from 'components/MarkdownFormControl';
 
 type Props = {
     title: string,
+    timezone: string,
     onSave: (t: Task) => void,
     onCancel?: () => void,
     editData?: Task,
@@ -25,6 +26,7 @@ type Props = {
 
 export function TaskForm({
     title,
+    timezone,
     onCancel,
     onSave,
     editData,
@@ -105,7 +107,12 @@ export function TaskForm({
                         {t('task.available')}
                         :
                     </Form.Label>
-                    <DateTimeControl name="available" rules={{ required: false }} control={control} />
+                    <DateTimePickerControl
+                        name="available"
+                        timezone={timezone}
+                        rules={{ required: false }}
+                        control={control}
+                    />
                 </Form.Group>
 
                 <Form.Group>
@@ -113,7 +120,12 @@ export function TaskForm({
                         {t('task.softDeadLine')}
                         :
                     </Form.Label>
-                    <DateTimeControl name="softDeadline" rules={{ required: false }} control={control} />
+                    <DateTimePickerControl
+                        name="softDeadline"
+                        timezone={timezone}
+                        rules={{ required: false }}
+                        control={control}
+                    />
                     {errors.softDeadline && <FormError message={errors.softDeadline.message} />}
                 </Form.Group>
 
@@ -122,8 +134,9 @@ export function TaskForm({
                         {t('task.hardDeadLine')}
                         :
                     </Form.Label>
-                    <DateTimeControl
+                    <DateTimePickerControl
                         name="hardDeadline"
+                        timezone={timezone}
                         rules={{ required: t('common.fieldRequired').toString() }}
                         control={control}
                     />

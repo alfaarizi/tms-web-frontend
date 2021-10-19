@@ -67,7 +67,7 @@ export function TestPage() {
 
     const handleDelete = async () => {
         try {
-            await removeMutation.mutateAsync(test.data.id);
+            await removeMutation.mutateAsync(test.data);
             history.replace('/instructor/exam');
         } catch (e) {
             // Already handled globally

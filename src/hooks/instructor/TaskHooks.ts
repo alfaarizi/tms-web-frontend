@@ -15,39 +15,10 @@ export function useTasks(groupID: number) {
     return useQuery<Task[][]>([QUERY_KEY, { groupID }], () => TasksService.index(groupID));
 }
 
-export function useCreateTaskMutation() {
-    return useMutation((newData: Task) => TasksService.create(newData));
-}
-
-export function useUpdateTaskMutation() {
-    const queryClient = useQueryClient();
-
-    return useMutation((newData: Task) => TasksService.update(newData), {
-        onSuccess: async (data) => {
-            const key = [QUERY_KEY, { taskID: data.id }];
-            queryClient.setQueryData(key, data);
-
-            const groupKey = ['instructor/groups', { groupID: data.groupID }];
-            await queryClient.invalidateQueries(groupKey);
-        },
-    });
-}
-
-export function useRemoveTaskMutation() {
-    const queryClient = useQueryClient();
-
-    return useMutation((task: Task) => TasksService.remove(task.id), {
-        onSuccess: async (_data, variables) => {
-            const groupKey = ['instructor/groups', { groupID: variables.groupID }];
-            await queryClient.invalidateQueries(groupKey);
-        },
-    });
-}
-
 export function useTaskListForCourse(
     courseID: number | 'All', myTasks: boolean, semesterFromID: number, semesterToID: number, enabled: boolean,
 ) {
-    const key = [QUERY_KEY, {
+    const key = [QUERY_KEY, 'forCourse', {
         courseID,
         myTasks,
         semesterFromID,
@@ -63,6 +34,45 @@ export function useTaskListForCourse(
 export function useUserList(taskIDs: number[], enabled: boolean) {
     const key = [QUERY_KEY, 'users', ...taskIDs];
     return useQuery(key, () => TasksService.listUsers(taskIDs), { enabled });
+}
+
+export function useCreateTaskMutation() {
+    const queryClient = useQueryClient();
+
+    return useMutation(
+        (newData: Task) => TasksService.create(newData), {
+            onSuccess: async (data) => {
+                queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
+                await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
+                await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
+            },
+        },
+    );
+}
+
+export function useUpdateTaskMutation() {
+    const queryClient = useQueryClient();
+
+    return useMutation((newData: Task) => TasksService.update(newData), {
+        onSuccess: async (data) => {
+            const key = [QUERY_KEY, { taskID: data.id }];
+            queryClient.setQueryData(key, data);
+
+            await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
+            await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
+        },
+    });
+}
+
+export function useRemoveTaskMutation() {
+    const queryClient = useQueryClient();
+
+    return useMutation((task: Task) => TasksService.remove(task.id), {
+        onSuccess: async (_data, taskToDelete) => {
+            await queryClient.invalidateQueries([QUERY_KEY, { groupID: taskToDelete.groupID }]);
+            await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
+        },
+    });
 }
 
 export function useToggleAutoTesterMutation() {

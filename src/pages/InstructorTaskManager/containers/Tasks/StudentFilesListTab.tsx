@@ -16,6 +16,7 @@ import { DataRow } from 'components/DataRow';
 import { StudentFilesList } from 'pages/InstructorTaskManager/containers/StudentFiles/StudentFilesList';
 import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
 import { SpreadsheetFormat } from 'api/instructor/StudentFilesService';
+import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
@@ -76,7 +77,12 @@ export function StudentFilesListTab({ task }: Props) {
                         <DataRow label={t('task.uploader')}>
                             {`${file.uploader.name} (${file.uploader.neptun})`}
                         </DataRow>
-                        <DataRow label={t('task.uploadTime')}>{file.uploadTime}</DataRow>
+                        <DataRow label={t('task.uploadTime')}>
+                            <GroupDateTime value={file.uploadTime} timezone={task.group?.timezone || ''} />
+                        </DataRow>
+                        <DataRow label={t('task.delay')}>
+                            {file.delay}
+                        </DataRow>
                         <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
                         <DataRow label={t('task.grade')}>{file.grade}</DataRow>
                         <DataRow label={t('task.graderName')}>{file.graderName}</DataRow>

@@ -15,15 +15,15 @@ export function AutoTestResultAlert({
 }: Props) {
     const { t } = useTranslation();
 
-    let variant: string = 'secondary';
+    let variant: string;
     if (isAccepted === 'Passed') {
         variant = 'success';
     } else if (isAccepted === 'Failed') {
         variant = 'danger';
     } else if (isAccepted === 'Updated' || isAccepted === 'Uploaded') {
-        variant = 'dark';
+        variant = 'primary';
     } else {
-        return null;
+        variant = 'secondary';
     }
 
     return (

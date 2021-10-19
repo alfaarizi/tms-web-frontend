@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Form, Modal } from 'react-bootstrap';
@@ -37,18 +37,21 @@ export function QuestionFormModal({
         },
     } = useForm<ExamQuestion>();
 
-    useEffect(() => {
+    const handleShow = () => {
+        // Set edit data or clear form fields
         if (editData) {
             setValue('text', editData.text);
+        } else {
+            setValue('text', '');
         }
-    }, [editData]);
+    };
 
     const onSubmit = handleSubmit((data) => {
         onSave(data);
     });
 
     return (
-        <Modal show={show} onHide={onCancel} animation size="lg">
+        <Modal show={show} onHide={onCancel} onShow={handleShow} animation size="lg">
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
