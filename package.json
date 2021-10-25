@@ -83,7 +83,7 @@
     "lint": "eslint . --ext .ts --ext .tsx",
     "lint-fix": "eslint . --ext .ts --ext .tsx --fix",
     "release": "standard-version",
-    "prerelease": "standard-version --prerelease alpha --skip.changelog"
+    "release-pre": "standard-version --prerelease alpha --skip.changelog"
   },
   "browserslist": {
     "production": [
