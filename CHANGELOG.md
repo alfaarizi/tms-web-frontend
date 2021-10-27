@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.0.3...v2.1.0) (2021-10-27)
+
+
+### Features
+
+* add a Markdown editor on the instructor interface for the task description ([80831b6](https://gitlab.com/tms-elte/frontend-react/commit/80831b6c91021a2dbadfd68c2dc997befd8c3185))
+* add insert table command to markdown editor ([3d1ef00](https://gitlab.com/tms-elte/frontend-react/commit/3d1ef00739001c2e15880c411d4376ba63f76bfd))
+* add support for GitHub Flavoured Markdown ([4a39ea8](https://gitlab.com/tms-elte/frontend-react/commit/4a39ea8d970fcac48436b722ee77de4f5b046d5d))
+* use Luxon and manage timezones ([075489f](https://gitlab.com/tms-elte/frontend-react/commit/075489fb5889facf9872bfeba5b0136283776f15))
+
+
+### Bug Fixes
+
+* automated evaluator result not shown for accepted and rejected submissions ([ea3b2dd](https://gitlab.com/tms-elte/frontend-react/commit/ea3b2ddf97456917cf6bfc26024537774ba4cdd4))
+
 ### [2.0.3](https://gitlab.com/tms-elte/frontend-react/compare/v2.0.2...v2.0.3) (2021-10-23)
 
 
