@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import DropdownItem from 'react-bootstrap/DropdownItem';
@@ -18,6 +18,7 @@ import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
 import { SpreadsheetFormat } from 'api/instructor/StudentFilesService';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { StudentFile } from 'resources/instructor/StudentFile';
 
 type Props = {
     task: Task
@@ -37,7 +38,28 @@ export function StudentFilesListTab({ task }: Props) {
         downloadAll.download(`${task.name}.zip`, onlyUngraded);
     };
 
-    if (!studentFiles.data) {
+    const sortedStudentFiles = useMemo(() => {
+        if (!studentFiles.data) {
+            return null;
+        }
+
+        const sorted = studentFiles.data.sort(
+            (a: StudentFile, b: StudentFile) => {
+                if (!a.grade && !!b.grade) {
+                    return -1;
+                }
+                if (!!a.grade && !b.grade) {
+                    return 1;
+                }
+
+                return a.uploadTime.localeCompare(b.uploadTime);
+            },
+        );
+
+        return sorted;
+    }, [studentFiles.data]);
+
+    if (!sortedStudentFiles) {
         return null;
     }
 
@@ -45,7 +67,7 @@ export function StudentFilesListTab({ task }: Props) {
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>{t('task.solutions')}</CustomCardTitle>
-                {studentFiles.data?.length !== 0 ? (
+                {sortedStudentFiles.length !== 0 ? (
                     <ButtonGroup>
                         <ToolbarDropdown title={t('common.export')} icon={faFileExport}>
                             <DropdownItem onSelect={() => handleExportSpreadsheet('xls')}>
@@ -71,7 +93,7 @@ export function StudentFilesListTab({ task }: Props) {
 
             <StudentFilesList
                 semesterID={task.semesterID}
-                files={studentFiles.data}
+                files={sortedStudentFiles}
                 renderItem={(file) => (
                     <>
                         <DataRow label={t('task.uploader')}>

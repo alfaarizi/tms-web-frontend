@@ -8,7 +8,7 @@ import { QUERY_KEY as GROUP_QUERY_KEY } from 'hooks/instructor/GroupHooks';
 export const QUERY_KEY = 'instructor/student-files';
 
 export function useStudentFilesForTask(taskID: number) {
-    return useQuery([QUERY_KEY, { taskID }], () => StudentFilesService.listforTask(taskID));
+    return useQuery([QUERY_KEY, { taskID }], () => StudentFilesService.listForTask(taskID));
 }
 
 export function useStudentFilesForStudent(groupID: number, uploaderID: number) {
