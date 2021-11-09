@@ -232,6 +232,7 @@
     "questions": "Kérdések",
     "availableTests": "Elérhető tesztek",
     "finishedTests": "Befejezett tesztek",
+    "futureTests": "Jövőbeli tesztek",
     "writeTest": "Teszt kitöltése",
     "successfulDuplication": "Teszt duplikálva",
     "successfulFinalization": "Teszt véglegesítve"

@@ -7,14 +7,16 @@ import { AvailableTestListItem } from 'pages/StudentExamination/components/Avail
 import { FinishedTestListItem } from 'pages/StudentExamination/components/FinishedTestListItem';
 import { TestList } from 'pages/StudentExamination/components/TestList';
 import { useSelectedSemester } from 'hooks/common/SemesterHooks';
+import { FutureTestListItem } from '../components/FutureTestListItem';
 
 export function HomePage() {
     const { selectedSemesterID } = useSelectedSemester();
     const history = useHistory();
     const { t } = useTranslation();
     const semesterID = selectedSemesterID;
-    const availableTests = useTestInstances(semesterID, false);
-    const finishedTests = useTestInstances(semesterID, true);
+    const availableTests = useTestInstances(semesterID, false, false);
+    const finishedTests = useTestInstances(semesterID, true, false);
+    const futureTests = useTestInstances(semesterID, false, true);
 
     const handleClick = (id: number) => {
         history.push(`/student/exam/test-instances/${id}`);
@@ -29,6 +31,15 @@ export function HomePage() {
                     <AvailableTestListItem
                         testInstance={testInstance}
                         onClick={() => handleClick(testInstance.id)}
+                    />
+                )}
+            />
+            <TestList
+                title={t('examTests.futureTests')}
+                testInstances={futureTests.data}
+                renderItem={(testInstance) => (
+                    <FutureTestListItem
+                        testInstance={testInstance}
                     />
                 )}
             />

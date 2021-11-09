@@ -231,6 +231,7 @@
     "questions": "Questions",
     "availableTests": "Available tests",
     "finishedTests": "Finished tests",
+    "futureTests": "Future tests",
     "writeTest": "Write tests",
     "successfulDuplication": "Successfully duplicated",
     "successfulFinalization": "Successfully finalized"

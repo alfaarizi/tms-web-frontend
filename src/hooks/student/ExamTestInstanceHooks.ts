@@ -4,11 +4,12 @@ import { ExamTestInstanceAnswer } from 'resources/student/ExamTestInstanceAnswer
 
 export const QUERY_KEY = 'student/exam-test-instances';
 
-export function useTestInstances(semesterID: number, submitted: boolean) {
+export function useTestInstances(semesterID: number, submitted: boolean, future: boolean) {
     return useQuery([QUERY_KEY, {
         semesterID,
         submitted,
-    }], () => ExamTestInstancesService.index(semesterID, submitted));
+        future,
+    }], () => ExamTestInstancesService.index(semesterID, submitted, future));
 }
 
 export function useTestInstance(id: number) {

@@ -4,11 +4,12 @@ import { axiosInstance } from 'api/axiosInstance';
 import { ExamWriterData } from 'resources/student/ExamWriterData';
 import { ExamTestInstanceAnswer } from 'resources/student/ExamTestInstanceAnswer';
 
-export async function index(semesterID: number, submitted: boolean) {
+export async function index(semesterID: number, submitted: boolean, future: boolean) {
     const res = await axiosInstance.get<ExamTestInstance[]>('/student/exam-test-instances', {
         params: {
             semesterID,
             submitted,
+            future,
         },
     });
     return res.data;
