@@ -1,7 +1,7 @@
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { axiosInstance } from 'api/axiosInstance';
 
-export async function listforTask(taskID: number) {
+export async function listForTask(taskID: number) {
     const res = await axiosInstance.get<StudentFile[]>('/instructor/student-files/list-for-task', {
         params: {
             taskID,
