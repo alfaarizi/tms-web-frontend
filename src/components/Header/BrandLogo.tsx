@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, Spinner } from 'react-bootstrap';
 import logo from 'assets/logo192.jpg';
 import styles from 'components/Header/BrandLogo.module.css';
-import { useIsFetching } from 'react-query';
 
 const classes = ['d-inline-block', 'align-top', styles.logo].join(' ');
 
@@ -10,11 +9,14 @@ type Props = {
     showFetchingIndicator: boolean
 }
 
+/**
+ * Shows application logo or fetching indicator
+ * @param showFetchingIndicator show fetching indicator instead of the application icon
+ * @constructor
+ */
 export function BrandLogo({ showFetchingIndicator }: Props) {
-    const isFetching = useIsFetching();
-
     let icon;
-    if (showFetchingIndicator && isFetching > 0) {
+    if (showFetchingIndicator) {
         icon = (
             <Spinner
                 size="sm"

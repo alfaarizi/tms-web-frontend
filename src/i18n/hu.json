@@ -61,7 +61,7 @@
     "password": "Jelszó",
     "ldapHelp": "Bejelentkezés INF-es azonosítóval. (Az ELTE IK számítógépeire bejelentkezéshez használt.)",
     "student": "Hallgatói hozzáférés",
-    "teacher": "Oktatói hozzáférés",
+    "instructor": "Oktatói hozzáférés",
     "admin": "Adminisztrátori hozzáférés",
     "neptunRequired": "A NEPTUN-kód nem lehet üres és csak 6 karakterből állhat",
     "nameRequired": "A név nem lehet üres",
@@ -75,7 +75,7 @@
     "language": "Nyelv",
     "roles": {
       "student": "Hallgató",
-      "teacher": "Oktató",
+      "instructor": "Oktató",
       "admin": "Adminisztrátor"
     },
     "semesterManager": "Szemeszterkezelő",

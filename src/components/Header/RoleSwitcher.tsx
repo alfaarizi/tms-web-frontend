@@ -3,60 +3,77 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGraduationCap, faBriefcase, faWrench } from '@fortawesome/free-solid-svg-icons';
 import { NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { Route, Switch, useHistory } from 'react-router';
+
+import { Role } from 'resources/common/Role';
 
 type Props = {
     isStudent: boolean,
     isFaculty: boolean
     isAdmin: boolean,
-    clearInactiveQueries: () => void,
+    currentRole: Role,
+    switchRole: (role: Role) => void,
 }
 
+const studentIcon = <FontAwesomeIcon icon={faGraduationCap} />;
+const instructorIcon = <FontAwesomeIcon icon={faBriefcase} />;
+const adminIcon = <FontAwesomeIcon icon={faWrench} />;
+
+/**
+ * Renders a dropdown component with the available roles
+ * @param isAdmin is admin role available
+ * @param isFaculty is faculty/instructor role available
+ * @param isStudent is student role available
+ * @param currentRole the currently selected role
+ * @param switchRole handle role switch
+ * @constructor
+ */
 export function RoleSwitcher({
     isAdmin,
     isFaculty,
     isStudent,
-    clearInactiveQueries,
+    currentRole,
+    switchRole,
 }: Props) {
     const { t } = useTranslation();
-    const history = useHistory();
-    const studentIcon = <FontAwesomeIcon icon={faGraduationCap} />;
-    const instructorIcon = <FontAwesomeIcon icon={faBriefcase} />;
-    const adminIcon = <FontAwesomeIcon icon={faWrench} />;
 
-    const switchRole = (url: string) => {
-        history.push(url);
-        // Wait a second to make sure the role switch was successful, then clear inactive queries
-        setTimeout(() => clearInactiveQueries(), 1000);
-    };
-
-    const title = (
-        <>
-            <Switch>
-                <Route path="/student">
-                    {studentIcon}
-                    {' '}
-                    {t('navbar.roles.student')}
-                </Route>
-                <Route path="/instructor">
-                    {instructorIcon}
-                    {' '}
-                    {t('navbar.roles.teacher')}
-                </Route>
-                <Route path="/admin">
-                    {adminIcon}
-                    {' '}
-                    {t('navbar.roles.admin')}
-                </Route>
-            </Switch>
-        </>
-    );
+    let title;
+    switch (currentRole) {
+    case 'student':
+        title = (
+            <>
+                {studentIcon}
+                {' '}
+                {t('navbar.roles.student')}
+            </>
+        );
+        break;
+    case 'instructor':
+        title = (
+            <>
+                {instructorIcon}
+                {' '}
+                {t('navbar.roles.instructor')}
+            </>
+        );
+        break;
+    case 'admin':
+        title = (
+            <>
+                {adminIcon}
+                {' '}
+                {t('navbar.roles.admin')}
+            </>
+        );
+        break;
+    default:
+        break;
+    }
 
     return (
         <NavDropdown title={title} id="nav-dropdown-role">
             {isStudent
                 ? (
-                    <NavDropdown.Item onClick={() => switchRole('/student/task-manager')}>
+                    <NavDropdown.Item onClick={() => switchRole('student')}>
                         {studentIcon}
                         {' '}
                         {t('navbar.roles.student')}
@@ -65,16 +82,16 @@ export function RoleSwitcher({
                 : null}
             {isFaculty
                 ? (
-                    <NavDropdown.Item onClick={() => switchRole('/instructor/task-manager')}>
+                    <NavDropdown.Item onClick={() => switchRole('instructor')}>
                         {instructorIcon}
                         {' '}
-                        {t('navbar.roles.teacher')}
+                        {t('navbar.roles.instructor')}
                     </NavDropdown.Item>
                 )
                 : null}
             {isAdmin
                 ? (
-                    <NavDropdown.Item onClick={() => switchRole('/admin/course-manager')}>
+                    <NavDropdown.Item onClick={() => switchRole('admin')}>
                         {adminIcon}
                         {' '}
                         {t('navbar.roles.admin')}

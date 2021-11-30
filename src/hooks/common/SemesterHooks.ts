@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import * as SemestersService from 'api/common/SemestersService';
 import { Semester } from 'resources/common/Semester';
 import { useUserInfo } from 'hooks/common/UserHooks';
-import { useAppContext } from 'context/AppContext';
+import { useGlobalContext } from 'context/GlobalContext';
 
 export const QUERY_KEY = 'semesters';
 
@@ -20,12 +20,12 @@ export function useSemesters(enabled: boolean = true) {
  * Get and set the selected semester
  */
 export function useSelectedSemester() {
-    const appContext = useAppContext();
+    const globalContext = useGlobalContext();
 
     return {
-        selectedSemester: appContext.selectedSemester,
-        selectedSemesterID: appContext.selectedSemester?.id || -1,
-        setSelectedSemester: appContext.setSelectedSemester,
+        selectedSemester: globalContext.selectedSemester,
+        selectedSemesterID: globalContext.selectedSemester?.id || -1,
+        setSelectedSemester: globalContext.setSelectedSemester,
     };
 }
 
