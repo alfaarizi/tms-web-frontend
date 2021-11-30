@@ -10,7 +10,7 @@ import { axiosInstance } from 'api/axiosInstance';
 import { LoginResponse } from 'resources/common/LoginResponse';
 import { LdapLogin } from 'resources/common/LdapLogin';
 import { useHistory } from 'react-router';
-import { useAppContext } from 'context/AppContext';
+import { useGlobalContext } from 'context/GlobalContext';
 
 export const USER_INFO_QUERY_KEY = 'userinfo';
 
@@ -21,7 +21,7 @@ export function useClientSideLocaleChange() {
     const { i18n } = useTranslation();
     const queryClient = useQueryClient();
 
-    const change = async (locale: string) => {
+    const mutateAsync = async (locale: string) => {
         // Always update the header, to make sure it is not undefined
         axiosInstance.defaults.headers.common['Accept-Language'] = locale;
 
@@ -39,7 +39,7 @@ export function useClientSideLocaleChange() {
     };
 
     return {
-        change,
+        mutateAsync,
     };
 }
 
@@ -53,7 +53,7 @@ export function useChangeUserLocaleMutation() {
     return useMutation((locale: string) => AuthService.updateUserLocale(locale), {
         onSuccess: async (_data, locale) => {
             // Also change clientside locale
-            await clientSideLocale.change(locale);
+            await clientSideLocale.mutateAsync(locale);
         },
     });
 }
@@ -62,7 +62,7 @@ export function useChangeUserLocaleMutation() {
  * Provides information about the current user
  */
 export function useUserInfo(enabled: boolean = true) {
-    const appContext = useAppContext();
+    const globalContext = useGlobalContext();
     const clientSideLocale = useClientSideLocaleChange();
 
     return useQuery<UserInfo>(USER_INFO_QUERY_KEY, () => AuthService.userinfo(), {
@@ -73,11 +73,11 @@ export function useUserInfo(enabled: boolean = true) {
             }
 
             // Update language based on userinfo
-            await clientSideLocale.change(data.locale);
+            await clientSideLocale.mutateAsync(data.locale);
 
             // Set selected semester to actual semester, if it is null
-            if (appContext.selectedSemester === null) {
-                appContext.setSelectedSemester(data.actualSemester);
+            if (globalContext.selectedSemester === null) {
+                globalContext.setSelectedSemester(data.actualSemester);
             }
         },
     });
@@ -89,7 +89,7 @@ export function useUserInfo(enabled: boolean = true) {
  */
 export function useBaseLoginMutation<TLoginData>(mutationFn: MutationFunction<LoginResponse, TLoginData>) {
     const queryClient = useQueryClient();
-    const appContext = useAppContext();
+    const globalContext = useGlobalContext();
     const clientSideLocale = useClientSideLocaleChange();
 
     return useMutation(mutationFn, {
@@ -104,9 +104,9 @@ export function useBaseLoginMutation<TLoginData>(mutationFn: MutationFunction<Lo
             // Update userInfo based on response
             queryClient.setQueryData(USER_INFO_QUERY_KEY, data.userInfo);
             // Set selected semester
-            appContext.setSelectedSemester(data.userInfo.actualSemester);
+            globalContext.setSelectedSemester(data.userInfo.actualSemester);
             // Set locale
-            await clientSideLocale.change(data.userInfo.locale);
+            await clientSideLocale.mutateAsync(data.userInfo.locale);
         },
     });
 }
@@ -131,7 +131,7 @@ export function useLdapLoginMutation() {
 export function useLogoutMutation() {
     const queryClient = useQueryClient();
     const history = useHistory();
-    const appContext = useAppContext();
+    const globalContext = useGlobalContext();
 
     const localLogout = () => {
         // Remove access token
@@ -140,20 +140,19 @@ export function useLogoutMutation() {
         queryClient.removeQueries({
             predicate: (query) => query.queryKey !== USER_INFO_QUERY_KEY,
         });
-        // Reset AppContext, for security reasons
-        appContext.resetState();
+        // Reset GlobalContext, for security reasons
+        globalContext.resetState();
         // Reset localStorage, this also clears accessTokens
         localStorage.clear();
         // Set userinfo to null
         queryClient.setQueryData(USER_INFO_QUERY_KEY, null);
-        // Redirect to homepage
-        history.replace('/');
     };
 
     const mutation = useMutation(() => AuthService.logout(), {
         retry: false,
         onSettled: () => {
             localLogout();
+            history.replace('/');
         },
     });
 
@@ -161,4 +160,12 @@ export function useLogoutMutation() {
         logout: mutation.mutate,
         logoutExpired: localLogout,
     };
+}
+
+/**
+ * Provides read-only access for the login status
+ */
+export function useIsLoggedIn() {
+    const { isLoggedIn } = useGlobalContext();
+    return isLoggedIn;
 }

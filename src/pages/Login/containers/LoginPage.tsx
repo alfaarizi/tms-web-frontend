@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MockLogin } from 'resources/common/MockLogin';
-import { useClientSideLocaleChange, useLdapLoginMutation, useMockLoginMutation } from 'hooks/common/UserHooks';
+import { useLdapLoginMutation, useMockLoginMutation } from 'hooks/common/UserHooks';
 import { MockLoginForm } from 'pages/Login/components/MockLoginForm';
 import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
 import { LoginCard } from 'pages/Login/components/LoginCard';
@@ -16,8 +16,6 @@ export function LoginPage() {
     // Login mutations
     const mockLoginMutation = useMockLoginMutation();
     const ldapLoginMutation = useLdapLoginMutation();
-    // Language change mutation
-    const clientSideLocaleChange = useClientSideLocaleChange();
     // Store serverside validation errors
     const [validationError, setValidationError] = useState<ValidationErrorBody | null>(null);
 
@@ -39,10 +37,6 @@ export function LoginPage() {
                 setValidationError(e.body);
             }
         }
-    };
-
-    const handleLocaleChange = async (locale: string) => {
-        await clientSideLocaleChange.change(locale);
     };
 
     // Select the correct login form
@@ -74,7 +68,7 @@ export function LoginPage() {
     // Render page
     return (
         <SingleColumnLayout>
-            <LoginCard onLocaleChange={handleLocaleChange}>
+            <LoginCard>
                 {formToDisplay}
             </LoginCard>
         </SingleColumnLayout>

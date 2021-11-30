@@ -11,6 +11,14 @@ type Props = {
     selected: Semester | null
 }
 
+/**
+ * Renders a dropdown component with the available semesters
+ * @param onChange handle semester change
+ * @param onRefetch handle semester list fetch
+ * @param semesters list of semesters
+ * @param selected selected semesters
+ * @constructor
+ */
 export function SemesterSwitcher({
     onChange,
     onRefetch,

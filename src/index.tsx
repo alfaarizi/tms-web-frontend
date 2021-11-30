@@ -8,9 +8,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
-import { App } from 'App';
+import { App } from 'containers/App';
 import './i18n/i18n';
-import { AppContextProvider } from 'context/AppContext';
+import { GlobalContextProvider } from 'context/GlobalContext';
 import { ErrorBoundary } from 'components/ErrorBoundary';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
@@ -31,14 +31,14 @@ const queryClient = new QueryClient({
 // Render application
 ReactDOM.render(
     <ErrorBoundary>
-        <AppContextProvider>
+        <GlobalContextProvider>
             <QueryClientProvider client={queryClient}>
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <App />
                     <ReactQueryDevtools initialIsOpen={false} />
                 </BrowserRouter>
             </QueryClientProvider>
-        </AppContextProvider>
+        </GlobalContextProvider>
     </ErrorBoundary>,
     document.getElementById('root'),
 );

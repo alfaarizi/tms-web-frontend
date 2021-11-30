@@ -11,7 +11,7 @@ type Props = {
 
 /**
  * Renders a dropdown component with the available languages
- * @param onChange
+ * @param onChange handle language switch
  * @constructor
  */
 export function LanguageSwitcher({ onChange }: Props) {

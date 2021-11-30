@@ -61,7 +61,7 @@
     "password": "Password",
     "ldapHelp": "You can log in with your INF.ELTE.HU account. (The one used to login on ELTE FI faculty computers.)",
     "student": "Student access",
-    "teacher": "Teacher access",
+    "instructor": "Instructor access",
     "admin": "Administrator access",
     "neptunRequired": "Invalid or missing NEPTUN-code",
     "nameRequired": "Name is required",
@@ -74,7 +74,7 @@
     "role": "Role",
     "roles": {
       "student": "Student",
-      "teacher": "Teacher",
+      "instructor": "Instructor",
       "admin": "Admin"
     },
     "language": "Language",

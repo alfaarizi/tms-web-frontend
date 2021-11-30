@@ -1,7 +1,7 @@
-import { useAppContext } from 'context/AppContext';
+import { useGlobalContext } from 'context/GlobalContext';
 
 export function useNotifications() {
-    const appCtx = useAppContext();
+    const appCtx = useGlobalContext();
 
     return {
         notification: appCtx.currentNotification,
