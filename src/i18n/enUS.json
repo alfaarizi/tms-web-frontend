@@ -25,7 +25,8 @@
     "neptunCodesRequired": "Please provide valid NEPTUN-codes separated with spaces!",
     "students": "Students",
     "instructors": "Instructors",
-    "email": "Email",
+    "officialEmail": "Official email address",
+    "customEmail": "Custom email address",
     "fieldRequired": "Field is required",
     "semesters": "Semesters",
     "minutes": "minutes",
@@ -67,6 +68,32 @@
     "nameRequired": "Name is required",
     "emailRequired": "Email is required"
   },
+  "settings": {
+    "customEmail": {
+      "confirmed": "Email address confirmed",
+      "unconfirmed": "Unconfirmed email address. Please confirm your custom email address before sending notifications there."
+    },
+    "notificationTarget": {
+      "label": "Send notifications to",
+      "required": "Notification target is required",
+      "official": "Official email address",
+      "custom": "Custom email address",
+      "none": "Don’t send notifications",
+      "noEmailToUnconfirmedAddress": "Please confirm your custom email address before sending notifications there"
+    },
+    "language": {
+      "label": "language",
+      "required": "Language is required"
+    },
+    "successfullySaved": "Settings successfully saved"
+  },
+  "confirmEmail": {
+    "success": "The email confirmation was successful.",
+    "openSettings": "You might now want to visit <settings>your settings</settings> to change the address used for notifications.",
+    "logIn": "You might now want to <login>log in</login> to change the address used for notifications.",
+    "differentUser": "<strong>Warning:</strong> The email address belongs to another user. To adjust your notification preferences, <logout>log out</logout> and log in with the user this address belongs to.",
+    "failed": "The email confirmation failed. Either you provided a wrong confirmation code, or the code has expired."
+  },
   "navbar": {
     "taskmanager": "Task Manager",
     "exam": "Exam",
@@ -77,7 +104,6 @@
       "instructor": "Instructor",
       "admin": "Admin"
     },
-    "language": "Language",
     "semesterManager": "Semester Manager",
     "plagiarism": "Plagiarism"
   },

@@ -74,7 +74,7 @@ export function MockLoginForm({
 
             <Form.Group>
                 <Form.Label>
-                    {t('common.email')}
+                    {t('common.officialEmail')}
                     :
                 </Form.Label>
                 <Form.Control

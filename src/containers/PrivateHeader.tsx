@@ -4,18 +4,16 @@ import { Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
-    faCalendar, faCrosshairs, faFile, faList, faPen, faSignOutAlt,
+    faCalendar, faCog, faCrosshairs, faFile, faList, faPen, faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { SemesterSwitcher } from 'components/Header/SemesterSwitcher';
-import { LanguageSwitcher } from 'components/Header/LanguageSwitcher';
 import { RoleSwitcher } from 'components/Header/RoleSwitcher';
 import { UserInfo } from 'resources/common/UserInfo';
 import { Header } from 'components/Header/Header';
 import { useIsFetching, useQueryClient } from 'react-query';
 import { useSemesters } from 'hooks/common/SemesterHooks';
-import { useChangeUserLocaleMutation } from 'hooks/common/UserHooks';
 import { useGlobalContext } from 'context/GlobalContext';
 import { Role } from 'resources/common/Role';
 import { HeaderContent } from 'components/Header/HeaderContent';
@@ -40,7 +38,6 @@ export function PrivateHeader({
         data: semesters,
         refetch: refetchSemesters,
     } = useSemesters(false);
-    const localeSetMutation = useChangeUserLocaleMutation();
     const history = useHistory();
     const { pathname } = useLocation();
     const [currentRole, setCurrentRole] = useState<Role>(null);
@@ -87,10 +84,6 @@ export function PrivateHeader({
         }
         // Wait a second to make sure the role switch was successful, then clear inactive queries
         setTimeout(() => queryClient.removeQueries({ inactive: true }), 1000);
-    };
-
-    const setLocale = (key: string) => {
-        localeSetMutation.mutate(key);
     };
 
     return (
@@ -178,7 +171,13 @@ export function PrivateHeader({
                     onRefetch={refetchSemesters}
                 />
 
-                <LanguageSwitcher onChange={setLocale} />
+                <LinkContainer to="/settings">
+                    <Nav.Link>
+                        <FontAwesomeIcon icon={faCog} />
+                        {' '}
+                        {t('common.settings')}
+                    </Nav.Link>
+                </LinkContainer>
 
                 <LinkContainer to="/logout">
                     <Nav.Link>
