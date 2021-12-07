@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.1.0...v2.2.0) (2021-12-07)
+
+
+### Features
+
+* Add user settings page ([490b143](https://gitlab.com/tms-elte/frontend-react/commit/490b143d7eaf69e07280d606b8d7ed383f6144af))
+* display finalized future exams ([b7341d0](https://gitlab.com/tms-elte/frontend-react/commit/b7341d0051686847fcd181d5c510154ace16d5b5))
+* sort student submissions by grading and date ([56fd09c](https://gitlab.com/tms-elte/frontend-react/commit/56fd09cf044c6d2a470b747bd99673e9a41c1105))
+
 ## [2.1.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.0.3...v2.1.0) (2021-10-27)
 
 
