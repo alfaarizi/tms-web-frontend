@@ -29,6 +29,8 @@ const InstructorExamination = lazy(() => import('pages/InstructorExamination'));
 const InstructorPlagiarism = lazy(() => import('pages/InstructorPlagiarism'));
 const AdminSemesterManager = lazy(() => import('pages/AdminSemesterManager'));
 const AdminCourseManager = lazy(() => import('pages/AdminCourseManager'));
+const Settings = lazy(() => import('pages/Settings'));
+const ConfirmEmailPage = lazy(() => import('pages/Settings/containers/ConfirmEmailPage'));
 
 /**
  * Handles app initialization, use global hooks, contains main pages and page groups
@@ -116,6 +118,13 @@ export function App() {
                     <ProtectedRoute hasPermission={isAdmin} path="/admin/semester-manager">
                         <AdminSemesterManager />
                     </ProtectedRoute>
+
+                    <ProtectedRoute exact path="/settings">
+                        <Settings />
+                    </ProtectedRoute>
+                    <Route path="/confirm-email/:code">
+                        <ConfirmEmailPage loggedIn={isLoggedIn} />
+                    </Route>
 
                     <Route>
                         <ErrorPage title={t('errorPage.pageNotFound')} />

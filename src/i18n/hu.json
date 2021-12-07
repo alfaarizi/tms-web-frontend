@@ -25,7 +25,8 @@
     "neptunCodesRequired": "Érvényes NEPTUN-kódokat kell megadni szóközökkel elválasztva!",
     "students": "Hallgatók",
     "instructors": "Gyakorlatvezetők",
-    "email": "Email",
+    "officialEmail": "Hivatalos e-mail-cím",
+    "customEmail": "Egyedi e-mail-cím",
     "fieldRequired": "A mező kitöltése kötelező",
     "semesters": "Szemeszterek",
     "minutes": "perc",
@@ -67,12 +68,37 @@
     "nameRequired": "A név nem lehet üres",
     "emailRequired": "A email nem lehet üres"
   },
+  "settings": {
+    "customEmail": {
+      "confirmed": "Az e-mail-cím megerősítve",
+      "unconfirmed": "Megerősítetlen e-mail-cím. Az egyedi e-mail-címet meg kell erősíteni, mielőtt értesítéseket lehetne oda küldeni."
+    },
+    "notificationTarget": {
+      "label": "Értesítések küldése",
+      "required": "Az értesítések céljának megadása kötelező",
+      "official": "A hivatalos e-mail-címre",
+      "custom": "Az egyedi e-mail-címre",
+      "none": "Értesítések küldésének mellőzése",
+      "noEmailToUnconfirmedAddress": "Az egyedi e-mail-címet meg kell erősíteni, mielőtt értesítéseket lehetne oda küldeni"
+    },
+    "language": {
+      "label": "Nyelv",
+      "required": "A nyelv megadása kötelező"
+    },
+    "successfullySaved": "A beállítások mentése sikeres"
+  },
+  "confirmEmail": {
+    "success": "Az e-mail-cím sikeresen megerősítve.",
+    "openSettings": "Most már módosíthatod az értesítésekhez használt e-mail-címet a <settings>beállításaidban</settings>.",
+    "logIn": "<login>Bejelentkezés</login> után most már módosíthatod az értesítésekhez használt e-mail-címet.",
+    "differentUser": "<strong>Figyelmeztetés:</strong> Ez az e-mail-cím egy másik felhasználóhoz tartozik. Az értesítési beállításaid módosításához <logout>jelentkezz ki</logout>, majd jelentkezz be a megfelelő felhasználóval.",
+    "failed": "Az e-mail-cím megerősítése nem sikerült, mert hibás megerősítési kódot adtál meg vagy a kód lejárt."
+  },
   "navbar": {
     "taskmanager": "Beadandókezelő",
     "exam": "Vizsgáztató",
     "logout": "Kijelentkezés ({{neptun}})",
     "role": "Szerepkör",
-    "language": "Nyelv",
     "roles": {
       "student": "Hallgató",
       "instructor": "Oktató",

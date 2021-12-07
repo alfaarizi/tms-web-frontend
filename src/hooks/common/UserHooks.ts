@@ -11,8 +11,10 @@ import { LoginResponse } from 'resources/common/LoginResponse';
 import { LdapLogin } from 'resources/common/LdapLogin';
 import { useHistory } from 'react-router';
 import { useGlobalContext } from 'context/GlobalContext';
+import { UserSettings } from 'resources/common/UserSettings';
 
 export const USER_INFO_QUERY_KEY = 'userinfo';
+export const USER_SETTINGS_QUERY_KEY = 'usersettings';
 
 /**
  * Changes i18next language and updates the Accept-Language header.
@@ -44,21 +46,6 @@ export function useClientSideLocaleChange() {
 }
 
 /**
- * Locale set mutation.
- * Sets location on the server, then update i18next configuration and headers
- */
-export function useChangeUserLocaleMutation() {
-    const clientSideLocale = useClientSideLocaleChange();
-
-    return useMutation((locale: string) => AuthService.updateUserLocale(locale), {
-        onSuccess: async (_data, locale) => {
-            // Also change clientside locale
-            await clientSideLocale.mutateAsync(locale);
-        },
-    });
-}
-
-/**
  * Provides information about the current user
  */
 export function useUserInfo(enabled: boolean = true) {
@@ -81,6 +68,25 @@ export function useUserInfo(enabled: boolean = true) {
             }
         },
     });
+}
+
+export function useSettings() {
+    return useQuery<UserSettings>(USER_SETTINGS_QUERY_KEY, () => AuthService.getSettings());
+}
+
+export function useSettingsMutation() {
+    const clientSideLocale = useClientSideLocaleChange();
+
+    return useMutation((settings: UserSettings) => AuthService.putSettings(settings), {
+        onSuccess: async (_data, settings) => {
+            // Also change client-side locale
+            await clientSideLocale.mutateAsync(settings.locale);
+        },
+    });
+}
+
+export function useConfirmEmailMutation() {
+    return useMutation((code: string) => AuthService.postConfirmEmail(code));
 }
 
 /**
