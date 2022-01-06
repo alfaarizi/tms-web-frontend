@@ -28,6 +28,7 @@ export function TestCaseListItem({
         <ListCardItem>
             <Row>
                 <Col md={9}>
+                    <DataRow label={t('task.autoTester.arguments')}>{testCase.arguments}</DataRow>
                     <DataRow label={t('task.autoTester.input')}>{testCase.input}</DataRow>
                     <DataRow label={t('task.autoTester.output')}>{testCase.output}</DataRow>
                 </Col>
