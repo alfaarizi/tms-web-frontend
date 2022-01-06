@@ -35,9 +35,11 @@ export function TestCaseFormModal({
 
     useEffect(() => {
         if (editData) {
+            setValue('arguments', editData.arguments);
             setValue('input', editData.input);
             setValue('output', editData.output);
         } else {
+            setValue('arguments', '');
             setValue('input', '');
             setValue('output', '');
         }
@@ -57,11 +59,23 @@ export function TestCaseFormModal({
 
                     <Form.Group>
                         <Form.Label>
+                            {t('task.autoTester.arguments')}
+                            :
+                        </Form.Label>
+                        <Form.Control type="text" {...register('arguments', { required: false })} />
+                        <Form.Text className="text-muted">
+                            {t('task.autoTester.argumentsHelp')}
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>
                             {t('task.autoTester.input')}
                             :
                         </Form.Label>
-                        <Form.Control as="textarea" {...register('input', { required: true })} />
-                        {errors.input && <FormError message={t('common.fieldRequired')} />}
+                        <Form.Control as="textarea" {...register('input', { required: false })} />
+                        <Form.Text className="text-muted">
+                            {t('task.autoTester.inputHelp')}
+                        </Form.Text>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
@@ -69,6 +83,9 @@ export function TestCaseFormModal({
                             :
                         </Form.Label>
                         <Form.Control as="textarea" {...register('output', { required: true })} />
+                        <Form.Text className="text-muted">
+                            {t('task.autoTester.outputHelp')}
+                        </Form.Text>
                         {errors.output && <FormError message={t('common.fieldRequired')} />}
                     </Form.Group>
 

@@ -223,6 +223,9 @@ export function AutoTesterForm({
                         size="sm"
                         disabled={inProgress}
                     />
+                    <Form.Text muted>
+                        {t('task.autoTester.runInstructionsHelp')}
+                    </Form.Text>
                     {errors.runInstructions && <FormError message={errors.runInstructions.message} />}
                 </Form.Group>
 
