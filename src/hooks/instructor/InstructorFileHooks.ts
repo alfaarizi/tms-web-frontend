@@ -7,8 +7,17 @@ import { useDownloader } from 'hooks/common/useDownloader';
 
 export const QUERY_KEY = 'instructor/instructor-files';
 
-export function useInstructorFiles(taskID: number) {
-    return useQuery([QUERY_KEY, { taskID }], () => InstructorFilesService.index(taskID));
+export function useInstructorFiles(taskID: number, includeAttachments: boolean, includeTestFiles: boolean) {
+    return useQuery([QUERY_KEY, { taskID, includeAttachments, includeTestFiles }],
+        () => InstructorFilesService.index(taskID, includeAttachments, includeTestFiles));
+}
+
+export function useAttachmentInstructorFiles(taskID: number) {
+    return useInstructorFiles(taskID, true, false);
+}
+
+export function useTestInstructorFiles(taskID: number) {
+    return useInstructorFiles(taskID, false, true);
 }
 
 export function useInstructorFilesUploadMutation(taskID: number) {

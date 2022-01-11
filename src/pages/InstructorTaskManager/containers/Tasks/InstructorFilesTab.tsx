@@ -1,6 +1,6 @@
 import {
+    useAttachmentInstructorFiles,
     useInstructorFileDownload,
-    useInstructorFiles,
     useInstructorFilesUploadMutation,
     useRemoveInstructorFileMutation,
 } from 'hooks/instructor/InstructorFileHooks';
@@ -18,7 +18,7 @@ type Props = {
 
 export function InstructorFilesTab({ task }: Props) {
     const actualSemester = useActualSemester();
-    const instructorFiles = useInstructorFiles(task.id);
+    const instructorFiles = useAttachmentInstructorFiles(task.id);
     const removeMutation = useRemoveInstructorFileMutation(task.id);
     const uploadMutation = useInstructorFilesUploadMutation(task.id);
     const downloadInstructorFileMutation = useInstructorFileDownload();
@@ -39,6 +39,7 @@ export function InstructorFilesTab({ task }: Props) {
         try {
             const uploadData: InstructorFilesUpload = {
                 taskID: task.id,
+                category: 'Attachment',
                 files,
             };
             await uploadMutation.mutateAsync(uploadData);
