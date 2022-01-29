@@ -10,7 +10,7 @@ import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import styles from 'pages/InstructorPlagiarism/components/Results.module.css';
 
 type Props = {
-    responseURL?: string,
+    responseURL: string | null,
     onRun: () => void,
     isRunning: boolean
 }
@@ -23,7 +23,9 @@ export function Result({
     const { t } = useTranslation();
 
     const openInNewTab = () => {
-        window.open(responseURL, '_blank');
+        // Force string; if it was `null`, the button with this
+        // callback wouldn’t appear in the first place
+        window.open(responseURL as string, '_blank');
     };
 
     return (

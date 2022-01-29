@@ -3,6 +3,6 @@ export interface Plagiarism {
     semesterID: number;
     name: string;
     description: string;
-    response: string;
+    url: string | null;
     ignoreThreshold: number;
 }

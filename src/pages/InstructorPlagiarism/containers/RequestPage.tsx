@@ -97,7 +97,7 @@ export function RequestPage() {
             }
 
             <Result
-                responseURL={request.data.response}
+                responseURL={request.data.url}
                 onRun={handleMossRun}
                 isRunning={runMossMutation.isLoading}
             />
