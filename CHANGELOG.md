@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.2.0...v2.3.0) (2022-02-06)
+
+
+### Features
+
+* command line arguments input for test cases ([4dfdcdf](https://gitlab.com/tms-elte/frontend-react/commit/4dfdcdf9ad3a91e2a2291e354c1d720a666bf2ee))
+
 ## [2.2.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.1.0...v2.2.0) (2021-12-07)
 
 
