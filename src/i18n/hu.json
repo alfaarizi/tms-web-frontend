@@ -194,7 +194,7 @@
       "arguments": "Argumentumok",
       "argumentsHelp": "Parancssori paraméterként kerülnek átadásra.",
       "input": "Bemenet",
-      "inputHelp": "Standard bemeneti folyamra kerül írásra. argumentumai a <code>\"$@\"</code> változóban érhetőek el. (Powershell esetén <code>@PSBoundParameters</code>.) A te",
+      "inputHelp": "Standard bemeneti folyamra kerül írásra.",
       "output": "Kimenet",
       "outputHelp": "Standard kimeneti folyam elvárt tartalma. A kezdő és záró szóközök (whitespace karakterek) pontos egyezése nem elvárt.",
       "newTestCase": "Teszteset hozzáadása",
