@@ -22,7 +22,7 @@ import {
 } from 'hooks/instructor/ExamAnswerHooks';
 import { AnswerFormModal } from 'pages/InstructorExamination/components/QuestionSets/AnswerFormModal';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { InsertFunc } from 'components/ReactMdeWithCommands';
 import { ExamImageGallery } from 'pages/InstructorExamination/containers/QuestionSets/ExamImageGallery';
 
@@ -132,6 +132,7 @@ export function QuestionsEditor({ questionSet }: Props) {
                 icon={faPlus}
                 onClick={showNew.toShow}
                 text={t('examQuestions.newQuestion')}
+                displayTextBreakpoint="xs"
             />
             <QuestionList
                 questions={questions.data}
@@ -142,7 +143,7 @@ export function QuestionsEditor({ questionSet }: Props) {
                             onClick={() => setEditedQuestion(question)}
                             text={t('common.edit')}
                         />
-                        <DeleteButton showText onDelete={() => handleRemoveQuestion(question)} />
+                        <DeleteToolbarButton onDelete={() => handleRemoveQuestion(question)} />
                         <ToolbarButton
                             icon={faPlus}
                             onClick={() => setQuestionToAddAnswer(question.id)}
@@ -152,8 +153,13 @@ export function QuestionsEditor({ questionSet }: Props) {
                 )}
                 renderAnswerOptions={(answer) => (
                     <>
-                        <ToolbarButton icon={faEdit} onClick={() => setEditedAnswer(answer)} />
-                        <DeleteButton showText={false} onDelete={() => handleRemoveAnswer(answer)} />
+                        <ToolbarButton
+                            icon={faEdit}
+                            text={t('common.edit')}
+                            displayTextBreakpoint="none"
+                            onClick={() => setEditedAnswer(answer)}
+                        />
+                        <DeleteToolbarButton displayTextBreakpoint="none" onDelete={() => handleRemoveAnswer(answer)} />
                     </>
                 )}
             />

@@ -2,10 +2,11 @@ import React from 'react';
 import { ButtonGroup, Media } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 
 type Props = {
     name: string,
@@ -18,6 +19,8 @@ export function FileListItem({
     onDownload,
     name,
 }: Props) {
+    const { t } = useTranslation();
+
     return (
         <ListCardItem>
             <div className="d-flex justify-content-between text-muted">
@@ -28,8 +31,13 @@ export function FileListItem({
                     </Media.Body>
                 </Media>
                 <ButtonGroup>
-                    <ToolbarButton icon={faDownload} onClick={onDownload} />
-                    {onRemove ? <DeleteButton showText={false} onDelete={onRemove} /> : null}
+                    <ToolbarButton
+                        text={t('common.download')}
+                        displayTextBreakpoint="none"
+                        icon={faDownload}
+                        onClick={onDownload}
+                    />
+                    {onRemove ? <DeleteToolbarButton displayTextBreakpoint="none" onDelete={onRemove} /> : null}
                 </ButtonGroup>
             </div>
         </ListCardItem>

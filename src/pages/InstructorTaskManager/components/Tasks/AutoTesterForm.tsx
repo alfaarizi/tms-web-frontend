@@ -104,7 +104,7 @@ export function AutoTesterForm({
                 </CustomCardTitle>
                 <ButtonGroup>
                     <ToolbarDropdown
-                        title={t('task.autoTester.templates')}
+                        text={t('task.autoTester.templates')}
                         icon={faClipboardList}
                         disabled={inProgress}
                     >
@@ -177,7 +177,13 @@ export function AutoTesterForm({
 
                     <InputGroup>
                         <InputGroup.Prepend>
-                            <ToolbarButton icon={faTimes} onClick={handleResetFileUpload} disabled={inProgress} />
+                            <ToolbarButton
+                                icon={faTimes}
+                                onClick={handleResetFileUpload}
+                                disabled={inProgress}
+                                text={t('common.delete')}
+                                displayTextBreakpoint="none"
+                            />
                         </InputGroup.Prepend>
                         <Form.File
                             id="dockerfile-upload"

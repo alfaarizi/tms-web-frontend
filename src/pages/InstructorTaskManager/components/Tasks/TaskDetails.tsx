@@ -8,7 +8,7 @@ import { Task } from 'resources/instructor/Task';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
@@ -39,7 +39,7 @@ export const TaskDetails = ({
                     ? (
                         <ButtonGroup>
                             <ToolbarButton icon={faEdit} onClick={onEdit} text={t('common.edit')} />
-                            <DeleteButton showText onDelete={onRemove} />
+                            <DeleteToolbarButton onDelete={onRemove} />
                         </ButtonGroup>
                     )
                     : null}

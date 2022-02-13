@@ -6,19 +6,33 @@ import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { Button, Modal } from 'react-bootstrap';
 
 import { useShow } from 'ui-hooks/useShow';
+import { Breakpoint } from 'components/Buttons/ResponsiveButtonText';
 
 type Props = {
-    showText: boolean,
-    onDelete: () => void
+    displayTextBreakpoint?: Breakpoint,
+    onDelete: () => void,
+    isLoading?: boolean,
+    disabled?: boolean,
 }
 
-export function DeleteButton({
+/**
+ * Reusable delete button component that can be used in ButtonGroups and toolbars.
+ * It shows a modal to confirm delete action.
+ * @param onDelete A callback function to execute after delete confirmation
+ * @param className Custom className applied to the Bootstrap Button component
+ * @param displayTextBreakpoint The first viewport size where the button text is visible
+ * @param isLoading Show a spinner instead of the icon
+ * @param disabled Disable button
+ * @constructor
+ */
+export function DeleteToolbarButton({
     onDelete,
-    showText,
+    displayTextBreakpoint,
+    isLoading,
+    disabled,
 }: Props) {
     const { t } = useTranslation();
     const show = useShow();
-    const text = showText ? t('common.delete') : '';
 
     const handleConfirm = () => {
         show.toHide();
@@ -29,8 +43,11 @@ export function DeleteButton({
         <>
             <ToolbarButton
                 onClick={show.toShow}
-                text={text}
+                text={t('common.delete')}
                 icon={faTrash}
+                displayTextBreakpoint={displayTextBreakpoint}
+                isLoading={isLoading}
+                disabled={disabled}
             />
             <Modal show={show.show} onHide={show.toHide}>
                 <Modal.Header closeButton>
