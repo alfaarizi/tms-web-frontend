@@ -11,7 +11,7 @@ import { UserListCard } from 'components/UserListCard/UserListCard';
 import { Group } from 'resources/instructor/Group';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 
 type Props = {
     group: Group
@@ -53,10 +53,19 @@ export function GroupStudentsListTab({ group }: Props) {
                 renderUserButtons={(user) => (
                     <>
                         <LinkContainer to={`${url}/students/${user.id}`}>
-                            <ToolbarButton icon={faUser} />
+                            <ToolbarButton
+                                icon={faUser}
+                                text={t('group.studentSolutions')}
+                                displayTextBreakpoint="none"
+                            />
                         </LinkContainer>
                         {actualSemester.check(group.semesterID) && !group.isCanvasCourse
-                            ? <DeleteButton showText={false} onDelete={() => handleDelete(user.id)} />
+                            ? (
+                                <DeleteToolbarButton
+                                    displayTextBreakpoint="none"
+                                    onDelete={() => handleDelete(user.id)}
+                                />
+                            )
                             : null}
                     </>
                 )}

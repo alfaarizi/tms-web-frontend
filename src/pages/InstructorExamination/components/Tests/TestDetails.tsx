@@ -8,7 +8,7 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { faCopy, faEdit, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { ButtonGroup } from 'react-bootstrap';
 import { DateTimeInterval } from 'pages/InstructorExamination/components/Tests/DateTimeInterval';
 
@@ -37,7 +37,7 @@ export function TestDetails({
                     <ToolbarButton icon={faPlay} text={t('examTests.finalize')} onClick={onFinalize} />
                     <ToolbarButton icon={faCopy} text={t('common.duplicate')} onClick={onDuplicate} />
                     <ToolbarButton icon={faEdit} text={t('common.edit')} onClick={onEdit} />
-                    <DeleteButton showText onDelete={onDelete} />
+                    <DeleteToolbarButton onDelete={onDelete} />
                 </ButtonGroup>
             </CustomCardHeader>
             <DataRow label={t('course.course')}>

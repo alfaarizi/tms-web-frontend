@@ -9,6 +9,12 @@ type Props = {
     isLoading?: boolean
 }
 
+/**
+ * Provides submit and cancel buttons for forms
+ * @param onCancel A callback function that called after clicking on the Cancel button
+ * @param isLoading Show a spinner instead of the button icon
+ * @constructor
+ */
 export function FormButtons({
     onCancel,
     isLoading,

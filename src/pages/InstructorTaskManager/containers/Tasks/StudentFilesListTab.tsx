@@ -69,7 +69,7 @@ export function StudentFilesListTab({ task }: Props) {
                 <CustomCardTitle>{t('task.solutions')}</CustomCardTitle>
                 {sortedStudentFiles.length !== 0 ? (
                     <ButtonGroup>
-                        <ToolbarDropdown title={t('common.export')} icon={faFileExport}>
+                        <ToolbarDropdown text={t('common.export')} icon={faFileExport}>
                             <DropdownItem onSelect={() => handleExportSpreadsheet('xls')}>
                                 <FontAwesomeIcon icon={faFileExcel} />
                                 {' XLS'}
@@ -79,7 +79,7 @@ export function StudentFilesListTab({ task }: Props) {
                                 {' CSV'}
                             </DropdownItem>
                         </ToolbarDropdown>
-                        <ToolbarDropdown title={t('task.downloadSolutions')} icon={faFileArchive}>
+                        <ToolbarDropdown text={t('task.downloadSolutions')} icon={faFileArchive}>
                             <DropdownItem onSelect={() => handleDownloadAll(false)}>
                                 {t('task.downloadAll')}
                             </DropdownItem>

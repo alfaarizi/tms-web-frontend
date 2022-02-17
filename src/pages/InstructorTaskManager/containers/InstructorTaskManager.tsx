@@ -57,6 +57,7 @@ export function InstructorTaskManager() {
                             icon={faPlus}
                             text={t('common.add')}
                             onClick={handleNewGroupOpen}
+                            displayTextBreakpoint="xs"
                         />
                     )
                     : null

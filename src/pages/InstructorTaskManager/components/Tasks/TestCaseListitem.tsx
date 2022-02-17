@@ -7,7 +7,7 @@ import { ButtonGroup, Col, Row } from 'react-bootstrap';
 import React from 'react';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 
 type Props = {
     testCase: TestCase,
@@ -37,8 +37,16 @@ export function TestCaseListItem({
                         ? (
                             <>
                                 <ButtonGroup className="float-right">
-                                    <ToolbarButton icon={faEdit} onClick={() => onEdit(testCase)} />
-                                    <DeleteButton showText={false} onDelete={() => onDelete(testCase)} />
+                                    <ToolbarButton
+                                        icon={faEdit}
+                                        onClick={() => onEdit(testCase)}
+                                        text={t('common.edit')}
+                                        displayTextBreakpoint="none"
+                                    />
+                                    <DeleteToolbarButton
+                                        displayTextBreakpoint="none"
+                                        onDelete={() => onDelete(testCase)}
+                                    />
                                 </ButtonGroup>
                                 <div className="clearfix" />
                             </>

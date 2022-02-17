@@ -48,7 +48,10 @@
     "fileUploadSuccess": "{{count}} file(s) uploaded successfully",
     "elteFI": "ELTE Faculty of Informatics",
     "export": "Export",
-    "timezone": "Timezone"
+    "timezone": "Timezone",
+    "previous": "Previous",
+    "next": "Next",
+    "insert": "Insert"
   },
   "errorPage": {
     "genericMessage": "Something went wrong",
@@ -125,6 +128,7 @@
     "addStudents": "Add Students",
     "addInstructors": "Add Instructors",
     "courseIDRequired": "Course is required",
+    "studentSolutions": "Solutions and statistics",
     "stats": {
       "stats": "Statistics",
       "intime": "In time",

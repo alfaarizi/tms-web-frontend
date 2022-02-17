@@ -48,7 +48,10 @@
     "fileUploadFailed": "Sikertelen fájlfeltöltés",
     "elteFI": "ELTE Informatikai Kar",
     "export": "Exportálás",
-    "timezone": "Időzóna"
+    "timezone": "Időzóna",
+    "previous": "Előző",
+    "next": "Következő",
+    "insert": "Beillesztés"
   },
   "errorPage": {
     "genericMessage": "Hiba történt",
@@ -125,6 +128,7 @@
     "addStudents": "Hallgatók hozzáadása",
     "addInstructors": "Gyakorlatvezetők hozzáadása",
     "courseIDRequired": "Kérem válasszon egy kurzust",
+    "studentSolutions": "Megoldások és statisztikák",
     "stats": {
       "stats": "Statisztikák",
       "intime": "Időben",
