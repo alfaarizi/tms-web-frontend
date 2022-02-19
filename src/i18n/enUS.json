@@ -5,8 +5,6 @@
     "groups": "Groups",
     "name": "Name",
     "details": "Details",
-    "upload": "Upload",
-    "uploadInProgress": "Uploading...",
     "download": "Download",
     "serverError": "Server Error",
     "yes": "Yes",
@@ -43,15 +41,20 @@
     "search": "Search",
     "settings": "Settings",
     "modify": "Modify",
-    "browse": "Browse",
-    "fileUploadFailed": "File upload failed",
-    "fileUploadSuccess": "{{count}} file(s) uploaded successfully",
     "elteFI": "ELTE Faculty of Informatics",
     "export": "Export",
     "timezone": "Timezone",
     "previous": "Previous",
     "next": "Next",
     "insert": "Insert"
+  },
+  "fileUpload": {
+    "success": "{{count}} file(s) uploaded successfully",
+    "failed":  "File upload failed",
+    "sizeLimitError": "The total size of uploaded files is limited to {{maxSize}} MiB!",
+    "browse": "Browse",
+    "upload": "Upload",
+    "uploadInProgress": "Uploading..."
   },
   "errorPage": {
     "genericMessage": "Something went wrong",

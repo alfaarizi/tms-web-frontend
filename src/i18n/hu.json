@@ -5,8 +5,6 @@
     "groups": "Csoportok",
     "name": "Név",
     "details": "Részletek",
-    "upload": "Feltöltés",
-    "uploadInProgress": "Feltöltés...",
     "download": "Letöltés",
     "serverError": "Szerver probléma",
     "yes": "Igen",
@@ -43,15 +41,20 @@
     "search": "Keresés",
     "settings": "Beállítások",
     "modify": "Módosítás",
-    "browse": "Tallózás",
-    "fileUploadSuccess": "{{count}} fájl feltöltése sikeres",
-    "fileUploadFailed": "Sikertelen fájlfeltöltés",
     "elteFI": "ELTE Informatikai Kar",
     "export": "Exportálás",
     "timezone": "Időzóna",
     "previous": "Előző",
     "next": "Következő",
     "insert": "Beillesztés"
+  },
+  "fileUpload": {
+    "success": "{{count}} fájl feltöltése sikeres",
+    "failed": "Sikertelen fájlfeltöltés",
+    "sizeLimitError": "A feltöltött fájlok összesített mérete legfeljebb {{maxSize}} MiB lehet!",
+    "browse": "Tallózás",
+    "upload": "Feltöltés",
+    "uploadInProgress": "Feltöltés..."
   },
   "errorPage": {
     "genericMessage": "Hiba történt",

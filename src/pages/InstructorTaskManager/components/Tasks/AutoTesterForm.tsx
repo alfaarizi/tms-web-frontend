@@ -18,6 +18,7 @@ import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
 import { faClipboardList, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { SetupTester } from 'resources/instructor/SetupTester';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { useFileSizeValidator } from 'ui-hooks/useFileSizeValidator';
 
 type Props = {
     onSave: (task: SetupTester) => void,
@@ -35,6 +36,7 @@ export function AutoTesterForm({
     isActualSemester,
 }: Props) {
     const { t } = useTranslation();
+    const fileSizeValidator = useFileSizeValidator();
     const {
         register,
         handleSubmit,
@@ -60,8 +62,6 @@ export function AutoTesterForm({
             handleResetFileUpload();
         }
     }, [task.imageName]);
-
-    const watchFiles = watch('files');
 
     const onSubmit = handleSubmit((data: SetupTester) => {
         onSave(data);
@@ -89,6 +89,7 @@ export function AutoTesterForm({
         alertToShow = <Alert variant="info">{t('task.autoTester.builtImageNotFound')}</Alert>;
     }
 
+    const watchFiles = watch('files');
     let fileLabel = ' ';
     if (watchFiles && watchFiles.length > 0) {
         for (let i = 0; i < watchFiles.length; ++i) {
@@ -187,14 +188,18 @@ export function AutoTesterForm({
                         </InputGroup.Prepend>
                         <Form.File
                             id="dockerfile-upload"
-                            data-browse={t('common.browse')}
+                            data-browse={t('fileUpload.browse')}
                             label={fileLabel}
                             custom
-                            {...register('files')}
                             multiple
                             disabled={inProgress}
+                            {...register('files', {
+                                validate: fileSizeValidator.reactHookFormsValidator,
+                            })}
                         />
                     </InputGroup>
+
+                    {errors.files && <FormError message={errors.files.message} />}
 
                     <Form.Text muted>
                         {t('task.autoTester.uploadDockerfileHelp')}
