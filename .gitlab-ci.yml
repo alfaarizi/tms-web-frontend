@@ -21,7 +21,7 @@ include:
 eslint:
   stage: lint
   before_script:
-    - npm install
+    - npm ci
   script:
     - npm run lint
   allow_failure: true
@@ -30,7 +30,7 @@ eslint:
 build:
   stage: test
   before_script:
-    - npm install
+    - npm ci
   script:
     - npm run build
 
@@ -56,7 +56,7 @@ build:
         git status
         git fetch origin
         git checkout tags/$CI_COMMIT_TAG
-        npm install
+        npm ci
         npm run build
       CMD
 
