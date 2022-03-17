@@ -60,7 +60,7 @@
     "genericMessage": "Something went wrong",
     "pageNotFound": "Page not found",
     "accessDenied": "Access denied",
-    "redirectToHome": "Redirect to homepage"
+    "versionError": "The backend version does not meet with the required version range! Excepted range: {{requiredRange}}, current version: {{version}}."
   },
   "login": {
     "login": "Login",

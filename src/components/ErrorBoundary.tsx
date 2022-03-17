@@ -1,6 +1,27 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, createContext, useContext } from 'react';
 import { Translation } from 'react-i18next';
 import ErrorPage from 'pages/ErrorPage';
+
+export interface ErrorBoundaryContextInterface {
+    /**
+     * Trigger error manually.
+     * @param error
+     */
+    triggerError: (error: Error) => void;
+}
+
+const ErrorBoundaryContext = createContext<ErrorBoundaryContextInterface>({
+    triggerError: () => {
+        throw new Error('Context in not initialized');
+    },
+});
+
+/**
+ * Access error boundary functionality from child components
+ */
+export function useErrorBoundaryContext() {
+    return useContext(ErrorBoundaryContext);
+}
 
 type Props = {
     children: ReactNode
@@ -12,7 +33,8 @@ type State = {
 }
 
 /**
- * Handles uncaught errors
+ * Global error handler, catches uncaught errors and provides an option to trigger errors manually.
+ * Note: Error boundaries cannot catch errors from async code, use triggerError function instead.
  * Docs: https://reactjs.org/docs/error-boundaries.html
  */
 export class ErrorBoundary extends React.Component<Props, State> {
@@ -33,21 +55,38 @@ export class ErrorBoundary extends React.Component<Props, State> {
         // Logging and error reporting should be placed here
     }
 
+    triggerError = (error: Error) => {
+        this.setState({
+            hasError: true,
+            message: error.message,
+        });
+    }
+
     render() {
         const { hasError, message } = this.state;
         const { children } = this.props;
-        // Renders errorPage if hasError is true
-        return hasError ? (
-            <Translation>
+        const contextValue = {
+            triggerError: this.triggerError,
+        };
+
+        return (
+            <ErrorBoundaryContext.Provider value={contextValue}>
                 {
-                    (t, { i18n }) => (
-                        <ErrorPage
-                            title={t('errorPage.genericMessage')}
-                            message={message}
-                        />
-                    )
+                    // Renders errorPage if hasError is true
+                    hasError ? (
+                        <Translation>
+                            {
+                                (t) => (
+                                    <ErrorPage
+                                        title={t('errorPage.genericMessage')}
+                                        message={message}
+                                    />
+                                )
+                            }
+                        </Translation>
+                    ) : children
                 }
-            </Translation>
-        ) : children;
+            </ErrorBoundaryContext.Provider>
+        );
     }
 }
