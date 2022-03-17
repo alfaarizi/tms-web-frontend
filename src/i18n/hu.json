@@ -60,7 +60,7 @@
     "genericMessage": "Hiba történt",
     "pageNotFound": "Oldal nem található",
     "accessDenied": "Hozzáférés megtagadva",
-    "redirectToHome": "Átirányítás a kezdőlapra"
+    "versionError": "A backend verziószáma nem felel meg az elvárt verziószám tartománynak! Elvárt tartomány: {{requiredRange}}, jelenlegi verzió: {{version}}."
   },
   "login": {
     "login": "Bejelentkezés",

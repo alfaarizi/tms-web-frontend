@@ -5,6 +5,7 @@ import {
     Redirect, Route, Switch, useLocation,
 } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { satisfies } from 'semver';
 
 import { useUserInfo } from 'hooks/common/UserHooks';
 import { FullScreenSpinner } from 'components/FullScreenSpinner/FullScreenSpinner';
@@ -20,6 +21,9 @@ import { axiosInstance } from 'api/axiosInstance';
 import { PrivateHeader } from 'containers/PrivateHeader';
 import { PublicHeader } from 'containers/PublicHeader';
 import { useGlobalContext } from 'context/GlobalContext';
+import { usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { useErrorBoundaryContext } from 'components/ErrorBoundary';
+import { InvalidVersionRangeError } from 'exceptions/InvalidVersionRangeError';
 
 // Lazy load bigger page groups
 const StudentTaskManager = lazy(() => import('pages/StudentTaskManager'));
@@ -43,32 +47,52 @@ export function App() {
     const { t } = useTranslation();
     const location = useLocation();
     const { isLoggedIn, setIsLoggedIn } = useGlobalContext();
-
+    const { triggerError } = useErrorBoundaryContext();
+    const publicSystemInfo = usePublicSystemInfoQuery(false);
     const {
         data: userInfo,
         refetch: refetchUserInfo,
     } = useUserInfo(!!isLoggedIn);
+
+    /**
+     * Load backend-core public system information and check version
+     */
+    const loadPublicSystemInfo = async () => {
+        const query = await publicSystemInfo.refetch({ throwOnError: true });
+
+        const { version } = query.data!;
+        const requiredRange = process.env.REACT_APP_BACKEND_CORE_VERSION_RANGE;
+        if (!satisfies(version, requiredRange)) {
+            throw new InvalidVersionRangeError(t('errorPage.versionError', { requiredRange, version }).toString());
+        }
+    };
+
+    /**
+     * Load token from localStorage
+     */
+    const authenticateWithAccessToken = async () => {
+        const accessToken = localStorage.getItem('accessToken');
+        // If localStorage contains a token, send it to the server
+        if (accessToken) {
+            axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+            const query = await refetchUserInfo();
+            setIsLoggedIn(query.isSuccess);
+        } else {
+            setIsLoggedIn(false);
+        }
+    };
+
+    useEffect(() => {
+        loadPublicSystemInfo()
+            .then(() => authenticateWithAccessToken())
+            .catch((err) => triggerError(err));
+    }, []);
 
     useEffect(() => {
         if (isLoggedIn !== null) {
             setIsLoggedIn(!!userInfo);
         }
     }, [userInfo, isLoggedIn]);
-
-    // Load token from localStorage
-    useEffect(() => {
-        const accessToken = localStorage.getItem('accessToken');
-        // If localStorage contains a token, send it to the server
-        if (accessToken) {
-            axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-            refetchUserInfo().then((query) => {
-                // If query is successful, the user is logged is
-                setIsLoggedIn(query.isSuccess);
-            });
-        } else {
-            setIsLoggedIn(false);
-        }
-    }, []);
 
     const isStudent = !!userInfo?.isStudent;
     const isFaculty = !!userInfo?.isFaculty;
