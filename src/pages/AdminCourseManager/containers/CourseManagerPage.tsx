@@ -45,6 +45,7 @@ export function CourseManagerPage() {
                     text={t('common.add')}
                     className="float-right"
                     onClick={handleNewCourseOpen}
+                    displayTextBreakpoint="xs"
                 />
             )}
             mainContent={(

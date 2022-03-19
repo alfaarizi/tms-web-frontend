@@ -16,7 +16,7 @@ export async function index(groupID: number) {
 
 export async function one(taskID: number) {
     const res = await axiosInstance.get<Task>(`/instructor/tasks/${taskID}`, {
-        params: { expand: 'studentFiles, instructorFiles, group' },
+        params: { expand: 'group' },
     });
     return res.data;
 }
@@ -27,7 +27,7 @@ export async function create(task: Task) {
 }
 
 export async function update(task: Task) {
-    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${task.id}??expand=group`, task);
+    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${task.id}?expand=group`, task);
     return res.data;
 }
 
@@ -56,9 +56,9 @@ export async function listUsers(ids: number[]) {
     return res.data;
 }
 
-export async function toggleAutoTester(id: number) {
-    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${id}/toggle-auto-tester`);
-    return res.data;
+export async function toggleAutoTester(id: number): Promise<number> {
+    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${id}/toggle-auto-tester?fields=autoTest`);
+    return res.data.autoTest;
 }
 
 export async function testerFormData(id: number) {
@@ -81,7 +81,7 @@ export async function setupAutoTester(id: number, data: SetupTester) {
         }
     }
 
-    const res = await axiosInstance.post<Task>(`/instructor/tasks/${id}/setup-auto-tester`, formData, {
+    const res = await axiosInstance.post<Task>(`/instructor/tasks/${id}/setup-auto-tester?expand=group`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },

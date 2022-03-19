@@ -9,7 +9,7 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
@@ -39,10 +39,7 @@ export function RequestDetails({
                                 text={t('common.edit')}
                                 onClick={onEdit}
                             />
-                            <DeleteButton
-                                showText
-                                onDelete={onDelete}
-                            />
+                            <DeleteToolbarButton onDelete={onDelete} />
                         </ButtonGroup>
                     )
                     : null}

@@ -39,7 +39,8 @@ export function GraderModal({
     // Sets field values
     const handleShow = () => {
         if (file) {
-            setValue('isAccepted', 'Accepted');
+            setValue('isAccepted',
+                file.isAccepted === 'Failed' ? 'Rejected' : 'Accepted');
             setValue('notes', file.notes);
             setValue('grade', file.grade);
         }

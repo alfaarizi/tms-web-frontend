@@ -4,7 +4,8 @@ import { faPaste } from '@fortawesome/free-solid-svg-icons';
 
 import { InsertFunc } from 'components/ReactMdeWithCommands';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
+import { useTranslation } from 'react-i18next';
 
 import {
     useExamImages,
@@ -24,6 +25,7 @@ export function ExamImageGallery({
     insertFunc,
     questionSetID,
 }: GalleryProps) {
+    const { t } = useTranslation();
     const images = useExamImages(questionSetID);
     const removeMutation = useRemoveExamImageMutation(questionSetID);
     const uploadMutation = useExamImageUploadMutation(questionSetID);
@@ -51,8 +53,16 @@ export function ExamImageGallery({
                 images={images.data}
                 renderButtons={((img) => (
                     <>
-                        <ToolbarButton icon={faPaste} onClick={() => insertFunc(img.url)} />
-                        <DeleteButton showText={false} onDelete={() => handleRemove(img.name)} />
+                        <ToolbarButton
+                            icon={faPaste}
+                            text={t('common.insert')}
+                            displayTextBreakpoint="none"
+                            onClick={() => insertFunc(img.url)}
+                        />
+                        <DeleteToolbarButton
+                            displayTextBreakpoint="none"
+                            onDelete={() => handleRemove(img.name)}
+                        />
                     </>
                 ))}
             />

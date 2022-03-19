@@ -5,8 +5,6 @@
     "groups": "Csoportok",
     "name": "Név",
     "details": "Részletek",
-    "upload": "Feltöltés",
-    "uploadInProgress": "Feltöltés...",
     "download": "Letöltés",
     "serverError": "Szerver probléma",
     "yes": "Igen",
@@ -43,18 +41,26 @@
     "search": "Keresés",
     "settings": "Beállítások",
     "modify": "Módosítás",
-    "browse": "Tallózás",
-    "fileUploadSuccess": "{{count}} fájl feltöltése sikeres",
-    "fileUploadFailed": "Sikertelen fájlfeltöltés",
     "elteFI": "ELTE Informatikai Kar",
     "export": "Exportálás",
-    "timezone": "Időzóna"
+    "timezone": "Időzóna",
+    "previous": "Előző",
+    "next": "Következő",
+    "insert": "Beillesztés"
+  },
+  "fileUpload": {
+    "success": "{{count}} fájl feltöltése sikeres",
+    "failed": "Sikertelen fájlfeltöltés",
+    "sizeLimitError": "A feltöltött fájlok összesített mérete legfeljebb {{maxSize}} MiB lehet!",
+    "browse": "Tallózás",
+    "upload": "Feltöltés",
+    "uploadInProgress": "Feltöltés..."
   },
   "errorPage": {
     "genericMessage": "Hiba történt",
     "pageNotFound": "Oldal nem található",
     "accessDenied": "Hozzáférés megtagadva",
-    "redirectToHome": "Átirányítás a kezdőlapra"
+    "versionError": "A backend verziószáma nem felel meg az elvárt verziószám tartománynak! Elvárt tartomány: {{requiredRange}}, jelenlegi verzió: {{version}}."
   },
   "login": {
     "login": "Bejelentkezés",
@@ -125,6 +131,7 @@
     "addStudents": "Hallgatók hozzáadása",
     "addInstructors": "Gyakorlatvezetők hozzáadása",
     "courseIDRequired": "Kérem válasszon egy kurzust",
+    "studentSolutions": "Megoldások és statisztikák",
     "stats": {
       "stats": "Statisztikák",
       "intime": "Időben",
@@ -194,7 +201,7 @@
       "arguments": "Argumentumok",
       "argumentsHelp": "Parancssori paraméterként kerülnek átadásra.",
       "input": "Bemenet",
-      "inputHelp": "Standard bemeneti folyamra kerül írásra. argumentumai a <code>\"$@\"</code> változóban érhetőek el. (Powershell esetén <code>@PSBoundParameters</code>.) A te",
+      "inputHelp": "Standard bemeneti folyamra kerül írásra.",
       "output": "Kimenet",
       "outputHelp": "Standard kimeneti folyam elvárt tartalma. A kezdő és záró szóközök (whitespace karakterek) pontos egyezése nem elvárt.",
       "newTestCase": "Teszteset hozzáadása",

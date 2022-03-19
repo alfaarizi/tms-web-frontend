@@ -7,7 +7,7 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { Group } from 'resources/instructor/Group';
 import { DataRow } from 'components/DataRow';
 
@@ -41,7 +41,7 @@ export function GroupDetails({
                         ? <ToolbarButton text={t('common.edit')} icon={faEdit} onClick={onEdit} />
                         : null}
                     {isActualSemester && !group.isCanvasCourse
-                        ? <DeleteButton onDelete={onRemove} showText />
+                        ? <DeleteToolbarButton onDelete={onRemove} />
                         : null}
                     {!group.isCanvasCourse
                         ? <ToolbarButton text={t('common.duplicate')} icon={faCopy} onClick={onDuplicate} />

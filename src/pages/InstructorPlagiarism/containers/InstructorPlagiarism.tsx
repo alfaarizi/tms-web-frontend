@@ -44,6 +44,7 @@ export function InstructorPlagiarism() {
                             icon={faPlus}
                             text={t('common.add')}
                             onClick={handleNewCourseOpen}
+                            displayTextBreakpoint="xs"
                         />
                     )
                     : null

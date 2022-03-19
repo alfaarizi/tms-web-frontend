@@ -78,10 +78,15 @@ export function useRemoveTaskMutation() {
 export function useToggleAutoTesterMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((id: number) => TasksService.toggleAutoTester(id), {
-        onSuccess: async (data) => {
-            const key = [QUERY_KEY, { taskID: data.id }];
-            queryClient.setQueryData(key, data);
+    return useMutation((taskID: number) => TasksService.toggleAutoTester(taskID), {
+        onSuccess: async (autoTest, taskID) => {
+            const key = [QUERY_KEY, { taskID }];
+            const oldData = await queryClient.getQueryData<Task>(key);
+            const newData = {
+                ...oldData,
+                autoTest,
+            };
+            queryClient.setQueryData(key, newData);
         },
     });
 }

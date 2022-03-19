@@ -67,7 +67,12 @@ function DateTimePicker({
     return (
         <>
             <div className="d-flex">
-                <ToolbarButton icon={faTimes} onClick={handleClear} />
+                <ToolbarButton
+                    icon={faTimes}
+                    text={t('common.delete')}
+                    displayTextBreakpoint="none"
+                    onClick={handleClear}
+                />
                 <Form.Control
                     className="mx-1"
                     type="date"

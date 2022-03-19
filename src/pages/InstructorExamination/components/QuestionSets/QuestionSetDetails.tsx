@@ -7,7 +7,7 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { DataRow } from 'components/DataRow';
 import { ExamQuestionSet } from 'resources/instructor/ExamQuestionSet';
 
@@ -36,7 +36,7 @@ export function QuestionSetDetails({
                     <ToolbarButton icon={faFileAlt} text={t('examTests.newTest')} onClick={onNewTest} />
                     <ToolbarButton icon={faCopy} text={t('common.duplicate')} onClick={onDuplicate} />
                     <ToolbarButton icon={faEdit} text={t('common.edit')} onClick={onEdit} />
-                    <DeleteButton showText onDelete={onDelete} />
+                    <DeleteToolbarButton onDelete={onDelete} />
                 </ButtonGroup>
             </CustomCardHeader>
 

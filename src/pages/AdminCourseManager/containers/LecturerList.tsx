@@ -9,7 +9,7 @@ import {
     useDeleteLecturerMutation,
 } from 'hooks/admin/CoursesHooks';
 import { Course } from 'resources/common/Course';
-import { DeleteButton } from 'components/Buttons/DeleteButton';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 
 type Props = {
     course: Course
@@ -44,7 +44,12 @@ export function LecturerList({ course }: Props) {
             <UserListCard
                 title={t('course.lecturers')}
                 users={instructors.data}
-                renderUserButtons={(user) => <DeleteButton showText={false} onDelete={() => handleDelete(user.id)} />}
+                renderUserButtons={(user) => (
+                    <DeleteToolbarButton
+                        displayTextBreakpoint="none"
+                        onDelete={() => handleDelete(user.id)}
+                    />
+                )}
             />
         </>
     );

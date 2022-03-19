@@ -3,6 +3,7 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { User } from 'resources/common/User';
+import { useTranslation } from 'react-i18next';
 import { ToolbarButton } from './Buttons/ToolbarButton';
 
 type Props = {
@@ -16,6 +17,7 @@ export function UserSwitcher({
     selectedID,
     users,
 }: Props) {
+    const { t } = useTranslation();
     const userIdx = users.findIndex((student) => student.id === selectedID);
     const { length } = users;
 
@@ -39,7 +41,12 @@ export function UserSwitcher({
             <Form.Group controlId="user-switcher">
                 <InputGroup>
                     <InputGroup.Prepend>
-                        <ToolbarButton onClick={handlePrev} icon={faArrowLeft} />
+                        <ToolbarButton
+                            text={t('common.previous')}
+                            displayTextBreakpoint="none"
+                            onClick={handlePrev}
+                            icon={faArrowLeft}
+                        />
                     </InputGroup.Prepend>
                     <Form.Control as="select" value={users[userIdx].id} onChange={handleSelectChange} custom>
                         {users.map((u) => (
@@ -53,7 +60,12 @@ export function UserSwitcher({
                         ))}
                     </Form.Control>
                     <InputGroup.Append>
-                        <ToolbarButton onClick={handleNext} icon={faArrowRight} />
+                        <ToolbarButton
+                            text={t('common.next')}
+                            displayTextBreakpoint="none"
+                            onClick={handleNext}
+                            icon={faArrowRight}
+                        />
                     </InputGroup.Append>
                 </InputGroup>
             </Form.Group>
