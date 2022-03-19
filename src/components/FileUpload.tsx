@@ -17,7 +17,8 @@ type Props = {
     onUpload: (files: File[]) => void,
     accept?: string,
     errorMessages?: string[],
-    successCount?: number
+    successCount?: number,
+    hintMessage?: string
 }
 
 export function FileUpload({
@@ -27,6 +28,7 @@ export function FileUpload({
     accept,
     errorMessages,
     successCount,
+    hintMessage,
 }: Props) {
     const { t } = useTranslation();
     const [fileList, setFileList] = useState<File[]>([]);
@@ -84,6 +86,15 @@ export function FileUpload({
                 onChange={handleChange}
                 accept={accept}
             />
+            {
+                hintMessage
+                    ? (
+                        <Form.Text muted>
+                            {hintMessage}
+                        </Form.Text>
+                    )
+                    : null
+            }
             <Button variant="success" size="sm" disabled={loading || fileList.length < 1} onClick={handleUpload}>
                 {
                     loading

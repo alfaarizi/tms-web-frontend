@@ -196,6 +196,7 @@ export function AutoTesterTab({ task }: Props) {
                             onUpload={handleTestFileUpload}
                             errorMessages={failedToUploadTestFile}
                             successCount={uploadTestFileMutation.data ? uploadTestFileMutation.data.uploaded.length : 0}
+                            hintMessage={t('task.autoTester.testFilesHelp')}
                         />
 
                         <InstructorFilesList
