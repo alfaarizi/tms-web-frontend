@@ -104,7 +104,7 @@ export function FileUpload({
             <Form.File
                 id="custom-file-upload"
                 data-browse={t('fileUpload.browse')}
-                className="mb-3"
+                className="mb-1"
                 label={fileLabel}
                 custom
                 name="files"
@@ -129,6 +129,7 @@ export function FileUpload({
             <Button
                 variant="success"
                 size="sm"
+                className="mt-2"
                 disabled={loading || !validSize || fileList.length === 0}
                 onClick={handleUpload}
             >
