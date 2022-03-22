@@ -22,8 +22,8 @@ import { InstructorFilesList } from 'components/InstructorFilesList';
 import {
     useInstructorFileDownload,
     useTestInstructorFiles,
-    useInstructorFilesUploadMutation,
-    useRemoveInstructorFileMutation,
+    useTestInstructorFilesUploadMutation,
+    useTestInstructorFileRemoveMutation,
 } from 'hooks/instructor/InstructorFileHooks';
 import { InstructorFilesUpload } from 'resources/instructor/InstructorFilesUpload';
 import { getFirstError } from 'utils/getFirstError';
@@ -50,8 +50,8 @@ export function AutoTesterTab({ task }: Props) {
 
     // Test file hooks
     const testFiles = useTestInstructorFiles(task.id);
-    const removeTestFileMutation = useRemoveInstructorFileMutation(task.id);
-    const uploadTestFileMutation = useInstructorFilesUploadMutation(task.id);
+    const removeTestFileMutation = useTestInstructorFileRemoveMutation(task.id);
+    const uploadTestFileMutation = useTestInstructorFilesUploadMutation(task.id);
     const downloadTestFileMutation = useInstructorFileDownload();
 
     // Test case hooks
