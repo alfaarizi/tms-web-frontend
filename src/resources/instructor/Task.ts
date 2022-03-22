@@ -7,9 +7,9 @@ export interface Task {
     category: string;
     translatedCategory: string;
     description: string;
-    softDeadline: string;
+    available?: string;
+    softDeadline?: string;
     hardDeadline: string;
-    available?: any;
     autoTest: number;
     isVersionControlled?: boolean;
     groupID: number;

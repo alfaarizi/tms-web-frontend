@@ -46,7 +46,10 @@
     "timezone": "Timezone",
     "previous": "Previous",
     "next": "Next",
-    "insert": "Insert"
+    "insert": "Insert",
+    "view": "View",
+    "list": "List",
+    "grid": "Grid"
   },
   "fileUpload": {
     "success": "{{count}} file(s) uploaded successfully",
@@ -88,7 +91,7 @@
       "noEmailToUnconfirmedAddress": "Please confirm your custom email address before sending notifications there"
     },
     "language": {
-      "label": "language",
+      "label": "Language",
       "required": "Language is required"
     },
     "successfullySaved": "Settings successfully saved"
@@ -187,6 +190,12 @@
       "largerTasks": "Larger Tasks",
       "classworkTasks": "Classwork Tasks",
       "exams": "Exams"
+    },
+    "deadlineStatus": {
+      "notAvailable": "Not available",
+      "softDeadlineExpired": "Soft deadline expired",
+      "hardDeadlineExpired": "Hard deadline expired",
+      "withinTheDeadline": "Within the deadline"
     },
     "newTask": "New Task",
     "editTask": "Edit Task",

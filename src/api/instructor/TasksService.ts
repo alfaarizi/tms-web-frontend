@@ -3,12 +3,34 @@ import { Task } from 'resources/instructor/Task';
 import { TesterFormData } from 'resources/instructor/TesterFormData';
 import { User } from 'resources/common/User';
 import { SetupTester } from 'resources/instructor/SetupTester';
+import { GridTask } from 'resources/instructor/GridTask.php';
 
+/**
+ * Loads task list
+ * @param groupID
+ */
 export async function index(groupID: number) {
     const res = await axiosInstance.get<Task[][]>('/instructor/tasks', {
         params: {
             groupID,
             expand: 'group',
+        },
+    });
+    return res.data;
+}
+
+/**
+ * Loads task list with student files. Only select necessary fields for the task grid.
+ * @param groupID
+ */
+export async function getTasksForGrid(groupID: number) {
+    const res = await axiosInstance.get<GridTask[][]>('/instructor/tasks', {
+        params: {
+            groupID,
+            fields: 'id,name,available,softDeadline,hardDeadline,translatedCategory'
+                + ',studentFiles.id,studentFiles.isAccepted,studentFiles.translatedIsAccepted'
+                + ',studentFiles.grade, studentFiles.uploaderID',
+            expand: 'studentFiles',
         },
     });
     return res.data;

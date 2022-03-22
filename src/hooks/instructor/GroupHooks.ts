@@ -4,6 +4,7 @@ import * as GroupService from 'api/instructor/GroupsService';
 import { Group } from 'resources/instructor/Group';
 import { AxiosError } from 'axios';
 import { User } from 'resources/common/User';
+import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/instructor/TaskHooks';
 
 export const QUERY_KEY = 'instructor/groups';
 
@@ -113,12 +114,13 @@ export function useAddStudentsMutation(groupID: number) {
     const queryClient = useQueryClient();
 
     return useMutation((neptunCodes: string[]) => GroupService.addStudents(groupID, neptunCodes), {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
             const key = [QUERY_KEY, 'students', { groupID }];
             const oldList = queryClient.getQueryData<User[]>(key);
             if (oldList) {
                 queryClient.setQueryData(key, [...oldList, ...data.addedUsers]);
             }
+            await queryClient.invalidateQueries([TASK_QUERY_KEY, { groupID }, 'grid']);
         },
     });
 }
@@ -127,12 +129,13 @@ export function useDeleteStudentMutation(groupID: number) {
     const queryClient = useQueryClient();
 
     return useMutation((studentID: number) => GroupService.removeStudent(groupID, studentID), {
-        onSuccess: (_data, studentID) => {
+        onSuccess: async (_data, studentID) => {
             const key = [QUERY_KEY, 'students', { groupID }];
             const oldList = queryClient.getQueryData<User[]>(key);
             if (oldList) {
                 queryClient.setQueryData(key, oldList.filter((user) => user.id !== studentID));
             }
+            await queryClient.invalidateQueries([TASK_QUERY_KEY, { groupID }, 'grid']);
         },
     });
 }

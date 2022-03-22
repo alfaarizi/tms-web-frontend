@@ -31,7 +31,7 @@ export function StudentFilePage() {
     const id = parseInt(params.id ? params.id : '-1', 10);
     const studentFile = useStudentFile(id);
     const gradeMutation = useGradeMutation();
-    const downloadfile = useDownloadStudentFile();
+    const downloadStudentFile = useDownloadStudentFile();
     const showGrader = useShow();
     const actualSemester = useActualSemester();
     const notifications = useNotifications();
@@ -42,7 +42,7 @@ export function StudentFilePage() {
 
     // Download file
     const handleDownload = async (file: StudentFile) => {
-        downloadfile.download(file.name, file.id);
+        downloadStudentFile.download(file.name, file.id);
     };
 
     // GraderModel save function
@@ -72,7 +72,7 @@ export function StudentFilePage() {
                             <DataRow label={t('common.group')}>
                                 <Link to={`/instructor/task-manager/groups/${item.groupID}`}>
                                     {`${item.task?.group?.course.name}`}
-                                    {` (${t('group.number')}: ${item?.task?.group?.number})`}
+                                    {` (${t('group.number')}: ${item?.task?.group?.number || ''})`}
                                 </Link>
                             </DataRow>
                             <DataRow label={t('task.task')}>
@@ -87,7 +87,6 @@ export function StudentFilePage() {
                             <DataRow label={t('task.delay')}>
                                 {item.delay}
                             </DataRow>
-                            <DataRow label={t('task.uploadTime')}>{item.uploadTime}</DataRow>
                             <DataRow label={t('task.status')}>{item.translatedIsAccepted}</DataRow>
                             <DataRow label={t('task.grade')}>{item.grade}</DataRow>
                             <DataRow label={t('task.graderName')}>{item.graderName}</DataRow>

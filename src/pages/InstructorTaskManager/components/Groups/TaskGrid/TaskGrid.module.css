@@ -1,0 +1,28 @@
+div.taskGridTableContainer {
+    overflow-x: auto;
+    overflow-y: visible;
+    min-height: 400px;
+}
+
+.taskGridDropdown > button,
+.taskGridCellButton {
+    min-width: 50px;
+    padding: 5px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+td.studentNameCell {
+    min-width: 170px;
+}
+
+th.taskNameCell {
+    text-align: center;
+    vertical-align: bottom;
+}
+
+th.taskNameCell > span {
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+}

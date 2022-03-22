@@ -13,6 +13,7 @@ export interface StudentFile {
     graderName: string;
     errorMsg?: string;
     uploader: User;
+    uploaderID: number;
     taskID: number;
     groupID: number;
     task?: Task;

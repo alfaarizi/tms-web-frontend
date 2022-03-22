@@ -46,7 +46,10 @@
     "timezone": "Időzóna",
     "previous": "Előző",
     "next": "Következő",
-    "insert": "Beillesztés"
+    "insert": "Beillesztés",
+    "view": "Nézet",
+    "list": "Lista",
+    "grid": "Rács"
   },
   "fileUpload": {
     "success": "{{count}} fájl feltöltése sikeres",
@@ -188,6 +191,12 @@
       "largerTasks": "Beadandók",
       "classworkTasks": "Órai munkák",
       "exams": "Vizsga feladatok"
+    },
+    "deadlineStatus": {
+      "notAvailable": "Nem elérhető",
+      "softDeadlineExpired": "A pótolható határidő lejárt",
+      "hardDeadlineExpired": "A végső határidő lejárt",
+      "withinTheDeadline": "Határidőn belül"
     },
     "newTask": "Új Beadandó",
     "editTask": "Feladat szerkesztése",

@@ -4,6 +4,7 @@ import { Task } from 'resources/instructor/Task';
 import * as TasksService from 'api/instructor/TasksService';
 import { TesterFormData } from 'resources/instructor/TesterFormData';
 import { SetupTester } from 'resources/instructor/SetupTester';
+import { GridTask } from 'resources/instructor/GridTask.php';
 
 export const QUERY_KEY = 'instructor/tasks';
 
@@ -13,6 +14,16 @@ export function useTask(taskID: number) {
 
 export function useTasks(groupID: number) {
     return useQuery<Task[][]>([QUERY_KEY, { groupID }], () => TasksService.index(groupID));
+}
+
+export function useTasksForGrid(groupID: number, enabled: boolean = true) {
+    return useQuery<GridTask[][]>(
+        [QUERY_KEY, { groupID }, 'grid'],
+        () => TasksService.getTasksForGrid(groupID),
+        {
+            enabled,
+        },
+    );
 }
 
 export function useTaskListForCourse(
@@ -45,6 +56,7 @@ export function useCreateTaskMutation() {
                 queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
                 await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
                 await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
+                await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }, 'grid']);
             },
         },
     );
@@ -60,6 +72,7 @@ export function useUpdateTaskMutation() {
 
             await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
             await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
+            await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }, 'grid']);
         },
     });
 }
@@ -71,6 +84,7 @@ export function useRemoveTaskMutation() {
         onSuccess: async (_data, taskToDelete) => {
             await queryClient.invalidateQueries([QUERY_KEY, { groupID: taskToDelete.groupID }]);
             await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
+            await queryClient.invalidateQueries([QUERY_KEY, { groupID: taskToDelete.groupID }, 'grid']);
         },
     });
 }

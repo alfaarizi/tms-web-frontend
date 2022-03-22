@@ -4,6 +4,7 @@ import { StudentFile } from 'resources/instructor/StudentFile';
 import * as StudentFilesService from 'api/instructor/StudentFilesService';
 import { useDownloader } from 'hooks/common/useDownloader';
 import { QUERY_KEY as GROUP_QUERY_KEY } from 'hooks/instructor/GroupHooks';
+import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/instructor/TaskHooks';
 
 export const QUERY_KEY = 'instructor/student-files';
 
@@ -56,6 +57,9 @@ export function useGradeMutation() {
                 groupID: data.groupID,
                 studentID: data.uploaderID,
             }]);
+
+            // Invalidate task grid
+            await queryClient.invalidateQueries([TASK_QUERY_KEY, { groupID: data.groupID }, 'grid']);
         },
     });
 }
@@ -64,14 +68,24 @@ export function useDownloadStudentFile() {
     return useDownloader((id: number) => StudentFilesService.download(id));
 }
 
-export function useExportSpreadsheet(taskID: number) {
+export type ExportSpreadsheetParams = {
+    taskID: number,
+    format: StudentFilesService.SpreadsheetFormat,
+};
+
+export function useExportSpreadsheet() {
     return useDownloader(
-        (format: StudentFilesService.SpreadsheetFormat) => StudentFilesService.exportSpreadsheet(taskID, format),
+        ({ taskID, format }: ExportSpreadsheetParams) => StudentFilesService.exportSpreadsheet(taskID, format),
     );
 }
 
-export function useDownloadAll(taskID: number) {
+export type DownloadAllParams = {
+    taskID: number,
+    onlyUngraded: boolean,
+};
+
+export function useDownloadAll() {
     return useDownloader(
-        (onlyUngraded: boolean) => StudentFilesService.downloadAllFiles(taskID, onlyUngraded),
+        ({ taskID, onlyUngraded }: DownloadAllParams) => StudentFilesService.downloadAllFiles(taskID, onlyUngraded),
     );
 }

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faFileArchive, faFileCsv, faFileExcel, faFileExport,
+    faFileArchive, faFileCsv, faFileExcel, faFileExport, faFilterCircleXmark, faListUl,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Task } from 'resources/instructor/Task';
@@ -27,15 +27,15 @@ type Props = {
 export function StudentFilesListTab({ task }: Props) {
     const { t } = useTranslation();
     const studentFiles = useStudentFilesForTask(task.id);
-    const exportSpreadsheet = useExportSpreadsheet(task.id);
-    const downloadAll = useDownloadAll(task.id);
+    const exportSpreadsheet = useExportSpreadsheet();
+    const downloadAll = useDownloadAll();
 
     const handleExportSpreadsheet = (format: SpreadsheetFormat) => {
-        exportSpreadsheet.download(`${task.name}.${format}`, format);
+        exportSpreadsheet.download(`${task.name}.${format}`, { taskID: task.id, format });
     };
 
     const handleDownloadAll = (onlyUngraded: boolean) => {
-        downloadAll.download(`${task.name}.zip`, onlyUngraded);
+        downloadAll.download(`${task.name}.zip`, { taskID: task.id, onlyUngraded });
     };
 
     const sortedStudentFiles = useMemo(() => {
@@ -43,7 +43,7 @@ export function StudentFilesListTab({ task }: Props) {
             return null;
         }
 
-        const sorted = studentFiles.data.sort(
+        return studentFiles.data.sort(
             (a: StudentFile, b: StudentFile) => {
                 if (!a.grade && !!b.grade) {
                     return -1;
@@ -55,8 +55,6 @@ export function StudentFilesListTab({ task }: Props) {
                 return a.uploadTime.localeCompare(b.uploadTime);
             },
         );
-
-        return sorted;
     }, [studentFiles.data]);
 
     if (!sortedStudentFiles) {
@@ -81,9 +79,13 @@ export function StudentFilesListTab({ task }: Props) {
                         </ToolbarDropdown>
                         <ToolbarDropdown text={t('task.downloadSolutions')} icon={faFileArchive}>
                             <DropdownItem onSelect={() => handleDownloadAll(false)}>
+                                <FontAwesomeIcon icon={faListUl} />
+                                {' '}
                                 {t('task.downloadAll')}
                             </DropdownItem>
                             <DropdownItem onSelect={() => handleDownloadAll(true)}>
+                                <FontAwesomeIcon icon={faFilterCircleXmark} />
+                                {' '}
                                 {t('task.downloadOnlyUngraded')}
                             </DropdownItem>
                         </ToolbarDropdown>

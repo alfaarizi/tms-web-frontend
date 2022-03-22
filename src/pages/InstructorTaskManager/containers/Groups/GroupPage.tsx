@@ -16,7 +16,6 @@ import { GroupStudentsListTab } from 'pages/InstructorTaskManager/containers/Gro
 import { GroupInstructorsListTab } from 'pages/InstructorTaskManager/containers/Groups/GroupInstructorsListTab';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { GroupStatsTab } from 'pages/InstructorTaskManager/containers/Groups/GroupStatsTab';
-import { GroupTaskListTab } from 'pages/InstructorTaskManager/containers/Groups/GroupTasksListTab';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { GroupDetails } from 'pages/InstructorTaskManager/components/Groups/GroupDetails';
 import { TabbedInterface } from 'components/TabbedInterface';
@@ -25,6 +24,7 @@ import { useCanvasSetupMutation, useCanvasSyncMutation } from 'hooks/instructor/
 import { useShow } from 'ui-hooks/useShow';
 import { SetupCanvasModal } from 'pages/InstructorTaskManager/containers/Groups/SetupCanvasModal';
 import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
+import { GroupTasksTab } from 'pages/InstructorTaskManager/containers/Groups/GroupTasksTab';
 
 type Params = {
     id?: string
@@ -149,7 +149,7 @@ export function GroupPage() {
 
             <TabbedInterface defaultActiveKey="tasks" id="group-tabs">
                 <Tab eventKey="tasks" title={t('task.tasks')}>
-                    <GroupTaskListTab group={group.data} />
+                    <GroupTasksTab group={group.data} />
                 </Tab>
                 <Tab eventKey="students" title={t('common.students')}>
                     <GroupStudentsListTab group={group.data} />
