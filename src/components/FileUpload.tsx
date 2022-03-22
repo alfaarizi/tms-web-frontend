@@ -21,7 +21,8 @@ type Props = {
     onUpload: (files: File[]) => void,
     accept?: string,
     errorMessages?: string[],
-    successCount?: number
+    successCount?: number,
+    hintMessage?: string
 }
 
 /**
@@ -41,6 +42,7 @@ export function FileUpload({
     accept,
     errorMessages = [],
     successCount,
+    hintMessage,
 }: Props) {
     const { t } = useTranslation();
     const fileSizeValidator = useFileSizeValidator();
@@ -102,7 +104,7 @@ export function FileUpload({
             <Form.File
                 id="custom-file-upload"
                 data-browse={t('fileUpload.browse')}
-                className="mb-3"
+                className="mb-1"
                 label={fileLabel}
                 custom
                 name="files"
@@ -111,14 +113,23 @@ export function FileUpload({
                 onChange={handleChange}
                 accept={accept}
             />
+
             {!validSize && (
                 <FormError
                     message={t('fileUpload.sizeLimitError', { maxSize: fileSizeValidator.maxSizeInMiB }).toString()}
                 />
             )}
+
+            {hintMessage && (
+                <Form.Text muted>
+                    {hintMessage}
+                </Form.Text>
+            )}
+
             <Button
                 variant="success"
                 size="sm"
+                className="mt-2"
                 disabled={loading || !validSize || fileList.length === 0}
                 onClick={handleUpload}
             >

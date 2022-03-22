@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { TestCaseFormModal } from 'pages/InstructorTaskManager/components/Tasks/TestCaseFormModal';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Task } from 'resources/instructor/Task';
 import { useSetupTesterMutation, useTesterFormData, useToggleAutoTesterMutation } from 'hooks/instructor/TaskHooks';
@@ -17,6 +17,16 @@ import { useShow } from 'ui-hooks/useShow';
 import { AutoTesterForm } from 'pages/InstructorTaskManager/components/Tasks/AutoTesterForm';
 import { SetupTester } from 'resources/instructor/SetupTester';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
+import { FileUpload } from 'components/FileUpload';
+import { InstructorFilesList } from 'components/InstructorFilesList';
+import {
+    useInstructorFileDownload,
+    useTestInstructorFiles,
+    useTestInstructorFilesUploadMutation,
+    useTestInstructorFileRemoveMutation,
+} from 'hooks/instructor/InstructorFileHooks';
+import { InstructorFilesUpload } from 'resources/instructor/InstructorFilesUpload';
+import { getFirstError } from 'utils/getFirstError';
 
 type Props = {
     task: Task
@@ -37,6 +47,12 @@ export function AutoTesterTab({ task }: Props) {
     // Test settings hooks
     const testerFormData = useTesterFormData(task.id, task.autoTest === 1);
     const setupMutation = useSetupTesterMutation(task.id);
+
+    // Test file hooks
+    const testFiles = useTestInstructorFiles(task.id);
+    const removeTestFileMutation = useTestInstructorFileRemoveMutation(task.id);
+    const uploadTestFileMutation = useTestInstructorFilesUploadMutation(task.id);
+    const downloadTestFileMutation = useInstructorFileDownload();
 
     // Test case hooks
     const testCases = useTestCases(task.id, task.autoTest === 1);
@@ -104,6 +120,47 @@ export function AutoTesterTab({ task }: Props) {
         }
     };
 
+    // Download test file
+    const handleTestFileDownload = (id: number, fileName: string) => {
+        downloadTestFileMutation.download(fileName, id);
+    };
+
+    // Remove test file
+    const handleTestFileRemove = (id: number) => {
+        removeTestFileMutation.mutate(id);
+    };
+
+    // Upload test file
+    const handleTestFileUpload = async (files: File[]) => {
+        try {
+            const uploadData: InstructorFilesUpload = {
+                taskID: task.id,
+                category: 'Test file',
+                files,
+            };
+            await uploadTestFileMutation.mutateAsync(uploadData);
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    useEffect(() => {
+        uploadTestFileMutation.reset();
+    }, [task.id]);
+
+    if (!testFiles.data) {
+        return null;
+    }
+
+    const failedToUploadTestFile: string[] | undefined = uploadTestFileMutation.data
+        ?.failed.map((f) => {
+            const firstError = getFirstError(f.cause);
+            if (firstError) {
+                return `${f.name}: ${firstError}`;
+            }
+            return f.name;
+        });
+
     // Render
     return (
         <>
@@ -125,6 +182,37 @@ export function AutoTesterTab({ task }: Props) {
                         onSave={handleTestUpdate}
                         inProgress={setupMutation.isLoading}
                         isActualSemester={actualSemester.check(task.semesterID)}
+                    />
+                )
+                : null}
+
+            {/* Display test files and upload form */}
+            {task.autoTest && actualSemester.check(task.semesterID)
+                ? (
+                    <>
+                        <FileUpload
+                            multiple
+                            loading={uploadTestFileMutation.isLoading}
+                            onUpload={handleTestFileUpload}
+                            errorMessages={failedToUploadTestFile}
+                            successCount={uploadTestFileMutation.data ? uploadTestFileMutation.data.uploaded.length : 0}
+                            hintMessage={t('task.autoTester.testFilesHelp')}
+                        />
+
+                        <InstructorFilesList
+                            instructorFiles={testFiles.data}
+                            onDownload={handleTestFileDownload}
+                            onRemove={handleTestFileRemove}
+                        />
+                    </>
+                )
+                : null}
+
+            {task.autoTest && !actualSemester.check(task.semesterID)
+                ? (
+                    <InstructorFilesList
+                        instructorFiles={testFiles.data}
+                        onDownload={handleTestFileDownload}
                     />
                 )
                 : null}

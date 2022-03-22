@@ -223,7 +223,8 @@
       "imageRequired": "Kötelező megadni egy Docker képet vagy feltölteni egy Dockerfile-t!",
       "previousSemesterInfo": "A tesztelő beállításai nem módosíthatóak: a kiválasztott feladat egy korábbi félévhez tartozik.",
       "results": "Automatikus tesztelés eredményei",
-      "notTested": "Még nem tesztelte le az automatikus tesztelő a beküldött megoldást."
+      "notTested": "Még nem tesztelte le az automatikus tesztelő a beküldött megoldást.",
+      "testFilesHelp": "A hallgatói megoldás a /test/submission/ könyvtárba kerül betöltésre, ami az alapértelmezett munkakönyvtár is lesz a fordítás és a futtatás során. A teszt fájlok a /test/test_files/ könyvtárba kerülnek betöltésre. Windows alapú tesztelésnél a gyökérkönyvtár analóg módon a C:\\\\test\\ könyvtár lesz."
     },
     "git": {
       "gitRepo": "Git tároló",
