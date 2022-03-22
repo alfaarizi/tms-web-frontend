@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.3.0...v2.4.0) (2022-03-22)
+
+
+### Features
+
+* check backend version requirement ([f81ca7f](https://gitlab.com/tms-elte/frontend-react/commit/f81ca7fc55b323583b8f9a673de29d7d77acbe51))
+* Default status for Failed submissions is Rejected ([601dcf6](https://gitlab.com/tms-elte/frontend-react/commit/601dcf6f512a4a1ff23abad1987a003c5242ea2d))
+* file upload support for automatic tester ([9e5cb22](https://gitlab.com/tms-elte/frontend-react/commit/9e5cb2226d2e67e7ba2d5a19bf0e082c18df50dd))
+
+
+### Bug Fixes
+
+* activating the automated tester resets the task deadlines ([5729574](https://gitlab.com/tms-elte/frontend-react/commit/57295743a6cef06ef8ad5dc01527c8f80c212478))
+* Misleading error message upon oversized file upload ([faa4b26](https://gitlab.com/tms-elte/frontend-react/commit/faa4b266eb1b75dfe23b4f8f42ceea3891148dac))
+
 ## [2.3.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.2.0...v2.3.0) (2022-02-06)
 
 
