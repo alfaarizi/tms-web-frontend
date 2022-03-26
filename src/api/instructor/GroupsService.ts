@@ -41,7 +41,18 @@ export async function duplicate(id: number) {
 
 export async function listStudents(groupID: number) {
     const res = await axiosInstance.get<User[]>(`/instructor/groups/${groupID}/students`);
-    return res.data;
+    return res.data.sort((a, b) => {
+        if (a.name === b.name) {
+            return a.neptun.localeCompare(b.neptun);
+        }
+        if (a.name !== null && b.name !== null) {
+            return a.name.localeCompare(b.name);
+        }
+        if (b.name === null) {
+            return 1;
+        }
+        return -1;
+    });
 }
 
 export async function addStudents(groupID: number, neptunCodes: string[]) {
