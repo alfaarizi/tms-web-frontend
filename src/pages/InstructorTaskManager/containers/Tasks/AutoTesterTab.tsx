@@ -3,7 +3,12 @@ import { TestCaseFormModal } from 'pages/InstructorTaskManager/components/Tasks/
 import React, { useEffect, useState } from 'react';
 
 import { Task } from 'resources/instructor/Task';
-import { useSetupTesterMutation, useTesterFormData, useToggleAutoTesterMutation } from 'hooks/instructor/TaskHooks';
+import {
+    useSetupTesterMutation,
+    useTesterFormData,
+    useToggleAutoTesterMutation,
+    useUpdateDockerImageMutation,
+} from 'hooks/instructor/TaskHooks';
 import { ToggleCard } from 'components/ToggleCard';
 import { TestCaseList } from 'pages/InstructorTaskManager/components/Tasks/TestCasesList';
 import {
@@ -47,6 +52,7 @@ export function AutoTesterTab({ task }: Props) {
     // Test settings hooks
     const testerFormData = useTesterFormData(task.id, task.autoTest === 1);
     const setupMutation = useSetupTesterMutation(task.id);
+    const updateDockerImageMutation = useUpdateDockerImageMutation(task.id);
 
     // Test file hooks
     const testFiles = useTestInstructorFiles(task.id);
@@ -120,6 +126,15 @@ export function AutoTesterTab({ task }: Props) {
         }
     };
 
+    // Update Docker image from repository
+    const handleDockerImageUpdate = async () => {
+        try {
+            await updateDockerImageMutation.mutateAsync();
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
     // Download test file
     const handleTestFileDownload = (id: number, fileName: string) => {
         downloadTestFileMutation.download(fileName, id);
@@ -180,7 +195,9 @@ export function AutoTesterTab({ task }: Props) {
                         task={task}
                         formData={testerFormData.data}
                         onSave={handleTestUpdate}
-                        inProgress={setupMutation.isLoading}
+                        onUpdateDockerImage={handleDockerImageUpdate}
+                        saveInProgress={setupMutation.isLoading}
+                        updateInProgress={updateDockerImageMutation.isLoading}
                         isActualSemester={actualSemester.check(task.semesterID)}
                     />
                 )

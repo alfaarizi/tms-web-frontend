@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import {
-    ButtonGroup, Form, Alert, InputGroup,
+    ButtonGroup, Form, Alert, InputGroup, Button, Spinner,
 } from 'react-bootstrap';
 
 import { Task } from 'resources/instructor/Task';
@@ -19,22 +19,29 @@ import { faClipboardList, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { SetupTester } from 'resources/instructor/SetupTester';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { useFileSizeValidator } from 'ui-hooks/useFileSizeValidator';
+import { DateTime } from 'luxon';
+import { getUserTimezone } from '../../../../utils/getUserTimezone';
 
 type Props = {
     onSave: (task: SetupTester) => void,
+    onUpdateDockerImage: () => void,
     task: Task,
     formData: TesterFormData,
-    inProgress: boolean,
+    saveInProgress: boolean,
+    updateInProgress: boolean,
     isActualSemester: boolean
 }
 
 export function AutoTesterForm({
     task,
     onSave,
+    onUpdateDockerImage,
     formData,
-    inProgress,
+    saveInProgress,
+    updateInProgress,
     isActualSemester,
 }: Props) {
+    const inProgress = saveInProgress || updateInProgress;
     const { t } = useTranslation();
     const fileSizeValidator = useFileSizeValidator();
     const {
@@ -84,7 +91,12 @@ export function AutoTesterForm({
     if (inProgress) {
         alertToShow = <Alert variant="dark">{t('task.autoTester.inProgress')}</Alert>;
     } else if (formData.imageSuccessfullyBuilt) {
-        alertToShow = <Alert variant="success">{t('task.autoTester.successfullyBuild')}</Alert>;
+        const dt = DateTime.fromISO(formData.imageCreationDate, { zone: getUserTimezone() });
+        alertToShow = (
+            <Alert variant="success">
+                {t('task.autoTester.successfullyBuild', { createdAt: dt.toFormat('yyyy-LL-dd HH:mm:ss') })}
+            </Alert>
+        );
     } else {
         alertToShow = <Alert variant="info">{t('task.autoTester.builtImageNotFound')}</Alert>;
     }
@@ -96,6 +108,8 @@ export function AutoTesterForm({
             fileLabel += `${watchFiles[i].name} `;
         }
     }
+
+    const watchImageName = watch('imageName');
 
     return (
         <CustomCard>
@@ -249,7 +263,24 @@ export function AutoTesterForm({
                     />
                 </Form.Group>
 
-                {isActualSemester ? <FormButtons isLoading={inProgress} /> : null}
+                {isActualSemester ? (
+                    <ButtonGroup>
+                        <FormButtons isLoading={saveInProgress} isDisabled={inProgress} />
+                        <Button
+                            disabled={inProgress || task.imageName !== watchImageName}
+                            variant="info"
+                            className="my-1 ml-1"
+                            size="sm"
+                            type="button"
+                            onClick={onUpdateDockerImage}
+                            title={task.imageName !== watchImageName ? t('task.autoTester.uploadPriorUpdate') : ''}
+                        >
+                            {updateInProgress && <Spinner animation="border" size="sm" />}
+                            {' '}
+                            {t('task.autoTester.updateImage')}
+                        </Button>
+                    </ButtonGroup>
+                ) : null}
             </Form>
         </CustomCard>
     );

@@ -124,3 +124,14 @@ export function useSetupTesterMutation(taskID: number) {
         },
     });
 }
+
+export function useUpdateDockerImageMutation(taskID: number) {
+    const queryClient = useQueryClient();
+
+    return useMutation(() => TasksService.updateDockerImage(taskID), {
+        onSuccess: async (data) => {
+            queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
+            await queryClient.invalidateQueries([QUERY_KEY, { taskID }, 'test-form-data']);
+        },
+    });
+}
