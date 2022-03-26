@@ -8,4 +8,5 @@ export interface TesterFormData {
     templates: TesterTemplate[];
     osMap: OsMap;
     imageSuccessfullyBuilt: boolean;
+    imageCreationDate: string;
 }

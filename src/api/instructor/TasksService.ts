@@ -112,3 +112,8 @@ export async function setupAutoTester(id: number, data: SetupTester) {
     res.data.showFullErrorMsg = parseInt(res.data.showFullErrorMsg.toString(), 10);
     return res.data;
 }
+
+export async function updateDockerImage(id: number) {
+    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${id}/update-docker-image`);
+    return res.data;
+}
