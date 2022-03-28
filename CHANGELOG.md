@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.4.0...v2.5.0) (2022-03-28)
+
+
+### Features
+
+* Display local plagiarism results ([17eabc4](https://gitlab.com/tms-elte/frontend-react/commit/17eabc44b80387cd90e2976a69f99c0c80019ffa))
+* enable docker image update of auto tester ([d7ceeeb](https://gitlab.com/tms-elte/frontend-react/commit/d7ceeeb631a503e08f6d22e52412f65842b3750d))
+* Grid view of tasks ([1195ccb](https://gitlab.com/tms-elte/frontend-react/commit/1195ccb0664c8e0ed8d169f639f604efcc101840))
+* sort students by their name and university identifier. ([2644f16](https://gitlab.com/tms-elte/frontend-react/commit/2644f16f346fea8039cf740fa639ace5303ca5cc))
+
 ## [2.4.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.3.0...v2.4.0) (2022-03-22)
 
 
