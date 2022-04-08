@@ -7,7 +7,6 @@ import {
     faCheck,
     faTimes,
     faArrowUp,
-    faRepeat,
     faArrowRotateLeft,
     faQuestion,
     IconDefinition,
@@ -53,10 +52,6 @@ export function TaskGridCellButton({ studentFile }: Props) {
         break;
     case 'Uploaded':
         icon = faArrowUp;
-        variant = 'secondary';
-        break;
-    case 'Updated':
-        icon = faRepeat;
         variant = 'secondary';
         break;
     case 'Late Submission':
