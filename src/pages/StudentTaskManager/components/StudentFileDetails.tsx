@@ -46,6 +46,7 @@ export const StudentFileDetails = ({
             </DataRow>
             <DataRow label={t('task.grade')}>{studentFile?.grade}</DataRow>
             <DataRow label={t('task.status')}>{studentFile?.translatedIsAccepted}</DataRow>
+            <DataRow label={t('task.uploadCount')}>{studentFile?.uploadCount}</DataRow>
             <DataRow label={t('task.graderName')}>{studentFile?.graderName}</DataRow>
             <DataRow label={t('task.notes')}>
                 <MultiLineTextBlock text={studentFile?.notes} />
