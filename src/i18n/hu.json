@@ -47,6 +47,7 @@
     "previous": "Előző",
     "next": "Következő",
     "insert": "Beillesztés",
+    "back": "Vissza",
     "view": "Nézet",
     "list": "Lista",
     "grid": "Rács"
@@ -286,7 +287,8 @@
     "futureTests": "Jövőbeli tesztek",
     "writeTest": "Teszt kitöltése",
     "successfulDuplication": "Teszt duplikálva",
-    "successfulFinalization": "Teszt véglegesítve"
+    "successfulFinalization": "Teszt véglegesítve",
+    "noGroupCreated" : "Egy csoport létrehozása szükséges új teszt létrehozása előtt"
   },
   "reactMde": {
     "write": "Szerkesztő",

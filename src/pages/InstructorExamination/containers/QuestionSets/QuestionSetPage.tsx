@@ -17,6 +17,8 @@ import { QuestionSetDetails } from 'pages/InstructorExamination/components/Quest
 import { useNotifications } from 'hooks/common/useNotifications';
 import { useCourses } from 'hooks/instructor/CourseHooks';
 import { useShow } from 'ui-hooks/useShow';
+import { useGroupsForCourse } from 'hooks/instructor/GroupHooks';
+import { useActualSemester } from 'hooks/common/SemesterHooks';
 
 type Params = {
     id?: string
@@ -34,6 +36,12 @@ export function QuestionSetPage() {
     const duplicateMutation = useDuplicateQuestionSetMutation();
     const notification = useNotifications();
     const courses = useCourses(true, false, showEdit.show);
+    const actualSemester = useActualSemester();
+    const groups = useGroupsForCourse(
+        actualSemester.actualSemesterID || -1,
+        questionSet.data?.course.id || -1,
+        false,
+    );
 
     if (!questionSet.data) {
         return null;
@@ -72,8 +80,16 @@ export function QuestionSetPage() {
         }
     };
 
-    const handleNewTest = () => {
-        history.push(`${url}/create-test`);
+    const handleNewTest = async () => {
+        const result = await groups.refetch();
+        if (result.data !== undefined && result.data.length > 0) {
+            history.push(`${url}/create-test`);
+            return;
+        }
+        notification.push({
+            variant: 'error',
+            message: t('examTests.noGroupCreated'),
+        });
     };
 
     return (
