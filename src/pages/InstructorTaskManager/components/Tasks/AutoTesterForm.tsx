@@ -66,6 +66,7 @@ export function AutoTesterForm({
             setValue('compileInstructions', task.compileInstructions);
             setValue('runInstructions', task.runInstructions || '');
             setValue('showFullErrorMsg', task.showFullErrorMsg === 1);
+            setValue('reevaluateAutoTest', task.reevaluateAutoTest === 1);
             handleResetFileUpload();
         }
     }, [task.imageName]);
@@ -259,6 +260,15 @@ export function AutoTesterForm({
                         type="checkbox"
                         label={t('task.autoTester.showFullErrorMsg')}
                         {...register('showFullErrorMsg')}
+                        disabled={inProgress}
+                    />
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Check
+                        type="checkbox"
+                        label={t('task.autoTester.reevaluateAutoTest')}
+                        {...register('reevaluateAutoTest')}
                         disabled={inProgress}
                     />
                 </Form.Group>
