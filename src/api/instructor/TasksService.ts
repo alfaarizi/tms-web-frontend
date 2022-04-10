@@ -96,6 +96,7 @@ export async function setupAutoTester(id: number, data: SetupTester) {
     formData.append('imageName', data.imageName || '');
     formData.append('compileInstructions', data.compileInstructions);
     formData.append('runInstructions', data.runInstructions);
+    formData.append('reevaluateAutoTest', data.reevaluateAutoTest ? '1' : '0');
 
     if (!!data.files && data.files.length > 0) {
         for (let i = 0; i < data.files.length; ++i) {
