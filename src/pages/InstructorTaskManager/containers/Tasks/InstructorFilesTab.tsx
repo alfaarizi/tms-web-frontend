@@ -11,12 +11,14 @@ import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { InstructorFilesList } from 'components/InstructorFilesList';
 import { getFirstError } from 'utils/getFirstError';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     task: Task
 }
 
 export function InstructorFilesTab({ task }: Props) {
+    const { t } = useTranslation();
     const actualSemester = useActualSemester();
     const instructorFiles = useAttachmentInstructorFiles(task.id);
     const removeMutation = useAttachmentInstructorFileRemoveMutation(task.id);
@@ -70,6 +72,7 @@ export function InstructorFilesTab({ task }: Props) {
                     onUpload={handleUpload}
                     errorMessages={failedToUpload}
                     successCount={uploadMutation.data ? uploadMutation.data.uploaded.length : 0}
+                    hintMessage={t('task.instructorFilesHelp')}
                 />
 
                 <InstructorFilesList
