@@ -47,6 +47,7 @@
     "previous": "Previous",
     "next": "Next",
     "insert": "Insert",
+    "back": "Back",
     "view": "View",
     "list": "List",
     "grid": "Grid"
@@ -285,7 +286,8 @@
     "futureTests": "Future tests",
     "writeTest": "Write tests",
     "successfulDuplication": "Successfully duplicated",
-    "successfulFinalization": "Successfully finalized"
+    "successfulFinalization": "Successfully finalized",
+    "noGroupCreated": "A group must be created before creating a new test"
   },
   "reactMde": {
     "write": "Editor",

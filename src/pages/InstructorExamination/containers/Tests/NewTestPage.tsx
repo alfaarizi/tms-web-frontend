@@ -10,6 +10,7 @@ import { useCreateTestMutation } from 'hooks/instructor/ExamTestHooks';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { useGroupsForCourse } from 'hooks/instructor/GroupHooks';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+import { TestNoGroupCard } from 'pages/InstructorExamination/components/Tests/TestNoGroupCard';
 
 type Params = {
     questionsetID: string
@@ -53,13 +54,15 @@ export function NewTestPage() {
         history.push(`/instructor/exam/question-sets/${questionsetID}`);
     };
 
-    return (
-        <TestForm
-            title={t('examTests.newTest')}
-            groups={groups.data}
-            onSave={handleSave}
-            onCancel={handleSaveCancel}
-            serverSideError={addErrorBody}
-        />
-    );
+    return groups.data !== undefined && groups.data.length > 0
+        ? (
+            <TestForm
+                title={t('examTests.newTest')}
+                groups={groups.data}
+                onSave={handleSave}
+                onCancel={handleSaveCancel}
+                serverSideError={addErrorBody}
+            />
+        )
+        : <TestNoGroupCard onBackClick={handleSaveCancel} />;
 }
