@@ -244,6 +244,12 @@
       "gitRepo": "Git Repository",
       "path": "Path",
       "usage": "Usage"
+    },
+    "sorting": {
+      "sorting": "Sort by",
+      "byUngradedFirst": "Ungraded first",
+      "byName": "Student name",
+      "byUploadTime": "Upload time"
     }
   },
   "status": {
