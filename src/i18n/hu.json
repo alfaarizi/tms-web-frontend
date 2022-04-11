@@ -245,6 +245,12 @@
       "gitRepo": "Git tároló",
       "path": "Útvonal",
       "usage": "Használat"
+    },
+    "sorting": {
+      "sorting": "Rendezés",
+      "byUngradedFirst": "Értékeltség szerint",
+      "byName": "Hallgató neve szerint",
+      "byUploadTime": "Feltöltés ideje szerint"
     }
   },
   "status": {

@@ -1,4 +1,6 @@
-import React, { useMemo } from 'react';
+import React, {
+    useMemo, useState,
+} from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import DropdownItem from 'react-bootstrap/DropdownItem';
@@ -24,11 +26,18 @@ type Props = {
     task: Task
 }
 
+enum SortType {
+    ByUngradedFirst,
+    ByName,
+    ByUploadTime,
+}
+
 export function StudentFilesListTab({ task }: Props) {
     const { t } = useTranslation();
     const studentFiles = useStudentFilesForTask(task.id);
     const exportSpreadsheet = useExportSpreadsheet();
     const downloadAll = useDownloadAll();
+    const [sortedBy, setSortedBy] = useState<SortType>(SortType.ByUngradedFirst);
 
     const handleExportSpreadsheet = (format: SpreadsheetFormat) => {
         exportSpreadsheet.download(`${task.name}.${format}`, { taskID: task.id, format });
@@ -38,12 +47,16 @@ export function StudentFilesListTab({ task }: Props) {
         downloadAll.download(`${task.name}.zip`, { taskID: task.id, onlyUngraded });
     };
 
-    const sortedStudentFiles = useMemo(() => {
+    const handleSorting = (sortingBy : SortType) => {
+        setSortedBy(sortingBy);
+    };
+
+    const sortingByUngradedFirst = () => {
         if (!studentFiles.data) {
             return null;
         }
 
-        return studentFiles.data.sort(
+        const sorted = studentFiles.data.sort(
             (a: StudentFile, b: StudentFile) => {
                 if (!a.grade && !!b.grade) {
                     return -1;
@@ -55,7 +68,44 @@ export function StudentFilesListTab({ task }: Props) {
                 return a.uploadTime.localeCompare(b.uploadTime);
             },
         );
-    }, [studentFiles.data]);
+        return sorted;
+    };
+
+    const sortingByName = () => {
+        if (!studentFiles.data) {
+            return null;
+        }
+
+        const sorted = studentFiles.data.sort(
+            (a: StudentFile, b: StudentFile) => a.uploader.name.localeCompare(b.uploader.name),
+        );
+
+        return sorted;
+    };
+
+    const sortingByUploadTime = () => {
+        if (!studentFiles.data) {
+            return null;
+        }
+
+        const sorted = studentFiles.data.sort(
+            (a: StudentFile, b: StudentFile) => a.uploadTime.localeCompare(b.uploadTime),
+        );
+
+        return sorted;
+    };
+
+    const sortedStudentFiles = useMemo(() => {
+        switch (sortedBy) {
+        case SortType.ByName:
+            return sortingByName();
+        case SortType.ByUploadTime:
+            return sortingByUploadTime();
+        case SortType.ByUngradedFirst:
+        default:
+            return sortingByUngradedFirst();
+        }
+    }, [sortedBy, studentFiles.data]);
 
     if (!sortedStudentFiles) {
         return null;
@@ -87,6 +137,17 @@ export function StudentFilesListTab({ task }: Props) {
                                 <FontAwesomeIcon icon={faFilterCircleXmark} />
                                 {' '}
                                 {t('task.downloadOnlyUngraded')}
+                            </DropdownItem>
+                        </ToolbarDropdown>
+                        <ToolbarDropdown text={t('task.sorting.sorting')} icon={faFileArchive}>
+                            <DropdownItem onSelect={() => handleSorting(SortType.ByUngradedFirst)}>
+                                {t('task.sorting.byUngradedFirst')}
+                            </DropdownItem>
+                            <DropdownItem onSelect={() => handleSorting(SortType.ByName)}>
+                                {t('task.sorting.byName')}
+                            </DropdownItem>
+                            <DropdownItem onSelect={() => handleSorting(SortType.ByUploadTime)}>
+                                {t('task.sorting.byUploadTime')}
                             </DropdownItem>
                         </ToolbarDropdown>
                     </ButtonGroup>
