@@ -20,7 +20,7 @@ export function AutoTestResultAlert({
         variant = 'success';
     } else if (isAccepted === 'Failed') {
         variant = 'danger';
-    } else if (isAccepted === 'Updated' || isAccepted === 'Uploaded') {
+    } else if (isAccepted === 'Uploaded') {
         variant = 'primary';
     } else {
         variant = 'secondary';
@@ -35,8 +35,8 @@ export function AutoTestResultAlert({
         >
             <h6>{t('task.autoTester.results')}</h6>
             <hr />
-            {isAccepted === 'Updated' || isAccepted === 'Uploaded' ? t('task.autoTester.notTested') : null}
-            {isAccepted !== 'Updated' && isAccepted !== 'Uploaded'
+            {isAccepted === 'Uploaded' ? t('task.autoTester.notTested') : null}
+            {isAccepted !== 'Uploaded'
                 ? <pre className="bg-light p-2 mt-2">{errorMsg}</pre> : null}
         </Alert>
     );

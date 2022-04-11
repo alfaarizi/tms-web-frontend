@@ -18,13 +18,13 @@ export function DataRow({
 }: Props) {
     return (
         <Row>
-            <Col md={2}>
+            <Col md={3}>
                 <strong>
                     {label}
                     {': '}
                 </strong>
             </Col>
-            <Col md={10}>{children}</Col>
+            <Col md={9}>{children}</Col>
         </Row>
     );
 }

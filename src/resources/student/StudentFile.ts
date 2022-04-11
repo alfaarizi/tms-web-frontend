@@ -9,4 +9,5 @@ export interface StudentFile {
     isVersionControlled: number;
     graderName: string;
     errorMsg?: string;
+    uploadCount: number;
 }

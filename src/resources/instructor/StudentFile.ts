@@ -14,6 +14,7 @@ export interface StudentFile {
     errorMsg?: string;
     uploader: User;
     uploaderID: number;
+    uploadCount: number;
     taskID: number;
     groupID: number;
     task?: Task;

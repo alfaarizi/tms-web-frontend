@@ -108,6 +108,7 @@ export function StudentFilesListTab({ task }: Props) {
                             {file.delay}
                         </DataRow>
                         <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
+                        <DataRow label={t('task.uploadCount')}>{file.uploadCount}</DataRow>
                         <DataRow label={t('task.grade')}>{file.grade}</DataRow>
                         <DataRow label={t('task.graderName')}>{file.graderName}</DataRow>
                         <DataRow label={t('task.notes')}>
