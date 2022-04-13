@@ -3,14 +3,18 @@
   "description": "Task Management System - React Client",
   "keywords": [
     "tms",
-    "yii2",
     "task management",
     "submission",
-    "examination"
+    "examination",
+    "plagiarism detection",
+    "automated evaluation",
+    "Canvas LMS"
   ],
   "version": "2.5.0",
   "private": true,
-  "homepage": "/app",
+  "homepage": "https://gitlab.com/tms-elte/frontend-react",
+  "bugs": "https://gitlab.com/tms-elte/frontend-react/-/issues",
+  "license": "BSD-3-Clause",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",

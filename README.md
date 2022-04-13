@@ -70,6 +70,12 @@ If you want to override an environment variable, you should create a local .env 
 [See Create React App documentation for more information](https://create-react-app.dev/docs/adding-custom-environment-variables/).
 Also, you should provide type definitions to `src/react-app-env.d.ts`.
 
+## Branding
+
+You may create a `public/branding.json` configuration file based on the provided 
+sample in `src/branding.dist.json`, to define the branding information of your
+TMS instance (e.g. organization name).
+
 # Dependencies
 
 * [TypeScript](https://www.typescriptlang.org/)
