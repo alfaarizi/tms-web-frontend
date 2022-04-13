@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
+import i18next from 'i18next';
 
 import { useClientSideLocaleChange, useConfirmEmailMutation } from 'hooks/common/UserHooks';
 import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
@@ -13,6 +13,7 @@ import { BrandLogo } from 'components/Header/BrandLogo';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardFooter } from 'components/CustomCard/CustomCardFooter';
+import { useBranding } from 'ui-hooks/useBranding';
 
 enum ConfirmationState { BeforeSend, Sending, SuccessSameUser, SuccessDifferentUser, Failed }
 
@@ -32,6 +33,8 @@ export default function ConfirmEmailPage({
     const [state, setState] = useState(ConfirmationState.BeforeSend);
     const confirmEmailMutation = useConfirmEmailMutation();
     const clientSideLocaleChange = useClientSideLocaleChange();
+    const branding = useBranding();
+
     if (!code) {
         return null;
     }
@@ -93,7 +96,11 @@ export default function ConfirmEmailPage({
                                 {text}
                             </Card.Body>
                             <CustomCardFooter>
-                                {t('common.elteFI')}
+                                <div>{branding.organizationName[i18next.language]}</div>
+                                <a href="https://gitlab.com/tms-elte">
+                                    TMS v
+                                    {process.env.REACT_APP_VERSION}
+                                </a>
                             </CustomCardFooter>
                         </CustomCard>
                     </Col>
