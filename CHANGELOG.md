@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.5.0...v2.6.0) (2022-04-14)
+
+
+### Features
+
+* Added option to reevaluate ungraded submissions when modifying automated testing ([d52128f](https://gitlab.com/tms-elte/frontend-react/commit/d52128f2d50c0ba939dae4f05e232664958d5490))
+* display TMS version information and repository URL on bottom of the login page ([017eb70](https://gitlab.com/tms-elte/frontend-react/commit/017eb70ad3e1fc065c32cbed6848bf6b113f14f8))
+* display upload count for solutions ([15355fb](https://gitlab.com/tms-elte/frontend-react/commit/15355fb6d418845d5eb473e5d5ab547445e0090a))
+* Optional sorting of student submissions. ([efacf07](https://gitlab.com/tms-elte/frontend-react/commit/efacf07803562691e9a34994cf19428d0e3d8575))
+
+
+### Bug Fixes
+
+* Disabled test creation for question sets without groups in the active semester ([72a103e](https://gitlab.com/tms-elte/frontend-react/commit/72a103e3cdafb5e97afed8038a5fa48a0e2e8e0a))
+
 ## [2.5.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.4.0...v2.5.0) (2022-03-28)
 
 
