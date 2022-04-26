@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faFileArchive, faFileCsv, faFileExcel, faFileExport, faFilterCircleXmark, faListUl,
+    faFileArchive, faFileCsv, faFileExcel, faFileExport, faFilterCircleXmark, faListUl, faSort,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Task } from 'resources/instructor/Task';
@@ -139,14 +139,23 @@ export function StudentFilesListTab({ task }: Props) {
                                 {t('task.downloadOnlyUngraded')}
                             </DropdownItem>
                         </ToolbarDropdown>
-                        <ToolbarDropdown text={t('task.sorting.sorting')} icon={faFileArchive}>
-                            <DropdownItem onSelect={() => handleSorting(SortType.ByUngradedFirst)}>
+                        <ToolbarDropdown text={t('task.sorting.sorting')} icon={faSort}>
+                            <DropdownItem
+                                onSelect={() => handleSorting(SortType.ByUngradedFirst)}
+                                active={sortedBy === SortType.ByUngradedFirst}
+                            >
                                 {t('task.sorting.byUngradedFirst')}
                             </DropdownItem>
-                            <DropdownItem onSelect={() => handleSorting(SortType.ByName)}>
+                            <DropdownItem
+                                onSelect={() => handleSorting(SortType.ByName)}
+                                active={sortedBy === SortType.ByName}
+                            >
                                 {t('task.sorting.byName')}
                             </DropdownItem>
-                            <DropdownItem onSelect={() => handleSorting(SortType.ByUploadTime)}>
+                            <DropdownItem
+                                onSelect={() => handleSorting(SortType.ByUploadTime)}
+                                active={sortedBy === SortType.ByUploadTime}
+                            >
                                 {t('task.sorting.byUploadTime')}
                             </DropdownItem>
                         </ToolbarDropdown>
