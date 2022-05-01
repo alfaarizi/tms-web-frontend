@@ -251,7 +251,8 @@
       "byName": "Hallgató neve szerint",
       "byUploadTime": "Feltöltés ideje szerint"
     },
-    "canvasAssignment": "Canvas feladat"
+    "canvasAssignment": "Canvas feladat",
+    "canvasUpload": "Látogasson el a feladat Canvas oldalára au új megoldások feltöltéséhez!"
   },
   "status": {
     "accepted": "Elfogadva",

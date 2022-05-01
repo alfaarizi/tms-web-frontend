@@ -15,6 +15,7 @@ import { StudentFileUpload } from 'resources/student/StudentFileUpload';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
 import { FileUpload } from 'components/FileUpload';
 import { GitInfo } from 'pages/StudentTaskManager/components/GitInfo';
+import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUploadInfo';
 
 type Params = {
     id?: string
@@ -58,14 +59,14 @@ export const TaskPage = () => {
         [uploadErrorMsg] = error.body.file;
     }
 
-    return (
-        <>
-            <TaskDetails task={task.data} />
-
-            {((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile?.isAccepted !== 'Accepted')
-                || studentFile?.isAccepted === 'Late Submission')
-              && task.data.category !== 'Canvas tasks'
-                ? (
+    let uploadCard;
+    if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile?.isAccepted !== 'Accepted')
+        || studentFile?.isAccepted === 'Late Submission') {
+        if (task.data.category === 'Canvas tasks') {
+            uploadCard = <CanvasUploadInfo />;
+        } else {
+            uploadCard = (
+                (
                     <FileUpload
                         multiple={false}
                         loading={uploadMutation.isLoading}
@@ -75,7 +76,15 @@ export const TaskPage = () => {
                         accept=".zip"
                     />
                 )
-                : null}
+            );
+        }
+    }
+
+    return (
+        <>
+            <TaskDetails task={task.data} />
+
+            {uploadCard}
 
             {task.data.gitInfo
                 ? <GitInfo path={task.data.gitInfo.path} usage={task.data.gitInfo.usage} />
