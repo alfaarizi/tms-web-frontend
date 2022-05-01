@@ -23,4 +23,5 @@ export interface Task {
     runInstructions?: string;
     group?: Group;
     semester?: Semester;
+    canvasUrl?: string;
 }

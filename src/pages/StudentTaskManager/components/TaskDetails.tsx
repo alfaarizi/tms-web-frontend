@@ -23,6 +23,11 @@ export const TaskDetails = ({ task }: Props) => {
                 <CustomCardTitle>{task.name}</CustomCardTitle>
             </CustomCardHeader>
             <DataRow label={t('task.category')}>{task.translatedCategory}</DataRow>
+            {task.canvasUrl ? (
+                <DataRow label={t('task.canvasAssignment')}>
+                    <a href={task.canvasUrl} target="_blank" rel="noreferrer">{task.canvasUrl}</a>
+                </DataRow>
+            ) : null}
             <DataRow label={t('task.available')}>
                 <LocaleDateTime value={task.available} />
             </DataRow>

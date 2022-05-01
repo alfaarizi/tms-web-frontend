@@ -10,4 +10,5 @@ export interface Group {
     canvasCanBeSynchronized: boolean;
     isCanvasCourse: boolean;
     timezone: string;
+    canvasUrl?: string;
 }

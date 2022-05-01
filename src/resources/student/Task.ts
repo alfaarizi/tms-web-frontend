@@ -18,4 +18,5 @@ export interface Task {
         usage: string
     }
     autoTest: number;
+    canvasUrl?: string;
 }

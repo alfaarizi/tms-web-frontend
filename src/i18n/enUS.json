@@ -249,7 +249,8 @@
       "byUngradedFirst": "Ungraded first",
       "byName": "Student name",
       "byUploadTime": "Upload time"
-    }
+    },
+    "canvasAssignment": "Canvas assignment"
   },
   "status": {
     "accepted": "Accepted",
