@@ -62,7 +62,7 @@ export const TaskPage = () => {
     let uploadCard;
     if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile?.isAccepted !== 'Accepted')
         || studentFile?.isAccepted === 'Late Submission') {
-        if (task.data.category === 'Canvas tasks') {
+        if (task.data.canvasUrl) {
             uploadCard = <CanvasUploadInfo />;
         } else {
             uploadCard = (
