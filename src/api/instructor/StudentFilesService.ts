@@ -5,7 +5,7 @@ export async function listForTask(taskID: number) {
     const res = await axiosInstance.get<StudentFile[]>('/instructor/student-files/list-for-task', {
         params: {
             taskID,
-            expand: 'uploader',
+            expand: 'uploader, codeCompass',
         },
     });
     return res.data;
@@ -16,7 +16,7 @@ export async function listForStudent(groupID: number, uploaderID: number) {
         params: {
             groupID,
             uploaderID,
-            expand: 'task, task.group',
+            expand: 'task, task.group, codeCompass',
         },
     });
     return res.data;
@@ -26,7 +26,7 @@ export async function view(id: number) {
     const res = await axiosInstance.get<StudentFile>(
         `/instructor/student-files/${id}`, {
             params: {
-                expand: 'uploader,task,task.group',
+                expand: 'uploader,task,task.group, codeCompass',
             },
         },
     );
@@ -66,8 +66,24 @@ export async function downloadAllFiles(taskID: number, onlyUngraded: boolean) {
 
 export async function grade(file: StudentFile) {
     const res = await axiosInstance.patch(
-        `/instructor/student-files/${file.id}?expand=uploader,task,task.group`,
+        `/instructor/student-files/${file.id}?expand=uploader,task,task.group,codeCompass`,
         file,
     );
+    return res.data;
+}
+
+export async function startCodeCompass(file: StudentFile) {
+    const res = await axiosInstance
+        .post<StudentFile>(
+            `/instructor/student-files/${file.id}/start-code-compass?expand=uploader,task,task.group,codeCompass`,
+        );
+    return res.data;
+}
+
+export async function stopCodeCompass(file: StudentFile) {
+    const res = await axiosInstance
+        .post<StudentFile>(
+            `/instructor/student-files/${file.id}/stop-code-compass?expand=uploader,task,task.group,codeCompass`,
+        );
     return res.data;
 }

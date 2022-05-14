@@ -5,9 +5,15 @@ import { Link } from 'react-router-dom';
 
 import { useShow } from 'ui-hooks/useShow';
 import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Students/StudentFileListItem';
-import { useDownloadStudentFile, useGradeMutation, useStudentFile } from 'hooks/instructor/StudentFileHooks';
+import {
+    useDownloadStudentFile,
+    useGradeMutation,
+    useStartCodeCompassMutation, useStopCodeCompassMutation,
+    useStudentFile,
+} from 'hooks/instructor/StudentFileHooks';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
+import { useUserInfo } from 'hooks/common/UserHooks';
 import { GraderModal } from 'pages/InstructorTaskManager/components/GraderModal';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { DataRow } from 'components/DataRow';
@@ -35,6 +41,10 @@ export function StudentFilePage() {
     const showGrader = useShow();
     const actualSemester = useActualSemester();
     const notifications = useNotifications();
+    const userInfo = useUserInfo();
+    const isCodeCompassEnabled = userInfo.data?.isCodeCompassEnabled ?? false;
+    const startCodeCompass = useStartCodeCompassMutation(studentFile.data?.taskID || -1);
+    const stopCodeCompass = useStopCodeCompassMutation(studentFile.data?.taskID || -1);
 
     if (!studentFile.data) {
         return null;
@@ -54,6 +64,25 @@ export function StudentFilePage() {
                 variant: 'success',
                 message: t('task.successfulGrade'),
             });
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    const handleStartCodeCompass = async (file: StudentFile) => {
+        try {
+            const data: StudentFile = await startCodeCompass.mutateAsync(file);
+            if (data.codeCompass?.port) {
+                window.open(`http://${window.location.hostname}:${data.codeCompass.port}/#`, '_blank');
+            }
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    const handleStopCodeCompass = async (file: StudentFile) => {
+        try {
+            await stopCodeCompass.mutateAsync(file);
         } catch (e) {
             // Already handled globally
         }
@@ -98,8 +127,11 @@ export function StudentFilePage() {
                         </>
                     )}
                     isActualSemester={actualSemester.check(studentFile.data.task?.semesterID)}
+                    isCodeCompassEnabled={isCodeCompassEnabled}
                     file={studentFile.data}
                     onDownload={handleDownload}
+                    onStartCodeCompass={handleStartCodeCompass}
+                    onStopCodeCompass={handleStopCodeCompass}
                     onGrade={showGrader.toShow}
                 />
             </CustomCard>

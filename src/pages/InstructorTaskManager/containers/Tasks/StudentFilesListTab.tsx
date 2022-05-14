@@ -24,6 +24,8 @@ import { StudentFile } from 'resources/instructor/StudentFile';
 
 type Props = {
     task: Task
+    handleStartCodeCompass: (file: StudentFile) => void,
+    handleStopCodeCompass: (file: StudentFile) => void,
 }
 
 enum SortType {
@@ -32,7 +34,9 @@ enum SortType {
     ByUploadTime,
 }
 
-export function StudentFilesListTab({ task }: Props) {
+export function StudentFilesListTab({
+    task, handleStartCodeCompass, handleStopCodeCompass,
+}: Props) {
     const { t } = useTranslation();
     const studentFiles = useStudentFilesForTask(task.id);
     const exportSpreadsheet = useExportSpreadsheet();
@@ -178,6 +182,8 @@ export function StudentFilesListTab({ task }: Props) {
                         {file.gitRepo ? <DataRow label={t('task.git.gitRepo')}>{file.gitRepo}</DataRow> : null}
                     </>
                 )}
+                handleStartCodeCompass={handleStartCodeCompass}
+                handleStopCodeCompass={handleStopCodeCompass}
             />
         </CustomCard>
     );

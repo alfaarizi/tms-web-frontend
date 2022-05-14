@@ -21,6 +21,8 @@ export interface Task {
     imageName?: string;
     compileInstructions: string;
     runInstructions?: string;
+    codeCompassCompileInstructions?: string;
+    codeCompassPackagesInstallInstructions?: string;
     group?: Group;
     semester?: Semester;
 }

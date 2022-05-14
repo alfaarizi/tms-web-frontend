@@ -4,6 +4,7 @@ import { TesterFormData } from 'resources/instructor/TesterFormData';
 import { User } from 'resources/common/User';
 import { SetupTester } from 'resources/instructor/SetupTester';
 import { GridTask } from 'resources/instructor/GridTask.php';
+import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
 
 /**
  * Loads task list
@@ -111,6 +112,19 @@ export async function setupAutoTester(id: number, data: SetupTester) {
     });
     // The api returns a string instead of number
     res.data.showFullErrorMsg = parseInt(res.data.showFullErrorMsg.toString(), 10);
+    return res.data;
+}
+
+export async function setupCodeCompassParameters(id: number, data: CodeCompassParameters) {
+    const formData = new FormData();
+    formData.append('codeCompassCompileInstructions', data.compileInstructions);
+    formData.append('codeCompassPackagesInstallInstructions', data.packagesInstallInstructions);
+
+    const res = await axiosInstance.post<Task>(`/instructor/tasks/${id}/setup-code-compass-parser`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
     return res.data;
 }
 

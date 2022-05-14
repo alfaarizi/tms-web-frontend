@@ -1,5 +1,6 @@
 import { User } from 'resources/common/User';
 import { Task } from './Task';
+import { CodeCompassInstance } from './CodeCompassInstance';
 
 export interface StudentFile {
     id: number;
@@ -20,4 +21,5 @@ export interface StudentFile {
     task?: Task;
     gitRepo?: string;
     delay?: string;
+    codeCompass?: CodeCompassInstance
 }

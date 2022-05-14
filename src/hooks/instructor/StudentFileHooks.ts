@@ -89,3 +89,56 @@ export function useDownloadAll() {
         ({ taskID, onlyUngraded }: DownloadAllParams) => StudentFilesService.downloadAllFiles(taskID, onlyUngraded),
     );
 }
+
+export function useStartCodeCompassMutation(taskId: number) {
+    const queryClient = useQueryClient();
+
+    return useMutation((file: StudentFile) => StudentFilesService.startCodeCompass(file), {
+        onSuccess: async (data) => {
+            const forTask = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, { taskID: taskId }]);
+            if (forTask) {
+                const newList = forTask.map((file) => (file.id === data.id ? data : file));
+                queryClient.setQueryData([QUERY_KEY, { taskID: data.taskID }], newList);
+            }
+
+            const forUploader = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, {
+                groupID: data.groupID,
+                uploaderID: data.uploader.id,
+            }]);
+            if (forUploader) {
+                const newList = forUploader.map((file) => (file.id === data.id ? data : file));
+                queryClient.setQueryData([QUERY_KEY, {
+                    groupID: data.groupID,
+                    uploaderID: data.uploader.id,
+                }], newList);
+            }
+            queryClient.setQueryData<StudentFile>(([QUERY_KEY, { id: data.id }]), data);
+        },
+    });
+}
+
+export function useStopCodeCompassMutation(taskId: number) {
+    const queryClient = useQueryClient();
+
+    return useMutation((file: StudentFile) => StudentFilesService.stopCodeCompass(file), {
+        onSuccess: async (data) => {
+            const forTask = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, { taskID: taskId }]);
+            if (forTask) {
+                const newList = forTask.map((file) => (file.id === data.id ? data : file));
+                queryClient.setQueryData([QUERY_KEY, { taskID: data.taskID }], newList);
+            }
+            const forUploader = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, {
+                groupID: data.groupID,
+                uploaderID: data.uploader.id,
+            }]);
+            if (forUploader) {
+                const newList = forUploader.map((file) => (file.id === data.id ? data : file));
+                queryClient.setQueryData([QUERY_KEY, {
+                    groupID: data.groupID,
+                    uploaderID: data.uploader.id,
+                }], newList);
+            }
+            queryClient.setQueryData<StudentFile>(([QUERY_KEY, { id: data.id }]), data);
+        },
+    });
+}

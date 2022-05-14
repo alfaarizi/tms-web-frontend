@@ -320,5 +320,20 @@
     "tasksRequired": "Kérem válasszon legalább egy beadandó feladatot!",
     "studentsRequired": "Kérem válasszon legalább két hallgatót!",
     "noResults": "A vizsgálat még nem lett lefuttatva ehhez a kérelemhez. Kattintson a fejlécen található 'Moss futtatása' gombra az ellenőrzés indításához!"
+  },
+  "codeCompass": {
+    "codeCompass": "CodeCompass",
+    "compileInstructions": "Fordítási utasítások (bash script):",
+    "compileInstructionsNeededPrefix": "A CodeCompass megfelelő működéséhez szükség van a fordításhoz szükséges csomagok telepítését végző, illetve egy fordítási script megadására. A scriptek Ubuntu 20.04 operációs rendszeren futnak. A kiinduló docker image elérhető a ",
+    "compileInstructionsNeededPostfix": " oldalon. Alapértelmezetten a runtime-sqlite taggel rendelkező képet használja a rendszer.",
+    "information": "CodeCompass információk",
+    "packages": "Csomagok telepítése (bash script):",
+    "parameters": "CodeCompass paraméterek",
+    "start": "CodeCompass elindítása",
+    "starting": "A CodeCompass indítása folyamatban, kérjük várjon!",
+    "stop": "CodeCompass leállítása",
+    "successfulParsing": "A megoldás fordítása sikeres volt, így a lehető legtöbb CodeCompass funkció elérhető!",
+    "tooManyInstances": "Pillanatnyilag túl sok CodeCompass példány fut a szerveren, ezért az indítást várakoztatjuk. Amint felszabadul a szükséges erőforrás, a szervert elindítjuk, és a kérvényező felhasználónak e-mailt küldünk róla.",
+    "unsuccessfulParsing": "A megoldás fordítása nem volt teljesen sikeres, így előfordulhat, hogy nem minden CodeCompass funkció lesz elérhető:"
   }
 }

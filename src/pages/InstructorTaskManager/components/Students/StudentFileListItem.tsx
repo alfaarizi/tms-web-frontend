@@ -1,30 +1,54 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { ButtonGroup, Col, Row } from 'react-bootstrap';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { faDownload, faEdit, faList } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCompass, faDownload, faEdit, faInfoCircle, faList, faStop,
+} from '@fortawesome/free-solid-svg-icons';
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { useShow } from 'ui-hooks/useShow';
 import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
 import { useTranslation } from 'react-i18next';
+import { CodeCompassInformationAlert } from 'components/CodeCompassInformationAlert';
+import { Status } from 'resources/instructor/CodeCompassInstance';
 
 type Props = {
     renderItem: (file: StudentFile) => ReactNode,
     isActualSemester: boolean,
+    isCodeCompassEnabled: boolean,
     file: StudentFile,
     onDownload: (file: StudentFile) => void,
+    onStartCodeCompass: (file: StudentFile) => void,
+    onStopCodeCompass: (file: StudentFile) => void,
     onGrade: (file: StudentFile) => void,
 }
 
 export function StudentFileListItem({
     file,
     isActualSemester,
+    isCodeCompassEnabled,
     renderItem,
     onDownload,
+    onStartCodeCompass,
+    onStopCodeCompass,
     onGrade,
 }: Props) {
     const { t } = useTranslation();
     const showAutoTesterResults = useShow();
+    const showCodeCompassInformation = useShow();
+    const [isCodeCompassLoading, setIsCodeCompassLoading] = useState(false);
+
+    const handleStartCodeCompass = async (data: StudentFile) => {
+        setIsCodeCompassLoading(true);
+        await onStartCodeCompass(data);
+        setIsCodeCompassLoading(false);
+    };
+
+    const handleStopCodeCompass = async (data: StudentFile) => {
+        setIsCodeCompassLoading(true);
+        await onStopCodeCompass(data);
+        setIsCodeCompassLoading(false);
+    };
 
     return (
         <ListCardItem>
@@ -44,6 +68,42 @@ export function StudentFileListItem({
                                 />
                             )
                             : null}
+
+                        {isCodeCompassEnabled && !file.codeCompass
+                            ? (
+                                <ToolbarButton
+                                    onClick={() => handleStartCodeCompass(file)}
+                                    icon={faCompass}
+                                    isLoading={isCodeCompassLoading}
+                                    text={t('codeCompass.start')}
+                                    displayTextBreakpoint="none"
+                                />
+                            )
+                            : null}
+
+                        {isCodeCompassEnabled && file.codeCompass?.status === Status.running
+                            ? (
+                                <ToolbarButton
+                                    onClick={() => handleStopCodeCompass(file)}
+                                    icon={faStop}
+                                    isLoading={isCodeCompassLoading}
+                                    text={t('codeCompass.stop')}
+                                    displayTextBreakpoint="none"
+                                />
+                            )
+                            : null}
+
+                        {isCodeCompassEnabled && file.codeCompass
+                            ? (
+                                <ToolbarButton
+                                    onClick={showCodeCompassInformation.toShow}
+                                    icon={faInfoCircle}
+                                    text={t('codeCompass.information')}
+                                    displayTextBreakpoint="none"
+                                />
+                            )
+                            : null}
+
                         <ToolbarButton
                             onClick={() => onDownload(file)}
                             icon={faDownload}
@@ -70,6 +130,15 @@ export function StudentFileListItem({
                         isAccepted={file.isAccepted}
                         errorMsg={file.errorMsg}
                         onClose={showAutoTesterResults.toHide}
+                    />
+                )
+                : null}
+
+            {file.codeCompass && showCodeCompassInformation.show
+                ? (
+                    <CodeCompassInformationAlert
+                        codeCompassInstance={file.codeCompass}
+                        onClose={showCodeCompassInformation.toHide}
                     />
                 )
                 : null}

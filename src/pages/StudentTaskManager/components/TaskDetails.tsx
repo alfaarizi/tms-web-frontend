@@ -7,8 +7,8 @@ import { Task } from 'resources/student/Task';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 import { LocaleDateTime } from 'components/LocaleDateTime';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
     task: Task

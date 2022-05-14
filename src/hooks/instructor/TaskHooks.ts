@@ -5,6 +5,7 @@ import * as TasksService from 'api/instructor/TasksService';
 import { TesterFormData } from 'resources/instructor/TesterFormData';
 import { SetupTester } from 'resources/instructor/SetupTester';
 import { GridTask } from 'resources/instructor/GridTask.php';
+import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
 
 export const QUERY_KEY = 'instructor/tasks';
 
@@ -132,6 +133,16 @@ export function useUpdateDockerImageMutation(taskID: number) {
         onSuccess: async (data) => {
             queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
             await queryClient.invalidateQueries([QUERY_KEY, { taskID }, 'test-form-data']);
+        },
+    });
+}
+
+export function useSetupCodeCompassParserMutation(taskID: number) {
+    const queryClient = useQueryClient();
+
+    return useMutation((data: CodeCompassParameters) => TasksService.setupCodeCompassParameters(taskID, data), {
+        onSuccess: async (data) => {
+            queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
         },
     });
 }

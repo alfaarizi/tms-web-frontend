@@ -11,21 +11,28 @@ import { useStudentFilesForStudent } from 'hooks/instructor/StudentFileHooks';
 import { User } from 'resources/common/User';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { StudentFile } from 'resources/instructor/StudentFile';
 
 type Props = {
     group: Group;
     user: User;
+    handleStartCodeCompass: (f: StudentFile) => void;
+    handleStopCodeCompass: (f: StudentFile) => void;
 }
 
 /**
  * Lists solutions for the given student
  * @param group
  * @param user
+ * @param handleStartCodeCompass
+ * @param handleStopCodeCompass
  * @constructor
  */
 export function StudentSolutionsTab({
     group,
     user,
+    handleStartCodeCompass,
+    handleStopCodeCompass,
 }: Props) {
     const { t } = useTranslation();
     const studentFiles = useStudentFilesForStudent(group.id, user.id);
@@ -43,6 +50,8 @@ export function StudentSolutionsTab({
             <StudentFilesList
                 semesterID={group.semesterID}
                 files={studentFiles.data}
+                handleStartCodeCompass={handleStartCodeCompass}
+                handleStopCodeCompass={handleStopCodeCompass}
                 renderItem={(file) => (
                     <>
                         <DataRow label={t('task.task')}>{file.task?.name}</DataRow>

@@ -16,6 +16,9 @@ import { AutoTesterTab } from 'pages/InstructorTaskManager/containers/Tasks/Auto
 import { useUserInfo } from 'hooks/common/UserHooks';
 import { TaskDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskDetails';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+import { StudentFile } from 'resources/instructor/StudentFile';
+import { useStartCodeCompassMutation, useStopCodeCompassMutation } from '../../../../hooks/instructor/StudentFileHooks';
+import { CodeCompassTab } from './CodeCompassTab';
 
 type Params = {
     id?: string
@@ -31,6 +34,8 @@ export const TaskDetailsPage = () => {
     const actualSemester = useActualSemester();
     const userInfo = useUserInfo();
     const showEdit = useShow();
+    const startCodeCompassMutation = useStartCodeCompassMutation(parseInt(id || '-1', 10));
+    const stopCodeCompassMutation = useStopCodeCompassMutation(parseInt(id || '-1', 10));
     const [updateErrorBody, setUpdateErrorBody] = useState<ValidationErrorBody | null>(null);
 
     if (!task.data) {
@@ -66,6 +71,25 @@ export const TaskDetailsPage = () => {
         }
     };
 
+    const handleStartCodeCompass = async (file: StudentFile) => {
+        try {
+            const data: StudentFile = await startCodeCompassMutation.mutateAsync(file);
+            if (data.codeCompass?.port) {
+                window.open(`http://${window.location.hostname}:${data.codeCompass.port}/#`, '_blank');
+            }
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    const handleStopCodeCompass = async (file: StudentFile) => {
+        try {
+            await stopCodeCompassMutation.mutateAsync(file);
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
     return (
         <>
             {showEdit.show ? (
@@ -91,7 +115,11 @@ export const TaskDetailsPage = () => {
 
             <TabbedInterface defaultActiveKey="solutions" id="group-tabs">
                 <Tab eventKey="solutions" title={t('task.solutions')}>
-                    <StudentFilesListTab task={task.data} />
+                    <StudentFilesListTab
+                        task={task.data}
+                        handleStartCodeCompass={handleStartCodeCompass}
+                        handleStopCodeCompass={handleStopCodeCompass}
+                    />
                 </Tab>
                 <Tab eventKey="instructorFiles" title={t('task.instructorFiles')}>
                     <InstructorFilesTab task={task.data} />
@@ -100,6 +128,13 @@ export const TaskDetailsPage = () => {
                     ? (
                         <Tab eventKey="tester" title={t('task.tester')}>
                             <AutoTesterTab task={task.data} />
+                        </Tab>
+                    )
+                    : null}
+                {!!userInfo.data && userInfo.data.isCodeCompassEnabled
+                    ? (
+                        <Tab eventKey="codeCompass" title={t('codeCompass.codeCompass')}>
+                            <CodeCompassTab task={task.data} />
                         </Tab>
                     )
                     : null}

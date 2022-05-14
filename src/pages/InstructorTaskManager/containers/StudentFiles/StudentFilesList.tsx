@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { GraderModal } from 'pages/InstructorTaskManager/components/GraderModal';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
+import { useUserInfo } from 'hooks/common/UserHooks';
 import { useDownloadStudentFile, useGradeMutation } from 'hooks/instructor/StudentFileHooks';
 import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Students/StudentFileListItem';
 import { useNotifications } from 'hooks/common/useNotifications';
@@ -11,6 +12,8 @@ import { useNotifications } from 'hooks/common/useNotifications';
 type Props = {
     files: StudentFile[],
     semesterID: number,
+    handleStartCodeCompass: (f: StudentFile) => void
+    handleStopCodeCompass: (f: StudentFile) => void
     renderItem: (f: StudentFile) => ReactNode
 }
 
@@ -20,11 +23,14 @@ type Props = {
  * @param semesterID Semester id for actual semester check
  * @param renderItem Function to render a list item.
  * More information about render props: https://hu.reactjs.org/docs/render-props.html
+ * @param handleCodeCompass Function to call when the code compass icon gets pressed
  * @constructor
  */
 export function StudentFilesList({
     files,
     semesterID,
+    handleStartCodeCompass,
+    handleStopCodeCompass,
     renderItem,
 }: Props) {
     const [gradedFile, setGradedFile] = useState<StudentFile | null>(null);
@@ -33,6 +39,8 @@ export function StudentFilesList({
     const downloadfile = useDownloadStudentFile();
     const { t } = useTranslation();
     const notifications = useNotifications();
+    const userInfo = useUserInfo();
+    const isCodeCompassEnabled = userInfo.data?.isCodeCompassEnabled ?? false;
 
     // Download file
     const handleDownload = async (file: StudentFile) => {
@@ -72,8 +80,11 @@ export function StudentFilesList({
                         key={file.id}
                         renderItem={renderItem}
                         isActualSemester={actualSemester.check(semesterID)}
+                        isCodeCompassEnabled={isCodeCompassEnabled}
                         file={file}
                         onDownload={handleDownload}
+                        onStartCodeCompass={handleStartCodeCompass}
+                        onStopCodeCompass={handleStopCodeCompass}
                         onGrade={handleGradeStart}
                     />
                 ))

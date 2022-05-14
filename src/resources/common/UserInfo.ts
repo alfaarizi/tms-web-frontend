@@ -11,4 +11,5 @@ export interface UserInfo {
     isAutoTestEnabled: boolean;
     isVersionControlEnabled: boolean;
     isCanvasEnabled: boolean;
+    isCodeCompassEnabled: boolean;
 }
