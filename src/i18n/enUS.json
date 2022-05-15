@@ -51,6 +51,15 @@
     "list": "List",
     "grid": "Grid"
   },
+  "passwordProtected": {
+    "passwordProtected": "Password protected",
+    "verify": "Verify",
+    "verifyRequired": "Verify required",
+    "verifySuccess": "Successful verification",
+    "verifyDisableIpCheck": "Disable IP address check",
+    "verified": "Verified",
+    "studentWarning": "The solution must be validated by the instructor, otherwise it will be invalid!"
+  },
   "fileUpload": {
     "success": "{{count}} file(s) uploaded successfully",
     "failed":  "File upload failed",
@@ -190,6 +199,8 @@
     "newSolution": "Upload new solution",
     "solutions": "Solutions",
     "tester": "Automatic tester",
+    "passwordProtectedHelp": "For password-protected tasks the solutions must be verified after uploading. Leave the password field blank to turn off password protection. Important: after removing the password all solutions will be verified!",
+    "passwordProtectedGitPush": "For password-protected tasks the 'git push' command is disabled.",
     "isVersionControlled": "Version controlled",
     "versionControlledHelp": "Uses separate Git repositories for each student. Not modifiable after task is created!",
     "categories": {

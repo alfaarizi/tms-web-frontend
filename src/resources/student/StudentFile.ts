@@ -10,4 +10,6 @@ export interface StudentFile {
     graderName: string;
     errorMsg?: string;
     uploadCount: number;
+    taskID: number;
+    verified: boolean;
 }

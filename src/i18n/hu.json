@@ -51,6 +51,15 @@
     "list": "Lista",
     "grid": "Rács"
   },
+  "passwordProtected": {
+    "passwordProtected": "Jelszóval védett",
+    "verify": "Hitelesítés",
+    "verifyRequired": "Hitelesítés szükséges",
+    "verifySuccess": "Sikeres hitelesítés",
+    "verifyDisableIpCheck": "IP-cím ellenőrzés kikapcsolása",
+    "verified": "Hitelesített",
+    "studentWarning": "A megoldást hitelesítenie kell az oktatónak, egyébként az érvénytelen lesz!"
+  },
   "fileUpload": {
     "success": "{{count}} fájl feltöltése sikeres",
     "failed": "Sikertelen fájlfeltöltés",
@@ -191,6 +200,8 @@
     "newSolution": "Új megoldás feltöltése",
     "solutions": "Megoldások",
     "tester": "Tesztelő",
+    "passwordProtectedHelp": "A jelszóvédett feladatok esetében a hitelesíteni kell a  megoldásokat a feltöltést követően. A védelem kikapcsolásához hagyja üresen a jelszó mezőt. Fontos: a jelszó eltávolítását követően az összes megoldás hitelesítve lesz!",
+    "passwordProtectedGitPush": "A jelszóvédett feladatok esetében a 'git push' nem használható.",
     "isVersionControlled": "Verziókezelt",
     "versionControlledHelp": "Hallgatónként saját Git tároló használata. A feladat létrehozása után nem módosítható!",
     "categories": {

@@ -6,6 +6,7 @@ import * as InstructorFilesService from 'api/student/InstructorFilesService';
 import { StudentFile } from 'resources/student/StudentFile';
 import { StudentFileUpload } from 'resources/student/StudentFileUpload';
 import { useDownloader } from 'hooks/common/useDownloader';
+import { VerifyItem } from 'resources/student/VerifyItem';
 
 export const QUERY_KEY = 'student/tasks';
 
@@ -20,18 +21,41 @@ export function useTasks(groupID: number) {
 export function useUploadStudentFileMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation<StudentFile, Error, StudentFileUpload>((uploadData) => StudentFilesService.upload(uploadData), {
-        onSuccess: (studentFile, variables) => {
-            const key = [QUERY_KEY, { taskID: variables.taskID }];
-            const oldTaskData = queryClient.getQueryData<Task>(key);
-            if (oldTaskData) {
-                queryClient.setQueryData(key, {
-                    ...oldTaskData,
-                    studentFiles: [studentFile],
-                });
-            }
+    return useMutation<StudentFile, Error, StudentFileUpload>(
+        (uploadData) => StudentFilesService.upload(uploadData),
+        {
+            onSuccess: (studentFile: StudentFile, variables: StudentFileUpload) => {
+                const key = [QUERY_KEY, { taskID: studentFile.taskID }];
+                const oldTaskData = queryClient.getQueryData<Task>(key);
+                if (oldTaskData) {
+                    queryClient.setQueryData(key, {
+                        ...oldTaskData,
+                        studentFiles: [studentFile],
+                    });
+                }
+            },
         },
-    });
+    );
+}
+
+export function useVerifyStudentFileMutation() {
+    const queryClient = useQueryClient();
+
+    return useMutation<StudentFile, Error, VerifyItem>(
+        (data) => StudentFilesService.verify(data),
+        {
+            onSuccess: (studentFile) => {
+                const key = [QUERY_KEY, { taskID: studentFile.taskID }];
+                const oldTaskData = queryClient.getQueryData<Task>(key);
+                if (oldTaskData) {
+                    queryClient.setQueryData(key, {
+                        ...oldTaskData,
+                        studentFiles: [studentFile],
+                    });
+                }
+            },
+        },
+    );
 }
 
 export function useDownloadInstructorFile() {

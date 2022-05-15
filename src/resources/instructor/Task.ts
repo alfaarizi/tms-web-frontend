@@ -18,6 +18,7 @@ export interface Task {
     testOS: string;
     showFullErrorMsg: number;
     reevaluateAutoTest: number;
+    password?: string;
     imageName?: string;
     compileInstructions: string;
     runInstructions?: string;

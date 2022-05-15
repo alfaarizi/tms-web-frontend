@@ -1,6 +1,9 @@
+import { AxiosResponse } from 'axios';
+
 import { axiosInstance } from 'api/axiosInstance';
 import { StudentFileUpload } from 'resources/student/StudentFileUpload';
 import { StudentFile } from 'resources/student/StudentFile';
+import { VerifyItem } from 'resources/student/VerifyItem';
 
 export async function download(id: number) {
     const res = await axiosInstance.get<Blob>(`/student/student-files/${id}/download`, {
@@ -19,5 +22,13 @@ export async function upload(uploadData: StudentFileUpload) {
             'Content-Type': 'multipart/form-data',
         },
     });
+    return res.data;
+}
+
+export async function verify(data: VerifyItem) {
+    const res = await axiosInstance.post<VerifyItem, AxiosResponse<StudentFile>>(
+        '/student/student-files/verify',
+        data,
+    );
     return res.data;
 }

@@ -5,6 +5,7 @@ import * as TasksService from 'api/instructor/TasksService';
 import { TesterFormData } from 'resources/instructor/TesterFormData';
 import { SetupTester } from 'resources/instructor/SetupTester';
 import { GridTask } from 'resources/instructor/GridTask.php';
+import { QUERY_KEY as STUDENT_FILE_QUERY } from 'hooks/instructor/StudentFileHooks';
 import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
 
 export const QUERY_KEY = 'instructor/tasks';
@@ -74,6 +75,8 @@ export function useUpdateTaskMutation() {
             await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
             await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
             await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }, 'grid']);
+            await queryClient.invalidateQueries([STUDENT_FILE_QUERY, { taskID: data.id }]);
+            await queryClient.invalidateQueries([STUDENT_FILE_QUERY, { groupID: data.groupID }]);
         },
     });
 }

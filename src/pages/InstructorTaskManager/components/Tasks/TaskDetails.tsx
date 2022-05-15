@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ButtonGroup } from 'react-bootstrap';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faKey } from '@fortawesome/free-solid-svg-icons';
 
 import { DataRow } from 'components/DataRow';
 import { Task } from 'resources/instructor/Task';
@@ -13,6 +13,7 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { IconTooltip } from 'components/IconTooltip';
 
 type Props = {
     task: Task,
@@ -62,6 +63,19 @@ export const TaskDetails = ({
                 <GroupDateTime value={task.hardDeadline} timezone={task.group?.timezone || ''} />
             </DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
+            <DataRow label={t('passwordProtected.passwordProtected')}>
+                {(!task.password || task.password.length === 0) ? t('common.no') : (
+                    <>
+                        {t('common.yes')}
+                        <IconTooltip
+                            tooltipID={`task-${task.id}-password`}
+                            icon={faKey}
+                            text={`${t('login.password')}: ${task.password}`}
+                        />
+                    </>
+                )}
+
+            </DataRow>
             {showVersionControl ? (
                 <DataRow label={t('task.isVersionControlled')}>
                     {task.isVersionControlled ? t('common.yes') : t('common.no')}

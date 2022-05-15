@@ -18,5 +18,6 @@ export interface Task {
         usage: string
     }
     autoTest: number;
+    passwordProtected: boolean;
     canvasUrl?: string;
 }

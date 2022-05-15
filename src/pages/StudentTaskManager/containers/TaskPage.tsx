@@ -1,20 +1,25 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import { DateTime } from 'luxon';
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
+import { StudentFile } from 'resources/student/StudentFile';
 import {
     useDownloadInstructorFile,
     useDownloadStudentFile,
     useTask,
-    useUploadStudentFileMutation,
+    useUploadStudentFileMutation, useVerifyStudentFileMutation,
 } from 'hooks/student/TaskHooks';
 import { TaskDetails } from 'pages/StudentTaskManager/components/TaskDetails';
 import { StudentFileDetails } from 'pages/StudentTaskManager/components/StudentFileDetails';
 import { InstructorFilesList } from 'components/InstructorFilesList';
 import { StudentFileUpload } from 'resources/student/StudentFileUpload';
-import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
+import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { FileUpload } from 'components/FileUpload';
 import { GitInfo } from 'pages/StudentTaskManager/components/GitInfo';
+import { VerifyItemForm } from 'pages/StudentTaskManager/components/VerifyItemForm';
+import { VerifyItem } from 'resources/student/VerifyItem';
+import { useNotifications } from 'hooks/common/useNotifications';
 import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUploadInfo';
 
 type Params = {
@@ -22,19 +27,40 @@ type Params = {
 }
 
 export const TaskPage = () => {
+    const { t } = useTranslation();
     const { id } = useParams<Params>();
     const task = useTask(parseInt(id || '-1', 10));
     const uploadMutation = useUploadStudentFileMutation();
     const downloadStudentFile = useDownloadStudentFile();
     const downloadInstructorFile = useDownloadInstructorFile();
+    const verifyMutation = useVerifyStudentFileMutation();
+    const notifications = useNotifications();
+    const [uploadErrorMsg, setUploadErrorMsg] = useState<string | null>(null);
+    const [verifyError, setVerifyError] = useState<ValidationErrorBody | null>(null);
 
     if (!task.data) {
         return null;
     }
-    const studentFile = task.data.studentFiles[0];
+    const studentFile: StudentFile | undefined = task.data.studentFiles[0];
 
     const handleStudentFileDownload = () => {
         downloadStudentFile.download(studentFile.name, studentFile.id);
+    };
+
+    const handleVerify = async (data: VerifyItem) => {
+        try {
+            await verifyMutation.mutateAsync({ ...data, id: studentFile.id });
+            notifications.push(
+                {
+                    message: t('passwordProtected.verifySuccess'),
+                    variant: 'success',
+                },
+            );
+        } catch (e) {
+            if (e instanceof ServerSideValidationError) {
+                setVerifyError(e.body);
+            }
+        }
     };
 
     const handleInstructorFileDownload = async (taskID: number, fileName: string) => {
@@ -49,15 +75,11 @@ export const TaskPage = () => {
             };
             await uploadMutation.mutateAsync(data);
         } catch (e) {
-            // Already handled globally
+            if (e instanceof ServerSideValidationError) {
+                setUploadErrorMsg(e.body.file[0]);
+            }
         }
     };
-
-    let uploadErrorMsg;
-    if (uploadMutation.error && uploadMutation.error instanceof ServerSideValidationError) {
-        const { error } = uploadMutation;
-        [uploadErrorMsg] = error.body.file;
-    }
 
     let uploadCard;
     if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile?.isAccepted !== 'Accepted')
@@ -84,10 +106,25 @@ export const TaskPage = () => {
         <>
             <TaskDetails task={task.data} />
 
+            {(studentFile && !studentFile.verified)
+                ? (
+                    <VerifyItemForm
+                        onSave={handleVerify}
+                        serverSideError={verifyError}
+                    />
+                )
+                : null}
+
             {uploadCard}
 
             {task.data.gitInfo
-                ? <GitInfo path={task.data.gitInfo.path} usage={task.data.gitInfo.usage} />
+                ? (
+                    <GitInfo
+                        path={task.data.gitInfo.path}
+                        usage={task.data.gitInfo.usage}
+                        passwordProtected={task.data.passwordProtected}
+                    />
+                )
                 : null}
 
             <StudentFileDetails
