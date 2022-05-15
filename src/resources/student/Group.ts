@@ -5,4 +5,5 @@ export interface Group {
     number: number;
     course: Course;
     instructorNames: string[];
+    canvasUrl?: string;
 }

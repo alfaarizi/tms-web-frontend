@@ -47,6 +47,11 @@ export const TaskDetails = ({
 
             <DataRow label="ID">{task.id}</DataRow>
             <DataRow label={t('task.category')}>{task.translatedCategory}</DataRow>
+            {task.canvasUrl ? (
+                <DataRow label={t('task.canvasAssignment')}>
+                    <a href={task.canvasUrl} target="_blank" rel="noreferrer">{task.canvasUrl}</a>
+                </DataRow>
+            ) : null}
             <DataRow label={t('task.available')}>
                 <GroupDateTime value={task.available} timezone={task.group?.timezone || ''} />
             </DataRow>

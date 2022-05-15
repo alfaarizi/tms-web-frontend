@@ -25,4 +25,5 @@ export interface Task {
     codeCompassPackagesInstallInstructions?: string;
     group?: Group;
     semester?: Semester;
+    canvasUrl?: string;
 }

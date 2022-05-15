@@ -250,7 +250,9 @@
       "byUngradedFirst": "Értékeltség szerint",
       "byName": "Hallgató neve szerint",
       "byUploadTime": "Feltöltés ideje szerint"
-    }
+    },
+    "canvasAssignment": "Canvas-feladat",
+    "canvasUpload": "Látogasson el a feladat Canvas-oldalára új megoldás feltöltéséhez!"
   },
   "status": {
     "accepted": "Elfogadva",
