@@ -75,7 +75,12 @@
     "admin": "Administrator access",
     "neptunRequired": "Invalid or missing NEPTUN-code",
     "nameRequired": "Name is required",
-    "emailRequired": "Email is required"
+    "emailRequired": "Email is required",
+    "mockUsers": {
+      "student": "Student {{number}}",
+      "instructor": "Instructor {{number}}",
+      "admin": "Administrator {{number}}"
+    }
   },
   "settings": {
     "customEmail": {
