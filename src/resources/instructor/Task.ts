@@ -16,6 +16,7 @@ export interface Task {
     semesterID: number;
     creatorName: string;
     testOS: string;
+    appType?: string;
     showFullErrorMsg: number;
     reevaluateAutoTest: number;
     password?: string;
@@ -27,4 +28,5 @@ export interface Task {
     group?: Group;
     semester?: Semester;
     canvasUrl?: string;
+    port?: number;
 }

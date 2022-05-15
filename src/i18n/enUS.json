@@ -26,6 +26,8 @@
     "officialEmail": "Official email address",
     "customEmail": "Custom email address",
     "fieldRequired": "Field is required",
+    "minValueRequired": "Smallest allowed value: {{value}}",
+    "maxValueRequired": "Largest allowed value: {{value}}",
     "semesters": "Semesters",
     "minutes": "minutes",
     "studentName": "Student name",
@@ -239,6 +241,7 @@
       "compileInstructions": "Compiler instructions",
       "runInstructions": "Run instructions",
       "runInstructionsHelp": "Arguments of the test case are available in the \"$@\" variable. (@PSBoundParameters in case of PowerShell.) The serial of the test case is stored in the $TEST_CASE_NR environment variable.",
+      "runWebAppInstructionsHelp": "Set up web application environment and start web application. The instructions will be executed in asynchronously.",
       "showFullErrorMsg": "When checked students can see the detailed compile or runtime error messages.",
       "reevaluateAutoTest" : "Reevaluate already tested, but ungraded student submissions",
       "templates": "Templates",
@@ -253,7 +256,26 @@
       "notTested": "The automatic tester have not tested your solution yet.",
       "testFilesHelp": "Student solution will be loaded into the /test/submission/ folder, which will be the default working directory during compilation and testing. Test files are loaded into the /test/test_files/ folder. On Windows OS, the root folder will be C:\\\\test\\ in an analog manner.",
       "updateImage": "Update Docker image",
-      "uploadPriorUpdate": "Docker image must be save before updating"
+      "uploadPriorUpdate": "Docker image must be save before updating",
+      "appType": "Application type",
+      "appTypes": {
+        "Console": "Console",
+        "Web": "Web"
+      },
+      "port": "Port",
+      "portHint": "Exposed port of the webserver running in the Docker container"
+    },
+    "exec": {
+      "startUp": "Start web app",
+      "tearDown": "Stop web app now",
+      "autoTearDownAt": "App will auto shut down at:",
+      "onStartUp": "App started at: {{url}}",
+      "onTearDown": "The application has shut down",
+      "visit": "Visit {{url}}",
+      "webApp": "Web app",
+      "form": {
+        "runInterval": "Application up time"
+      }
     },
     "git": {
       "gitRepo": "Git Repository",

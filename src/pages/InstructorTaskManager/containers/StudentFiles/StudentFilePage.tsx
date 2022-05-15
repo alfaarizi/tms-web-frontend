@@ -136,6 +136,7 @@ export function StudentFilePage() {
                     onStartCodeCompass={handleStartCodeCompass}
                     onStopCodeCompass={handleStopCodeCompass}
                     onGrade={showGrader.toShow}
+                    task={studentFile.data.task}
                 />
             </CustomCard>
 

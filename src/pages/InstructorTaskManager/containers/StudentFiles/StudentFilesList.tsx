@@ -8,6 +8,7 @@ import { useUserInfo } from 'hooks/common/UserHooks';
 import { useDownloadStudentFile, useGradeMutation } from 'hooks/instructor/StudentFileHooks';
 import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Students/StudentFileListItem';
 import { useNotifications } from 'hooks/common/useNotifications';
+import { Task } from 'resources/instructor/Task';
 
 type Props = {
     files: StudentFile[],
@@ -15,6 +16,7 @@ type Props = {
     handleStartCodeCompass: (f: StudentFile) => void
     handleStopCodeCompass: (f: StudentFile) => void
     renderItem: (f: StudentFile) => ReactNode
+    task?: Task
 }
 
 /**
@@ -32,6 +34,7 @@ export function StudentFilesList({
     handleStartCodeCompass,
     handleStopCodeCompass,
     renderItem,
+    task,
 }: Props) {
     const [gradedFile, setGradedFile] = useState<StudentFile | null>(null);
     const actualSemester = useActualSemester();
@@ -86,6 +89,7 @@ export function StudentFilesList({
                         onStartCodeCompass={handleStartCodeCompass}
                         onStopCodeCompass={handleStopCodeCompass}
                         onGrade={handleGradeStart}
+                        task={task != null ? task : file.task}
                     />
                 ))
             }

@@ -7,6 +7,7 @@ export interface OsMap {
 export interface TesterFormData {
     templates: TesterTemplate[];
     osMap: OsMap;
+    appTypes: string[],
     imageSuccessfullyBuilt: boolean;
     imageCreationDate: string;
 }

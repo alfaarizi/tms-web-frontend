@@ -235,7 +235,7 @@ export function AutoTesterTab({ task }: Props) {
                 : null}
 
             {/* Display test cases */}
-            {task.autoTest
+            {(task.autoTest && task.appType !== 'Web')
                 ? (
                     <TestCaseList
                         testCases={testCases.data}

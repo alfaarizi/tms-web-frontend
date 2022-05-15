@@ -26,6 +26,8 @@
     "officialEmail": "Hivatalos e-mail-cím",
     "customEmail": "Egyedi e-mail-cím",
     "fieldRequired": "A mező kitöltése kötelező",
+    "minValueRequired": "Legkisebb megengedett érték: {{value}}",
+    "maxValueRequired": "Legnagyobb megengedett érték: {{value}}",
     "semesters": "Szemeszterek",
     "minutes": "perc",
     "studentName": "Hallgató neve",
@@ -41,6 +43,7 @@
     "search": "Keresés",
     "settings": "Beállítások",
     "modify": "Módosítás",
+    "elteFI": "ELTE Informatikai Kar",
     "export": "Exportálás",
     "timezone": "Időzóna",
     "previous": "Előző",
@@ -240,6 +243,7 @@
       "compileInstructions": "Fordítási beállítások",
       "runInstructions": "Futtatási beállítások",
       "runInstructionsHelp": "A teszteset parancssori argumentumai a \"$@\" változóban érhetőek el. (Powershell esetén @PSBoundParameters.) A teszteset sorszáma a $TEST_CASE_NR környezeti változóból olvasható ki.",
+      "runWebAppInstructionsHelp": "Webalkalmazás környezet konfigurációja és a web szerver indítása. A parancsok végrehajtása azonnal visszatér.",
       "showFullErrorMsg": "A hallgatók láthatják a részletes fordítási és futtatási hibaüzeneteket.",
       "reevaluateAutoTest": "Már tesztelt, de még nem értékelt hallgatói megoldások újratesztelése",
       "templates": "Sablonok",
@@ -254,7 +258,26 @@
       "notTested": "Még nem tesztelte le az automatikus tesztelő a beküldött megoldást.",
       "testFilesHelp": "A hallgatói megoldás a /test/submission/ könyvtárba kerül betöltésre, ami az alapértelmezett munkakönyvtár is lesz a fordítás és a futtatás során. A teszt fájlok a /test/test_files/ könyvtárba kerülnek betöltésre. Windows alapú tesztelésnél a gyökérkönyvtár analóg módon a C:\\\\test\\ könyvtár lesz.",
       "updateImage": "Docker kép frissítése",
-      "uploadPriorUpdate": "Mentsd a Docker képet, mielőtt frissítenél"
+      "uploadPriorUpdate": "Mentsd a Docker képet, mielőtt frissítenél",
+      "appType": "Alkalmazás típusa",
+      "appTypes": {
+        "Console": "Konzol",
+        "Web": "Web"
+      },
+      "port": "Port",
+      "portHint": "Docker konténerben futó webszerver port száma"
+    },
+    "exec": {
+      "startUp": "Webalkalmazás indítása",
+      "tearDown": "Webalkalmazás leállítása",
+      "autoTearDownAt": "Automatikus leállítás:",
+      "onStartUp": "Alkalmazás elindítva: {{url}}",
+      "onTearDown": "Alkalmazás leállítva",
+      "visit": "{{url}} megtekintése",
+      "webApp": "Webalkalmazás",
+      "form": {
+        "runInterval": "Futtatási idő"
+      }
     },
     "git": {
       "gitRepo": "Git tároló",

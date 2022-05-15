@@ -5,5 +5,7 @@ export interface SetupTester {
     imageName?: string;
     compileInstructions: string;
     runInstructions: string;
-    files: FileList | null
+    appType: string;
+    port?: number;
+    files: FileList | null;
 }

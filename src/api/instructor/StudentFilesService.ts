@@ -5,7 +5,7 @@ export async function listForTask(taskID: number) {
     const res = await axiosInstance.get<StudentFile[]>('/instructor/student-files/list-for-task', {
         params: {
             taskID,
-            expand: 'uploader, codeCompass',
+            expand: 'uploader,execution,codeCompass',
         },
     });
     return res.data;
@@ -16,7 +16,7 @@ export async function listForStudent(groupID: number, uploaderID: number) {
         params: {
             groupID,
             uploaderID,
-            expand: 'task, task.group, codeCompass',
+            expand: 'task,task.group,execution,codeCompass',
         },
     });
     return res.data;
@@ -26,7 +26,7 @@ export async function view(id: number) {
     const res = await axiosInstance.get<StudentFile>(
         `/instructor/student-files/${id}`, {
             params: {
-                expand: 'uploader,task,task.group, codeCompass',
+                expand: 'uploader,task,task.group,execution,codeCompass',
             },
         },
     );

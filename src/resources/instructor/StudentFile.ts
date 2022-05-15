@@ -1,6 +1,7 @@
 import { User } from 'resources/common/User';
 import { Task } from './Task';
 import { CodeCompassInstance } from './CodeCompassInstance';
+import { WebAppExecution } from './WebAppExecution';
 
 export interface StudentFile {
     id: number;
@@ -19,6 +20,7 @@ export interface StudentFile {
     taskID: number;
     groupID: number;
     task?: Task;
+    execution?: WebAppExecution,
     gitRepo?: string;
     delay?: string;
     ipAddress?: string;
