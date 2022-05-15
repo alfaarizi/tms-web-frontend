@@ -62,6 +62,8 @@ export function AutoTesterForm({
     useEffect(() => {
         if (task.imageName) {
             setValue('testOS', task.testOS);
+            setValue('appType', task.appType || '');
+            setValue('port', task.port);
             setValue('imageName', task.imageName);
             setValue('compileInstructions', task.compileInstructions);
             setValue('runInstructions', task.runInstructions || '');
@@ -78,8 +80,10 @@ export function AutoTesterForm({
     const handleSetTemplate = (template: TesterTemplate) => {
         setValue('testOS', template.os);
         setValue('imageName', template.image);
+        setValue('appType', template.appType);
         setValue('compileInstructions', template.compileInstructions);
         setValue('runInstructions', template.runInstructions);
+        setValue('port', template.port);
 
         handleResetFileUpload();
     };
@@ -87,6 +91,9 @@ export function AutoTesterForm({
     // Render
     const osOptions = Object.keys(formData.osMap)
         .map((key: string) => <option key={key} value={key}>{formData.osMap[key]}</option>);
+
+    const appTypeOptions = formData.appTypes
+        .map((val: string) => <option key={val} value={val}>{t(`task.autoTester.appTypes.${val}`)}</option>);
 
     let alertToShow;
     if (inProgress) {
@@ -111,6 +118,7 @@ export function AutoTesterForm({
     }
 
     const watchImageName = watch('imageName');
+    const watchAppType = watch('appType');
 
     return (
         <CustomCard>
@@ -162,6 +170,55 @@ export function AutoTesterForm({
                     </Form.Control>
                     {errors.testOS && <FormError message={errors.testOS.message} />}
                 </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('task.autoTester.appType')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        as="select"
+                        {...register('appType', {
+                            required: t('common.fieldRequired')
+                                .toString(),
+                        })}
+                        size="sm"
+                        disabled={inProgress}
+                    >
+                        {appTypeOptions}
+                    </Form.Control>
+                    {errors.appType && <FormError message={errors.appType.message} />}
+                </Form.Group>
+
+                {watchAppType === 'Web' && (
+                    <Form.Group>
+                        <Form.Label>
+                            {t('task.autoTester.port')}
+                            :
+                        </Form.Label>
+                        <Form.Control
+                            type="number"
+                            {...register('port', {
+                                valueAsNumber: true,
+                                required: t('common.fieldRequired').toString(),
+                                min: {
+                                    value: 1,
+                                    message: t('common.minValueRequired', { value: 1 }).toString(),
+                                },
+                                max: {
+                                    value: 65353,
+                                    message: t('common.maxValueRequired', { value: 65353 }).toString(),
+                                },
+                            })}
+                            size="sm"
+                            disabled={inProgress}
+                        />
+                        <Form.Text>
+                            {t('task.autoTester.portHint')}
+                        </Form.Text>
+                        {errors.port && <FormError message={errors.port.message} />}
+                    </Form.Group>
+                )}
 
                 <Form.Group>
                     <Form.Label>
@@ -250,7 +307,9 @@ export function AutoTesterForm({
                         disabled={inProgress}
                     />
                     <Form.Text muted>
-                        {t('task.autoTester.runInstructionsHelp')}
+                        {t(watchAppType === 'Web'
+                            ? 'task.autoTester.runInstructionsHelp'
+                            : 'task.autoTester.runWebAppInstructionsHelp')}
                     </Form.Text>
                     {errors.runInstructions && <FormError message={errors.runInstructions.message} />}
                 </Form.Group>

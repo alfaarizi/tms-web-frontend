@@ -4,4 +4,6 @@ export interface TesterTemplate {
     image: string;
     compileInstructions: string;
     runInstructions: string;
+    appType: string;
+    port?: number;
 }

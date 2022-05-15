@@ -9,8 +9,10 @@ import { StudentFile } from 'resources/instructor/StudentFile';
 import { useShow } from 'ui-hooks/useShow';
 import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
 import { useTranslation } from 'react-i18next';
+import { Task } from 'resources/instructor/Task';
 import { CodeCompassInformationAlert } from 'components/CodeCompassInformationAlert';
 import { Status } from 'resources/instructor/CodeCompassInstance';
+import { WebAppExecutionControl } from './WebAppExecutionControl';
 
 type Props = {
     renderItem: (file: StudentFile) => ReactNode,
@@ -21,6 +23,7 @@ type Props = {
     onStartCodeCompass: (file: StudentFile) => void,
     onStopCodeCompass: (file: StudentFile) => void,
     onGrade: (file: StudentFile) => void,
+    task?: Task,
 }
 
 export function StudentFileListItem({
@@ -28,6 +31,7 @@ export function StudentFileListItem({
     isActualSemester,
     isCodeCompassEnabled,
     renderItem,
+    task,
     onDownload,
     onStartCodeCompass,
     onStopCodeCompass,
@@ -35,6 +39,7 @@ export function StudentFileListItem({
 }: Props) {
     const { t } = useTranslation();
     const showAutoTesterResults = useShow();
+    const isExecutable = task && task.appType === 'Web';
     const showCodeCompassInformation = useShow();
     const [isCodeCompassLoading, setIsCodeCompassLoading] = useState(false);
 
@@ -121,6 +126,12 @@ export function StudentFileListItem({
                                 />
                             )
                             : null}
+                        {isExecutable
+                            && (
+                                <WebAppExecutionControl
+                                    file={file}
+                                />
+                            )}
                     </ButtonGroup>
                 </Col>
             </Row>

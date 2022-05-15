@@ -170,6 +170,7 @@ export function StudentFilesListTab({
             <StudentFilesList
                 semesterID={task.semesterID}
                 files={sortedStudentFiles}
+                task={task}
                 renderItem={(file) => (
                     <>
                         <DataRow label={t('task.uploader')}>
