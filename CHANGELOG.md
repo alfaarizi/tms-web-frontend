@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.6.0...v2.7.0) (2022-05-15)
+
+
+### Features
+
+* added easier mock login with predefined users ([059a191](https://gitlab.com/tms-elte/frontend-react/commit/059a1911e7ec22cdc5065174c1aff3be04f66d82))
+* CodeCompass integration ([83deaaf](https://gitlab.com/tms-elte/frontend-react/commit/83deaaf6030c8adb865ece8384339678db69c8a9))
+* inform students about how to upload new solutions to a Canvas tasks ([cea8a36](https://gitlab.com/tms-elte/frontend-react/commit/cea8a368901c0207e5016a6e340025a27b18eef0))
+* Password protected task user interface ([b450b92](https://gitlab.com/tms-elte/frontend-react/commit/b450b929b17e377d700a84c1f0afc5bda3a75290))
+* remote execution of web applications ([a379676](https://gitlab.com/tms-elte/frontend-react/commit/a379676280daa02e516319bb1e4913ec303bca8d))
+* show Canvas url for groups and tasks ([95f4148](https://gitlab.com/tms-elte/frontend-react/commit/95f4148068d7a4b864bd646ea64639b193d6dbb7))
+
 ## [2.6.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.5.0...v2.6.0) (2022-04-14)
 
 
