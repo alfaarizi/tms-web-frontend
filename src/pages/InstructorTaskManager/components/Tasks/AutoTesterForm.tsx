@@ -308,8 +308,8 @@ export function AutoTesterForm({
                     />
                     <Form.Text muted>
                         {t(watchAppType === 'Web'
-                            ? 'task.autoTester.runInstructionsHelp'
-                            : 'task.autoTester.runWebAppInstructionsHelp')}
+                            ? 'task.autoTester.runWebAppInstructionsHelp'
+                            : 'task.autoTester.runInstructionsHelp')}
                     </Form.Text>
                     {errors.runInstructions && <FormError message={errors.runInstructions.message} />}
                 </Form.Group>
