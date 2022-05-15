@@ -7,6 +7,7 @@ import { LoginCard } from 'pages/Login/components/LoginCard';
 import { LdapLoginForm } from 'pages/Login/components/LdapLoginForm';
 import { LdapLogin } from 'resources/common/LdapLogin';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+import { DefaultUserLogin } from 'pages/Login/components/DefaultUserLogin';
 
 /**
  * Displays a login form based on the value of REACT_APP_LOGIN_METHOD env variable
@@ -44,11 +45,14 @@ export function LoginPage() {
     switch (process.env.REACT_APP_LOGIN_METHOD) {
     case 'MOCK':
         formToDisplay = (
-            <MockLoginForm
-                onLogin={handleMockLogin}
-                isLoading={mockLoginMutation.isLoading}
-                serverSideError={validationError}
-            />
+            <>
+                <MockLoginForm
+                    onLogin={handleMockLogin}
+                    isLoading={mockLoginMutation.isLoading}
+                    serverSideError={validationError}
+                />
+                <DefaultUserLogin onLogin={handleMockLogin} />
+            </>
         );
         break;
     case 'LDAP':

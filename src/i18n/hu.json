@@ -75,7 +75,12 @@
     "admin": "Adminisztrátori hozzáférés",
     "neptunRequired": "A NEPTUN-kód nem lehet üres és csak 6 karakterből állhat",
     "nameRequired": "A név nem lehet üres",
-    "emailRequired": "A email nem lehet üres"
+    "emailRequired": "A email nem lehet üres",
+    "mockUsers": {
+      "student": "Hallgató {{number}}",
+      "instructor": "Oktató {{number}}",
+      "admin": "Adminisztrátor {{number}}"
+    }
   },
   "settings": {
     "customEmail": {
