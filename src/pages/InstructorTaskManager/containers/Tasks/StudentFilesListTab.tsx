@@ -182,6 +182,9 @@ export function StudentFilesListTab({
                             {file.delay}
                         </DataRow>
                         <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
+                        <DataRow label={t('passwordProtected.verified')}>
+                            {file.verified ? t('common.yes') : t('common.no')}
+                        </DataRow>
                         <DataRow label={t('task.uploadCount')}>{file.uploadCount}</DataRow>
                         <DataRow label={t('task.grade')}>{file.grade}</DataRow>
                         <DataRow label={t('task.graderName')}>{file.graderName}</DataRow>

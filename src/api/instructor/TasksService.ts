@@ -30,7 +30,7 @@ export async function getTasksForGrid(groupID: number) {
             groupID,
             fields: 'id,name,available,softDeadline,hardDeadline,translatedCategory'
                 + ',studentFiles.id,studentFiles.isAccepted,studentFiles.translatedIsAccepted'
-                + ',studentFiles.grade, studentFiles.uploaderID',
+                + ',studentFiles.grade,studentFiles.uploaderID,studentFiles.verified',
             expand: 'studentFiles',
         },
     });

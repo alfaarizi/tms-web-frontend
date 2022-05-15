@@ -8,12 +8,14 @@ import { DataRow } from 'components/DataRow';
 
 type Props = {
     path: string,
-    usage: string
+    usage: string,
+    passwordProtected: boolean,
 }
 
 export function GitInfo({
     path,
     usage,
+    passwordProtected,
 }: Props) {
     const { t } = useTranslation();
 
@@ -22,6 +24,7 @@ export function GitInfo({
             <CustomCardHeader>
                 <CustomCardTitle>{t('task.git.gitRepo')}</CustomCardTitle>
             </CustomCardHeader>
+            {passwordProtected ? <p>{t('task.passwordProtectedGitPush')}</p> : null}
             <DataRow label={t('task.git.path')}>{path}</DataRow>
             <DataRow label={t('task.git.usage')}>{usage}</DataRow>
         </CustomCard>

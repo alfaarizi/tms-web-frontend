@@ -143,6 +143,20 @@ export function TaskForm({
                     {errors.hardDeadline && <FormError message={errors.hardDeadline.message} />}
                 </Form.Group>
 
+                <Form.Group>
+                    <Form.Label>
+                        {t('login.password')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        type="text"
+                        {...register('password')}
+                        size="sm"
+                    />
+                    {errors.password && <FormError message={errors.password.message} />}
+                    <Form.Text className="text-muted">{t('task.passwordProtectedHelp')}</Form.Text>
+                </Form.Group>
+
                 {showVersionControl
                     ? (
                         <Form.Group>
@@ -153,6 +167,8 @@ export function TaskForm({
                             />
                             <Form.Text className="text-muted">
                                 {t('task.versionControlledHelp')}
+                                {' '}
+                                {t('task.passwordProtectedGitPush')}
                             </Form.Text>
                         </Form.Group>
                     )

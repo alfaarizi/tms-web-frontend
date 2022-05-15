@@ -21,5 +21,7 @@ export interface StudentFile {
     task?: Task;
     gitRepo?: string;
     delay?: string;
+    ipAddress?: string;
+    verified: boolean;
     codeCompass?: CodeCompassInstance
 }

@@ -4,4 +4,5 @@ export interface GridStudentFile {
     translatedIsAccepted: string;
     grade?: number;
     uploaderID: number;
+    verified: boolean;
 }

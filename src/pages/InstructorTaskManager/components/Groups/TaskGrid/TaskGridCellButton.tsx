@@ -8,6 +8,7 @@ import {
     faTimes,
     faArrowUp,
     faArrowRotateLeft,
+    faLock,
     faQuestion,
     IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
@@ -33,38 +34,44 @@ export function TaskGridCellButton({ studentFile }: Props) {
     let icon: IconDefinition;
     let variant: Variant;
 
-    switch (studentFile.isAccepted) {
-    case 'Accepted':
-        icon = faThumbsUp;
-        variant = 'success';
-        break;
-    case 'Rejected':
-        icon = faThumbsDown;
-        variant = 'danger';
-        break;
-    case 'Passed':
-        icon = faCheck;
-        variant = 'info';
-        break;
-    case 'Failed':
-        icon = faTimes;
-        variant = 'warning';
-        break;
-    case 'Uploaded':
-        icon = faArrowUp;
+    if (studentFile.verified) {
+        switch (studentFile.isAccepted) {
+        case 'Accepted':
+            icon = faThumbsUp;
+            variant = 'success';
+            break;
+        case 'Rejected':
+            icon = faThumbsDown;
+            variant = 'danger';
+            break;
+        case 'Passed':
+            icon = faCheck;
+            variant = 'info';
+            break;
+        case 'Failed':
+            icon = faTimes;
+            variant = 'warning';
+            break;
+        case 'Uploaded':
+            icon = faArrowUp;
+            variant = 'secondary';
+            break;
+        case 'Late Submission':
+            icon = faArrowRotateLeft;
+            variant = 'dark';
+            break;
+        default:
+            icon = faQuestion;
+            variant = 'light';
+            break;
+        }
+    } else {
+        icon = faLock;
         variant = 'secondary';
-        break;
-    case 'Late Submission':
-        icon = faArrowRotateLeft;
-        variant = 'dark';
-        break;
-    default:
-        icon = faQuestion;
-        variant = 'light';
-        break;
     }
 
     const title = `${t('task.status')}: ${studentFile.translatedIsAccepted}`
+        + `\n${t('passwordProtected.verified')}: ${studentFile.verified ? t('common.yes') : t('common.no')}`
         + `\n${t('task.grade')}: ${studentFile.grade || ''}`;
 
     return (

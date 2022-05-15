@@ -117,6 +117,9 @@ export function StudentFilePage() {
                                 {item.delay}
                             </DataRow>
                             <DataRow label={t('task.status')}>{item.translatedIsAccepted}</DataRow>
+                            <DataRow label={t('passwordProtected.verified')}>
+                                {item.verified ? t('common.yes') : t('common.no')}
+                            </DataRow>
                             <DataRow label={t('task.uploadCount')}>{item.uploadCount}</DataRow>
                             <DataRow label={t('task.grade')}>{item.grade}</DataRow>
                             <DataRow label={t('task.graderName')}>{item.graderName}</DataRow>
