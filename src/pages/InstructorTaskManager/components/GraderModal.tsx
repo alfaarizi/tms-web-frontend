@@ -24,6 +24,7 @@ export function GraderModal({
         register,
         handleSubmit,
         setValue,
+        watch,
     } = useForm<StudentFile>();
 
     const onSubmit = handleSubmit((data) => {
@@ -39,12 +40,12 @@ export function GraderModal({
     // Sets field values
     const handleShow = () => {
         if (file) {
-            setValue('isAccepted',
-                file.isAccepted === 'Failed' ? 'Rejected' : 'Accepted');
+            setValue('isAccepted', file.isAccepted);
             setValue('notes', file.notes);
             setValue('grade', file.grade);
         }
     };
+    const selectValue = watch('isAccepted');
 
     // Render
     return (
@@ -59,10 +60,16 @@ export function GraderModal({
                             {t('task.status')}
                             :
                         </Form.Label>
-                        <Form.Control as="select" {...register('isAccepted', { required: true })} size="sm">
+                        <Form.Control
+                            as="select"
+                            value={selectValue}
+                            {...register('isAccepted', { required: true })}
+                            size="sm"
+                        >
                             <option value="Accepted">{t('status.accepted')}</option>
                             <option value="Rejected">{t('status.rejected')}</option>
                             <option value="Late Submission">{t('status.lateSubmission')}</option>
+
                         </Form.Control>
                     </Form.Group>
 
