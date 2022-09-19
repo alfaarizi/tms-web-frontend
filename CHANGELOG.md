@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.7.0...v2.7.1) (2022-09-19)
+
+
+### Bug Fixes
+
+* correct status selected when regrading submissions ([c7eecb5](https://gitlab.com/tms-elte/frontend-react/commit/c7eecb5c80bc6133e13f8a81f1dee76c5bc641ac))
+* disable caching for index.html on Apache webservers ([2e5c635](https://gitlab.com/tms-elte/frontend-react/commit/2e5c635885cda6f69bd91f838dcb8d3242810138))
+
 ## [2.7.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.6.0...v2.7.0) (2022-05-15)
 
 
