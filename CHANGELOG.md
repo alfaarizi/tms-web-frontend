@@ -7,20 +7,20 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* correct status selected when regrading submissions ([c7eecb5](https://gitlab.com/tms-elte/frontend-react/commit/c7eecb5c80bc6133e13f8a81f1dee76c5bc641ac))
-* disable caching for index.html on Apache webservers ([2e5c635](https://gitlab.com/tms-elte/frontend-react/commit/2e5c635885cda6f69bd91f838dcb8d3242810138))
+* Correct status selected when regrading submissions ([c7eecb5](https://gitlab.com/tms-elte/frontend-react/commit/c7eecb5c80bc6133e13f8a81f1dee76c5bc641ac))
+* Disable caching for index.html on Apache webservers ([2e5c635](https://gitlab.com/tms-elte/frontend-react/commit/2e5c635885cda6f69bd91f838dcb8d3242810138))
 
 ## [2.7.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.6.0...v2.7.0) (2022-05-15)
 
 
 ### Features
 
-* added easier mock login with predefined users ([059a191](https://gitlab.com/tms-elte/frontend-react/commit/059a1911e7ec22cdc5065174c1aff3be04f66d82))
+* Added easier mock login with predefined users ([059a191](https://gitlab.com/tms-elte/frontend-react/commit/059a1911e7ec22cdc5065174c1aff3be04f66d82))
 * CodeCompass integration ([83deaaf](https://gitlab.com/tms-elte/frontend-react/commit/83deaaf6030c8adb865ece8384339678db69c8a9))
-* inform students about how to upload new solutions to a Canvas tasks ([cea8a36](https://gitlab.com/tms-elte/frontend-react/commit/cea8a368901c0207e5016a6e340025a27b18eef0))
+* Inform students about how to upload new solutions to a Canvas tasks ([cea8a36](https://gitlab.com/tms-elte/frontend-react/commit/cea8a368901c0207e5016a6e340025a27b18eef0))
 * Password protected task user interface ([b450b92](https://gitlab.com/tms-elte/frontend-react/commit/b450b929b17e377d700a84c1f0afc5bda3a75290))
-* remote execution of web applications ([a379676](https://gitlab.com/tms-elte/frontend-react/commit/a379676280daa02e516319bb1e4913ec303bca8d))
-* show Canvas url for groups and tasks ([95f4148](https://gitlab.com/tms-elte/frontend-react/commit/95f4148068d7a4b864bd646ea64639b193d6dbb7))
+* Remote execution of web applications ([a379676](https://gitlab.com/tms-elte/frontend-react/commit/a379676280daa02e516319bb1e4913ec303bca8d))
+* Show Canvas url for groups and tasks ([95f4148](https://gitlab.com/tms-elte/frontend-react/commit/95f4148068d7a4b864bd646ea64639b193d6dbb7))
 
 ## [2.6.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.5.0...v2.6.0) (2022-04-14)
 
@@ -28,8 +28,8 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 * Added option to reevaluate ungraded submissions when modifying automated testing ([d52128f](https://gitlab.com/tms-elte/frontend-react/commit/d52128f2d50c0ba939dae4f05e232664958d5490))
-* display TMS version information and repository URL on bottom of the login page ([017eb70](https://gitlab.com/tms-elte/frontend-react/commit/017eb70ad3e1fc065c32cbed6848bf6b113f14f8))
-* display upload count for solutions ([15355fb](https://gitlab.com/tms-elte/frontend-react/commit/15355fb6d418845d5eb473e5d5ab547445e0090a))
+* Display TMS version information and repository URL on bottom of the login page ([017eb70](https://gitlab.com/tms-elte/frontend-react/commit/017eb70ad3e1fc065c32cbed6848bf6b113f14f8))
+* Display upload count for solutions ([15355fb](https://gitlab.com/tms-elte/frontend-react/commit/15355fb6d418845d5eb473e5d5ab547445e0090a))
 * Optional sorting of student submissions. ([efacf07](https://gitlab.com/tms-elte/frontend-react/commit/efacf07803562691e9a34994cf19428d0e3d8575))
 
 
