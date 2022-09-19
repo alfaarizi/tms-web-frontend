@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.2](https://gitlab.com/tms-elte/frontend-react/compare/v2.7.1...v2.7.2) (2022-09-19)
+
+
+### Bug Fixes
+
+* Properly save default submission status when grading. ([835eac4](https://gitlab.com/tms-elte/frontend-react/commit/835eac44cfd60049f05cdd0404278a53b4543db5))
+
 ### [2.7.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.7.0...v2.7.1) (2022-09-19)
 
 
