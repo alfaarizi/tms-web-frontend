@@ -88,9 +88,9 @@ export function MockLoginForm({
             </Form.Group>
 
             <Form.Group>
-                <Form.Check type="checkbox" label={t('login.student')} {...register('isStudent')} />
-                <Form.Check type="checkbox" label={t('login.instructor')} {...register('isTeacher')} />
-                <Form.Check type="checkbox" label={t('login.admin')} {...register('isAdmin')} />
+                <Form.Check type="checkbox" id="isStudent" label={t('login.student')} {...register('isStudent')} />
+                <Form.Check type="checkbox" id="isTeacher" label={t('login.instructor')} {...register('isTeacher')} />
+                <Form.Check type="checkbox" id="isAdmin" label={t('login.admin')} {...register('isAdmin')} />
             </Form.Group>
 
             <LoginButton isLoading={isLoading} />
