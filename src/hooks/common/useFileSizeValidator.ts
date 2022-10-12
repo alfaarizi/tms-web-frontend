@@ -1,20 +1,30 @@
 import { useTranslation } from 'react-i18next';
 import { Validate } from 'react-hook-form';
+import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 
 /**
  * Provides functions to validate the total size of the uploaded files.
- * The maximum size is loaded from an environmental variable.
+ * The maximum size is loaded from the private system information.
  */
 export function useFileSizeValidator() {
     const { t } = useTranslation();
-    const maxSizeInMiB: number = parseInt(process.env.REACT_APP_UPLOAD_MAX_FILESIZE, 10);
-    const maxSizeInBytes: number = maxSizeInMiB * 1024 * 1024;
+    const privateSystemInfo = usePrivateSystemInfoQuery();
+    const { isSuccess: ready } = privateSystemInfo;
+    const maxSizeInBytes = ready ? Math.min(
+        privateSystemInfo.data!.uploadMaxFilesize,
+        privateSystemInfo.data!.postMaxSize,
+    ) : 0;
+    const maxSizeInMiB = maxSizeInBytes / 1024 / 1024;
 
     /**
      * Determines if the total size of the uploaded files is less than the global file size limit
      * @param files
      */
     const validate = (files: FileList | null): boolean => {
+        if (!ready) {
+            throw new Error('Private system info is not available');
+        }
+
         if (!files) {
             return true;
         }
@@ -34,11 +44,16 @@ export function useFileSizeValidator() {
      * Wraps validate in a react-hook-form validator function
      * @param files
      */
-    const reactHookFormsValidator: Validate<FileList | null> = (files) => (
-        validate(files) || t('fileUpload.sizeLimitError', { maxSize: maxSizeInMiB }).toString()
-    );
+    const reactHookFormsValidator: Validate<FileList | null> = (files) => {
+        if (!ready) {
+            throw new Error('Private system info is not available');
+        }
+
+        return validate(files) || t('fileUpload.sizeLimitError', { maxSize: maxSizeInMiB }).toString();
+    };
 
     return {
+        ready,
         validate,
         reactHookFormsValidator,
         maxSizeInBytes,

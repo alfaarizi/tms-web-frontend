@@ -60,7 +60,6 @@ If you want to override an environment variable, you should create a local .env 
 | `REACT_APP_API_BASEURL` | Used | Used            | TMS API baseurl.                                                                                                                                                                                               |
 | `REACT_APP_LOGIN_METHOD`| Used | Used            | Set login method. Possible values: `LDAP`, `MOCK`                                                                                                                                                              |
 | `REACT_DEV_PROXY` | Used | Ignored         | Backend server address that used in development mode. The development server will proxy API requests to this address.                                                                                          |
-| `REACT_APP_UPLOAD_MAX_FILESIZE` | Used | Used           | The maximum total size of the uploaded files in one request (unit: MiB)                                                                                                                                        |
 | `REACT_APP_BACKEND_CORE_VERSION_RANGE` | Used | Used           | This variable defines the accepted `backend-core` semantic version range. Check the documentation of the [semver](https://github.com/npm/node-semver) npm package for more information about version ranges. |
 
 [Create React App specific environment variables](https://create-react-app.dev/docs/advanced-configuration/)

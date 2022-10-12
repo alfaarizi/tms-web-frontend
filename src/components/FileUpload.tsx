@@ -12,7 +12,7 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { ErrorAlert } from 'components/ErrorAlert';
-import { useFileSizeValidator } from 'ui-hooks/useFileSizeValidator';
+import { useFileSizeValidator } from 'hooks/common/useFileSizeValidator';
 import { FormError } from 'components/FormError';
 
 type Props = {
@@ -109,7 +109,7 @@ export function FileUpload({
                 custom
                 name="files"
                 multiple={multiple}
-                disabled={loading}
+                disabled={loading || !fileSizeValidator.ready}
                 onChange={handleChange}
                 accept={accept}
             />
@@ -130,7 +130,7 @@ export function FileUpload({
                 variant="success"
                 size="sm"
                 className="mt-2"
-                disabled={loading || !validSize || fileList.length === 0}
+                disabled={loading || !validSize || fileList.length === 0 || !fileSizeValidator.ready}
                 onClick={handleUpload}
             >
                 {

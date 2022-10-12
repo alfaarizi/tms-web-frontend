@@ -18,9 +18,9 @@ import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
 import { faClipboardList, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { SetupTester } from 'resources/instructor/SetupTester';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { useFileSizeValidator } from 'ui-hooks/useFileSizeValidator';
+import { useFileSizeValidator } from 'hooks/common/useFileSizeValidator';
 import { DateTime } from 'luxon';
-import { getUserTimezone } from '../../../../utils/getUserTimezone';
+import { getUserTimezone } from 'utils/getUserTimezone';
 
 type Props = {
     onSave: (task: SetupTester) => void,
@@ -264,7 +264,7 @@ export function AutoTesterForm({
                             label={fileLabel}
                             custom
                             multiple
-                            disabled={inProgress}
+                            disabled={inProgress || !fileSizeValidator.ready}
                             {...register('files', {
                                 validate: fileSizeValidator.reactHookFormsValidator,
                             })}
