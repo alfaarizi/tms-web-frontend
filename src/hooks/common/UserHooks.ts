@@ -30,6 +30,7 @@ export function useClientSideLocaleChange() {
         // Change i18next language, if the new locale is different
         if (locale !== i18n.language) {
             await i18n.changeLanguage(locale);
+            document.documentElement.lang = locale;
 
             // Reload all content to change dynamic content language
             // Cancel all fetching queries,
