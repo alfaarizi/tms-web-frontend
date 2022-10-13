@@ -16,7 +16,7 @@ type Props = {
  */
 export function LanguageSwitcher({ onChange }: Props) {
     const { i18n } = useTranslation();
-    const selectedKey = i18n.language;
+    const selectedKey = i18n.languages[0];
 
     return (
         <NavDropdown
@@ -28,6 +28,7 @@ export function LanguageSwitcher({ onChange }: Props) {
                 </>
             )}
             id="nav-dropdown-role"
+            alignRight
         >
             {
                 Object.keys(languages).map((key) => (
