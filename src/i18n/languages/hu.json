@@ -53,7 +53,9 @@
     "back": "Vissza",
     "view": "Nézet",
     "list": "Lista",
-    "grid": "Rács"
+    "grid": "Rács",
+    "areYouSure": "Biztos benne?",
+    "confirmDiscard": "Ha bezárja az ablakot, az eddigi módosításai elvesznek!"
   },
   "passwordProtected": {
     "passwordProtected": "Jelszóval védett",
