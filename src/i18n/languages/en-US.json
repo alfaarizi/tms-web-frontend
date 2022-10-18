@@ -52,7 +52,9 @@
     "back": "Back",
     "view": "View",
     "list": "List",
-    "grid": "Grid"
+    "grid": "Grid",
+    "areYouSure": "Are you sure?",
+    "confirmDiscard": "If you close the modal, all your changes will be lost!"
   },
   "passwordProtected": {
     "passwordProtected": "Password protected",
