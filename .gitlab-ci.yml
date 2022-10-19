@@ -1,5 +1,5 @@
 # Default image (https://hub.docker.com/_/node)
-image: node:10.24
+image: node:12.22-bullseye
 
 # Stages: lint -> test -> deploy
 stages:

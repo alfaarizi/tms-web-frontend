@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://create-react-app.dev/)
 
+## Requirements
+
+Node.JS 12 or greater is required to build this application.
+
 ## Available Scripts
 
 In the project directory, you can run:
