@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.8.0...v2.8.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* GraderModal confirm exit dialog doesn't always show ([1faba1b](https://gitlab.com/tms-elte/frontend-react/commit/1faba1bc4014ac3896f2e1cdea1ad544fc409bdf))
+
 ## [2.8.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.7.2...v2.8.0) (2022-10-21)
 
 
