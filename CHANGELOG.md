@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.7.2...v2.8.0) (2022-10-21)
+
+
+### Features
+
+* Query upload file size limits from the backend ([7632696](https://gitlab.com/tms-elte/frontend-react/commit/76326962a422930e65e46469422b5b2891f62c65))
+
+
+### Bug Fixes
+
+* Grading window closes too easily ([d39c8bd](https://gitlab.com/tms-elte/frontend-react/commit/d39c8bd94034a0bc74e21ba22d49b7c8d9bd6e20))
+* Make checkbox labels on mock login clickable ([4bdfbaf](https://gitlab.com/tms-elte/frontend-react/commit/4bdfbaf666e0d3fa48df126f2ba7e138400e678a))
+
 ### [2.7.2](https://gitlab.com/tms-elte/frontend-react/compare/v2.7.1...v2.7.2) (2022-09-19)
 
 
