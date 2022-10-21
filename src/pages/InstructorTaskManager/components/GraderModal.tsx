@@ -28,10 +28,8 @@ export function GraderModal({
         setValue,
         watch,
         reset,
-        getValues,
-        formState,
+        formState: { isDirty, dirtyFields },
     } = useForm<StudentFile>();
-
     const onSubmit = handleSubmit((data) => {
         if (file) {
             onSave({
@@ -44,7 +42,7 @@ export function GraderModal({
     // Bootstrap modal onShow event handler
     // Sets field values
     const handleShow = () => {
-        reset(getValues());
+        reset();
         if (file) {
             if (['Accepted', 'Passed'].includes(file.isAccepted)) {
                 setValue('isAccepted', 'Accepted');
@@ -62,7 +60,7 @@ export function GraderModal({
     const selectValue = watch('isAccepted');
 
     const handleGraderExiting = () => {
-        if (formState.isDirty || (Object.keys(formState.dirtyFields).length !== 0)) {
+        if (isDirty || (Object.keys(dirtyFields).length !== 0)) {
             setConfirmDialog(true);
         } else {
             onCancel();
