@@ -12,47 +12,40 @@ import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
-type Props = {
-    studentFile?: StudentFile,
+type StudentFileDetailsProps = {
+    studentFile: StudentFile,
     onDownload: () => void,
     autoTest: number
 }
 
-export const StudentFileDetails = ({
-    studentFile,
-    onDownload,
-    autoTest,
-}: Props) => {
+export const StudentFileDetails = (props: StudentFileDetailsProps) => {
+    const { studentFile, onDownload, autoTest } = props;
     const { t } = useTranslation();
 
     return (
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>{t('task.solution')}</CustomCardTitle>
-                {studentFile
-                    ? (
-                        <ToolbarButton
-                            onClick={onDownload}
-                            icon={faDownload}
-                            text={t('common.download')}
-                        />
-                    )
-                    : null}
+                <ToolbarButton
+                    onClick={onDownload}
+                    icon={faDownload}
+                    text={t('common.download')}
+                />
             </CustomCardHeader>
 
-            <DataRow label={t('task.name')}>{studentFile?.name}</DataRow>
+            <DataRow label={t('task.name')}>{studentFile.name}</DataRow>
             <DataRow label={t('task.uploadTime')}>
-                <LocaleDateTime value={studentFile?.uploadTime} />
+                <LocaleDateTime value={studentFile.uploadTime} />
             </DataRow>
-            <DataRow label={t('task.grade')}>{studentFile?.grade}</DataRow>
-            <DataRow label={t('task.status')}>{studentFile?.translatedIsAccepted}</DataRow>
-            <DataRow label={t('task.uploadCount')}>{studentFile?.uploadCount}</DataRow>
-            <DataRow label={t('task.graderName')}>{studentFile?.graderName}</DataRow>
+            <DataRow label={t('task.grade')}>{studentFile.grade}</DataRow>
+            <DataRow label={t('task.status')}>{studentFile.translatedIsAccepted}</DataRow>
+            <DataRow label={t('task.uploadCount')}>{studentFile.uploadCount}</DataRow>
+            <DataRow label={t('task.graderName')}>{studentFile.graderName}</DataRow>
             <DataRow label={t('task.notes')}>
-                <MultiLineTextBlock text={studentFile?.notes} />
+                <MultiLineTextBlock text={studentFile.notes} />
             </DataRow>
-            {autoTest === 1 && studentFile?.errorMsg
-                ? <AutoTestResultAlert isAccepted={studentFile?.isAccepted} errorMsg={studentFile?.errorMsg} /> : null}
+            {(autoTest === 1 && studentFile.errorMsg)
+                && <AutoTestResultAlert isAccepted={studentFile.isAccepted} errorMsg={studentFile.errorMsg} />}
         </CustomCard>
     );
 };

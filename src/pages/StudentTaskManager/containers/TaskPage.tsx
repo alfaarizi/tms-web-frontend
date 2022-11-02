@@ -107,36 +107,40 @@ export const TaskPage = () => {
             <TaskDetails task={task.data} />
 
             {(studentFile && !studentFile.verified)
-                ? (
-                    <VerifyItemForm
-                        onSave={handleVerify}
-                        serverSideError={verifyError}
-                    />
-                )
-                : null}
+            && (
+                <VerifyItemForm
+                    onSave={handleVerify}
+                    serverSideError={verifyError}
+                />
+            )}
 
             {uploadCard}
 
             {task.data.gitInfo
-                ? (
-                    <GitInfo
-                        path={task.data.gitInfo.path}
-                        usage={task.data.gitInfo.usage}
-                        passwordProtected={task.data.passwordProtected}
-                    />
-                )
-                : null}
+            && (
+                <GitInfo
+                    path={task.data.gitInfo.path}
+                    usage={task.data.gitInfo.usage}
+                    passwordProtected={task.data.passwordProtected}
+                />
+            )}
 
-            <StudentFileDetails
-                studentFile={studentFile}
-                onDownload={handleStudentFileDownload}
-                autoTest={task.data.autoTest}
-            />
+            {studentFile
+            && (
+                <StudentFileDetails
+                    studentFile={studentFile}
+                    onDownload={handleStudentFileDownload}
+                    autoTest={task.data.autoTest}
+                />
+            )}
 
-            <InstructorFilesList
-                instructorFiles={task.data.instructorFiles}
-                onDownload={handleInstructorFileDownload}
-            />
+            {task.data.instructorFiles.length !== 0
+            && (
+                <InstructorFilesList
+                    instructorFiles={task.data.instructorFiles}
+                    onDownload={handleInstructorFileDownload}
+                />
+            )}
         </>
     );
 };
