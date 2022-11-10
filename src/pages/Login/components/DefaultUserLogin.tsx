@@ -11,10 +11,11 @@ import {
 } from 'pages/Login/components/MockLoginDefaultUsers';
 
 type Props = {
-    onLogin : (data: MockLogin) => void
+    onLogin : (data: MockLogin) => void,
+    isLoading: boolean,
 }
 
-export function DefaultUserLogin({ onLogin } : Props) {
+export function DefaultUserLogin({ onLogin, isLoading } : Props) {
     const { t } = useTranslation();
     return (
         <Container>
@@ -32,6 +33,8 @@ export function DefaultUserLogin({ onLogin } : Props) {
                                 text={t(msg, { number: index + 1 })}
                                 onClick={() => onLogin(user)}
                                 key={user.neptun}
+                                displayTextBreakpoint="xs"
+                                disabled={isLoading}
                             />
                         ))}
                     </Row>

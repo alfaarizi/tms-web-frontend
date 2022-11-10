@@ -16,7 +16,7 @@ type Props = {
 export function LoginButton({ isLoading }: Props) {
     const { t } = useTranslation();
     return (
-        <Button variant="primary" type="submit" block>
+        <Button variant="primary" type="submit" disabled={isLoading} block>
             {isLoading ? <Spinner animation="border" size="sm" /> : <FontAwesomeIcon icon={faSignInAlt} />}
             {' '}
             {t('login.login')}
