@@ -8,37 +8,43 @@ import { LdapLoginForm } from 'pages/Login/components/LdapLoginForm';
 import { LdapLogin } from 'resources/common/LdapLogin';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { DefaultUserLogin } from 'pages/Login/components/DefaultUserLogin';
+import { LoginResponse } from 'resources/common/LoginResponse';
+
+type AsyncLoginFn<TData> = (data: TData) => Promise<LoginResponse>;
 
 /**
  * Displays a login form based on the value of REACT_APP_LOGIN_METHOD env variable
  * @constructor
  */
 export function LoginPage() {
+    const [isLoading, setIsLoading] = useState(false);
     // Login mutations
     const mockLoginMutation = useMockLoginMutation();
     const ldapLoginMutation = useLdapLoginMutation();
     // Store serverside validation errors
     const [validationError, setValidationError] = useState<ValidationErrorBody | null>(null);
 
-    const handleMockLogin = async (data: MockLogin) => {
+    /**
+     * Returns a new login handler for the given login mutation function
+     * @param loginFn login mutation function
+     */
+    const getLoginHandler = <TData, >(loginFn: AsyncLoginFn<TData>) => (async (data: TData) => {
         try {
-            await mockLoginMutation.mutateAsync(data);
+            setIsLoading(true);
+            await loginFn(data);
+            setIsLoading(false);
         } catch (e) {
             if (e instanceof ServerSideValidationError) {
                 setValidationError(e.body);
             }
-        }
-    };
 
-    const handleLdapLogin = async (data: LdapLogin) => {
-        try {
-            await ldapLoginMutation.mutateAsync(data);
-        } catch (e) {
-            if (e instanceof ServerSideValidationError) {
-                setValidationError(e.body);
-            }
+            const ms = parseInt(process.env.REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN, 10);
+            setTimeout(() => setIsLoading(false), ms);
         }
-    };
+    });
+
+    const handleMockLogin = getLoginHandler<MockLogin>(mockLoginMutation.mutateAsync);
+    const handleLdapLogin = getLoginHandler<LdapLogin>(ldapLoginMutation.mutateAsync);
 
     // Select the correct login form
     let formToDisplay;
@@ -48,10 +54,13 @@ export function LoginPage() {
             <>
                 <MockLoginForm
                     onLogin={handleMockLogin}
-                    isLoading={mockLoginMutation.isLoading}
+                    isLoading={isLoading}
                     serverSideError={validationError}
                 />
-                <DefaultUserLogin onLogin={handleMockLogin} />
+                <DefaultUserLogin
+                    onLogin={handleMockLogin}
+                    isLoading={isLoading}
+                />
             </>
         );
         break;
@@ -59,7 +68,7 @@ export function LoginPage() {
         formToDisplay = (
             <LdapLoginForm
                 onLogin={handleLdapLogin}
-                isLoading={mockLoginMutation.isLoading}
+                isLoading={isLoading}
                 serverSideError={validationError}
             />
         );

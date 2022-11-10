@@ -8,5 +8,6 @@ declare namespace NodeJS {
         REACT_APP_API_BASEURL: string,
         REACT_DEV_PROXY?: string,
         REACT_APP_BACKEND_CORE_VERSION_RANGE: string,
+        REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN: string,
     }
 }
