@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.2](https://gitlab.com/tms-elte/frontend-react/compare/v2.8.1...v2.8.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* disable login button while waiting for response and add timeout after failure ([430096f](https://gitlab.com/tms-elte/frontend-react/commit/430096f1271ba2ed232415fdcd048eade6902361))
+* Fix displaying solutions section and instructor files ([d08b50b](https://gitlab.com/tms-elte/frontend-react/commit/d08b50bea8449e960e1681938aa00e633188c64c))
+
 ### [2.8.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.8.0...v2.8.1) (2022-10-21)
 
 
