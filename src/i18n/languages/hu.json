@@ -179,7 +179,10 @@
     "successfulCanvasSync": "A Canvas szinkronizáció sikeres volt",
     "waitingForCanvas": "Várakozás a Canvas szerverre...",
     "localTime": "Helyi idő",
-    "groupTime": "Csoport idő"
+    "groupTime": "Csoport idő",
+    "notes": "Megjegyzések",
+    "addNotes": "Megjegyzés hozzáadása",
+    "studentNotes": "Megjegyzések a hallgatónak"
   },
   "task": {
     "task": "Beadandó",

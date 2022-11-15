@@ -177,7 +177,10 @@
     "successfulCanvasSync": "Successful Canvas synchronization",
     "waitingForCanvas": "Waiting for Canvas...",
     "localTime": "Local time",
-    "groupTime": "Group time"
+    "groupTime": "Group time",
+    "notes": "Notes",
+    "addNotes": "Add Notes",
+    "studentNotes": "Notes for the Student"
   },
   "task": {
     "task": "Assignment",

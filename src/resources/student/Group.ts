@@ -6,4 +6,5 @@ export interface Group {
     course: Course;
     instructorNames: string[];
     canvasUrl?: string;
+    notes?: string;
 }

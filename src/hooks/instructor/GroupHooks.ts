@@ -5,6 +5,7 @@ import { Group } from 'resources/instructor/Group';
 import { AxiosError } from 'axios';
 import { User } from 'resources/common/User';
 import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/instructor/TaskHooks';
+import { StudentNotes } from 'resources/instructor/StudentNotes';
 
 export const QUERY_KEY = 'instructor/groups';
 
@@ -108,6 +109,27 @@ export function useDuplicateGroupMutation() {
 
 export function useGroupStudents(groupID: number) {
     return useQuery<User[]>([QUERY_KEY, 'students', { groupID }], () => GroupService.listStudents(groupID));
+}
+
+export function useGroupStudentNotes(groupID: number, studentID: number, enabled : boolean = true) {
+    return useQuery([QUERY_KEY, 'notes', {
+        groupID,
+        studentID,
+    }], () => GroupService.studentNotes(groupID, studentID),
+    {
+        enabled,
+    });
+}
+
+export function useGroupStudentNotesMutation(groupID: number, studentID: number) {
+    const queryClient = useQueryClient();
+
+    return useMutation((notes: string) => GroupService.addStudentNotes(groupID, studentID, notes), {
+        onSuccess: (data) => {
+            const key = [QUERY_KEY, 'notes', { groupID, studentID }];
+            queryClient.setQueryData(key, data.notes);
+        },
+    });
 }
 
 export function useAddStudentsMutation(groupID: number) {

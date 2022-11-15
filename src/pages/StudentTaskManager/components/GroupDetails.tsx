@@ -6,6 +6,7 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
+import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
     group: Group
@@ -36,6 +37,7 @@ export function GroupDetails({ group }: Props) {
                 </DataRow>
             ) : null}
             <DataRow label={t('group.instructors')}>{instructors}</DataRow>
+            <DataRow label={t('group.notes')}><MultiLineTextBlock text={group.notes} /></DataRow>
         </CustomCard>
     );
 }
