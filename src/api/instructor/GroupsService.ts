@@ -4,6 +4,7 @@ import { User } from 'resources/common/User';
 import { UserAddResponse } from 'resources/instructor/UserAddResponse';
 import { GroupStats } from 'resources/instructor/GroupStats';
 import { StudentStats } from 'resources/instructor/StudentStats';
+import { StudentNotes } from 'resources/instructor/StudentNotes';
 
 export async function index(semesterID: number, courseID?: number) {
     const res = await axiosInstance.get<Group[]>('/instructor/groups', {
@@ -36,6 +37,18 @@ export async function remove(id: number) {
 
 export async function duplicate(id: number) {
     const res = await axiosInstance.post<Group>(`instructor/groups/${id}/duplicate`);
+    return res.data;
+}
+
+export async function addStudentNotes(groupID: number, userId: number, notes: string) {
+    const res = await axiosInstance.put<StudentNotes>(
+        `/instructor/groups/${groupID}/students/${userId}/notes`, { notes },
+    );
+    return res.data;
+}
+
+export async function studentNotes(groupID: number, userId: number) {
+    const res = await axiosInstance.get<StudentNotes>(`/instructor/groups/${groupID}/students/${userId}/notes`);
     return res.data;
 }
 

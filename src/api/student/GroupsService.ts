@@ -12,6 +12,6 @@ export async function index(semesterID: number) {
 }
 
 export async function view(groupID: number) {
-    const res = await axiosInstance.get<Group>(`/student/groups/${groupID}`, { params: { expand: 'course' } });
+    const res = await axiosInstance.get<Group>(`/student/groups/${groupID}`, { params: { expand: 'course,notes' } });
     return res.data;
 }

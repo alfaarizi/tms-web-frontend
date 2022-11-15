@@ -12,6 +12,7 @@ import { Group } from 'resources/instructor/Group';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
+import { StudentNotesContainer } from 'pages/InstructorTaskManager/containers/Groups/StudentNotesContainer';
 
 type Props = {
     group: Group
@@ -59,6 +60,12 @@ export function GroupStudentsListTab({ group }: Props) {
                                 displayTextBreakpoint="none"
                             />
                         </LinkContainer>
+                        <StudentNotesContainer
+                            groupId={group.id}
+                            studentId={user.id}
+                            isActualSemester={actualSemester.check(group.semesterID)}
+                            displayTextBreakpoint="none"
+                        />
                         {actualSemester.check(group.semesterID) && !group.isCanvasCourse
                             ? (
                                 <DeleteToolbarButton
