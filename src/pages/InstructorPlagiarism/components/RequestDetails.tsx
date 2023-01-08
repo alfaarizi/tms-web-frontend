@@ -27,6 +27,24 @@ export function RequestDetails({
 }: Props) {
     const { t } = useTranslation();
 
+    const typeData = report.typeSpecificData;
+    let typeDataUI: JSX.Element;
+    switch (typeData.type) {
+    case 'moss':
+        typeDataUI = <DataRow label={t('plagiarism.moss.ignoreThreshold')}>{typeData.ignoreThreshold}</DataRow>;
+        break;
+    case 'jplag':
+        typeDataUI = (
+            <DataRow label={t('plagiarism.jplag.tune')}>
+                {typeData.tune || t('plagiarism.jplag.tuneAutomatic') /* tune = 0 means automatic */}
+            </DataRow>
+        );
+        break;
+    default:
+        // Should not happen
+        typeDataUI = <></>;
+    }
+
     return (
         <CustomCard>
             <CustomCardHeader>
@@ -44,7 +62,8 @@ export function RequestDetails({
                     )
                     : null}
             </CustomCardHeader>
-            <DataRow label={t('plagiarism.ignoreThreshold')}>{report.ignoreThreshold}</DataRow>
+            <DataRow label={t('plagiarism.type')}>{t(`plagiarism.${report.typeSpecificData.type}.name`)}</DataRow>
+            {typeDataUI}
             <DataRow label={t('common.description')}>
                 <MultiLineTextBlock text={report.description} />
             </DataRow>

@@ -9,6 +9,10 @@ export function usePlagiarismList(semesterID: number) {
     return useQuery([QUERY_KEY, { semesterID }], () => PlagiarismService.index(semesterID));
 }
 
+export function usePlagiarismServices(enabled: boolean = true) {
+    return useQuery([QUERY_KEY], () => PlagiarismService.getServices(), { staleTime: Infinity, enabled });
+}
+
 export function usePlagiarismRequest(id: number) {
     return useQuery([QUERY_KEY, { id }], () => PlagiarismService.view(id));
 }
@@ -63,10 +67,10 @@ export function useRemovePlagiarismMutation() {
     });
 }
 
-export function useRunMossMutation() {
+export function useRunMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((id: number) => PlagiarismService.runMoss(id), {
+    return useMutation((id: number) => PlagiarismService.run(id), {
         onSuccess: (data) => {
             const key = [QUERY_KEY, { id: data.id }];
             queryClient.setQueryData<Plagiarism>(key, data);

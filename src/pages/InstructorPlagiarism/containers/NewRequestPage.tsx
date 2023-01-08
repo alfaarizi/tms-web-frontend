@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { useSemesters } from 'hooks/common/SemesterHooks';
+import { PlagiarismType } from 'resources/instructor/PlagiarismType';
 import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
 import { useCourses } from 'hooks/instructor/CourseHooks';
 import { useTaskListForCourse, useUserList } from 'hooks/instructor/TaskHooks';
-import { useCreatePlagiarismMutation } from 'hooks/instructor/PlagiarismHooks';
+import { useCreatePlagiarismMutation, usePlagiarismServices } from 'hooks/instructor/PlagiarismHooks';
 import { useBasefilesByTasks } from 'hooks/instructor/PlagiarismBaseFileHooks';
 import { useHistory } from 'react-router';
 import { NewRequestForm, PlagiarismForm } from 'pages/InstructorPlagiarism/components/NewRequestForm';
@@ -25,13 +26,14 @@ export function NewRequestPage() {
         },
     });
     // Watch form values
-    const [myTasks, semesterFromID, semesterToID, courseID, selectedTasks] = formMethods.watch(
-        ['myTasks', 'semesterFromID', 'semesterToID', 'courseID', 'selectedTasks'],
+    const [myTasks, semesterFromID, semesterToID, courseID, selectedTasks, type] = formMethods.watch(
+        ['myTasks', 'semesterFromID', 'semesterToID', 'courseID', 'selectedTasks', 'type'],
     );
 
     const createMutation = useCreatePlagiarismMutation();
 
     // Load data for fields
+    const availableTypes = usePlagiarismServices();
     const semesters = useSemesters();
     const courses = useCourses(true, true);
     const tasksForCourse = useTaskListForCourse(
@@ -74,6 +76,8 @@ export function NewRequestPage() {
                 tasks={tasksForCourse.data}
                 users={users.data}
                 basefiles={basefiles.data}
+                availableTypes={availableTypes.data}
+                selectedType={type}
             />
         </FormProvider>
     );

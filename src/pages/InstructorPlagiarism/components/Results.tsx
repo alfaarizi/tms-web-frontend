@@ -35,7 +35,7 @@ export function Result({
                 <ButtonGroup>
                     <ToolbarButton
                         icon={faPlay}
-                        text={t('plagiarism.runMoss')}
+                        text={t('plagiarism.run')}
                         onClick={onRun}
                         isLoading={isRunning}
                     />

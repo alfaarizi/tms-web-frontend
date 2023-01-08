@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import {
     usePlagiarismRequest,
     useRemovePlagiarismMutation,
-    useRunMossMutation,
+    useRunMutation,
     useUpdatePlagiarismMutation,
 } from 'hooks/instructor/PlagiarismHooks';
 import { RequestDetails } from 'pages/InstructorPlagiarism/components/RequestDetails';
@@ -26,7 +26,7 @@ export function RequestPage() {
     const id = parseInt(params.id || '-1', 10);
     const history = useHistory();
     const request = usePlagiarismRequest(id);
-    const runMossMutation = useRunMossMutation();
+    const runMutation = useRunMutation();
     const removeMutation = useRemovePlagiarismMutation();
     const updateMutation = useUpdatePlagiarismMutation(id);
     const showEdit = useShow();
@@ -34,20 +34,20 @@ export function RequestPage() {
     const actualSemester = useActualSemester();
 
     useEffect(() => {
-        runMossMutation.reset();
+        runMutation.reset();
     }, [id]);
 
     if (!request.data) {
         return null;
     }
 
-    const handleMossRun = async () => {
+    const handleRun = async () => {
         try {
             notifications.push({
                 variant: 'info',
                 message: t('plagiarism.runStarted', { name: request.data.name }),
             });
-            await runMossMutation.mutateAsync(request.data.id);
+            await runMutation.mutateAsync(request.data.id);
             notifications.push({
                 variant: 'success',
                 message: t('plagiarism.runSuccess', { name: request.data.name }),
@@ -98,8 +98,8 @@ export function RequestPage() {
 
             <Result
                 responseURL={request.data.url}
-                onRun={handleMossRun}
-                isRunning={runMossMutation.isLoading}
+                onRun={handleRun}
+                isRunning={runMutation.isLoading}
             />
         </>
     );

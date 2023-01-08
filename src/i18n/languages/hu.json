@@ -389,21 +389,33 @@
   "plagiarism": {
     "plagiarismCheck": "Másolásvizsgálatok",
     "newPlagiarismCheck": "Új másolásvizsgálat",
+    "type": "Típus",
     "ignoreThreshold": "Egyezéskorlát",
     "ignoreThresholdHelp": "A legnagyobb számú előfordulás, ami még plágiumnak számít",
     "from": "Ettől",
     "to": "Eddig",
     "myTasks": "Csak az én beadandóimat mutassa",
     "result": "Eredmény",
-    "runMoss": "Moss futtatása",
+    "run": "Futtatás",
     "runStarted": "{{name}}: az ellenőrzés futtatása megkeződött",
     "runSuccess": "{{name}}: Az ellenőrzés futtatása sikeresen befejeződött",
     "tasksRequired": "Kérem válasszon legalább egy beadandó feladatot!",
     "studentsRequired": "Kérem válasszon legalább két hallgatót!",
-    "noResults": "A vizsgálat még nem lett lefuttatva ehhez a kérelemhez. Kattintson a fejlécen található 'Moss futtatása' gombra az ellenőrzés indításához!",
+    "noResults": "A vizsgálat még nem lett lefuttatva ehhez a kérelemhez. Kattintson a fejlécen található „Futtatás” gombra az ellenőrzés indításához!",
     "basefiles": {
       "basefiles": "Alapfájlok",
       "about": "Ezek a fájlok hozzáadhatók a plágium-ellenőrzésekhez kivételekként. Például az oktató által megosztott fájlok kivételezésével elkerülhetők a felesleges figyelmeztetések, amikor a hallgatók jogosan használják őket."
+	},
+    "moss": {
+      "name": "Moss",
+      "ignoreThreshold": "Egyezéskorlát",
+      "ignoreThresholdHelp": "A legnagyobb számú előfordulás, ami még plágiumnak számít"
+    },
+    "jplag": {
+      "name": "JPlag",
+      "ignoreFiles": "Ignorált fájlok",
+      "ignoreFilesHelp": "A megadott nevű fájlok figyelmen kívül hagyása. Csak a fájlnevek illeszkedését vizsgálja, könyvtárnevek nélkül.",
+      "ignoreFilesError": "A fájlnevek nem tartalmazhatnak perjel és visszaper (backslash) karaktereket."
     }
   },
   "codeCompass": {

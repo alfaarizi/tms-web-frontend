@@ -1,27 +1,32 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Col, Form } from 'react-bootstrap';
-import { useFormContext } from 'react-hook-form';
+import { Col, Form, InputGroup } from 'react-bootstrap';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { DateTime } from 'luxon';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { FormError } from 'components/FormError';
 import { DualListBoxControl } from 'pages/InstructorPlagiarism/components/DualListBoxControl';
+import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { FormButtons } from 'components/Buttons/FormButtons';
+import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { Course } from 'resources/common/Course';
 import { Semester } from 'resources/common/Semester';
 import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
 import { Task } from 'resources/instructor/Task';
 import { User } from 'resources/common/User';
+import { PlagiarismType } from 'resources/instructor/PlagiarismType';
 import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 
-export interface PlagiarismForm extends RequestPlagiarism {
+export interface PlagiarismForm extends Omit<RequestPlagiarism, 'ignoreFiles'> {
     myTasks: boolean;
     courseID: number | 'All';
     semesterFromID: number;
     semesterToID: number;
+    ignoreFiles: {name: string; id: string}[];
 }
 
 function formatBaseFileLabel(basefile: PlagiarismBasefile, appendDate: boolean) {
@@ -67,7 +72,9 @@ type Props = {
     users?: User[],
     basefiles?: PlagiarismBasefile[],
     semesterToID: number,
-    semesterFromID: number
+    semesterFromID: number,
+    availableTypes?: PlagiarismType[],
+    selectedType: PlagiarismType,
 }
 
 export function NewRequestForm({
@@ -80,6 +87,8 @@ export function NewRequestForm({
     tasks,
     users,
     basefiles,
+    availableTypes,
+    selectedType,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -91,8 +100,12 @@ export function NewRequestForm({
             errors,
         },
     } = useFormContext<PlagiarismForm>(); // retrieve all hook methods
+    const ignoreFiles = useFieldArray({ name: 'ignoreFiles' });
 
-    const obSubmit = handleSubmit((data) => onSave(data));
+    const obSubmit = handleSubmit((data) => onSave({
+        ...data,
+        ignoreFiles: data.ignoreFiles.map(({ name }) => name).filter((name) => name),
+    }));
 
     const tasksList = tasks
         ?.map((task) => ({
@@ -102,9 +115,100 @@ export function NewRequestForm({
         || [];
     const userList = users?.map((user) => ({
         value: user.id,
-        label: `${user.name} <${user.neptun}>`,
+        label: `${user.name ?? ''} <${user.neptun}>`,
     })) || [];
     const basefileList = basefiles ? formatBaseFileList(basefiles) : [];
+
+    let typeSettings: JSX.Element;
+    switch (selectedType) {
+    case 'moss':
+        typeSettings = (
+            <Form.Group>
+                <Form.Label>
+                    {t('plagiarism.moss.ignoreThreshold')}
+                    :
+                </Form.Label>
+                <Form.Control
+                    type="number"
+                    min="2"
+                    {...register(
+                        'ignoreThreshold',
+                        {
+                            required: t('common.fieldRequired')
+                                .toString(),
+                            min: 2,
+                        },
+                    )}
+                    size="sm"
+                />
+                <Form.Text className="text-muted">
+                    {t('plagiarism.moss.ignoreThresholdHelp')}
+                </Form.Text>
+                {errors.ignoreThreshold && <FormError message={errors.ignoreThreshold.message} />}
+            </Form.Group>
+        );
+        break;
+    case 'jplag':
+        typeSettings = (
+            <>
+                <Form.Group>
+                    <Form.Label>
+                        {t('plagiarism.jplag.tune')}
+                        :
+                    </Form.Label>
+                    <Form.Control type="number" min="1" {...register('tune', { min: 1 })} size="sm" />
+                    <Form.Text className="text-muted">
+                        {t('plagiarism.jplag.tuneHelp')}
+                    </Form.Text>
+                    {errors.tune && <FormError message={errors.tune.message} />}
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>
+                        {t('plagiarism.jplag.ignoreFiles')}
+                        :
+                    </Form.Label>
+                    {ignoreFiles.fields.map((field, index) => {
+                        const ifErrors = errors.ignoreFiles && errors.ignoreFiles[index]?.name;
+                        return (
+                            <React.Fragment key={field.id}>
+                                <InputGroup>
+                                    <Form.Control
+                                        {...register(`ignoreFiles.${index}.name`, {
+                                            pattern: {
+                                                value: /^[^\n\\/]+$/,
+                                                message: t('plagiarism.jplag.ignoreFilesError'),
+                                            },
+                                        })}
+                                        size="sm"
+                                    />
+                                    <DeleteToolbarButton
+                                        displayTextBreakpoint="none"
+                                        onDelete={() => ignoreFiles.remove(index)}
+                                    />
+                                </InputGroup>
+                                {ifErrors && <FormError message={ifErrors.message} />}
+                            </React.Fragment>
+                        );
+                    })}
+                    <div>
+                        <ToolbarButton
+                            icon={faPlus}
+                            onClick={() => ignoreFiles.append('')}
+                            text={t('common.add')}
+                            displayTextBreakpoint="xs"
+                        />
+                    </div>
+                    <Form.Text className="text-muted">
+                        {t('plagiarism.jplag.ignoreFilesHelp')}
+                    </Form.Text>
+                </Form.Group>
+            </>
+        );
+        break;
+    default:
+        // should not happen
+        typeSettings = <></>;
+    }
 
     return (
         <CustomCard>
@@ -140,27 +244,22 @@ export function NewRequestForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('plagiarism.ignoreThreshold')}
+                        {t('plagiarism.type')}
                         :
                     </Form.Label>
-                    <Form.Control
-                        type="number"
-                        min="2"
-                        {...register(
-                            'ignoreThreshold',
-                            {
-                                required: t('common.fieldRequired')
-                                    .toString(),
-                                min: 2,
-                            },
-                        )}
-                        size="sm"
-                    />
-                    <Form.Text className="text-muted">
-                        {t('plagiarism.ignoreThresholdHelp')}
-                    </Form.Text>
-                    {errors.ignoreThreshold && <FormError message={errors.ignoreThreshold.message} />}
+                    {availableTypes?.map((type) => (
+                        <Form.Check
+                            type="radio"
+                            id={`newplagiarism-type-${type}`}
+                            key={type}
+                            value={type}
+                            label={t(`plagiarism.${type}.name`)}
+                            {...register('type')}
+                        />
+                    ))}
                 </Form.Group>
+
+                {typeSettings}
 
                 <hr />
 

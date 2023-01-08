@@ -387,21 +387,34 @@
   "plagiarism": {
     "plagiarismCheck": "Plagiarisms",
     "newPlagiarismCheck": "New Plagiarism Check",
-    "ignoreThreshold": "Ignore threshold",
-    "ignoreThresholdHelp": "The maximum number of occurrences before it is ignored",
+    "type": "Type",
     "from": "From",
     "to": "To",
     "myTasks": "Show only my tasks",
     "result": "Result",
-    "runMoss": "Run Moss",
+    "run": "Run",
     "runStarted": "{{name}}: check started",
     "runSuccess": "{{name}}: check is successfully finished",
     "tasksRequired": "Please select at least one task!",
     "studentsRequired": "Please select at least two students!",
-    "noResults": "You have not run a check on this request yet. Click on the 'Run Moss' button!",
+    "noResults": "You have not run a check on this request yet. Click on the ‘Run’ button!",
     "basefiles": {
       "basefiles": "Base files",
       "about": "These files can be added to plagiarism checks as exempted files. For example, instructor-provided files can be exempted to avoid false alarms when students legitimately use them."
+	},
+    "moss": {
+      "name": "Moss",
+      "ignoreThreshold": "Ignore threshold",
+      "ignoreThresholdHelp": "The maximum number of occurrences before it is ignored"
+    },
+    "jplag": {
+      "name": "JPlag",
+      "tune": "Tune",
+      "tuneHelp": "Tunes the comparison sensitivity by adjusting the minimum token required to be counted as a matching section. A smaller number increases the sensitivity but might lead to more false-positives. The default depends on the detected language.",
+      "tuneAutomatic": "Automatic (language-dependent)",
+      "ignoreFiles": "Ignored files",
+      "ignoreFilesHelp": "Ignore files with the given names. It matches only the file names, without directory paths.",
+      "ignoreFilesError": "File names cannot contain forward or backslashes."
     }
   },
   "codeCompass": {
