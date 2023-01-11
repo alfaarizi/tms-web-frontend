@@ -3,5 +3,6 @@ export interface RequestPlagiarism {
     description: string;
     selectedTasks: number[];
     selectedStudents: number[];
+    selectedBasefiles: number[];
     ignoreThreshold: number;
 }

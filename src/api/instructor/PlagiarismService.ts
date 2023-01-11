@@ -1,4 +1,7 @@
 import { axiosInstance } from 'api/axiosInstance';
+import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
+import { BaseFileUpload } from 'resources/instructor/BaseFileUpload';
+import { BaseFileUploadResult } from 'resources/instructor/BaseFileUploadResult';
 import { Plagiarism } from 'resources/instructor/Plagiarism';
 import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
 
@@ -29,4 +32,46 @@ export async function remove(id: number) {
 export async function runMoss(id: number) {
     const res = await axiosInstance.post<Plagiarism>(`/instructor/plagiarism/${id}/run-moss`);
     return res.data;
+}
+
+export async function getBasefiles() {
+    const res = await axiosInstance.get<PlagiarismBasefile[]>(
+        '/instructor/plagiarism-basefile',
+        { params: { expand: 'course,deletable' } },
+    );
+    return res.data;
+}
+
+export async function basefilesByTasks(ids: number[]) {
+    const res = await axiosInstance.post<PlagiarismBasefile[]>(
+        '/instructor/plagiarism-basefile/by-tasks?expand=course',
+        { ids },
+    );
+    return res.data;
+}
+
+export async function downloadBasefile(id: number) {
+    const res = await axiosInstance.get<Blob>(`/instructor/plagiarism-basefile/${id}/download`, {
+        responseType: 'blob',
+    });
+    return res.data;
+}
+
+export async function uploadBasefiles(uploadData: BaseFileUpload) {
+    const formData = new FormData();
+    formData.append('courseID', uploadData.courseID.toString());
+    for (let i = 0; i < uploadData.files.length; ++i) {
+        formData.append('files[]', uploadData.files[i]);
+    }
+
+    const res = await axiosInstance.post<BaseFileUploadResult>('/instructor/plagiarism-basefile', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    return res.data;
+}
+
+export async function removeBasefile(id: number) {
+    await axiosInstance.delete(`/instructor/plagiarism-basefile/${id}`);
 }
