@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Col, Form } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
+import { DateTime } from 'luxon';
 
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { FormError } from 'components/FormError';
@@ -9,6 +10,7 @@ import { DualListBoxControl } from 'pages/InstructorPlagiarism/components/DualLi
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { Course } from 'resources/common/Course';
 import { Semester } from 'resources/common/Semester';
+import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
 import { Task } from 'resources/instructor/Task';
 import { User } from 'resources/common/User';
 import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
@@ -22,6 +24,40 @@ export interface PlagiarismForm extends RequestPlagiarism {
     semesterToID: number;
 }
 
+function formatBaseFileLabel(basefile: PlagiarismBasefile, appendDate: boolean) {
+    let label = `${basefile.course?.name || '?'} / ${basefile.name}`;
+    if (appendDate) {
+        const date = DateTime.fromISO(basefile.lastUpdateTime).toLocaleString(DateTime.DATE_SHORT);
+        label = `${label} / ${date}`;
+    }
+    return label;
+}
+
+function formatBaseFileList(basefiles: PlagiarismBasefile[]) {
+    const formatted: { basefile: PlagiarismBasefile, label: string }[] = [];
+    const duplicates = new Set<string>();
+    for (let i = 0; i < basefiles.length; ++i) {
+        const basefile = basefiles[i];
+        let label = formatBaseFileLabel(basefile, false);
+        let firstDupe;
+        if (duplicates.has(label)) {
+            // This is the at least third occurrance of the same
+            // course-name combination, simply add the date suffix
+            label = formatBaseFileLabel(basefile, true);
+        // eslint-disable-next-line no-cond-assign
+        } else if ((firstDupe = formatted.find((x) => x.label === label)) !== undefined) {
+            // This is the exactly second occurrance of the same
+            // course-name combination, add the suffix to the first
+            // one as well, and remember that it’s a dupe
+            duplicates.add(label);
+            firstDupe.label = formatBaseFileLabel(firstDupe.basefile, true);
+            label = formatBaseFileLabel(basefile, true);
+        }
+        formatted.push({ basefile, label });
+    }
+    return formatted.map((x) => ({ value: x.basefile.id, label: x.label }));
+}
+
 type Props = {
     onSave: (data: RequestPlagiarism) => void,
     onCancel: () => void,
@@ -29,6 +65,7 @@ type Props = {
     semesters?: Semester[],
     tasks?: Task[],
     users?: User[],
+    basefiles?: PlagiarismBasefile[],
     semesterToID: number,
     semesterFromID: number
 }
@@ -42,6 +79,7 @@ export function NewRequestForm({
     semesters,
     tasks,
     users,
+    basefiles,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -66,6 +104,7 @@ export function NewRequestForm({
         value: user.id,
         label: `${user.name} <${user.neptun}>`,
     })) || [];
+    const basefileList = basefiles ? formatBaseFileList(basefiles) : [];
 
     return (
         <CustomCard>
@@ -180,7 +219,7 @@ export function NewRequestForm({
                     <DualListBoxControl
                         control={control}
                         name="selectedTasks"
-                        rules={{ validate: { notEmpty: (v: string[]) => v.length > 0 } }}
+                        rules={{ validate: { notEmpty: (v: number[]) => v.length > 0 } }}
                         options={tasksList}
                     />
                     {errors.selectedTasks && <FormError message={t('plagiarism.tasksRequired')} />}
@@ -194,10 +233,22 @@ export function NewRequestForm({
                     <DualListBoxControl
                         control={control}
                         name="selectedStudents"
-                        rules={{ validate: { notEmpty: (v: string[]) => v.length >= 2 } }}
+                        rules={{ validate: { notEmpty: (v: number[]) => v.length >= 2 } }}
                         options={userList}
                     />
                     {errors.selectedStudents && <FormError message={t('plagiarism.studentsRequired')} />}
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('plagiarism.basefiles.basefiles')}
+                        :
+                    </Form.Label>
+                    <DualListBoxControl
+                        control={control}
+                        name="selectedBasefiles"
+                        options={basefileList}
+                    />
                 </Form.Group>
 
                 <FormButtons onCancel={onCancel} />

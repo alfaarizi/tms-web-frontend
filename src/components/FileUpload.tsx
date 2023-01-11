@@ -1,5 +1,5 @@
 import React, {
-    ChangeEventHandler, MouseEventHandler, useState,
+    ChangeEventHandler, MouseEventHandler, ReactNode, useState,
 } from 'react';
 import {
     Alert, Button, Form, Spinner,
@@ -16,8 +16,10 @@ import { useFileSizeValidator } from 'hooks/common/useFileSizeValidator';
 import { FormError } from 'components/FormError';
 
 type Props = {
+    children?: ReactNode,
     multiple: boolean,
     loading: boolean,
+    disabled?: boolean,
     onUpload: (files: File[]) => void,
     accept?: string,
     errorMessages?: string[],
@@ -36,7 +38,9 @@ type Props = {
  * @constructor
  */
 export function FileUpload({
+    children,
     loading,
+    disabled,
     multiple,
     onUpload,
     accept,
@@ -101,6 +105,7 @@ export function FileUpload({
                 messages={errorMessages}
                 show={errorMessages.length > 0}
             />
+            {children}
             <Form.File
                 id="custom-file-upload"
                 data-browse={t('fileUpload.browse')}
@@ -109,7 +114,7 @@ export function FileUpload({
                 custom
                 name="files"
                 multiple={multiple}
-                disabled={loading || !fileSizeValidator.ready}
+                disabled={disabled || loading || !fileSizeValidator.ready}
                 onChange={handleChange}
                 accept={accept}
             />
@@ -130,7 +135,7 @@ export function FileUpload({
                 variant="success"
                 size="sm"
                 className="mt-2"
-                disabled={loading || !validSize || fileList.length === 0 || !fileSizeValidator.ready}
+                disabled={disabled || loading || !validSize || fileList.length === 0 || !fileSizeValidator.ready}
                 onClick={handleUpload}
             >
                 {

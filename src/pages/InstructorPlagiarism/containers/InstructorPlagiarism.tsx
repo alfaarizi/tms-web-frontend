@@ -5,8 +5,9 @@ import {
 import { useTranslation } from 'react-i18next';
 import { SideBarLayout } from 'layouts/SideBarLayout';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { faFileAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBriefcase, faFileAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { NewRequestPage } from 'pages/InstructorPlagiarism/containers/NewRequestPage';
+import { BaseFilesPage } from 'pages/InstructorPlagiarism/containers/BaseFilesPage';
 import { usePlagiarismList } from 'hooks/instructor/PlagiarismHooks';
 import { RequestPage } from 'pages/InstructorPlagiarism/containers/RequestPage';
 import { SideBarItemWithIcon } from 'components/Navigation/SideBarItemWithIcon';
@@ -23,19 +24,27 @@ export function InstructorPlagiarism() {
     const handleNewCourseOpen = () => {
         history.push(`${url}/new`);
     };
+    const sidebarItems = plagiarism.data?.map((item) => (
+        <SideBarItemWithIcon
+            key={item.id}
+            title={item.name}
+            icon={faFileAlt}
+            to={`${url}/${item.id}`}
+        />
+    )) || [];
+    sidebarItems.unshift(
+        <SideBarItemWithIcon
+            key="basefiles"
+            title={t('plagiarism.basefiles.basefiles')}
+            icon={faBriefcase}
+            to={`${url}/basefiles`}
+        />,
+        <hr />,
+    );
     return (
         <SideBarLayout
             sidebarTitle={t('plagiarism.plagiarismCheck')}
-            sidebarItems={
-                plagiarism.data?.map((item) => (
-                    <SideBarItemWithIcon
-                        key={item.id}
-                        title={item.name}
-                        icon={faFileAlt}
-                        to={`${url}/${item.id}`}
-                    />
-                )) || []
-            }
+            sidebarItems={sidebarItems}
             sidebarButtons={
                 check(selectedSemesterID)
                     ? (
@@ -53,6 +62,9 @@ export function InstructorPlagiarism() {
                 <Switch>
                     <Route path={`${url}/new`} exact>
                         <NewRequestPage />
+                    </Route>
+                    <Route path={`${url}/basefiles`} exact>
+                        <BaseFilesPage />
                     </Route>
                     <Route path={`${url}/:id`}>
                         <RequestPage />

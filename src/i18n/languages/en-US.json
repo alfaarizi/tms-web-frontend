@@ -364,7 +364,11 @@
     "runSuccess": "{{name}}: check is successfully finished",
     "tasksRequired": "Please select at least one task!",
     "studentsRequired": "Please select at least two students!",
-    "noResults": "You have not run a check on this request yet. Click on the 'Run Moss' button!"
+    "noResults": "You have not run a check on this request yet. Click on the 'Run Moss' button!",
+    "basefiles": {
+      "basefiles": "Base files",
+      "about": "These files can be added to plagiarism checks as exempted files. For example, instructor-provided files can be exempted to avoid false alarms when students legitimately use them."
+    }
   },
   "codeCompass": {
     "codeCompass": "CodeCompass",

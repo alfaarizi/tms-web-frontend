@@ -6,6 +6,7 @@ import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
 import { useCourses } from 'hooks/instructor/CourseHooks';
 import { useTaskListForCourse, useUserList } from 'hooks/instructor/TaskHooks';
 import { useCreatePlagiarismMutation } from 'hooks/instructor/PlagiarismHooks';
+import { useBasefilesByTasks } from 'hooks/instructor/PlagiarismBaseFileHooks';
 import { useHistory } from 'react-router';
 import { NewRequestForm, PlagiarismForm } from 'pages/InstructorPlagiarism/components/NewRequestForm';
 
@@ -37,6 +38,7 @@ export function NewRequestPage() {
         courseID, myTasks, semesterFromID, semesterToID, semesterFromID > -1 && semesterToID > -1,
     );
     const users = useUserList(selectedTasks, selectedTasks.length > 0);
+    const basefiles = useBasefilesByTasks(selectedTasks, selectedTasks.length > 0);
 
     // Set semester values after page load
     useEffect(() => {
@@ -71,6 +73,7 @@ export function NewRequestPage() {
                 semesters={semesters.data}
                 tasks={tasksForCourse.data}
                 users={users.data}
+                basefiles={basefiles.data}
             />
         </FormProvider>
     );

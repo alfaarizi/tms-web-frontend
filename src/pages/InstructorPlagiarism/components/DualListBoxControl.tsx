@@ -12,7 +12,13 @@ import {
     faChevronRight,
     faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
-import { Controller } from 'react-hook-form';
+import {
+    Control,
+    Controller,
+    FieldPath,
+    FieldValues,
+    RegisterOptions,
+} from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 const icons = {
@@ -32,19 +38,27 @@ const icons = {
     moveBottom: <FontAwesomeIcon icon={faChevronCircleDown} />,
 };
 
-type Props = {
-    control: any,
-    name: string,
-    rules: any,
-    options: any
+type OptionItem<TValue> = {
+    label: string,
+    value: TValue,
+    disabled?: boolean,
+    title?: string,
 }
 
-export function DualListBoxControl({
+type Props<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>> = {
+    control: Control<TFieldValues, object>,
+    name: TName,
+    rules?: Omit<RegisterOptions<TFieldValues, TName>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>,
+    // TODO instead of string|number, it should be T such that TFieldValues[TName] = Array<T>
+    options: OptionItem<string | number>[],
+}
+
+export function DualListBoxControl<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({
     control,
     name,
     options,
     rules,
-}: Props) {
+}: Props<TFieldValues, TName>) {
     const { t } = useTranslation();
 
     return (
@@ -52,7 +66,7 @@ export function DualListBoxControl({
             name={name}
             control={control}
             rules={rules}
-            defaultValue={[]}
+            defaultValue={([] as any)} // TODO can we express in the type sytem that control[name] should be an array?
             render={({ field }) => (
                 <DualListBox
                     canFilter

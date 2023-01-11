@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ButtonGroup, Media } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile, faDownload } from '@fortawesome/free-solid-svg-icons';
@@ -10,14 +10,16 @@ import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 
 type Props = {
     name: string,
+    children?: ReactNode,
     onDownload: () => void,
     onRemove?: () => void
 }
 
 export function FileListItem({
+    name,
+    children,
     onRemove,
     onDownload,
-    name,
 }: Props) {
     const { t } = useTranslation();
 
@@ -28,6 +30,7 @@ export function FileListItem({
                     <FontAwesomeIcon icon={faFile} size="lg" className="mr-2" />
                     <Media.Body>
                         <strong>{name}</strong>
+                        {children ? (<div>{children}</div>) : null}
                     </Media.Body>
                 </Media>
                 <ButtonGroup>
