@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { Validate } from 'react-hook-form';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 
 /**
@@ -44,7 +43,7 @@ export function useFileSizeValidator() {
      * Wraps validate in a react-hook-form validator function
      * @param files
      */
-    const reactHookFormsValidator: Validate<FileList | null> = (files) => {
+    const reactHookFormsValidator = (files: FileList | null) => {
         if (!ready) {
             throw new Error('Private system info is not available');
         }
