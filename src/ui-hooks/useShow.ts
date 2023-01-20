@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export function useShow() {
+export function useShow(defaultState: boolean = false) {
     const [show, setShow] = useState(false);
+
+    useEffect(() => setShow(defaultState), []);
 
     return {
         show,

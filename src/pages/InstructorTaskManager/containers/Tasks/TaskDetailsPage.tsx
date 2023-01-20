@@ -12,7 +12,7 @@ import { StudentFilesListTab } from 'pages/InstructorTaskManager/containers/Task
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { useShow } from 'ui-hooks/useShow';
 import { TabbedInterface } from 'components/TabbedInterface';
-import { AutoTesterTab } from 'pages/InstructorTaskManager/containers/Tasks/AutoTesterTab';
+import { EvaluatorTab } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/EvaluatorTab';
 import { useUserInfo } from 'hooks/common/UserHooks';
 import { TaskDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskDetails';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
@@ -126,8 +126,8 @@ export const TaskDetailsPage = () => {
                 </Tab>
                 {!!userInfo.data && userInfo.data.isAutoTestEnabled
                     ? (
-                        <Tab eventKey="tester" title={t('task.tester')}>
-                            <AutoTesterTab task={task.data} />
+                        <Tab eventKey="tester" title={t('task.evaluator.tabName')}>
+                            <EvaluatorTab task={task.data} />
                         </Tab>
                     )
                     : null}
