@@ -2,7 +2,28 @@ div.taskGridTableContainer {
     overflow-x: auto;
     overflow-y: visible;
     min-height: 400px;
+    table-layout: fixed;
+
 }
+
+.sticky tbody:nth-child(even) tr:nth-child(odd) td:nth-child(-n+2) {
+    background-color: #f4f4f4;
+    outline: 1px solid #e9ecef;
+    border: none;
+    outline-offset: -1px;
+}
+
+.sticky tbody tr:hover td {
+    background-color: #EFEFEF !important;
+}
+
+.sticky tbody:nth-child(even) tr:nth-child(even) td:nth-child(-n+2) {
+    background-color: white;
+    outline: 1px solid #e9ecef;
+    border: none;
+    outline-offset: -1px;
+}
+
 
 .taskGridDropdown > button,
 .taskGridCellButton {
@@ -12,9 +33,6 @@ div.taskGridTableContainer {
     font-weight: bold;
 }
 
-td.studentNameCell {
-    min-width: 170px;
-}
 
 th.taskNameCell {
     text-align: center;
@@ -25,4 +43,18 @@ th.taskNameCell > span {
     transform: rotate(180deg);
     writing-mode: vertical-rl;
     white-space: nowrap;
+}
+
+
+.stickyHead {
+    min-width: 170px;
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+.outlines {
+    outline: 1px solid #e9ecef;
+    border: none;
+    outline-offset: -1px;
 }
