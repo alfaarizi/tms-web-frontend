@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { TaskGridCellButton } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridCellButton';
 import { User } from 'resources/common/User';
@@ -22,13 +22,23 @@ type Props = {
  */
 export function TaskGridTableBody({ getStudentFile, students, taskList }: Props) {
     const rows: JSX.Element[] = [];
+    const ref = useRef<HTMLTableCellElement>(null);
+
+    const [widthForLeft, setWidthForLeft] = useState<number>();
+
+    useEffect(() => {
+        if (ref.current != null) {
+            setWidthForLeft(ref.current.offsetWidth);
+        }
+    }, []);
+
     students.forEach((student) => {
         const row = (
             <tr key={student.id}>
-                <td className={styles.studentNameCell}>
+                <td ref={ref} className={styles.stickyHead}>
                     {student.name}
                 </td>
-                <td>
+                <td style={{ left: widthForLeft }} className={styles.stickyHead}>
                     {student.neptun}
                 </td>
                 {taskList.map((task) => {

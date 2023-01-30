@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -6,6 +6,7 @@ import { TaskGridHeaderDropdown } from 'pages/InstructorTaskManager/components/G
 import { GridTask } from 'resources/instructor/GridTask.php';
 import { DownloadAllParams, ExportSpreadsheetParams } from 'hooks/instructor/StudentFileHooks';
 import { TaskNameCell } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskNameCell';
+import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 
 type Props = {
     categorizedTasks: GridTask[][],
@@ -26,6 +27,14 @@ export function TaskGridTableHeader({
     categorizedTasks, onDownloadAll, onExportSpreadsheet, taskList,
 }: Props) {
     const { t } = useTranslation();
+    const ref = useRef<HTMLTableCellElement>(null);
+    const [widthForLeft, setWidthForLeft] = useState<number>();
+
+    useEffect(() => {
+        if (ref.current != null) {
+            setWidthForLeft(ref.current.offsetWidth);
+        }
+    }, []);
 
     const headerCategories = categorizedTasks.map((category) => (
         <th
@@ -55,15 +64,34 @@ export function TaskGridTableHeader({
     return (
         <thead className="text-center">
             <tr>
-                <th className="align-middle" colSpan={2} rowSpan={2}>{t('common.students')}</th>
+                <th
+                    className={[styles.stickyHead, styles.outlines].join(' ')}
+                    id="students"
+                    colSpan={2}
+                    rowSpan={2}
+                    style={{ backgroundColor: 'white' }}
+                >
+                    {t('common.students')}
+                </th>
                 {headerCategories}
             </tr>
             <tr>
                 {headerDropdowns}
             </tr>
             <tr>
-                <th>{t('common.name')}</th>
-                <th>{t('common.neptun')}</th>
+                <th
+                    ref={ref}
+                    style={{ backgroundColor: 'white' }}
+                    className={[styles.stickyHead, styles.outlines].join(' ')}
+                >
+                    {t('common.name')}
+                </th>
+                <th
+                    style={{ left: widthForLeft, backgroundColor: 'white' }}
+                    className={[styles.stickyHead, styles.outlines].join(' ')}
+                >
+                    {t('common.neptun')}
+                </th>
                 {headerTasks}
             </tr>
         </thead>

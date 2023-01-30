@@ -17,7 +17,12 @@ export function TaskGridTableCard({ children }: Props) {
     return (
         <CustomCard>
             <div className={styles.taskGridTableContainer}>
-                <Table className="w-auto" size="sm" hover striped bordered>
+                <Table
+                    className={['w-auto', styles.sticky].join(' ')}
+                    size="sm"
+                    striped
+                    bordered
+                >
                     {children}
                 </Table>
             </div>
