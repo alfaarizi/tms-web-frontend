@@ -1,5 +1,5 @@
 # Default image (https://hub.docker.com/_/node)
-image: node:12.22-bullseye
+image: node:18-bullseye
 
 # Stages: lint -> test -> deploy
 stages:
@@ -33,6 +33,28 @@ build:
     - npm ci
   script:
     - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+
+build_staging:
+  extends: build
+  script:
+    - echo "$CD_STAGING_ENV" > .env.production.local
+    - echo "$CD_BRANDING" > public/branding.json
+    - npm run build
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PROJECT_NAMESPACE == "tms-elte"'
+
+build_production:
+  extends: build
+  script:
+    - echo "$CD_PRODUCTION_ENV" > .env.production.local
+    - echo "$CD_BRANDING" > public/branding.json
+    - npm run build
+  rules:
+    - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v[^-]*$/ && $CI_PROJECT_NAMESPACE == "tms-elte"'
 
 # Deployment over SSH
 .deploy:
@@ -40,31 +62,28 @@ build:
   image: ubuntu:20.04
   variables:
     DEPLOY_PATH: /var/www/html
+    TEMP_PATH: /tmp/tms_frontend_react_$CI_COMMIT_SHORT_SHA/
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh-add <(echo "$CD_PRIVATE_KEY")
+    - ssh -P22 gitlab-deployer@tms.inf.elte.hu "rm -rf $TEMP_PATH"
+    - ssh -P22 gitlab-deployer@tms.inf.elte.hu "mkdir -p $TEMP_PATH/new"
+    - scp -P22 -r build gitlab-deployer@tms.inf.elte.hu:$TEMP_PATH/new
+    - ssh -P22 gitlab-deployer@tms.inf.elte.hu "mv $DEPLOY_PATH $TEMP_PATH/old && mv $TEMP_PATH/new/build $DEPLOY_PATH"
+    - ssh -P22 gitlab-deployer@tms.inf.elte.hu "rm -rf $TEMP_PATH"
 
 # Deployment to staging environment of ELTE
 # All pushes on develop
 deploy_staging:
   extends: .deploy
+  dependencies:
+    - build_staging
   variables:
     DEPLOY_PATH: /var/www/tms_dev/frontend-react/
-  script:
-    - ssh-add <(echo "$CD_PRIVATE_KEY")
-    - |
-      ssh -p22 gitlab-deployer@tms.inf.elte.hu << CMD
-        set -e
-        set -x
-        umask 002
-        cd $DEPLOY_PATH
-        git status
-        git pull
-        npm ci
-        npm run build
-      CMD
   environment:
     name: staging
     url: https://tms.inf.elte.hu/dev/
@@ -75,22 +94,10 @@ deploy_staging:
 # All v* tags, excluding prereleases
 deploy_production:
   extends: .deploy
+  dependencies:
+    - build_production
   variables:
     DEPLOY_PATH: /var/www/tms/frontend-react/
-  script:
-    - ssh-add <(echo "$CD_PRIVATE_KEY")
-    - |
-      ssh -p22 gitlab-deployer@tms.inf.elte.hu << CMD
-        set -e
-        set -x
-        umask 002
-        cd $DEPLOY_PATH
-        git status
-        git fetch origin
-        git checkout tags/$CI_COMMIT_TAG
-        npm ci
-        npm run build
-      CMD
   environment:
     name: production
     url: https://tms.inf.elte.hu/
