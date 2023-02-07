@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.8.2...v2.9.0) (2023-02-07)
+
+
+### Features
+
+* Always show students' names and neptun codes on the grid view ([6c8dd88](https://gitlab.com/tms-elte/frontend-react/commit/6c8dd888c8129ed4f34e2f523b864f8666364475))
+* Plagiarism basefile support ([163769d](https://gitlab.com/tms-elte/frontend-react/commit/163769de709a0c0cb8b6ad0317068f64e108de80))
+* User Interface for personal notes ([51ceaf2](https://gitlab.com/tms-elte/frontend-react/commit/51ceaf22d09fef25c214c946d289e163a6a83e62))
+
+
+### Bug Fixes
+
+* Build errors after the React Hook From package is updated ([2bc3e03](https://gitlab.com/tms-elte/frontend-react/commit/2bc3e0360e3e515406834af1ba72a9fceca99db9))
+
 ### [2.8.2](https://gitlab.com/tms-elte/frontend-react/compare/v2.8.1...v2.8.2) (2022-11-11)
 
 
