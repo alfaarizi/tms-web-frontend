@@ -1,6 +1,8 @@
 # Task Manager System - React Client
 
-This project was bootstrapped with [Create React App](https://create-react-app.dev/)
+[![pipeline status](https://gitlab.com/tms-elte/frontend-react/badges/develop/pipeline.svg)](https://gitlab.com/tms-elte/frontend-react/-/commits/develop)
+
+This project is the web client for <abbr title="Task Management System">TMS</abbr>, an assignment management and plagiarism detection software. The project is mainly written in [TypeScript](https://www.typescriptlang.org/) and based on the [React library](https://reactjs.org/).
 
 ## Requirements
 
@@ -76,11 +78,11 @@ Also, you should provide type definitions to `src/react-app-env.d.ts`.
 
 ## Branding
 
-You may create a `public/branding.json` configuration file based on the provided 
+You may create a `public/branding.json` configuration file based on the provided
 sample in `src/branding.dist.json`, to define the branding information of your
 TMS instance (e.g. organization name).
 
-# Dependencies
+## Dependencies
 
 * [TypeScript](https://www.typescriptlang.org/)
 * [React](https://reactjs.org/)
@@ -99,3 +101,10 @@ TMS instance (e.g. organization name).
 * [Luxon](https://moment.github.io/luxon/)
 * [semver](https://github.com/npm/node-semver)
 
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on issue policies, and the process for contributing to the development.
+
+## License
+
+This project is licensed under the BSD License - see the [LICENSE.md](LICENSE.md) file for details.
