@@ -74,6 +74,7 @@ export const TaskPage = () => {
                 file: files[0],
             };
             await uploadMutation.mutateAsync(data);
+            setUploadErrorMsg(null);
         } catch (e) {
             if (e instanceof ServerSideValidationError) {
                 setUploadErrorMsg(e.body.file[0]);
