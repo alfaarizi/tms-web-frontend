@@ -12,7 +12,7 @@ import {
 import { ToggleCard } from 'components/ToggleCard';
 import { TestCaseList } from 'pages/InstructorTaskManager/components/Tasks/TestCasesList';
 import {
-    useCreateTestCaseMutation,
+    useCreateTestCaseMutation, useExportTestCases, useImportTestCasesMutation,
     useRemoveTestCaseMutation,
     useTestCases,
     useUpdateTestCaseMutation,
@@ -32,6 +32,7 @@ import {
 } from 'hooks/instructor/InstructorFileHooks';
 import { InstructorFilesUpload } from 'resources/instructor/InstructorFilesUpload';
 import { getFirstError } from 'utils/getFirstError';
+import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
 
 type Props = {
     task: Task
@@ -67,6 +68,9 @@ export function AutoTesterTab({ task }: Props) {
     const removeTestCaseMutation = useRemoveTestCaseMutation();
     const showNewTestCaseModal = useShow();
     const [testCaseToEdit, setTestCaseToEdit] = useState<TestCase | null>(null);
+    const exportTestCases = useExportTestCases();
+    const importTestCasesMutation = useImportTestCasesMutation(task.id);
+    const [uploadErrorMsg, setUploadErrorMsg] = useState<string | null>(null);
 
     // Turn testing on/off
     const handleToggle = () => {
@@ -159,8 +163,20 @@ export function AutoTesterTab({ task }: Props) {
         }
     };
 
+    const handleTestCasesFileUpload = async (files: File[]) => {
+        try {
+            await importTestCasesMutation.mutateAsync(files[0]);
+            setUploadErrorMsg(null);
+        } catch (e) {
+            if (e instanceof ServerSideValidationError) {
+                setUploadErrorMsg(getFirstError(e.body));
+            }
+        }
+    };
+
     useEffect(() => {
         uploadTestFileMutation.reset();
+        importTestCasesMutation.reset();
     }, [task.id]);
 
     if (!testFiles.data) {
@@ -237,13 +253,26 @@ export function AutoTesterTab({ task }: Props) {
             {/* Display test cases */}
             {(task.autoTest && task.appType !== 'Web')
                 ? (
-                    <TestCaseList
-                        testCases={testCases.data}
-                        onNew={showNewTestCaseModal.toShow}
-                        onEdit={handleTestCaseEditShow}
-                        onDelete={handleTestCaseDelete}
-                        isActualSemester={actualSemester.check(task.semesterID)}
-                    />
+                    <>
+                        <TestCaseList
+                            task={task}
+                            testCases={testCases.data}
+                            onNew={showNewTestCaseModal.toShow}
+                            onEdit={handleTestCaseEditShow}
+                            onDelete={handleTestCaseDelete}
+                            onExportTestCases={exportTestCases.download}
+                            isActualSemester={actualSemester.check(task.semesterID)}
+                        />
+                        <FileUpload
+                            multiple={false}
+                            loading={importTestCasesMutation.isLoading}
+                            onUpload={handleTestCasesFileUpload}
+                            errorMessages={uploadErrorMsg ? [uploadErrorMsg] : undefined}
+                            successCount={importTestCasesMutation.isSuccess ? 1 : 0}
+                            accept=".xls,.csv"
+                            hintMessage={t('task.autoTester.testCaseUpload')}
+                        />
+                    </>
                 ) : null}
 
             {/* Modal to create new test case */}

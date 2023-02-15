@@ -269,7 +269,8 @@
         "Web": "Web"
       },
       "port": "Port",
-      "portHint": "Exposed port of the webserver running in the Docker container"
+      "portHint": "Exposed port of the webserver running in the Docker container",
+      "testCaseUpload": "You can import the list of test cases from XLS and CSV files. Important: the existing test cases will be discarded after the import!"
     },
     "exec": {
       "startUp": "Start web app",
