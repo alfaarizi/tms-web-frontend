@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as TestCasesService from 'api/instructor/TestCasesService';
 import { TestCase } from 'resources/instructor/TestCase';
+import { useDownloader } from 'hooks/common/useDownloader';
+import { ExportSpreadsheetParams } from 'hooks/instructor/StudentFileHooks';
 
 export const QUERY_KEY = 'instructor/test-cases';
 
@@ -56,4 +58,26 @@ export function useRemoveTestCaseMutation() {
             }
         },
     });
+}
+
+export function useExportTestCases() {
+    return useDownloader(
+        ({ taskID, format }: ExportSpreadsheetParams) => TestCasesService.exportTestCases(taskID, format),
+    );
+}
+
+export function useImportTestCasesMutation(taskID : number) {
+    const queryClient = useQueryClient();
+
+    return useMutation<TestCase[], Error, File>(
+        (file : File) => TestCasesService.importTestCases(taskID, file), {
+            onSuccess: (data) => {
+                const key = [QUERY_KEY, { taskID }];
+                const oldList = queryClient.getQueryData<TestCase[]>(key);
+                if (oldList) {
+                    queryClient.setQueryData(key, data);
+                }
+            },
+        },
+    );
 }

@@ -9,20 +9,27 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { TestCaseListItem } from 'pages/InstructorTaskManager/components/Tasks/TestCaseListitem';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { Task } from 'resources/instructor/Task';
+import { TestCaseHeaderDropdown } from 'pages/InstructorTaskManager/components/Tasks/TestCaseHeaderDropdown';
+import { ExportSpreadsheetParams } from 'hooks/instructor/StudentFileHooks';
 
 type Props = {
+    task: Task,
     testCases?: TestCase[],
     onNew: () => void,
     onEdit: (testCase: TestCase) => void,
     onDelete: (testCase: TestCase) => void,
+    onExportTestCases: (fileName: string, funcParams: ExportSpreadsheetParams) => void,
     isActualSemester: boolean
 }
 
 export function TestCaseList({
+    task,
     testCases,
     onNew,
     onEdit,
     onDelete,
+    onExportTestCases,
     isActualSemester,
 }: Props) {
     const { t } = useTranslation();
@@ -36,6 +43,7 @@ export function TestCaseList({
                 {isActualSemester
                     ? (
                         <ButtonGroup>
+                            <TestCaseHeaderDropdown task={task} onExportTestCases={onExportTestCases} />
                             <ToolbarButton icon={faPlus} text={t('common.add')} onClick={onNew} />
                         </ButtonGroup>
                     )
