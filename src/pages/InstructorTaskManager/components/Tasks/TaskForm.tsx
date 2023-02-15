@@ -161,6 +161,7 @@ export function TaskForm({
                     ? (
                         <Form.Group>
                             <Form.Check
+                                id="enable-version-control"
                                 type="checkbox"
                                 label={t('task.isVersionControlled')}
                                 {...register('isVersionControlled')}

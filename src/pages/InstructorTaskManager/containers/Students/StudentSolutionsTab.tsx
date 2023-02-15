@@ -71,7 +71,21 @@ export function StudentSolutionsTab({
                         <DataRow label={t('task.notes')}>
                             <MultiLineTextBlock text={file.notes} />
                         </DataRow>
-                        {file.gitRepo ? <DataRow label={t('task.git.gitRepo')}>{file.gitRepo}</DataRow> : null}
+                        {file.gitRepo
+                            ? (
+                                <DataRow label={t('task.git.gitRepo')}>
+                                    {file.isVersionControlled ? (
+                                        <kbd>
+                                            git clone
+                                            {' '}
+                                            {file.gitRepo}
+                                            {' '}
+                                            {user.neptun}
+                                        </kbd>
+                                    ) : file.gitRepo}
+                                </DataRow>
+                            )
+                            : null}
                     </>
                 )}
             />

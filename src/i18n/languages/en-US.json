@@ -286,7 +286,12 @@
     "git": {
       "gitRepo": "Git Repository",
       "path": "Path",
-      "usage": "Usage"
+      "usage": "Usage",
+      "taskLevelGitRepo": "Task-level git repository",
+      "taskLevelGitRepoNotAvailable": "Task-level repository is not available, because this task has been created by an older version of TMS.",
+      "cloneRepo": "Clone repository",
+      "updateAfterStudentListChanged": "Update the repository after the list of students has changed",
+      "getNewSolutions": "Get new solutions"
     },
     "sorting": {
       "sorting": "Sort by",

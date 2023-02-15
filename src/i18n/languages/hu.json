@@ -288,7 +288,12 @@
     "git": {
       "gitRepo": "Git tároló",
       "path": "Útvonal",
-      "usage": "Használat"
+      "usage": "Használat",
+      "taskLevelGitRepo": "Feladatszintű Git-tároló",
+      "taskLevelGitRepoNotAvailable": "A feladatszintű Git-tároló nem érhető el ehhez a feladathoz, mivel egy régebbi TMS-verzióval készült.",
+      "cloneRepo": "Tároló klónozása",
+      "updateAfterStudentListChanged": "Tároló frissítése a névsor változása után",
+      "getNewSolutions": "Új megoldások letöltése"
     },
     "sorting": {
       "sorting": "Rendezés",

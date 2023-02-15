@@ -21,6 +21,8 @@ import { SpreadsheetFormat } from 'api/instructor/StudentFilesService';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 import { StudentFile } from 'resources/instructor/StudentFile';
+import { useUserInfo } from 'hooks/common/UserHooks';
+import { TaskLevelRepoDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskLevelRepoDetails';
 
 type Props = {
     task: Task
@@ -38,6 +40,7 @@ export function StudentFilesListTab({
     task, handleStartCodeCompass, handleStopCodeCompass,
 }: Props) {
     const { t } = useTranslation();
+    const userInfo = useUserInfo();
     const studentFiles = useStudentFilesForTask(task.id);
     const exportSpreadsheet = useExportSpreadsheet();
     const downloadAll = useDownloadAll();
@@ -116,88 +119,108 @@ export function StudentFilesListTab({
     }
 
     return (
-        <CustomCard>
-            <CustomCardHeader>
-                <CustomCardTitle>{t('task.solutions')}</CustomCardTitle>
-                {sortedStudentFiles.length !== 0 ? (
-                    <ButtonGroup>
-                        <ToolbarDropdown text={t('common.export')} icon={faFileExport}>
-                            <DropdownItem onSelect={() => handleExportSpreadsheet('xls')}>
-                                <FontAwesomeIcon icon={faFileExcel} />
-                                {' XLS'}
-                            </DropdownItem>
-                            <DropdownItem onSelect={() => handleExportSpreadsheet('csv')}>
-                                <FontAwesomeIcon icon={faFileCsv} />
-                                {' CSV'}
-                            </DropdownItem>
-                        </ToolbarDropdown>
-                        <ToolbarDropdown text={t('task.downloadSolutions')} icon={faFileArchive}>
-                            <DropdownItem onSelect={() => handleDownloadAll(false)}>
-                                <FontAwesomeIcon icon={faListUl} />
-                                {' '}
-                                {t('task.downloadAll')}
-                            </DropdownItem>
-                            <DropdownItem onSelect={() => handleDownloadAll(true)}>
-                                <FontAwesomeIcon icon={faFilterCircleXmark} />
-                                {' '}
-                                {t('task.downloadOnlyUngraded')}
-                            </DropdownItem>
-                        </ToolbarDropdown>
-                        <ToolbarDropdown text={t('task.sorting.sorting')} icon={faSort}>
-                            <DropdownItem
-                                onSelect={() => handleSorting(SortType.ByUngradedFirst)}
-                                active={sortedBy === SortType.ByUngradedFirst}
-                            >
-                                {t('task.sorting.byUngradedFirst')}
-                            </DropdownItem>
-                            <DropdownItem
-                                onSelect={() => handleSorting(SortType.ByName)}
-                                active={sortedBy === SortType.ByName}
-                            >
-                                {t('task.sorting.byName')}
-                            </DropdownItem>
-                            <DropdownItem
-                                onSelect={() => handleSorting(SortType.ByUploadTime)}
-                                active={sortedBy === SortType.ByUploadTime}
-                            >
-                                {t('task.sorting.byUploadTime')}
-                            </DropdownItem>
-                        </ToolbarDropdown>
-                    </ButtonGroup>
-                ) : null}
-            </CustomCardHeader>
+        <>
+            {userInfo.data?.isVersionControlEnabled && task.isVersionControlled
+                ? <TaskLevelRepoDetails url={task.taskLevelGitRepo} />
+                : null}
 
-            <StudentFilesList
-                semesterID={task.semesterID}
-                files={sortedStudentFiles}
-                task={task}
-                renderItem={(file) => (
-                    <>
-                        <DataRow label={t('task.uploader')}>
-                            {`${file.uploader.name} (${file.uploader.neptun})`}
-                        </DataRow>
-                        <DataRow label={t('task.uploadTime')}>
-                            <GroupDateTime value={file.uploadTime} timezone={task.group?.timezone || ''} />
-                        </DataRow>
-                        <DataRow label={t('task.delay')}>
-                            {file.delay}
-                        </DataRow>
-                        <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
-                        <DataRow label={t('passwordProtected.verified')}>
-                            {file.verified ? t('common.yes') : t('common.no')}
-                        </DataRow>
-                        <DataRow label={t('task.uploadCount')}>{file.uploadCount}</DataRow>
-                        <DataRow label={t('task.grade')}>{file.grade}</DataRow>
-                        <DataRow label={t('task.graderName')}>{file.graderName}</DataRow>
-                        <DataRow label={t('task.notes')}>
-                            <MultiLineTextBlock text={file.notes} />
-                        </DataRow>
-                        {file.gitRepo ? <DataRow label={t('task.git.gitRepo')}>{file.gitRepo}</DataRow> : null}
-                    </>
-                )}
-                handleStartCodeCompass={handleStartCodeCompass}
-                handleStopCodeCompass={handleStopCodeCompass}
-            />
-        </CustomCard>
+            <CustomCard>
+                <CustomCardHeader>
+                    <CustomCardTitle>{t('task.solutions')}</CustomCardTitle>
+                    {sortedStudentFiles.length !== 0 ? (
+                        <ButtonGroup>
+                            <ToolbarDropdown text={t('common.export')} icon={faFileExport}>
+                                <DropdownItem onSelect={() => handleExportSpreadsheet('xls')}>
+                                    <FontAwesomeIcon icon={faFileExcel} />
+                                    {' XLS'}
+                                </DropdownItem>
+                                <DropdownItem onSelect={() => handleExportSpreadsheet('csv')}>
+                                    <FontAwesomeIcon icon={faFileCsv} />
+                                    {' CSV'}
+                                </DropdownItem>
+                            </ToolbarDropdown>
+                            <ToolbarDropdown text={t('task.downloadSolutions')} icon={faFileArchive}>
+                                <DropdownItem onSelect={() => handleDownloadAll(false)}>
+                                    <FontAwesomeIcon icon={faListUl} />
+                                    {' '}
+                                    {t('task.downloadAll')}
+                                </DropdownItem>
+                                <DropdownItem onSelect={() => handleDownloadAll(true)}>
+                                    <FontAwesomeIcon icon={faFilterCircleXmark} />
+                                    {' '}
+                                    {t('task.downloadOnlyUngraded')}
+                                </DropdownItem>
+                            </ToolbarDropdown>
+                            <ToolbarDropdown text={t('task.sorting.sorting')} icon={faSort}>
+                                <DropdownItem
+                                    onSelect={() => handleSorting(SortType.ByUngradedFirst)}
+                                    active={sortedBy === SortType.ByUngradedFirst}
+                                >
+                                    {t('task.sorting.byUngradedFirst')}
+                                </DropdownItem>
+                                <DropdownItem
+                                    onSelect={() => handleSorting(SortType.ByName)}
+                                    active={sortedBy === SortType.ByName}
+                                >
+                                    {t('task.sorting.byName')}
+                                </DropdownItem>
+                                <DropdownItem
+                                    onSelect={() => handleSorting(SortType.ByUploadTime)}
+                                    active={sortedBy === SortType.ByUploadTime}
+                                >
+                                    {t('task.sorting.byUploadTime')}
+                                </DropdownItem>
+                            </ToolbarDropdown>
+                        </ButtonGroup>
+                    ) : null}
+                </CustomCardHeader>
+
+                <StudentFilesList
+                    semesterID={task.semesterID}
+                    files={sortedStudentFiles}
+                    task={task}
+                    renderItem={(file) => (
+                        <>
+                            <DataRow label={t('task.uploader')}>
+                                {`${file.uploader.name} (${file.uploader.neptun})`}
+                            </DataRow>
+                            <DataRow label={t('task.uploadTime')}>
+                                <GroupDateTime value={file.uploadTime} timezone={task.group?.timezone || ''} />
+                            </DataRow>
+                            <DataRow label={t('task.delay')}>
+                                {file.delay}
+                            </DataRow>
+                            <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
+                            <DataRow label={t('passwordProtected.verified')}>
+                                {file.verified ? t('common.yes') : t('common.no')}
+                            </DataRow>
+                            <DataRow label={t('task.uploadCount')}>{file.uploadCount}</DataRow>
+                            <DataRow label={t('task.grade')}>{file.grade}</DataRow>
+                            <DataRow label={t('task.graderName')}>{file.graderName}</DataRow>
+                            <DataRow label={t('task.notes')}>
+                                <MultiLineTextBlock text={file.notes} />
+                            </DataRow>
+                            {file.gitRepo
+                                ? (
+                                    <DataRow label={t('task.git.gitRepo')}>
+                                        {file.isVersionControlled ? (
+                                            <kbd>
+                                                git clone
+                                                {' '}
+                                                {file.gitRepo}
+                                                {' '}
+                                                {file.uploader.neptun}
+                                            </kbd>
+                                        ) : file.gitRepo}
+                                    </DataRow>
+                                )
+                                : null}
+                        </>
+                    )}
+                    handleStartCodeCompass={handleStartCodeCompass}
+                    handleStopCodeCompass={handleStopCodeCompass}
+                />
+            </CustomCard>
+        </>
     );
 }

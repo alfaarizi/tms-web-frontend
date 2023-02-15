@@ -29,4 +29,5 @@ export interface Task {
     semester?: Semester;
     canvasUrl?: string;
     port?: number;
+    taskLevelGitRepo?: string;
 }

@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { DataRow } from 'components/DataRow';
 
 type Props = {
     path: string,
@@ -25,8 +24,22 @@ export function GitInfo({
                 <CustomCardTitle>{t('task.git.gitRepo')}</CustomCardTitle>
             </CustomCardHeader>
             {passwordProtected ? <p>{t('task.passwordProtectedGitPush')}</p> : null}
-            <DataRow label={t('task.git.path')}>{path}</DataRow>
-            <DataRow label={t('task.git.usage')}>{usage}</DataRow>
+            <p>
+                <strong>
+                    {t('task.git.path')}
+                    :
+                </strong>
+                <br />
+                <kbd>{path}</kbd>
+            </p>
+            <p className="mb-0">
+                <strong>
+                    {t('task.git.usage')}
+                    :
+                </strong>
+                <br />
+                <kbd>{usage}</kbd>
+            </p>
         </CustomCard>
     );
 }
