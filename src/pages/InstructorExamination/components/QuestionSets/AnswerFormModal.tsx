@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Form, Modal } from 'react-bootstrap';
@@ -8,6 +8,7 @@ import { MarkdownFormControl } from 'components/MarkdownFormControl';
 import { ExamAnswer } from 'resources/instructor/ExamAnswer';
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { InsertFunc } from 'components/ReactMdeWithCommands';
+import { ConfirmModal } from 'components/Modals/ConfirmModal';
 
 type Props = {
     title: string,
@@ -35,11 +36,13 @@ export function AnswerFormModal({
         register,
         setError,
         setValue,
-
+        reset,
         formState: {
-            errors,
+            errors, isDirty, dirtyFields,
         },
     } = useForm<ExamAnswer>();
+
+    const [confirmDialog, setConfirmDialog] = useState(false);
 
     useEffect(() => {
         if (textError) {
@@ -48,6 +51,7 @@ export function AnswerFormModal({
     }, [textError]);
 
     const handleShow = () => {
+        reset();
         // Set edit data or clear form fields
         if (editData) {
             setValue('text', editData.text);
@@ -62,37 +66,58 @@ export function AnswerFormModal({
         onSave(data);
     });
 
+    const handleGraderExiting = () => {
+        if (isDirty || (Object.keys(dirtyFields).length !== 0)) {
+            setConfirmDialog(true);
+        } else {
+            onCancel();
+        }
+    };
+
+    const onConfirm = () => {
+        setConfirmDialog(false);
+        onCancel();
+    };
+
     return (
-        <Modal show={show} onHide={onCancel} onShow={handleShow} animation size="lg">
-            <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={onSubmit}>
-                    <Form.Group>
-                        <MarkdownFormControl
-                            renderGallery={renderGallery}
-                            name="text"
-                            control={control}
-                            rules={{
-                                required: t('common.fieldRequired')
-                                    .toString(),
-                            }}
-                        />
-                        {errors.text && <FormError message={errors.text.message} />}
-                    </Form.Group>
+        <>
+            <Modal show={show} onHide={handleGraderExiting} onShow={handleShow} animation size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>{title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={onSubmit}>
+                        <Form.Group>
+                            <MarkdownFormControl
+                                renderGallery={renderGallery}
+                                name="text"
+                                control={control}
+                                rules={{
+                                    required: t('common.fieldRequired')
+                                        .toString(),
+                                }}
+                            />
+                            {errors.text && <FormError message={errors.text.message} />}
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Form.Check
-                            type="checkbox"
-                            label={t('examQuestions.correct')}
-                            {...register('correct')}
-                        />
-                    </Form.Group>
-
-                    <FormButtons onCancel={onCancel} />
-                </Form>
-            </Modal.Body>
-        </Modal>
+                        <Form.Group>
+                            <Form.Check
+                                type="checkbox"
+                                label={t('examQuestions.correct')}
+                                {...register('correct')}
+                            />
+                        </Form.Group>
+                        <FormButtons onCancel={handleGraderExiting} />
+                    </Form>
+                </Modal.Body>
+            </Modal>
+            <ConfirmModal
+                description={t('common.confirmDiscard')}
+                isConfirmDialogOpen={confirmDialog}
+                onCancel={() => { setConfirmDialog(false); }}
+                onConfirm={onConfirm}
+                title={t('common.areYouSure')}
+            />
+        </>
     );
 }
