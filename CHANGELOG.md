@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.10.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.9.1...v2.10.0) (2023-03-06)
+
+
+### Features
+
+* Implement confirm close functionality for all modals with forms ([6cc70d6](https://gitlab.com/tms-elte/frontend-react/commit/6cc70d6f8c4b0afa3d15002b2616a2bfe646e39c))
+* Import multiple test cases from csv and xls files ([d1e89e6](https://gitlab.com/tms-elte/frontend-react/commit/d1e89e6c0779d605068348fc3091889037d25e1f))
+* user interface for task-level git repositories ([ea25c99](https://gitlab.com/tms-elte/frontend-react/commit/ea25c9940e8111b74fa2084f0ee97920efacb8e3))
+
 ### [2.9.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.9.0...v2.9.1) (2023-02-10)
 
 
