@@ -40,7 +40,7 @@ export async function download(id: number) {
     return res.data;
 }
 
-export type SpreadsheetFormat = 'xls' | 'csv';
+export type SpreadsheetFormat = 'xlsx' | 'csv';
 
 export async function exportSpreadsheet(taskID: number, format: SpreadsheetFormat) {
     const res = await axiosInstance.get<Blob>('/instructor/student-files/export-spreadsheet', {

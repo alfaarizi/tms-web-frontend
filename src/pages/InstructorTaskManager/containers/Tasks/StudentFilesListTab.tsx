@@ -130,9 +130,9 @@ export function StudentFilesListTab({
                     {sortedStudentFiles.length !== 0 ? (
                         <ButtonGroup>
                             <ToolbarDropdown text={t('common.export')} icon={faFileExport}>
-                                <DropdownItem onSelect={() => handleExportSpreadsheet('xls')}>
+                                <DropdownItem onSelect={() => handleExportSpreadsheet('xlsx')}>
                                     <FontAwesomeIcon icon={faFileExcel} />
-                                    {' XLS'}
+                                    {' XLSX'}
                                 </DropdownItem>
                                 <DropdownItem onSelect={() => handleExportSpreadsheet('csv')}>
                                     <FontAwesomeIcon icon={faFileCsv} />

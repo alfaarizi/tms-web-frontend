@@ -272,7 +272,7 @@
       },
       "port": "Port",
       "portHint": "Docker konténerben futó webszerver port száma",
-      "testCaseUpload": "A tesztesetek listája importálható XLS és CSV állományokból. Fontos: a meglévő tesztesetek elvesznek az importálást követően!"
+      "testCaseUpload": "A tesztesetek listája importálható XLSX és CSV állományokból. Fontos: a meglévő tesztesetek elvesznek az importálást követően!"
     },
     "exec": {
       "startUp": "Webalkalmazás indítása",
