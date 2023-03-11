@@ -269,7 +269,7 @@ export function AutoTesterTab({ task }: Props) {
                             onUpload={handleTestCasesFileUpload}
                             errorMessages={uploadErrorMsg ? [uploadErrorMsg] : undefined}
                             successCount={importTestCasesMutation.isSuccess ? 1 : 0}
-                            accept=".xls,.csv"
+                            accept=".xlsx,.csv"
                             hintMessage={t('task.autoTester.testCaseUpload')}
                         />
                     </>

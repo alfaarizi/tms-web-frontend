@@ -101,9 +101,9 @@ export function TaskGridHeaderDropdown({ onDownloadAll, onExportSpreadsheet, tas
                 {' '}
                 {t('common.export')}
             </Dropdown.Header>
-            <DropdownItem onSelect={() => handleExportSpreadsheet('xls')}>
+            <DropdownItem onSelect={() => handleExportSpreadsheet('xlsx')}>
                 <FontAwesomeIcon icon={faFileExcel} />
-                {' XLS'}
+                {' XLSX'}
             </DropdownItem>
             <DropdownItem onSelect={() => handleExportSpreadsheet('csv')}>
                 <FontAwesomeIcon icon={faFileCsv} />
