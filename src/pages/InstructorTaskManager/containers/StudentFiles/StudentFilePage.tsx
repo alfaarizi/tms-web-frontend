@@ -13,7 +13,6 @@ import {
 } from 'hooks/instructor/StudentFileHooks';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { useUserInfo } from 'hooks/common/UserHooks';
 import { GraderModal } from 'pages/InstructorTaskManager/components/GraderModal';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { DataRow } from 'components/DataRow';
@@ -22,6 +21,7 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 
 type Params = {
     id?: string
@@ -41,8 +41,8 @@ export function StudentFilePage() {
     const showGrader = useShow();
     const actualSemester = useActualSemester();
     const notifications = useNotifications();
-    const userInfo = useUserInfo();
-    const isCodeCompassEnabled = userInfo.data?.isCodeCompassEnabled ?? false;
+    const privateSystemInfo = usePrivateSystemInfoQuery();
+    const isCodeCompassEnabled = privateSystemInfo.data?.isCodeCompassEnabled ?? false;
     const startCodeCompass = useStartCodeCompassMutation(studentFile.data?.taskID || -1);
     const stopCodeCompass = useStopCodeCompassMutation(studentFile.data?.taskID || -1);
 

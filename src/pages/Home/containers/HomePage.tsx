@@ -1,27 +1,27 @@
 import React from 'react';
 import { Redirect } from 'react-router';
-import { useUserInfo } from 'hooks/common/UserHooks';
+import { useUserSettings } from 'hooks/common/UserHooks';
 
 /**
  * Redirects the user to the correct homepage
  * @constructor
  */
 export function HomePage() {
-    const userInfo = useUserInfo();
+    const userSettings = useUserSettings();
 
-    if (!userInfo.data) {
+    if (!userSettings.data) {
         return null;
     }
 
-    if (userInfo.data.isFaculty) {
+    if (userSettings.data.isFaculty) {
         return <Redirect to="/instructor/task-manager" />;
     }
 
-    if (userInfo.data.isStudent) {
+    if (userSettings.data.isStudent) {
         return <Redirect to="/student/task-manager" />;
     }
 
-    if (userInfo.data.isAdmin) {
+    if (userSettings.data.isAdmin) {
         return <Redirect to="/admin/course-manager" />;
     }
 

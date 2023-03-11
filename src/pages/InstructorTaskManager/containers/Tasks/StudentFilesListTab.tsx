@@ -21,7 +21,7 @@ import { SpreadsheetFormat } from 'api/instructor/StudentFilesService';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 import { StudentFile } from 'resources/instructor/StudentFile';
-import { useUserInfo } from 'hooks/common/UserHooks';
+import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { TaskLevelRepoDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskLevelRepoDetails';
 
 type Props = {
@@ -40,7 +40,7 @@ export function StudentFilesListTab({
     task, handleStartCodeCompass, handleStopCodeCompass,
 }: Props) {
     const { t } = useTranslation();
-    const userInfo = useUserInfo();
+    const privateSystemInfo = usePrivateSystemInfoQuery();
     const studentFiles = useStudentFilesForTask(task.id);
     const exportSpreadsheet = useExportSpreadsheet();
     const downloadAll = useDownloadAll();
@@ -120,7 +120,7 @@ export function StudentFilesListTab({
 
     return (
         <>
-            {userInfo.data?.isVersionControlEnabled && task.isVersionControlled
+            {privateSystemInfo.data?.isVersionControlEnabled && task.isVersionControlled
                 ? <TaskLevelRepoDetails url={task.taskLevelGitRepo} />
                 : null}
 

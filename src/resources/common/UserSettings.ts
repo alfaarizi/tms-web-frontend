@@ -6,6 +6,9 @@ export interface UserSettings {
     email: string;
     customEmail: string | null;
     locale: string;
+    isStudent: boolean;
+    isFaculty: boolean;
+    isAdmin: boolean;
     customEmailConfirmed: boolean;
     notificationTarget: NotificationTarget;
 }

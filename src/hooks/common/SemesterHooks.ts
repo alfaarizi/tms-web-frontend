@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
 import * as SemestersService from 'api/common/SemestersService';
 import { Semester } from 'resources/common/Semester';
-import { useUserInfo } from 'hooks/common/UserHooks';
 import { useGlobalContext } from 'context/GlobalContext';
+import { usePrivateSystemInfoQuery } from './SystemHooks';
 
 export const QUERY_KEY = 'semesters';
 
@@ -36,7 +36,7 @@ export function useActualSemester() {
     const {
         data,
         isLoading,
-    } = useUserInfo(true);
+    } = usePrivateSystemInfoQuery(true);
 
     const check = (semesterID: number | undefined | null) => {
         if (semesterID === null || semesterID === undefined) {

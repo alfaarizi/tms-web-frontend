@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { GraderModal } from 'pages/InstructorTaskManager/components/GraderModal';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { useUserInfo } from 'hooks/common/UserHooks';
 import { useDownloadStudentFile, useGradeMutation } from 'hooks/instructor/StudentFileHooks';
 import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Students/StudentFileListItem';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { Task } from 'resources/instructor/Task';
+import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 
 type Props = {
     files: StudentFile[],
@@ -42,8 +42,8 @@ export function StudentFilesList({
     const downloadfile = useDownloadStudentFile();
     const { t } = useTranslation();
     const notifications = useNotifications();
-    const userInfo = useUserInfo();
-    const isCodeCompassEnabled = userInfo.data?.isCodeCompassEnabled ?? false;
+    const privateSystemInfo = usePrivateSystemInfoQuery();
+    const isCodeCompassEnabled = privateSystemInfo.data?.isCodeCompassEnabled ?? false;
 
     // Download file
     const handleDownload = async (file: StudentFile) => {

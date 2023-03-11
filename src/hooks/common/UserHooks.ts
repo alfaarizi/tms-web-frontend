@@ -4,7 +4,7 @@ import {
 } from 'react-query';
 
 import * as AuthService from 'api/common/AuthService';
-import { UserInfo } from 'resources/common/UserInfo';
+import * as UserSettingsService from 'api/common/UserSettingsService';
 import { MockLogin } from 'resources/common/MockLogin';
 import { axiosInstance } from 'api/axiosInstance';
 import { LoginResponse } from 'resources/common/LoginResponse';
@@ -12,8 +12,8 @@ import { LdapLogin } from 'resources/common/LdapLogin';
 import { useHistory } from 'react-router';
 import { useGlobalContext } from 'context/GlobalContext';
 import { UserSettings } from 'resources/common/UserSettings';
+import { usePrivateSystemInfoQuery, PRIVATE_INFO_QUERY_KEY } from 'hooks/common/SystemHooks';
 
-export const USER_INFO_QUERY_KEY = 'userinfo';
 export const USER_SETTINGS_QUERY_KEY = 'usersettings';
 
 /**
@@ -49,36 +49,26 @@ export function useClientSideLocaleChange() {
 /**
  * Provides information about the current user
  */
-export function useUserInfo(enabled: boolean = true) {
-    const globalContext = useGlobalContext();
+export function useUserSettings(enabled: boolean = true) {
     const clientSideLocale = useClientSideLocaleChange();
 
-    return useQuery<UserInfo>(USER_INFO_QUERY_KEY, () => AuthService.userinfo(), {
+    return useQuery<UserSettings>(USER_SETTINGS_QUERY_KEY, () => UserSettingsService.getSettings(), {
         enabled,
         onSuccess: async (data) => {
             if (!data) {
                 return;
             }
 
-            // Update language based on userinfo
+            // Update language based on user settings
             await clientSideLocale.mutateAsync(data.locale);
-
-            // Set selected semester to actual semester, if it is null
-            if (globalContext.selectedSemester === null) {
-                globalContext.setSelectedSemester(data.actualSemester);
-            }
         },
     });
-}
-
-export function useSettings() {
-    return useQuery<UserSettings>(USER_SETTINGS_QUERY_KEY, () => AuthService.getSettings());
 }
 
 export function useSettingsMutation() {
     const clientSideLocale = useClientSideLocaleChange();
 
-    return useMutation((settings: UserSettings) => AuthService.putSettings(settings), {
+    return useMutation((settings: UserSettings) => UserSettingsService.putSettings(settings), {
         onSuccess: async (_data, settings) => {
             // Also change client-side locale
             await clientSideLocale.mutateAsync(settings.locale);
@@ -87,7 +77,7 @@ export function useSettingsMutation() {
 }
 
 export function useConfirmEmailMutation() {
-    return useMutation((code: string) => AuthService.postConfirmEmail(code));
+    return useMutation((code: string) => UserSettingsService.postConfirmEmail(code));
 }
 
 /**
@@ -95,9 +85,9 @@ export function useConfirmEmailMutation() {
  * @param mutationFn
  */
 export function useBaseLoginMutation<TLoginData>(mutationFn: MutationFunction<LoginResponse, TLoginData>) {
-    const queryClient = useQueryClient();
+    const userSettings = useUserSettings(false);
+    const privateSystemInfo = usePrivateSystemInfoQuery(false);
     const globalContext = useGlobalContext();
-    const clientSideLocale = useClientSideLocaleChange();
 
     return useMutation(mutationFn, {
         retry: false,
@@ -108,12 +98,14 @@ export function useBaseLoginMutation<TLoginData>(mutationFn: MutationFunction<Lo
             axiosInstance.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
             // Set image token in local storage
             localStorage.setItem('imageToken', data.imageToken);
-            // Update userInfo based on response
-            queryClient.setQueryData(USER_INFO_QUERY_KEY, data.userInfo);
-            // Set selected semester
-            globalContext.setSelectedSemester(data.userInfo.actualSemester);
-            // Set locale
-            await clientSideLocale.mutateAsync(data.userInfo.locale);
+            // Load the settings of the current user
+            await userSettings.refetch();
+            const privateInfoData = await privateSystemInfo.refetch();
+
+            // Set selected semester to actual semester, if it is null
+            if (privateInfoData.data && globalContext.selectedSemester === null) {
+                globalContext.setSelectedSemester(privateInfoData.data.actualSemester);
+            }
         },
     });
 }
@@ -143,16 +135,17 @@ export function useLogoutMutation() {
     const localLogout = () => {
         // Remove access token
         axiosInstance.defaults.headers.common.Authorization = '';
-        // Remove all queries expect userInfo, for security reasons
+        // Remove all queries expect user settings, for security reasons
         queryClient.removeQueries({
-            predicate: (query) => query.queryKey !== USER_INFO_QUERY_KEY,
+            predicate: (query) => query.queryKey !== USER_SETTINGS_QUERY_KEY,
         });
         // Reset GlobalContext, for security reasons
         globalContext.resetState();
         // Reset localStorage, this also clears accessTokens
         localStorage.clear();
-        // Set userinfo to null
-        queryClient.setQueryData(USER_INFO_QUERY_KEY, null);
+        // Delete user settings and private info from cache
+        queryClient.setQueryData(USER_SETTINGS_QUERY_KEY, null);
+        queryClient.setQueryData(PRIVATE_INFO_QUERY_KEY, null);
     };
 
     const mutation = useMutation(() => AuthService.logout(), {
