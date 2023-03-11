@@ -68,7 +68,7 @@ export function StudentFileListItem({
                                 <ToolbarButton
                                     onClick={showAutoTesterResults.toShow}
                                     icon={faList}
-                                    text={t('task.autoTester.results')}
+                                    text={t('task.evaluator.results')}
                                     displayTextBreakpoint="none"
                                 />
                             )

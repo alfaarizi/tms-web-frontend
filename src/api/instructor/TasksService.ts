@@ -1,8 +1,6 @@
 import { axiosInstance } from 'api/axiosInstance';
 import { Task } from 'resources/instructor/Task';
-import { TesterFormData } from 'resources/instructor/TesterFormData';
 import { User } from 'resources/common/User';
-import { SetupTester } from 'resources/instructor/SetupTester';
 import { GridTask } from 'resources/instructor/GridTask.php';
 import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
 
@@ -79,46 +77,6 @@ export async function listUsers(ids: number[]) {
     return res.data;
 }
 
-export async function toggleAutoTester(id: number): Promise<number> {
-    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${id}/toggle-auto-tester?fields=autoTest`);
-    return res.data.autoTest;
-}
-
-export async function testerFormData(id: number) {
-    const res = await axiosInstance.get<TesterFormData>(`/instructor/tasks/${id}/tester-form-data`);
-    return res.data;
-}
-
-export async function setupAutoTester(id: number, data: SetupTester) {
-    // Build form data to upload files
-    const formData = new FormData();
-    formData.append('testOS', data.testOS);
-    formData.append('showFullErrorMsg', data.showFullErrorMsg ? '1' : '0');
-    formData.append('imageName', data.imageName || '');
-    formData.append('compileInstructions', data.compileInstructions);
-    formData.append('runInstructions', data.runInstructions);
-    formData.append('reevaluateAutoTest', data.reevaluateAutoTest ? '1' : '0');
-    formData.append('appType', data.appType);
-    if (data.port) {
-        formData.append('port', data.port.toString());
-    }
-
-    if (!!data.files && data.files.length > 0) {
-        for (let i = 0; i < data.files.length; ++i) {
-            formData.append('files[]', data.files[i]);
-        }
-    }
-
-    const res = await axiosInstance.post<Task>(`/instructor/tasks/${id}/setup-auto-tester?expand=group`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    });
-    // The api returns a string instead of number
-    res.data.showFullErrorMsg = parseInt(res.data.showFullErrorMsg.toString(), 10);
-    return res.data;
-}
-
 export async function setupCodeCompassParameters(id: number, data: CodeCompassParameters) {
     const formData = new FormData();
     formData.append('codeCompassCompileInstructions', data.compileInstructions);
@@ -129,10 +87,5 @@ export async function setupCodeCompassParameters(id: number, data: CodeCompassPa
             'Content-Type': 'multipart/form-data',
         },
     });
-    return res.data;
-}
-
-export async function updateDockerImage(id: number) {
-    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${id}/update-docker-image`);
     return res.data;
 }

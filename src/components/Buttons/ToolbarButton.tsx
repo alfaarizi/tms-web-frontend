@@ -38,7 +38,7 @@ export function ToolbarButton({
     if (isLoading) {
         displayedIcon = <Spinner animation="border" size="sm" />;
     } else {
-        displayedIcon = <FontAwesomeIcon icon={icon} />;
+        displayedIcon = <FontAwesomeIcon className="fa-fw" icon={icon} />;
     }
 
     return (

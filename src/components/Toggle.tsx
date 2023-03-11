@@ -19,7 +19,7 @@ type Props = {
  * @param label Label to display
  * @constructor
  */
-export function ToggleCard({
+export function Toggle({
     onToggle,
     status,
     disabled,
@@ -27,15 +27,13 @@ export function ToggleCard({
     toggleID,
 }: Props) {
     return (
-        <CustomCard>
-            <Form.Check
-                checked={status}
-                onChange={onToggle}
-                type="switch"
-                id={toggleID}
-                disabled={disabled}
-                label={label}
-            />
-        </CustomCard>
+        <Form.Check
+            checked={status}
+            onChange={onToggle}
+            type="switch"
+            id={toggleID}
+            disabled={disabled}
+            label={label}
+        />
     );
 }

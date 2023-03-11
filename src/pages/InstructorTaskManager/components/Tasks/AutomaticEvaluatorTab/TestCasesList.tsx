@@ -7,7 +7,7 @@ import { TestCase } from 'resources/instructor/TestCase';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { TestCaseListItem } from 'pages/InstructorTaskManager/components/Tasks/TestCaseListitem';
+import { TestCaseListItem } from 'pages/InstructorTaskManager/components/Tasks/AutomaticEvaluatorTab/TestCaseListitem';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { Task } from 'resources/instructor/Task';
 import { TestCaseHeaderDropdown } from 'pages/InstructorTaskManager/components/Tasks/TestCaseHeaderDropdown';
@@ -38,7 +38,7 @@ export function TestCaseList({
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>
-                    {t('task.autoTester.testCases')}
+                    {t('task.evaluator.testCases')}
                 </CustomCardTitle>
                 {isActualSemester
                     ? (

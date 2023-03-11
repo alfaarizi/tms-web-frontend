@@ -34,7 +34,7 @@ export function ToolbarDropdown({
             disabled={disabled}
             title={(
                 <span title={text}>
-                    <FontAwesomeIcon icon={icon} />
+                    <FontAwesomeIcon className="fa-fw" icon={icon} />
                     <ResponsiveButtonText text={text} displayTextBreakpoint={displayTextBreakpoint} />
                 </span>
             )}

@@ -1,11 +1,11 @@
-import { TesterTemplate } from 'resources/instructor/TesterTemplate';
+import { EvaluatorTemplate } from 'resources/instructor/EvaluatorTemplate';
 
 export interface OsMap {
     [key: string]: string
 }
 
-export interface TesterFormData {
-    templates: TesterTemplate[];
+export interface EvaluatorAdditionalInformation {
+    templates: EvaluatorTemplate[];
     osMap: OsMap;
     appTypes: string[],
     imageSuccessfullyBuilt: boolean;

@@ -77,32 +77,32 @@ export function TestCaseFormModal({
 
                         <Form.Group>
                             <Form.Label>
-                                {t('task.autoTester.arguments')}
+                                {t('task.evaluator.arguments')}
                                 :
                             </Form.Label>
                             <Form.Control type="text" {...register('arguments', { required: false })} />
                             <Form.Text className="text-muted">
-                                {t('task.autoTester.argumentsHelp')}
+                                {t('task.evaluator.argumentsHelp')}
                             </Form.Text>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>
-                                {t('task.autoTester.input')}
+                                {t('task.evaluator.input')}
                                 :
                             </Form.Label>
                             <Form.Control as="textarea" {...register('input', { required: false })} />
                             <Form.Text className="text-muted">
-                                {t('task.autoTester.inputHelp')}
+                                {t('task.evaluator.inputHelp')}
                             </Form.Text>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>
-                                {t('task.autoTester.output')}
+                                {t('task.evaluator.output')}
                                 :
                             </Form.Label>
                             <Form.Control as="textarea" {...register('output', { required: true })} />
                             <Form.Text className="text-muted">
-                                {t('task.autoTester.outputHelp')}
+                                {t('task.evaluator.outputHelp')}
                             </Form.Text>
                             {errors.output && <FormError message={t('common.fieldRequired')} />}
                         </Form.Group>

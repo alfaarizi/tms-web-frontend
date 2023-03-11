@@ -28,9 +28,9 @@ export function TestCaseListItem({
         <ListCardItem>
             <Row>
                 <Col md={9}>
-                    <DataRow label={t('task.autoTester.arguments')}>{testCase.arguments}</DataRow>
-                    <DataRow label={t('task.autoTester.input')}>{testCase.input}</DataRow>
-                    <DataRow label={t('task.autoTester.output')}>{testCase.output}</DataRow>
+                    <DataRow label={t('task.evaluator.arguments')}>{testCase.arguments}</DataRow>
+                    <DataRow label={t('task.evaluator.input')}>{testCase.input}</DataRow>
+                    <DataRow label={t('task.evaluator.output')}>{testCase.output}</DataRow>
                 </Col>
                 <Col md={3}>
                     {isActualSemester

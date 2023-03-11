@@ -208,7 +208,6 @@
     "graderName": "Értékelte",
     "newSolution": "Új megoldás feltöltése",
     "solutions": "Megoldások",
-    "tester": "Tesztelő",
     "passwordProtectedHelp": "A jelszóvédett feladatok esetében a hitelesíteni kell a  megoldásokat a feltöltést követően. A védelem kikapcsolásához hagyja üresen a jelszó mezőt. Fontos: a jelszó eltávolítását követően az összes megoldás hitelesítve lesz!",
     "passwordProtectedGitPush": "A jelszóvédett feladatok esetében a 'git push' nem használható.",
     "isVersionControlled": "Verziókezelt",
@@ -231,8 +230,11 @@
     "downloadOnlyUngraded": "Nem értékelt megoldások letöltése",
     "uploader": "Feltöltötte",
     "successfulGrade": "A beküldött megoldás osztályozása sikeres volt",
-    "autoTester": {
-      "activate": "Automatikus tesztelés aktiválása",
+    "evaluator": {
+      "tabName": "Automatikus kiértékelés",
+      "environment": "Környezet",
+      "autoTester": "Automatikus tesztelő",
+      "activateAutoTester": "Automatikus tesztelés aktiválása",
       "testCases": "Tesztesetek",
       "arguments": "Argumentumok",
       "argumentsHelp": "Parancssori paraméterként kerülnek átadásra.",
@@ -254,12 +256,12 @@
       "reevaluateAutoTest": "Már tesztelt, de még nem értékelt hallgatói megoldások újratesztelése",
       "templates": "Sablonok",
       "templateHelp": "Ha először használja a felületet, javasolt valamelyik sablon használata. Kattintson a Sablonok gombra és válasszon egy konfigurációt.",
-      "builtImageNotFound": "A beadandó még nem rendelkezik egy sikeresen felépített vagy letöltött Docker képpel. Az automatikus tesztelés csak sikeresen letöltött vagy felépített Docker képpel rendelkező beadandókra fut le.",
+      "builtImageNotFound": "A beadandó még nem rendelkezik egy sikeresen felépített vagy letöltött Docker képpel. Az automatikus kiértékelés csak sikeresen letöltött vagy felépített Docker képpel rendelkező beadandókra fut le.",
       "successfullyBuild": "A beadandó rendelkezik egy sikeresen felépített vagy letöltött Docker képpel, építési idő: {{createdAt}}",
       "failedBuild": "A Dockerfile-ból nem sikerült képet építeni.",
       "inProgress": "A kérés feldolgozása folyamatban, kérem várjon! Amennyiben új docker kép letöltése vagy építése szükséges, ez hosszabb ideig is eltarthat.",
       "imageRequired": "Kötelező megadni egy Docker képet vagy feltölteni egy Dockerfile-t!",
-      "previousSemesterInfo": "A tesztelő beállításai nem módosíthatóak: a kiválasztott feladat egy korábbi félévhez tartozik.",
+      "previousSemesterInfo": "A kiértékelő beállításai nem módosíthatóak: a kiválasztott feladat egy korábbi félévhez tartozik.",
       "results": "Automatikus tesztelés eredményei",
       "notTested": "Még nem tesztelte le az automatikus tesztelő a beküldött megoldást.",
       "testFilesHelp": "A hallgatói megoldás a /test/submission/ könyvtárba kerül betöltésre, ami az alapértelmezett munkakönyvtár is lesz a fordítás és a futtatás során. A teszt fájlok a /test/test_files/ könyvtárba kerülnek betöltésre. Windows alapú tesztelésnél a gyökérkönyvtár analóg módon a C:\\\\test\\ könyvtár lesz.",
@@ -272,7 +274,8 @@
       },
       "port": "Port",
       "portHint": "Docker konténerben futó webszerver port száma",
-      "testCaseUpload": "A tesztesetek listája importálható XLSX és CSV állományokból. Fontos: a meglévő tesztesetek elvesznek az importálást követően!"
+      "testCaseUpload": "A tesztesetek listája importálható XLSX és CSV állományokból. Fontos: a meglévő tesztesetek elvesznek az importálást követően!",
+      "templateSelectConfirmDescription": "A kiválaszott sablon alkalmazása felülírja a meglévő beállításokat!"
     },
     "exec": {
       "startUp": "Webalkalmazás indítása",

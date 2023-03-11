@@ -1,11 +1,9 @@
-export interface SetupTester {
-    testOS: string;
+export interface SetupAutoTester {
+    autoTest: boolean,
     showFullErrorMsg: boolean;
     reevaluateAutoTest: boolean;
-    imageName?: string;
     compileInstructions: string;
     runInstructions: string;
     appType: string;
     port?: number;
-    files: FileList | null;
 }

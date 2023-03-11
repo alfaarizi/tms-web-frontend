@@ -2,8 +2,6 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { Task } from 'resources/instructor/Task';
 import * as TasksService from 'api/instructor/TasksService';
-import { TesterFormData } from 'resources/instructor/TesterFormData';
-import { SetupTester } from 'resources/instructor/SetupTester';
 import { GridTask } from 'resources/instructor/GridTask.php';
 import { QUERY_KEY as STUDENT_FILE_QUERY } from 'hooks/instructor/StudentFileHooks';
 import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
@@ -89,53 +87,6 @@ export function useRemoveTaskMutation() {
             await queryClient.invalidateQueries([QUERY_KEY, { groupID: taskToDelete.groupID }]);
             await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
             await queryClient.invalidateQueries([QUERY_KEY, { groupID: taskToDelete.groupID }, 'grid']);
-        },
-    });
-}
-
-export function useToggleAutoTesterMutation() {
-    const queryClient = useQueryClient();
-
-    return useMutation((taskID: number) => TasksService.toggleAutoTester(taskID), {
-        onSuccess: async (autoTest, taskID) => {
-            const key = [QUERY_KEY, { taskID }];
-            const oldData = await queryClient.getQueryData<Task>(key);
-            const newData = {
-                ...oldData,
-                autoTest,
-            };
-            queryClient.setQueryData(key, newData);
-        },
-    });
-}
-
-export function useTesterFormData(taskID: number, enabled: boolean) {
-    return useQuery<TesterFormData>(
-        [QUERY_KEY, { taskID }, 'test-form-data'],
-        () => TasksService.testerFormData(taskID), {
-            enabled,
-        },
-    );
-}
-
-export function useSetupTesterMutation(taskID: number) {
-    const queryClient = useQueryClient();
-
-    return useMutation((data: SetupTester) => TasksService.setupAutoTester(taskID, data), {
-        onSuccess: async (data) => {
-            queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
-            await queryClient.invalidateQueries([QUERY_KEY, { taskID }, 'test-form-data']);
-        },
-    });
-}
-
-export function useUpdateDockerImageMutation(taskID: number) {
-    const queryClient = useQueryClient();
-
-    return useMutation(() => TasksService.updateDockerImage(taskID), {
-        onSuccess: async (data) => {
-            queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
-            await queryClient.invalidateQueries([QUERY_KEY, { taskID }, 'test-form-data']);
         },
     });
 }

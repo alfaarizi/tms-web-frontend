@@ -33,9 +33,9 @@ export function AutoTestResultAlert({
             onClose={onClose ? () => onClose() : undefined}
             dismissible={!!onClose}
         >
-            <h6>{t('task.autoTester.results')}</h6>
+            <h6>{t('task.evaluator.results')}</h6>
             <hr />
-            {isAccepted === 'Uploaded' ? t('task.autoTester.notTested') : null}
+            {isAccepted === 'Uploaded' ? t('task.evaluator.notTested') : null}
             {isAccepted !== 'Uploaded'
                 ? <pre className="bg-light p-2 mt-2">{errorMsg}</pre> : null}
         </Alert>
