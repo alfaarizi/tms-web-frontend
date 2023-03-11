@@ -13,11 +13,11 @@ import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { useShow } from 'ui-hooks/useShow';
 import { TabbedInterface } from 'components/TabbedInterface';
 import { EvaluatorTab } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/EvaluatorTab';
-import { useUserInfo } from 'hooks/common/UserHooks';
 import { TaskDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskDetails';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { StudentFile } from 'resources/instructor/StudentFile';
-import { useStartCodeCompassMutation, useStopCodeCompassMutation } from '../../../../hooks/instructor/StudentFileHooks';
+import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { useStartCodeCompassMutation, useStopCodeCompassMutation } from 'hooks/instructor/StudentFileHooks';
 import { CodeCompassTab } from './CodeCompassTab';
 
 type Params = {
@@ -32,7 +32,7 @@ export const TaskDetailsPage = () => {
     const updateMutation = useUpdateTaskMutation();
     const removeMutation = useRemoveTaskMutation();
     const actualSemester = useActualSemester();
-    const userInfo = useUserInfo();
+    const privateSystemInfo = usePrivateSystemInfoQuery();
     const showEdit = useShow();
     const startCodeCompassMutation = useStartCodeCompassMutation(parseInt(id || '-1', 10));
     const stopCodeCompassMutation = useStopCodeCompassMutation(parseInt(id || '-1', 10));
@@ -109,7 +109,7 @@ export const TaskDetailsPage = () => {
                         onEdit={showEdit.toShow}
                         onRemove={handleRemove}
                         task={task.data}
-                        showVersionControl={!!userInfo.data && userInfo.data.isVersionControlEnabled}
+                        showVersionControl={!!privateSystemInfo.data && privateSystemInfo.data.isVersionControlEnabled}
                     />
                 )}
 
@@ -124,14 +124,14 @@ export const TaskDetailsPage = () => {
                 <Tab eventKey="instructorFiles" title={t('task.instructorFiles')}>
                     <InstructorFilesTab task={task.data} />
                 </Tab>
-                {!!userInfo.data && userInfo.data.isAutoTestEnabled
+                {!!privateSystemInfo.data && privateSystemInfo.data.isAutoTestEnabled
                     ? (
                         <Tab eventKey="tester" title={t('task.evaluator.tabName')}>
                             <EvaluatorTab task={task.data} />
                         </Tab>
                     )
                     : null}
-                {!!userInfo.data && userInfo.data.isCodeCompassEnabled
+                {!!privateSystemInfo.data && privateSystemInfo.data.isCodeCompassEnabled
                     ? (
                         <Tab eventKey="codeCompass" title={t('codeCompass.codeCompass')}>
                             <CodeCompassTab task={task.data} />

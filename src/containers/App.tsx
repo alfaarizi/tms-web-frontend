@@ -7,7 +7,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { satisfies } from 'semver';
 
-import { useUserInfo } from 'hooks/common/UserHooks';
+import { useUserSettings } from 'hooks/common/UserHooks';
 import { FullScreenSpinner } from 'components/FullScreenSpinner/FullScreenSpinner';
 import { ProtectedRoute } from 'components/ProtectedRoute';
 import { useNetworkErrorHandler } from 'hooks/common/useNetworkErrorHandler';
@@ -50,9 +50,9 @@ export function App() {
     const { triggerError } = useErrorBoundaryContext();
     const publicSystemInfo = usePublicSystemInfoQuery(false);
     const {
-        data: userInfo,
-        refetch: refetchUserInfo,
-    } = useUserInfo(!!isLoggedIn);
+        data: userSettings,
+        refetch: refetchUserSettings,
+    } = useUserSettings(!!isLoggedIn);
 
     /**
      * Load backend-core public system information and check version
@@ -75,7 +75,7 @@ export function App() {
         // If localStorage contains a token, send it to the server
         if (accessToken) {
             axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-            const query = await refetchUserInfo();
+            const query = await refetchUserSettings();
             setIsLoggedIn(query.isSuccess);
         } else {
             setIsLoggedIn(false);
@@ -90,13 +90,13 @@ export function App() {
 
     useEffect(() => {
         if (isLoggedIn !== null) {
-            setIsLoggedIn(!!userInfo);
+            setIsLoggedIn(!!userSettings);
         }
-    }, [userInfo, isLoggedIn]);
+    }, [userSettings, isLoggedIn]);
 
-    const isStudent = !!userInfo?.isStudent;
-    const isFaculty = !!userInfo?.isFaculty;
-    const isAdmin = !!userInfo?.isAdmin;
+    const isStudent = !!userSettings?.isStudent;
+    const isFaculty = !!userSettings?.isFaculty;
+    const isAdmin = !!userSettings?.isAdmin;
 
     // Render
     if (isLoggedIn === null) {
@@ -106,7 +106,7 @@ export function App() {
     return (
         <>
             <NotificationToast data={notifications.notification} onClose={notifications.close} />
-            {userInfo ? <PrivateHeader userInfo={userInfo} /> : <PublicHeader />}
+            {userSettings ? <PrivateHeader userSettings={userSettings} /> : <PublicHeader />}
             <Suspense fallback={<FullScreenSpinner />}>
                 <Switch>
                     <ProtectedRoute exact path="/">

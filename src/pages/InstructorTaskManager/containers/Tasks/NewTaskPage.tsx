@@ -6,9 +6,9 @@ import { useHistory } from 'react-router';
 import { TaskForm } from 'pages/InstructorTaskManager/components/Tasks/TaskForm';
 import { Task } from 'resources/instructor/Task';
 import { useCreateTaskMutation } from 'hooks/instructor/TaskHooks';
-import { useUserInfo } from 'hooks/common/UserHooks';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useGroup } from 'hooks/instructor/GroupHooks';
+import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 
 type Params = {
     groupID?: string
@@ -21,7 +21,7 @@ export function NewTaskPage() {
     const groupID = parseInt(params.groupID || '-1', 10);
     const group = useGroup(groupID);
     const createMutation = useCreateTaskMutation();
-    const userInfo = useUserInfo();
+    const privateSystemInfo = usePrivateSystemInfoQuery();
     const [addErrorBody, setAddErrorBody] = useState<ValidationErrorBody | null>(null);
 
     const handleSave = async (task: Task) => {
@@ -42,7 +42,7 @@ export function NewTaskPage() {
         history.push(`/instructor/task-manager/groups/${groupID}`);
     };
 
-    if (!userInfo.data || !group.data) {
+    if (!privateSystemInfo.data || !group.data) {
         return null;
     }
 
@@ -51,7 +51,7 @@ export function NewTaskPage() {
             title={t('task.newTask')}
             onSave={handleSave}
             onCancel={handleSaveCancel}
-            showVersionControl={!!userInfo.data && userInfo.data.isVersionControlEnabled}
+            showVersionControl={!!privateSystemInfo.data && privateSystemInfo.data.isVersionControlEnabled}
             serverSideError={addErrorBody}
             timezone={group.data.timezone}
         />

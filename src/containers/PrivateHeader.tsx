@@ -10,25 +10,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { SemesterSwitcher } from 'components/Header/SemesterSwitcher';
 import { RoleSwitcher } from 'components/Header/RoleSwitcher';
-import { UserInfo } from 'resources/common/UserInfo';
 import { Header } from 'components/Header/Header';
 import { useIsFetching, useQueryClient } from 'react-query';
 import { useSemesters } from 'hooks/common/SemesterHooks';
 import { useGlobalContext } from 'context/GlobalContext';
 import { Role } from 'resources/common/Role';
 import { HeaderContent } from 'components/Header/HeaderContent';
+import { UserSettings } from 'resources/common/UserSettings';
 
 type Props = {
-    userInfo: UserInfo
+    userSettings: UserSettings
 }
 
 /**
  * Contains private navigation actions
- * @param userInfo
+ * @param userSettings
  * @constructor
  */
 export function PrivateHeader({
-    userInfo,
+    userSettings,
 }: Props) {
     const { t } = useTranslation();
     const globalContext = useGlobalContext();
@@ -55,13 +55,13 @@ export function PrivateHeader({
             newRole = currentRole;
         }
 
-        // If the role is still null, set it from userInfo
+        // If the role is still null, set it from user settings
         if (newRole == null) {
-            if (userInfo.isFaculty) {
+            if (userSettings.isFaculty) {
                 newRole = 'instructor';
-            } else if (userInfo.isStudent) {
+            } else if (userSettings.isStudent) {
                 newRole = 'student';
-            } else if (userInfo.isAdmin) {
+            } else if (userSettings.isAdmin) {
                 newRole = 'admin';
             }
         }
@@ -92,9 +92,9 @@ export function PrivateHeader({
                 <RoleSwitcher
                     currentRole={currentRole}
                     switchRole={switchRole}
-                    isStudent={userInfo.isStudent}
-                    isFaculty={userInfo.isFaculty}
-                    isAdmin={userInfo.isAdmin}
+                    isStudent={userSettings.isStudent}
+                    isFaculty={userSettings.isFaculty}
+                    isAdmin={userSettings.isAdmin}
                 />
 
                 {currentRole === 'student'
@@ -183,7 +183,7 @@ export function PrivateHeader({
                     <Nav.Link>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                         {' '}
-                        {t('navbar.logout', { neptun: userInfo.neptun })}
+                        {t('navbar.logout', { neptun: userSettings.neptun })}
                     </Nav.Link>
                 </LinkContainer>
             </HeaderContent>

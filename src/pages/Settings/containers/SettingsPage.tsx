@@ -15,14 +15,14 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { FormError } from 'components/FormError';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useNotifications } from 'hooks/common/useNotifications';
-import { useSettings, useSettingsMutation } from 'hooks/common/UserHooks';
+import { useUserSettings, useSettingsMutation } from 'hooks/common/UserHooks';
 import { NotificationTarget, UserSettings } from 'resources/common/UserSettings';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
 
 export function SettingsPage() {
-    const settings = useSettings();
+    const userSettings = useUserSettings();
     const settingsMutation = useSettingsMutation();
-    const settingsData = settings.data;
+    const settingsData = userSettings.data;
     const { t } = useTranslation();
     const notifications = useNotifications();
     const [customEmail, setCustomEmail] = useState<string | null>(null);
