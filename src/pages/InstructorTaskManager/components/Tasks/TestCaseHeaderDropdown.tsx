@@ -24,9 +24,9 @@ export function TestCaseHeaderDropdown({ task, onExportTestCases } : Props) {
             text={t('common.export')}
             icon={faFileExport}
         >
-            <DropdownItem onSelect={() => handleExportSpreadsheet('xls')}>
+            <DropdownItem onSelect={() => handleExportSpreadsheet('xlsx')}>
                 <FontAwesomeIcon icon={faFileExcel} />
-                {' XLS'}
+                {' XLSX'}
             </DropdownItem>
             <DropdownItem onSelect={() => handleExportSpreadsheet('csv')}>
                 <FontAwesomeIcon icon={faFileCsv} />

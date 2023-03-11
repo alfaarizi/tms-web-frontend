@@ -272,7 +272,7 @@
       },
       "port": "Port",
       "portHint": "Exposed port of the webserver running in the Docker container",
-      "testCaseUpload": "You can import the list of test cases from XLS and CSV files. Important: the existing test cases will be discarded after the import!",
+      "testCaseUpload": "You can import the list of test cases from XLSX and CSV files. Important: the existing test cases will be discarded after the import!",
       "templateSelectConfirmDescription": "Applying the selected template will override the current settings!"
     },
     "exec": {
