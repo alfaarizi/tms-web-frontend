@@ -69,9 +69,40 @@ The popular Bootstrap CSS library enables to develop responsive web applications
 The project currently uses React-Bootstrap version 1.6, which is built on Bootstrap 4.6.
 Bootstrap 5 was released in the meantime, so pay attention which documentation you read!
 
+#### CSS modules
+If it is possible, custom components should be composed of React-Bootstrap components or standard HTML-elements styled with Bootstrap CSS classes. If custom CSS styles are needed, they should be placed in [CSS Modules](https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/) to avoid name collisions.
+
 #### React Router
 React Router ensures that the current URL and the state of our application remain in sync.
 The project is currently using version 5.1 of the library (https://v5.reactrouter.com/).
+
+### Architecture
+
+#### Presentational components
+
+Contains presentational code, with simple event handlers to handle user input. They could contain `useState` hooks, but they are mainly for presentational purposes. They must not access the model layer directly.
+In addition to our own components, the React-Bootstrap components also belong to this category.
+
+This kind of components should placed in the global `src/components` or to the local `components` folder of the given page.
+
+#### Container components
+These components compose other components and the hooks/functions from the model layer in order to implement the functionality of a bigger part of the application, like pages, tabs and modals.
+They can contain presentational and other container components. While HTML elements are also allowed in the current codebase, it is recommended to place them in presentational components.
+
+This kind of components should placed in the global `src/conainters` or to the local `containers` folder of the given page.
+
+#### Model layer
+This layer contains the business logic. The model layer provides its functionality mainly with custom hooks, but traditional functions can be also used.
+
+Contents:
+- Client-side global state management, currently implemented with contexts.
+- Server-side state management, implemented with React Query.
+- Smaller utilities.
+
+#### Service layer/API client
+The API client is implemented using the `axios` library. It contains client functions for the backend API endpoints, and TypeScirpt interfaces for the corresponding the backend resources. If it is possible, the client functions and resource types should be organized similarly to the controller actions of the backend to make code navigation easier.
+
+Only the model layer should access the service layer. 
 
 
 DEVELOPMENT GUIDELINES
