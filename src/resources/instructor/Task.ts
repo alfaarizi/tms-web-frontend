@@ -28,5 +28,11 @@ export interface Task {
     semester?: Semester;
     canvasUrl?: string;
     port?: number;
+    staticCodeAnalysis: boolean;
+    staticCodeAnalyzerTool?: string;
+    staticCodeAnalyzerInstructions?: string;
+    codeCheckerCompileInstructions?: string;
+    codeCheckerToggles?: string;
+    codeCheckerSkipFile?: string;
     taskLevelGitRepo?: string;
 }

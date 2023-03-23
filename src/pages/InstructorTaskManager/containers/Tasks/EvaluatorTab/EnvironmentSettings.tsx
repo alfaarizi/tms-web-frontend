@@ -2,8 +2,7 @@ import React from 'react';
 import { Task } from 'resources/instructor/Task';
 import {
     EnvironmentSettingsForm,
-} from 'pages/InstructorTaskManager/components/Tasks/AutomaticEvaluatorTab/EnvironmentSettingsForm';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
+} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/EnvironmentSettingsForm';
 import {
     useSetupEvaluatorEnvironment,
     useUpdateDockerImageMutation,
@@ -11,6 +10,7 @@ import {
 import { SetupEvaluatorEnvironment } from 'resources/instructor/SetupEvaluatorEnvironment';
 import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
 import { TestFileManager } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/TestFileManager';
+import { useActualSemester } from 'hooks/common/SemesterHooks';
 
 type Props = {
     task: Task
@@ -53,7 +53,7 @@ export function EnvironmentSettings({ task, additionalInformation }: Props) {
                 updateInProgress={updateDockerImageMutation.isLoading}
                 isActualSemester={actualSemester.check(task.semesterID)}
             />
-            <TestFileManager task={task} />
+            <TestFileManager task={task} isActualSemester={actualSemester.check(task.semesterID)} />
         </>
     );
 }

@@ -3,6 +3,7 @@ import { Task } from 'resources/instructor/Task';
 import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
 import { SetupAutoTester } from 'resources/instructor/SetupAutoTester';
 import { SetupEvaluatorEnvironment } from 'resources/instructor/SetupEvaluatorEnvironment';
+import { SetupCodeChecker } from 'resources/instructor/SetupCodeChecker';
 
 export async function updateDockerImage(id: number) {
     const res = await axiosInstance.post<EvaluatorAdditionalInformation>(
@@ -11,7 +12,7 @@ export async function updateDockerImage(id: number) {
     return res.data;
 }
 
-export async function additionalEvaluatorInformation(id: number) {
+export async function evaluatorAdditionalInformation(id: number) {
     const res = await axiosInstance.get<EvaluatorAdditionalInformation>(
         `/instructor/tasks/${id}/evaluator/additional-information`,
     );
@@ -50,5 +51,13 @@ export async function setupEvaluatorEnvironment(id: number, data: SetupEvaluator
         },
     );
 
+    return res.data;
+}
+
+export async function setupCodeChecker(id: number, data: SetupCodeChecker) {
+    const res = await axiosInstance.post<Task>(
+        `/instructor/tasks/${id}/evaluator/setup-code-checker?expand=group`,
+        data,
+    );
     return res.data;
 }

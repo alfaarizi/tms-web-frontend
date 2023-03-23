@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { StudentFile } from 'resources/instructor/StudentFile';
-import { GraderModal } from 'pages/InstructorTaskManager/components/GraderModal';
+import { GraderModal } from 'pages/InstructorTaskManager/components/StudentFiles/GraderModal';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { useDownloadStudentFile, useGradeMutation } from 'hooks/instructor/StudentFileHooks';
 import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Students/StudentFileListItem';

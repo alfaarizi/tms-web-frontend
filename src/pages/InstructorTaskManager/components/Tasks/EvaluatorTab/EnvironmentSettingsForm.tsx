@@ -103,7 +103,6 @@ export function EnvironmentSettingsForm({
                 </CustomCardTitle>
             </CustomCardHeader>
 
-            {!isActualSemester ? <Alert variant="warning">{t('task.evaluator.previousSemesterInfo')}</Alert> : null}
             {alertToShow}
 
             <p>{t('task.evaluator.templateHelp')}</p>

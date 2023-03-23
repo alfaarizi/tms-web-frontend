@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Task } from 'resources/instructor/Task';
 import { useTranslation } from 'react-i18next';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
 import {
     useSetupAutoTester,
 } from 'hooks/instructor/EvaluatorHooks';
@@ -15,15 +14,16 @@ import { TestCase } from 'resources/instructor/TestCase';
 import { SetupAutoTester } from 'resources/instructor/SetupAutoTester';
 import {
     AutoTesterSettingsForm,
-} from 'pages/InstructorTaskManager/components/Tasks/AutomaticEvaluatorTab/AutoTesterSettingsForm';
+} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/AutoTesterSettingsForm';
 import {
     TestCaseFormModal,
-} from 'pages/InstructorTaskManager/components/Tasks/AutomaticEvaluatorTab/TestCaseFormModal';
-import { TestCaseList } from 'pages/InstructorTaskManager/components/Tasks/AutomaticEvaluatorTab/TestCasesList';
+} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/TestCaseFormModal';
+import { TestCaseList } from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/TestCasesList';
 import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
 import { FileUpload } from 'components/FileUpload';
 import { getFirstError } from 'utils/getFirstError';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
+import { useActualSemester } from 'hooks/common/SemesterHooks';
 
 type Props = {
     task: Task,

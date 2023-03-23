@@ -1,0 +1,23 @@
+.unspecified {
+    color: #666666;
+}
+
+.style {
+    color: #9932cc;
+}
+
+.low {
+    color: #669603;
+}
+
+.medium {
+    color: #a9d323;
+}
+
+.high {
+    color: #ffa800;
+}
+
+.critical {
+    color: #e92625;
+}

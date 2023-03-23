@@ -12,15 +12,14 @@ import {
 } from 'hooks/instructor/InstructorFileHooks';
 import { FileUpload } from 'components/FileUpload';
 import { InstructorFilesList } from 'components/InstructorFilesList';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
 
 type Props = {
-    task: Task
+    task: Task,
+    isActualSemester: boolean,
 }
 
-export function TestFileManager({ task }: Props) {
+export function TestFileManager({ task, isActualSemester }: Props) {
     const { t } = useTranslation();
-    const actualSemester = useActualSemester();
 
     const testFiles = useTestInstructorFiles(task.id);
     const removeTestFileMutation = useTestInstructorFileRemoveMutation(task.id);
@@ -68,7 +67,7 @@ export function TestFileManager({ task }: Props) {
             return f.name;
         });
 
-    if (actualSemester.check(task.semesterID)) {
+    if (isActualSemester) {
         return (
             <>
                 <FileUpload

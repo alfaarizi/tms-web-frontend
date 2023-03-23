@@ -1,3 +1,5 @@
+import { CodeCheckerResult } from 'resources/student/CodeCheckerResult';
+
 export interface StudentFile {
     id: number;
     name: string;
@@ -12,4 +14,5 @@ export interface StudentFile {
     uploadCount: number;
     taskID: number;
     verified: boolean;
+    codeCheckerResult: CodeCheckerResult;
 }
