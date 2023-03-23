@@ -251,7 +251,7 @@
       "runInstructionsHelp": "Arguments of the test case are available in the \"$@\" variable. (@PSBoundParameters in case of PowerShell.) The serial of the test case is stored in the $TEST_CASE_NR environment variable.",
       "runWebAppInstructionsHelp": "Set up web application environment and start web application. The instructions will be executed in asynchronously.",
       "showFullErrorMsg": "When checked students can see the detailed compile or runtime error messages.",
-      "reevaluateAutoTest" : "Reevaluate already tested, but ungraded student submissions",
+      "reevaluate" : "Reevaluate already tested, but ungraded student submissions",
       "templates": "Templates",
       "templateHelp": "In case you are not familiar with the interface, it is recommended to start with a template. Please click on the Templates button and select one of the preconfigured templates.",
       "builtImageNotFound": "The automatic evaluator only runs on tasks with successfully downloaded or built image.",
@@ -273,6 +273,31 @@
       "port": "Port",
       "portHint": "Exposed port of the webserver running in the Docker container",
       "testCaseUpload": "You can import the list of test cases from XLSX and CSV files. Important: the existing test cases will be discarded after the import!",
+      "staticCodeAnalysis": "Static code analysis",
+      "staticCodeAnalysisReports": "Static code analysis reports",
+      "activateStaticCodeAnalysis": "Activate static code analysis",
+      "staticCodeAnalyzerTool": "Static code analyzer tool",
+      "codeCheckerToggles": "Additional arguments of the CodeChecker check command",
+      "codeCheckerTogglesHelp": "The detailed documentation of the CodeChecker check command",
+      "staticCodeAnalyzerInstructions": "Static code analyzer tool instructions",
+      "staticCodeAnalyzerInstructionsHelp": "On Linux OS the output of the analyzer must be placed to /test/{{outputPathLinux}}, on Windows OS the output of the analyzer must be placed to C:\\\\test\\{{outputPathWindows}} in an analog manner. It is also important that the instruction above must keep the original exit code of the analyzer which can be read from the '$?' variable on Linux (Bash), and from the '$LASTEXITCODE' variable  on Windows (PowerShell).",
+      "codeCheckerSkipFile": "Ignored source files",
+      "codeCheckerSkipFileHelp": "The list of the ignored source files can specified with the CodeChecker skipfile format.",
+      "codeCheckerResult": {
+        "file": "File (line, column)",
+        "checkerName": "Checker name",
+        "severity": "Severity",
+        "category": "Category",
+        "message": "Message",
+        "detailedStatusMessages": {
+          "noIssues": "No issues were found in the uploaded submission",
+          "inProgress": "The uploaded submission is being checked",
+          "analysisFailed": "The static analyzer tool failed to run. The uploaded solution may be incorrect or the configuration for the task may be invalid.",
+          "runnerError": "Runner error"
+        }
+      },
+      "stdout": "Standard output",
+      "stderr": "Standard error",
       "templateSelectConfirmDescription": "Applying the selected template will override the current settings!"
     },
     "exec": {

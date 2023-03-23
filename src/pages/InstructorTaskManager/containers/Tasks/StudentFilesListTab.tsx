@@ -23,6 +23,7 @@ import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextB
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { TaskLevelRepoDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskLevelRepoDetails';
+import { Link } from 'react-router-dom';
 
 type Props = {
     task: Task
@@ -191,6 +192,13 @@ export function StudentFilesListTab({
                                 {file.delay}
                             </DataRow>
                             <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
+                            {file.codeCheckerResult ? (
+                                <DataRow label={t('task.evaluator.staticCodeAnalysis')}>
+                                    <Link to={`/instructor/task-manager/student-files/${file.id}`}>
+                                        {file.codeCheckerResult?.translatedStatus}
+                                    </Link>
+                                </DataRow>
+                            ) : null}
                             <DataRow label={t('passwordProtected.verified')}>
                                 {file.verified ? t('common.yes') : t('common.no')}
                             </DataRow>

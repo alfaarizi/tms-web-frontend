@@ -253,7 +253,7 @@
       "runInstructionsHelp": "A teszteset parancssori argumentumai a \"$@\" változóban érhetőek el. (Powershell esetén @PSBoundParameters.) A teszteset sorszáma a $TEST_CASE_NR környezeti változóból olvasható ki.",
       "runWebAppInstructionsHelp": "Webalkalmazás környezet konfigurációja és a web szerver indítása. A parancsok végrehajtása azonnal visszatér.",
       "showFullErrorMsg": "A hallgatók láthatják a részletes fordítási és futtatási hibaüzeneteket.",
-      "reevaluateAutoTest": "Már tesztelt, de még nem értékelt hallgatói megoldások újratesztelése",
+      "reevaluate": "Már tesztelt, de még nem értékelt hallgatói megoldások újratesztelése",
       "templates": "Sablonok",
       "templateHelp": "Ha először használja a felületet, javasolt valamelyik sablon használata. Kattintson a Sablonok gombra és válasszon egy konfigurációt.",
       "builtImageNotFound": "A beadandó még nem rendelkezik egy sikeresen felépített vagy letöltött Docker képpel. Az automatikus kiértékelés csak sikeresen letöltött vagy felépített Docker képpel rendelkező beadandókra fut le.",
@@ -275,6 +275,31 @@
       "port": "Port",
       "portHint": "Docker konténerben futó webszerver port száma",
       "testCaseUpload": "A tesztesetek listája importálható XLSX és CSV állományokból. Fontos: a meglévő tesztesetek elvesznek az importálást követően!",
+      "staticCodeAnalysis": "Statikus kódanalízis",
+      "staticCodeAnalysisReports": "Statikus kódanalízis jelentések",
+      "activateStaticCodeAnalysis": "Statikus kódelemzés aktiválása",
+      "staticCodeAnalyzerTool": "Statikus kódelemező eszköz",
+      "codeCheckerToggles": "CodeChecker check parancs opcionális paraméterei",
+      "codeCheckerTogglesHelp": "A CodeChecker check parancs részletes dokumentációja",
+      "staticCodeAnalyzerInstructions": "Statikus kódelemző eszköz futtatási parancsai",
+      "staticCodeAnalyzerInstructionsHelp": "Linux alapú tesztelésnél az elemző kimenetét /test/{{outputPathLinux}}, Windows alapú tesztelésnél pedig analóg módon a C:\\\\test\\{{outputPathWindows}} útvonalra szükséges elhelyezni. Továbbá fontos, hogy a fenti utasításoknak meg kell őrizniuk az elemző eszköz kilépési kódját, amely Linux (Bash) alatt a '$?' változóból, Windows (PowerShell) alatt pedig a '$LASTEXITCODE' változóból olvasható ki.",
+      "codeCheckerSkipFile": "Figyelmen kívül hagyott forrásfájlok",
+      "codeCheckerSkipFileHelp": "Figyelmen kívül hagyott forrásfájlok listája a CodeChecker skipfile formátumában adható meg.",
+      "codeCheckerResult": {
+        "file": "Fájl (sor, oszlop)",
+        "checkerName": "Ellenőrzés",
+        "severity": "Súlyosság",
+        "category": "Kategória",
+        "message": "Üzenet",
+        "detailedStatusMessages": {
+          "noIssues": "Nem találhatóak problémák a feltölött megoldásban",
+          "inProgress": "A feltöltött megoldás kiértékelése folyamatban van",
+          "analysisFailed": "A statikus elemző futtatása sikertelen volt. Előfordulhat hogy hibás a feltölött megoldás vagy érvénytelen a feladathoz tartozó konfiguráció.",
+          "runnerError": "Sikertelen futtatás"
+        }
+      },
+      "stdout": "Standard kimenet",
+      "stderr": "Standard hibakimenet",
       "templateSelectConfirmDescription": "A kiválaszott sablon alkalmazása felülírja a meglévő beállításokat!"
     },
     "exec": {

@@ -13,7 +13,10 @@ export async function index(groupID: number) {
 
 export async function one(taskID: number) {
     const res = await axiosInstance.get<Task>(`/student/tasks/${taskID}`, {
-        params: { expand: 'studentFiles, instructorFiles' },
+        params: {
+            expand: 'studentFiles, instructorFiles,'
+            + 'studentFiles.codeCheckerResult, studentFiles.codeCheckerResult.codeCheckerReports',
+        },
     });
     return res.data;
 }

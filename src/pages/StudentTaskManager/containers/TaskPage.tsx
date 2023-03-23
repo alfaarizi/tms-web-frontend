@@ -21,6 +21,7 @@ import { VerifyItemForm } from 'pages/StudentTaskManager/components/VerifyItemFo
 import { VerifyItem } from 'resources/student/VerifyItem';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUploadInfo';
+import { CodeCheckerReportsList } from 'components/CodeChecker/CodeCheckerReportsList';
 
 type Params = {
     id?: string
@@ -134,6 +135,14 @@ export const TaskPage = () => {
                     autoTest={task.data.autoTest}
                 />
             )}
+
+            {studentFile?.codeCheckerResult
+                && (
+                    <CodeCheckerReportsList
+                        status={studentFile.codeCheckerResult.status}
+                        reports={studentFile.codeCheckerResult.codeCheckerReports}
+                    />
+                )}
 
             {task.data.instructorFiles.length !== 0
             && (

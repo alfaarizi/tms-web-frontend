@@ -146,10 +146,7 @@ export function AutoTesterSettingsForm({
                     </Form.Label>
                     <Form.Control
                         as="textarea"
-                        {...register('compileInstructions', {
-                            required: t('common.fieldRequired')
-                                .toString(),
-                        })}
+                        {...register('compileInstructions')}
                         size="sm"
                         disabled={inProgress}
                         rows={7}
@@ -191,7 +188,7 @@ export function AutoTesterSettingsForm({
                     <Form.Check
                         type="checkbox"
                         id="autoTestReevaluateSolutions"
-                        label={t('task.evaluator.reevaluateAutoTest')}
+                        label={t('task.evaluator.reevaluate')}
                         {...register('reevaluateAutoTest')}
                         disabled={inProgress}
                     />

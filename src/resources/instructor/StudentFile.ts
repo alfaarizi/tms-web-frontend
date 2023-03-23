@@ -1,4 +1,5 @@
 import { User } from 'resources/common/User';
+import { CodeCheckerResult } from 'resources/instructor/CodeCheckerResult';
 import { Task } from './Task';
 import { CodeCompassInstance } from './CodeCompassInstance';
 import { WebAppExecution } from './WebAppExecution';
@@ -25,5 +26,6 @@ export interface StudentFile {
     delay?: string;
     ipAddress?: string;
     verified: boolean;
-    codeCompass?: CodeCompassInstance
+    codeCompass?: CodeCompassInstance;
+    codeCheckerResult?: CodeCheckerResult;
 }

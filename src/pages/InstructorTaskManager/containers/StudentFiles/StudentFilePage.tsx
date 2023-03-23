@@ -13,7 +13,7 @@ import {
 } from 'hooks/instructor/StudentFileHooks';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { GraderModal } from 'pages/InstructorTaskManager/components/GraderModal';
+import { GraderModal } from 'pages/InstructorTaskManager/components/StudentFiles/GraderModal';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
@@ -22,6 +22,9 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { TabbedInterface } from 'components/TabbedInterface';
+import { Tab } from 'react-bootstrap';
+import { StaticCodeAnalysisTab } from 'pages/InstructorTaskManager/components/StudentFiles/StaticCodeAnalysisTab';
 
 type Params = {
     id?: string
@@ -139,6 +142,14 @@ export function StudentFilePage() {
                     task={studentFile.data.task}
                 />
             </CustomCard>
+
+            <TabbedInterface id="student-file-evaluator" defaultActiveKey="static-code-analysis">
+                {studentFile.data.codeCheckerResult && (
+                    <Tab eventKey="static-code-analysis" title={t('task.evaluator.staticCodeAnalysis')}>
+                        <StaticCodeAnalysisTab result={studentFile.data.codeCheckerResult} />
+                    </Tab>
+                )}
+            </TabbedInterface>
 
             <GraderModal
                 file={studentFile.data}

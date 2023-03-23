@@ -5,7 +5,7 @@ export async function listForTask(taskID: number) {
     const res = await axiosInstance.get<StudentFile[]>('/instructor/student-files/list-for-task', {
         params: {
             taskID,
-            expand: 'uploader,execution,codeCompass',
+            expand: 'uploader,execution,codeCompass,codeCheckerResult',
         },
     });
     return res.data;
@@ -16,7 +16,7 @@ export async function listForStudent(groupID: number, uploaderID: number) {
         params: {
             groupID,
             uploaderID,
-            expand: 'task,task.group,execution,codeCompass',
+            expand: 'task,task.group,execution,codeCompass,codeCheckerResult',
         },
     });
     return res.data;
@@ -26,7 +26,10 @@ export async function view(id: number) {
     const res = await axiosInstance.get<StudentFile>(
         `/instructor/student-files/${id}`, {
             params: {
-                expand: 'uploader,task,task.group,execution,codeCompass',
+                expand: 'uploader,task,task.group,execution,codeCompass,codeCheckerResult,'
+                    + 'codeCheckerResult.stdout,codeCheckerResult.stderr,codeCheckerResult.codeCheckerReports,'
+                    + 'codeCheckerResult.runnerErrorMessage'
+                ,
             },
         },
     );
