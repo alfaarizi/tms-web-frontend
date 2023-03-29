@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.10.0...v3.0.0) (2023-03-29)
+
+
+### Features
+
+* New evaluator settings UI ([756fbe1](https://gitlab.com/tms-elte/frontend-react/commit/756fbe114a42c5b83c14dd97aa4486c9f3448a6f))
+* UI for static analyzer settings ([7b75d73](https://gitlab.com/tms-elte/frontend-react/commit/7b75d737d560cecf9b261c1798ba52ef55a70009))
+
 ## [2.10.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.9.1...v2.10.0) (2023-03-06)
 
 
