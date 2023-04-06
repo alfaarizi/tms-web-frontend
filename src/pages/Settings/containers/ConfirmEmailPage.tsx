@@ -97,7 +97,7 @@ export default function ConfirmEmailPage({
                             </Card.Body>
                             <CustomCardFooter>
                                 <div>{branding.organizationName[i18next.language]}</div>
-                                <a href="https://gitlab.com/tms-elte">
+                                <a href="https://tms-elte.gitlab.io/">
                                     TMS v
                                     {process.env.REACT_APP_VERSION}
                                 </a>
