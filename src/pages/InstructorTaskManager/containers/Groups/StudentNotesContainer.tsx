@@ -8,9 +8,11 @@ import { useGroupStudentNotes, useGroupStudentNotesMutation } from 'hooks/instru
 import { Breakpoint } from 'components/Buttons/ResponsiveButtonText';
 import { StudentNotes } from 'resources/instructor/StudentNotes';
 import { StudentNotesModal } from 'pages/InstructorTaskManager/components/Students/StudentNotesModal';
+import { User } from 'resources/common/User';
 
 type Props = {
     groupId : number,
+    student : User,
     studentId: number,
     isActualSemester: boolean,
     displayTextBreakpoint?: Breakpoint,
@@ -20,6 +22,7 @@ type Props = {
 export function StudentNotesContainer({
     groupId,
     studentId,
+    student,
     isActualSemester,
     displayTextBreakpoint,
     disabled,
@@ -59,6 +62,7 @@ export function StudentNotesContainer({
                         />
                         <StudentNotesModal
                             isActualSemester={isActualSemester}
+                            student={student}
                             show={show}
                             submit={onSubmit}
                             data={data}

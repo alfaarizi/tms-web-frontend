@@ -62,6 +62,7 @@ export function GroupStudentsListTab({ group }: Props) {
                         </LinkContainer>
                         <StudentNotesContainer
                             groupId={group.id}
+                            student={user}
                             studentId={user.id}
                             isActualSemester={actualSemester.check(group.semesterID)}
                             displayTextBreakpoint="none"
