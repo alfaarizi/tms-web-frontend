@@ -6,9 +6,11 @@ import { FormButtons } from 'components/Buttons/FormButtons';
 import { useForm } from 'react-hook-form';
 import { StudentNotes } from 'resources/instructor/StudentNotes';
 import { ConfirmModal } from 'components/Modals/ConfirmModal';
+import { User } from 'resources/common/User';
 
 type Props = {
     isActualSemester: boolean,
+    student: User,
     data: StudentNotes | undefined,
     show: {show: boolean, toShow: () => void, toHide: () => void, toggle: () => void},
     submit: (noteData: StudentNotes) => Promise<void>,
@@ -17,6 +19,7 @@ type Props = {
 
 export function StudentNotesModal({
     isActualSemester,
+    student,
     show,
     submit,
     data,
@@ -69,7 +72,10 @@ export function StudentNotesModal({
                 <Modal.Body>
                     <Form onSubmit={onSubmit}>
                         <Form.Group>
-                            <Form.Label>{t('group.studentNotes')}</Form.Label>
+                            <Form.Label>
+                                {`${t('group.studentNotes')}: 
+                                ${student.name ? `${student.name} (${student.neptun})` : student.neptun}`}
+                            </Form.Label>
                             <Form.Control
                                 as="textarea"
                                 {...register('notes', { required: false })}
