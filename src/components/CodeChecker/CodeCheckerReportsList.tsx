@@ -25,7 +25,7 @@ export function CodeCheckerReportsList({ status, reports }: Props) {
         case 'Issues Found':
             return reports
                 .sort((a, b) => SeverityOrder[b.severity] - SeverityOrder[a.severity])
-                .map((report) => <CodeCheckerReportListItem report={report} />);
+                .map((report) => <CodeCheckerReportListItem key={report.id} report={report} />);
         case 'Analysis Failed':
             return <span>{t('task.evaluator.codeCheckerResult.detailedStatusMessages.analysisFailed')}</span>;
         case 'Runner Error':
