@@ -60,14 +60,15 @@ If you want to override an environment variable, you should create a local .env 
 
 ### Variables
 
-| Name                                   | Development mode | Production mode | Description |
-|:---------------------------------------|:-----------------|:----------------|:------------|
-| `PUBLIC_URL`                           | Used             | Used            | Frontend application baseurl. If you use this variable, you shouldn't set `homepage` in `package.json`. |
-| `REACT_APP_API_BASEURL`                | Used             | Used            | TMS API baseurl. |
-| `REACT_APP_LOGIN_METHOD`               | Used             | Used            | Set login method. Possible values: `LDAP`, `MOCK` |
-| `REACT_DEV_PROXY`                      | Used             | Ignored         | Backend server address that used in development mode. The development server will proxy API requests to this address. |
+| Name                                   | Development mode | Production mode | Description                                                                                                                                                                                                  |
+|:---------------------------------------|:-----------------|:----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PUBLIC_URL`                           | Used             | Used            | Frontend application baseurl. If you use this variable, you shouldn't set `homepage` in `package.json`.                                                                                                      |
+| `REACT_APP_API_BASEURL`                | Used             | Used            | TMS API baseurl.                                                                                                                                                                                             |
+| `REACT_APP_LOGIN_METHOD`               | Used             | Used            | Set login method. Possible values: `LDAP`, `MOCK`                                                                                                                                                            |
+| `REACT_DEV_PROXY`                      | Used             | Ignored         | Backend server address that used in development mode. The development server will proxy API requests to this address.                                                                                        |
 | `REACT_APP_BACKEND_CORE_VERSION_RANGE` | Used             | Used            | This variable defines the accepted `backend-core` semantic version range. Check the documentation of the [semver](https://github.com/npm/node-semver) npm package for more information about version ranges. |
-| `REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN` | Used             | Used            | Timeout duration in milliseconds after a failed login attempt. |
+| `REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN` | Used             | Used            | Timeout duration in milliseconds after a failed login attempt.                                                                                                                                               |
+| `REACT_APP_THEME`                      | Used             | Used            | UI theme.  Possible values: `dark`, `blue`.                                                                                                                                                                  |
 
 [Create React App specific environment variables](https://create-react-app.dev/docs/advanced-configuration/)
 
