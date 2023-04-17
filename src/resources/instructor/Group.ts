@@ -11,4 +11,5 @@ export interface Group {
     isCanvasCourse: boolean;
     timezone: string;
     canvasUrl?: string;
+    lastSyncTime?: string;
 }

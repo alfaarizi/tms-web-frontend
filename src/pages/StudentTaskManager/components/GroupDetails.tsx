@@ -7,6 +7,7 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 
 type Props = {
     group: Group
@@ -34,6 +35,11 @@ export function GroupDetails({ group }: Props) {
             {group.canvasUrl ? (
                 <DataRow label={t('group.canvasCourse')}>
                     <a href={group.canvasUrl} target="_blank" rel="noreferrer">{group.canvasUrl}</a>
+                </DataRow>
+            ) : null}
+            {group.canvasUrl ? (
+                <DataRow label={t('group.lastSyncTime')}>
+                    <GroupDateTime value={group.lastSyncTime} timezone={group.timezone} />
                 </DataRow>
             ) : null}
             <DataRow label={t('group.instructors')}>{instructors}</DataRow>
