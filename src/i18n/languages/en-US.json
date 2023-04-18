@@ -171,6 +171,7 @@
     "successfulDuplication": "Successfully duplicated",
     "examGroupHelp": "For exam groups the group number and the identity of the instructors and submission graders are confidential toward the students.",
     "canvasSync":  "Canvas synchronization",
+    "lastSyncTime": "Last synchronization",
     "canvasCourse": "Canvas course",
     "canvasSection": "Canvas section",
     "studentCount": "{{count}} students",

@@ -10,6 +10,7 @@ import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { Group } from 'resources/instructor/Group';
 import { DataRow } from 'components/DataRow';
+import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 
 type Props = {
     isActualSemester: boolean,
@@ -64,6 +65,11 @@ export function GroupDetails({
             {group.canvasUrl ? (
                 <DataRow label={t('group.canvasCourse')}>
                     <a href={group.canvasUrl} target="_blank" rel="noreferrer">{group.canvasUrl}</a>
+                </DataRow>
+            ) : null}
+            {group.canvasUrl ? (
+                <DataRow label={t('group.lastSyncTime')}>
+                    <GroupDateTime value={group.lastSyncTime} timezone={group.timezone} />
                 </DataRow>
             ) : null}
             <DataRow label={t('common.timezone')}>{group.timezone}</DataRow>

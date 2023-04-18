@@ -172,6 +172,7 @@
     "successfulDuplication": "A csoport duplikálva",
     "examGroupHelp": "Vizsgacsoportok esetén a csoport szám, valamint az oktatók és értékelők személye rejtett a hallgatók elől.",
     "canvasSync":  "Canvas szinkronizáció",
+    "lastSyncTime": "Utolsó szinkronizáció",
     "setupCanvas": "Canvas beállítása",
     "canvasCourse": "Canvas kurzus",
     "canvasSection": "Canvas kurzusszekció",
