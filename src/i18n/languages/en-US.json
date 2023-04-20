@@ -54,7 +54,8 @@
     "list": "List",
     "grid": "Grid",
     "areYouSure": "Are you sure?",
-    "confirmDiscard": "If you close the modal, all your changes will be lost!"
+    "confirmDiscard": "If you close the modal, all your changes will be lost!",
+    "confirmAddSemester": "If you add a new semester, that will be the actual one and you won't be able to change back the previous one"
   },
   "passwordProtected": {
     "passwordProtected": "Password protected",
