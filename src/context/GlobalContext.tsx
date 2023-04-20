@@ -24,6 +24,9 @@ export interface NotificationData {
 export type AvailableTheme = 'dark'|'blue';
 const availableThemes = ['dark', 'blue'];
 const defaultTheme: AvailableTheme = 'dark';
+const configuredTheme = availableThemes.includes(process.env.REACT_APP_THEME)
+    ? process.env.REACT_APP_THEME as AvailableTheme
+    : defaultTheme;
 
 /**
  * Set initial values for the new React context
@@ -41,7 +44,7 @@ const GlobalContext = React.createContext<GlobalContextInterface>({
     setIsLoggedIn: () => {
         throw new Error('Context in not initialized');
     },
-    theme: defaultTheme,
+    theme: configuredTheme,
     setTheme: () => {
         throw new Error('Context in not initialized');
     },
@@ -63,16 +66,12 @@ export function GlobalContextProvider({ children }: Props) {
     const [selectedSemester, setSelectedSemester] = useState<Semester | null>(null);
     const [currentNotification, setCurrentNotification] = useState<NotificationData | null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
-    const [theme, setTheme] = useState<AvailableTheme>(
-        availableThemes.includes(process.env.REACT_APP_THEME)
-            ? process.env.REACT_APP_THEME as AvailableTheme
-            : defaultTheme,
-    );
+    const [theme, setTheme] = useState<AvailableTheme>(configuredTheme);
 
     const resetState = () => {
         setSelectedSemester(null);
         setCurrentNotification(null);
-        setTheme(defaultTheme);
+        setTheme(configuredTheme);
     };
 
     const ctx: GlobalContextInterface = {
