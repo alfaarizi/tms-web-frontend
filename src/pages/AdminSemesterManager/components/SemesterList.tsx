@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +10,7 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ButtonGroup } from 'react-bootstrap';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { SemesterListItem } from 'pages/AdminSemesterManager/components/SemesterListItem';
+import { ConfirmModal } from 'components/Modals/ConfirmModal';
 
 type Props = {
     semesters?: Semester[],
@@ -24,6 +25,17 @@ export function SemesterList({
 }: Props) {
     const { t } = useTranslation();
 
+    const [confirmDialog, setConfirmDialog] = useState(false);
+
+    const handleAddButton = () => {
+        setConfirmDialog(true);
+    };
+
+    const onConfirm = () => {
+        setConfirmDialog(false);
+        onAddNext();
+    };
+
     return (
         <SingleColumnLayout>
             <CustomCard>
@@ -31,11 +43,18 @@ export function SemesterList({
                     <CustomCardTitle>{t('common.semesters')}</CustomCardTitle>
                     <ButtonGroup>
                         <ToolbarButton
-                            onClick={onAddNext}
+                            onClick={handleAddButton}
                             icon={faCalendarPlus}
                             text={`${t('common.add')}: ${nextSemester}`}
                         />
                     </ButtonGroup>
+                    <ConfirmModal
+                        description={t('common.confirmAddSemester')}
+                        isConfirmDialogOpen={confirmDialog}
+                        onCancel={() => { setConfirmDialog(false); }}
+                        onConfirm={onConfirm}
+                        title={t('common.areYouSure')}
+                    />
                 </CustomCardHeader>
 
                 {semesters?.map((semester) => <SemesterListItem key={semester.id} semester={semester} />)}
