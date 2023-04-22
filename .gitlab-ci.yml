@@ -27,7 +27,7 @@ eslint:
   allow_failure: true
 
 # Build
-build:
+.build:
   stage: test
   before_script:
     - npm ci
@@ -39,7 +39,7 @@ build:
     expire_in: 1 week
 
 build_staging:
-  extends: build
+  extends: .build
   script:
     - echo "$CD_STAGING_ENV" > .env.production.local
     - echo "$CD_BRANDING" > public/branding.json
@@ -48,7 +48,7 @@ build_staging:
     - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PROJECT_NAMESPACE == "tms-elte"'
 
 build_production:
-  extends: build
+  extends: .build
   script:
     - echo "$CD_PRODUCTION_ENV" > .env.production.local
     - echo "$CD_BRANDING" > public/branding.json
