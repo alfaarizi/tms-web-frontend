@@ -10,5 +10,6 @@ declare namespace NodeJS {
         REACT_APP_BACKEND_CORE_VERSION_RANGE: string,
         REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN: string,
         REACT_APP_THEME: string,
+        REACT_APP_GOOGLE_ANALYTICS_ID?: string,
     }
 }
