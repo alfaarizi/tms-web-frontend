@@ -119,10 +119,10 @@
   },
   "confirmEmail": {
     "success": "Az e-mail-cím sikeresen megerősítve.",
-    "openSettings": "Most már módosíthatod az értesítésekhez használt e-mail-címet a <settings>beállításaidban</settings>.",
-    "logIn": "<login>Bejelentkezés</login> után most már módosíthatod az értesítésekhez használt e-mail-címet.",
-    "differentUser": "<strong>Figyelmeztetés:</strong> Ez az e-mail-cím egy másik felhasználóhoz tartozik. Az értesítési beállításaid módosításához <logout>jelentkezz ki</logout>, majd jelentkezz be a megfelelő felhasználóval.",
-    "failed": "Az e-mail-cím megerősítése nem sikerült, mert hibás megerősítési kódot adtál meg vagy a kód lejárt."
+    "openSettings": "Most már módosíthatja az értesítésekhez használt e-mail-címet a <settings>beállításaiban</settings>.",
+    "logIn": "<login>Bejelentkezés</login> után most már módosíthatja az értesítésekhez használt e-mail-címet.",
+    "differentUser": "<strong>Figyelmeztetés:</strong> Ez az e-mail-cím egy másik felhasználóhoz tartozik. Az értesítési beállításai módosításához <logout>jelentkezzen ki</logout>, majd jelentkezzen be a megfelelő felhasználóval.",
+    "failed": "Az e-mail-cím megerősítése nem sikerült, mert hibás megerősítési kódot adott meg vagy a kód lejárt."
   },
   "navbar": {
     "taskmanager": "Beadandókezelő",
@@ -284,7 +284,7 @@
       "codeCheckerToggles": "CodeChecker check parancs opcionális paraméterei",
       "codeCheckerTogglesHelp": "A CodeChecker check parancs részletes dokumentációja",
       "staticCodeAnalyzerInstructions": "Statikus kódelemző eszköz futtatási parancsai",
-      "staticCodeAnalyzerInstructionsHelp": "Linux alapú tesztelésnél az elemző kimenetét /test/{{outputPathLinux}}, Windows alapú tesztelésnél pedig analóg módon a C:\\\\test\\{{outputPathWindows}} útvonalra szükséges elhelyezni. Továbbá fontos, hogy a fenti utasításoknak meg kell őrizniuk az elemző eszköz kilépési kódját, amely Linux (Bash) alatt a '$?' változóból, Windows (PowerShell) alatt pedig a '$LASTEXITCODE' változóból olvasható ki.",
+      "staticCodeAnalyzerInstructionsHelp": "Linux alapú tesztelésnél az elemző kimenetét /test/{{outputPathLinux}}, Windows alapú tesztelésnél pedig analóg módon a C:\\\\test\\{{outputPathWindows}} útvonalra szükséges elhelyezni. Továbbá fontos, hogy a fenti utasításoknak meg kell őrizniük az elemző eszköz kilépési kódját, amely Linux (Bash) alatt a '$?' változóból, Windows (PowerShell) alatt pedig a '$LASTEXITCODE' változóból olvasható ki.",
       "codeCheckerSkipFile": "Figyelmen kívül hagyott forrásfájlok",
       "codeCheckerSkipFileHelp": "Figyelmen kívül hagyott forrásfájlok listája a CodeChecker skipfile formátumában adható meg.",
       "codeCheckerResult": {
