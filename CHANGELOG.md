@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.0.0...v3.1.0) (2023-04-27)
+
+
+### Features
+
+* added alternative UI theme to distinguish multiple TMS instances visually ([e1df152](https://gitlab.com/tms-elte/frontend-react/commit/e1df152c650ed8e866fc5719ccd5eeed6af08254))
+* added Google Analytics support ([944a49f](https://gitlab.com/tms-elte/frontend-react/commit/944a49f09254c7ffebc459896987cdab8ab7608b))
+* Ask for confirmation before adding a new semester ([4ffd793](https://gitlab.com/tms-elte/frontend-react/commit/4ffd79325962db063624ff41c3929cda103812e8))
+* Display last Canvas synchronization timestamp ([95abdfc](https://gitlab.com/tms-elte/frontend-react/commit/95abdfceb196c59ee1adcabbbb0b9fde9db2c047))
+* Hide Group Time if same as Local Time ([3592fb5](https://gitlab.com/tms-elte/frontend-react/commit/3592fb51d87178c2dc2607bc5be5722569b67d1a))
+* Show current student's name and neptun on the Add Notes modal ([4fed934](https://gitlab.com/tms-elte/frontend-react/commit/4fed934e10f49012bd1ebfa7363df48659319118))
+
 ## [3.0.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.10.0...v3.0.0) (2023-03-29)
 
 
