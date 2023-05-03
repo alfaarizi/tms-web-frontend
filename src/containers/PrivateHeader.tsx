@@ -13,6 +13,7 @@ import { RoleSwitcher } from 'components/Header/RoleSwitcher';
 import { Header } from 'components/Header/Header';
 import { useIsFetching, useQueryClient } from 'react-query';
 import { useSemesters } from 'hooks/common/SemesterHooks';
+import { usePlagiarismServices } from 'hooks/instructor/PlagiarismHooks';
 import { useGlobalContext } from 'context/GlobalContext';
 import { Role } from 'resources/common/Role';
 import { HeaderContent } from 'components/Header/HeaderContent';
@@ -38,6 +39,7 @@ export function PrivateHeader({
         data: semesters,
         refetch: refetchSemesters,
     } = useSemesters(false);
+    const availablePlagiarismServices = usePlagiarismServices(userSettings.isFaculty);
     const history = useHistory();
     const { pathname } = useLocation();
     const [currentRole, setCurrentRole] = useState<Role>(null);
@@ -126,13 +128,16 @@ export function PrivateHeader({
                                     {t('navbar.taskmanager')}
                                 </Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to="/instructor/plagiarism">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faCrosshairs} />
-                                    {' '}
-                                    {t('navbar.plagiarism')}
-                                </Nav.Link>
-                            </LinkContainer>
+                            {availablePlagiarismServices.data?.length
+                                ? (
+                                    <LinkContainer to="/instructor/plagiarism">
+                                        <Nav.Link>
+                                            <FontAwesomeIcon icon={faCrosshairs} />
+                                            {' '}
+                                            {t('navbar.plagiarism')}
+                                        </Nav.Link>
+                                    </LinkContainer>
+                                ) : null}
                             <LinkContainer to="/instructor/exam">
                                 <Nav.Link>
                                     <FontAwesomeIcon icon={faPen} />

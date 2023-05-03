@@ -3,10 +3,16 @@ import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
 import { BaseFileUpload } from 'resources/instructor/BaseFileUpload';
 import { BaseFileUploadResult } from 'resources/instructor/BaseFileUploadResult';
 import { Plagiarism } from 'resources/instructor/Plagiarism';
+import { PlagiarismType } from 'resources/instructor/PlagiarismType';
 import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
 
 export async function index(semesterID: number) {
     const res = await axiosInstance.get<Plagiarism[]>('/instructor/plagiarism', { params: { semesterID } });
+    return res.data;
+}
+
+export async function getServices() {
+    const res = await axiosInstance.get<PlagiarismType[]>('/instructor/plagiarism/services');
     return res.data;
 }
 
@@ -29,8 +35,8 @@ export async function remove(id: number) {
     await axiosInstance.delete(`/instructor/plagiarism/${id}`);
 }
 
-export async function runMoss(id: number) {
-    const res = await axiosInstance.post<Plagiarism>(`/instructor/plagiarism/${id}/run-moss`);
+export async function run(id: number) {
+    const res = await axiosInstance.post<Plagiarism>(`/instructor/plagiarism/${id}/run`);
     return res.data;
 }
 
