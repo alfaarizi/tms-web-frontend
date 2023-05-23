@@ -8,6 +8,8 @@ type Props = {
     icon: IconProp,
     text: string,
     onClick?: () => void,
+    href?: string,
+    target?: string,
     className?: string,
     isLoading?: boolean,
     disabled?: boolean,
@@ -19,6 +21,9 @@ type Props = {
  * @param className Custom className applied to the Bootstrap component
  * @param icon FontAwesome icon
  * @param onClick onClick event handler callback
+ * @param href URL the button should link to; if provided, the button will be an `<a>`
+ *  element instead of a `<button>`
+ * @param target `target` attribute if the button is rendered as an `<a>` element
  * @param text Button text
  * @param displayTextBreakpoint The first viewport size where the button text is visible
  * @param isLoading Show a spinner instead of the icon
@@ -29,6 +34,8 @@ export function ToolbarButton({
     className,
     icon,
     onClick,
+    href,
+    target,
     text,
     isLoading,
     disabled,
@@ -47,6 +54,8 @@ export function ToolbarButton({
             size="sm"
             variant="outline-secondary"
             onClick={onClick}
+            href={href}
+            target={target}
             disabled={disabled || isLoading}
             title={text}
         >
