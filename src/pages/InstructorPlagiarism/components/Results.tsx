@@ -22,12 +22,6 @@ export function Result({
 }: Props) {
     const { t } = useTranslation();
 
-    const openInNewTab = () => {
-        // Force string; if it was `null`, the button with this
-        // callback wouldn’t appear in the first place
-        window.open(responseURL as string, '_blank');
-    };
-
     return (
         <CustomCard>
             <CustomCardHeader>
@@ -44,7 +38,8 @@ export function Result({
                             <ToolbarButton
                                 icon={faExternalLinkAlt}
                                 text={t('common.openInNewTab')}
-                                onClick={openInNewTab}
+                                href={responseURL}
+                                target="_blank"
                             />
                         ) : null}
                 </ButtonGroup>
