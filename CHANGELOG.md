@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.1.0...v3.2.0) (2023-05-26)
+
+
+### Features
+
+* Integrate JPlag plagiarism detection tool ([bb1fd4f](https://gitlab.com/tms-elte/frontend-react/commit/bb1fd4f194caeee3e4d972f21fcd8f0fc0e2fe50))
+
 ## [3.1.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.0.0...v3.1.0) (2023-04-27)
 
 
