@@ -56,6 +56,7 @@ export function GroupForm({
         if (editData) {
             setValue('number', editData.number);
             setValue('timezone', editData.timezone);
+            setValue('isExamGroup', editData.isExamGroup);
         } else {
             setValue('timezone', getUserTimezone());
         }
@@ -129,7 +130,12 @@ export function GroupForm({
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Check type="checkbox" label={t('group.examGroup')} {...register('isExamGroup')} />
+                    <Form.Check
+                        type="checkbox"
+                        id="groupForm-isExamGroup"
+                        label={t('group.examGroup')}
+                        {...register('isExamGroup')}
+                    />
                     <Form.Text className="text-muted">
                         {t('group.examGroupHelp')}
                     </Form.Text>
