@@ -22,6 +22,7 @@ import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { useUserSettings } from 'hooks/common/UserHooks';
 import { Group } from 'resources/instructor/Group';
+import { INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
 
  enum GroupView {
     ALL = 'all',
@@ -39,7 +40,7 @@ export function InstructorTaskManager() {
     const [groupView, setGroupView] = useState<GroupView>(GroupView.ALL);
 
     useEffect(() => {
-        const value = localStorage.getItem('instructorGroupView');
+        const value = localStorage.getItem(INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY);
 
         // Check if the loaded value is a valid view
         switch (value) {
@@ -63,7 +64,7 @@ export function InstructorTaskManager() {
      */
     const handleGroupTypeChange = (newGroupView: GroupView) => {
         setGroupView(newGroupView);
-        localStorage.setItem('instructorGroupView', newGroupView);
+        localStorage.setItem(INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY, newGroupView);
     };
 
     const filteredGroups = useMemo(() => {

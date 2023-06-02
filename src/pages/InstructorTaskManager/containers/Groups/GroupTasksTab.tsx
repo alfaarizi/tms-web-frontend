@@ -13,6 +13,7 @@ import { GroupTaskListView } from 'pages/InstructorTaskManager/containers/Groups
 import { GroupTaskGridView } from 'pages/InstructorTaskManager/containers/Groups/GroupTaskGridView';
 import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
 import DropdownItem from 'react-bootstrap/DropdownItem';
+import { INSTRUCTOR_TASK_VIEW_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
 
 type Props = {
     group: Group
@@ -35,7 +36,7 @@ export function GroupTasksTab({ group }: Props) {
     const [view, setView] = useState<View>(View.List);
 
     useEffect(() => {
-        const value = localStorage.getItem('instructorTaskView');
+        const value = localStorage.getItem(INSTRUCTOR_TASK_VIEW_LOCAL_STORAGE_KEY);
 
         // Check if the loaded value is a valid view
         switch (value) {
@@ -55,7 +56,7 @@ export function GroupTasksTab({ group }: Props) {
      */
     const handleViewChange = (newView: View) => {
         setView(newView);
-        localStorage.setItem('instructorTaskView', newView);
+        localStorage.setItem(INSTRUCTOR_TASK_VIEW_LOCAL_STORAGE_KEY, newView);
     };
 
     // Render

@@ -6,6 +6,7 @@ import { AxiosError } from 'axios';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
 import { useLogoutMutation } from 'hooks/common/UserHooks';
+import { PROXY_AUTH_REDIRECT_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
 
 /**
  * Global error handler. Displays notifications about network errors and handle specific status codes.
@@ -29,7 +30,7 @@ export function useNetworkErrorHandler() {
             if (error.response.headers['proxy-authenticate']) {
                 // Save the current location to localStorage.
                 // So, the application can redirect the user to the original location after successful login.
-                localStorage.setItem('proxyAuthRedirect', location.pathname);
+                localStorage.setItem(PROXY_AUTH_REDIRECT_LOCAL_STORAGE_KEY, location.pathname);
 
                 // Get redirectURI (or other instructions) from the response headers
                 const redirectTo: string = error.response.headers['proxy-authenticate'];
@@ -45,7 +46,7 @@ export function useNetworkErrorHandler() {
                 message: error.response.data.message,
             });
         } else {
-            // If it an error without a formatted json body
+            // If it is an error without a formatted json body
             // then display the generic error message for the given status
             push({
                 variant: 'error',
