@@ -21,7 +21,7 @@ import { axiosInstance } from 'api/axiosInstance';
 import { PrivateHeader } from 'containers/PrivateHeader';
 import { PublicHeader } from 'containers/PublicHeader';
 import { useGlobalContext } from 'context/GlobalContext';
-import { usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { usePrivateSystemInfoQuery, usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { useErrorBoundaryContext } from 'components/ErrorBoundary';
 import { InvalidVersionRangeError } from 'exceptions/InvalidVersionRangeError';
 
@@ -49,6 +49,9 @@ export function App() {
     const { isLoggedIn, setIsLoggedIn } = useGlobalContext();
     const { triggerError } = useErrorBoundaryContext();
     const publicSystemInfo = usePublicSystemInfoQuery(false);
+    // NOTE: this is a temporary workaround to set current semester as current for all users
+    // TODO: rewrite login logic in https://gitlab.com/tms-elte/frontend-react/-/issues/112
+    const privateSystemInfo = usePrivateSystemInfoQuery(!!isLoggedIn);
     const {
         data: userSettings,
         refetch: refetchUserSettings,
