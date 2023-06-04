@@ -53,7 +53,7 @@ export function useUpdateDockerImageMutation(taskID: number) {
 
     return useMutation(() => EvaluatorService.updateDockerImage(taskID), {
         onSuccess: async (data) => {
-            queryClient.setQueryData([QUERY_KEY, { taskID }, 'test-form-data'], data);
+            queryClient.setQueryData([QUERY_KEY, { taskID }, 'additional-information'], data);
         },
     });
 }
