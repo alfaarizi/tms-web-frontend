@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.1](https://gitlab.com/tms-elte/frontend-react/compare/v3.2.0...v3.2.1) (2023-06-04)
+
+
+### Bug Fixes
+
+* Docker image build or pull date is not updated after image updated ([1c99817](https://gitlab.com/tms-elte/frontend-react/commit/1c998174b3ed52faba9aebf77d8e79b8fb18dea5))
+* exam group checkbox is not set correctly on group form ([ae53505](https://gitlab.com/tms-elte/frontend-react/commit/ae5350577230467b9c52bb1f0713ea9f1058d401))
+* selected semester is null for students and instructors after page refresh ([21df929](https://gitlab.com/tms-elte/frontend-react/commit/21df92962935afd52a005a5c7c744c77666a3e60))
+
 ## [3.2.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.1.0...v3.2.0) (2023-05-26)
 
 
