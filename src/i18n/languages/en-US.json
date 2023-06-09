@@ -250,7 +250,7 @@
       "uploadDockerfileHelp": "If you upload a Dockerfile, the application will ignore the value of the Docker Image filed. Notice that building an image from a Dockerfile can take up several minutes.",
       "compileInstructions": "Compiler instructions",
       "runInstructions": "Run instructions",
-      "runInstructionsHelp": "Arguments of the test case are available in the \"$@\" variable. (@PSBoundParameters in case of PowerShell.) The serial of the test case is stored in the $TEST_CASE_NR environment variable.",
+      "runInstructionsHelp": "Arguments of the test case are available in the \"$@\" variable. ($args in case of PowerShell.) The serial of the test case is stored in the $TEST_CASE_NR environment variable.",
       "runWebAppInstructionsHelp": "Set up web application environment and start web application. The instructions will be executed in asynchronously.",
       "showFullErrorMsg": "When checked students can see the detailed compile or runtime error messages.",
       "reevaluate" : "Reevaluate already tested, but ungraded student submissions",

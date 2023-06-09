@@ -252,7 +252,7 @@
       "uploadDockerfileHelp": "Ha saját Dockerfile-t tölt fel, akkor a Docker kép mező értékét nem veszi figyelembe a program. Figyelem! A Dockerfileból való Docker kép építése több percig is eltarthat.",
       "compileInstructions": "Fordítási beállítások",
       "runInstructions": "Futtatási beállítások",
-      "runInstructionsHelp": "A teszteset parancssori argumentumai a \"$@\" változóban érhetőek el. (Powershell esetén @PSBoundParameters.) A teszteset sorszáma a $TEST_CASE_NR környezeti változóból olvasható ki.",
+      "runInstructionsHelp": "A teszteset parancssori argumentumai a \"$@\" változóban érhetőek el. (Powershell esetén $args.) A teszteset sorszáma a $TEST_CASE_NR környezeti változóból olvasható ki.",
       "runWebAppInstructionsHelp": "Webalkalmazás környezet konfigurációja és a web szerver indítása. A parancsok végrehajtása azonnal visszatér.",
       "showFullErrorMsg": "A hallgatók láthatják a részletes fordítási és futtatási hibaüzeneteket.",
       "reevaluate": "Már tesztelt, de még nem értékelt hallgatói megoldások újratesztelése",
