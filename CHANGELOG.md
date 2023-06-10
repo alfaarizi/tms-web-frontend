@@ -8,8 +8,8 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * Docker image build or pull date is not updated after image updated ([1c99817](https://gitlab.com/tms-elte/frontend-react/commit/1c998174b3ed52faba9aebf77d8e79b8fb18dea5))
-* exam group checkbox is not set correctly on group form ([ae53505](https://gitlab.com/tms-elte/frontend-react/commit/ae5350577230467b9c52bb1f0713ea9f1058d401))
-* selected semester is null for students and instructors after page refresh ([21df929](https://gitlab.com/tms-elte/frontend-react/commit/21df92962935afd52a005a5c7c744c77666a3e60))
+* Exam group checkbox is not set correctly on group form ([ae53505](https://gitlab.com/tms-elte/frontend-react/commit/ae5350577230467b9c52bb1f0713ea9f1058d401))
+* Selected semester is null for students and instructors after page refresh ([21df929](https://gitlab.com/tms-elte/frontend-react/commit/21df92962935afd52a005a5c7c744c77666a3e60))
 
 ## [3.2.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.1.0...v3.2.0) (2023-05-26)
 
@@ -23,12 +23,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* added alternative UI theme to distinguish multiple TMS instances visually ([e1df152](https://gitlab.com/tms-elte/frontend-react/commit/e1df152c650ed8e866fc5719ccd5eeed6af08254))
-* added Google Analytics support ([944a49f](https://gitlab.com/tms-elte/frontend-react/commit/944a49f09254c7ffebc459896987cdab8ab7608b))
+* Added alternative UI theme to distinguish multiple TMS instances visually ([e1df152](https://gitlab.com/tms-elte/frontend-react/commit/e1df152c650ed8e866fc5719ccd5eeed6af08254))
+* Added Google Analytics support ([944a49f](https://gitlab.com/tms-elte/frontend-react/commit/944a49f09254c7ffebc459896987cdab8ab7608b))
 * Ask for confirmation before adding a new semester ([4ffd793](https://gitlab.com/tms-elte/frontend-react/commit/4ffd79325962db063624ff41c3929cda103812e8))
 * Display last Canvas synchronization timestamp ([95abdfc](https://gitlab.com/tms-elte/frontend-react/commit/95abdfceb196c59ee1adcabbbb0b9fde9db2c047))
 * Hide Group Time if same as Local Time ([3592fb5](https://gitlab.com/tms-elte/frontend-react/commit/3592fb51d87178c2dc2607bc5be5722569b67d1a))
-* Show current student's name and neptun on the Add Notes modal ([4fed934](https://gitlab.com/tms-elte/frontend-react/commit/4fed934e10f49012bd1ebfa7363df48659319118))
+* Show current student's name and Neptun code on the Add Notes modal ([4fed934](https://gitlab.com/tms-elte/frontend-react/commit/4fed934e10f49012bd1ebfa7363df48659319118))
 
 ## [3.0.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.10.0...v3.0.0) (2023-03-29)
 
@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 * Implement confirm close functionality for all modals with forms ([6cc70d6](https://gitlab.com/tms-elte/frontend-react/commit/6cc70d6f8c4b0afa3d15002b2616a2bfe646e39c))
-* Import multiple test cases from csv and xls files ([d1e89e6](https://gitlab.com/tms-elte/frontend-react/commit/d1e89e6c0779d605068348fc3091889037d25e1f))
+* Import multiple test cases from CSV and XLS files ([d1e89e6](https://gitlab.com/tms-elte/frontend-react/commit/d1e89e6c0779d605068348fc3091889037d25e1f))
 * user interface for task-level git repositories ([ea25c99](https://gitlab.com/tms-elte/frontend-react/commit/ea25c9940e8111b74fa2084f0ee97920efacb8e3))
 
 ### [2.9.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.9.0...v2.9.1) (2023-02-10)
@@ -59,7 +59,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* Always show students' names and neptun codes on the grid view ([6c8dd88](https://gitlab.com/tms-elte/frontend-react/commit/6c8dd888c8129ed4f34e2f523b864f8666364475))
+* Always show students' names and Neptun codes on the grid view ([6c8dd88](https://gitlab.com/tms-elte/frontend-react/commit/6c8dd888c8129ed4f34e2f523b864f8666364475))
 * Plagiarism basefile support ([163769d](https://gitlab.com/tms-elte/frontend-react/commit/163769de709a0c0cb8b6ad0317068f64e108de80))
 * User Interface for personal notes ([51ceaf2](https://gitlab.com/tms-elte/frontend-react/commit/51ceaf22d09fef25c214c946d289e163a6a83e62))
 
@@ -73,7 +73,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* disable login button while waiting for response and add timeout after failure ([430096f](https://gitlab.com/tms-elte/frontend-react/commit/430096f1271ba2ed232415fdcd048eade6902361))
+* Disable login button while waiting for response and add timeout after failure ([430096f](https://gitlab.com/tms-elte/frontend-react/commit/430096f1271ba2ed232415fdcd048eade6902361))
 * Fix displaying solutions section and instructor files ([d08b50b](https://gitlab.com/tms-elte/frontend-react/commit/d08b50bea8449e960e1681938aa00e633188c64c))
 
 ### [2.8.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.8.0...v2.8.1) (2022-10-21)
@@ -101,7 +101,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* Properly save default submission status when grading. ([835eac4](https://gitlab.com/tms-elte/frontend-react/commit/835eac44cfd60049f05cdd0404278a53b4543db5))
+* Properly save default submission status when grading ([835eac4](https://gitlab.com/tms-elte/frontend-react/commit/835eac44cfd60049f05cdd0404278a53b4543db5))
 
 ### [2.7.1](https://gitlab.com/tms-elte/frontend-react/compare/v2.7.0...v2.7.1) (2022-09-19)
 
@@ -121,7 +121,7 @@ All notable changes to this project will be documented in this file. See [standa
 * Inform students about how to upload new solutions to a Canvas tasks ([cea8a36](https://gitlab.com/tms-elte/frontend-react/commit/cea8a368901c0207e5016a6e340025a27b18eef0))
 * Password protected task user interface ([b450b92](https://gitlab.com/tms-elte/frontend-react/commit/b450b929b17e377d700a84c1f0afc5bda3a75290))
 * Remote execution of web applications ([a379676](https://gitlab.com/tms-elte/frontend-react/commit/a379676280daa02e516319bb1e4913ec303bca8d))
-* Show Canvas url for groups and tasks ([95f4148](https://gitlab.com/tms-elte/frontend-react/commit/95f4148068d7a4b864bd646ea64639b193d6dbb7))
+* Show Canvas URL for groups and tasks ([95f4148](https://gitlab.com/tms-elte/frontend-react/commit/95f4148068d7a4b864bd646ea64639b193d6dbb7))
 
 ## [2.6.0](https://gitlab.com/tms-elte/frontend-react/compare/v2.5.0...v2.6.0) (2022-04-14)
 
@@ -131,7 +131,7 @@ All notable changes to this project will be documented in this file. See [standa
 * Added option to reevaluate ungraded submissions when modifying automated testing ([d52128f](https://gitlab.com/tms-elte/frontend-react/commit/d52128f2d50c0ba939dae4f05e232664958d5490))
 * Display TMS version information and repository URL on bottom of the login page ([017eb70](https://gitlab.com/tms-elte/frontend-react/commit/017eb70ad3e1fc065c32cbed6848bf6b113f14f8))
 * Display upload count for solutions ([15355fb](https://gitlab.com/tms-elte/frontend-react/commit/15355fb6d418845d5eb473e5d5ab547445e0090a))
-* Optional sorting of student submissions. ([efacf07](https://gitlab.com/tms-elte/frontend-react/commit/efacf07803562691e9a34994cf19428d0e3d8575))
+* Optional sorting of student submissions ([efacf07](https://gitlab.com/tms-elte/frontend-react/commit/efacf07803562691e9a34994cf19428d0e3d8575))
 
 
 ### Bug Fixes
