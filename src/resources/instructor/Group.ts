@@ -1,4 +1,5 @@
 import { Course } from 'resources/common/Course';
+import { Instructor } from 'resources/instructor/Instructor';
 
 export interface Group {
     id: number;
@@ -12,4 +13,5 @@ export interface Group {
     timezone: string;
     canvasUrl?: string;
     lastSyncTime?: string;
+    instructors?: Instructor[];
 }
