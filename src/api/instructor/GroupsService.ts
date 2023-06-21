@@ -11,6 +11,7 @@ export async function index(semesterID: number, courseID?: number) {
         params: {
             semesterID,
             courseID,
+            expand: 'instructors',
         },
     });
     return res.data;
