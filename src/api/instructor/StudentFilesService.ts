@@ -69,7 +69,7 @@ export async function downloadAllFiles(taskID: number, onlyUngraded: boolean) {
 
 export async function grade(file: StudentFile) {
     const res = await axiosInstance.patch(
-        `/instructor/student-files/${file.id}?expand=uploader,task,task.group,codeCompass`,
+        `/instructor/student-files/${file.id}?expand=uploader,task,task.group,codeCompass,codeCheckerResult`,
         file,
     );
     return res.data;
@@ -78,7 +78,8 @@ export async function grade(file: StudentFile) {
 export async function startCodeCompass(file: StudentFile) {
     const res = await axiosInstance
         .post<StudentFile>(
-            `/instructor/student-files/${file.id}/start-code-compass?expand=uploader,task,task.group,codeCompass`,
+            `/instructor/student-files/${file.id}/start-code-compass?expand=uploader,task,task.group,`
+                + 'codeCompass,codeCheckerResult',
         );
     return res.data;
 }
@@ -86,7 +87,8 @@ export async function startCodeCompass(file: StudentFile) {
 export async function stopCodeCompass(file: StudentFile) {
     const res = await axiosInstance
         .post<StudentFile>(
-            `/instructor/student-files/${file.id}/stop-code-compass?expand=uploader,task,task.group,codeCompass`,
+            `/instructor/student-files/${file.id}/stop-code-compass?expand=uploader,task,task.group`
+                + 'codeCompass,codeCheckerResult',
         );
     return res.data;
 }
