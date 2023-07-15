@@ -112,13 +112,14 @@ export function GroupPage() {
     const handleCanvasSetup = async (data: CanvasSetupData) => {
         try {
             await canvasSetupMutation.mutateAsync(data);
-            showCanvasSetupModal.toHide();
             notifications.push({
                 variant: 'success',
                 message: t('group.successfulCanvasSync'),
             });
         } catch (e) {
             // Already handled globally
+        } finally {
+            showCanvasSetupModal.toHide();
         }
     };
 

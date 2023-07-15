@@ -30,7 +30,8 @@ export function useCanvasSetupMutation(groupID: number) {
     return useMutation(
         (data: CanvasSetupData) => CanvasService.setup(groupID, data),
         {
-            onSuccess: async () => {
+            // the queries should be invalidated both in case of success and error
+            onSettled: async () => {
                 await afterSync(queryClient, groupID);
             },
         },
@@ -47,7 +48,8 @@ export function useCanvasSyncMutation(groupID: number) {
     return useMutation(
         () => CanvasService.sync(groupID),
         {
-            onSuccess: async () => {
+            // the queries should be invalidated both in case of success and error
+            onSettled: async () => {
                 await afterSync(queryClient, groupID);
             },
         },
