@@ -47,7 +47,9 @@ export function StudentFilesList({
 
     // Download file
     const handleDownload = async (file: StudentFile) => {
-        downloadfile.download(file.name, file.id);
+        if (file.name !== undefined) {
+            downloadfile.download(file.name, file.id);
+        }
     };
 
     // Set graded file

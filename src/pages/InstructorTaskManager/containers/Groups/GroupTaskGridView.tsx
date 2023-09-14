@@ -45,12 +45,11 @@ export function GroupTaskGridView({ group }: Props) {
         return map;
     }, [flatTaskList]);
 
+    // This function can return undefined, because the studentList and categorizedTasks arrays can be out of sync
+    // during query invalidation in mutations.
     const getStudentFile = (taskID: number, studentID: number): GridStudentFile | undefined => {
         const taskFiles = taskFileMap.get(taskID);
-        if (taskFiles) {
-            return taskFiles.get(studentID);
-        }
-        return undefined;
+        return taskFiles?.get(studentID);
     };
 
     // Render

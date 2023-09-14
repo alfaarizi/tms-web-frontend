@@ -27,7 +27,7 @@ export function TaskGridTableBody({ getStudentFile, students, taskList }: Props)
     const [widthForLeft, setWidthForLeft] = useState<number>();
 
     useEffect(() => {
-        if (ref.current != null) {
+        if (ref.current !== null) {
             setWidthForLeft(ref.current.offsetWidth);
         }
     }, []);
@@ -43,10 +43,13 @@ export function TaskGridTableBody({ getStudentFile, students, taskList }: Props)
                 </td>
                 {taskList.map((task) => {
                     const file = getStudentFile(task.id, student.id);
+                    if (!file) {
+                        return null;
+                    }
                     const key = `${task.id}-${student.id}`;
                     return (
                         <td key={key} className="text-center">
-                            {file ? <TaskGridCellButton studentFile={file} /> : '-'}
+                            <TaskGridCellButton studentFile={file} />
                         </td>
                     );
                 })}

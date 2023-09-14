@@ -42,10 +42,12 @@ export const TaskPage = () => {
     if (!task.data) {
         return null;
     }
-    const studentFile: StudentFile | undefined = task.data.studentFiles[0];
+    const studentFile: StudentFile = task.data.studentFiles[0];
 
     const handleStudentFileDownload = () => {
-        downloadStudentFile.download(studentFile.name, studentFile.id);
+        if (studentFile.name !== undefined) {
+            downloadStudentFile.download(studentFile.name, studentFile.id);
+        }
     };
 
     const handleVerify = async (data: VerifyItem) => {
@@ -84,8 +86,8 @@ export const TaskPage = () => {
     };
 
     let uploadCard;
-    if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile?.isAccepted !== 'Accepted')
-        || studentFile?.isAccepted === 'Late Submission') {
+    if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile.isAccepted !== 'Accepted')
+        || studentFile.isAccepted === 'Late Submission') {
         if (task.data.canvasUrl) {
             uploadCard = <CanvasUploadInfo />;
         } else {
@@ -108,7 +110,7 @@ export const TaskPage = () => {
         <>
             <TaskDetails task={task.data} />
 
-            {(studentFile && !studentFile.verified)
+            {(!studentFile.verified)
             && (
                 <VerifyItemForm
                     onSave={handleVerify}
@@ -127,7 +129,7 @@ export const TaskPage = () => {
                 />
             )}
 
-            {studentFile
+            {studentFile.isAccepted !== 'No Submission'
             && (
                 <StudentFileDetails
                     studentFile={studentFile}

@@ -55,7 +55,9 @@ export function StudentFilePage() {
 
     // Download file
     const handleDownload = async (file: StudentFile) => {
-        downloadStudentFile.download(file.name, file.id);
+        if (file.name !== undefined) {
+            downloadStudentFile.download(file.name, file.id);
+        }
     };
 
     // GraderModel save function

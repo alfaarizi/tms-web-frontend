@@ -21,9 +21,9 @@ export const TaskListItem = ({
             <div className="d-flex justify-content-between align-items-center w-100">
                 <strong>{task.name}</strong>
                 <strong>
-                    {task.studentFiles[0]?.translatedIsAccepted}
+                    {task.studentFiles[0].translatedIsAccepted}
                     {' '}
-                    {task.studentFiles[0]?.grade ? ` (${task.studentFiles[0]?.grade})` : null}
+                    {task.studentFiles[0].grade ? ` (${task.studentFiles[0]?.grade})` : null}
                 </strong>
             </div>
 
