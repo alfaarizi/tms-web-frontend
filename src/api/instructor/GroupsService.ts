@@ -5,6 +5,7 @@ import { UserAddResponse } from 'resources/instructor/UserAddResponse';
 import { GroupStats } from 'resources/instructor/GroupStats';
 import { StudentStats } from 'resources/instructor/StudentStats';
 import { StudentNotes } from 'resources/instructor/StudentNotes';
+import { safeLocaleCompare } from 'utils/safeLocaleCompare';
 
 export async function index(semesterID: number, courseID?: number) {
     const res = await axiosInstance.get<Group[]>('/instructor/groups', {
@@ -59,13 +60,7 @@ export async function listStudents(groupID: number) {
         if (a.name === b.name) {
             return a.neptun.localeCompare(b.neptun);
         }
-        if (a.name !== null && b.name !== null) {
-            return a.name.localeCompare(b.name);
-        }
-        if (b.name === null) {
-            return 1;
-        }
-        return -1;
+        return safeLocaleCompare(a.name, b.name);
     });
 }
 

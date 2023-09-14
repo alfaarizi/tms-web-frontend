@@ -10,6 +10,7 @@ import {
     faArrowRotateLeft,
     faLock,
     faQuestion,
+    faMinus,
     IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -59,6 +60,10 @@ export function TaskGridCellButton({ studentFile }: Props) {
         case 'Late Submission':
             icon = faArrowRotateLeft;
             variant = 'dark';
+            break;
+        case 'No Submission':
+            icon = faMinus;
+            variant = 'light';
             break;
         default:
             icon = faQuestion;

@@ -2,8 +2,8 @@ import { CodeCheckerResult } from 'resources/student/CodeCheckerResult';
 
 export interface StudentFile {
     id: number;
-    name: string;
-    uploadTime: string;
+    name?: string;
+    uploadTime?: string;
     isAccepted: string;
     translatedIsAccepted: string;
     grade: number;

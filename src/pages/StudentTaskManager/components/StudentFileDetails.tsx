@@ -18,19 +18,22 @@ type StudentFileDetailsProps = {
     autoTest: number
 }
 
-export const StudentFileDetails = (props: StudentFileDetailsProps) => {
-    const { studentFile, onDownload, autoTest } = props;
+export const StudentFileDetails = ({ studentFile, onDownload, autoTest } : StudentFileDetailsProps) => {
     const { t } = useTranslation();
 
     return (
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>{t('task.solution')}</CustomCardTitle>
-                <ToolbarButton
-                    onClick={onDownload}
-                    icon={faDownload}
-                    text={t('common.download')}
-                />
+                {studentFile.uploadCount > 0
+                    ? (
+                        <ToolbarButton
+                            onClick={onDownload}
+                            icon={faDownload}
+                            text={t('common.download')}
+                        />
+                    )
+                    : null}
             </CustomCardHeader>
 
             <DataRow label={t('task.name')}>{studentFile.name}</DataRow>

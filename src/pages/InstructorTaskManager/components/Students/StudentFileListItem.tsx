@@ -74,7 +74,7 @@ export function StudentFileListItem({
                             )
                             : null}
 
-                        {isCodeCompassEnabled && !file.codeCompass
+                        {isCodeCompassEnabled && !file.codeCompass && file.uploadCount > 0
                             ? (
                                 <ToolbarButton
                                     onClick={() => handleStartCodeCompass(file)}
@@ -109,12 +109,16 @@ export function StudentFileListItem({
                             )
                             : null}
 
-                        <ToolbarButton
-                            onClick={() => onDownload(file)}
-                            icon={faDownload}
-                            text={t('common.download')}
-                            displayTextBreakpoint="none"
-                        />
+                        {file.uploadCount > 0
+                            ? (
+                                <ToolbarButton
+                                    onClick={() => onDownload(file)}
+                                    icon={faDownload}
+                                    text={t('common.download')}
+                                    displayTextBreakpoint="none"
+                                />
+                            )
+                            : null}
 
                         {isActualSemester
                             ? (
@@ -126,7 +130,7 @@ export function StudentFileListItem({
                                 />
                             )
                             : null}
-                        {isExecutable
+                        {isExecutable && file.uploadCount > 0
                             && (
                                 <WebAppExecutionControl
                                     file={file}

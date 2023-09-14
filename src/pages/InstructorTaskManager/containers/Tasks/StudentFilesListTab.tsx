@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faFileArchive, faFileCsv, faFileExcel, faFileExport, faFilterCircleXmark, faListUl, faSort,
 } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 import { Task } from 'resources/instructor/Task';
 import { useDownloadAll, useExportSpreadsheet, useStudentFilesForTask } from 'hooks/instructor/StudentFileHooks';
@@ -23,7 +24,7 @@ import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextB
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { TaskLevelRepoDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskLevelRepoDetails';
-import { Link } from 'react-router-dom';
+import { safeLocaleCompare } from 'utils/safeLocaleCompare';
 
 type Props = {
     task: Task
@@ -64,19 +65,22 @@ export function StudentFilesListTab({
             return null;
         }
 
-        const sorted = studentFiles.data.sort(
-            (a: StudentFile, b: StudentFile) => {
-                if (!a.grade && !!b.grade) {
-                    return -1;
-                }
-                if (!!a.grade && !b.grade) {
-                    return 1;
-                }
+        const getStatusNumber = (s : StudentFile) => {
+            // Ungraded
+            if (s.isAccepted !== 'No Submission' && !s.grade) {
+                return 1;
+            }
+            // Unsubmitted
+            if (s.isAccepted === 'No Submission') {
+                return 2;
+            }
+            // Graded
+            return 3;
+        };
 
-                return a.uploadTime.localeCompare(b.uploadTime);
-            },
+        return studentFiles.data.sort(
+            (a, b) => getStatusNumber(a) - getStatusNumber(b) || safeLocaleCompare(a.uploadTime, b.uploadTime),
         );
-        return sorted;
     };
 
     const sortingByName = () => {
@@ -84,11 +88,9 @@ export function StudentFilesListTab({
             return null;
         }
 
-        const sorted = studentFiles.data.sort(
-            (a: StudentFile, b: StudentFile) => a.uploader.name.localeCompare(b.uploader.name),
+        return studentFiles.data.sort(
+            (a: StudentFile, b: StudentFile) => safeLocaleCompare(a.uploader.name, b.uploader.name),
         );
-
-        return sorted;
     };
 
     const sortingByUploadTime = () => {
@@ -96,11 +98,9 @@ export function StudentFilesListTab({
             return null;
         }
 
-        const sorted = studentFiles.data.sort(
-            (a: StudentFile, b: StudentFile) => a.uploadTime.localeCompare(b.uploadTime),
+        return studentFiles.data.sort(
+            (a: StudentFile, b: StudentFile) => safeLocaleCompare(a.uploadTime, b.uploadTime),
         );
-
-        return sorted;
     };
 
     const sortedStudentFiles = useMemo(() => {
