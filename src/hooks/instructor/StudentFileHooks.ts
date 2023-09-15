@@ -142,3 +142,11 @@ export function useStopCodeCompassMutation(taskId: number) {
         },
     });
 }
+
+export function useAutoTestResults(id: number, enabled: boolean = true) {
+    return useQuery(
+        [QUERY_KEY, 'auto-tester-results', { id }],
+        () => StudentFilesService.autoTesterResults(id),
+        { enabled },
+    );
+}

@@ -1,17 +1,18 @@
 import React, { ReactNode, useState } from 'react';
 import { ButtonGroup, Col, Row } from 'react-bootstrap';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import {
     faCompass, faDownload, faEdit, faInfoCircle, faList, faStop,
 } from '@fortawesome/free-solid-svg-icons';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { StudentFile } from 'resources/instructor/StudentFile';
 import { useShow } from 'ui-hooks/useShow';
-import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
 import { useTranslation } from 'react-i18next';
-import { Task } from 'resources/instructor/Task';
+import { useAutoTestResults } from 'hooks/instructor/StudentFileHooks';
+import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
+import { ListCardItem } from 'components/ListCardItem/ListCardItem';
+import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { CodeCompassInformationAlert } from 'components/CodeCompassInformationAlert';
 import { Status } from 'resources/instructor/CodeCompassInstance';
+import { StudentFile } from 'resources/instructor/StudentFile';
+import { Task } from 'resources/instructor/Task';
 import { WebAppExecutionControl } from './WebAppExecutionControl';
 
 type Props = {
@@ -39,6 +40,11 @@ export function StudentFileListItem({
 }: Props) {
     const { t } = useTranslation();
     const showAutoTesterResults = useShow();
+    const [loadAutoTesterResults, setLoadAutoTesterResults] = useState(false);
+    const {
+        data: autoTesterResults,
+        refetch: refetchAutoTesterResults,
+    } = useAutoTestResults(file.id, loadAutoTesterResults);
     const isExecutable = task && task.appType === 'Web';
     const showCodeCompassInformation = useShow();
     const [isCodeCompassLoading, setIsCodeCompassLoading] = useState(false);
@@ -55,6 +61,12 @@ export function StudentFileListItem({
         setIsCodeCompassLoading(false);
     };
 
+    const handleAutoTesterResultsDisplay = async (data: StudentFile) => {
+        await refetchAutoTesterResults();
+        setLoadAutoTesterResults(true); // keep the query enabled to get updates
+        showAutoTesterResults.toShow();
+    };
+
     return (
         <ListCardItem>
             <Row>
@@ -66,7 +78,7 @@ export function StudentFileListItem({
                         {file.errorMsg
                             ? (
                                 <ToolbarButton
-                                    onClick={showAutoTesterResults.toShow}
+                                    onClick={() => handleAutoTesterResultsDisplay(file)}
                                     icon={faList}
                                     text={t('task.evaluator.results')}
                                     displayTextBreakpoint="none"
@@ -144,6 +156,7 @@ export function StudentFileListItem({
                     <AutoTestResultAlert
                         isAccepted={file.isAccepted}
                         errorMsg={file.errorMsg}
+                        results={autoTesterResults}
                         onClose={showAutoTesterResults.toHide}
                     />
                 )
