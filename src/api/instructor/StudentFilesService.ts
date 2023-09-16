@@ -1,4 +1,5 @@
 import { StudentFile } from 'resources/instructor/StudentFile';
+import { AutoTesterResult } from 'resources/common/AutoTesterResult';
 import { axiosInstance } from 'api/axiosInstance';
 
 export async function listForTask(taskID: number) {
@@ -90,5 +91,12 @@ export async function stopCodeCompass(file: StudentFile) {
             `/instructor/student-files/${file.id}/stop-code-compass?expand=uploader,task,task.group`
                 + 'codeCompass,codeCheckerResult',
         );
+    return res.data;
+}
+
+export async function autoTesterResults(id: number) {
+    const res = await axiosInstance.get<AutoTesterResult[]>(
+        `/instructor/student-files/${id}/auto-tester-results`,
+    );
     return res.data;
 }

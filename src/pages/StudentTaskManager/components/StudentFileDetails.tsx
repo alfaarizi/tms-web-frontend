@@ -11,6 +11,7 @@ import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { useAutoTestResults } from 'hooks/student/StudentFileHooks';
 
 type StudentFileDetailsProps = {
     studentFile: StudentFile,
@@ -20,6 +21,7 @@ type StudentFileDetailsProps = {
 
 export const StudentFileDetails = ({ studentFile, onDownload, autoTest } : StudentFileDetailsProps) => {
     const { t } = useTranslation();
+    const autoTesterResults = useAutoTestResults(studentFile.id);
 
     return (
         <CustomCard>
@@ -48,7 +50,13 @@ export const StudentFileDetails = ({ studentFile, onDownload, autoTest } : Stude
                 <MultiLineTextBlock text={studentFile.notes} />
             </DataRow>
             {(autoTest === 1 && studentFile.errorMsg)
-                && <AutoTestResultAlert isAccepted={studentFile.isAccepted} errorMsg={studentFile.errorMsg} />}
+                && (
+                    <AutoTestResultAlert
+                        isAccepted={studentFile.isAccepted}
+                        errorMsg={studentFile.errorMsg}
+                        results={autoTesterResults.data}
+                    />
+                )}
         </CustomCard>
     );
 };

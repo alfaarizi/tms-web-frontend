@@ -1,4 +1,5 @@
 import { CodeCheckerResult } from 'resources/student/CodeCheckerResult';
+import { AutoTesterResult } from 'resources/common/AutoTesterResult';
 
 export interface StudentFile {
     id: number;
