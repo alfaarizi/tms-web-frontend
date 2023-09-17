@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file. See [standa
 * Filterable group list for instructors ([cbf2361](https://gitlab.com/tms-elte/frontend-react/commit/cbf2361d70233c8f4ed0f77787feae469961e008))
 * Handle no-submission state for student assignments ([d7fce15](https://gitlab.com/tms-elte/frontend-react/commit/d7fce15b6a9a4e9edbea009f335bbc2abc0f5822))
 * Handle partially successful Canvas synchronization ([9180032](https://gitlab.com/tms-elte/frontend-react/commit/9180032b9905f31b3cc064aa9ce83a72f9dcb54a))
-* per test case reporting ([f374eb3](https://gitlab.com/tms-elte/frontend-react/commit/f374eb34808d5759ea59d2c02a23c7e4842ed543))
+* Reporting results for all test cases ([f374eb3](https://gitlab.com/tms-elte/frontend-react/commit/f374eb34808d5759ea59d2c02a23c7e4842ed543))
 
 
 ### Bug Fixes
