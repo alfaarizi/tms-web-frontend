@@ -126,7 +126,7 @@ export function GroupForm({
                             timezones.map((timezone) => <option key={timezone} value={timezone}>{timezone}</option>)
                         }
                     </Form.Control>
-                    {errors.number && <FormError message={errors.number.message} />}
+                    {errors.timezone && <FormError message={errors.timezone.message} />}
                 </Form.Group>
 
                 <Form.Group>
