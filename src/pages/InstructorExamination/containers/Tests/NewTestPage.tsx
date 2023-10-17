@@ -62,6 +62,7 @@ export function NewTestPage() {
                 onSave={handleSave}
                 onCancel={handleSaveCancel}
                 serverSideError={addErrorBody}
+                isLoading={createMutation.isLoading}
             />
         )
         : <TestNoGroupCard onBackClick={handleSaveCancel} />;

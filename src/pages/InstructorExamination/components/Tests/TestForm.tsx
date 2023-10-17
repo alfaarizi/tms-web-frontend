@@ -20,7 +20,8 @@ type Props = {
     editData?: ExamTest,
     onCancel?: () => void,
     groups: Group[] | undefined,
-    serverSideError?: ValidationErrorBody | null
+    serverSideError?: ValidationErrorBody | null,
+    isLoading: boolean
 }
 
 export function TestForm({
@@ -30,6 +31,7 @@ export function TestForm({
     onSave,
     groups,
     serverSideError,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -177,7 +179,7 @@ export function TestForm({
                     <Form.Check type="checkbox" label={t('examTests.unique')} {...register('unique')} />
                 </Form.Group>
 
-                <FormButtons onCancel={onCancel} />
+                <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>
         </CustomCard>
     );

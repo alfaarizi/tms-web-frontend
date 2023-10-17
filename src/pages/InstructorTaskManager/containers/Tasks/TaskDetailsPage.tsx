@@ -101,6 +101,7 @@ export const TaskDetailsPage = () => {
                     editData={task.data}
                     showVersionControl={false}
                     serverSideError={updateErrorBody}
+                    isLoading={updateMutation.isLoading}
                 />
             )
                 : (

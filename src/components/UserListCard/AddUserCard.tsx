@@ -1,6 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Button, Form } from 'react-bootstrap';
+import {
+    Alert, Button, Form, Spinner,
+} from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +18,8 @@ import { getFirstError } from 'utils/getFirstError';
 type Props = {
     title: string,
     onAdd: (neptunCodes: string[]) => void,
-    data?: UserAddResponse
+    data?: UserAddResponse,
+    isLoading: boolean
 }
 
 type FormData = {
@@ -38,6 +41,7 @@ export function AddUserCard({
     title,
     onAdd,
     data,
+    isLoading,
 }: Props) {
     const {
         register,
@@ -88,8 +92,8 @@ export function AddUserCard({
                     />
                     {errors.neptunCodes && <FormError message={t('common.neptunCodesRequired')} />}
                 </Form.Group>
-                <Button variant="primary" type="submit" size="sm">
-                    <FontAwesomeIcon icon={faPlus} />
+                <Button variant="primary" type="submit" size="sm" disabled={isLoading}>
+                    {isLoading ? <Spinner animation="border" size="sm" /> : <FontAwesomeIcon icon={faPlus} />}
                     {' '}
                     {t('common.add')}
                 </Button>

@@ -115,6 +115,7 @@ export const TaskPage = () => {
                 <VerifyItemForm
                     onSave={handleVerify}
                     serverSideError={verifyError}
+                    isLoading={verifyMutation.isLoading}
                 />
             )}
 

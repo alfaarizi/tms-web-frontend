@@ -39,7 +39,12 @@ export function LecturerList({ course }: Props) {
 
     return (
         <>
-            <AddUserCard title={t('course.addLecturers')} onAdd={handleAdd} data={addMutation.data} />
+            <AddUserCard
+                title={t('course.addLecturers')}
+                onAdd={handleAdd}
+                data={addMutation.data}
+                isLoading={addMutation.isLoading}
+            />
 
             <UserListCard
                 title={t('course.lecturers')}

@@ -158,6 +158,7 @@ export function StudentFilePage() {
                 show={showGrader.show}
                 onSave={handleGradeSave}
                 onCancel={showGrader.toHide}
+                isLoading={gradeMutation.isLoading}
             />
         </>
 

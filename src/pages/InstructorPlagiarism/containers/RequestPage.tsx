@@ -84,6 +84,7 @@ export function RequestPage() {
                             editData={request.data}
                             onSave={handleEditSave}
                             onCancel={showEdit.toHide}
+                            isLoading={updateMutation.isLoading}
                         />
                     )
                     : (

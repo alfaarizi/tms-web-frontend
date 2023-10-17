@@ -135,7 +135,7 @@ export function TestWriterPage() {
                         </ExamQuestionCard>
                     ))
                 }
-                <FormButtons />
+                <FormButtons isLoading={finishWriteMutation.isLoading} />
             </Form>
         </>
     );

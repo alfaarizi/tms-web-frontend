@@ -21,7 +21,8 @@ type Props = {
     onCancel?: () => void,
     editData?: Task,
     showVersionControl: boolean,
-    serverSideError: ValidationErrorBody | null
+    serverSideError: ValidationErrorBody | null,
+    isLoading: boolean
 }
 
 export function TaskForm({
@@ -32,6 +33,7 @@ export function TaskForm({
     editData,
     showVersionControl,
     serverSideError,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -175,7 +177,7 @@ export function TaskForm({
                     )
                     : null}
 
-                <FormButtons onCancel={onCancel} />
+                <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>
         </CustomCard>
     );

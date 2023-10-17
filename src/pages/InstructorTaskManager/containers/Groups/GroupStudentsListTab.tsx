@@ -45,7 +45,14 @@ export function GroupStudentsListTab({ group }: Props) {
     return (
         <>
             {actualSemester.check(group.semesterID) && !group.isCanvasCourse
-                ? <AddUserCard title={t('group.addStudents')} onAdd={handleAdd} data={addMutation.data} />
+                ? (
+                    <AddUserCard
+                        title={t('group.addStudents')}
+                        onAdd={handleAdd}
+                        data={addMutation.data}
+                        isLoading={addMutation.isLoading}
+                    />
+                )
                 : null}
 
             <UserListCard

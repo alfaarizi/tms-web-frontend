@@ -78,6 +78,7 @@ export function NewRequestPage() {
                 basefiles={basefiles.data}
                 availableTypes={availableTypes.data}
                 selectedType={type}
+                isLoading={createMutation.isLoading}
             />
         </FormProvider>
     );

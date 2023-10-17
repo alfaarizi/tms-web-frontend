@@ -102,6 +102,7 @@ export function QuestionSetPage() {
                         onSave={handleEditSave}
                         onCancel={showEdit.toHide}
                         editData={questionSet.data}
+                        isLoading={updateMutation.isLoading}
                     />
                 )
                 : (

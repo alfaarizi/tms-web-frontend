@@ -11,7 +11,8 @@ type Props = {
     file: StudentFile | null;
     show: boolean,
     onSave: (data: StudentFile) => void,
-    onCancel: () => void
+    onCancel: () => void,
+    isLoading:boolean
 }
 
 export function GraderModal({
@@ -19,6 +20,7 @@ export function GraderModal({
     show,
     onCancel,
     onSave,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const [confirmDialog, setConfirmDialog] = useState(false);
@@ -125,7 +127,7 @@ export function GraderModal({
                                 {...register('grade', { required: false })}
                             />
                         </Form.Group>
-                        <FormButtons onCancel={handleGraderExiting} />
+                        <FormButtons onCancel={handleGraderExiting} isLoading={isLoading} />
                     </Form>
                 </Modal.Body>
             </Modal>

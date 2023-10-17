@@ -24,5 +24,12 @@ export function NewCoursePage() {
         history.push('./');
     };
 
-    return <CourseForm onSave={handleSave} onCancel={handleCancel} title={t('course.newCourse')} />;
+    return (
+        <CourseForm
+            onSave={handleSave}
+            onCancel={handleCancel}
+            title={t('course.newCourse')}
+            isLoading={createMutation.isLoading}
+        />
+    );
 }

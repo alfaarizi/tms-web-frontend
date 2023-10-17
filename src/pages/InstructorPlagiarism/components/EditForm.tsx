@@ -13,13 +13,15 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 type Props = {
     editData: Plagiarism,
     onSave: (data: Plagiarism) => void,
-    onCancel: () => void
+    onCancel: () => void,
+    isLoading:boolean
 }
 
 export function EditForm({
     editData,
     onCancel,
     onSave,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -60,7 +62,7 @@ export function EditForm({
                     <Form.Control as="textarea" {...register('description', { required: false })} size="sm" />
                 </Form.Group>
 
-                <FormButtons onCancel={onCancel} />
+                <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>
         </CustomCard>
     );

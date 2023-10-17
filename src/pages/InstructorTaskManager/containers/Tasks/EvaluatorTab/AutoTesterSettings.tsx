@@ -157,6 +157,7 @@ export function AutoTesterSettings({ task, additionalInformation }: Props) {
                 show={showNewTestCaseModal.show}
                 onSave={handleSaveNewTestCase}
                 onCancel={showNewTestCaseModal.toHide}
+                isLoading={createTestCaseMutation.isLoading}
             />
 
             {/* Modal to edit existing test case */}
@@ -166,6 +167,7 @@ export function AutoTesterSettings({ task, additionalInformation }: Props) {
                 editData={testCaseToEdit}
                 onSave={handleTestCaseEditSave}
                 onCancel={handleTestCaseEditClose}
+                isLoading={updateTestCaseMutation.isLoading}
             />
         </>
     );

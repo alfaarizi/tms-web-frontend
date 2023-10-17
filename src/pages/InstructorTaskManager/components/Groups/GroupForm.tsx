@@ -21,7 +21,8 @@ type Props = {
     onSave: (group: Group) => void,
     onCancel?: () => void
     editData?: Group,
-    serverSideError: ValidationErrorBody | null
+    serverSideError: ValidationErrorBody | null,
+    isLoading:boolean
 }
 
 export function GroupForm({
@@ -31,6 +32,7 @@ export function GroupForm({
     onCancel,
     editData,
     serverSideError,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -141,7 +143,7 @@ export function GroupForm({
                     </Form.Text>
                 </Form.Group>
 
-                <FormButtons onCancel={onCancel} />
+                <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>
         </CustomCard>
     );

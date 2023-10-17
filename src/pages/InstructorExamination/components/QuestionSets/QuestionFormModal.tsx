@@ -16,7 +16,8 @@ type Props = {
     onSave: (question: ExamQuestion) => void,
     editData?: ExamQuestion | null,
     onCancel: () => void,
-    renderGallery: (insertFunc: InsertFunc) => ReactNode
+    renderGallery: (insertFunc: InsertFunc) => ReactNode,
+    isLoading:boolean
 }
 
 export function QuestionFormModal({
@@ -26,6 +27,7 @@ export function QuestionFormModal({
     onSave,
     onCancel,
     renderGallery,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const [confirmDialog, setConfirmDialog] = useState(false);
@@ -86,7 +88,7 @@ export function QuestionFormModal({
                             />
                             {errors.text && <FormError message={errors.text.message} />}
                         </Form.Group>
-                        <FormButtons onCancel={handleGraderExiting} />
+                        <FormButtons onCancel={handleGraderExiting} isLoading={isLoading} />
                     </Form>
                 </Modal.Body>
             </Modal>
