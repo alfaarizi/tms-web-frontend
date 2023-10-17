@@ -54,6 +54,7 @@ export function NewTaskPage() {
             showVersionControl={!!privateSystemInfo.data && privateSystemInfo.data.isVersionControlEnabled}
             serverSideError={addErrorBody}
             timezone={group.data.timezone}
+            isLoading={createMutation.isLoading}
         />
     );
 }

@@ -16,7 +16,8 @@ type Props = {
     courses?: Course[],
     onSave: (set: ExamQuestionSet) => void,
     onCancel?: () => void,
-    editData?: ExamQuestionSet
+    editData?: ExamQuestionSet,
+    isLoading:boolean
 }
 
 export function QuestionSetForm({
@@ -25,6 +26,7 @@ export function QuestionSetForm({
     editData,
     onCancel,
     onSave,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -88,7 +90,7 @@ export function QuestionSetForm({
                     {errors.courseID && <FormError message={t('group.courseIDRequired')} />}
                 </Form.Group>
 
-                <FormButtons onCancel={onCancel} />
+                <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>
         </CustomCard>
     );

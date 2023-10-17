@@ -109,6 +109,7 @@ export function TestPage() {
                         editData={test.data}
                         groups={groupsForEdit.data}
                         serverSideError={editErrorBody}
+                        isLoading={updateMutation.isLoading}
                     />
                 )
                 : (

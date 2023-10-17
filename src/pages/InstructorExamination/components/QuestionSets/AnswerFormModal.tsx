@@ -17,7 +17,8 @@ type Props = {
     editData?: ExamAnswer | null
     onCancel: () => void,
     textError?: string,
-    renderGallery: (insertFunc: InsertFunc) => ReactNode
+    renderGallery: (insertFunc: InsertFunc) => ReactNode,
+    isLoading:boolean
 }
 
 export function AnswerFormModal({
@@ -28,6 +29,7 @@ export function AnswerFormModal({
     textError,
     title,
     renderGallery,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -107,7 +109,7 @@ export function AnswerFormModal({
                                 {...register('correct')}
                             />
                         </Form.Group>
-                        <FormButtons onCancel={handleGraderExiting} />
+                        <FormButtons onCancel={handleGraderExiting} isLoading={isLoading} />
                     </Form>
                 </Modal.Body>
             </Modal>

@@ -170,6 +170,7 @@ export function QuestionsEditor({ questionSet }: Props) {
                 renderGallery={renderGallery}
                 onSave={handleNewQuestionSave}
                 onCancel={showNew.toHide}
+                isLoading={createQuestionMutation.isLoading}
             />
 
             <QuestionFormModal
@@ -179,6 +180,7 @@ export function QuestionsEditor({ questionSet }: Props) {
                 renderGallery={renderGallery}
                 onSave={handleUpdateQuestion}
                 onCancel={() => setEditedQuestion(null)}
+                isLoading={updateQuestionMutation.isLoading}
             />
 
             <AnswerFormModal
@@ -188,6 +190,7 @@ export function QuestionsEditor({ questionSet }: Props) {
                 textError={textError}
                 renderGallery={renderGallery}
                 onCancel={() => setQuestionToAddAnswer(-1)}
+                isLoading={createAnswerMutation.isLoading}
             />
 
             <AnswerFormModal
@@ -198,6 +201,7 @@ export function QuestionsEditor({ questionSet }: Props) {
                 textError={textError}
                 renderGallery={renderGallery}
                 onCancel={() => setEditedAnswer(null)}
+                isLoading={updateAnswerMutation.isLoading}
             />
         </>
     );

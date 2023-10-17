@@ -101,6 +101,7 @@ export function StudentFilesList({
                 show={gradedFile !== null}
                 onSave={handleGradeSave}
                 onCancel={handleGradeFinish}
+                isLoading={gradeMutation.isLoading}
             />
         </>
     );

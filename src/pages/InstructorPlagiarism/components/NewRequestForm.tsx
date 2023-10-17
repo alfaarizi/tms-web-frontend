@@ -75,6 +75,7 @@ type Props = {
     semesterFromID: number,
     availableTypes?: PlagiarismType[],
     selectedType: PlagiarismType,
+    isLoading: boolean,
 }
 
 export function NewRequestForm({
@@ -89,6 +90,7 @@ export function NewRequestForm({
     basefiles,
     availableTypes,
     selectedType,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -350,7 +352,7 @@ export function NewRequestForm({
                     />
                 </Form.Group>
 
-                <FormButtons onCancel={onCancel} />
+                <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>
         </CustomCard>
     );

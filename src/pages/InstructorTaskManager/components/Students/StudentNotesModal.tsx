@@ -83,7 +83,7 @@ export function StudentNotesModal({
                                 disabled={!isActualSemester || isLoading}
                             />
                         </Form.Group>
-                        { isActualSemester && <FormButtons onCancel={show.toHide} /> }
+                        { isActualSemester && <FormButtons onCancel={show.toHide} isLoading={isLoading} /> }
                     </Form>
                 </Modal.Body>
             </Modal>

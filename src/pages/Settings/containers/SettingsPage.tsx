@@ -40,6 +40,7 @@ export function SettingsPage() {
     } = useForm<UserSettings>({
         mode: 'onBlur',
     });
+
     useServersideFormErrors<UserSettings>(clearErrors, setError, serverSideError);
     const handleCustomEmailKeypress = useMemo(
         () => (e: React.KeyboardEvent<HTMLInputElement>) => setCustomEmail(e.currentTarget.value),
@@ -226,7 +227,7 @@ export function SettingsPage() {
                         </Form.Control>
                         {errors.locale && <FormError message={errors.locale.message} />}
                     </Form.Group>
-                    <FormButtons />
+                    <FormButtons isLoading={settingsMutation.isLoading} />
                 </Form>
             </CustomCard>
         </SingleColumnLayout>

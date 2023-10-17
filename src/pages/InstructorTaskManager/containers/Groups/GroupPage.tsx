@@ -134,6 +134,7 @@ export function GroupPage() {
                         onSave={handleEditSave}
                         serverSideError={editErrorBody}
                         onCancel={showEditForm.toHide}
+                        isLoading={updateMutation.isLoading}
                     />
                 )
                 : (

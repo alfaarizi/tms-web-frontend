@@ -1,6 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Alert, Form, Button } from 'react-bootstrap';
+import {
+    Alert, Form, Button, Spinner,
+} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +17,7 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 type Props = {
     onSave: (data: VerifyItem) => void,
     serverSideError: ValidationErrorBody | null,
+    isLoading:boolean
 };
 
 /**
@@ -23,7 +26,7 @@ type Props = {
  * @param serverSideError
  * @constructor
  */
-export function VerifyItemForm({ onSave, serverSideError }: Props) {
+export function VerifyItemForm({ onSave, serverSideError, isLoading }: Props) {
     const { t } = useTranslation();
     const {
         register,
@@ -70,8 +73,8 @@ export function VerifyItemForm({ onSave, serverSideError }: Props) {
                     {errors.disableIpCheck && <FormError message={errors.disableIpCheck.message} />}
                 </Form.Group>
 
-                <Button variant="primary" size="sm" type="submit">
-                    <FontAwesomeIcon icon={faLockOpen} />
+                <Button variant="primary" size="sm" type="submit" disabled={isLoading}>
+                    {isLoading ? <Spinner animation="border" size="sm" /> : <FontAwesomeIcon icon={faLockOpen} />}
                     {' '}
                     {t('passwordProtected.verify')}
                 </Button>

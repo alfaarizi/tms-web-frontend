@@ -37,6 +37,7 @@ export function NewGroup() {
             onSave={handleSave}
             onCancel={handleSaveCancel}
             serverSideError={addErrorBody}
+            isLoading={createMutation.isLoading}
         />
     );
 }

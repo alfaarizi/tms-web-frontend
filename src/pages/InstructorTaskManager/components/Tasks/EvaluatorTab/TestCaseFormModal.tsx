@@ -14,6 +14,7 @@ type Props = {
     onSave: (answer: TestCase) => void,
     editData?: TestCase | null
     onCancel: () => void,
+    isLoading:boolean,
 }
 
 export function TestCaseFormModal({
@@ -22,6 +23,7 @@ export function TestCaseFormModal({
     onSave,
     editData,
     onCancel,
+    isLoading,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -107,7 +109,7 @@ export function TestCaseFormModal({
                             {errors.output && <FormError message={t('common.fieldRequired')} />}
                         </Form.Group>
 
-                        <FormButtons onCancel={handleGraderExiting} />
+                        <FormButtons onCancel={handleGraderExiting} isLoading={isLoading} />
                     </Form>
                 </Modal.Body>
             </Modal>

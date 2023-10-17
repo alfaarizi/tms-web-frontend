@@ -47,6 +47,7 @@ export function CoursePage() {
                         onSave={handleEditSave}
                         onCancel={showEdit.toHide}
                         editData={course.data}
+                        isLoading={updateMutation.isLoading}
                     />
                 )
                 : (

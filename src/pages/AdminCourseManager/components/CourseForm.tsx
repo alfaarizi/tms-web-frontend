@@ -14,7 +14,8 @@ type Props = {
     onSave: (course: Course) => void,
     onCancel?: () => void
     editData?: Course,
-    title: string
+    title: string,
+    isLoading: boolean
 }
 
 export function CourseForm({
@@ -22,6 +23,7 @@ export function CourseForm({
     onCancel,
     editData,
     title,
+    isLoading,
 }: Props) {
     const {
         register,
@@ -68,7 +70,7 @@ export function CourseForm({
                     <Form.Control type="text" {...register('code', { required: false })} size="sm" />
                 </Form.Group>
 
-                <FormButtons onCancel={onCancel} />
+                <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>
         </CustomCard>
     );

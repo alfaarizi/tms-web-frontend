@@ -32,6 +32,7 @@ export function NewQuestionSetPage() {
             courses={courses.data}
             onSave={handleSave}
             onCancel={handleSaveCancel}
+            isLoading={createMutation.isLoading}
         />
     );
 }
