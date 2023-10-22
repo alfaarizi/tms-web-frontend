@@ -70,7 +70,9 @@ export async function downloadAllFiles(taskID: number, onlyUngraded: boolean) {
 
 export async function grade(file: StudentFile) {
     const res = await axiosInstance.patch(
-        `/instructor/student-files/${file.id}?expand=uploader,task,task.group,codeCompass,codeCheckerResult`,
+        `/instructor/student-files/${file.id}?expand=uploader,task,task.group,codeCompass,codeCheckerResult,`
+        + 'codeCheckerResult.stdout,codeCheckerResult.stderr,codeCheckerResult.codeCheckerReports,'
+        + 'codeCheckerResult.runnerErrorMessage',
         file,
     );
     return res.data;
