@@ -7,7 +7,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { satisfies } from 'semver';
 
-import { useUserSettings } from 'hooks/common/UserHooks';
+import { useTokenAuth, useUserSettings } from 'hooks/common/UserHooks';
 import { FullScreenSpinner } from 'components/FullScreenSpinner/FullScreenSpinner';
 import { ProtectedRoute } from 'components/ProtectedRoute';
 import { useNetworkErrorHandler } from 'hooks/common/useNetworkErrorHandler';
@@ -17,11 +17,10 @@ import { NotificationToast } from 'components/NotificationToast/NotificationToas
 import Home from 'pages/Home';
 import Logout from 'pages/Logout';
 import ErrorPage from 'pages/ErrorPage';
-import { axiosInstance } from 'api/axiosInstance';
 import { PrivateHeader } from 'containers/PrivateHeader';
 import { PublicHeader } from 'containers/PublicHeader';
 import { useGlobalContext } from 'context/GlobalContext';
-import { usePrivateSystemInfoQuery, usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { useErrorBoundaryContext } from 'components/ErrorBoundary';
 import { InvalidVersionRangeError } from 'exceptions/InvalidVersionRangeError';
 
@@ -43,19 +42,15 @@ const ConfirmEmailPage = lazy(() => import('pages/Settings/containers/ConfirmEma
 export function App() {
     // Use network networkErrorHandler globally
     useNetworkErrorHandler();
+
     const notifications = useNotifications();
     const { t } = useTranslation();
     const location = useLocation();
-    const { isLoggedIn, setIsLoggedIn } = useGlobalContext();
+    const { isLoggedIn } = useGlobalContext();
     const { triggerError } = useErrorBoundaryContext();
     const publicSystemInfo = usePublicSystemInfoQuery(false);
-    // NOTE: this is a temporary workaround to set current semester as current for all users
-    // TODO: rewrite login logic in https://gitlab.com/tms-elte/frontend-react/-/issues/112
-    const privateSystemInfo = usePrivateSystemInfoQuery(!!isLoggedIn);
-    const {
-        data: userSettings,
-        refetch: refetchUserSettings,
-    } = useUserSettings(!!isLoggedIn);
+    const userSettings = useUserSettings(!!isLoggedIn);
+    const tokenAuth = useTokenAuth();
 
     /**
      * Load backend-core public system information and check version
@@ -71,35 +66,17 @@ export function App() {
     };
 
     /**
-     * Load token from localStorage
+     * Run on application startup
      */
-    const authenticateWithAccessToken = async () => {
-        const accessToken = localStorage.getItem('accessToken');
-        // If localStorage contains a token, send it to the server
-        if (accessToken) {
-            axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-            const query = await refetchUserSettings();
-            setIsLoggedIn(query.isSuccess);
-        } else {
-            setIsLoggedIn(false);
-        }
-    };
-
     useEffect(() => {
         loadPublicSystemInfo()
-            .then(() => authenticateWithAccessToken())
+            .then(() => tokenAuth.tryAuthenticate())
             .catch((err) => triggerError(err));
     }, []);
 
-    useEffect(() => {
-        if (isLoggedIn !== null) {
-            setIsLoggedIn(!!userSettings);
-        }
-    }, [userSettings, isLoggedIn]);
-
-    const isStudent = !!userSettings?.isStudent;
-    const isFaculty = !!userSettings?.isFaculty;
-    const isAdmin = !!userSettings?.isAdmin;
+    const isStudent = !!userSettings.data?.isStudent;
+    const isFaculty = !!userSettings.data?.isFaculty;
+    const isAdmin = !!userSettings.data?.isAdmin;
 
     // Render
     if (isLoggedIn === null) {
@@ -109,7 +86,7 @@ export function App() {
     return (
         <>
             <NotificationToast data={notifications.notification} onClose={notifications.close} />
-            {userSettings ? <PrivateHeader userSettings={userSettings} /> : <PublicHeader />}
+            {userSettings.data ? <PrivateHeader userSettings={userSettings.data} /> : <PublicHeader />}
             <Suspense fallback={<FullScreenSpinner />}>
                 <Switch>
                     <ProtectedRoute exact path="/">

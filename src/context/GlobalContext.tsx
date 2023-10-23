@@ -9,6 +9,12 @@ export interface GlobalContextInterface {
     setSelectedSemester: (semester: Semester) => void,
     currentNotification: NotificationData | null,
     setCurrentNotification: (notification: NotificationData | null) => void,
+    /**
+     * Indicates whether the user is logged in
+     * true: logged in
+     * false: logged out
+     * null: the status is unknown after application startup
+     */
     isLoggedIn: boolean | null,
     setIsLoggedIn: (value: boolean | null) => void,
     theme: AvailableTheme,

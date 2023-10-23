@@ -12,7 +12,8 @@ import { LdapLogin } from 'resources/common/LdapLogin';
 import { useHistory } from 'react-router';
 import { useGlobalContext } from 'context/GlobalContext';
 import { UserSettings } from 'resources/common/UserSettings';
-import { usePrivateSystemInfoQuery, PRIVATE_INFO_QUERY_KEY } from 'hooks/common/SystemHooks';
+import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { ACCESS_TOKEN_LOCAL_STORAGE_KEY, IMAGE_TOKEN_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
 
 export const USER_SETTINGS_QUERY_KEY = 'usersettings';
 
@@ -50,18 +51,8 @@ export function useClientSideLocaleChange() {
  * Provides information about the current user
  */
 export function useUserSettings(enabled: boolean = true) {
-    const clientSideLocale = useClientSideLocaleChange();
-
     return useQuery<UserSettings>(USER_SETTINGS_QUERY_KEY, () => UserSettingsService.getSettings(), {
         enabled,
-        onSuccess: async (data) => {
-            if (!data) {
-                return;
-            }
-
-            // Update language based on user settings
-            await clientSideLocale.mutateAsync(data.locale);
-        },
     });
 }
 
@@ -81,31 +72,62 @@ export function useConfirmEmailMutation() {
 }
 
 /**
+ * Tries to authenticate the user with the access token set in the local storage
+ */
+export function useTokenAuth() {
+    const userSettings = useUserSettings(false);
+    const privateSystemInfo = usePrivateSystemInfoQuery(false);
+    const globalContext = useGlobalContext();
+    const clientSideLocale = useClientSideLocaleChange();
+
+    const tryAuthenticate = async () => {
+        const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY);
+
+        // Set token in axiosInstance
+        axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+
+        // Try to load user information
+        const { data: userInfoData } = await userSettings.refetch();
+        if (!userInfoData) {
+            globalContext.setIsLoggedIn(false);
+            return;
+        }
+
+        // Try to load system information
+        const { data: privateSystemInfoData } = await privateSystemInfo.refetch();
+        if (!privateSystemInfoData) {
+            globalContext.setIsLoggedIn(false);
+            return;
+        }
+
+        // If loading user settings and private system info, then the token was valid
+        // Set the initial version of the global state from the aforementioned resources
+        await clientSideLocale.mutateAsync(userInfoData.locale);
+        globalContext.setSelectedSemester(privateSystemInfoData.actualSemester);
+        globalContext.setIsLoggedIn(true);
+    };
+
+    return {
+        tryAuthenticate,
+    };
+}
+
+/**
  * Generic login mutation. Other login methods should use this hook with their own TLoginData type and mutationFn.
  * @param mutationFn
  */
 export function useBaseLoginMutation<TLoginData>(mutationFn: MutationFunction<LoginResponse, TLoginData>) {
-    const userSettings = useUserSettings(false);
-    const privateSystemInfo = usePrivateSystemInfoQuery(false);
-    const globalContext = useGlobalContext();
+    const tokenAuth = useTokenAuth();
 
     return useMutation(mutationFn, {
         retry: false,
-        onSuccess: async (data: LoginResponse) => {
+        onSuccess: async (loginResponse: LoginResponse) => {
             // Save token to localStorage
-            localStorage.setItem('accessToken', data.accessToken);
-            // Set token in axiosInstance
-            axiosInstance.defaults.headers.common.Authorization = `Bearer ${data.accessToken}`;
+            localStorage.setItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY, loginResponse.accessToken);
             // Set image token in local storage
-            localStorage.setItem('imageToken', data.imageToken);
-            // Load the settings of the current user
-            await userSettings.refetch();
-            const privateInfoData = await privateSystemInfo.refetch();
-
-            // Set selected semester to actual semester, if it is null
-            if (privateInfoData.data && globalContext.selectedSemester === null) {
-                globalContext.setSelectedSemester(privateInfoData.data.actualSemester);
-            }
+            localStorage.setItem(IMAGE_TOKEN_LOCAL_STORAGE_KEY, loginResponse.imageToken);
+            // Load user data after the tokens are set
+            await tokenAuth.tryAuthenticate();
         },
     });
 }
@@ -135,17 +157,14 @@ export function useLogoutMutation() {
     const localLogout = () => {
         // Remove access token
         axiosInstance.defaults.headers.common.Authorization = '';
-        // Remove all queries expect user settings, for security reasons
-        queryClient.removeQueries({
-            predicate: (query) => query.queryKey !== USER_SETTINGS_QUERY_KEY,
-        });
+        // Remove all queries for security reasons
+        queryClient.removeQueries();
         // Reset GlobalContext, for security reasons
         globalContext.resetState();
+        // Set login status to logout
+        globalContext.setIsLoggedIn(false);
         // Reset localStorage, this also clears accessTokens
         localStorage.clear();
-        // Delete user settings and private info from cache
-        queryClient.setQueryData(USER_SETTINGS_QUERY_KEY, null);
-        queryClient.setQueryData(PRIVATE_INFO_QUERY_KEY, null);
     };
 
     const mutation = useMutation(() => AuthService.logout(), {
