@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.3.1](https://gitlab.com/tms-elte/frontend-react/compare/v3.3.0...v3.3.1) (2023-10-23)
+
+
+### Bug Fixes
+
+* Disabled buttons while mutations are loading ([cc1fe8c](https://gitlab.com/tms-elte/frontend-react/commit/cc1fe8ccf0c822395a9bfb1e2b2bdad4d1a28ef5))
+* Do not show Add Instructors panel for instructors with insufficient privilege ([032a477](https://gitlab.com/tms-elte/frontend-react/commit/032a47750f9982ae6d51bd5ea4170a36994af8ad))
+* Group number validation message is shown twice on the new/edit group form ([35ca56f](https://gitlab.com/tms-elte/frontend-react/commit/35ca56f3c905b013a31b7bd851f8a667185ff982))
+* Page load issue after grading ([8b39b1a](https://gitlab.com/tms-elte/frontend-react/commit/8b39b1a01bfcd1502fcfb002ed46dcb114d5f80c))
+
 ## [3.3.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.2.1...v3.3.0) (2023-09-17)
 
 
