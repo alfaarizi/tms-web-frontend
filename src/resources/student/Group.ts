@@ -9,4 +9,5 @@ export interface Group {
     canvasUrl?: string;
     lastSyncTime?: string;
     notes?: string;
+    isExamGroup: boolean;
 }

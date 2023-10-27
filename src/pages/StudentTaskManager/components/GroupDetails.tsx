@@ -16,13 +16,10 @@ type Props = {
 export function GroupDetails({ group }: Props) {
     const { t } = useTranslation();
 
-    // Prepare instructors list
-    let instructors = '';
-    if (group.instructorNames.length > 0) {
-        [instructors] = group.instructorNames;
-        for (let i = 1; i < group.instructorNames.length; ++i) {
-            instructors += `, ${group.instructorNames[i]}`;
-        }
+    // Prepare instructors list (lecturers if there are no instructors)
+    let teachers = group.instructorNames.join(', ');
+    if (group.instructorNames.length === 0) {
+        teachers = group.course.lecturerNames.join(', ');
     }
 
     return (
@@ -42,7 +39,9 @@ export function GroupDetails({ group }: Props) {
                     <GroupDateTime value={group.lastSyncTime} timezone={group.timezone} />
                 </DataRow>
             ) : null}
-            <DataRow label={t('group.instructors')}>{instructors}</DataRow>
+            {!group.isExamGroup ? (
+                <DataRow label={t('group.instructors')}>{teachers}</DataRow>
+            ) : null}
             <DataRow label={t('group.notes')}><MultiLineTextBlock text={group.notes} /></DataRow>
         </CustomCard>
     );
