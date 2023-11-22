@@ -309,7 +309,12 @@ export function NewRequestForm({
                 </Form.Row>
 
                 <Form.Group>
-                    <Form.Check type="checkbox" label={t('plagiarism.myTasks')} {...register('myTasks')} />
+                    <Form.Check
+                        type="checkbox"
+                        id="myTasks"
+                        label={t('plagiarism.myTasks')}
+                        {...register('myTasks')}
+                    />
                 </Form.Group>
 
                 <Form.Group>

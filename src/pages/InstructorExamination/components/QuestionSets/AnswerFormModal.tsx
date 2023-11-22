@@ -105,6 +105,7 @@ export function AnswerFormModal({
                         <Form.Group>
                             <Form.Check
                                 type="checkbox"
+                                id="correct"
                                 label={t('examQuestions.correct')}
                                 {...register('correct')}
                             />

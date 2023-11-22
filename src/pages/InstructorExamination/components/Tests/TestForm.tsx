@@ -172,11 +172,21 @@ export function TestForm({
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Check type="checkbox" label={t('examTests.shuffled')} {...register('shuffled')} />
+                    <Form.Check
+                        type="checkbox"
+                        id="shuffled"
+                        label={t('examTests.shuffled')}
+                        {...register('shuffled')}
+                    />
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Check type="checkbox" label={t('examTests.unique')} {...register('unique')} />
+                    <Form.Check
+                        type="checkbox"
+                        id="unique"
+                        label={t('examTests.unique')}
+                        {...register('unique')}
+                    />
                 </Form.Group>
 
                 <FormButtons onCancel={onCancel} isLoading={isLoading} />
