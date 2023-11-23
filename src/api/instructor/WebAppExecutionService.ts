@@ -1,7 +1,6 @@
 import { axiosInstance } from 'api/axiosInstance';
 import { WebAppExecution } from 'resources/instructor/WebAppExecution';
 import { SetupWebAppExecution } from 'resources/instructor/SetupWebAppExecution';
-import { DateTime } from 'luxon';
 
 export async function one(studentFileID: number) {
     const res = await axiosInstance.get<WebAppExecution>('/instructor/web-app-execution', {
@@ -19,9 +18,13 @@ export async function startWebAppExecution(studentFileID: number, data: SetupWeb
 }
 
 export async function stopWebAppExecution(webAppExecution: WebAppExecution) {
-    if (DateTime.fromISO(webAppExecution.shutdownAt) > DateTime.now()) {
-        const res = await axiosInstance.delete<void>(`/instructor/web-app-execution/${webAppExecution.id}`);
-        return res.data;
-    }
-    return null;
+    const res = await axiosInstance.delete<void>(`/instructor/web-app-execution/${webAppExecution.id}`);
+    return res.data;
+}
+
+export async function downloadRunLog(webAppExecution: WebAppExecution) {
+    const res = await axiosInstance.get<Blob>(`/instructor/web-app-execution/${webAppExecution.id}/download-run-log`, {
+        responseType: 'blob',
+    });
+    return res.data;
 }

@@ -8,6 +8,7 @@ import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Stud
 import {
     useDownloadStudentFile,
     useGradeMutation,
+    useDownloadTestReport,
     useStartCodeCompassMutation, useStopCodeCompassMutation,
     useStudentFile,
 } from 'hooks/instructor/StudentFileHooks';
@@ -41,6 +42,7 @@ export function StudentFilePage() {
     const studentFile = useStudentFile(id);
     const gradeMutation = useGradeMutation();
     const downloadStudentFile = useDownloadStudentFile();
+    const downloadTestReport = useDownloadTestReport();
     const showGrader = useShow();
     const actualSemester = useActualSemester();
     const notifications = useNotifications();
@@ -58,6 +60,11 @@ export function StudentFilePage() {
         if (file.name !== undefined) {
             downloadStudentFile.download(file.name, file.id);
         }
+    };
+
+    // Download test report
+    const handleReportDownload = async (file: StudentFile) => {
+        downloadTestReport.download(`${file.id}_report.tar`, file.id);
     };
 
     // GraderModel save function
@@ -138,6 +145,7 @@ export function StudentFilePage() {
                     isCodeCompassEnabled={isCodeCompassEnabled}
                     file={studentFile.data}
                     onDownload={handleDownload}
+                    onReportDownload={handleReportDownload}
                     onStartCodeCompass={handleStartCodeCompass}
                     onStopCodeCompass={handleStopCodeCompass}
                     onGrade={showGrader.toShow}

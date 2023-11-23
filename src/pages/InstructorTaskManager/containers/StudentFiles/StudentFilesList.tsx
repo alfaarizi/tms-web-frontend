@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { GraderModal } from 'pages/InstructorTaskManager/components/StudentFiles/GraderModal';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { useDownloadStudentFile, useGradeMutation } from 'hooks/instructor/StudentFileHooks';
+import { useDownloadStudentFile, useDownloadTestReport, useGradeMutation } from 'hooks/instructor/StudentFileHooks';
 import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Students/StudentFileListItem';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { Task } from 'resources/instructor/Task';
@@ -24,6 +24,7 @@ type Props = {
  * @param files List of files
  * @param semesterID Semester id for actual semester check
  * @param renderItem Function to render a list item.
+ * @param task Task of Student file
  * More information about render props: https://hu.reactjs.org/docs/render-props.html
  * @param handleCodeCompass Function to call when the code compass icon gets pressed
  * @constructor
@@ -40,6 +41,7 @@ export function StudentFilesList({
     const actualSemester = useActualSemester();
     const gradeMutation = useGradeMutation();
     const downloadfile = useDownloadStudentFile();
+    const downloadTestReport = useDownloadTestReport();
     const { t } = useTranslation();
     const notifications = useNotifications();
     const privateSystemInfo = usePrivateSystemInfoQuery();
@@ -50,6 +52,11 @@ export function StudentFilesList({
         if (file.name !== undefined) {
             downloadfile.download(file.name, file.id);
         }
+    };
+
+    // Download test report
+    const handleReportDownload = async (file: StudentFile) => {
+        downloadTestReport.download(`${file.id}_report.tar`, file.id);
     };
 
     // Set graded file
@@ -90,6 +97,7 @@ export function StudentFilesList({
                         onDownload={handleDownload}
                         onStartCodeCompass={handleStartCodeCompass}
                         onStopCodeCompass={handleStopCodeCompass}
+                        onReportDownload={handleReportDownload}
                         onGrade={handleGradeStart}
                         task={task != null ? task : file.task}
                     />

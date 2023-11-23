@@ -65,3 +65,7 @@ export function useDownloadInstructorFile() {
 export function useDownloadStudentFile() {
     return useDownloader((id: number) => StudentFilesService.download(id));
 }
+
+export function useDownloadTestReport() {
+    return useDownloader((id: number) => StudentFilesService.downloadTestReport(id));
+}

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { StudentFile } from 'resources/student/StudentFile';
 import {
     useDownloadInstructorFile,
-    useDownloadStudentFile,
+    useDownloadStudentFile, useDownloadTestReport,
     useTask,
     useUploadStudentFileMutation, useVerifyStudentFileMutation,
 } from 'hooks/student/TaskHooks';
@@ -38,6 +38,7 @@ export const TaskPage = () => {
     const notifications = useNotifications();
     const [uploadErrorMsg, setUploadErrorMsg] = useState<string | null>(null);
     const [verifyError, setVerifyError] = useState<ValidationErrorBody | null>(null);
+    const downloadTestReport = useDownloadTestReport();
 
     if (!task.data) {
         return null;
@@ -68,6 +69,10 @@ export const TaskPage = () => {
 
     const handleInstructorFileDownload = async (taskID: number, fileName: string) => {
         downloadInstructorFile.download(fileName, taskID);
+    };
+
+    const handleTestReportDownload = () => {
+        downloadTestReport.download(`${studentFile.id}_report.tar`, studentFile.id);
     };
 
     const handleSolutionUpload = async (files: File[]) => {
@@ -135,7 +140,9 @@ export const TaskPage = () => {
                 <StudentFileDetails
                     studentFile={studentFile}
                     onDownload={handleStudentFileDownload}
+                    onReportDownload={handleTestReportDownload}
                     autoTest={task.data.autoTest}
+                    appType={task.data.appType}
                 />
             )}
 

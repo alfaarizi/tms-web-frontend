@@ -20,4 +20,5 @@ export interface Task {
     autoTest: number;
     passwordProtected: boolean;
     canvasUrl?: string;
+    appType?: string;
 }

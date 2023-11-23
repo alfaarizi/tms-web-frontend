@@ -269,6 +269,13 @@
       "results": "Automatikus tesztelés eredményei",
       "notTested": "Még nem tesztelte le az automatikus tesztelő a beküldött megoldást.",
       "testFilesHelp": "A hallgatói megoldás a /test/submission/ könyvtárba kerül betöltésre, ami az alapértelmezett munkakönyvtár is lesz a fordítás és a futtatás során. A teszt fájlok a /test/test_files/ könyvtárba kerülnek betöltésre. Windows alapú tesztelésnél a gyökérkönyvtár analóg módon a C:\\\\test\\ könyvtár lesz.",
+      "webTestSuiteHelp": "A feltöltött fájl szintaktikai helyességét a TMS validálja.",
+      "webTestSuiteTitle": "Átvételi teszt fájl feltöltése",
+      "webTestSuites": "Feltöltött átéveteli teszt fájlok",
+      "testSuiteValidationFailed": "Teszt fájl validációja sikertelen, ellenőrizze a validation_error.log fájlt",
+      "downloadReport": "Átvételi teszt riportok letöltése",
+      "webTestInfo": "Átvételi tesztek készítése",
+      "webTestTemplateDesc": "A teszteket a Robot Framework futtatja. Töltsd le a sablon fájlt, amiben megírhatod a teszteseteket. A feltöltött fájl szintaktikai helyességét a TMS validálja. A feltöltött átvételi teszt fájlokat ábécé sorrendben hajtja végre a tesztelő rendszer.",
       "updateImage": "Docker kép frissítése",
       "uploadPriorUpdate": "Mentsd a Docker képet, mielőtt frissítenél",
       "appType": "Alkalmazás típusa",
@@ -309,11 +316,12 @@
     "exec": {
       "startUp": "Webalkalmazás indítása",
       "tearDown": "Webalkalmazás leállítása",
-      "autoTearDownAt": "Automatikus leállítás:",
+      "autoTearDownAt": "Automatikus leállítás",
       "onStartUp": "Alkalmazás elindítva: {{url}}",
       "onTearDown": "Alkalmazás leállítva",
       "visit": "{{url}} megtekintése",
       "webApp": "Webalkalmazás",
+      "downloadRunLog": "Futtatási napló letöltése",
       "form": {
         "runInterval": "Futtatási idő"
       }

@@ -267,6 +267,13 @@
       "results": "Automatic Tester Results",
       "notTested": "The automatic tester have not tested your solution yet.",
       "testFilesHelp": "Student solution will be loaded into the /test/submission/ folder, which will be the default working directory during compilation and testing. Test files are loaded into the /test/test_files/ folder. On Windows OS, the root folder will be C:\\\\test\\ in an analog manner.",
+      "webTestSuiteHelp": "The file syntax will be validated on upload.",
+      "webTestSuiteTitle": "Upload acceptance test suite",
+      "webTestSuites": "Uploaded acceptance test suites",
+      "testSuiteValidationFailed": "Test suite validation failed, check validation_error.log",
+      "downloadReport": "Download acceptance test reports",
+      "webTestInfo": "Writing acceptance tests",
+      "webTestTemplateDesc": "Tests can be created with Robot Framework. Download the test template file to begin writing your test cases. The file syntax will be validated on upload. The uploaded acceptance test suites will be executed in alphabetical order.",
       "updateImage": "Update Docker image",
       "uploadPriorUpdate": "Docker image must be save before updating",
       "appType": "Application type",
@@ -307,11 +314,12 @@
     "exec": {
       "startUp": "Start web app",
       "tearDown": "Stop web app now",
-      "autoTearDownAt": "App will auto shut down at:",
+      "autoTearDownAt": "App will auto shut down at",
       "onStartUp": "App started at: {{url}}",
       "onTearDown": "The application has shut down",
       "visit": "Visit {{url}}",
       "webApp": "Web app",
+      "downloadRunLog": "Download run log",
       "form": {
         "runInterval": "Application up time"
       }
