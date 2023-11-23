@@ -1,6 +1,6 @@
 import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
 import {
-    faEye, faGlobe, faPlay, faSave, faStop,
+    faEye, faGlobe, faPlay, faStop, faDownload,
 } from '@fortawesome/free-solid-svg-icons';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +15,7 @@ import {
 import { FormError } from 'components/FormError';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 import {
+    useDownloadRunLog,
     useStartWebAppExecutionMutation,
     useStopWebAppExecutionMutation,
     useWebAppExecution,
@@ -23,6 +24,7 @@ import { StudentFile } from 'resources/instructor/StudentFile';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
 import { getFirstError } from 'utils/getFirstError';
+import { WebAppExecution } from 'resources/instructor/WebAppExecution';
 
 type Props = {
     file: StudentFile,
@@ -34,6 +36,7 @@ export function WebAppExecutionControl({
     const webAppExecution = useWebAppExecution(file);
     const onStartUp = useStartWebAppExecutionMutation(file);
     const onTearDown = useStopWebAppExecutionMutation(file);
+    const downloadRunLogMutation = useDownloadRunLog();
     const isLoading = onStartUp.isLoading || onTearDown.isLoading;
     const { t } = useTranslation();
     const notification = useNotifications();
@@ -75,6 +78,10 @@ export function WebAppExecutionControl({
         } catch (e) {
             // handled already
         }
+    };
+
+    const handleDownload = (webAppExec: WebAppExecution) => {
+        downloadRunLogMutation.download('run.log', webAppExec);
     };
 
     const onSubmit = handleSubmit((data: SetupWebAppExecution) => {
@@ -141,6 +148,14 @@ export function WebAppExecutionControl({
                                 <FontAwesomeIcon icon={faStop} />
                                 {' '}
                                 {t('task.exec.tearDown')}
+                            </DropdownItem>
+                            <DropdownItem
+                                disabled={isLoading}
+                                onSelect={() => handleDownload(webAppExecution.data)}
+                            >
+                                <FontAwesomeIcon icon={faDownload} />
+                                {' '}
+                                {t('task.exec.downloadRunLog')}
                             </DropdownItem>
                         </ToolbarDropdown>
                     </>

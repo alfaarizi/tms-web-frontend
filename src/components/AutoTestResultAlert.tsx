@@ -2,14 +2,17 @@ import React from 'react';
 import { Alert, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faCircleXmark, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { AutoTesterResult } from 'resources/common/AutoTesterResult';
+import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 
 type Props = {
     isAccepted: string | null | undefined,
     errorMsg: string | null | undefined,
+    onClose?: () => void,
+    appType: string,
+    onReportDownload: () => void
     results: AutoTesterResult[] | undefined,
-    onClose?: () => void
 }
 
 export function AutoTestResultAlert({
@@ -17,6 +20,8 @@ export function AutoTestResultAlert({
     errorMsg,
     results,
     onClose,
+    appType,
+    onReportDownload,
 }: Props) {
     const { t } = useTranslation();
 
@@ -68,6 +73,15 @@ export function AutoTestResultAlert({
                     </Table>
                 )
                 : null}
+
+            {isAccepted !== 'Uploaded' && appType === 'Web'
+                && (
+                    <ToolbarButton
+                        icon={faDownload}
+                        text={t('task.evaluator.downloadReport')}
+                        onClick={onReportDownload}
+                    />
+                )}
         </Alert>
     );
 }

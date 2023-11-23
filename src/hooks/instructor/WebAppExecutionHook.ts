@@ -3,6 +3,7 @@ import * as WebAppExecutionService from 'api/instructor/WebAppExecutionService';
 import { WebAppExecution } from 'resources/instructor/WebAppExecution';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { SetupWebAppExecution } from 'resources/instructor/SetupWebAppExecution';
+import { useDownloader } from 'hooks/common/useDownloader';
 
 export const QUERY_KEY = 'instructor/web-app-execution';
 
@@ -10,7 +11,8 @@ export function useWebAppExecution(studentFile: StudentFile) {
     return useQuery<WebAppExecution>([QUERY_KEY, { studentFileID: studentFile.id }],
         () => WebAppExecutionService.one(studentFile.id), {
             initialData: studentFile.execution,
-            refetchInterval: 5000,
+            refetchInterval: 60000,
+            refetchIntervalInBackground: false,
         });
 }
 
@@ -34,4 +36,9 @@ export function useStopWebAppExecutionMutation(studentFile: StudentFile) {
             await queryClient.invalidateQueries([QUERY_KEY, { studentFileID: studentFile.id }]);
         },
     });
+}
+export function useDownloadRunLog() {
+    return useDownloader(
+        (webAppExecution: WebAppExecution) => WebAppExecutionService.downloadRunLog(webAppExecution),
+    );
 }

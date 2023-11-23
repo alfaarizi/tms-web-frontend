@@ -5,10 +5,20 @@ import {
     useSetupAutoTester,
 } from 'hooks/instructor/EvaluatorHooks';
 import {
-    useCreateTestCaseMutation, useExportTestCases, useImportTestCasesMutation, useRemoveTestCaseMutation,
+    useCreateTestCaseMutation,
+    useExportTestCases,
+    useImportTestCasesMutation,
+    useRemoveTestCaseMutation,
     useTestCases,
     useUpdateTestCaseMutation,
 } from 'hooks/instructor/TestCasesHooks';
+import {
+    useWebTestSuites,
+    useWebTestSuiteRemoveMutation,
+    useWebTestSuiteUploadMutation, useInstructorFileDownload,
+} from 'hooks/instructor/InstructorFileHooks';
+import { useDownloader } from 'hooks/common/useDownloader';
+import { WebTestSuites } from 'pages/InstructorTaskManager/components/Tasks/WebTestSuites';
 import { useShow } from 'ui-hooks/useShow';
 import { TestCase } from 'resources/instructor/TestCase';
 import { SetupAutoTester } from 'resources/instructor/SetupAutoTester';
@@ -24,6 +34,7 @@ import { FileUpload } from 'components/FileUpload';
 import { getFirstError } from 'utils/getFirstError';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
+import { InstructorFilesUpload } from '../../../../../resources/instructor/InstructorFilesUpload';
 
 type Props = {
     task: Task,
@@ -47,6 +58,32 @@ export function AutoTesterSettings({ task, additionalInformation }: Props) {
     const exportTestCases = useExportTestCases();
     const importTestCasesMutation = useImportTestCasesMutation(task.id);
     const [uploadErrorMsg, setUploadErrorMsg] = useState<string | null>(null);
+
+    // Web test suite mutation
+    const webTestSuites = useWebTestSuites(task.id);
+    const removeWebTestSuiteMutation = useWebTestSuiteRemoveMutation(task.id);
+    const uploadWebTestSuiteMutation = useWebTestSuiteUploadMutation(task.id);
+
+    const instructorFileDownloadMutation = useInstructorFileDownload();
+    // Download instructor file
+    const handleInstructorFileDownload = (id: number, fileName: string) => {
+        instructorFileDownloadMutation.download(fileName, id);
+    };
+
+    // Upload web test suite
+    const handleWebTestSuiteUpload = async (files: File[]) => {
+        const uploadData: InstructorFilesUpload = {
+            taskID: task.id,
+            category: 'Web test suite',
+            files,
+        };
+        await uploadWebTestSuiteMutation.mutateAsync(uploadData);
+    };
+
+    // Remove web test suite
+    const handleWebTestSuiteFileRemove = (id: number) => {
+        removeWebTestSuiteMutation.mutate(id);
+    };
 
     // Save new test case
     const handleSaveNewTestCase = async (data: TestCase) => {
@@ -112,6 +149,15 @@ export function AutoTesterSettings({ task, additionalInformation }: Props) {
         }
     };
 
+    const failedWebTestFiles : string[] | undefined = uploadWebTestSuiteMutation.data
+        ?.failed.map((f) => {
+            const firstError = getFirstError(f.cause);
+            if (firstError) {
+                return `${f.name}: ${firstError}`;
+            }
+            return f.name;
+        });
+
     // Render
     return (
         <>
@@ -126,7 +172,7 @@ export function AutoTesterSettings({ task, additionalInformation }: Props) {
             />
 
             {/* Display test cases */}
-            {task.appType !== 'Web'
+            {task.appType === 'Console'
                 ? (
                     <>
                         <TestCaseList
@@ -148,8 +194,16 @@ export function AutoTesterSettings({ task, additionalInformation }: Props) {
                             hintMessage={t('task.evaluator.testCaseUpload')}
                         />
                     </>
-
-                ) : null}
+                ) : (
+                    <WebTestSuites
+                        webTestSuites={webTestSuites.data}
+                        isLoading={uploadWebTestSuiteMutation.isLoading}
+                        testFileValidationError={failedWebTestFiles}
+                        onUpload={handleWebTestSuiteUpload}
+                        onDownload={handleInstructorFileDownload}
+                        onDelete={handleWebTestSuiteFileRemove}
+                    />
+                )}
 
             {/* Modal to create new test case */}
             <TestCaseFormModal

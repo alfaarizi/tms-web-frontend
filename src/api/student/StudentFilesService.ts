@@ -26,6 +26,13 @@ export async function upload(uploadData: StudentFileUpload) {
     return res.data;
 }
 
+export async function downloadTestReport(id: number) {
+    const res = await axiosInstance.get<Blob>(`/student/student-files/${id}/download-report`, {
+        responseType: 'blob',
+    });
+    return res.data;
+}
+
 export async function verify(data: VerifyItem) {
     const res = await axiosInstance.post<VerifyItem, AxiosResponse<StudentFile>>(
         '/student/student-files/verify',

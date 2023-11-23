@@ -16,7 +16,7 @@ export interface Task {
     semesterID: number;
     creatorName: string;
     testOS: string;
-    appType?: string;
+    appType?: 'Console' | 'Web';
     showFullErrorMsg: number;
     password?: string;
     imageName?: string;

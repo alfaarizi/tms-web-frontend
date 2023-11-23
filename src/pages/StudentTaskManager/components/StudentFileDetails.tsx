@@ -16,10 +16,14 @@ import { useAutoTestResults } from 'hooks/student/StudentFileHooks';
 type StudentFileDetailsProps = {
     studentFile: StudentFile,
     onDownload: () => void,
-    autoTest: number
+    onReportDownload: () => void,
+    autoTest: number,
+    appType?: string
 }
 
-export const StudentFileDetails = ({ studentFile, onDownload, autoTest } : StudentFileDetailsProps) => {
+export const StudentFileDetails = ({
+    studentFile, onDownload, onReportDownload, autoTest, appType,
+} : StudentFileDetailsProps) => {
     const { t } = useTranslation();
     const autoTesterResults = useAutoTestResults(studentFile.id);
 
@@ -49,14 +53,17 @@ export const StudentFileDetails = ({ studentFile, onDownload, autoTest } : Stude
             <DataRow label={t('task.notes')}>
                 <MultiLineTextBlock text={studentFile.notes} />
             </DataRow>
-            {(autoTest === 1 && studentFile.errorMsg)
-                && (
+            {autoTest === 1 && studentFile?.errorMsg
+                ? (
                     <AutoTestResultAlert
-                        isAccepted={studentFile.isAccepted}
-                        errorMsg={studentFile.errorMsg}
-                        results={autoTesterResults.data}
+                        isAccepted={studentFile?.isAccepted}
+                        errorMsg={studentFile?.errorMsg}
+                        appType={appType || 'Console'}
+                        onReportDownload={onReportDownload}
+                        results={autoTesterResults.data ?? []}
                     />
-                )}
+                )
+                : null}
         </CustomCard>
     );
 };

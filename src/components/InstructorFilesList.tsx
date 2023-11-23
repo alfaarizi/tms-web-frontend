@@ -10,20 +10,22 @@ import { FileListItem } from 'components/FileListItem';
 type Props = {
     instructorFiles: InstructorFile[],
     onDownload: (id: number, filename: string) => void,
-    onRemove?: (id: number) => void
+    onRemove?: (id: number) => void,
+    title?: string
 }
 
 export const InstructorFilesList = ({
     instructorFiles,
     onDownload,
     onRemove,
+    title,
 }: Props) => {
     const { t } = useTranslation();
 
     return (
         <CustomCard>
             <CustomCardHeader>
-                <CustomCardTitle>{t('task.instructorFiles')}</CustomCardTitle>
+                <CustomCardTitle>{title || t('task.instructorFiles')}</CustomCardTitle>
             </CustomCardHeader>
             {instructorFiles.map((file) => (
                 <FileListItem

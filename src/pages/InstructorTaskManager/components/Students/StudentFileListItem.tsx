@@ -13,7 +13,7 @@ import { CodeCompassInformationAlert } from 'components/CodeCompassInformationAl
 import { Status } from 'resources/instructor/CodeCompassInstance';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { Task } from 'resources/instructor/Task';
-import { WebAppExecutionControl } from './WebAppExecutionControl';
+import { WebAppExecutionControl } from '../../containers/StudentFiles/WebAppExecutionControl';
 
 type Props = {
     renderItem: (file: StudentFile) => ReactNode,
@@ -21,6 +21,7 @@ type Props = {
     isCodeCompassEnabled: boolean,
     file: StudentFile,
     onDownload: (file: StudentFile) => void,
+    onReportDownload: (file: StudentFile) => void
     onStartCodeCompass: (file: StudentFile) => void,
     onStopCodeCompass: (file: StudentFile) => void,
     onGrade: (file: StudentFile) => void,
@@ -34,6 +35,7 @@ export function StudentFileListItem({
     renderItem,
     task,
     onDownload,
+    onReportDownload,
     onStartCodeCompass,
     onStopCodeCompass,
     onGrade,
@@ -158,6 +160,8 @@ export function StudentFileListItem({
                         errorMsg={file.errorMsg}
                         results={autoTesterResults}
                         onClose={showAutoTesterResults.toHide}
+                        appType={task?.appType || 'Console'}
+                        onReportDownload={() => onReportDownload(file)}
                     />
                 )
                 : null}

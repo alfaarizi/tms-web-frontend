@@ -25,6 +25,7 @@ type Props = {
     errorMessages?: string[],
     successCount?: number,
     hintMessage?: string
+    title?: string
 }
 
 /**
@@ -35,6 +36,8 @@ type Props = {
  * @param accept Accepted file extensions
  * @param successCount Number of successfully uploaded files
  * @param errorMessages Error messages (e.g. validation messages from the server)
+ * @param hintMessage descriptive message for user
+ * @param title Overrides default title
  * @constructor
  */
 export function FileUpload({
@@ -47,6 +50,7 @@ export function FileUpload({
     errorMessages = [],
     successCount,
     hintMessage,
+    title,
 }: Props) {
     const { t } = useTranslation();
     const fileSizeValidator = useFileSizeValidator();
@@ -93,7 +97,7 @@ export function FileUpload({
     return (
         <CustomCard>
             <CustomCardHeader>
-                <CustomCardTitle>{t('fileUpload.upload')}</CustomCardTitle>
+                <CustomCardTitle>{title || t('fileUpload.upload')}</CustomCardTitle>
             </CustomCardHeader>
             {/* Server-side success message */}
             <Alert variant="success" show={!!successCount && successCount > 0}>

@@ -3,12 +3,15 @@ import { InstructorFile } from 'resources/common/InstructorFile';
 import { InstructorFilesUpload } from 'resources/instructor/InstructorFilesUpload';
 import { InstructorFilesUploadResult } from 'resources/instructor/InstructorFilesUploadResult';
 
-export async function index(taskID: number, includeAttachments?: boolean, includeTestFiles?: boolean) {
+export async function index(
+    taskID: number, includeAttachments?: boolean, includeTestFiles?: boolean, includeWebTestSuites?: boolean,
+) {
     const res = await axiosInstance.get<InstructorFile[]>('/instructor/instructor-files', {
         params: {
             taskID,
             includeAttachments,
             includeTestFiles,
+            includeWebTestSuites,
         },
     });
     return res.data;

@@ -44,6 +44,13 @@ export async function download(id: number) {
     return res.data;
 }
 
+export async function downloadTestReport(id: number) {
+    const res = await axiosInstance.get<Blob>(`/instructor/student-files/${id}/download-report`, {
+        responseType: 'blob',
+    });
+    return res.data;
+}
+
 export type SpreadsheetFormat = 'xlsx' | 'csv';
 
 export async function exportSpreadsheet(taskID: number, format: SpreadsheetFormat) {
