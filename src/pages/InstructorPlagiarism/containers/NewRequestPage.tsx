@@ -50,6 +50,13 @@ export function NewRequestPage() {
         }
     }, [semesters.data]);
 
+    // Select the first available plagiarism type after page load
+    useEffect(() => {
+        if (availableTypes.data && availableTypes.data.length > 0 && !type) {
+            formMethods.setValue('type', availableTypes.data[0]);
+        }
+    }, [availableTypes.data]);
+
     const handleSave = async (data: RequestPlagiarism) => {
         try {
             const resData = await createMutation.mutateAsync(data);
