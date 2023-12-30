@@ -67,6 +67,7 @@ export function VerifyItemForm({ onSave, serverSideError, isLoading }: Props) {
                 <Form.Group>
                     <Form.Check
                         type="checkbox"
+                        id="disableIpCheck"
                         label={t('passwordProtected.verifyDisableIpCheck')}
                         {...register('disableIpCheck')}
                     />

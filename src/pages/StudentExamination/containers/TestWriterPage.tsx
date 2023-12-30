@@ -127,6 +127,7 @@ export function TestWriterPage() {
                                         type="radio"
                                         key={answer.id}
                                         value={answer.id}
+                                        id={`answer-${answer.id}`}
                                         label={<MarkdownRenderer source={answer.text} />}
                                         {...registerAnswer(`test.${index}.selectedAnswerID` as const)}
                                     />
