@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.3.1...v3.4.0) (2024-01-03)
+
+
+### Features
+
+* added automated testing for web applications ([f757738](https://gitlab.com/tms-elte/frontend-react/commit/f757738888edc9350a193cf1e9e473178a8877b5))
+
+
+### Bug Fixes
+
+* Set default plagiarism type on new plagiarism form ([44682ce](https://gitlab.com/tms-elte/frontend-react/commit/44682ce538e9e349dd4c069341b5e9b86d4ada8d))
+
 ### [3.3.1](https://gitlab.com/tms-elte/frontend-react/compare/v3.3.0...v3.3.1) (2023-10-23)
 
 
