@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.4.0...v3.5.0) (2024-02-05)
+
+
+### Features
+
+* Notification management on the UI ([83df3d0](https://gitlab.com/tms-elte/frontend-react/commit/83df3d047bf97d2f3f8b359e619928726bac814c))
+
 ## [3.4.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.3.1...v3.4.0) (2024-01-03)
 
 
