@@ -12,6 +12,7 @@ import { FullScreenSpinner } from 'components/FullScreenSpinner/FullScreenSpinne
 import { ProtectedRoute } from 'components/ProtectedRoute';
 import { useNetworkErrorHandler } from 'hooks/common/useNetworkErrorHandler';
 import { useNotifications } from 'hooks/common/useNotifications';
+import { useNotifications as useAlertNotifications } from 'hooks/common/NotificationsHooks';
 import { NotificationToast } from 'components/NotificationToast/NotificationToast';
 
 import Home from 'pages/Home';
@@ -19,6 +20,7 @@ import Logout from 'pages/Logout';
 import ErrorPage from 'pages/ErrorPage';
 import { PrivateHeader } from 'containers/PrivateHeader';
 import { PublicHeader } from 'containers/PublicHeader';
+import { NotificationAlerts } from 'components/NotificationAlerts/NotificationAlerts';
 import { useGlobalContext } from 'context/GlobalContext';
 import { usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { useErrorBoundaryContext } from 'components/ErrorBoundary';
@@ -31,6 +33,7 @@ const InstructorTaskManager = lazy(() => import('pages/InstructorTaskManager'));
 const InstructorExamination = lazy(() => import('pages/InstructorExamination'));
 const InstructorPlagiarism = lazy(() => import('pages/InstructorPlagiarism'));
 const AdminSemesterManager = lazy(() => import('pages/AdminSemesterManager'));
+const AdminNotificationManager = lazy(() => import('pages/AdminNotificationManager'));
 const AdminCourseManager = lazy(() => import('pages/AdminCourseManager'));
 const Settings = lazy(() => import('pages/Settings'));
 const ConfirmEmailPage = lazy(() => import('pages/Settings/containers/ConfirmEmailPage'));
@@ -44,6 +47,7 @@ export function App() {
     useNetworkErrorHandler();
 
     const notifications = useNotifications();
+    const alertNotifications = useAlertNotifications();
     const { t } = useTranslation();
     const location = useLocation();
     const { isLoggedIn } = useGlobalContext();
@@ -87,6 +91,7 @@ export function App() {
         <>
             <NotificationToast data={notifications.notification} onClose={notifications.close} />
             {userSettings.data ? <PrivateHeader userSettings={userSettings.data} /> : <PublicHeader />}
+            {alertNotifications.data ? <NotificationAlerts notifications={alertNotifications.data} /> : null}
             <Suspense fallback={<FullScreenSpinner />}>
                 <Switch>
                     <ProtectedRoute exact path="/">
@@ -121,6 +126,9 @@ export function App() {
                     </ProtectedRoute>
                     <ProtectedRoute hasPermission={isAdmin} path="/admin/semester-manager">
                         <AdminSemesterManager />
+                    </ProtectedRoute>
+                    <ProtectedRoute hasPermission={isAdmin} path="/admin/notification-manager">
+                        <AdminNotificationManager />
                     </ProtectedRoute>
 
                     <ProtectedRoute exact path="/settings">

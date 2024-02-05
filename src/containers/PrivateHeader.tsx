@@ -4,7 +4,7 @@ import { Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
-    faCalendar, faCog, faCrosshairs, faFile, faList, faPen, faSignOutAlt,
+    faCalendar, faCog, faCrosshairs, faFile, faList, faPen, faSignOutAlt, faBullhorn,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -162,6 +162,13 @@ export function PrivateHeader({
                                     <FontAwesomeIcon icon={faCalendar} />
                                     {' '}
                                     {t('navbar.semesterManager')}
+                                </Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to="/admin/notification-manager/notifications">
+                                <Nav.Link>
+                                    <FontAwesomeIcon icon={faBullhorn} />
+                                    {' '}
+                                    {t('navbar.notificationManager')}
                                 </Nav.Link>
                             </LinkContainer>
                         </>

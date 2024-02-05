@@ -163,8 +163,9 @@ export function useLogoutMutation() {
         globalContext.resetState();
         // Set login status to logout
         globalContext.setIsLoggedIn(false);
-        // Reset localStorage, this also clears accessTokens
-        localStorage.clear();
+        // Remove access tokens from local storage
+        localStorage.removeItem(ACCESS_TOKEN_LOCAL_STORAGE_KEY);
+        localStorage.removeItem(IMAGE_TOKEN_LOCAL_STORAGE_KEY);
     };
 
     const mutation = useMutation(() => AuthService.logout(), {
