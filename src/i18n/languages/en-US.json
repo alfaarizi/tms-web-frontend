@@ -31,6 +31,7 @@
     "minValueRequired": "Smallest allowed value: {{value}}",
     "maxValueRequired": "Largest allowed value: {{value}}",
     "semesters": "Semesters",
+    "notifications": "Notifications",
     "minutes": "minutes",
     "studentName": "Student name",
     "noFilesSelected": "Please select at least one file!",
@@ -136,6 +137,7 @@
       "admin": "Admin"
     },
     "semesterManager": "Semester Manager",
+    "notificationManager": "Notification Manager",
     "plagiarism": "Plagiarism"
   },
   "course": {
@@ -146,6 +148,18 @@
     "addLecturers": "Add lecturers",
     "newCourse": "New Course",
     "editCourse": "Edit Course"
+  },
+  "notification": {
+    "notification": "Notification",
+    "newNotification": "New Notification",
+    "editNotification": "Edit Notification",
+    "message": "Message",
+    "startTime": "Starting time",
+    "endTime": "Ending time",
+    "isAvailableForAll": "Available for everyone",
+    "isAvailableForAllHelp": "If checked, the notification will be available for not logged in users as well.",
+    "dismissable": "Dismissable",
+    "dismissableHelp": "If checked, the notification can be dismissed by the user."
   },
   "group": {
     "number": "Group code",
@@ -413,7 +427,7 @@
     "basefiles": {
       "basefiles": "Base files",
       "about": "These files can be added to plagiarism checks as exempted files. For example, instructor-provided files can be exempted to avoid false alarms when students legitimately use them."
-	},
+    },
     "moss": {
       "name": "Moss",
       "ignoreThreshold": "Ignore threshold",

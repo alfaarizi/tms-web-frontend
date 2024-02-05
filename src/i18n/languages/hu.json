@@ -31,6 +31,7 @@
     "minValueRequired": "Legkisebb megengedett érték: {{value}}",
     "maxValueRequired": "Legnagyobb megengedett érték: {{value}}",
     "semesters": "Szemeszterek",
+    "notifications": "Értesítések",
     "minutes": "perc",
     "studentName": "Hallgató neve",
     "noFilesSelected": "Nincsenek fájlok kiválasztva",
@@ -137,6 +138,7 @@
       "admin": "Adminisztrátor"
     },
     "semesterManager": "Szemeszterkezelő",
+    "notificationManager": "Értesítéskezelő",
     "plagiarism": "Plágium"
   },
   "course": {
@@ -147,6 +149,18 @@
     "addLecturers": "Előadók hozzáadása",
     "newCourse": "Új kurzus",
     "editCourse": "Kurzus szerkesztése"
+  },
+  "notification": {
+    "notification": "Értesítés",
+    "newNotification": "Új értesítés",
+    "editNotification": "Értesítés szerkesztése",
+    "message": "Üzenet",
+    "startTime": "Kezdési időpont",
+    "endTime": "Befejezési időpont",
+    "isAvailableForAll": "Mindenkinek elérhető",
+    "isAvailableForAllHelp": "Ha be van jelölve, akkor a nem bejelentkezett felhasználók is láthatják az értesítést.",
+    "dismissable": "Elrejthető",
+    "dismissableHelp": "Ha be van jelölve, akkor a felhasználók elrejthetik az értesítést."
   },
   "group": {
     "number": "Csoport Kód",
@@ -417,7 +431,7 @@
     "basefiles": {
       "basefiles": "Alapfájlok",
       "about": "Ezek a fájlok hozzáadhatók a plágium-ellenőrzésekhez kivételekként. Például az oktató által megosztott fájlok kivételezésével elkerülhetők a felesleges figyelmeztetések, amikor a hallgatók jogosan használják őket."
-	},
+    },
     "moss": {
       "name": "Moss",
       "ignoreThreshold": "Egyezéskorlát",
