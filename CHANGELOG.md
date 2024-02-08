@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.1](https://gitlab.com/tms-elte/frontend-react/compare/v3.5.0...v3.5.1) (2024-02-08)
+
+
+### Bug Fixes
+
+* Increase sidebar width. ([645a2cd](https://gitlab.com/tms-elte/frontend-react/commit/645a2cdbcd1b15b111fcf05111f27cdb4defe05b))
+
 ## [3.5.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.4.0...v3.5.0) (2024-02-05)
 
 
