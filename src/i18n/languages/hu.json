@@ -59,7 +59,12 @@
     "grid": "Rács",
     "areYouSure": "Biztos benne?",
     "confirmDiscard": "Ha bezárja az ablakot, az eddigi módosításai elvesznek!",
-    "confirmAddSemester": "Ha hozzáad egy új szemesztert, az lesz az aktuális, és nem tudja visszaállítani az előzőt"
+    "confirmAddSemester": "Ha hozzáad egy új szemesztert, az lesz, az aktuális, és nem tudja visszaállítani az előzőt",
+    "addNewNeptunCode": "Új NEPTUN-kód hozzáadása: ",
+    "searchForNeptunCodeOrName": "NEPTUN-kód vagy név",
+    "neptunCodeOrNameRequired": "Érvényes NEPTUN-kódokat kell megadni!",
+    "basicSearch": "Importálás",
+    "autoCompleteSearch": "Keresés"
   },
   "passwordProtected": {
     "passwordProtected": "Jelszóval védett",

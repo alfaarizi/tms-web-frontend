@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AddUserCard } from 'components/UserListCard/AddUserCard';
@@ -10,6 +10,7 @@ import {
 } from 'hooks/admin/CoursesHooks';
 import { Course } from 'resources/common/Course';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
+import { useSearchFacultyQuery } from 'hooks/common/UserHooks';
 
 type Props = {
     course: Course
@@ -20,6 +21,9 @@ export function LecturerList({ course }: Props) {
     const instructors = useCourseLecturers(course.id);
     const addMutation = useAddLecturerMutation(course.id);
     const deleteMutation = useDeleteLecturerMutation(course.id);
+    const [userSearchText, setUserSearchText] = useState<string>('');
+    const [userSearchQueryEnabled, setUserSearchQueryEnabled] = useState<boolean>(false);
+    const facultySearchQuery = useSearchFacultyQuery(userSearchText, userSearchQueryEnabled);
 
     useEffect(() => {
         addMutation.reset();
@@ -33,6 +37,11 @@ export function LecturerList({ course }: Props) {
         deleteMutation.mutate(studentID);
     };
 
+    const handleSearch = (text: string) => {
+        setUserSearchText(text);
+        setUserSearchQueryEnabled(true);
+    };
+
     if (!instructors.data) {
         return null;
     }
@@ -40,10 +49,14 @@ export function LecturerList({ course }: Props) {
     return (
         <>
             <AddUserCard
+                id="add-lecturers"
                 title={t('course.addLecturers')}
                 onAdd={handleAdd}
                 data={addMutation.data}
                 isLoading={addMutation.isLoading}
+                onSearch={handleSearch}
+                searchData={facultySearchQuery.data}
+                isSearchLoading={facultySearchQuery.isLoading}
             />
 
             <UserListCard

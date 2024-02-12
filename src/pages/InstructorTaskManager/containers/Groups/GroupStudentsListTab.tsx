@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,7 @@ import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { StudentNotesContainer } from 'pages/InstructorTaskManager/containers/Groups/StudentNotesContainer';
+import { useSearchStudentQuery } from 'hooks/common/UserHooks';
 
 type Props = {
     group: Group
@@ -23,6 +24,9 @@ export function GroupStudentsListTab({ group }: Props) {
     const students = useGroupStudents(group.id);
     const addMutation = useAddStudentsMutation(group.id);
     const deleteMutation = useDeleteStudentMutation(group.id);
+    const [userSearchText, setUserSearchText] = useState<string>('');
+    const [userSearchQueryEnabled, setUserSearchQueryEnabled] = useState<boolean>(false);
+    const studentSearchQuery = useSearchStudentQuery(userSearchText, userSearchQueryEnabled);
     const actualSemester = useActualSemester();
     const { url } = useRouteMatch();
 
@@ -38,6 +42,11 @@ export function GroupStudentsListTab({ group }: Props) {
         deleteMutation.mutate(studentID);
     };
 
+    const handleSearch = (text: string) => {
+        setUserSearchText(text);
+        setUserSearchQueryEnabled(true);
+    };
+
     if (!students.data) {
         return null;
     }
@@ -47,10 +56,14 @@ export function GroupStudentsListTab({ group }: Props) {
             {actualSemester.check(group.semesterID) && !group.isCanvasCourse
                 ? (
                     <AddUserCard
+                        id="add-students"
                         title={t('group.addStudents')}
                         onAdd={handleAdd}
                         data={addMutation.data}
                         isLoading={addMutation.isLoading}
+                        onSearch={handleSearch}
+                        searchData={studentSearchQuery.data}
+                        isSearchLoading={studentSearchQuery.isLoading}
                     />
                 )
                 : null}

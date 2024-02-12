@@ -14,8 +14,12 @@ import { useGlobalContext } from 'context/GlobalContext';
 import { UserSettings } from 'resources/common/UserSettings';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { ACCESS_TOKEN_LOCAL_STORAGE_KEY, IMAGE_TOKEN_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
+import * as UsersService from 'api/common/UsersService';
+import { User } from 'resources/common/User';
 
 export const USER_SETTINGS_QUERY_KEY = 'usersettings';
+export const SEARCH_STUDENT_QUERY_KEY = 'common/users/student';
+export const SEARCH_FACULTY_QUERY_KEY = 'common/users/faculty';
 
 /**
  * Changes i18next language and updates the Accept-Language header.
@@ -188,4 +192,20 @@ export function useLogoutMutation() {
 export function useIsLoggedIn() {
     const { isLoggedIn } = useGlobalContext();
     return isLoggedIn;
+}
+
+export function useSearchStudentQuery(text: string, enabled: boolean = true) {
+    return useQuery<User[]>(
+        [SEARCH_STUDENT_QUERY_KEY, { text }],
+        () => UsersService.searchStudent(text),
+        { enabled },
+    );
+}
+
+export function useSearchFacultyQuery(text: string, enabled: boolean = true) {
+    return useQuery<User[]>(
+        [SEARCH_FACULTY_QUERY_KEY, { text }],
+        () => UsersService.searchFaculty(text),
+        { enabled },
+    );
 }
