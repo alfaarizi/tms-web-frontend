@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
     useAddInstructorsMutation,
@@ -12,6 +12,7 @@ import { Group } from 'resources/instructor/Group';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useSearchFacultyQuery } from 'hooks/common/UserHooks';
 
 type Props = {
     group: Group
@@ -22,6 +23,9 @@ export function GroupInstructorsListTab({ group }: Props) {
     const instructors = useGroupInstructors(group.id);
     const addMutation = useAddInstructorsMutation(group.id);
     const deleteMutation = useDeleteInstructorMutation(group.id);
+    const [userSearchText, setUserSearchText] = useState<string>('');
+    const [userSearchQueryEnabled, setUserSearchQueryEnabled] = useState<boolean>(false);
+    const facultySearchQuery = useSearchFacultyQuery(userSearchText, userSearchQueryEnabled);
     const actualSemester = useActualSemester();
     const courses = useCourses(true, false);
     const isLecturer = courses.data ? courses.data.some((c) => c.id === group.course.id) : false;
@@ -38,6 +42,11 @@ export function GroupInstructorsListTab({ group }: Props) {
         deleteMutation.mutate(studentID);
     };
 
+    const handleSearch = (text: string) => {
+        setUserSearchText(text);
+        setUserSearchQueryEnabled(true);
+    };
+
     if (!instructors.data || !courses.data) {
         return null;
     }
@@ -47,10 +56,14 @@ export function GroupInstructorsListTab({ group }: Props) {
             {actualSemester.check(group.semesterID) && isLecturer
                 ? (
                     <AddUserCard
+                        id="add-instructors"
                         title={t('group.addInstructors')}
                         onAdd={handleAdd}
                         data={addMutation.data}
                         isLoading={addMutation.isLoading}
+                        onSearch={handleSearch}
+                        searchData={facultySearchQuery.data}
+                        isSearchLoading={facultySearchQuery.isLoading}
                     />
                 )
                 : null}

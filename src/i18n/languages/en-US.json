@@ -58,7 +58,12 @@
     "grid": "Grid",
     "areYouSure": "Are you sure?",
     "confirmDiscard": "If you close the modal, all your changes will be lost!",
-    "confirmAddSemester": "If you add a new semester, that will be the actual one and you won't be able to change back the previous one"
+    "confirmAddSemester": "If you add a new semester, that will be the actual one and you won't be able to change back the previous one",
+    "addNewNeptunCode": "Add new NEPTUN-code: ",
+    "searchForNeptunCodeOrName": "Enter NEPTUN-code or name",
+    "neptunCodeOrNameRequired": "Please provide valid NEPTUN-codes!",
+    "basicSearch": "Import",
+    "autoCompleteSearch": "Search"
   },
   "passwordProtected": {
     "passwordProtected": "Password protected",
