@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.5.1...v3.6.0) (2024-02-13)
+
+
+### Features
+
+* Add user selection feature with autocomplete support based on name and student code ([fa97ae8](https://gitlab.com/tms-elte/frontend-react/commit/fa97ae808409f7e6c80e98b0652232594c82f066))
+
 ### [3.5.1](https://gitlab.com/tms-elte/frontend-react/compare/v3.5.0...v3.5.1) (2024-02-08)
 
 
