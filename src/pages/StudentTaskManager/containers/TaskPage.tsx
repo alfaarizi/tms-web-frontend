@@ -22,6 +22,8 @@ import { VerifyItem } from 'resources/student/VerifyItem';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUploadInfo';
 import { CodeCheckerReportsList } from 'components/CodeChecker/CodeCheckerReportsList';
+import { useGroup } from 'hooks/student/GroupHooks';
+import { useCanvasSyncSubmissionMutation } from 'hooks/student/CanvasHooks';
 
 type Params = {
     id?: string
@@ -30,7 +32,8 @@ type Params = {
 export const TaskPage = () => {
     const { t } = useTranslation();
     const { id } = useParams<Params>();
-    const task = useTask(parseInt(id || '-1', 10));
+    const taskIDInt = parseInt(id || '-1', 10);
+    const task = useTask(taskIDInt);
     const uploadMutation = useUploadStudentFileMutation();
     const downloadStudentFile = useDownloadStudentFile();
     const downloadInstructorFile = useDownloadInstructorFile();
@@ -39,8 +42,11 @@ export const TaskPage = () => {
     const [uploadErrorMsg, setUploadErrorMsg] = useState<string | null>(null);
     const [verifyError, setVerifyError] = useState<ValidationErrorBody | null>(null);
     const downloadTestReport = useDownloadTestReport();
+    const canvasSyncSubmissionMutation = useCanvasSyncSubmissionMutation(taskIDInt);
 
-    if (!task.data) {
+    const group = useGroup(task.data ? task.data.groupID : -1);
+
+    if (!task.data || !group.data) {
         return null;
     }
     const studentFile: StudentFile = task.data.studentFiles[0];
@@ -90,6 +96,21 @@ export const TaskPage = () => {
         }
     };
 
+    // Synchronize submission with Canvas, if synchronization is set up correctly
+    const handleCanvasSync = async () => {
+        if (group.data.isCanvasCourse) {
+            try {
+                await canvasSyncSubmissionMutation.mutateAsync();
+                notifications.push({
+                    variant: 'success',
+                    message: t('group.successfulCanvasSync'),
+                });
+            } catch (e) {
+                // Already handled globally
+            }
+        }
+    };
+
     let uploadCard;
     if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile.isAccepted !== 'Accepted')
         || studentFile.isAccepted === 'Late Submission') {
@@ -113,7 +134,12 @@ export const TaskPage = () => {
 
     return (
         <>
-            <TaskDetails task={task.data} />
+            <TaskDetails
+                task={task.data}
+                isCanvasCourse={group.data.isCanvasCourse}
+                canvasSyncInProgress={canvasSyncSubmissionMutation.isLoading}
+                onCanvasSync={handleCanvasSync}
+            />
 
             {(!studentFile.verified)
             && (

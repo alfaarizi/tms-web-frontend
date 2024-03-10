@@ -6,6 +6,7 @@ export interface Group {
     course: Course;
     instructorNames: string[];
     timezone: string;
+    isCanvasCourse: boolean;
     canvasUrl?: string;
     lastSyncTime?: string;
     notes?: string;
