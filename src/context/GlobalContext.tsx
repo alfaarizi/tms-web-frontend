@@ -1,5 +1,6 @@
 import React, { ReactNode, useContext, useState } from 'react';
 import { Semester } from 'resources/common/Semester';
+import { env } from 'runtime-env';
 
 /**
  * Describes the public interface of the global client-side state
@@ -30,8 +31,8 @@ export interface NotificationData {
 export type AvailableTheme = 'dark'|'blue';
 const availableThemes = ['dark', 'blue'];
 const defaultTheme: AvailableTheme = 'dark';
-const configuredTheme = availableThemes.includes(process.env.REACT_APP_THEME)
-    ? process.env.REACT_APP_THEME as AvailableTheme
+const configuredTheme = availableThemes.includes(env.REACT_APP_THEME)
+    ? env.REACT_APP_THEME as AvailableTheme
     : defaultTheme;
 
 /**
