@@ -9,18 +9,38 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
-    task: Task
+    task: Task,
+    isCanvasCourse: boolean,
+    canvasSyncInProgress: boolean,
+    onCanvasSync: () => void,
 }
 
-export const TaskDetails = ({ task }: Props) => {
+export const TaskDetails = ({
+    task,
+    isCanvasCourse,
+    canvasSyncInProgress,
+    onCanvasSync,
+}: Props) => {
     const { t } = useTranslation();
 
     return (
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>{task.name}</CustomCardTitle>
+                { isCanvasCourse
+                    ? (
+                        <ToolbarButton
+                            isLoading={canvasSyncInProgress}
+                            text={t('group.canvasSync')}
+                            icon={faSync}
+                            onClick={onCanvasSync}
+                        />
+                    )
+                    : null}
             </CustomCardHeader>
             <DataRow label={t('task.category')}>{task.translatedCategory}</DataRow>
             {task.canvasUrl ? (

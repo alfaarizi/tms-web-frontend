@@ -3,6 +3,7 @@ import { InstructorFile } from 'resources/common/InstructorFile';
 
 export interface Task {
     id: number;
+    groupID: number;
     name: string;
     category: string;
     translatedCategory: string;
