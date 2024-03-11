@@ -3,7 +3,10 @@ import { axiosInstance } from '../axiosInstance';
 
 export async function index(semesterID: number) {
     const res = await axiosInstance.get<ExamTest[]>('/instructor/exam-tests', {
-        params: { semesterID },
+        params: {
+            semesterID,
+            expand: 'group',
+        },
     });
     return res.data;
 }

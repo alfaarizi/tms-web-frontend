@@ -15,7 +15,7 @@ export function FutureTestListItem({
     const { t } = useTranslation();
     return (
         <ListCardItem>
-            <DataRow label={t('course.course')}>{testInstance.test.courseName}</DataRow>
+            <DataRow label={t('course.course')}>{testInstance.test.group?.course.name}</DataRow>
             <DataRow label={t('examTests.testName')}>{testInstance.test.name}</DataRow>
             <DataRow label={t('examTests.availablefrom')}>{testInstance.test.availablefrom}</DataRow>
         </ListCardItem>

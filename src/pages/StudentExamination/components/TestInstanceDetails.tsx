@@ -31,7 +31,7 @@ export function TestInstanceDetails({ testInstance }: Props) {
                     : null}
 
             </CustomCardHeader>
-            <DataRow label={t('course.course')}>{testInstance.test.courseName}</DataRow>
+            <DataRow label={t('course.course')}>{testInstance.test.group?.course.name}</DataRow>
             <DataRow label={t('examTests.availableuntil')}>
                 <LocaleDateTime value={testInstance.test.availableuntil} />
             </DataRow>

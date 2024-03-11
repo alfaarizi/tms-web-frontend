@@ -10,6 +10,7 @@ export async function index(semesterID: number, submitted: boolean, future: bool
             semesterID,
             submitted,
             future,
+            expand: 'group',
         },
     });
     return res.data;

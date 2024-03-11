@@ -17,7 +17,7 @@ export function FinishedTestListItem({
     const { t } = useTranslation();
     return (
         <ListCardItem onClick={onClick}>
-            <DataRow label={t('course.course')}>{testInstance.test.courseName}</DataRow>
+            <DataRow label={t('course.course')}>{testInstance.test.group?.course.name}</DataRow>
             <DataRow label={t('examTests.testName')}>{testInstance.test.name}</DataRow>
             <DataRow label={t('examTests.score')}>
                 {testInstance.score}

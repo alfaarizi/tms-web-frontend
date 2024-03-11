@@ -29,10 +29,10 @@ export function TestList({
                 <ListCardItem key={test.id} onClick={() => onChange(test.id)}>
                     <DataRow label={t('common.name')}>{test.name}</DataRow>
                     <DataRow label={t('course.course')}>
-                        {test.courseName}
+                        {test.group?.course.name}
                         {' '}
                         (
-                        {test.groupNumber}
+                        {test.group?.number}
                         )
                     </DataRow>
                     <DataRow label={t('examTests.available')}>
