@@ -41,10 +41,10 @@ export function TestDetails({
                 </ButtonGroup>
             </CustomCardHeader>
             <DataRow label={t('course.course')}>
-                {test.courseName}
+                {test.group?.course.name}
                 {' '}
                 (
-                {test.groupNumber}
+                {test.group?.number}
                 )
             </DataRow>
             <DataRow label={t('examTests.available')}>

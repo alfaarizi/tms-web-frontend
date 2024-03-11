@@ -1,3 +1,5 @@
+import { Group } from 'resources/instructor/Group';
+
 export interface ExamTest {
     id: number;
     name: string;
@@ -7,11 +9,9 @@ export interface ExamTest {
     unique: number;
     availablefrom: string;
     availableuntil: string;
-    courseName: string;
-    groupNumber: number;
     groupID: number;
     questionsetID: number;
-    courseID: number;
     semesterID: number;
     timezone: string;
+    group?: Group;
 }

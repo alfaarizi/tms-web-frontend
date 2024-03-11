@@ -41,7 +41,7 @@ export function TestPage() {
     const { actualSemesterID } = useActualSemester();
     const groupsForEdit = useGroupsForCourse(
         actualSemesterID || -1,
-        test.data?.courseID || -1,
+        test.data?.group?.courseID || -1,
         showEdit.show && !!actualSemesterID,
     );
     const notifications = useNotifications();
