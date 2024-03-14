@@ -7,8 +7,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* main content is overlapping sidebar on certain display sizes ([382d2fb](https://gitlab.com/tms-elte/frontend-react/commit/382d2fb528f5bde10d433dd634ee423adfe1565b))
-* set sidebar height to dynamic ([5c80365](https://gitlab.com/tms-elte/frontend-react/commit/5c80365c56588d587e9ecb5fca2ef28b8c6d79ea))
+* Main content is overlapping sidebar on certain display sizes ([382d2fb](https://gitlab.com/tms-elte/frontend-react/commit/382d2fb528f5bde10d433dd634ee423adfe1565b))
+* Set sidebar height to dynamic ([5c80365](https://gitlab.com/tms-elte/frontend-react/commit/5c80365c56588d587e9ecb5fca2ef28b8c6d79ea))
 
 ## [3.6.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.5.1...v3.6.0) (2024-02-13)
 
@@ -36,7 +36,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* added automated testing for web applications ([f757738](https://gitlab.com/tms-elte/frontend-react/commit/f757738888edc9350a193cf1e9e473178a8877b5))
+* Added automated testing for web applications ([f757738](https://gitlab.com/tms-elte/frontend-react/commit/f757738888edc9350a193cf1e9e473178a8877b5))
 
 
 ### Bug Fixes
