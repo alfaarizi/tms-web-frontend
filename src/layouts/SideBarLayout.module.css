@@ -1,5 +1,12 @@
-@media (min-width: 2500px){
+@media (min-width: 2500px) {
+    .customMainContentWrapper {
+        justify-content: center;
+        display: flex;
+    }
+}
+@media (min-width: 2500px) {
     .customMainContent {
-    width: 90%;
-      }
+        width: 2000px;
+        justify-content: center;
+    }
 }

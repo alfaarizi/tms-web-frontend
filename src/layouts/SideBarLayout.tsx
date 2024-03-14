@@ -29,6 +29,7 @@ export function SideBarLayout({
         toHide,
     } = useShow();
     const { isExact } = useRouteMatch();
+    const contentClasses = `mt-2 ${show && !isExact ? 'd-none' : ''}`;
 
     useEffect(() => {
         if (isExact) {
@@ -40,7 +41,7 @@ export function SideBarLayout({
 
     return (
         <Container fluid>
-            <Row className={`justify-content-center ${styles.customMainContent}`}>
+            <Row className="justify-content-center">
                 <Col xs={12} sm={12} md={4} lg={3} xl={2} className="mt-0 ml-0 pl-0 pr-0">
                     <SideBar show={show}>
                         <div className="pb-1 border-secondary border-bottom">
@@ -56,8 +57,8 @@ export function SideBarLayout({
                         {sidebarItems.map((item) => <div key={item.key} onClick={toHide}>{item}</div>)}
                     </SideBar>
                 </Col>
-                <Col sm={12} md={8} lg={9} xl={10} className={`mt-2`}>
-                    <main role="main">
+                <Col sm={12} md={8} lg={9} xl={10} className={`${contentClasses} ${styles.customMainContentWrapper}`}>
+                    <main role="main" className={`${styles.customMainContent}`}>
                         <Button onClick={toShow} className="d-md-none">
                             <FontAwesomeIcon icon={faColumns} />
                             {' '}
