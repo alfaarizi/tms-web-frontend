@@ -8,6 +8,7 @@ import { useShow } from 'ui-hooks/useShow';
 import { useRouteMatch } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faColumns } from '@fortawesome/free-solid-svg-icons';
+import styles from './SideBarLayout.module.css';
 
 type Props = {
     sidebarTitle: string,
@@ -39,8 +40,8 @@ export function SideBarLayout({
 
     return (
         <Container fluid>
-            <Row className="justify-content-center">
-                <Col md={2} xs={12} className="mt-0 ml-0 pl-0 pr-0">
+            <Row className={`justify-content-center ${styles.customMainContent}`}>
+                <Col xs={12} sm={12} md={4} lg={3} xl={2} className="mt-0 ml-0 pl-0 pr-0">
                     <SideBar show={show}>
                         <div className="pb-1 border-secondary border-bottom">
                             <h4>{sidebarTitle}</h4>
@@ -55,7 +56,7 @@ export function SideBarLayout({
                         {sidebarItems.map((item) => <div key={item.key} onClick={toHide}>{item}</div>)}
                     </SideBar>
                 </Col>
-                <Col md={9} lg={10} className="ml-sm-auto mt-2 pl-5">
+                <Col sm={12} md={8} lg={9} xl={10} className={`mt-2`}>
                     <main role="main">
                         <Button onClick={toShow} className="d-md-none">
                             <FontAwesomeIcon icon={faColumns} />
