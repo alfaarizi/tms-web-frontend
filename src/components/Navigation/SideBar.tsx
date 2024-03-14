@@ -10,7 +10,7 @@ export function SideBar({
     show,
     children,
 }: Props) {
-    const classes = ['col-md-3', 'col-lg-2', 'd-md-block', styles.sidebar, 'collapse'];
+    const classes = ['d-md-block', styles.sidebar, 'collapse', 'h-100'];
     if (show) {
         classes.push('show');
     }
