@@ -22,7 +22,6 @@ import { VerifyItem } from 'resources/student/VerifyItem';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUploadInfo';
 import { CodeCheckerReportsList } from 'components/CodeChecker/CodeCheckerReportsList';
-import { useGroup } from 'hooks/student/GroupHooks';
 import { useCanvasSyncSubmissionMutation } from 'hooks/student/CanvasHooks';
 
 type Params = {
@@ -44,9 +43,7 @@ export const TaskPage = () => {
     const downloadTestReport = useDownloadTestReport();
     const canvasSyncSubmissionMutation = useCanvasSyncSubmissionMutation(taskIDInt);
 
-    const group = useGroup(task.data ? task.data.groupID : -1);
-
-    if (!task.data || !group.data) {
+    if (!task.data) {
         return null;
     }
     const studentFile: StudentFile = task.data.studentFiles[0];
@@ -98,16 +95,14 @@ export const TaskPage = () => {
 
     // Synchronize submission with Canvas, if synchronization is set up correctly
     const handleCanvasSync = async () => {
-        if (group.data.isCanvasCourse) {
-            try {
-                await canvasSyncSubmissionMutation.mutateAsync();
-                notifications.push({
-                    variant: 'success',
-                    message: t('group.successfulCanvasSync'),
-                });
-            } catch (e) {
-                // Already handled globally
-            }
+        try {
+            await canvasSyncSubmissionMutation.mutateAsync();
+            notifications.push({
+                variant: 'success',
+                message: t('group.successfulCanvasSync'),
+            });
+        } catch (e) {
+            // Already handled globally
         }
     };
 
@@ -136,7 +131,6 @@ export const TaskPage = () => {
         <>
             <TaskDetails
                 task={task.data}
-                isCanvasCourse={group.data.isCanvasCourse}
                 canvasSyncInProgress={canvasSyncSubmissionMutation.isLoading}
                 onCanvasSync={handleCanvasSync}
             />
