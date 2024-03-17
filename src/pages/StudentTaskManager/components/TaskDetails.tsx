@@ -14,14 +14,12 @@ import { faSync } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
     task: Task,
-    isCanvasCourse: boolean,
     canvasSyncInProgress: boolean,
     onCanvasSync: () => void,
 }
 
 export const TaskDetails = ({
     task,
-    isCanvasCourse,
     canvasSyncInProgress,
     onCanvasSync,
 }: Props) => {
@@ -31,7 +29,7 @@ export const TaskDetails = ({
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>{task.name}</CustomCardTitle>
-                { isCanvasCourse
+                { task.canvasUrl
                     ? (
                         <ToolbarButton
                             isLoading={canvasSyncInProgress}
