@@ -24,7 +24,7 @@ export interface StudentFile {
     execution?: WebAppExecution,
     gitRepo?: string;
     delay?: string;
-    ipAddress?: string;
+    ipAddresses: string[];
     verified: boolean;
     codeCompass?: CodeCompassInstance;
     codeCheckerResult?: CodeCheckerResult;
