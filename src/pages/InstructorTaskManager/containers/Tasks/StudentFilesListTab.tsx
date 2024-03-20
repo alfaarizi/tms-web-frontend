@@ -208,6 +208,9 @@ export function StudentFilesListTab({
                             <DataRow label={t('task.notes')}>
                                 <MultiLineTextBlock text={file.notes} />
                             </DataRow>
+                            <DataRow label={t('task.ipAddresses')}>
+                                {file.ipAddresses.join(', ')}
+                            </DataRow>
                             {file.gitRepo
                                 ? (
                                     <DataRow label={t('task.git.gitRepo')}>

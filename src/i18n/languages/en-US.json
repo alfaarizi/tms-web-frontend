@@ -218,6 +218,7 @@
     "submittedSolution": "Solution",
     "grade": "Grade",
     "notes": "Notes",
+    "ipAddresses": "IP Addresses",
     "instructorFiles": "Instructor files",
     "instructorFilesHelp": "Files uploaded here will be accessible for students (once the task is available for them).",
     "solution": "Solution",
