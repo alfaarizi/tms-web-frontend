@@ -63,7 +63,7 @@ export function GroupTasksTab({ group }: Props) {
     return (
         <>
             <ButtonGroup className="mt-2">
-                {actualSemester.check(group.semesterID) && !group.isCanvasCourse
+                {actualSemester.check(group.semesterID)
                     ? (
                         <LinkContainer to={`${url}/new-task`}>
                             <ToolbarButton icon={faPlus} text={t('task.newTask')} displayTextBreakpoint="xs" />
