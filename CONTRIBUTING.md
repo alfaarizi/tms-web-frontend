@@ -102,7 +102,13 @@ Contents:
 #### Service layer/API client
 The API client is implemented using the `axios` library. It contains client functions for the backend API endpoints, and TypeScirpt interfaces for the corresponding the backend resources. If it is possible, the client functions and resource types should be organized similarly to the controller actions of the backend to make code navigation easier.
 
-Only the model layer should access the service layer. 
+Only the model layer should access the service layer.
+
+### Adding custom environment variables
+
+[See Create React App documentation for more information](https://create-react-app.dev/docs/adding-custom-environment-variables/).
+Also, you should provide type definitions to `src/react-app-env.d.ts`.
+If the variable should be runtime configurable, then `src/runtime-env.ts` should also be updated accordingly.
 
 
 DEVELOPMENT GUIDELINES

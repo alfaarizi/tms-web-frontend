@@ -9,6 +9,7 @@ import { LdapLogin } from 'resources/common/LdapLogin';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { DefaultUserLogin } from 'pages/Login/components/DefaultUserLogin';
 import { LoginResponse } from 'resources/common/LoginResponse';
+import { env } from 'runtime-env';
 
 type AsyncLoginFn<TData> = (data: TData) => Promise<LoginResponse>;
 
@@ -48,7 +49,7 @@ export function LoginPage() {
 
     // Select the correct login form
     let formToDisplay;
-    switch (process.env.REACT_APP_LOGIN_METHOD) {
+    switch (env.REACT_APP_LOGIN_METHOD) {
     case 'MOCK':
         formToDisplay = (
             <>

@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import ReactGA from 'react-ga4';
+import { env } from 'runtime-env';
 
 import { App } from 'containers/App';
 import './i18n/i18n';
@@ -30,8 +31,8 @@ const queryClient = new QueryClient({
 });
 
 // Google Analytics
-if (process.env.REACT_APP_GOOGLE_ANALYTICS_ID && process.env.NODE_ENV === 'production') {
-    ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID);
+if (env.REACT_APP_GOOGLE_ANALYTICS_ID && process.env.NODE_ENV === 'production') {
+    ReactGA.initialize(env.REACT_APP_GOOGLE_ANALYTICS_ID);
 }
 
 // Render application

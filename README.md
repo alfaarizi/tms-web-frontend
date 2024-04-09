@@ -58,25 +58,35 @@ If you want to override an environment variable, you should create a local .env 
 * `.env.development.local`: local overrides used in development mode (`npm start`)
 * `.env.production.local`: local overrides used in production mode (`npm run build`)
 
+### Runtime configurable variables
+
+Some environment variables are also runtime configurable, meaning you don't need to rebuild the frontend application to change their value.
+This is especially convenient to reuse the same build in different environments.
+
+To achieve this, simply run the following command **after** you have built the frontend, and it will create an `env.js` file in your build folder.
+```bash
+REACT_APP_VAR1=value1 REACT_APP_API_VAR2=value2 npx react-inject-env set
+```
+
+E.g. to use the *blue* theme:
+```bash
+REACT_APP_THEME=blue npx react-inject-env set
+```
+
 ### Variables
 
-| Name                                    | Development mode | Production mode | Description                                                                                                                                                                                                  |
-|:----------------------------------------|:-----------------|:----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PUBLIC_URL`                            | Used             | Used            | Frontend application baseurl. If you use this variable, you shouldn't set `homepage` in `package.json`.                                                                                                      |
-| `REACT_APP_API_BASEURL`                 | Used             | Used            | TMS API baseurl.                                                                                                                                                                                             |
-| `REACT_APP_LOGIN_METHOD`                | Used             | Used            | Set login method. Possible values: `LDAP`, `MOCK`                                                                                                                                                            |
-| `REACT_DEV_PROXY`                       | Used             | Ignored         | Backend server address that used in development mode. The development server will proxy API requests to this address.                                                                                        |
-| `REACT_APP_BACKEND_CORE_VERSION_RANGE`  | Used             | Used            | This variable defines the accepted `backend-core` semantic version range. Check the documentation of the [semver](https://github.com/npm/node-semver) npm package for more information about version ranges. |
-| `REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN`  | Used             | Used            | Timeout duration in milliseconds after a failed login attempt.                                                                                                                                               |
-| `REACT_APP_THEME`                       | Used             | Used            | UI theme.  Possible values: `dark`, `blue`.                                                                                                                                                                  |
-| `REACT_APP_GOOGLE_ANALYTICS_ID`         | Ignored          | Used            | Google Analytics (GA4) tracking ID for website monitoring. If empty or undefined, tracking is disabled.                                                                                                      |
+| Name                                    | Development mode | Production mode | Runtime configurable | Description                                                                                                                                                                                                  |
+|:----------------------------------------|:-----------------|:----------------|:---------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PUBLIC_URL`                            | Used             | Used            | Not supported        | Frontend application baseurl. If you use this variable, you shouldn't set `homepage` in `package.json`.                                                                                                      |
+| `REACT_APP_API_BASEURL`                 | Used             | Used            | Supported            | TMS API baseurl.                                                                                                                                                                                             |
+| `REACT_APP_LOGIN_METHOD`                | Used             | Used            | Supported            | Set login method. Possible values: `LDAP`, `MOCK`                                                                                                                                                            |
+| `REACT_DEV_PROXY`                       | Used             | Ignored         | Not supported        | Backend server address that used in development mode. The development server will proxy API requests to this address.                                                                                        |
+| `REACT_APP_BACKEND_CORE_VERSION_RANGE`  | Used             | Used            | Not supported        | This variable defines the accepted `backend-core` semantic version range. Check the documentation of the [semver](https://github.com/npm/node-semver) npm package for more information about version ranges. |
+| `REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN`  | Used             | Used            | Not supported        | Timeout duration in milliseconds after a failed login attempt.                                                                                                                                               |
+| `REACT_APP_THEME`                       | Used             | Used            | Supported            | UI theme.  Possible values: `dark`, `blue`.                                                                                                                                                                  |
+| `REACT_APP_GOOGLE_ANALYTICS_ID`         | Ignored          | Used            | Supported            | Google Analytics (GA4) tracking ID for website monitoring. If empty or undefined, tracking is disabled.                                                                                                      |
 
-[Create React App specific environment variables](https://create-react-app.dev/docs/advanced-configuration/)
-
-### Adding custom environment variables
-
-[See Create React App documentation for more information](https://create-react-app.dev/docs/adding-custom-environment-variables/).
-Also, you should provide type definitions to `src/react-app-env.d.ts`.
+[Create React App specific environment variables](https://create-react-app.dev/docs/advanced-configuration/).
 
 ## Branding
 
