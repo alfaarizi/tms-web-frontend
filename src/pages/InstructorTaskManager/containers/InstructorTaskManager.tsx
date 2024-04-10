@@ -1,30 +1,31 @@
+import { faPlus, faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     Route, Switch, useHistory, useRouteMatch,
 } from 'react-router';
-import { faPlus, faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useTranslation } from 'react-i18next';
 
-import { TaskDetailsPage } from 'pages/InstructorTaskManager/containers/Tasks/TaskDetailsPage';
-import { NewTaskPage } from 'pages/InstructorTaskManager/containers/Tasks/NewTaskPage';
-import { StudentDetailsPage } from 'pages/InstructorTaskManager/containers/Students/StudentDetailsPage';
-import { useGroups } from 'hooks/instructor/GroupHooks';
-import { SideBarItem } from 'components/Navigation/SideBarItem';
-import { NewGroup } from 'pages/InstructorTaskManager/containers/Groups/NewGroup';
-import { SideBarLayout } from 'layouts/SideBarLayout';
-import { GroupPage } from 'pages/InstructorTaskManager/containers/Groups/GroupPage';
-import { useActualSemester, useSelectedSemester } from 'hooks/common/SemesterHooks';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { CanvasOAuth2 } from 'pages/InstructorTaskManager/containers/CanvasOAuth2';
-import { StudentFilePage } from 'pages/InstructorTaskManager/containers/StudentFiles/StudentFilePage';
 import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
-import DropdownItem from 'react-bootstrap/DropdownItem';
-import { useUserSettings } from 'hooks/common/UserHooks';
-import { Group } from 'resources/instructor/Group';
+import { SideBarItem } from 'components/Navigation/SideBarItem';
 import { INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
+import { useActualSemester, useSelectedSemester } from 'hooks/common/SemesterHooks';
+import { useUserSettings } from 'hooks/common/UserHooks';
+import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useGroups } from 'hooks/instructor/GroupHooks';
+import { SideBarLayout } from 'layouts/SideBarLayout';
+import { CanvasOAuth2 } from 'pages/InstructorTaskManager/containers/CanvasOAuth2';
+import { GroupPage } from 'pages/InstructorTaskManager/containers/Groups/GroupPage';
+import { NewGroup } from 'pages/InstructorTaskManager/containers/Groups/NewGroup';
+import { StudentFilePage } from 'pages/InstructorTaskManager/containers/StudentFiles/StudentFilePage';
+import { StudentDetailsPage } from 'pages/InstructorTaskManager/containers/Students/StudentDetailsPage';
+import { NewTaskPage } from 'pages/InstructorTaskManager/containers/Tasks/NewTaskPage';
+import { TaskDetailsPage } from 'pages/InstructorTaskManager/containers/Tasks/TaskDetailsPage';
+import DropdownItem from 'react-bootstrap/DropdownItem';
+import { Group } from 'resources/instructor/Group';
 
- enum GroupView {
+enum GroupView {
     ALL = 'all',
     INSTRUCTOR = 'instructor'
 }
@@ -36,6 +37,7 @@ export function InstructorTaskManager() {
     const history = useHistory();
     const { url } = useRouteMatch();
     const { t } = useTranslation();
+    const courses = useCourses(true, false);
 
     const [groupView, setGroupView] = useState<GroupView>(GroupView.ALL);
 
@@ -79,6 +81,8 @@ export function InstructorTaskManager() {
         return groups.data;
     }, [groups.data, groupView]);
 
+    const isLecturer = courses.data ? courses.data.length > 0 : false;
+
     return (
         <SideBarLayout
             sidebarTitle={t('common.groups')}
@@ -102,13 +106,17 @@ export function InstructorTaskManager() {
                 actualSemester.check(selectedSemesterID)
                     ? (
                         <>
-                            <ToolbarButton
-                                className="float-right"
-                                icon={faPlus}
-                                text={t('common.add')}
-                                onClick={handleNewGroupOpen}
-                                displayTextBreakpoint="xs"
-                            />
+                            {isLecturer
+                                ? (
+                                    <ToolbarButton
+                                        className="float-right"
+                                        icon={faPlus}
+                                        text={t('common.add')}
+                                        onClick={handleNewGroupOpen}
+                                        displayTextBreakpoint="xs"
+                                    />
+                                )
+                                : null}
                             <ToolbarDropdown
                                 text={t('common.groupView')}
                                 displayTextBreakpoint="xs"
