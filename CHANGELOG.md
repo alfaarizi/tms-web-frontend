@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.6.1...v3.7.0) (2024-04-11)
+
+
+### Features
+
+* Display IP log for submissions ([14d0973](https://gitlab.com/tms-elte/frontend-react/commit/14d09737f12c77c4ed4694bb5821e1d29b9f3b7a))
+* Do not show Add Group button for instructors ([33b16aa](https://gitlab.com/tms-elte/frontend-react/commit/33b16aae13e3c0f0d8bc94446a89e44218864a4e))
+* introduced support for runtime configurable environment variables ([95ce22b](https://gitlab.com/tms-elte/frontend-react/commit/95ce22b3fec8bf537f4abfb019c2c46d30b086f1))
+* regular tasks for Canvas synchronized groups ([9680fb3](https://gitlab.com/tms-elte/frontend-react/commit/9680fb3a5a3ae7d973d0f8359cc7558622daf9da))
+* Student initiated Canvas synchronization ([2213310](https://gitlab.com/tms-elte/frontend-react/commit/2213310af211c5e50d31cefe1276edb0eac54037))
+
 ### [3.6.1](https://gitlab.com/tms-elte/frontend-react/compare/v3.6.0...v3.6.1) (2024-03-14)
 
 
