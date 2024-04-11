@@ -98,7 +98,7 @@ deploy_production:
   dependencies:
     - build_production
   variables:
-    DEPLOY_PATH: /var/www/tms/frontend-react/
+    DEPLOY_PATH: /var/www/tms_prod/frontend-react/
   environment:
     name: production
     url: https://tms.inf.elte.hu/
