@@ -11,7 +11,13 @@ import { VerifyItem } from 'resources/student/VerifyItem';
 export const QUERY_KEY = 'student/tasks';
 
 export function useTask(taskID: number) {
-    return useQuery<Task>([QUERY_KEY, { taskID }], () => TasksService.one(taskID));
+    return useQuery<Task>([QUERY_KEY, { taskID }], () => TasksService.one(taskID), {
+        refetchInterval: (queryState) => (
+            !!queryState?.studentFiles?.some((file) => file.isAccepted === 'Uploaded')
+                && !!queryState?.autoTest
+                ? 60000 : false),
+        refetchIntervalInBackground: false,
+    });
 }
 
 export function useTasks(groupID: number) {
