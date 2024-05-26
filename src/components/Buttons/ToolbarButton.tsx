@@ -6,6 +6,7 @@ import { ResponsiveButtonText, Breakpoint } from 'components/Buttons/ResponsiveB
 
 type Props = {
     icon: IconProp,
+    flip?: 'horizontal' | 'vertical' | 'both',
     text: string,
     onClick?: () => void,
     href?: string,
@@ -33,6 +34,7 @@ type Props = {
 export function ToolbarButton({
     className,
     icon,
+    flip,
     onClick,
     href,
     target,
@@ -45,7 +47,7 @@ export function ToolbarButton({
     if (isLoading) {
         displayedIcon = <Spinner animation="border" size="sm" />;
     } else {
-        displayedIcon = <FontAwesomeIcon className="fa-fw" icon={icon} />;
+        displayedIcon = <FontAwesomeIcon className="fa-fw" icon={icon} flip={flip} />;
     }
 
     return (

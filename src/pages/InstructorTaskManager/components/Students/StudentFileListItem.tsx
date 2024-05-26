@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { ButtonGroup, Col, Row } from 'react-bootstrap';
 import {
+    faCode,
     faCompass, faDownload, faEdit, faInfoCircle, faList, faStop,
 } from '@fortawesome/free-solid-svg-icons';
 import { useShow } from 'ui-hooks/useShow';
@@ -20,6 +21,7 @@ type Props = {
     isActualSemester: boolean,
     isCodeCompassEnabled: boolean,
     file: StudentFile,
+    onCodeView: (file: StudentFile) => void,
     onDownload: (file: StudentFile) => void,
     onReportDownload: (file: StudentFile) => void
     onStartCodeCompass: (file: StudentFile) => void,
@@ -34,6 +36,7 @@ export function StudentFileListItem({
     isCodeCompassEnabled,
     renderItem,
     task,
+    onCodeView,
     onDownload,
     onReportDownload,
     onStartCodeCompass,
@@ -129,6 +132,17 @@ export function StudentFileListItem({
                                     onClick={() => onDownload(file)}
                                     icon={faDownload}
                                     text={t('common.download')}
+                                    displayTextBreakpoint="none"
+                                />
+                            )
+                            : null}
+
+                        {file.uploadCount > 0
+                            ? (
+                                <ToolbarButton
+                                    onClick={() => onCodeView(file)}
+                                    icon={faCode}
+                                    text={t('task.viewCode')}
                                     displayTextBreakpoint="none"
                                 />
                             )

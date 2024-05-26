@@ -9,6 +9,7 @@ import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Stud
 import { useNotifications } from 'hooks/common/useNotifications';
 import { Task } from 'resources/instructor/Task';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { useHistory } from 'react-router';
 
 type Props = {
     files: StudentFile[],
@@ -46,6 +47,13 @@ export function StudentFilesList({
     const notifications = useNotifications();
     const privateSystemInfo = usePrivateSystemInfoQuery();
     const isCodeCompassEnabled = privateSystemInfo.data?.isCodeCompassEnabled ?? false;
+    const history = useHistory();
+
+    const handleCodeView = async (file: StudentFile) => {
+        if (file.name !== undefined) {
+            history.push(`/instructor/task-manager/code-viewer/${file.id}`);
+        }
+    };
 
     // Download file
     const handleDownload = async (file: StudentFile) => {
@@ -94,6 +102,7 @@ export function StudentFilesList({
                         isActualSemester={actualSemester.check(semesterID)}
                         isCodeCompassEnabled={isCodeCompassEnabled}
                         file={file}
+                        onCodeView={handleCodeView}
                         onDownload={handleDownload}
                         onStartCodeCompass={handleStartCodeCompass}
                         onStopCodeCompass={handleStopCodeCompass}

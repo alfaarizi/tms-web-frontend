@@ -24,6 +24,8 @@ import { NewTaskPage } from 'pages/InstructorTaskManager/containers/Tasks/NewTas
 import { TaskDetailsPage } from 'pages/InstructorTaskManager/containers/Tasks/TaskDetailsPage';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { Group } from 'resources/instructor/Group';
+import { StudentCodeViewerPage }
+    from 'pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage';
 
 enum GroupView {
     ALL = 'all',
@@ -165,6 +167,9 @@ export function InstructorTaskManager() {
                     </Route>
                     <Route path={`${url}/student-files/:id`}>
                         <StudentFilePage />
+                    </Route>
+                    <Route path={`${url}/code-viewer/:id`}>
+                        <StudentCodeViewerPage />
                     </Route>
                 </Switch>
             )}

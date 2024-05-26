@@ -361,7 +361,9 @@
       "byUploadTime": "Upload time"
     },
     "canvasAssignment": "Canvas assignment",
-    "canvasUpload": "Visit the Canvas page of the assignment to upload a new solution!"
+    "canvasUpload": "Visit the Canvas page of the assignment to upload a new solution!",
+    "viewCode": "View code",
+    "toggleIndent": "Toggle indentation"
   },
   "status": {
     "accepted": "Accepted",
