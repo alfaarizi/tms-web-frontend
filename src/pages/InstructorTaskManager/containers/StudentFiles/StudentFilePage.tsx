@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import { useShow } from 'ui-hooks/useShow';
@@ -50,10 +50,17 @@ export function StudentFilePage() {
     const isCodeCompassEnabled = privateSystemInfo.data?.isCodeCompassEnabled ?? false;
     const startCodeCompass = useStartCodeCompassMutation(studentFile.data?.taskID || -1);
     const stopCodeCompass = useStopCodeCompassMutation(studentFile.data?.taskID || -1);
+    const history = useHistory();
 
     if (!studentFile.data) {
         return null;
     }
+
+    const handleCodeView = async (file: StudentFile) => {
+        if (file.name !== undefined) {
+            history.push(`/instructor/task-manager/code-viewer/${file.id}`);
+        }
+    };
 
     // Download file
     const handleDownload = async (file: StudentFile) => {
@@ -144,6 +151,7 @@ export function StudentFilePage() {
                     isActualSemester={actualSemester.check(studentFile.data.task?.semesterID)}
                     isCodeCompassEnabled={isCodeCompassEnabled}
                     file={studentFile.data}
+                    onCodeView={handleCodeView}
                     onDownload={handleDownload}
                     onReportDownload={handleReportDownload}
                     onStartCodeCompass={handleStartCodeCompass}

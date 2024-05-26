@@ -14,9 +14,12 @@ import { App } from 'containers/App';
 import './i18n/i18n';
 import { GlobalContextProvider } from 'context/GlobalContext';
 import { ErrorBoundary } from 'components/ErrorBoundary';
+import { Buffer } from 'buffer';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+// in React during pollyfilling Buffer is not defined, so we need to define it
+global.Buffer = Buffer;
 /**
  * Configure React Query.
  * Defaults: https://react-query.tanstack.com/guides/important-defaults

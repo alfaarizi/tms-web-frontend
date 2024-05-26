@@ -363,7 +363,9 @@
       "byUploadTime": "Feltöltés ideje szerint"
     },
     "canvasAssignment": "Canvas-feladat",
-    "canvasUpload": "Látogasson el a feladat Canvas-oldalára új megoldás feltöltéséhez!"
+    "canvasUpload": "Látogasson el a feladat Canvas-oldalára új megoldás feltöltéséhez!",
+    "viewCode": "Kód megtekintése",
+    "toggleIndent": "Fájlok indentálása"
   },
   "status": {
     "accepted": "Elfogadva",
