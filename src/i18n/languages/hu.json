@@ -87,7 +87,8 @@
     "genericMessage": "Hiba történt",
     "pageNotFound": "Oldal nem található",
     "accessDenied": "Hozzáférés megtagadva",
-    "versionError": "A backend verziószáma nem felel meg az elvárt verziószám tartománynak! Elvárt tartomány: {{requiredRange}}, jelenlegi verzió: {{version}}."
+    "versionError": "A backend verziószáma nem felel meg az elvárt verziószám tartománynak! Elvárt tartomány: {{requiredRange}}, jelenlegi verzió: {{version}}.",
+    "serverTimeDiff": "A szerver időpontja {{diff}} perccel eltér a helyi időtől, emiatt nem működhet megfelelően az alkalmazás. (Az üzenet eltüntetéséhez állítsa be megfelelő időt és töltse újra az oldalt)"
   },
   "login": {
     "login": "Bejelentkezés",
