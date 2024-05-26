@@ -86,7 +86,8 @@
     "genericMessage": "Something went wrong",
     "pageNotFound": "Page not found",
     "accessDenied": "Access denied",
-    "versionError": "The backend version does not meet with the required version range! Excepted range: {{requiredRange}}, current version: {{version}}."
+    "versionError": "The backend version does not meet with the required version range! Excepted range: {{requiredRange}}, current version: {{version}}.",
+    "serverTimeDiff": "The server time differs from the local time by {{diff}} minutes, so the application may not work properly. (To remove the message, set the correct time and reload the page)"
   },
   "login": {
     "login": "Login",

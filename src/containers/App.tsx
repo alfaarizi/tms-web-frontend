@@ -1,11 +1,12 @@
 import React, {
-    lazy, useEffect, Suspense,
+    lazy, Suspense, useEffect, useState,
 } from 'react';
 import {
     Redirect, Route, Switch, useLocation,
 } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { satisfies } from 'semver';
+import { DateTime } from 'luxon';
 
 import { useTokenAuth, useUserSettings } from 'hooks/common/UserHooks';
 import { FullScreenSpinner } from 'components/FullScreenSpinner/FullScreenSpinner';
@@ -22,9 +23,11 @@ import { PrivateHeader } from 'containers/PrivateHeader';
 import { PublicHeader } from 'containers/PublicHeader';
 import { NotificationAlerts } from 'components/NotificationAlerts/NotificationAlerts';
 import { useGlobalContext } from 'context/GlobalContext';
-import { usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { usePrivateSystemInfoQuery, usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { useErrorBoundaryContext } from 'components/ErrorBoundary';
 import { InvalidVersionRangeError } from 'exceptions/InvalidVersionRangeError';
+import { Notification } from '../resources/common/Notification';
+import { getClockDifferenceNotification } from '../utils/MandatoryNotifications';
 
 // Lazy load bigger page groups
 const StudentTaskManager = lazy(() => import('pages/StudentTaskManager'));
@@ -53,8 +56,10 @@ export function App() {
     const { isLoggedIn } = useGlobalContext();
     const { triggerError } = useErrorBoundaryContext();
     const publicSystemInfo = usePublicSystemInfoQuery(false);
+    const privateSystemInfo = usePrivateSystemInfoQuery(false);
     const userSettings = useUserSettings(!!isLoggedIn);
     const tokenAuth = useTokenAuth();
+    const [mandatoryNotifications, setMandatoryNotifications] = useState<Notification[]>([]);
 
     /**
      * Load backend-core public system information and check version
@@ -70,6 +75,29 @@ export function App() {
     };
 
     /**
+     * Load backend-core private system information and check server time
+     */
+    const loadPrivateSystemInfo = async () => {
+        const query = await privateSystemInfo.refetch({ throwOnError: true });
+
+        const { serverDateTime } = query.data!;
+
+        const now = DateTime.now();
+        const serverTime = DateTime.fromISO(serverDateTime);
+        const diff = Math.round(Math.abs(serverTime.diff(now, 'minutes').minutes));
+
+        // if the difference is more than 3 minutes, we should show a warning
+        if (diff > 3) {
+            const clockDifferenceNotification = getClockDifferenceNotification(diff, t);
+            // if the notification is already in the list, don't add it again
+            if (mandatoryNotifications.some((notification) => notification.id === clockDifferenceNotification.id)) {
+                return;
+            }
+            setMandatoryNotifications([...mandatoryNotifications, clockDifferenceNotification]);
+        }
+    };
+
+    /**
      * Run on application startup
      */
     useEffect(() => {
@@ -77,6 +105,15 @@ export function App() {
             .then(() => tokenAuth.tryAuthenticate())
             .catch((err) => triggerError(err));
     }, []);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            loadPrivateSystemInfo()
+                .catch((err) => triggerError(err));
+        } else {
+            setMandatoryNotifications([]);
+        }
+    }, [isLoggedIn]);
 
     const isStudent = !!userSettings.data?.isStudent;
     const isFaculty = !!userSettings.data?.isFaculty;
@@ -91,6 +128,7 @@ export function App() {
         <>
             <NotificationToast data={notifications.notification} onClose={notifications.close} />
             {userSettings.data ? <PrivateHeader userSettings={userSettings.data} /> : <PublicHeader />}
+            {mandatoryNotifications.length ? <NotificationAlerts notifications={mandatoryNotifications} /> : null}
             {alertNotifications.data ? <NotificationAlerts notifications={alertNotifications.data} /> : null}
             <Suspense fallback={<FullScreenSpinner />}>
                 <Switch>
