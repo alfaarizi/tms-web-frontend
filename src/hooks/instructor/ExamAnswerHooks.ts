@@ -12,12 +12,16 @@ export function useCreateAnswerMutation() {
     const queryClient = useQueryClient();
 
     return useMutation((data: ExamAnswer) => ExamAnswersService.create(data), {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
             const key = [QUERY_KEY, { questionID: data.questionID }];
 
             const oldData = queryClient.getQueryData<ExamAnswer[]>(key);
             if (oldData) {
-                queryClient.setQueryData(key, [...oldData, data]);
+                if (data.correct) {
+                    await queryClient.invalidateQueries(key);
+                } else {
+                    queryClient.setQueryData(key, [...oldData, data]);
+                }
             } else {
                 queryClient.setQueryData(key, [data]);
             }
@@ -29,12 +33,16 @@ export function useUpdateAnswerMutation() {
     const queryClient = useQueryClient();
 
     return useMutation((data: ExamAnswer) => ExamAnswersService.update(data), {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
             const key = [QUERY_KEY, { questionID: data.questionID }];
 
             const oldData = queryClient.getQueryData<ExamAnswer[]>(key);
             if (oldData) {
-                queryClient.setQueryData(key, oldData.map((answer) => (answer.id === data.id ? data : answer)));
+                if (data.correct) {
+                    await queryClient.invalidateQueries(key);
+                } else {
+                    queryClient.setQueryData(key, oldData.map((answer) => (answer.id === data.id ? data : answer)));
+                }
             }
         },
     });
