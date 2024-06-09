@@ -22,7 +22,7 @@ export function StudentTaskManager() {
                 groups.data?.map((group) => (
                     <SideBarItem title={group.course.name} key={group.id} to={`${url}/groups/${group.id}`}>
                         <p>
-                            {group.course.code}
+                            {group.course.codes.join(', ')}
                             {' | '}
                             {group.number}
                         </p>

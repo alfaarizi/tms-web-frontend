@@ -60,7 +60,7 @@ export function GroupDetails({
                 </ButtonGroup>
             </CustomCardHeader>
             <DataRow label="ID">{group.id}</DataRow>
-            <DataRow label={t('course.code')}>{group.course.code}</DataRow>
+            <DataRow label={t('course.codes')}>{group.course.codes}</DataRow>
             <DataRow label={t('group.number')}>{group.number}</DataRow>
             {group.canvasUrl ? (
                 <DataRow label={t('group.canvasCourse')}>

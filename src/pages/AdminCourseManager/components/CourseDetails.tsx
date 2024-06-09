@@ -32,7 +32,7 @@ export function CourseDetails({
                 </ButtonGroup>
             </CustomCardHeader>
             <DataRow label="ID">{course.id}</DataRow>
-            <DataRow label={t('course.code')}>{course.code}</DataRow>
+            <DataRow label={t('course.codes')}>{course.codes.join(', ')}</DataRow>
         </CustomCard>
     );
 }
