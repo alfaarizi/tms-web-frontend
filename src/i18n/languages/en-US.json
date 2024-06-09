@@ -148,7 +148,8 @@
   "course": {
     "course": "Course",
     "courses": "Courses",
-    "code": "Course code",
+    "codes": "Course codes",
+    "separateCodes": "(Separate the course codes by ,)",
     "lecturers": "Lecturers",
     "addLecturers": "Add lecturers",
     "newCourse": "New Course",

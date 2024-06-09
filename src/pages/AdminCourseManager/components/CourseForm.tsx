@@ -39,6 +39,15 @@ export function CourseForm({
 
     const onSubmit = handleSubmit(async (data: Course) => {
         const newData = { ...data };
+
+        if (newData.codes) {
+            const stringCodes = newData.codes.toString();
+            if (stringCodes) {
+                const codes = stringCodes.replaceAll(' ', '').split(',');
+                newData.codes = codes.filter((code) => code !== '');
+            }
+        }
+
         if (editData) {
             newData.id = editData.id;
         }
@@ -64,10 +73,14 @@ export function CourseForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('course.code')}
+                        {t('course.codes')}
                         :
                     </Form.Label>
-                    <Form.Control type="text" {...register('code', { required: false })} size="sm" />
+                    <Form.Control type="text" {...register('codes', { required: false })} size="sm" />
+                    <Form.Text className="text-muted">
+                        {t('course.separateCodes')}
+                    </Form.Text>
+
                 </Form.Group>
 
                 <FormButtons onCancel={onCancel} isLoading={isLoading} />

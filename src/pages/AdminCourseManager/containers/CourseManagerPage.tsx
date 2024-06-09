@@ -32,9 +32,9 @@ export function CourseManagerPage() {
                         to={`${url}/courses/${course.id}`}
                     >
                         <p>
-                            {t('course.code')}
+                            {t('course.codes')}
                             {': '}
-                            {course.code}
+                            {course.codes.join(', ')}
                         </p>
                     </SideBarItem>
                 )) || []

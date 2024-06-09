@@ -149,7 +149,8 @@
   "course": {
     "course": "Kurzus",
     "courses": "Kurzusok",
-    "code": "Kurzus Kód",
+    "codes": "Kurzus Kódok",
+    "separateCodes": "(A kurzus kodókat ,-vel válassza el egymástól)",
     "lecturers": "Előadók",
     "addLecturers": "Előadók hozzáadása",
     "newCourse": "Új kurzus",

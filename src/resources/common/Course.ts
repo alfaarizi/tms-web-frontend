@@ -1,6 +1,6 @@
 export interface Course {
     id: number;
     name: string;
-    code: string;
+    codes: string[];
     lecturerNames: string[];
 }

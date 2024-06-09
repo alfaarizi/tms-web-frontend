@@ -27,7 +27,7 @@ export function GroupDetails({ group }: Props) {
             <CustomCardHeader>
                 <CustomCardTitle>{group.course.name}</CustomCardTitle>
             </CustomCardHeader>
-            <DataRow label={t('course.code')}>{group.course.code}</DataRow>
+            <DataRow label={t('course.codes')}>{group.course.codes.join(', ')}</DataRow>
             <DataRow label={t('group.number')}>{group.number}</DataRow>
             {group.canvasUrl ? (
                 <DataRow label={t('group.canvasCourse')}>
