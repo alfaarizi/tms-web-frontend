@@ -145,6 +145,7 @@ export function StudentFilePage() {
                             <DataRow label={t('task.notes')}>
                                 <MultiLineTextBlock text={item.notes} />
                             </DataRow>
+                            <DataRow label={t('task.ipAddresses')}>{item.ipAddresses}</DataRow>
                             {item.gitRepo ? <DataRow label={t('task.git.gitRepo')}>{item.gitRepo}</DataRow> : null}
                         </>
                     )}
