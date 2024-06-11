@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
     faCalendar, faCog, faCrosshairs, faFile, faList, faPen, faSignOutAlt, faBullhorn,
+    faBookOpenReader,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -174,15 +175,20 @@ export function PrivateHeader({
                         </>
                     ) : null}
             </HeaderContent>
-
             <HeaderContent align="end">
+                <LinkContainer to="/about">
+                    <Nav.Link>
+                        <FontAwesomeIcon icon={faBookOpenReader} />
+                        {' '}
+                        {t('aboutPage.about')}
+                    </Nav.Link>
+                </LinkContainer>
                 <SemesterSwitcher
                     semesters={semesters || []}
                     selected={globalContext.selectedSemester}
                     onChange={globalContext.setSelectedSemester}
                     onRefetch={refetchSemesters}
                 />
-
                 <LinkContainer to="/settings">
                     <Nav.Link>
                         <FontAwesomeIcon icon={faCog} />
@@ -190,7 +196,6 @@ export function PrivateHeader({
                         {t('common.settings')}
                     </Nav.Link>
                 </LinkContainer>
-
                 <LinkContainer to="/logout">
                     <Nav.Link>
                         <FontAwesomeIcon icon={faSignOutAlt} />

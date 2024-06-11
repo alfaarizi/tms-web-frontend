@@ -90,6 +90,26 @@
     "versionError": "A backend verziószáma nem felel meg az elvárt verziószám tartománynak! Elvárt tartomány: {{requiredRange}}, jelenlegi verzió: {{version}}.",
     "serverTimeDiff": "A szerver időpontja {{diff}} perccel eltér a helyi időtől, emiatt nem működhet megfelelően az alkalmazás. (Az üzenet eltüntetéséhez állítsa be megfelelő időt és töltse újra az oldalt)"
   },
+  "aboutPage": {
+    "about": "A TMS-ről",
+    "description": "A TMS (Task Management System) egy nyílt forráskódú, webalapú feladatkezelő, automatikus értékelő, plágiumellenőrző és vizsgaszoftver a számítástechnikai felsőoktatás számára.",
+    "repositories": "Projekt tárolók",
+    "repositoriesLinkBackend": "Backend",
+    "repositoriesLinkFrontend": "Frontend",
+    "documentation": "Dokumentáció",
+    "documentationLinkBackend": "Backend PHP API dokumentáció",
+    "documentationLinkFrontend": "Frontend REST API dokumentáció",
+    "issueBoard": "Hibajelentő fórum",
+    "issueBoardText": "Ha hibát észlel, kérjük, jelentse a <a>hibajelentő fórumon</a>. Köszönjük, hogy segít nekünk!",
+    "issueBoardLink": "hibajelentő fórumon",
+    "changelog": "Változásnapló",
+    "changelogText": "A legújabb frissítések és fejlesztések megtekintéséhez nézze meg a változásnaplókat",
+    "changelogLinkBackend": "Backend változásnapló",
+    "changelogLinkFrontend": "Frontend változásnapló",
+    "credits": "Köszönetnyilvánítás",
+    "creditsText": "Kíváncsi, hogy kik állnak a projekt mögött? Ismerje meg a csapatot a <a>köszönetnyilvánítás</a> oldalon.",
+    "creditsLink": "köszönetnyilvánítás"
+  },
   "login": {
     "login": "Bejelentkezés",
     "username": "Felhasználónév",
@@ -195,7 +215,7 @@
     },
     "successfulDuplication": "A csoport duplikálva",
     "examGroupHelp": "Vizsgacsoportok esetén a csoport szám, valamint az oktatók és értékelők személye rejtett a hallgatók elől.",
-    "canvasSync":  "Canvas szinkronizáció",
+    "canvasSync": "Canvas szinkronizáció",
     "lastSyncTime": "Utolsó szinkronizáció",
     "setupCanvas": "Canvas beállítása",
     "canvasCourse": "Canvas kurzus",
@@ -412,7 +432,7 @@
     "writeTest": "Teszt kitöltése",
     "successfulDuplication": "Teszt duplikálva",
     "successfulFinalization": "Teszt véglegesítve",
-    "noGroupCreated" : "Egy csoport létrehozása szükséges új teszt létrehozása előtt"
+    "noGroupCreated": "Egy csoport létrehozása szükséges új teszt létrehozása előtt"
   },
   "reactMde": {
     "write": "Szerkesztő",

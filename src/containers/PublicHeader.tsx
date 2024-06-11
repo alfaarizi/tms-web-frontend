@@ -7,7 +7,7 @@ import { Header } from 'components/Header/Header';
 import { useIsFetching } from 'react-query';
 import { useClientSideLocaleChange } from 'hooks/common/UserHooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpenReader, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { LinkContainer } from 'react-router-bootstrap';
 import { HeaderContent } from 'components/Header/HeaderContent';
 
@@ -26,6 +26,13 @@ export function PublicHeader() {
     return (
         <Header showFetchingIndicator={isFetching > 0}>
             <HeaderContent align="end">
+                <LinkContainer to="/about">
+                    <Nav.Link>
+                        <FontAwesomeIcon icon={faBookOpenReader} />
+                        {' '}
+                        {t('aboutPage.about')}
+                    </Nav.Link>
+                </LinkContainer>
                 <LanguageSwitcher onChange={setLocale} />
                 <LinkContainer to="/">
                     <Nav.Link>
