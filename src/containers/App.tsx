@@ -40,6 +40,7 @@ const AdminNotificationManager = lazy(() => import('pages/AdminNotificationManag
 const AdminCourseManager = lazy(() => import('pages/AdminCourseManager'));
 const Settings = lazy(() => import('pages/Settings'));
 const ConfirmEmailPage = lazy(() => import('pages/Settings/containers/ConfirmEmailPage'));
+const AboutPage = lazy(() => import('pages/AboutPage'));
 
 /**
  * Handles app initialization, use global hooks, contains main pages and page groups
@@ -172,10 +173,13 @@ export function App() {
                     <ProtectedRoute exact path="/settings">
                         <Settings />
                     </ProtectedRoute>
+
+                    <Route path="/about">
+                        <AboutPage />
+                    </Route>
                     <Route path="/confirm-email/:code">
                         <ConfirmEmailPage loggedIn={isLoggedIn} />
                     </Route>
-
                     <Route>
                         <ErrorPage title={t('errorPage.pageNotFound')} />
                     </Route>
