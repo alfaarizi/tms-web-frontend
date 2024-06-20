@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.7.0...v4.0.0) (2024-06-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add multiple course codes to courses
+
+### Features
+
+* Add about page ([e08882d](https://gitlab.com/tms-elte/frontend-react/commit/e08882d7add0aaa74cc18258a7ec03031ba24861))
+* Add multiple course codes to courses ([3da8e82](https://gitlab.com/tms-elte/frontend-react/commit/3da8e8292bd3d9890f1584f1c5e250bfb72c3d22))
+* Add periodic refetch to assignment evaluation ([bc41c2d](https://gitlab.com/tms-elte/frontend-react/commit/bc41c2d883866a430020fbb6d2257a268282d75b))
+* Handle misconfigured system clock on client machine ([f064a50](https://gitlab.com/tms-elte/frontend-react/commit/f064a507630ca066534bd979365693a56d22d94e))
+* Integrate file and code browser for submissions ([f576b49](https://gitlab.com/tms-elte/frontend-react/commit/f576b49b783c894b8d2b47723003d5191de67593))
+
+
+### Bug Fixes
+
+* Invalidate query on correct answer submission ([3a5d1d1](https://gitlab.com/tms-elte/frontend-react/commit/3a5d1d1e40191c378faa168acf6c3b7f6829ae65))
+* IP address list is not present on all interfaces  ([2d8285d](https://gitlab.com/tms-elte/frontend-react/commit/2d8285da261d04c07725ca8b8f980e80658e0fa9))
+
 ## [3.7.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.6.1...v3.7.0) (2024-04-11)
 
 
