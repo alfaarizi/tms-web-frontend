@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.2](https://gitlab.com/tms-elte/frontend-react/compare/v4.0.1...v4.0.2) (2024-06-21)
+
+
+### Bug Fixes
+
+* turn off password save option in browsers for submission password verification box ([66d44fb](https://gitlab.com/tms-elte/frontend-react/commit/66d44fb74057f110e41522b4d1c140086867e5df))
+
 ### [4.0.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.0.0...v4.0.1) (2024-06-21)
 
 
