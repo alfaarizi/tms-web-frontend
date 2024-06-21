@@ -5,10 +5,6 @@ All notable changes to this project will be documented in this file. See [standa
 ## [4.0.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.7.0...v4.0.0) (2024-06-20)
 
 
-### ⚠ BREAKING CHANGES
-
-* Add multiple course codes to courses
-
 ### Features
 
 * Add about page ([e08882d](https://gitlab.com/tms-elte/frontend-react/commit/e08882d7add0aaa74cc18258a7ec03031ba24861))
