@@ -58,7 +58,7 @@ export function VerifyItemForm({ onSave, serverSideError, isLoading }: Props) {
                     </Form.Label>
                     <Form.Control
                         type="password"
-                        autoComplete="off"
+                        autoComplete="one-time-code"
                         {...register('password', { required: t('common.fieldRequired').toString() })}
                         size="sm"
                     />
