@@ -2,7 +2,9 @@ import React, { useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ReactMde, { Command, CommandContext, ExecuteOptions } from 'react-mde';
 import { useTranslation } from 'react-i18next';
-import { faImages, faTable } from '@fortawesome/free-solid-svg-icons';
+import {
+    faImages, faTable, faSquareRootVariable, faSquareRootAlt, faSquareFull,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useShow } from 'ui-hooks/useShow';
@@ -34,6 +36,39 @@ const insertImageCommand: Command = {
 };
 
 /**
+ * Wraps the current selection with a single line LaTeX block
+ */
+const insertLatexFormulaCommand: Command = {
+    icon: () => (
+        <FontAwesomeIcon icon={faSquareRootVariable} />
+    ),
+    execute: (options) => {
+        options.textApi.replaceSelection(`$${options.initialState.selectedText}$`);
+    },
+};
+
+/**
+ * Wraps the current selection with a multiline LaTeX block
+ */
+const insertMultilineLatexFormulaCommand: Command = {
+    icon: () => (
+        <span className="fa-layers fa-fw">
+            <FontAwesomeIcon icon={faSquareFull} />
+            <FontAwesomeIcon icon={faSquareRootAlt} transform="shrink-6" color="white" />
+        </span>
+    ),
+    execute: (options: ExecuteOptions) => {
+        const newText = `
+$$
+${options.initialState.selectedText}
+$$
+
+`;
+        options.textApi.replaceSelection(newText);
+    },
+};
+
+/**
  * Replaces selection with a table
  */
 const insertTableCommand: Command = {
@@ -56,6 +91,7 @@ const toolbarButtons = [
     ['header', 'bold', 'italic', 'strikethrough'],
     ['link', 'quote', 'code', 'image', 'table'],
     ['unordered-list', 'ordered-list', 'checked-list'],
+    ['insert-latex', 'insert-multiline-latex'],
 ];
 
 export type InsertFunc = (url: string) => void;
@@ -118,6 +154,8 @@ export function ReactMdeWithCommands({ value, onChange, renderGallery }: Props) 
                 }}
                 commands={{
                     'insert-image': insertImageCommand,
+                    'insert-latex': insertLatexFormulaCommand,
+                    'insert-multiline-latex': insertMultilineLatexFormulaCommand,
                     table: insertTableCommand,
                 }}
                 toolbarCommands={toolbarButtons}

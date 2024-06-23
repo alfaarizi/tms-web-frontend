@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
 import { createImageUrl } from 'utils/createImageUrl';
 
+import 'katex/dist/katex.min.css';
 import styles from 'components/MarkdownRenderer/MarkdownRenderer.module.css';
 
 type Props = {
@@ -23,7 +26,8 @@ export function MarkdownRenderer({ source }: Props) {
         <ReactMarkdown
             className={styles.markdownRenderer}
             transformImageUri={transformImgUrl}
-            remarkPlugins={[remarkGfm]}
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex]}
         >
             {source}
         </ReactMarkdown>
