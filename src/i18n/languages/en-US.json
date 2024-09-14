@@ -30,6 +30,7 @@
     "fieldRequired": "Field is required",
     "minValueRequired": "Smallest allowed value: {{value}}",
     "maxValueRequired": "Largest allowed value: {{value}}",
+    "fieldMaxLength": "Largest allowed length: {{length}} characters",
     "semesters": "Semesters",
     "notifications": "Notifications",
     "minutes": "minutes",
@@ -170,7 +171,8 @@
     "lecturers": "Lecturers",
     "addLecturers": "Add lecturers",
     "newCourse": "New Course",
-    "editCourse": "Edit Course"
+    "editCourse": "Edit Course",
+    "invalidCourseCodes": "The maximum length of a course code is {{maxLength}} characters, the following codes are not valid: {{codes}}."
   },
   "notification": {
     "notification": "Notification",

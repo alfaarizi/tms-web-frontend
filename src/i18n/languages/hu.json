@@ -30,6 +30,7 @@
     "fieldRequired": "A mező kitöltése kötelező",
     "minValueRequired": "Legkisebb megengedett érték: {{value}}",
     "maxValueRequired": "Legnagyobb megengedett érték: {{value}}",
+    "fieldMaxLength": "Legnagyobb megengedett hossz: {{length}} karakter",
     "semesters": "Szemeszterek",
     "notifications": "Értesítések",
     "minutes": "perc",

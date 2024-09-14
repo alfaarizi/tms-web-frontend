@@ -3,15 +3,15 @@ import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
 import { CourseForm } from 'pages/AdminCourseManager/components/CourseForm';
-import { Course } from 'resources/common/Course';
 import { useCreateCourseMutation } from 'hooks/admin/CoursesHooks';
+import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
 
 export function NewCoursePage() {
     const { t } = useTranslation();
     const history = useHistory();
     const createMutation = useCreateCourseMutation();
 
-    const handleSave = async (data: Course) => {
+    const handleSave = async (data: CreateOrUpdateCourse) => {
         try {
             const newCourse = await createMutation.mutateAsync(data);
             history.replace(`./${newCourse.id}`);

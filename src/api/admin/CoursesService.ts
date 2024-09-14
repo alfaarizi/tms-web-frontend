@@ -2,6 +2,7 @@ import { Course } from 'resources/common/Course';
 import { axiosInstance } from 'api/axiosInstance';
 import { User } from 'resources/common/User';
 import { UserAddResponse } from 'resources/instructor/UserAddResponse';
+import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
 
 export async function index() {
     const res = await axiosInstance.get<Course[]>('/admin/courses');
@@ -13,13 +14,13 @@ export async function view(courseID: number) {
     return res.data;
 }
 
-export async function create(course: Course) {
+export async function create(course: CreateOrUpdateCourse) {
     const res = await axiosInstance.post<Course>('admin/courses', course);
     return res.data;
 }
 
-export async function update(course: Course) {
-    const res = await axiosInstance.patch<Course>(`admin/courses/${course.id}`, course);
+export async function update(id: number, course: CreateOrUpdateCourse) {
+    const res = await axiosInstance.patch<Course>(`admin/courses/${id}`, course);
     return res.data;
 }
 

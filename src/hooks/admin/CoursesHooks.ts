@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as CoursesService from 'api/admin/CoursesService';
 import { User } from 'resources/common/User';
 import { Course } from 'resources/common/Course';
+import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
 
 export const QUERY_KEY = 'admin/courses';
 
@@ -17,7 +18,7 @@ export function useCourses() {
 export function useCreateCourseMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((uploadData: Course) => CoursesService.create(uploadData), {
+    return useMutation((uploadData: CreateOrUpdateCourse) => CoursesService.create(uploadData), {
         onSuccess: async (data) => {
             const oldCourses = queryClient.getQueryData<Course[]>(QUERY_KEY);
             if (oldCourses) {
@@ -27,10 +28,10 @@ export function useCreateCourseMutation() {
     });
 }
 
-export function useUpdateCourseMutation() {
+export function useUpdateCourseMutation(id: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((uploadData: Course) => CoursesService.update(uploadData), {
+    return useMutation((uploadData: CreateOrUpdateCourse) => CoursesService.update(id, uploadData), {
         onSuccess: (data) => {
             // Update course info with the returned data
             const key = [QUERY_KEY, { courseID: data.id }];

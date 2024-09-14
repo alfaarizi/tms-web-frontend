@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -9,14 +9,20 @@ import { FormButtons } from 'components/Buttons/FormButtons';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
+import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
 
 type Props = {
-    onSave: (course: Course) => void,
+    onSave: (course: CreateOrUpdateCourse) => void,
     onCancel?: () => void
     editData?: Course,
     title: string,
     isLoading: boolean
 }
+
+type CourseFormField = {
+    name: string,
+    codes: string,
+};
 
 export function CourseForm({
     onSave,
@@ -28,36 +34,49 @@ export function CourseForm({
     const {
         register,
         handleSubmit,
+        setValue,
 
         formState: {
             errors,
         },
-    } = useForm<Course>({
-        defaultValues: editData,
-    });
+    } = useForm<CourseFormField>();
     const { t } = useTranslation();
 
-    const onSubmit = handleSubmit(async (data: Course) => {
-        const newData = { ...data };
-
-        if (newData.codes) {
-            const stringCodes = newData.codes.toString();
-            if (stringCodes) {
-                const codes = stringCodes.replaceAll(' ', '').split(',');
-                newData.codes = codes.filter((code) => code !== '');
-            }
-        }
-
+    useEffect(() => {
         if (editData) {
-            newData.id = editData.id;
+            setValue('name', editData.name);
+            setValue('codes', editData.codes.join(', '));
         }
-        onSave(newData);
+    }, [editData]);
+
+    const splitCourseCodes = (value: string) => value.split(',')
+        .map((code) => code.trim())
+        .filter((code) => code !== '')
+        .filter((code, index, self) => self.indexOf(code) === index);
+
+    const onSubmit = handleSubmit(async (courseData: CourseFormField) => {
+        const course: CreateOrUpdateCourse = {
+            name: courseData.name,
+            codes: splitCourseCodes(courseData.codes),
+        };
+        onSave(course);
     });
+
+    const validateCourseCodes = (value: string) : string | undefined => {
+        if (!value) {
+            return undefined;
+        }
+        const invalidCodes = splitCourseCodes(value).filter((code) => code.length > 30);
+        return invalidCodes.length > 0
+            ? t('course.invalidCourseCodes', { maxLength: 30, codes: invalidCodes.join(', ') })
+            : undefined;
+    };
 
     return (
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>
+                    re
                     {title}
                 </CustomCardTitle>
             </CustomCardHeader>
@@ -67,8 +86,15 @@ export function CourseForm({
                         {t('common.name')}
                         :
                     </Form.Label>
-                    <Form.Control type="text" {...register('name', { required: true })} size="sm" />
-                    {errors.name && <FormError message={t('common.requiredField')} />}
+                    <Form.Control
+                        type="text"
+                        {...register('name', {
+                            required: t('common.fieldRequired'),
+                            maxLength: { value: 100, message: t('common.fieldMaxLength', { length: 100 }) },
+                        })}
+                        size="sm"
+                    />
+                    {errors.name && <FormError message={errors.name.message} />}
                 </Form.Group>
 
                 <Form.Group>
@@ -76,10 +102,16 @@ export function CourseForm({
                         {t('course.codes')}
                         :
                     </Form.Label>
-                    <Form.Control type="text" {...register('codes', { required: false })} size="sm" />
+                    <Form.Control
+                        type="text"
+                        {
+                            ...register('codes', { required: false, validate: validateCourseCodes })}
+                        size="sm"
+                    />
                     <Form.Text className="text-muted">
                         {t('course.separateCodes')}
                     </Form.Text>
+                    {errors.codes && <FormError message={errors.codes.message} />}
 
                 </Form.Group>
 
