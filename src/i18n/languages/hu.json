@@ -64,7 +64,8 @@
     "searchForNeptunCodeOrName": "NEPTUN-kód vagy név",
     "neptunCodeOrNameRequired": "Érvényes NEPTUN-kódokat kell megadni!",
     "basicSearch": "Importálás",
-    "autoCompleteSearch": "Keresés"
+    "autoCompleteSearch": "Keresés",
+    "operations": "Műveletek"
   },
   "passwordProtected": {
     "passwordProtected": "Jelszóval védett",
@@ -81,7 +82,13 @@
     "sizeLimitError": "A feltöltött fájlok összesített mérete legfeljebb {{maxSize}} MiB lehet!",
     "browse": "Tallózás",
     "upload": "Feltöltés",
-    "uploadInProgress": "Feltöltés..."
+    "uploadInProgress": "Feltöltés...",
+    "hint": {
+      "dllExeNotAllowed": "A .dll és .exe fájlok feltöltése nem engedélyezett!",
+      "gitFolderNotAllowed": "A .git mappa feltöltése nem engedélyezett!",
+      "zipOnly": "Több zip fájl feltöltése esetében a fájlok becsomagolódnak egy zip-be!",
+      "willBeZipped": "A kiválasztott fájl(ok) becsomagolásra kerülnek!"
+    }
   },
   "errorPage": {
     "genericMessage": "Hiba történt",

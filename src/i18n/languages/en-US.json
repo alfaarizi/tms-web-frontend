@@ -63,7 +63,8 @@
     "searchForNeptunCodeOrName": "Enter NEPTUN-code or name",
     "neptunCodeOrNameRequired": "Please provide valid NEPTUN-codes!",
     "basicSearch": "Import",
-    "autoCompleteSearch": "Search"
+    "autoCompleteSearch": "Search",
+    "operations": "Operations"
   },
   "passwordProtected": {
     "passwordProtected": "Password protected",
@@ -80,7 +81,13 @@
     "sizeLimitError": "The total size of uploaded files is limited to {{maxSize}} MiB!",
     "browse": "Browse",
     "upload": "Upload",
-    "uploadInProgress": "Uploading..."
+    "uploadInProgress": "Uploading...",
+    "hint": {
+      "dllExeNotAllowed": "Uploading .dll and .exe files is not allowed!",
+      "gitFolderNotAllowed": "Uploading .git folders is not allowed!",
+      "zipOnly": "When uploading multiple zip files, the files are packed into a single zip!",
+      "willBeZipped": "The uploaded file(s) will be packed into a single zip file!"
+    }
   },
   "errorPage": {
     "genericMessage": "Something went wrong",
