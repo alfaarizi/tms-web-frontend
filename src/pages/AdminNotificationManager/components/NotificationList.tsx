@@ -44,7 +44,7 @@ export function NotificationList({
                             <th style={{ borderTop: 'none' }}>{t('notification.endTime')}</th>
                             <th style={{ borderTop: 'none' }}>{t('notification.isAvailableForAll')}</th>
                             <th style={{ borderTop: 'none' }}>{t('notification.dismissable')}</th>
-                            <th style={{ borderTop: 'none' }}> </th>
+                            <th style={{ borderTop: 'none' }}>{t('common.operations')}</th>
                         </tr>
                     </thead>
                     <tbody>

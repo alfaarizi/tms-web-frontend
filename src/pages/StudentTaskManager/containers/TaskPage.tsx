@@ -23,6 +23,7 @@ import { useNotifications } from 'hooks/common/useNotifications';
 import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUploadInfo';
 import { CodeCheckerReportsList } from 'components/CodeChecker/CodeCheckerReportsList';
 import { useCanvasSyncSubmissionMutation } from 'hooks/student/CanvasHooks';
+import { useSolutionZipFileCreator } from 'hooks/student/useSolutionZipFileCreator';
 
 type Params = {
     id?: string
@@ -42,6 +43,7 @@ export const TaskPage = () => {
     const [verifyError, setVerifyError] = useState<ValidationErrorBody | null>(null);
     const downloadTestReport = useDownloadTestReport();
     const canvasSyncSubmissionMutation = useCanvasSyncSubmissionMutation(taskIDInt);
+    const zipCreator = useSolutionZipFileCreator();
 
     if (!task.data) {
         return null;
@@ -80,9 +82,11 @@ export const TaskPage = () => {
 
     const handleSolutionUpload = async (files: File[]) => {
         try {
+            const computedFiles = await zipCreator.zipFilesIfNeeded(files);
+
             const data: StudentFileUpload = {
                 taskID: task.data.id,
-                file: files[0],
+                file: computedFiles,
             };
             await uploadMutation.mutateAsync(data);
             setUploadErrorMsg(null);
@@ -115,12 +119,14 @@ export const TaskPage = () => {
             uploadCard = (
                 (
                     <FileUpload
-                        multiple={false}
+                        multiple
+                        disableUpload={zipCreator.disableUpload}
                         loading={uploadMutation.isLoading}
                         onUpload={handleSolutionUpload}
+                        onChange={zipCreator.handleChangedFiles}
                         errorMessages={uploadErrorMsg ? [uploadErrorMsg] : undefined}
+                        hintMessage={zipCreator.uploadHintMsg}
                         successCount={uploadMutation.isSuccess ? 1 : 0}
-                        accept=".zip"
                     />
                 )
             );
