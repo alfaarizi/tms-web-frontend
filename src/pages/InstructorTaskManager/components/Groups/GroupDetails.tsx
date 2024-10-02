@@ -1,8 +1,9 @@
 import React from 'react';
 import { ButtonGroup } from 'react-bootstrap';
-import { faCopy, faEdit, faSync } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCopy, faEdit, faQuestion, faSync,
+} from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
@@ -32,6 +33,14 @@ export function GroupDetails({
     onCanvasSync,
 }: Props) {
     const { t } = useTranslation();
+
+    const tooltipContent = (
+        <>
+            <p>{t('group.canvasSyncTooltip.part1')}</p>
+            <p>{t('group.canvasSyncTooltip.part2')}</p>
+            <p>{t('group.canvasSyncTooltip.part3')}</p>
+        </>
+    );
 
     return (
         <CustomCard>
@@ -68,7 +77,11 @@ export function GroupDetails({
                 </DataRow>
             ) : null}
             {group.canvasUrl ? (
-                <DataRow label={t('group.lastSyncTime')}>
+                <DataRow
+                    label={t('group.lastSyncTime')}
+                    tooltipNode={tooltipContent}
+                    tooltipIcon={faQuestion}
+                >
                     <GroupDateTime value={group.lastSyncTime} timezone={group.timezone} />
                 </DataRow>
             ) : null}
