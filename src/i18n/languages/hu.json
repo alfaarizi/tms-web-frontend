@@ -220,6 +220,11 @@
     "successfulDuplication": "A csoport duplikálva",
     "examGroupHelp": "Vizsgacsoportok esetén a csoport szám, valamint az oktatók és értékelők személye rejtett a hallgatók elől.",
     "canvasSync": "Canvas szinkronizáció",
+    "canvasSyncTooltip": {
+      "part1": "A Canvas-ból csak a publikált kurzusok kerülnek szinkronizálásra.",
+      "part2": "Csak a feladatok kerülnek szinkronizálásra, a kvízek nem.",
+      "part3": "Csak azok a publikált feladatok kerülnek szinkronizálásra, amelyek \"Online\" beadási típussal, \"Fájlfeltöltések\" beadási lehetőséggel és \"zip\" kiterjesztésű fájltípussal rendelkeznek."
+    },
     "lastSyncTime": "Utolsó szinkronizáció",
     "setupCanvas": "Canvas beállítása",
     "canvasCourse": "Canvas kurzus",
