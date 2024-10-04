@@ -13,7 +13,7 @@ export function IssueBoard() {
                     components={{
                         a:
     <a
-        href="https://gitlab.com/tms-elte/frontend-react/-/issues/"
+        href="https://gitlab.com/tms-elte/frontend-react/-/issues/new?issuable_template=Bug%20Report"
         target="_blank"
         rel="noreferrer"
     >
