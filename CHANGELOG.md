@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.0.2...v4.1.0) (2024-10-07)
+
+
+### Features
+
+* Added Frontend and Backend version to About page. ([709efe2](https://gitlab.com/tms-elte/frontend-react/commit/709efe21f910268c1ae57e80c18a2b1034eaf40f))
+* Support LaTeX formulas in markdown descriptions ([f12c74c](https://gitlab.com/tms-elte/frontend-react/commit/f12c74c739ac6a459639e0f265aad1c2d888eade))
+
 ### [4.0.2](https://gitlab.com/tms-elte/frontend-react/compare/v4.0.1...v4.0.2) (2024-06-21)
 
 
