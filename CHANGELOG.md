@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.1.0...v4.2.0) (2024-10-07)
+
+
+### Features
+
+* Added frontend validation rules for course codes ([8f79f5f](https://gitlab.com/tms-elte/frontend-react/commit/8f79f5fb9d0b2fe2b4f00525545683bb0759cd1e))
+* Show list of conditions to sync from Canvas ([0bc47f8](https://gitlab.com/tms-elte/frontend-react/commit/0bc47f85b212e72c2f993a6cffd2f7efd24581ec))
+* Upload custom files for assignments ([ebed39c](https://gitlab.com/tms-elte/frontend-react/commit/ebed39c000a40a5858de226650d9d71684c92133))
+
 ## [4.1.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.0.2...v4.1.0) (2024-10-07)
 
 
