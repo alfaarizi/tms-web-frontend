@@ -30,6 +30,7 @@
     "fieldRequired": "Field is required",
     "minValueRequired": "Smallest allowed value: {{value}}",
     "maxValueRequired": "Largest allowed value: {{value}}",
+    "fieldMaxLength": "Largest allowed length: {{length}} characters",
     "semesters": "Semesters",
     "notifications": "Notifications",
     "minutes": "minutes",
@@ -63,7 +64,8 @@
     "searchForNeptunCodeOrName": "Enter NEPTUN-code or name",
     "neptunCodeOrNameRequired": "Please provide valid NEPTUN-codes!",
     "basicSearch": "Import",
-    "autoCompleteSearch": "Search"
+    "autoCompleteSearch": "Search",
+    "operations": "Operations"
   },
   "passwordProtected": {
     "passwordProtected": "Password protected",
@@ -80,7 +82,13 @@
     "sizeLimitError": "The total size of uploaded files is limited to {{maxSize}} MiB!",
     "browse": "Browse",
     "upload": "Upload",
-    "uploadInProgress": "Uploading..."
+    "uploadInProgress": "Uploading...",
+    "hint": {
+      "dllExeNotAllowed": "Uploading .dll and .exe files is not allowed!",
+      "gitFolderNotAllowed": "Uploading .git folders is not allowed!",
+      "zipOnly": "When uploading multiple zip files, the files are packed into a single zip!",
+      "willBeZipped": "The uploaded file(s) will be packed into a single zip file!"
+    }
   },
   "errorPage": {
     "genericMessage": "Something went wrong",
@@ -170,7 +178,8 @@
     "lecturers": "Lecturers",
     "addLecturers": "Add lecturers",
     "newCourse": "New Course",
-    "editCourse": "Edit Course"
+    "editCourse": "Edit Course",
+    "invalidCourseCodes": "The maximum length of a course code is {{maxLength}} characters, the following codes are not valid: {{codes}}."
   },
   "notification": {
     "notification": "Notification",
@@ -211,6 +220,11 @@
     "successfulDuplication": "Successfully duplicated",
     "examGroupHelp": "For exam groups the group number and the identity of the instructors and submission graders are confidential toward the students.",
     "canvasSync": "Canvas synchronization",
+    "canvasSyncTooltip": {
+      "part1": "Only courses with a published state in Canvas will be synchronized.",
+      "part2": "Only assignments will be synchronized, quizzes not.",
+      "part3": "Only published assignments with an \"Online\" submission type, \"File Uploads\" entry type, and restricted extension type to \"zip\" will be synchronized."
+    },
     "lastSyncTime": "Last synchronization",
     "canvasCourse": "Canvas course",
     "canvasSection": "Canvas section",

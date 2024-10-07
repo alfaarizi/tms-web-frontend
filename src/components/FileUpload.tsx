@@ -19,8 +19,10 @@ type Props = {
     children?: ReactNode,
     multiple: boolean,
     loading: boolean,
-    disabled?: boolean,
+    disableSelect?: boolean,
+    disableUpload?: boolean,
     onUpload: (files: File[]) => void,
+    onChange?: (files: File[]) => void,
     accept?: string,
     errorMessages?: string[],
     successCount?: number,
@@ -43,9 +45,11 @@ type Props = {
 export function FileUpload({
     children,
     loading,
-    disabled,
+    disableSelect,
+    disableUpload,
     multiple,
     onUpload,
+    onChange,
     accept,
     errorMessages = [],
     successCount,
@@ -76,6 +80,9 @@ export function FileUpload({
             newFileList.push(files[i]);
         }
         setFileList(newFileList);
+        if (onChange) {
+            onChange(newFileList);
+        }
 
         // eslint-disable-next-line no-param-reassign
         evt.target.value = '';
@@ -118,7 +125,7 @@ export function FileUpload({
                 custom
                 name="files"
                 multiple={multiple}
-                disabled={disabled || loading || !fileSizeValidator.ready}
+                disabled={disableSelect || loading || !fileSizeValidator.ready}
                 onChange={handleChange}
                 accept={accept}
             />
@@ -139,7 +146,7 @@ export function FileUpload({
                 variant="success"
                 size="sm"
                 className="mt-2"
-                disabled={disabled || loading || !validSize || fileList.length === 0 || !fileSizeValidator.ready}
+                disabled={disableUpload || loading || !validSize || fileList.length === 0 || !fileSizeValidator.ready}
                 onClick={handleUpload}
             >
                 {

@@ -30,6 +30,7 @@
     "fieldRequired": "A mező kitöltése kötelező",
     "minValueRequired": "Legkisebb megengedett érték: {{value}}",
     "maxValueRequired": "Legnagyobb megengedett érték: {{value}}",
+    "fieldMaxLength": "Legnagyobb megengedett hossz: {{length}} karakter",
     "semesters": "Szemeszterek",
     "notifications": "Értesítések",
     "minutes": "perc",
@@ -64,7 +65,8 @@
     "searchForNeptunCodeOrName": "NEPTUN-kód vagy név",
     "neptunCodeOrNameRequired": "Érvényes NEPTUN-kódokat kell megadni!",
     "basicSearch": "Importálás",
-    "autoCompleteSearch": "Keresés"
+    "autoCompleteSearch": "Keresés",
+    "operations": "Műveletek"
   },
   "passwordProtected": {
     "passwordProtected": "Jelszóval védett",
@@ -81,7 +83,13 @@
     "sizeLimitError": "A feltöltött fájlok összesített mérete legfeljebb {{maxSize}} MiB lehet!",
     "browse": "Tallózás",
     "upload": "Feltöltés",
-    "uploadInProgress": "Feltöltés..."
+    "uploadInProgress": "Feltöltés...",
+    "hint": {
+      "dllExeNotAllowed": "A .dll és .exe fájlok feltöltése nem engedélyezett!",
+      "gitFolderNotAllowed": "A .git mappa feltöltése nem engedélyezett!",
+      "zipOnly": "Több zip fájl feltöltése esetében a fájlok becsomagolódnak egy zip-be!",
+      "willBeZipped": "A kiválasztott fájl(ok) becsomagolásra kerülnek!"
+    }
   },
   "errorPage": {
     "genericMessage": "Hiba történt",
@@ -212,6 +220,11 @@
     "successfulDuplication": "A csoport duplikálva",
     "examGroupHelp": "Vizsgacsoportok esetén a csoport szám, valamint az oktatók és értékelők személye rejtett a hallgatók elől.",
     "canvasSync": "Canvas szinkronizáció",
+    "canvasSyncTooltip": {
+      "part1": "A Canvas-ból csak a publikált kurzusok kerülnek szinkronizálásra.",
+      "part2": "Csak a feladatok kerülnek szinkronizálásra, a kvízek nem.",
+      "part3": "Csak azok a publikált feladatok kerülnek szinkronizálásra, amelyek \"Online\" beadási típussal, \"Fájlfeltöltések\" beadási lehetőséggel és \"zip\" kiterjesztésű fájltípussal rendelkeznek."
+    },
     "lastSyncTime": "Utolsó szinkronizáció",
     "setupCanvas": "Canvas beállítása",
     "canvasCourse": "Canvas kurzus",

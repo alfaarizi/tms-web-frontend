@@ -62,7 +62,8 @@ export function BaseFilesPage() {
         <>
             <FileUpload
                 multiple
-                disabled={uploadDisabled}
+                disableSelect={uploadDisabled}
+                disableUpload={uploadDisabled}
                 loading={uploadMutation.isLoading}
                 onUpload={handleUpload}
                 errorMessages={failedToUpload}

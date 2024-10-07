@@ -5,9 +5,9 @@ import { useParams } from 'react-router';
 import { CourseDetails } from 'pages/AdminCourseManager/components/CourseDetails';
 import { useCourse, useUpdateCourseMutation } from 'hooks/admin/CoursesHooks';
 import { LecturerList } from 'pages/AdminCourseManager/containers/LecturerList';
-import { Course } from 'resources/common/Course';
 import { CourseForm } from 'pages/AdminCourseManager/components/CourseForm';
 import { useShow } from 'ui-hooks/useShow';
+import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
 
 type Params = {
     id?: string
@@ -19,13 +19,13 @@ export function CoursePage() {
     const courseID = parseInt(params.id || '-1', 10);
     const course = useCourse(courseID);
     const showEdit = useShow();
-    const updateMutation = useUpdateCourseMutation();
+    const updateMutation = useUpdateCourseMutation(courseID);
 
     useEffect(() => {
         showEdit.toHide();
     }, [courseID]);
 
-    const handleEditSave = async (courseData: Course) => {
+    const handleEditSave = async (courseData: CreateOrUpdateCourse) => {
         try {
             await updateMutation.mutateAsync(courseData);
             showEdit.toHide();
