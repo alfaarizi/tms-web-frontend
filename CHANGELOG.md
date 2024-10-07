@@ -15,14 +15,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* turn off password save option in browsers for submission password verification box ([66d44fb](https://gitlab.com/tms-elte/frontend-react/commit/66d44fb74057f110e41522b4d1c140086867e5df))
+* Turn off password save option in browsers for submission password verification box ([66d44fb](https://gitlab.com/tms-elte/frontend-react/commit/66d44fb74057f110e41522b4d1c140086867e5df))
 
 ### [4.0.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.0.0...v4.0.1) (2024-06-21)
 
 
 ### Bug Fixes
 
-* turn off password save option in browsers for submission password verification box ([c1db0ad](https://gitlab.com/tms-elte/frontend-react/commit/c1db0adb8d2dbe3b4ad067b3ccf5f1afbb3fcf8b))
+* Turn off password save option in browsers for submission password verification box ([c1db0ad](https://gitlab.com/tms-elte/frontend-react/commit/c1db0adb8d2dbe3b4ad067b3ccf5f1afbb3fcf8b))
 
 ## [4.0.0](https://gitlab.com/tms-elte/frontend-react/compare/v3.7.0...v4.0.0) (2024-06-20)
 
@@ -48,8 +48,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 * Display IP log for submissions ([14d0973](https://gitlab.com/tms-elte/frontend-react/commit/14d09737f12c77c4ed4694bb5821e1d29b9f3b7a))
 * Do not show Add Group button for instructors ([33b16aa](https://gitlab.com/tms-elte/frontend-react/commit/33b16aae13e3c0f0d8bc94446a89e44218864a4e))
-* introduced support for runtime configurable environment variables ([95ce22b](https://gitlab.com/tms-elte/frontend-react/commit/95ce22b3fec8bf537f4abfb019c2c46d30b086f1))
-* regular tasks for Canvas synchronized groups ([9680fb3](https://gitlab.com/tms-elte/frontend-react/commit/9680fb3a5a3ae7d973d0f8359cc7558622daf9da))
+* Introduced support for runtime configurable environment variables ([95ce22b](https://gitlab.com/tms-elte/frontend-react/commit/95ce22b3fec8bf537f4abfb019c2c46d30b086f1))
+* Regular tasks for Canvas synchronized groups ([9680fb3](https://gitlab.com/tms-elte/frontend-react/commit/9680fb3a5a3ae7d973d0f8359cc7558622daf9da))
 * Student initiated Canvas synchronization ([2213310](https://gitlab.com/tms-elte/frontend-react/commit/2213310af211c5e50d31cefe1276edb0eac54037))
 
 ### [3.6.1](https://gitlab.com/tms-elte/frontend-react/compare/v3.6.0...v3.6.1) (2024-03-14)
