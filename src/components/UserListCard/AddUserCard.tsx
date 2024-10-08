@@ -46,16 +46,16 @@ function extractCodes(value: string): string[] {
 
 function validate(value: string): boolean {
     return extractCodes(value)
-        .every((code) => code.length === 6);
+        .every((code) => code.match(/^[a-zA-Z0-9]{6}$/));
 }
 
 function validateList(value: string[]): boolean {
-    return value.length > 0 && value.every((code) => code.length === 6);
+    return value.length > 0 && value.every((code) => code.match(/^[a-zA-Z0-9]{6}$/));
 }
 
 function validateOptions(value: Option[]): boolean {
     // custom options also have a neptun field (because of labelKey)
-    return value.length > 0 && value.every((opt) => (opt as User).neptun.length === 6);
+    return value.length > 0 && value.every((opt) => (opt as User).neptun.match(/^[a-zA-Z0-9]{6}$/));
 }
 
 export function AddUserCard({
