@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.2.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.2.0...v4.2.1) (2024-10-08)
+
+
+### Bug Fixes
+
+* downgrading remark-gfm to v3, as v4 is not working correctly. ([8a5360d](https://gitlab.com/tms-elte/frontend-react/commit/8a5360dfef14a680af744aedf0c202d225d03ed4))
+* Improved regex validation of Neptun codes ([1606bd7](https://gitlab.com/tms-elte/frontend-react/commit/1606bd70398e988941566e7c1d2324f0c3f671db))
+
 ## [4.2.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.1.0...v4.2.0) (2024-10-07)
 
 
