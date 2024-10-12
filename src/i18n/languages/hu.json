@@ -169,7 +169,8 @@
     },
     "semesterManager": "Szemeszterkezelő",
     "notificationManager": "Értesítéskezelő",
-    "plagiarism": "Plágium"
+    "plagiarism": "Plágium",
+    "statistics": "Statisztikák"
   },
   "course": {
     "course": "Kurzus",
@@ -497,5 +498,16 @@
     "successfulParsing": "A megoldás fordítása sikeres volt, így a lehető legtöbb CodeCompass funkció elérhető!",
     "tooManyInstances": "Pillanatnyilag túl sok CodeCompass példány fut a szerveren, ezért az indítást várakoztatjuk. Amint felszabadul a szükséges erőforrás, a szervert elindítjuk, és a kérvényező felhasználónak e-mailt küldünk róla.",
     "unsuccessfulParsing": "A megoldás fordítása nem volt teljesen sikeres, így előfordulhat, hogy nem minden CodeCompass funkció lesz elérhető:"
+  },
+  "statistics": {
+    "systemStatistics": "Rendszer statisztikák",
+    "submissionsUnderTesting": "Tesztelés alatt álló beadandók",
+    "submissionsToBeTested": "Tesztelésre váró beadandók",
+    "freeDiskSpace": "Szabad lemezterület",
+    "statisticsOverSemesters":"Statisztikák szemeszterekre",
+    "groupsCount": "Csoportok száma",
+    "tasksCount": "Feladatok száma",
+    "submissionsCount": "Megoldások száma",
+    "testedSubmissionsCount": "Tesztelt beadások száma"
   }
 }

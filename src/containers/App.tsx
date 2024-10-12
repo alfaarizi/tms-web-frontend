@@ -37,6 +37,7 @@ const InstructorExamination = lazy(() => import('pages/InstructorExamination'));
 const InstructorPlagiarism = lazy(() => import('pages/InstructorPlagiarism'));
 const AdminSemesterManager = lazy(() => import('pages/AdminSemesterManager'));
 const AdminNotificationManager = lazy(() => import('pages/AdminNotificationManager'));
+const AdminStatistics = lazy(() => import('pages/AdminStatistics'));
 const AdminCourseManager = lazy(() => import('pages/AdminCourseManager'));
 const Settings = lazy(() => import('pages/Settings'));
 const ConfirmEmailPage = lazy(() => import('pages/Settings/containers/ConfirmEmailPage'));
@@ -168,6 +169,9 @@ export function App() {
                     </ProtectedRoute>
                     <ProtectedRoute hasPermission={isAdmin} path="/admin/notification-manager">
                         <AdminNotificationManager />
+                    </ProtectedRoute>
+                    <ProtectedRoute hasPermission={isAdmin} path="/admin/statistics">
+                        <AdminStatistics />
                     </ProtectedRoute>
 
                     <ProtectedRoute exact path="/settings">
