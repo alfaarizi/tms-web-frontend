@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router';
+import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faList, faTableCells } from '@fortawesome/free-solid-svg-icons';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -33,7 +34,8 @@ export function GroupTasksTab({ group }: Props) {
     const { t } = useTranslation();
     const { url } = useRouteMatch();
     const actualSemester = useActualSemester();
-    const [view, setView] = useState<View>(View.List);
+    const [view, setView] = useState<View>(View.Grid);
+    const isMobile = useMediaQuery({ query: 'only screen and (max-width: 768px)' });
 
     useEffect(() => {
         const value = localStorage.getItem(INSTRUCTOR_TASK_VIEW_LOCAL_STORAGE_KEY);
@@ -46,6 +48,9 @@ export function GroupTasksTab({ group }: Props) {
             setView(value);
             break;
         default:
+            if (isMobile) {
+                setView(View.List);
+            }
             break;
         }
     }, []);
