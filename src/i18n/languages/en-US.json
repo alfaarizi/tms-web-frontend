@@ -168,7 +168,8 @@
     },
     "semesterManager": "Semester Manager",
     "notificationManager": "Notification Manager",
-    "plagiarism": "Plagiarism"
+    "plagiarism": "Plagiarism",
+    "statistics": "Statistics"
   },
   "course": {
     "course": "Course",
@@ -497,5 +498,16 @@
     "successfulParsing": "The compilation of the project was successful, you can access all possible CodeCompass features:",
     "tooManyInstances": "There are currently too many CodeCompass instances running, so we placed your request into a queue. As soon as the needed resources are available, we will start the server and will send an e-mail to the user requesting the instance.",
     "unsuccessfulParsing": "The compilation of the project was not fully successful, there may be some CodeCompass features not available:"
+  },
+  "statistics": {
+    "systemStatistics": "System statistics",
+    "submissionsUnderTesting": "Submissions under testing",
+    "submissionsToBeTested": "Submissions to be tested",
+    "freeDiskSpace": "Free disk space",
+    "statisticsOverSemesters":"Statistics over semesters",
+    "groupsCount": "Groups count",
+    "tasksCount": "Tasks count",
+    "submissionsCount": "Submissions count",
+    "testedSubmissionsCount": "Tested submissions count"
   }
 }
