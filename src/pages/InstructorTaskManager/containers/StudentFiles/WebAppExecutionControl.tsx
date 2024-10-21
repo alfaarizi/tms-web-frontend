@@ -20,6 +20,7 @@ import {
     useStopWebAppExecutionMutation,
     useWebAppExecution,
 } from 'hooks/instructor/WebAppExecutionHook';
+import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { StudentFile } from 'resources/instructor/StudentFile';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
@@ -34,6 +35,7 @@ export function WebAppExecutionControl({
     file,
 }: Props) {
     const webAppExecution = useWebAppExecution(file);
+    const privateSystemInfo = usePrivateSystemInfoQuery(false);
     const onStartUp = useStartWebAppExecutionMutation(file);
     const onTearDown = useStopWebAppExecutionMutation(file);
     const downloadRunLogMutation = useDownloadRunLog();
@@ -99,12 +101,17 @@ export function WebAppExecutionControl({
                             disabled={isLoading}
                             size="sm"
                             {...register('runInterval', {
-                                required: t('common.fieldRequired').toString(),
+                                required: t('common.fieldRequired'),
                                 valueAsNumber: true,
-                                value: 30,
+                                value: privateSystemInfo.data!.maxWebAppRunTime,
                                 min: {
                                     value: 10,
-                                    message: t('common.minValueRequired', { value: 10 }).toString(),
+                                    message: `${t('common.minValueRequired', { value: 10 })}`,
+                                },
+                                max: {
+                                    value: privateSystemInfo.data!.maxWebAppRunTime,
+                                    message: `${t('common.maxValueRequired',
+                                        { value: privateSystemInfo.data!.maxWebAppRunTime })}`,
                                 },
                             })}
                         />
