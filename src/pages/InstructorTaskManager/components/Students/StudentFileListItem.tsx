@@ -50,7 +50,7 @@ export function StudentFileListItem({
         data: autoTesterResults,
         refetch: refetchAutoTesterResults,
     } = useAutoTestResults(file.id, loadAutoTesterResults);
-    const isExecutable = task && task.appType === 'Web';
+    const isExecutable = task && task.testOS !== null && task.appType === 'Web';
     const showCodeCompassInformation = useShow();
     const [isCodeCompassLoading, setIsCodeCompassLoading] = useState(false);
 
