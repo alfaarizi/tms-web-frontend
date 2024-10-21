@@ -142,52 +142,63 @@ export function EvaluatorTab({ task }: Props) {
                 )}
             />
 
-            { /* Display automatic tester settings */ }
-            <ExpandableSection
-                show={showAutoTesterSettings.show}
-                onToggle={showAutoTesterSettings.toggle}
-                header={(
+            {additionalEvaluatorInformation.data.imageSuccessfullyBuilt
+                ? (
                     <>
-                        <SectionHeaderIcon
-                            icon={faListCheck}
-                            active={additionalEvaluatorInformation.data.imageSuccessfullyBuilt && !!task.autoTest}
+                        { /* Display automatic tester settings */ }
+                        <ExpandableSection
+                            show={showAutoTesterSettings.show}
+                            onToggle={showAutoTesterSettings.toggle}
+                            header={(
+                                <>
+                                    <SectionHeaderIcon
+                                        icon={faListCheck}
+                                        active={
+                                            additionalEvaluatorInformation.data.imageSuccessfullyBuilt
+                                            && !!task.autoTest
+                                        }
+                                    />
+                                    {' '}
+                                    {t('task.evaluator.autoTester')}
+                                </>
+                            )}
+                            content={(
+                                <AutoTesterSettings
+                                    task={task}
+                                    additionalInformation={additionalEvaluatorInformation.data}
+                                />
+                            )}
                         />
-                        {' '}
-                        {t('task.evaluator.autoTester')}
-                    </>
-                )}
-                content={(
-                    <AutoTesterSettings
-                        task={task}
-                        additionalInformation={additionalEvaluatorInformation.data}
-                    />
-                )}
-            />
 
-            { /* Display CodeChecker settings */ }
-            <ExpandableSection
-                show={showStaticCodeAnalyzerSettings.show}
-                onToggle={showStaticCodeAnalyzerSettings.toggle}
-                header={(
-                    <>
-                        <SectionHeaderIcon
-                            icon={faMagnifyingGlassChart}
-                            flip="horizontal"
-                            active={additionalEvaluatorInformation.data.imageSuccessfullyBuilt
-                                && task.staticCodeAnalysis}
+                        { /* Display CodeChecker settings */ }
+                        <ExpandableSection
+                            show={showStaticCodeAnalyzerSettings.show}
+                            onToggle={showStaticCodeAnalyzerSettings.toggle}
+                            header={(
+                                <>
+                                    <SectionHeaderIcon
+                                        icon={faMagnifyingGlassChart}
+                                        flip="horizontal"
+                                        active={additionalEvaluatorInformation.data.imageSuccessfullyBuilt
+                                            && task.staticCodeAnalysis}
+                                    />
+                                    {' '}
+                                    {t('task.evaluator.staticCodeAnalysis')}
+                                </>
+                            )}
+                            content={(
+                                <CodeCheckerSettings
+                                    task={task}
+                                    supportedStaticAnalyzers={
+                                        additionalEvaluatorInformation.data.supportedStaticAnalyzers
+                                    }
+                                    isActualSemester={isActualSemester}
+                                />
+                            )}
                         />
-                        {' '}
-                        {t('task.evaluator.staticCodeAnalysis')}
                     </>
-                )}
-                content={(
-                    <CodeCheckerSettings
-                        task={task}
-                        supportedStaticAnalyzers={additionalEvaluatorInformation.data.supportedStaticAnalyzers}
-                        isActualSemester={isActualSemester}
-                    />
-                )}
-            />
+                )
+                : null}
         </>
     );
 }
