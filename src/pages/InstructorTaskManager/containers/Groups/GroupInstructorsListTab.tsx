@@ -12,7 +12,7 @@ import { Group } from 'resources/instructor/Group';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { useCourses } from 'hooks/instructor/CourseHooks';
-import { useSearchFacultyQuery } from 'hooks/common/UserHooks';
+import { useSearchFacultyQuery, useUserSettings } from 'hooks/common/UserHooks';
 
 type Props = {
     group: Group
@@ -26,9 +26,11 @@ export function GroupInstructorsListTab({ group }: Props) {
     const [userSearchText, setUserSearchText] = useState<string>('');
     const [userSearchQueryEnabled, setUserSearchQueryEnabled] = useState<boolean>(false);
     const facultySearchQuery = useSearchFacultyQuery(userSearchText, userSearchQueryEnabled);
+    const userSettings = useUserSettings();
     const actualSemester = useActualSemester();
     const courses = useCourses(true, false);
     const isLecturer = courses.data ? courses.data.some((c) => c.id === group.course.id) : false;
+    const isAdmin = userSettings.data?.isAdmin;
 
     useEffect(() => {
         addMutation.reset();
@@ -53,7 +55,7 @@ export function GroupInstructorsListTab({ group }: Props) {
 
     return (
         <>
-            {actualSemester.check(group.semesterID) && isLecturer
+            {actualSemester.check(group.semesterID) && (isLecturer || isAdmin)
                 ? (
                     <AddUserCard
                         id="add-instructors"
@@ -73,7 +75,7 @@ export function GroupInstructorsListTab({ group }: Props) {
                 users={instructors.data}
                 renderUserButtons={(user) => (
                     <>
-                        {actualSemester.check(group.semesterID) && isLecturer
+                        {actualSemester.check(group.semesterID) && (isLecturer || isAdmin)
                             ? (
                                 <DeleteToolbarButton
                                     displayTextBreakpoint="none"
