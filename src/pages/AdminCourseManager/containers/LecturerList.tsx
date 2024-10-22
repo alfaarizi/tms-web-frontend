@@ -29,8 +29,8 @@ export function LecturerList({ course }: Props) {
         addMutation.reset();
     }, [course.id]);
 
-    const handleAdd = (neptunCodes: string[]) => {
-        addMutation.mutate(neptunCodes);
+    const handleAdd = (userCodes: string[]) => {
+        addMutation.mutate(userCodes);
     };
 
     const handleDelete = (studentID: number) => {

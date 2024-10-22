@@ -183,7 +183,7 @@ export function StudentFilesListTab({
                     renderItem={(file) => (
                         <>
                             <DataRow label={t('task.uploader')}>
-                                {`${file.uploader.name} (${file.uploader.neptun})`}
+                                {`${file.uploader.name} (${file.uploader.userCode})`}
                             </DataRow>
                             <DataRow label={t('task.uploadTime')}>
                                 <GroupDateTime value={file.uploadTime} timezone={task.group?.timezone || ''} />
@@ -220,7 +220,7 @@ export function StudentFilesListTab({
                                                 {' '}
                                                 {file.gitRepo}
                                                 {' '}
-                                                {file.uploader.neptun}
+                                                {file.uploader.userCode}
                                             </kbd>
                                         ) : file.gitRepo}
                                     </DataRow>

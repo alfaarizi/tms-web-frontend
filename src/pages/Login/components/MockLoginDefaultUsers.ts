@@ -6,7 +6,7 @@ export function generateStudentUsers(count : number) : MockLogin[] {
     for (let i = 1; i <= count; i++) {
         const idx = i.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
         out.push({
-            neptun: `stud${idx}`,
+            userCode: `stud${idx}`,
             name: `student${idx}`,
             email: `student${idx}@example.com`,
             isStudent: true,
@@ -24,7 +24,7 @@ export function generateInstructorUsers(count : number) : MockLogin[] {
     for (let i = 1; i <= count; i++) {
         const idx = i.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
         out.push({
-            neptun: `inst${idx}`,
+            userCode: `inst${idx}`,
             name: `instructor${idx}`,
             email: `instructor${idx}@example.com`,
             isStudent: false,
@@ -42,7 +42,7 @@ export function generateAdminUsers(count : number) : MockLogin[] {
     for (let i = 1; i <= count; i++) {
         const idx = i.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
         out.push({
-            neptun: `admr${idx}`,
+            userCode: `admr${idx}`,
             name: `admin${idx}`,
             email: `admin${idx}@example.com`,
             isStudent: false,

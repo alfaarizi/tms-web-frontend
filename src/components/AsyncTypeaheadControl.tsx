@@ -19,7 +19,7 @@ export function AsyncTypeaheadControl({
     name, id, rules, control, isSearchLoading, onSearch, searchData,
 }: Props) {
     const { t } = useTranslation();
-    const formatOption = (opt: Option) : string => (opt as User).neptun + ((opt as User)?.name
+    const formatOption = (opt: Option) : string => (opt as User).userCode + ((opt as User)?.name
         ? ` (${(opt as User).name})` : '');
     // Bypass client-side filtering by returning `true`. Results are already
     // filtered by the search endpoint, so no need to do it again.
@@ -34,11 +34,11 @@ export function AsyncTypeaheadControl({
             render={({ field }) => (
                 <AsyncTypeahead
                     allowNew
-                    newSelectionPrefix={t('common.addNewNeptunCode')}
+                    newSelectionPrefix={t('common.addNewUserCode')}
                     filterBy={filterBy}
                     id={id}
                     multiple
-                    labelKey="neptun"
+                    labelKey="userCode"
                     isLoading={isSearchLoading}
                     minLength={3}
                     onSearch={onSearch}
@@ -46,7 +46,7 @@ export function AsyncTypeaheadControl({
                     onChange={field.onChange}
                     selected={field.value}
                     size="sm"
-                    placeholder={t('common.searchForNeptunCodeOrName')}
+                    placeholder={t('common.searchForUserCodeOrName')}
                     renderMenuItemChildren={(option) => (
                         <>
                             <span>

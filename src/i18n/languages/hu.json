@@ -1,7 +1,7 @@
 {
   "autonym": "Magyar",
   "common": {
-    "neptun": "NEPTUN",
+    "userCode": "Egyetemi azonosító",
     "group": "Csoport",
     "groups": "Csoportok",
     "name": "Név",
@@ -20,8 +20,8 @@
     "options": "Opciók",
     "userAddFailed": "A következő felhasználók hozzáadása meghíúsult",
     "userAddSuccess": "{{count}} felhasználó sikeresen hozzáadva",
-    "neptunCodes": "NEPTUN-kódok szóközökkel elválasztva",
-    "neptunCodesRequired": "Érvényes NEPTUN-kódokat kell megadni szóközökkel elválasztva!",
+    "userCodes": "NEPTUN-kódok szóközökkel elválasztva",
+    "userCodesRequired": "Érvényes NEPTUN-kódokat kell megadni szóközökkel elválasztva!",
     "students": "Hallgatók",
     "instructors": "Gyakorlatvezetők",
     "asInstructor": "Gyakorlatvezetőként",
@@ -61,9 +61,9 @@
     "areYouSure": "Biztos benne?",
     "confirmDiscard": "Ha bezárja az ablakot, az eddigi módosításai elvesznek!",
     "confirmAddSemester": "Ha hozzáad egy új szemesztert, az lesz, az aktuális, és nem tudja visszaállítani az előzőt",
-    "addNewNeptunCode": "Új NEPTUN-kód hozzáadása: ",
-    "searchForNeptunCodeOrName": "NEPTUN-kód vagy név",
-    "neptunCodeOrNameRequired": "Érvényes NEPTUN-kódokat kell megadni!",
+    "addNewUserCode": "Új NEPTUN-kód hozzáadása: ",
+    "searchForUserCodeOrName": "NEPTUN-kód vagy név",
+    "userCodeOrNameRequired": "Érvényes NEPTUN-kódokat kell megadni!",
     "basicSearch": "Importálás",
     "autoCompleteSearch": "Keresés",
     "operations": "Műveletek"
@@ -122,7 +122,7 @@
     "student": "Hallgatói hozzáférés",
     "instructor": "Oktatói hozzáférés",
     "admin": "Adminisztrátori hozzáférés",
-    "neptunRequired": "A NEPTUN-kód nem lehet üres és csak 6 karakterből állhat",
+    "userCodeRequired": "A NEPTUN-kód nem lehet üres és csak 6 karakterből állhat",
     "nameRequired": "A név nem lehet üres",
     "emailRequired": "A email nem lehet üres",
     "mockUsers": {
@@ -160,7 +160,7 @@
   "navbar": {
     "taskmanager": "Beadandókezelő",
     "exam": "Vizsgáztató",
-    "logout": "Kijelentkezés ({{neptun}})",
+    "logout": "Kijelentkezés ({{userCode}})",
     "role": "Szerepkör",
     "roles": {
       "student": "Hallgató",

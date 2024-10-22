@@ -32,7 +32,7 @@ export function DefaultUserLogin({ onLogin, isLoading } : Props) {
                                 icon={faSignInAlt}
                                 text={t(msg, { number: index + 1 })}
                                 onClick={() => onLogin(user)}
-                                key={user.neptun}
+                                key={user.userCode}
                                 displayTextBreakpoint="xs"
                                 disabled={isLoading}
                             />

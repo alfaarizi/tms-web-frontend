@@ -54,7 +54,7 @@ export function UserSwitcher({
                                 {u.name}
                                 {' '}
                                 (
-                                {u.neptun}
+                                {u.userCode}
                                 )
                             </option>
                         ))}

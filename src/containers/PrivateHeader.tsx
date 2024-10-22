@@ -206,7 +206,7 @@ export function PrivateHeader({
                     <Nav.Link>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                         {' '}
-                        {t('navbar.logout', { neptun: userSettings.neptun })}
+                        {t('navbar.logout', { userCode: userSettings.userCode })}
                     </Nav.Link>
                 </LinkContainer>
             </HeaderContent>

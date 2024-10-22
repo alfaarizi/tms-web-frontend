@@ -117,7 +117,7 @@ export function NewRequestForm({
         || [];
     const userList = users?.map((user) => ({
         value: user.id,
-        label: `${user.name ?? ''} <${user.neptun}>`,
+        label: `${user.name ?? ''} <${user.userCode}>`,
     })) || [];
     const basefileList = basefiles ? formatBaseFileList(basefiles) : [];
 

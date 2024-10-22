@@ -61,7 +61,7 @@ export function useCourseLecturers(courseID: number) {
 export function useAddLecturerMutation(courseID: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((neptunCodes: string[]) => CoursesService.addLecturers(courseID, neptunCodes), {
+    return useMutation((userCodes: string[]) => CoursesService.addLecturers(courseID, userCodes), {
         onSuccess: (data) => {
             const key = [QUERY_KEY, 'lecturers', { courseID }];
             const oldList = queryClient.getQueryData<User[]>(key);

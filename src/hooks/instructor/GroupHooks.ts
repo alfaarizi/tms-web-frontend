@@ -135,7 +135,7 @@ export function useGroupStudentNotesMutation(groupID: number, studentID: number)
 export function useAddStudentsMutation(groupID: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((neptunCodes: string[]) => GroupService.addStudents(groupID, neptunCodes), {
+    return useMutation((userCodes: string[]) => GroupService.addStudents(groupID, userCodes), {
         onSuccess: async (data) => {
             const key = [QUERY_KEY, 'students', { groupID }];
             const oldList = queryClient.getQueryData<User[]>(key);
@@ -169,7 +169,7 @@ export function useGroupInstructors(groupID: number) {
 export function useAddInstructorsMutation(groupID: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((neptunCodes: string[]) => GroupService.addInstructors(groupID, neptunCodes), {
+    return useMutation((userCodes: string[]) => GroupService.addInstructors(groupID, userCodes), {
         onSuccess: (data) => {
             const key = [QUERY_KEY, 'instructors', { groupID }];
             const oldList = queryClient.getQueryData<User[]>(key);

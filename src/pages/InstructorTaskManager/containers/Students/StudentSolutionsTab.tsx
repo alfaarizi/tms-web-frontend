@@ -80,7 +80,7 @@ export function StudentSolutionsTab({
                                             {' '}
                                             {file.gitRepo}
                                             {' '}
-                                            {user.neptun}
+                                            {user.userCode}
                                         </kbd>
                                     ) : file.gitRepo}
                                 </DataRow>

@@ -43,18 +43,18 @@ export function MockLoginForm({
         <Form onSubmit={onSubmit}>
             <Form.Group>
                 <Form.Label>
-                    {t('common.neptun')}
+                    {t('common.userCode')}
                     :
                 </Form.Label>
                 <Form.Control
                     type="text"
-                    {...register('neptun', {
+                    {...register('userCode', {
                         required: true,
                         minLength: 6,
                         maxLength: 6,
                     })}
                 />
-                {errors.neptun && <FormError message={t('login.neptunRequired')} />}
+                {errors.userCode && <FormError message={t('login.userCodeRequired')} />}
             </Form.Group>
 
             <Form.Group>

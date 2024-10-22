@@ -22,7 +22,7 @@ import { AsyncTypeaheadControl } from 'components/AsyncTypeaheadControl';
 type Props = {
     id: string,
     title: string,
-    onAdd: (neptunCodes: string[]) => void,
+    onAdd: (userCodes: string[]) => void,
     data?: UserAddResponse,
     isLoading: boolean,
     onSearch: (text: string) => void,
@@ -31,7 +31,7 @@ type Props = {
 }
 
 type FormData = {
-    neptunCodes: string
+    userCodes: string
 }
 
 type TypeaheadFormData = {
@@ -54,8 +54,8 @@ function validateList(value: string[]): boolean {
 }
 
 function validateOptions(value: Option[]): boolean {
-    // custom options also have a neptun field (because of labelKey)
-    return value.length > 0 && value.every((opt) => (opt as User).neptun.match(/^[a-zA-Z0-9]{6}$/));
+    // custom options also have a userCode field (because of labelKey)
+    return value.length > 0 && value.every((opt) => (opt as User).userCode.match(/^[a-zA-Z0-9]{6}$/));
 }
 
 export function AddUserCard({
@@ -90,22 +90,22 @@ export function AddUserCard({
     const { t } = useTranslation();
 
     const onSubmit = handleSubmit((formData: FormData) => {
-        const codes = extractCodes(formData.neptunCodes);
+        const codes = extractCodes(formData.userCodes);
         onAdd(codes);
-        setValue('neptunCodes', '');
+        setValue('userCodes', '');
     });
 
-    const getSelectedNeptunCodes = (selectedOptions: Option[]) : string[] => {
+    const getSelectedUserCodes = (selectedOptions: Option[]) : string[] => {
         const codes : string[] = [];
         for (let i = 0; i < selectedOptions.length; i++) {
             const opt = selectedOptions[i];
-            codes.push((opt as User).neptun);
+            codes.push((opt as User).userCode);
         }
         return codes;
     };
 
     const onSubmitTypeahead = handleSubmitTypeahead((formData: TypeaheadFormData) => {
-        const codes = getSelectedNeptunCodes(formData.selectedOptions);
+        const codes = getSelectedUserCodes(formData.selectedOptions);
         if (validateList(codes)) {
             onAdd(codes);
             setSelectedValue('selectedOptions', []);
@@ -115,9 +115,9 @@ export function AddUserCard({
     const failed: string[] = data?.failed.map((user) => {
         const firstError = getFirstError(user.cause);
         if (firstError) {
-            return `${user.neptun}: ${firstError}`;
+            return `${user.userCode}: ${firstError}`;
         }
-        return user.neptun;
+        return user.userCode;
     }) || [];
 
     const [toggleValue, setToggleValue] = useState('off');
@@ -156,14 +156,14 @@ export function AddUserCard({
                         <Form.Group>
                             <Form.Control
                                 type="text"
-                                {...register('neptunCodes', {
+                                {...register('userCodes', {
                                     required: true,
                                     validate,
                                 })}
                                 size="sm"
-                                placeholder={t('common.neptunCodes')}
+                                placeholder={t('common.userCodes')}
                             />
-                            {errors.neptunCodes && <FormError message={t('common.neptunCodesRequired')} />}
+                            {errors.userCodes && <FormError message={t('common.userCodesRequired')} />}
                         </Form.Group>
 
                         <Button variant="primary" type="submit" size="sm" disabled={isLoading}>
@@ -191,7 +191,7 @@ export function AddUserCard({
                                 searchData={searchData}
                             />
                             {errorsTypeahead.selectedOptions
-                                && <FormError message={t('common.neptunCodeOrNameRequired')} />}
+                                && <FormError message={t('common.userCodeCodeOrNameRequired')} />}
                         </Form.Group>
                         <Button variant="primary" type="submit" size="sm" disabled={isLoading}>
                             {isLoading ? <Spinner animation="border" size="sm" /> : <FontAwesomeIcon icon={faPlus} />}

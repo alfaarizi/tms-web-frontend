@@ -75,7 +75,7 @@ export function InstructorTaskManager() {
         if (groupView === GroupView.INSTRUCTOR) {
             return groups.data?.filter((group: Group) => {
                 if (group.instructors && userSettings.data) {
-                    return group.instructors.some((instructor) => instructor.neptun === userSettings.data.neptun);
+                    return group.instructors.some((instructor) => instructor.userCode === userSettings.data.userCode);
                 }
                 return false;
             });
