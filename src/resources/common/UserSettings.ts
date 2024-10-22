@@ -2,7 +2,7 @@ export type NotificationTarget = 'official' | 'custom' | 'none';
 
 export interface UserSettings {
     name: string;
-    neptun: string;
+    userCode: string;
     email: string;
     customEmail: string | null;
     locale: string;

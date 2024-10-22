@@ -127,7 +127,7 @@ export function StudentFilePage() {
                                 <Link to={`/instructor/task-manager/tasks/${item.task?.id}`}>{item.task?.name}</Link>
                             </DataRow>
                             <DataRow label={t('task.uploader')}>
-                                {`${item.uploader.name} (${item.uploader.neptun})`}
+                                {`${item.uploader.name} (${item.uploader.userCode})`}
                             </DataRow>
                             <DataRow label={t('task.uploadTime')}>
                                 <GroupDateTime value={item.uploadTime} timezone={item.task?.group?.timezone || ''} />

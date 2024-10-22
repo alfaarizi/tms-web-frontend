@@ -1,7 +1,7 @@
 {
   "autonym": "English",
   "common": {
-    "neptun": "NEPTUN",
+    "userCode": "University identifier",
     "group": "Group",
     "groups": "Groups",
     "name": "Name",
@@ -20,8 +20,8 @@
     "options": "Options",
     "userAddFailed": "Failed to add the following users",
     "userAddSuccess": "Added {{count}} user(s)",
-    "neptunCodes": "NEPTUN-codes separated with spaces",
-    "neptunCodesRequired": "Please provide valid NEPTUN-codes separated with spaces!",
+    "userCodes": "User codes separated with spaces",
+    "userCodesRequired": "Please provide valid user codes separated with spaces!",
     "students": "Students",
     "instructors": "Instructors",
     "asInstructor": "As an instructor",
@@ -60,9 +60,9 @@
     "areYouSure": "Are you sure?",
     "confirmDiscard": "If you close the modal, all your changes will be lost!",
     "confirmAddSemester": "If you add a new semester, that will be the actual one and you won't be able to change back the previous one",
-    "addNewNeptunCode": "Add new NEPTUN-code: ",
-    "searchForNeptunCodeOrName": "Enter NEPTUN-code or name",
-    "neptunCodeOrNameRequired": "Please provide valid NEPTUN-codes!",
+    "addNewUserCode": "Add new user code: ",
+    "searchForUserCodeOrName": "Enter user code or name",
+    "userCodeOrNameRequired": "Please provide valid user codes!",
     "basicSearch": "Import",
     "autoCompleteSearch": "Search",
     "operations": "Operations"
@@ -121,7 +121,7 @@
     "student": "Student access",
     "instructor": "Instructor access",
     "admin": "Administrator access",
-    "neptunRequired": "Invalid or missing NEPTUN-code",
+    "userCodeRequired": "Invalid or missing user code",
     "nameRequired": "Name is required",
     "emailRequired": "Email is required",
     "mockUsers": {
@@ -159,7 +159,7 @@
   "navbar": {
     "taskmanager": "Task Manager",
     "exam": "Exam",
-    "logout": "Logout ({{neptun}})",
+    "logout": "Logout ({{userCode}})",
     "role": "Role",
     "roles": {
       "student": "Student",

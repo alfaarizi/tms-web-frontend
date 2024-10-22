@@ -29,8 +29,8 @@ export async function listLecturers(courseID: number) {
     return res.data;
 }
 
-export async function addLecturers(courseID: number, neptunCodes: string[]) {
-    const res = await axiosInstance.post<UserAddResponse>(`admin/courses/${courseID}/lecturers`, { neptunCodes });
+export async function addLecturers(courseID: number, userCodes: string[]) {
+    const res = await axiosInstance.post<UserAddResponse>(`admin/courses/${courseID}/lecturers`, { userCodes });
     return res.data;
 }
 

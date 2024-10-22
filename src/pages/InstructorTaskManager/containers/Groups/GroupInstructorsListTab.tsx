@@ -36,8 +36,8 @@ export function GroupInstructorsListTab({ group }: Props) {
         addMutation.reset();
     }, [group.id]);
 
-    const handleAdd = (neptunCodes: string[]) => {
-        addMutation.mutate(neptunCodes);
+    const handleAdd = (userCodes: string[]) => {
+        addMutation.mutate(userCodes);
     };
 
     const handleDelete = (studentID: number) => {

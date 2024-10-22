@@ -50,7 +50,7 @@ export function SettingsPage() {
     useEffect(() => {
         if (settingsData) {
             setValue('name', settingsData.name);
-            setValue('neptun', settingsData.neptun);
+            setValue('userCode', settingsData.userCode);
             setValue('email', settingsData.email);
             setValue('customEmail', settingsData.customEmail);
             setCustomEmail(settingsData.customEmail);
@@ -134,13 +134,13 @@ export function SettingsPage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
-                            {t('common.neptun')}
+                            {t('common.userCode')}
                             :
                         </Form.Label>
                         <Form.Control
                             type="text"
                             disabled
-                            {...register('neptun', {
+                            {...register('userCode', {
                                 required: false,
                             })}
                         />

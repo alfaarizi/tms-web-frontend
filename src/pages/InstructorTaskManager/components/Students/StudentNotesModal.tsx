@@ -74,7 +74,7 @@ export function StudentNotesModal({
                         <Form.Group>
                             <Form.Label>
                                 {`${t('group.studentNotes')}: 
-                                ${student.name ? `${student.name} (${student.neptun})` : student.neptun}`}
+                                ${student.name ? `${student.name} (${student.userCode})` : student.userCode}`}
                             </Form.Label>
                             <Form.Control
                                 as="textarea"

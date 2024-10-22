@@ -90,7 +90,7 @@ export function TaskGridTableHeader({
                     style={{ left: widthForLeft, backgroundColor: 'white' }}
                     className={[styles.stickyHead, styles.outlines].join(' ')}
                 >
-                    {t('common.neptun')}
+                    {t('common.userCode')}
                 </th>
                 {headerTasks}
             </tr>

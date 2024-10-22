@@ -58,14 +58,14 @@ export async function listStudents(groupID: number) {
     const res = await axiosInstance.get<User[]>(`/instructor/groups/${groupID}/students`);
     return res.data.sort((a, b) => {
         if (a.name === b.name) {
-            return a.neptun.localeCompare(b.neptun);
+            return a.userCode.localeCompare(b.userCode);
         }
         return safeLocaleCompare(a.name, b.name);
     });
 }
 
-export async function addStudents(groupID: number, neptunCodes: string[]) {
-    const res = await axiosInstance.post<UserAddResponse>(`/instructor/groups/${groupID}/students`, { neptunCodes });
+export async function addStudents(groupID: number, userCodes: string[]) {
+    const res = await axiosInstance.post<UserAddResponse>(`/instructor/groups/${groupID}/students`, { userCodes });
     return res.data;
 }
 
@@ -78,8 +78,8 @@ export async function listInstructors(groupID: number) {
     return res.data;
 }
 
-export async function addInstructors(groupID: number, neptunCodes: string[]) {
-    const res = await axiosInstance.post<UserAddResponse>(`/instructor/groups/${groupID}/instructors`, { neptunCodes });
+export async function addInstructors(groupID: number, userCodes: string[]) {
+    const res = await axiosInstance.post<UserAddResponse>(`/instructor/groups/${groupID}/instructors`, { userCodes });
     return res.data;
 }
 

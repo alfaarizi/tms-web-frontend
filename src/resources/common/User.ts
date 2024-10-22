@@ -1,5 +1,5 @@
 export interface User {
     id: number;
-    neptun: string;
+    userCode: string;
     name?: string;
 }

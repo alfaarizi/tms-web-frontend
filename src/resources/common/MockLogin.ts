@@ -1,5 +1,5 @@
 export interface MockLogin {
-    neptun: string;
+    userCode: string;
     name: string;
     email: string;
     isStudent: boolean;
