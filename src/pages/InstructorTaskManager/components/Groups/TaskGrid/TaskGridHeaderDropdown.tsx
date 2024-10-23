@@ -20,8 +20,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DateTime } from 'luxon';
 
 import { GridTask } from 'resources/instructor/GridTask.php';
-import { SpreadsheetFormat } from 'api/instructor/StudentFilesService';
-import { DownloadAllParams, ExportSpreadsheetParams } from 'hooks/instructor/StudentFileHooks';
+import { SpreadsheetFormat } from 'api/instructor/SubmissionsService';
+import { DownloadAllParams, ExportSpreadsheetParams } from 'hooks/instructor/SubmissionHooks';
 
 import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 

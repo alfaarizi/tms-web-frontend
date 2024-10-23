@@ -17,26 +17,26 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 import { useTranslation } from 'react-i18next';
 
-import { GridStudentFile } from 'resources/instructor/GridStudentFile';
+import { GridSubmission } from 'resources/instructor/GridSubmission';
 
 import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 
 type Props = {
-    studentFile: GridStudentFile,
+    submission: GridSubmission,
 }
 
 /**
- * Shows a button with the status and the grade of the given student file
- * @param studentFile
+ * Shows a button with the status and the grade of the given submission
+ * @param submission
  * @constructor
  */
-export function TaskGridCellButton({ studentFile }: Props) {
+export function TaskGridCellButton({ submission }: Props) {
     const { t } = useTranslation();
     let icon: IconDefinition;
     let variant: Variant;
 
-    if (studentFile.verified) {
-        switch (studentFile.isAccepted) {
+    if (submission.verified) {
+        switch (submission.status) {
         case 'Accepted':
             icon = faThumbsUp;
             variant = 'success';
@@ -75,19 +75,19 @@ export function TaskGridCellButton({ studentFile }: Props) {
         variant = 'secondary';
     }
 
-    const title = `${t('task.status')}: ${studentFile.translatedIsAccepted}`
-        + `\n${t('passwordProtected.verified')}: ${studentFile.verified ? t('common.yes') : t('common.no')}`
-        + `\n${t('task.grade')}: ${studentFile.grade || ''}`;
+    const title = `${t('task.status')}: ${submission.translatedStatus}`
+        + `\n${t('passwordProtected.verified')}: ${submission.verified ? t('common.yes') : t('common.no')}`
+        + `\n${t('task.grade')}: ${submission.grade || ''}`;
 
     return (
         <LinkContainer
             className={styles.taskGridCellButton}
-            to={`/instructor/task-manager/student-files/${studentFile.id}`}
+            to={`/instructor/task-manager/submissions/${submission.id}`}
             title={title}
         >
             <Button variant={variant}>
                 <FontAwesomeIcon icon={icon} />
-                {studentFile.grade != null ? ` ${studentFile.grade}` : null}
+                {submission.grade != null ? ` ${submission.grade}` : null}
             </Button>
         </LinkContainer>
     );

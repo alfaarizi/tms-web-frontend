@@ -1,12 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import * as StudentFilesService from 'api/student/StudentFilesService';
+import * as SubmissionsService from 'api/student/SubmissionsService';
 
-export const QUERY_KEY = 'student/student-files';
+export const QUERY_KEY = 'student/submissions';
 
 export function useAutoTestResults(id: number) {
     return useQuery(
         [QUERY_KEY, 'auto-tester-results', { id }],
-        () => StudentFilesService.autoTesterResults(id),
+        () => SubmissionsService.autoTesterResults(id),
     );
 }

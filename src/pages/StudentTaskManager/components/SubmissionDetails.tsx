@@ -4,34 +4,34 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { DataRow } from 'components/DataRow';
-import { StudentFile } from 'resources/student/StudentFile';
+import { Submission } from 'resources/student/Submission';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { useAutoTestResults } from 'hooks/student/StudentFileHooks';
+import { useAutoTestResults } from 'hooks/student/SubmissionHooks';
 
-type StudentFileDetailsProps = {
-    studentFile: StudentFile,
+type SubmissionDetailsProps = {
+    submission: Submission,
     onDownload: () => void,
     onReportDownload: () => void,
     autoTest: number,
     appType?: string
 }
 
-export const StudentFileDetails = ({
-    studentFile, onDownload, onReportDownload, autoTest, appType,
-} : StudentFileDetailsProps) => {
+export const SubmissionDetails = ({
+    submission, onDownload, onReportDownload, autoTest, appType,
+} : SubmissionDetailsProps) => {
     const { t } = useTranslation();
-    const autoTesterResults = useAutoTestResults(studentFile.id);
+    const autoTesterResults = useAutoTestResults(submission.id);
 
     return (
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>{t('task.solution')}</CustomCardTitle>
-                {studentFile.uploadCount > 0
+                {submission.uploadCount > 0
                     ? (
                         <ToolbarButton
                             onClick={onDownload}
@@ -42,22 +42,22 @@ export const StudentFileDetails = ({
                     : null}
             </CustomCardHeader>
 
-            <DataRow label={t('task.name')}>{studentFile.name}</DataRow>
+            <DataRow label={t('task.name')}>{submission.name}</DataRow>
             <DataRow label={t('task.uploadTime')}>
-                <LocaleDateTime value={studentFile.uploadTime} />
+                <LocaleDateTime value={submission.uploadTime} />
             </DataRow>
-            <DataRow label={t('task.grade')}>{studentFile.grade}</DataRow>
-            <DataRow label={t('task.status')}>{studentFile.translatedIsAccepted}</DataRow>
-            <DataRow label={t('task.uploadCount')}>{studentFile.uploadCount}</DataRow>
-            <DataRow label={t('task.graderName')}>{studentFile.graderName}</DataRow>
+            <DataRow label={t('task.grade')}>{submission.grade}</DataRow>
+            <DataRow label={t('task.status')}>{submission.translatedStatus}</DataRow>
+            <DataRow label={t('task.uploadCount')}>{submission.uploadCount}</DataRow>
+            <DataRow label={t('task.graderName')}>{submission.graderName}</DataRow>
             <DataRow label={t('task.notes')}>
-                <MultiLineTextBlock text={studentFile.notes} />
+                <MultiLineTextBlock text={submission.notes} />
             </DataRow>
-            {autoTest === 1 && studentFile?.errorMsg
+            {autoTest === 1 && submission?.errorMsg
                 ? (
                     <AutoTestResultAlert
-                        isAccepted={studentFile?.isAccepted}
-                        errorMsg={studentFile?.errorMsg}
+                        status={submission?.status}
+                        errorMsg={submission?.errorMsg}
                         appType={appType || 'Console'}
                         onReportDownload={onReportDownload}
                         results={autoTesterResults.data ?? []}

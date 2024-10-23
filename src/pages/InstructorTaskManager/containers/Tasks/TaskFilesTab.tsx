@@ -1,14 +1,14 @@
 import {
-    useAttachmentInstructorFiles,
-    useInstructorFileDownload,
-    useAttachmentInstructorFilesUploadMutation,
-    useAttachmentInstructorFileRemoveMutation,
-} from 'hooks/instructor/InstructorFileHooks';
+    useAttachmentTaskFiles,
+    useTaskFileDownload,
+    useAttachmentTaskFilesUploadMutation,
+    useAttachmentTaskFileRemoveMutation,
+} from 'hooks/instructor/TaskFileHooks';
 import { FileUpload } from 'components/FileUpload';
-import { InstructorFilesUpload } from 'resources/instructor/InstructorFilesUpload';
+import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
 import { Task } from 'resources/instructor/Task';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { InstructorFilesList } from 'components/InstructorFilesList';
+import { TaskFilesList } from 'components/TaskFilesList';
 import { getFirstError } from 'utils/getFirstError';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,20 +17,20 @@ type Props = {
     task: Task
 }
 
-export function InstructorFilesTab({ task }: Props) {
+export function TaskFilesTab({ task }: Props) {
     const { t } = useTranslation();
     const actualSemester = useActualSemester();
-    const instructorFiles = useAttachmentInstructorFiles(task.id);
-    const removeMutation = useAttachmentInstructorFileRemoveMutation(task.id);
-    const uploadMutation = useAttachmentInstructorFilesUploadMutation(task.id);
-    const downloadInstructorFileMutation = useInstructorFileDownload();
+    const taskFiles = useAttachmentTaskFiles(task.id);
+    const removeMutation = useAttachmentTaskFileRemoveMutation(task.id);
+    const uploadMutation = useAttachmentTaskFilesUploadMutation(task.id);
+    const downloadTaskFileMutation = useTaskFileDownload();
 
     useEffect(() => {
         uploadMutation.reset();
     }, [task.id]);
 
     const handleDownload = (id: number, fileName: string) => {
-        downloadInstructorFileMutation.download(fileName, id);
+        downloadTaskFileMutation.download(fileName, id);
     };
 
     const handleRemove = (id: number) => {
@@ -39,7 +39,7 @@ export function InstructorFilesTab({ task }: Props) {
 
     const handleUpload = async (files: File[]) => {
         try {
-            const uploadData: InstructorFilesUpload = {
+            const uploadData: TaskFilesUpload = {
                 taskID: task.id,
                 category: 'Attachment',
                 files,
@@ -50,7 +50,7 @@ export function InstructorFilesTab({ task }: Props) {
         }
     };
 
-    if (!instructorFiles.data) {
+    if (!taskFiles.data) {
         return null;
     }
 
@@ -72,11 +72,11 @@ export function InstructorFilesTab({ task }: Props) {
                     onUpload={handleUpload}
                     errorMessages={failedToUpload}
                     successCount={uploadMutation.data ? uploadMutation.data.uploaded.length : 0}
-                    hintMessage={t('task.instructorFilesHelp')}
+                    hintMessage={t('task.taskFilesHelp')}
                 />
 
-                <InstructorFilesList
-                    instructorFiles={instructorFiles.data}
+                <TaskFilesList
+                    taskFiles={taskFiles.data}
                     onDownload={handleDownload}
                     onRemove={handleRemove}
                 />
@@ -84,8 +84,8 @@ export function InstructorFilesTab({ task }: Props) {
         )
         : (
             <>
-                <InstructorFilesList
-                    instructorFiles={instructorFiles.data}
+                <TaskFilesList
+                    taskFiles={taskFiles.data}
                     onDownload={handleDownload}
                 />
             </>

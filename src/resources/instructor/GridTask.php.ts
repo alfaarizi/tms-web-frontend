@@ -1,9 +1,9 @@
-import { GridStudentFile } from 'resources/instructor/GridStudentFile';
+import { GridSubmission } from 'resources/instructor/GridSubmission';
 
 export interface GridTask {
     id: number;
     name: string;
-    studentFiles: GridStudentFile[],
+    submissions: GridSubmission[],
     available?: string;
     softDeadline?: string;
     hardDeadline: string;

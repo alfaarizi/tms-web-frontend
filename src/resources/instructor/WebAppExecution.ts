@@ -1,6 +1,6 @@
 export interface WebAppExecution {
     id: number,
-    studentFileID: number,
+    submissionID: number,
     instructorID: number,
     port: number,
     startedAt: string,

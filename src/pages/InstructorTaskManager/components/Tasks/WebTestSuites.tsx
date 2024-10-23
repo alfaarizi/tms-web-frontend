@@ -1,8 +1,8 @@
 import React from 'react';
 import { FileUpload } from 'components/FileUpload';
-import { InstructorFilesList } from 'components/InstructorFilesList';
+import { TaskFilesList } from 'components/TaskFilesList';
 import { useTranslation } from 'react-i18next';
-import { InstructorFile } from 'resources/common/InstructorFile';
+import { TaskFile } from 'resources/common/TaskFile';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +11,7 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 
 type Props = {
-    webTestSuites: InstructorFile[]|undefined,
+    webTestSuites: TaskFile[]|undefined,
     isLoading: boolean,
     testFileValidationError: string[]|undefined,
     onUpload: (files: File[]) => Promise<void>,
@@ -56,8 +56,8 @@ export const WebTestSuites = ({
             />
             {webTestSuites
                 && (
-                    <InstructorFilesList
-                        instructorFiles={webTestSuites}
+                    <TaskFilesList
+                        taskFiles={webTestSuites}
                         onDownload={onDownload}
                         onRemove={onDelete}
                         title={t('task.evaluator.webTestSuites')}

@@ -2,11 +2,11 @@ import React, { useMemo } from 'react';
 import { useTasksForGrid } from 'hooks/instructor/TaskHooks';
 
 import { Group } from 'resources/instructor/Group';
-import { useDownloadAll, useExportSpreadsheet } from 'hooks/instructor/StudentFileHooks';
+import { useDownloadAll, useExportSpreadsheet } from 'hooks/instructor/SubmissionHooks';
 import { TaskGridTableBody } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableBody';
 import { TaskGridTableHeader } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableHeader';
 import { TaskGridTableCard } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableCard';
-import { GridStudentFile } from 'resources/instructor/GridStudentFile';
+import { GridSubmission } from 'resources/instructor/GridSubmission';
 import { useGroupStudents } from 'hooks/instructor/GroupHooks';
 import { GridTask } from 'resources/instructor/GridTask.php';
 import { User } from 'resources/common/User';
@@ -32,13 +32,13 @@ export function GroupTaskGridView({ group }: Props) {
         () => categorizedTasks.flat(),
         [categorizedTasks],
     );
-    // (taskID, studentID) -> GridStudentFile
-    const taskFileMap: Map<number, Map<number, GridStudentFile>> = useMemo(() => {
-        const map = new Map<number, Map<number, GridStudentFile>>();
+    // (taskID, studentID) -> GridSubmission
+    const taskFileMap: Map<number, Map<number, GridSubmission>> = useMemo(() => {
+        const map = new Map<number, Map<number, GridSubmission>>();
         flatTaskList.forEach((task) => {
-            const fileMap = new Map<number, GridStudentFile>();
+            const fileMap = new Map<number, GridSubmission>();
             map.set(task.id, fileMap);
-            task.studentFiles.forEach((file) => {
+            task.submissions.forEach((file) => {
                 fileMap.set(file.uploaderID, file);
             });
         });
@@ -47,7 +47,7 @@ export function GroupTaskGridView({ group }: Props) {
 
     // This function can return undefined, because the studentList and categorizedTasks arrays can be out of sync
     // during query invalidation in mutations.
-    const getStudentFile = (taskID: number, studentID: number): GridStudentFile | undefined => {
+    const getSubmission = (taskID: number, studentID: number): GridSubmission | undefined => {
         const taskFiles = taskFileMap.get(taskID);
         return taskFiles?.get(studentID);
     };
@@ -68,7 +68,7 @@ export function GroupTaskGridView({ group }: Props) {
             <TaskGridTableBody
                 students={studentList}
                 taskList={flatTaskList}
-                getStudentFile={getStudentFile}
+                getSubmission={getSubmission}
             />
         </TaskGridTableCard>
     );

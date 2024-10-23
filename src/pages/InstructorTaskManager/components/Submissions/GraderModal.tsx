@@ -3,14 +3,14 @@ import { Form, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { StudentFile } from 'resources/instructor/StudentFile';
+import { Submission } from 'resources/instructor/Submission';
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { ConfirmModal } from 'components/Modals/ConfirmModal';
 
 type Props = {
-    file: StudentFile | null;
+    file: Submission | null;
     show: boolean,
-    onSave: (data: StudentFile) => void,
+    onSave: (data: Submission) => void,
     onCancel: () => void,
     isLoading:boolean
 }
@@ -31,7 +31,7 @@ export function GraderModal({
         watch,
         reset,
         formState: { isDirty, dirtyFields },
-    } = useForm<StudentFile>();
+    } = useForm<Submission>();
     const onSubmit = handleSubmit((data) => {
         if (file) {
             onSave({
@@ -46,20 +46,20 @@ export function GraderModal({
     const handleShow = () => {
         reset();
         if (file) {
-            if (['Accepted', 'Passed'].includes(file.isAccepted)) {
-                setValue('isAccepted', 'Accepted');
-            } else if (['Rejected', 'Failed'].includes(file.isAccepted)) {
-                setValue('isAccepted', 'Rejected');
-            } else if (file.isAccepted === 'Late Submission') {
-                setValue('isAccepted', file.isAccepted);
+            if (['Accepted', 'Passed'].includes(file.status)) {
+                setValue('status', 'Accepted');
+            } else if (['Rejected', 'Failed'].includes(file.status)) {
+                setValue('status', 'Rejected');
+            } else if (file.status === 'Late Submission') {
+                setValue('status', file.status);
             } else {
-                setValue('isAccepted', 'Accepted');
+                setValue('status', 'Accepted');
             }
             setValue('notes', file.notes);
             setValue('grade', file.grade);
         }
     };
-    const selectValue = watch('isAccepted');
+    const selectValue = watch('status');
 
     const handleGraderExiting = () => {
         if (isDirty || (Object.keys(dirtyFields).length !== 0)) {
@@ -97,7 +97,7 @@ export function GraderModal({
                             <Form.Control
                                 as="select"
                                 value={selectValue}
-                                {...register('isAccepted', { required: true })}
+                                {...register('status', { required: true })}
                                 size="sm"
                             >
                                 <option value="Accepted">{t('status.accepted')}</option>

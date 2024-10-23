@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as TestCasesService from 'api/instructor/TestCasesService';
 import { TestCase } from 'resources/instructor/TestCase';
 import { useDownloader } from 'hooks/common/useDownloader';
-import { ExportSpreadsheetParams } from 'hooks/instructor/StudentFileHooks';
+import { ExportSpreadsheetParams } from 'hooks/instructor/SubmissionHooks';
 
 export const QUERY_KEY = 'instructor/test-cases';
 

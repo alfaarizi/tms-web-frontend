@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Task } from 'resources/instructor/Task';
 import * as TasksService from 'api/instructor/TasksService';
 import { GridTask } from 'resources/instructor/GridTask.php';
-import { QUERY_KEY as STUDENT_FILE_QUERY } from 'hooks/instructor/StudentFileHooks';
+import { QUERY_KEY as SUBMISSION_QUERY } from 'hooks/instructor/SubmissionHooks';
 import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
 
 export const QUERY_KEY = 'instructor/tasks';
@@ -73,8 +73,8 @@ export function useUpdateTaskMutation() {
             await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
             await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
             await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }, 'grid']);
-            await queryClient.invalidateQueries([STUDENT_FILE_QUERY, { taskID: data.id }]);
-            await queryClient.invalidateQueries([STUDENT_FILE_QUERY, { groupID: data.groupID }]);
+            await queryClient.invalidateQueries([SUBMISSION_QUERY, { taskID: data.id }]);
+            await queryClient.invalidateQueries([SUBMISSION_QUERY, { groupID: data.groupID }]);
         },
     });
 }

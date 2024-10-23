@@ -6,31 +6,31 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useShow } from 'ui-hooks/useShow';
 import { useTranslation } from 'react-i18next';
-import { useAutoTestResults } from 'hooks/instructor/StudentFileHooks';
+import { useAutoTestResults } from 'hooks/instructor/SubmissionHooks';
 import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { CodeCompassInformationAlert } from 'components/CodeCompassInformationAlert';
 import { Status } from 'resources/instructor/CodeCompassInstance';
-import { StudentFile } from 'resources/instructor/StudentFile';
+import { Submission } from 'resources/instructor/Submission';
 import { Task } from 'resources/instructor/Task';
-import { WebAppExecutionControl } from '../../containers/StudentFiles/WebAppExecutionControl';
+import { WebAppExecutionControl } from '../../containers/Submissions/WebAppExecutionControl';
 
 type Props = {
-    renderItem: (file: StudentFile) => ReactNode,
+    renderItem: (file: Submission) => ReactNode,
     isActualSemester: boolean,
     isCodeCompassEnabled: boolean,
-    file: StudentFile,
-    onCodeView: (file: StudentFile) => void,
-    onDownload: (file: StudentFile) => void,
-    onReportDownload: (file: StudentFile) => void
-    onStartCodeCompass: (file: StudentFile) => void,
-    onStopCodeCompass: (file: StudentFile) => void,
-    onGrade: (file: StudentFile) => void,
+    file: Submission,
+    onCodeView: (file: Submission) => void,
+    onDownload: (file: Submission) => void,
+    onReportDownload: (file: Submission) => void
+    onStartCodeCompass: (file: Submission) => void,
+    onStopCodeCompass: (file: Submission) => void,
+    onGrade: (file: Submission) => void,
     task?: Task,
 }
 
-export function StudentFileListItem({
+export function SubmissionListItem({
     file,
     isActualSemester,
     isCodeCompassEnabled,
@@ -54,19 +54,19 @@ export function StudentFileListItem({
     const showCodeCompassInformation = useShow();
     const [isCodeCompassLoading, setIsCodeCompassLoading] = useState(false);
 
-    const handleStartCodeCompass = async (data: StudentFile) => {
+    const handleStartCodeCompass = async (data: Submission) => {
         setIsCodeCompassLoading(true);
         await onStartCodeCompass(data);
         setIsCodeCompassLoading(false);
     };
 
-    const handleStopCodeCompass = async (data: StudentFile) => {
+    const handleStopCodeCompass = async (data: Submission) => {
         setIsCodeCompassLoading(true);
         await onStopCodeCompass(data);
         setIsCodeCompassLoading(false);
     };
 
-    const handleAutoTesterResultsDisplay = async (data: StudentFile) => {
+    const handleAutoTesterResultsDisplay = async (data: Submission) => {
         await refetchAutoTesterResults();
         setLoadAutoTesterResults(true); // keep the query enabled to get updates
         showAutoTesterResults.toShow();
@@ -170,7 +170,7 @@ export function StudentFileListItem({
             {showAutoTesterResults.show
                 ? (
                     <AutoTestResultAlert
-                        isAccepted={file.isAccepted}
+                        status={file.status}
                         errorMsg={file.errorMsg}
                         results={autoTesterResults}
                         onClose={showAutoTesterResults.toHide}

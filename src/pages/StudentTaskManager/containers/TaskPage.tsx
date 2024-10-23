@@ -3,17 +3,17 @@ import { DateTime } from 'luxon';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { StudentFile } from 'resources/student/StudentFile';
+import { Submission } from 'resources/student/Submission';
 import {
-    useDownloadInstructorFile,
-    useDownloadStudentFile, useDownloadTestReport,
+    useDownloadTaskFile,
+    useDownloadSubmission, useDownloadTestReport,
     useTask,
-    useUploadStudentFileMutation, useVerifyStudentFileMutation,
+    useUploadSubmissionMutation, useVerifySubmissionMutation,
 } from 'hooks/student/TaskHooks';
 import { TaskDetails } from 'pages/StudentTaskManager/components/TaskDetails';
-import { StudentFileDetails } from 'pages/StudentTaskManager/components/StudentFileDetails';
-import { InstructorFilesList } from 'components/InstructorFilesList';
-import { StudentFileUpload } from 'resources/student/StudentFileUpload';
+import { SubmissionDetails } from 'pages/StudentTaskManager/components/SubmissionDetails';
+import { TaskFilesList } from 'components/TaskFilesList';
+import { SubmissionUpload } from 'resources/student/SubmissionUpload';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { FileUpload } from 'components/FileUpload';
 import { GitInfo } from 'pages/StudentTaskManager/components/GitInfo';
@@ -34,10 +34,10 @@ export const TaskPage = () => {
     const { id } = useParams<Params>();
     const taskIDInt = parseInt(id || '-1', 10);
     const task = useTask(taskIDInt);
-    const uploadMutation = useUploadStudentFileMutation();
-    const downloadStudentFile = useDownloadStudentFile();
-    const downloadInstructorFile = useDownloadInstructorFile();
-    const verifyMutation = useVerifyStudentFileMutation();
+    const uploadMutation = useUploadSubmissionMutation();
+    const downloadSubmission = useDownloadSubmission();
+    const downloadTaskFile = useDownloadTaskFile();
+    const verifyMutation = useVerifySubmissionMutation();
     const notifications = useNotifications();
     const [uploadErrorMsg, setUploadErrorMsg] = useState<string | null>(null);
     const [verifyError, setVerifyError] = useState<ValidationErrorBody | null>(null);
@@ -48,17 +48,17 @@ export const TaskPage = () => {
     if (!task.data) {
         return null;
     }
-    const studentFile: StudentFile = task.data.studentFiles[0];
+    const submission: Submission = task.data.submissions[0];
 
-    const handleStudentFileDownload = () => {
-        if (studentFile.name !== undefined) {
-            downloadStudentFile.download(studentFile.name, studentFile.id);
+    const handleSubmissionDownload = () => {
+        if (submission.name !== undefined) {
+            downloadSubmission.download(submission.name, submission.id);
         }
     };
 
     const handleVerify = async (data: VerifyItem) => {
         try {
-            await verifyMutation.mutateAsync({ ...data, id: studentFile.id });
+            await verifyMutation.mutateAsync({ ...data, id: submission.id });
             notifications.push(
                 {
                     message: t('passwordProtected.verifySuccess'),
@@ -72,19 +72,19 @@ export const TaskPage = () => {
         }
     };
 
-    const handleInstructorFileDownload = async (taskID: number, fileName: string) => {
-        downloadInstructorFile.download(fileName, taskID);
+    const handleTaskFileDownload = async (taskID: number, fileName: string) => {
+        downloadTaskFile.download(fileName, taskID);
     };
 
     const handleTestReportDownload = () => {
-        downloadTestReport.download(`${studentFile.id}_report.tar`, studentFile.id);
+        downloadTestReport.download(`${submission.id}_report.tar`, submission.id);
     };
 
     const handleSolutionUpload = async (files: File[]) => {
         try {
             const computedFiles = await zipCreator.zipFilesIfNeeded(files);
 
-            const data: StudentFileUpload = {
+            const data: SubmissionUpload = {
                 taskID: task.data.id,
                 file: computedFiles,
             };
@@ -111,8 +111,8 @@ export const TaskPage = () => {
     };
 
     let uploadCard;
-    if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && studentFile.isAccepted !== 'Accepted')
-        || studentFile.isAccepted === 'Late Submission') {
+    if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && submission.status !== 'Accepted')
+        || submission.status === 'Late Submission') {
         if (task.data.canvasUrl) {
             uploadCard = <CanvasUploadInfo />;
         } else {
@@ -141,7 +141,7 @@ export const TaskPage = () => {
                 onCanvasSync={handleCanvasSync}
             />
 
-            {(!studentFile.verified)
+            {(!submission.verified)
             && (
                 <VerifyItemForm
                     onSave={handleVerify}
@@ -161,30 +161,30 @@ export const TaskPage = () => {
                 />
             )}
 
-            {studentFile.isAccepted !== 'No Submission'
+            {submission.status !== 'No Submission'
             && (
-                <StudentFileDetails
-                    studentFile={studentFile}
-                    onDownload={handleStudentFileDownload}
+                <SubmissionDetails
+                    submission={submission}
+                    onDownload={handleSubmissionDownload}
                     onReportDownload={handleTestReportDownload}
                     autoTest={task.data.autoTest}
                     appType={task.data.appType}
                 />
             )}
 
-            {studentFile?.codeCheckerResult
+            {submission?.codeCheckerResult
                 && (
                     <CodeCheckerReportsList
-                        status={studentFile.codeCheckerResult.status}
-                        reports={studentFile.codeCheckerResult.codeCheckerReports}
+                        status={submission.codeCheckerResult.status}
+                        reports={submission.codeCheckerResult.codeCheckerReports}
                     />
                 )}
 
-            {task.data.instructorFiles.length !== 0
+            {task.data.taskFiles.length !== 0
             && (
-                <InstructorFilesList
-                    instructorFiles={task.data.instructorFiles}
-                    onDownload={handleInstructorFileDownload}
+                <TaskFilesList
+                    taskFiles={task.data.taskFiles}
+                    onDownload={handleTaskFileDownload}
                 />
             )}
         </>

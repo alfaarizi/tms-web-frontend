@@ -2,16 +2,16 @@ import { axiosInstance } from 'api/axiosInstance';
 import { WebAppExecution } from 'resources/instructor/WebAppExecution';
 import { SetupWebAppExecution } from 'resources/instructor/SetupWebAppExecution';
 
-export async function one(studentFileID: number) {
+export async function one(submissionID: number) {
     const res = await axiosInstance.get<WebAppExecution>('/instructor/web-app-execution', {
-        params: { studentFileID },
+        params: { submissionID },
     });
     return res.data;
 }
 
-export async function startWebAppExecution(studentFileID: number, data: SetupWebAppExecution) {
+export async function startWebAppExecution(submissionID: number, data: SetupWebAppExecution) {
     const res = await axiosInstance.post<WebAppExecution>('/instructor/web-app-execution', {
-        studentFileID,
+        submissionID,
         runInterval: data.runInterval,
     });
     return res.data;

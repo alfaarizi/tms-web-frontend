@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Task } from 'resources/student/Task';
 import * as TasksService from 'api/student/TasksService';
-import * as StudentFilesService from 'api/student/StudentFilesService';
-import * as InstructorFilesService from 'api/student/InstructorFilesService';
-import { StudentFile } from 'resources/student/StudentFile';
-import { StudentFileUpload } from 'resources/student/StudentFileUpload';
+import * as SubmissionsService from 'api/student/SubmissionsService';
+import * as TaskFilesService from 'api/student/TaskFilesService';
+import { Submission } from 'resources/student/Submission';
+import { SubmissionUpload } from 'resources/student/SubmissionUpload';
 import { useDownloader } from 'hooks/common/useDownloader';
 import { VerifyItem } from 'resources/student/VerifyItem';
 
@@ -13,7 +13,7 @@ export const QUERY_KEY = 'student/tasks';
 export function useTask(taskID: number) {
     return useQuery<Task>([QUERY_KEY, { taskID }], () => TasksService.one(taskID), {
         refetchInterval: (queryState) => (
-            !!queryState?.studentFiles?.some((file) => file.isAccepted === 'Uploaded')
+            !!queryState?.submissions?.some((file) => file.status === 'Uploaded')
                 && !!queryState?.autoTest
                 ? 60000 : false),
         refetchIntervalInBackground: false,
@@ -24,19 +24,19 @@ export function useTasks(groupID: number) {
     return useQuery<Task[][]>([QUERY_KEY, { groupID }], () => TasksService.index(groupID));
 }
 
-export function useUploadStudentFileMutation() {
+export function useUploadSubmissionMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation<StudentFile, Error, StudentFileUpload>(
-        (uploadData) => StudentFilesService.upload(uploadData),
+    return useMutation<Submission, Error, SubmissionUpload>(
+        (uploadData) => SubmissionsService.upload(uploadData),
         {
-            onSuccess: (studentFile: StudentFile, variables: StudentFileUpload) => {
-                const key = [QUERY_KEY, { taskID: studentFile.taskID }];
+            onSuccess: (submission: Submission, variables: SubmissionUpload) => {
+                const key = [QUERY_KEY, { taskID: submission.taskID }];
                 const oldTaskData = queryClient.getQueryData<Task>(key);
                 if (oldTaskData) {
                     queryClient.setQueryData(key, {
                         ...oldTaskData,
-                        studentFiles: [studentFile],
+                        submissions: [submission],
                     });
                 }
             },
@@ -44,19 +44,19 @@ export function useUploadStudentFileMutation() {
     );
 }
 
-export function useVerifyStudentFileMutation() {
+export function useVerifySubmissionMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation<StudentFile, Error, VerifyItem>(
-        (data) => StudentFilesService.verify(data),
+    return useMutation<Submission, Error, VerifyItem>(
+        (data) => SubmissionsService.verify(data),
         {
-            onSuccess: (studentFile) => {
-                const key = [QUERY_KEY, { taskID: studentFile.taskID }];
+            onSuccess: (submission) => {
+                const key = [QUERY_KEY, { taskID: submission.taskID }];
                 const oldTaskData = queryClient.getQueryData<Task>(key);
                 if (oldTaskData) {
                     queryClient.setQueryData(key, {
                         ...oldTaskData,
-                        studentFiles: [studentFile],
+                        submissions: [submission],
                     });
                 }
             },
@@ -64,14 +64,14 @@ export function useVerifyStudentFileMutation() {
     );
 }
 
-export function useDownloadInstructorFile() {
-    return useDownloader((id: number) => InstructorFilesService.download(id));
+export function useDownloadTaskFile() {
+    return useDownloader((id: number) => TaskFilesService.download(id));
 }
 
-export function useDownloadStudentFile() {
-    return useDownloader((id: number) => StudentFilesService.download(id));
+export function useDownloadSubmission() {
+    return useDownloader((id: number) => SubmissionsService.download(id));
 }
 
 export function useDownloadTestReport() {
-    return useDownloader((id: number) => StudentFilesService.downloadTestReport(id));
+    return useDownloader((id: number) => SubmissionsService.downloadTestReport(id));
 }

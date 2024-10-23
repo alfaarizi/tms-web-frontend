@@ -1,8 +1,8 @@
-import { InstructorFile } from 'resources/common/InstructorFile';
+import { TaskFile } from 'resources/common/TaskFile';
 import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 
-export interface InstructorFilesUploadResult {
-    uploaded: InstructorFile[];
+export interface TaskFilesUploadResult {
+    uploaded: TaskFile[];
     failed: {
         name: string,
         cause: ValidationErrorBody

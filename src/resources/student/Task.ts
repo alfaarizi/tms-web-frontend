@@ -1,5 +1,5 @@
-import { StudentFile } from 'resources/student/StudentFile';
-import { InstructorFile } from 'resources/common/InstructorFile';
+import { Submission } from 'resources/student/Submission';
+import { TaskFile } from 'resources/common/TaskFile';
 
 export interface Task {
     id: number;
@@ -12,8 +12,8 @@ export interface Task {
     hardDeadline: string;
     available?: string;
     creatorName: string;
-    studentFiles: StudentFile[];
-    instructorFiles: InstructorFile[];
+    submissions: Submission[];
+    taskFiles: TaskFile[];
     gitInfo?: {
         path: string
         usage: string

@@ -1,6 +1,6 @@
 export interface CodeCompassInstance {
     id: number;
-    studentFileId: number;
+    submissionID: number;
     starterUserId: number;
     port?: number;
     status: Status;

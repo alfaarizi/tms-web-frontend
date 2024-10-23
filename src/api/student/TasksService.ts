@@ -5,7 +5,7 @@ export async function index(groupID: number) {
     const res = await axiosInstance.get<Task[][]>('/student/tasks', {
         params: {
             groupID,
-            expand: 'studentFiles',
+            expand: 'submissions',
         },
     });
     return res.data;
@@ -14,8 +14,8 @@ export async function index(groupID: number) {
 export async function one(taskID: number) {
     const res = await axiosInstance.get<Task>(`/student/tasks/${taskID}`, {
         params: {
-            expand: 'studentFiles, instructorFiles,'
-            + 'studentFiles.codeCheckerResult, studentFiles.codeCheckerResult.codeCheckerReports',
+            expand: 'submissions, taskFiles,'
+            + 'submissions.codeCheckerResult, submissions.codeCheckerResult.codeCheckerReports',
         },
     });
     return res.data;

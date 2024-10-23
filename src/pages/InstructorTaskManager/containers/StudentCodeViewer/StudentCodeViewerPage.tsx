@@ -15,7 +15,7 @@ import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { Col, Row } from 'react-bootstrap';
 import { getExtension } from 'pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
 import { githubLight } from '@uiw/codemirror-theme-github';
-import * as StudentFilesService from 'api/instructor/StudentFilesService';
+import * as SubmissionsService from 'api/instructor/SubmissionsService';
 import JSZip, { JSZipLoadOptions } from 'jszip';
 import jschardet from 'jschardet';
 
@@ -43,7 +43,7 @@ export function StudentCodeViewerPage() {
 
     useEffect(() => {
         const downloadFile = async () => {
-            const blob = await StudentFilesService.download(id);
+            const blob = await SubmissionsService.download(id);
             if (blob.type !== 'application/zip') {
                 throw new Error('Invalid blob type');
             }

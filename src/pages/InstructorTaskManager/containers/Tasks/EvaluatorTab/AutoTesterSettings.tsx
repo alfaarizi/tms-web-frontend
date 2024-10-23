@@ -15,8 +15,8 @@ import {
 import {
     useWebTestSuites,
     useWebTestSuiteRemoveMutation,
-    useWebTestSuiteUploadMutation, useInstructorFileDownload,
-} from 'hooks/instructor/InstructorFileHooks';
+    useWebTestSuiteUploadMutation, useTaskFileDownload,
+} from 'hooks/instructor/TaskFileHooks';
 import { useDownloader } from 'hooks/common/useDownloader';
 import { WebTestSuites } from 'pages/InstructorTaskManager/components/Tasks/WebTestSuites';
 import { useShow } from 'ui-hooks/useShow';
@@ -34,7 +34,7 @@ import { FileUpload } from 'components/FileUpload';
 import { getFirstError } from 'utils/getFirstError';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { InstructorFilesUpload } from '../../../../../resources/instructor/InstructorFilesUpload';
+import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
 
 type Props = {
     task: Task,
@@ -64,15 +64,15 @@ export function AutoTesterSettings({ task, additionalInformation }: Props) {
     const removeWebTestSuiteMutation = useWebTestSuiteRemoveMutation(task.id);
     const uploadWebTestSuiteMutation = useWebTestSuiteUploadMutation(task.id);
 
-    const instructorFileDownloadMutation = useInstructorFileDownload();
-    // Download instructor file
-    const handleInstructorFileDownload = (id: number, fileName: string) => {
-        instructorFileDownloadMutation.download(fileName, id);
+    const taskFileDownloadMutation = useTaskFileDownload();
+    // Download task file
+    const handleTaskFileDownload = (id: number, fileName: string) => {
+        taskFileDownloadMutation.download(fileName, id);
     };
 
     // Upload web test suite
     const handleWebTestSuiteUpload = async (files: File[]) => {
-        const uploadData: InstructorFilesUpload = {
+        const uploadData: TaskFilesUpload = {
             taskID: task.id,
             category: 'Web test suite',
             files,
@@ -200,7 +200,7 @@ export function AutoTesterSettings({ task, additionalInformation }: Props) {
                         isLoading={uploadWebTestSuiteMutation.isLoading}
                         testFileValidationError={failedWebTestFiles}
                         onUpload={handleWebTestSuiteUpload}
-                        onDownload={handleInstructorFileDownload}
+                        onDownload={handleTaskFileDownload}
                         onDelete={handleWebTestSuiteFileRemove}
                     />
                 )}

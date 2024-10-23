@@ -3,15 +3,15 @@ import { useTranslation } from 'react-i18next';
 
 import { Task } from 'resources/instructor/Task';
 import { getFirstError } from 'utils/getFirstError';
-import { InstructorFilesUpload } from 'resources/instructor/InstructorFilesUpload';
+import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
 import {
-    useInstructorFileDownload,
-    useTestInstructorFileRemoveMutation,
-    useTestInstructorFiles,
-    useTestInstructorFilesUploadMutation,
-} from 'hooks/instructor/InstructorFileHooks';
+    useTaskFileDownload,
+    useTestTaskFileRemoveMutation,
+    useTestTaskFiles,
+    useTestTaskFilesUploadMutation,
+} from 'hooks/instructor/TaskFileHooks';
 import { FileUpload } from 'components/FileUpload';
-import { InstructorFilesList } from 'components/InstructorFilesList';
+import { TaskFilesList } from 'components/TaskFilesList';
 
 type Props = {
     task: Task,
@@ -21,10 +21,10 @@ type Props = {
 export function TestFileManager({ task, isActualSemester }: Props) {
     const { t } = useTranslation();
 
-    const testFiles = useTestInstructorFiles(task.id);
-    const removeTestFileMutation = useTestInstructorFileRemoveMutation(task.id);
-    const uploadTestFileMutation = useTestInstructorFilesUploadMutation(task.id);
-    const downloadTestFileMutation = useInstructorFileDownload();
+    const testFiles = useTestTaskFiles(task.id);
+    const removeTestFileMutation = useTestTaskFileRemoveMutation(task.id);
+    const uploadTestFileMutation = useTestTaskFilesUploadMutation(task.id);
+    const downloadTestFileMutation = useTaskFileDownload();
 
     // Download test file
     const handleTestFileDownload = (id: number, fileName: string) => {
@@ -39,7 +39,7 @@ export function TestFileManager({ task, isActualSemester }: Props) {
     // Upload test file
     const handleTestFileUpload = async (files: File[]) => {
         try {
-            const uploadData: InstructorFilesUpload = {
+            const uploadData: TaskFilesUpload = {
                 taskID: task.id,
                 category: 'Test file',
                 files,
@@ -79,8 +79,8 @@ export function TestFileManager({ task, isActualSemester }: Props) {
                     hintMessage={t('task.evaluator.testFilesHelp')}
                 />
 
-                <InstructorFilesList
-                    instructorFiles={testFiles.data}
+                <TaskFilesList
+                    taskFiles={testFiles.data}
                     onDownload={handleTestFileDownload}
                     onRemove={handleTestFileRemove}
                 />
@@ -88,8 +88,8 @@ export function TestFileManager({ task, isActualSemester }: Props) {
         );
     }
     return (
-        <InstructorFilesList
-            instructorFiles={testFiles.data}
+        <TaskFilesList
+            taskFiles={testFiles.data}
             onDownload={handleTestFileDownload}
         />
     );

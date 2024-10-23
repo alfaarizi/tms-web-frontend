@@ -4,12 +4,12 @@ import { Task } from './Task';
 import { CodeCompassInstance } from './CodeCompassInstance';
 import { WebAppExecution } from './WebAppExecution';
 
-export interface StudentFile {
+export interface Submission {
     id: number;
     name?: string;
     uploadTime?: string;
-    isAccepted: string;
-    translatedIsAccepted: string;
+    status: string;
+    translatedStatus: string;
     grade: number;
     notes: string;
     isVersionControlled: number;

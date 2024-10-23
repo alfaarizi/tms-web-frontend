@@ -1,39 +1,39 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as WebAppExecutionService from 'api/instructor/WebAppExecutionService';
 import { WebAppExecution } from 'resources/instructor/WebAppExecution';
-import { StudentFile } from 'resources/instructor/StudentFile';
+import { Submission } from 'resources/instructor/Submission';
 import { SetupWebAppExecution } from 'resources/instructor/SetupWebAppExecution';
 import { useDownloader } from 'hooks/common/useDownloader';
 
 export const QUERY_KEY = 'instructor/web-app-execution';
 
-export function useWebAppExecution(studentFile: StudentFile) {
-    return useQuery<WebAppExecution>([QUERY_KEY, { studentFileID: studentFile.id }],
-        () => WebAppExecutionService.one(studentFile.id), {
-            initialData: studentFile.execution,
+export function useWebAppExecution(submission: Submission) {
+    return useQuery<WebAppExecution>([QUERY_KEY, { submissionID: submission.id }],
+        () => WebAppExecutionService.one(submission.id), {
+            initialData: submission.execution,
             refetchInterval: 60000,
             refetchIntervalInBackground: false,
         });
 }
 
-export function useStartWebAppExecutionMutation(studentFile: StudentFile) {
+export function useStartWebAppExecutionMutation(submission: Submission) {
     const queryClient = useQueryClient();
 
     return useMutation((data: SetupWebAppExecution) => WebAppExecutionService
-        .startWebAppExecution(studentFile.id, data), {
+        .startWebAppExecution(submission.id, data), {
         onSuccess: async (data) => {
-            queryClient.setQueryData([QUERY_KEY, { studentFileID: studentFile.id }], data);
+            queryClient.setQueryData([QUERY_KEY, { submissionID: submission.id }], data);
         },
     });
 }
 
-export function useStopWebAppExecutionMutation(studentFile: StudentFile) {
+export function useStopWebAppExecutionMutation(submission: Submission) {
     const queryClient = useQueryClient();
 
     return useMutation((webAppExecution: WebAppExecution) => WebAppExecutionService
         .stopWebAppExecution(webAppExecution), {
         onSuccess: async (data) => {
-            await queryClient.invalidateQueries([QUERY_KEY, { studentFileID: studentFile.id }]);
+            await queryClient.invalidateQueries([QUERY_KEY, { submissionID: submission.id }]);
         },
     });
 }

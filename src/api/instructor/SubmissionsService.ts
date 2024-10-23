@@ -1,9 +1,9 @@
-import { StudentFile } from 'resources/instructor/StudentFile';
+import { Submission } from 'resources/instructor/Submission';
 import { AutoTesterResult } from 'resources/common/AutoTesterResult';
 import { axiosInstance } from 'api/axiosInstance';
 
 export async function listForTask(taskID: number) {
-    const res = await axiosInstance.get<StudentFile[]>('/instructor/student-files/list-for-task', {
+    const res = await axiosInstance.get<Submission[]>('/instructor/submissions/list-for-task', {
         params: {
             taskID,
             expand: 'uploader,execution,codeCompass,codeCheckerResult',
@@ -13,7 +13,7 @@ export async function listForTask(taskID: number) {
 }
 
 export async function listForStudent(groupID: number, uploaderID: number) {
-    const res = await axiosInstance.get<StudentFile[]>('/instructor/student-files/list-for-student', {
+    const res = await axiosInstance.get<Submission[]>('/instructor/submissions/list-for-student', {
         params: {
             groupID,
             uploaderID,
@@ -24,8 +24,8 @@ export async function listForStudent(groupID: number, uploaderID: number) {
 }
 
 export async function view(id: number) {
-    const res = await axiosInstance.get<StudentFile>(
-        `/instructor/student-files/${id}`, {
+    const res = await axiosInstance.get<Submission>(
+        `/instructor/submissions/${id}`, {
             params: {
                 expand: 'uploader,task,task.group,execution,codeCompass,codeCheckerResult,'
                     + 'codeCheckerResult.stdout,codeCheckerResult.stderr,codeCheckerResult.codeCheckerReports,'
@@ -38,14 +38,14 @@ export async function view(id: number) {
 }
 
 export async function download(id: number) {
-    const res = await axiosInstance.get<Blob>(`/instructor/student-files/${id}/download`, {
+    const res = await axiosInstance.get<Blob>(`/instructor/submissions/${id}/download`, {
         responseType: 'blob',
     });
     return res.data;
 }
 
 export async function downloadTestReport(id: number) {
-    const res = await axiosInstance.get<Blob>(`/instructor/student-files/${id}/download-report`, {
+    const res = await axiosInstance.get<Blob>(`/instructor/submissions/${id}/download-report`, {
         responseType: 'blob',
     });
     return res.data;
@@ -54,7 +54,7 @@ export async function downloadTestReport(id: number) {
 export type SpreadsheetFormat = 'xlsx' | 'csv';
 
 export async function exportSpreadsheet(taskID: number, format: SpreadsheetFormat) {
-    const res = await axiosInstance.get<Blob>('/instructor/student-files/export-spreadsheet', {
+    const res = await axiosInstance.get<Blob>('/instructor/submissions/export-spreadsheet', {
         params: {
             taskID,
             format,
@@ -65,7 +65,7 @@ export async function exportSpreadsheet(taskID: number, format: SpreadsheetForma
 }
 
 export async function downloadAllFiles(taskID: number, onlyUngraded: boolean) {
-    const res = await axiosInstance.get<Blob>('/instructor/student-files/download-all-files', {
+    const res = await axiosInstance.get<Blob>('/instructor/submissions/download-all-files', {
         responseType: 'blob',
         params: {
             taskID,
@@ -75,9 +75,9 @@ export async function downloadAllFiles(taskID: number, onlyUngraded: boolean) {
     return res.data;
 }
 
-export async function grade(file: StudentFile) {
+export async function grade(file: Submission) {
     const res = await axiosInstance.patch(
-        `/instructor/student-files/${file.id}?expand=uploader,task,task.group,codeCompass,codeCheckerResult,`
+        `/instructor/submissions/${file.id}?expand=uploader,task,task.group,codeCompass,codeCheckerResult,`
         + 'codeCheckerResult.stdout,codeCheckerResult.stderr,codeCheckerResult.codeCheckerReports,'
         + 'codeCheckerResult.runnerErrorMessage',
         file,
@@ -85,19 +85,19 @@ export async function grade(file: StudentFile) {
     return res.data;
 }
 
-export async function startCodeCompass(file: StudentFile) {
+export async function startCodeCompass(file: Submission) {
     const res = await axiosInstance
-        .post<StudentFile>(
-            `/instructor/student-files/${file.id}/start-code-compass?expand=uploader,task,task.group,`
+        .post<Submission>(
+            `/instructor/submissions/${file.id}/start-code-compass?expand=uploader,task,task.group,`
                 + 'codeCompass,codeCheckerResult',
         );
     return res.data;
 }
 
-export async function stopCodeCompass(file: StudentFile) {
+export async function stopCodeCompass(file: Submission) {
     const res = await axiosInstance
-        .post<StudentFile>(
-            `/instructor/student-files/${file.id}/stop-code-compass?expand=uploader,task,task.group`
+        .post<Submission>(
+            `/instructor/submissions/${file.id}/stop-code-compass?expand=uploader,task,task.group`
                 + 'codeCompass,codeCheckerResult',
         );
     return res.data;
@@ -105,7 +105,7 @@ export async function stopCodeCompass(file: StudentFile) {
 
 export async function autoTesterResults(id: number) {
     const res = await axiosInstance.get<AutoTesterResult[]>(
-        `/instructor/student-files/${id}/auto-tester-results`,
+        `/instructor/submissions/${id}/auto-tester-results`,
     );
     return res.data;
 }

@@ -1,12 +1,12 @@
 import { axiosInstance } from 'api/axiosInstance';
-import { InstructorFile } from 'resources/common/InstructorFile';
-import { InstructorFilesUpload } from 'resources/instructor/InstructorFilesUpload';
-import { InstructorFilesUploadResult } from 'resources/instructor/InstructorFilesUploadResult';
+import { TaskFile } from 'resources/common/TaskFile';
+import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
+import { TaskFilesUploadResult } from 'resources/instructor/TaskFilesUploadResult';
 
 export async function index(
     taskID: number, includeAttachments?: boolean, includeTestFiles?: boolean, includeWebTestSuites?: boolean,
 ) {
-    const res = await axiosInstance.get<InstructorFile[]>('/instructor/instructor-files', {
+    const res = await axiosInstance.get<TaskFile[]>('/instructor/task-files', {
         params: {
             taskID,
             includeAttachments,
@@ -18,10 +18,10 @@ export async function index(
 }
 
 export async function remove(id: number) {
-    await axiosInstance.delete(`/instructor/instructor-files/${id}`);
+    await axiosInstance.delete(`/instructor/task-files/${id}`);
 }
 
-export async function upload(uploadData: InstructorFilesUpload) {
+export async function upload(uploadData: TaskFilesUpload) {
     const formData = new FormData();
     formData.append('taskID', uploadData.taskID.toString());
     formData.append('category', uploadData.category);
@@ -29,7 +29,7 @@ export async function upload(uploadData: InstructorFilesUpload) {
         formData.append('files[]', uploadData.files[i]);
     }
 
-    const res = await axiosInstance.post<InstructorFilesUploadResult>('/instructor/instructor-files', formData, {
+    const res = await axiosInstance.post<TaskFilesUploadResult>('/instructor/task-files', formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
@@ -38,7 +38,7 @@ export async function upload(uploadData: InstructorFilesUpload) {
 }
 
 export async function download(id: number) {
-    const res = await axiosInstance.get<Blob>(`/instructor/instructor-files/${id}/download`, {
+    const res = await axiosInstance.get<Blob>(`/instructor/task-files/${id}/download`, {
         responseType: 'blob',
     });
     return res.data;
