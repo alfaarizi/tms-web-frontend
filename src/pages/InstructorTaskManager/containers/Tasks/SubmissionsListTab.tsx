@@ -11,25 +11,25 @@ import {
 import { Link } from 'react-router-dom';
 
 import { Task } from 'resources/instructor/Task';
-import { useDownloadAll, useExportSpreadsheet, useStudentFilesForTask } from 'hooks/instructor/StudentFileHooks';
+import { useDownloadAll, useExportSpreadsheet, useSubmissionsForTask } from 'hooks/instructor/SubmissionHooks';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { DataRow } from 'components/DataRow';
-import { StudentFilesList } from 'pages/InstructorTaskManager/containers/StudentFiles/StudentFilesList';
+import { SubmissionsList } from 'pages/InstructorTaskManager/containers/Submissions/SubmissionsList';
 import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
-import { SpreadsheetFormat } from 'api/instructor/StudentFilesService';
+import { SpreadsheetFormat } from 'api/instructor/SubmissionsService';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { StudentFile } from 'resources/instructor/StudentFile';
+import { Submission } from 'resources/instructor/Submission';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { TaskLevelRepoDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskLevelRepoDetails';
 import { safeLocaleCompare } from 'utils/safeLocaleCompare';
 
 type Props = {
     task: Task
-    handleStartCodeCompass: (file: StudentFile) => void,
-    handleStopCodeCompass: (file: StudentFile) => void,
+    handleStartCodeCompass: (file: Submission) => void,
+    handleStopCodeCompass: (file: Submission) => void,
 }
 
 enum SortType {
@@ -38,12 +38,12 @@ enum SortType {
     ByUploadTime,
 }
 
-export function StudentFilesListTab({
+export function SubmissionsListTab({
     task, handleStartCodeCompass, handleStopCodeCompass,
 }: Props) {
     const { t } = useTranslation();
     const privateSystemInfo = usePrivateSystemInfoQuery();
-    const studentFiles = useStudentFilesForTask(task.id);
+    const submissions = useSubmissionsForTask(task.id);
     const exportSpreadsheet = useExportSpreadsheet();
     const downloadAll = useDownloadAll();
     const [sortedBy, setSortedBy] = useState<SortType>(SortType.ByUngradedFirst);
@@ -61,49 +61,49 @@ export function StudentFilesListTab({
     };
 
     const sortingByUngradedFirst = () => {
-        if (!studentFiles.data) {
+        if (!submissions.data) {
             return null;
         }
 
-        const getStatusNumber = (s : StudentFile) => {
+        const getStatusNumber = (s : Submission) => {
             // Ungraded
-            if (s.isAccepted !== 'No Submission' && !s.grade) {
+            if (s.status !== 'No Submission' && !s.grade) {
                 return 1;
             }
             // Unsubmitted
-            if (s.isAccepted === 'No Submission') {
+            if (s.status === 'No Submission') {
                 return 2;
             }
             // Graded
             return 3;
         };
 
-        return studentFiles.data.sort(
+        return submissions.data.sort(
             (a, b) => getStatusNumber(a) - getStatusNumber(b) || safeLocaleCompare(a.uploadTime, b.uploadTime),
         );
     };
 
     const sortingByName = () => {
-        if (!studentFiles.data) {
+        if (!submissions.data) {
             return null;
         }
 
-        return studentFiles.data.sort(
-            (a: StudentFile, b: StudentFile) => safeLocaleCompare(a.uploader.name, b.uploader.name),
+        return submissions.data.sort(
+            (a: Submission, b: Submission) => safeLocaleCompare(a.uploader.name, b.uploader.name),
         );
     };
 
     const sortingByUploadTime = () => {
-        if (!studentFiles.data) {
+        if (!submissions.data) {
             return null;
         }
 
-        return studentFiles.data.sort(
-            (a: StudentFile, b: StudentFile) => safeLocaleCompare(a.uploadTime, b.uploadTime),
+        return submissions.data.sort(
+            (a: Submission, b: Submission) => safeLocaleCompare(a.uploadTime, b.uploadTime),
         );
     };
 
-    const sortedStudentFiles = useMemo(() => {
+    const sortedSubmissions = useMemo(() => {
         switch (sortedBy) {
         case SortType.ByName:
             return sortingByName();
@@ -113,9 +113,9 @@ export function StudentFilesListTab({
         default:
             return sortingByUngradedFirst();
         }
-    }, [sortedBy, studentFiles.data]);
+    }, [sortedBy, submissions.data]);
 
-    if (!sortedStudentFiles) {
+    if (!sortedSubmissions) {
         return null;
     }
 
@@ -128,7 +128,7 @@ export function StudentFilesListTab({
             <CustomCard>
                 <CustomCardHeader>
                     <CustomCardTitle>{t('task.solutions')}</CustomCardTitle>
-                    {sortedStudentFiles.length !== 0 ? (
+                    {sortedSubmissions.length !== 0 ? (
                         <ButtonGroup>
                             <ToolbarDropdown text={t('common.export')} icon={faFileExport}>
                                 <DropdownItem onSelect={() => handleExportSpreadsheet('xlsx')}>
@@ -176,9 +176,9 @@ export function StudentFilesListTab({
                     ) : null}
                 </CustomCardHeader>
 
-                <StudentFilesList
+                <SubmissionsList
                     semesterID={task.semesterID}
-                    files={sortedStudentFiles}
+                    files={sortedSubmissions}
                     task={task}
                     renderItem={(file) => (
                         <>
@@ -191,10 +191,10 @@ export function StudentFilesListTab({
                             <DataRow label={t('task.delay')}>
                                 {file.delay}
                             </DataRow>
-                            <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
+                            <DataRow label={t('task.status')}>{file.translatedStatus}</DataRow>
                             {file.codeCheckerResult ? (
                                 <DataRow label={t('task.evaluator.staticCodeAnalysis')}>
-                                    <Link to={`/instructor/task-manager/student-files/${file.id}`}>
+                                    <Link to={`/instructor/task-manager/submissions/${file.id}`}>
                                         {file.codeCheckerResult?.translatedStatus}
                                     </Link>
                                 </DataRow>

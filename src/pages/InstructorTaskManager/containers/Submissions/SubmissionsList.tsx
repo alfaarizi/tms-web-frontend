@@ -1,36 +1,36 @@
 import React, { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { StudentFile } from 'resources/instructor/StudentFile';
-import { GraderModal } from 'pages/InstructorTaskManager/components/StudentFiles/GraderModal';
+import { Submission } from 'resources/instructor/Submission';
+import { GraderModal } from 'pages/InstructorTaskManager/components/Submissions/GraderModal';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { useDownloadStudentFile, useDownloadTestReport, useGradeMutation } from 'hooks/instructor/StudentFileHooks';
-import { StudentFileListItem } from 'pages/InstructorTaskManager/components/Students/StudentFileListItem';
+import { useDownloadSubmission, useDownloadTestReport, useGradeMutation } from 'hooks/instructor/SubmissionHooks';
+import { SubmissionListItem } from 'pages/InstructorTaskManager/components/Students/SubmissionListItem';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { Task } from 'resources/instructor/Task';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { useHistory } from 'react-router';
 
 type Props = {
-    files: StudentFile[],
+    files: Submission[],
     semesterID: number,
-    handleStartCodeCompass: (f: StudentFile) => void
-    handleStopCodeCompass: (f: StudentFile) => void
-    renderItem: (f: StudentFile) => ReactNode
+    handleStartCodeCompass: (f: Submission) => void
+    handleStopCodeCompass: (f: Submission) => void
+    renderItem: (f: Submission) => ReactNode
     task?: Task
 }
 
 /**
- * Reusable container component for rendering studentfile lists
+ * Reusable container component for rendering submission lists
  * @param files List of files
  * @param semesterID Semester id for actual semester check
  * @param renderItem Function to render a list item.
- * @param task Task of Student file
+ * @param task Task of submission
  * More information about render props: https://hu.reactjs.org/docs/render-props.html
  * @param handleCodeCompass Function to call when the code compass icon gets pressed
  * @constructor
  */
-export function StudentFilesList({
+export function SubmissionsList({
     files,
     semesterID,
     handleStartCodeCompass,
@@ -38,10 +38,10 @@ export function StudentFilesList({
     renderItem,
     task,
 }: Props) {
-    const [gradedFile, setGradedFile] = useState<StudentFile | null>(null);
+    const [gradedFile, setGradedFile] = useState<Submission | null>(null);
     const actualSemester = useActualSemester();
     const gradeMutation = useGradeMutation();
-    const downloadfile = useDownloadStudentFile();
+    const downloadfile = useDownloadSubmission();
     const downloadTestReport = useDownloadTestReport();
     const { t } = useTranslation();
     const notifications = useNotifications();
@@ -49,26 +49,26 @@ export function StudentFilesList({
     const isCodeCompassEnabled = privateSystemInfo.data?.isCodeCompassEnabled ?? false;
     const history = useHistory();
 
-    const handleCodeView = async (file: StudentFile) => {
+    const handleCodeView = async (file: Submission) => {
         if (file.name !== undefined) {
             history.push(`/instructor/task-manager/code-viewer/${file.id}`);
         }
     };
 
     // Download file
-    const handleDownload = async (file: StudentFile) => {
+    const handleDownload = async (file: Submission) => {
         if (file.name !== undefined) {
             downloadfile.download(file.name, file.id);
         }
     };
 
     // Download test report
-    const handleReportDownload = async (file: StudentFile) => {
+    const handleReportDownload = async (file: Submission) => {
         downloadTestReport.download(`${file.id}_report.tar`, file.id);
     };
 
     // Set graded file
-    const handleGradeStart = (file: StudentFile) => {
+    const handleGradeStart = (file: Submission) => {
         setGradedFile(file);
     };
 
@@ -78,7 +78,7 @@ export function StudentFilesList({
     };
 
     // GraderModel save function
-    const handleGradeSave = async (data: StudentFile) => {
+    const handleGradeSave = async (data: Submission) => {
         try {
             await gradeMutation.mutateAsync(data);
             handleGradeFinish();
@@ -96,7 +96,7 @@ export function StudentFilesList({
         <>
             {
                 files.map((file) => (
-                    <StudentFileListItem
+                    <SubmissionListItem
                         key={file.id}
                         renderItem={renderItem}
                         isActualSemester={actualSemester.check(semesterID)}

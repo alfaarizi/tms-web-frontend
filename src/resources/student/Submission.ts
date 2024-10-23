@@ -1,12 +1,12 @@
 import { CodeCheckerResult } from 'resources/student/CodeCheckerResult';
 import { AutoTesterResult } from 'resources/common/AutoTesterResult';
 
-export interface StudentFile {
+export interface Submission {
     id: number;
     name?: string;
     uploadTime?: string;
-    isAccepted: string;
-    translatedIsAccepted: string;
+    status: string;
+    translatedStatus: string;
     grade: number;
     notes: string;
     isVersionControlled: number;

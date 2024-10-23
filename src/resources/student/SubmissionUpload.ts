@@ -1,4 +1,4 @@
-export interface StudentFileUpload {
+export interface SubmissionUpload {
     taskID: number;
     file: File;
 }

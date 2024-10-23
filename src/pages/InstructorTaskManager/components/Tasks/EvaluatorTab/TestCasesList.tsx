@@ -11,7 +11,7 @@ import { TestCaseListItem } from 'pages/InstructorTaskManager/components/Tasks/E
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { Task } from 'resources/instructor/Task';
 import { TestCaseHeaderDropdown } from 'pages/InstructorTaskManager/components/Tasks/TestCaseHeaderDropdown';
-import { ExportSpreadsheetParams } from 'hooks/instructor/StudentFileHooks';
+import { ExportSpreadsheetParams } from 'hooks/instructor/SubmissionHooks';
 
 type Props = {
     task: Task,

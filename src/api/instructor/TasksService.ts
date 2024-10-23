@@ -19,7 +19,7 @@ export async function index(groupID: number) {
 }
 
 /**
- * Loads task list with student files. Only select necessary fields for the task grid.
+ * Loads task list with submissions. Only select necessary fields for the task grid.
  * @param groupID
  */
 export async function getTasksForGrid(groupID: number) {
@@ -27,9 +27,9 @@ export async function getTasksForGrid(groupID: number) {
         params: {
             groupID,
             fields: 'id,name,available,softDeadline,hardDeadline,translatedCategory'
-                + ',studentFiles.id,studentFiles.isAccepted,studentFiles.translatedIsAccepted'
-                + ',studentFiles.grade,studentFiles.uploaderID,studentFiles.verified',
-            expand: 'studentFiles',
+                + ',submissions.id,submissions.status,submissions.translatedStatus'
+                + ',submissions.grade,submissions.uploaderID,submissions.verified',
+            expand: 'submissions',
         },
     });
     return res.data;

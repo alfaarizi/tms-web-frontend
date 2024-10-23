@@ -1,45 +1,45 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import { StudentFile } from 'resources/instructor/StudentFile';
-import * as StudentFilesService from 'api/instructor/StudentFilesService';
+import { Submission } from 'resources/instructor/Submission';
+import * as SubmissionsService from 'api/instructor/SubmissionsService';
 import { useDownloader } from 'hooks/common/useDownloader';
 import { QUERY_KEY as GROUP_QUERY_KEY } from 'hooks/instructor/GroupHooks';
 import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/instructor/TaskHooks';
 
-export const QUERY_KEY = 'instructor/student-files';
+export const QUERY_KEY = 'instructor/submissions';
 
-export function useStudentFilesForTask(taskID: number) {
-    return useQuery([QUERY_KEY, { taskID }], () => StudentFilesService.listForTask(taskID));
+export function useSubmissionsForTask(taskID: number) {
+    return useQuery([QUERY_KEY, { taskID }], () => SubmissionsService.listForTask(taskID));
 }
 
-export function useStudentFilesForStudent(groupID: number, uploaderID: number) {
+export function useSubmissionsForStudent(groupID: number, uploaderID: number) {
     return useQuery([QUERY_KEY, {
         groupID,
         uploaderID,
     }],
-    () => StudentFilesService.listForStudent(groupID, uploaderID));
+    () => SubmissionsService.listForStudent(groupID, uploaderID));
 }
 
-export function useStudentFile(id: number) {
-    return useQuery([QUERY_KEY, { id }], () => StudentFilesService.view(id));
+export function useSubmission(id: number) {
+    return useQuery([QUERY_KEY, { id }], () => SubmissionsService.view(id));
 }
 
 export function useGradeMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((file: StudentFile) => StudentFilesService.grade(file), {
+    return useMutation((file: Submission) => SubmissionsService.grade(file), {
         onSuccess: async (data) => {
-            // Replace existing StudentFile with the returned data
+            // Replace existing Submission with the returned data
             queryClient.setQueryData([QUERY_KEY, { id: data.id }], data);
 
             // Update lists
-            const forTask = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, { taskID: data.taskID }]);
+            const forTask = queryClient.getQueryData<Submission[]>([QUERY_KEY, { taskID: data.taskID }]);
             if (forTask) {
                 const newList = forTask.map((file) => (file.id === data.id ? data : file));
                 queryClient.setQueryData([QUERY_KEY, { taskID: data.taskID }], newList);
             }
 
-            const forUploader = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, {
+            const forUploader = queryClient.getQueryData<Submission[]>([QUERY_KEY, {
                 groupID: data.groupID,
                 uploaderID: data.uploaderID,
             }]);
@@ -64,22 +64,22 @@ export function useGradeMutation() {
     });
 }
 
-export function useDownloadStudentFile() {
-    return useDownloader((id: number) => StudentFilesService.download(id));
+export function useDownloadSubmission() {
+    return useDownloader((id: number) => SubmissionsService.download(id));
 }
 
 export function useDownloadTestReport() {
-    return useDownloader((id: number) => StudentFilesService.downloadTestReport(id));
+    return useDownloader((id: number) => SubmissionsService.downloadTestReport(id));
 }
 
 export type ExportSpreadsheetParams = {
     taskID: number,
-    format: StudentFilesService.SpreadsheetFormat,
+    format: SubmissionsService.SpreadsheetFormat,
 };
 
 export function useExportSpreadsheet() {
     return useDownloader(
-        ({ taskID, format }: ExportSpreadsheetParams) => StudentFilesService.exportSpreadsheet(taskID, format),
+        ({ taskID, format }: ExportSpreadsheetParams) => SubmissionsService.exportSpreadsheet(taskID, format),
     );
 }
 
@@ -90,22 +90,22 @@ export type DownloadAllParams = {
 
 export function useDownloadAll() {
     return useDownloader(
-        ({ taskID, onlyUngraded }: DownloadAllParams) => StudentFilesService.downloadAllFiles(taskID, onlyUngraded),
+        ({ taskID, onlyUngraded }: DownloadAllParams) => SubmissionsService.downloadAllFiles(taskID, onlyUngraded),
     );
 }
 
 export function useStartCodeCompassMutation(taskId: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((file: StudentFile) => StudentFilesService.startCodeCompass(file), {
+    return useMutation((file: Submission) => SubmissionsService.startCodeCompass(file), {
         onSuccess: async (data) => {
-            const forTask = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, { taskID: taskId }]);
+            const forTask = queryClient.getQueryData<Submission[]>([QUERY_KEY, { taskID: taskId }]);
             if (forTask) {
                 const newList = forTask.map((file) => (file.id === data.id ? data : file));
                 queryClient.setQueryData([QUERY_KEY, { taskID: data.taskID }], newList);
             }
 
-            const forUploader = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, {
+            const forUploader = queryClient.getQueryData<Submission[]>([QUERY_KEY, {
                 groupID: data.groupID,
                 uploaderID: data.uploader.id,
             }]);
@@ -116,7 +116,7 @@ export function useStartCodeCompassMutation(taskId: number) {
                     uploaderID: data.uploader.id,
                 }], newList);
             }
-            queryClient.setQueryData<StudentFile>(([QUERY_KEY, { id: data.id }]), data);
+            queryClient.setQueryData<Submission>(([QUERY_KEY, { id: data.id }]), data);
         },
     });
 }
@@ -124,14 +124,14 @@ export function useStartCodeCompassMutation(taskId: number) {
 export function useStopCodeCompassMutation(taskId: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((file: StudentFile) => StudentFilesService.stopCodeCompass(file), {
+    return useMutation((file: Submission) => SubmissionsService.stopCodeCompass(file), {
         onSuccess: async (data) => {
-            const forTask = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, { taskID: taskId }]);
+            const forTask = queryClient.getQueryData<Submission[]>([QUERY_KEY, { taskID: taskId }]);
             if (forTask) {
                 const newList = forTask.map((file) => (file.id === data.id ? data : file));
                 queryClient.setQueryData([QUERY_KEY, { taskID: data.taskID }], newList);
             }
-            const forUploader = queryClient.getQueryData<StudentFile[]>([QUERY_KEY, {
+            const forUploader = queryClient.getQueryData<Submission[]>([QUERY_KEY, {
                 groupID: data.groupID,
                 uploaderID: data.uploader.id,
             }]);
@@ -142,7 +142,7 @@ export function useStopCodeCompassMutation(taskId: number) {
                     uploaderID: data.uploader.id,
                 }], newList);
             }
-            queryClient.setQueryData<StudentFile>(([QUERY_KEY, { id: data.id }]), data);
+            queryClient.setQueryData<Submission>(([QUERY_KEY, { id: data.id }]), data);
         },
     });
 }
@@ -150,7 +150,7 @@ export function useStopCodeCompassMutation(taskId: number) {
 export function useAutoTestResults(id: number, enabled: boolean = true) {
     return useQuery(
         [QUERY_KEY, 'auto-tester-results', { id }],
-        () => StudentFilesService.autoTesterResults(id),
+        () => SubmissionsService.autoTesterResults(id),
         { enabled },
     );
 }

@@ -18,7 +18,7 @@ import { SideBarLayout } from 'layouts/SideBarLayout';
 import { CanvasOAuth2 } from 'pages/InstructorTaskManager/containers/CanvasOAuth2';
 import { GroupPage } from 'pages/InstructorTaskManager/containers/Groups/GroupPage';
 import { NewGroup } from 'pages/InstructorTaskManager/containers/Groups/NewGroup';
-import { StudentFilePage } from 'pages/InstructorTaskManager/containers/StudentFiles/StudentFilePage';
+import { SubmissionPage } from 'pages/InstructorTaskManager/containers/Submissions/SubmissionPage';
 import { StudentDetailsPage } from 'pages/InstructorTaskManager/containers/Students/StudentDetailsPage';
 import { NewTaskPage } from 'pages/InstructorTaskManager/containers/Tasks/NewTaskPage';
 import { TaskDetailsPage } from 'pages/InstructorTaskManager/containers/Tasks/TaskDetailsPage';
@@ -165,8 +165,8 @@ export function InstructorTaskManager() {
                     <Route path={`${url}/tasks/:id`}>
                         <TaskDetailsPage />
                     </Route>
-                    <Route path={`${url}/student-files/:id`}>
-                        <StudentFilePage />
+                    <Route path={`${url}/submissions/:id`}>
+                        <SubmissionPage />
                     </Route>
                     <Route path={`${url}/code-viewer/:id`}>
                         <StudentCodeViewerPage />

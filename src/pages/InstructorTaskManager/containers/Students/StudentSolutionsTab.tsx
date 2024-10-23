@@ -5,19 +5,19 @@ import { Group } from 'resources/instructor/Group';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { StudentFilesList } from 'pages/InstructorTaskManager/containers/StudentFiles/StudentFilesList';
+import { SubmissionsList } from 'pages/InstructorTaskManager/containers/Submissions/SubmissionsList';
 import { DataRow } from 'components/DataRow';
-import { useStudentFilesForStudent } from 'hooks/instructor/StudentFileHooks';
+import { useSubmissionsForStudent } from 'hooks/instructor/SubmissionHooks';
 import { User } from 'resources/common/User';
 import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { StudentFile } from 'resources/instructor/StudentFile';
+import { Submission } from 'resources/instructor/Submission';
 
 type Props = {
     group: Group;
     user: User;
-    handleStartCodeCompass: (f: StudentFile) => void;
-    handleStopCodeCompass: (f: StudentFile) => void;
+    handleStartCodeCompass: (f: Submission) => void;
+    handleStopCodeCompass: (f: Submission) => void;
 }
 
 /**
@@ -35,9 +35,9 @@ export function StudentSolutionsTab({
     handleStopCodeCompass,
 }: Props) {
     const { t } = useTranslation();
-    const studentFiles = useStudentFilesForStudent(group.id, user.id);
+    const submissions = useSubmissionsForStudent(group.id, user.id);
 
-    if (!studentFiles.data) {
+    if (!submissions.data) {
         return null;
     }
 
@@ -47,9 +47,9 @@ export function StudentSolutionsTab({
                 <CustomCardTitle>{t('task.solutions')}</CustomCardTitle>
 
             </CustomCardHeader>
-            <StudentFilesList
+            <SubmissionsList
                 semesterID={group.semesterID}
-                files={studentFiles.data}
+                files={submissions.data}
                 handleStartCodeCompass={handleStartCodeCompass}
                 handleStopCodeCompass={handleStopCodeCompass}
                 renderItem={(file) => (
@@ -61,7 +61,7 @@ export function StudentSolutionsTab({
                         <DataRow label={t('task.delay')}>
                             {file.delay}
                         </DataRow>
-                        <DataRow label={t('task.status')}>{file.translatedIsAccepted}</DataRow>
+                        <DataRow label={t('task.status')}>{file.translatedStatus}</DataRow>
                         <DataRow label={t('passwordProtected.verified')}>
                             {file.verified ? t('common.yes') : t('common.no')}
                         </DataRow>

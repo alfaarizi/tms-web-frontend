@@ -7,14 +7,14 @@ import { useHistory } from 'react-router';
 import {
     useStartCodeCompassMutation,
     useStopCodeCompassMutation,
-    useStudentFilesForStudent,
-} from 'hooks/instructor/StudentFileHooks';
+    useSubmissionsForStudent,
+} from 'hooks/instructor/SubmissionHooks';
 import { useGroup, useGroupStudents } from 'hooks/instructor/GroupHooks';
 import { StudentSolutionsTab } from 'pages/InstructorTaskManager/containers/Students/StudentSolutionsTab';
 import { StudentStatsTab } from 'pages/InstructorTaskManager/containers/Students/StudentStatsTab';
 import { UserSwitcher } from 'components/UserSwticher';
 import { TabbedInterface } from 'components/TabbedInterface';
-import { StudentFile } from 'resources/instructor/StudentFile';
+import { Submission } from 'resources/instructor/Submission';
 
 type Params = {
     groupID: string;
@@ -29,7 +29,7 @@ export function StudentDetailsPage() {
     const groupID = parseInt(params.groupID || '-1', 10);
     const selectedUserID = parseInt(params.userID || '-1', 10);
 
-    const studentFiles = useStudentFilesForStudent(groupID, selectedUserID);
+    const submissions = useSubmissionsForStudent(groupID, selectedUserID);
     const students = useGroupStudents(groupID);
     const group = useGroup(groupID);
     const selectedUser = students.data?.find((u) => u.id === selectedUserID);
@@ -40,9 +40,9 @@ export function StudentDetailsPage() {
         history.push(`./${userID}`);
     };
 
-    const handleStartCodeCompass = async (file: StudentFile) => {
+    const handleStartCodeCompass = async (file: Submission) => {
         try {
-            const data: StudentFile = await startCodeCompass.mutateAsync(file);
+            const data: Submission = await startCodeCompass.mutateAsync(file);
             if (data.codeCompass?.port) {
                 window.open(`http://${window.location.hostname}:${data.codeCompass.port}/`, '_blank');
             }
@@ -51,7 +51,7 @@ export function StudentDetailsPage() {
         }
     };
 
-    const handleStopCodeCompass = async (file: StudentFile) => {
+    const handleStopCodeCompass = async (file: Submission) => {
         try {
             await stopCodeCompass.mutateAsync(file);
         } catch (e) {
@@ -59,7 +59,7 @@ export function StudentDetailsPage() {
         }
     };
 
-    if (!studentFiles.data || !students.data || !selectedUser || !group.data) {
+    if (!submissions.data || !students.data || !selectedUser || !group.data) {
         return null;
     }
 

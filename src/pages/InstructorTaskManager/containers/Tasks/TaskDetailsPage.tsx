@@ -7,17 +7,17 @@ import { useRemoveTaskMutation, useTask, useUpdateTaskMutation } from 'hooks/ins
 import { Task } from 'resources/instructor/Task';
 import { useTranslation } from 'react-i18next';
 import { TaskForm } from 'pages/InstructorTaskManager/components/Tasks/TaskForm';
-import { InstructorFilesTab } from 'pages/InstructorTaskManager/containers/Tasks/InstructorFilesTab';
-import { StudentFilesListTab } from 'pages/InstructorTaskManager/containers/Tasks/StudentFilesListTab';
+import { TaskFilesTab } from 'pages/InstructorTaskManager/containers/Tasks/TaskFilesTab';
+import { SubmissionsListTab } from 'pages/InstructorTaskManager/containers/Tasks/SubmissionsListTab';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { useShow } from 'ui-hooks/useShow';
 import { TabbedInterface } from 'components/TabbedInterface';
 import { EvaluatorTab } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/EvaluatorTab';
 import { TaskDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskDetails';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { StudentFile } from 'resources/instructor/StudentFile';
+import { Submission } from 'resources/instructor/Submission';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
-import { useStartCodeCompassMutation, useStopCodeCompassMutation } from 'hooks/instructor/StudentFileHooks';
+import { useStartCodeCompassMutation, useStopCodeCompassMutation } from 'hooks/instructor/SubmissionHooks';
 import { CodeCompassTab } from './CodeCompassTab';
 
 type Params = {
@@ -71,9 +71,9 @@ export const TaskDetailsPage = () => {
         }
     };
 
-    const handleStartCodeCompass = async (file: StudentFile) => {
+    const handleStartCodeCompass = async (file: Submission) => {
         try {
-            const data: StudentFile = await startCodeCompassMutation.mutateAsync(file);
+            const data: Submission = await startCodeCompassMutation.mutateAsync(file);
             if (data.codeCompass?.port) {
                 window.open(`http://${window.location.hostname}:${data.codeCompass.port}/#`, '_blank');
             }
@@ -82,7 +82,7 @@ export const TaskDetailsPage = () => {
         }
     };
 
-    const handleStopCodeCompass = async (file: StudentFile) => {
+    const handleStopCodeCompass = async (file: Submission) => {
         try {
             await stopCodeCompassMutation.mutateAsync(file);
         } catch (e) {
@@ -116,14 +116,14 @@ export const TaskDetailsPage = () => {
 
             <TabbedInterface defaultActiveKey="solutions" id="group-tabs">
                 <Tab eventKey="solutions" title={t('task.solutions')}>
-                    <StudentFilesListTab
+                    <SubmissionsListTab
                         task={task.data}
                         handleStartCodeCompass={handleStartCodeCompass}
                         handleStopCodeCompass={handleStopCodeCompass}
                     />
                 </Tab>
-                <Tab eventKey="instructorFiles" title={t('task.instructorFiles')}>
-                    <InstructorFilesTab task={task.data} />
+                <Tab eventKey="taskFiles" title={t('task.taskFiles')}>
+                    <TaskFilesTab task={task.data} />
                 </Tab>
                 {!!privateSystemInfo.data && privateSystemInfo.data.isAutoTestEnabled
                     ? (

@@ -7,7 +7,7 @@ import { AutoTesterResult } from 'resources/common/AutoTesterResult';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 
 type Props = {
-    isAccepted: string | null | undefined,
+    status: string | null | undefined,
     errorMsg: string | null | undefined,
     onClose?: () => void,
     appType: string,
@@ -16,7 +16,7 @@ type Props = {
 }
 
 export function AutoTestResultAlert({
-    isAccepted,
+    status,
     errorMsg,
     results,
     onClose,
@@ -26,11 +26,11 @@ export function AutoTestResultAlert({
     const { t } = useTranslation();
 
     let variant: string;
-    if (isAccepted === 'Passed') {
+    if (status === 'Passed') {
         variant = 'success';
-    } else if (isAccepted === 'Failed') {
+    } else if (status === 'Failed') {
         variant = 'danger';
-    } else if (isAccepted === 'Uploaded') {
+    } else if (status === 'Uploaded') {
         variant = 'primary';
     } else {
         variant = 'secondary';
@@ -45,12 +45,12 @@ export function AutoTestResultAlert({
         >
             <h6>{t('task.evaluator.results')}</h6>
             <hr />
-            {isAccepted === 'Uploaded' ? t('task.evaluator.notTested') : null}
+            {status === 'Uploaded' ? t('task.evaluator.notTested') : null}
 
-            {isAccepted !== 'Uploaded' && (!results || results.length === 0)
+            {status !== 'Uploaded' && (!results || results.length === 0)
                 ? <pre className="bg-light p-2 mt-2">{errorMsg}</pre> : null}
 
-            {isAccepted !== 'Uploaded' && !!results && results.length > 0
+            {status !== 'Uploaded' && !!results && results.length > 0
                 ? (
                     <Table className="bg-light">
                         {results.map((result) => (
@@ -74,7 +74,7 @@ export function AutoTestResultAlert({
                 )
                 : null}
 
-            {isAccepted !== 'Uploaded' && appType === 'Web'
+            {status !== 'Uploaded' && appType === 'Web'
                 && (
                     <ToolbarButton
                         icon={faDownload}

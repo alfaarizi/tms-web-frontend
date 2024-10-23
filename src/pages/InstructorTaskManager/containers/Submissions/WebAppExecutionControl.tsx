@@ -21,14 +21,14 @@ import {
     useWebAppExecution,
 } from 'hooks/instructor/WebAppExecutionHook';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
-import { StudentFile } from 'resources/instructor/StudentFile';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
 import { getFirstError } from 'utils/getFirstError';
 import { WebAppExecution } from 'resources/instructor/WebAppExecution';
+import { Submission } from 'resources/instructor/Submission';
 
 type Props = {
-    file: StudentFile,
+    file: Submission,
 }
 
 export function WebAppExecutionControl({
