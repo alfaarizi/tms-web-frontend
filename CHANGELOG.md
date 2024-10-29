@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.2.1...v4.3.0) (2024-10-29)
+
+
+### Features
+
+* Rename all Neptun code occurrences to User code ([62c2c83](https://gitlab.com/tms-elte/frontend-react/commit/62c2c83e623057f85b25b645a8f81979265f4317))
+* set the default submission view based on the screen size ([8f3d79f](https://gitlab.com/tms-elte/frontend-react/commit/8f3d79fdb96b9eb65643c44d7bce2da9b8b3032c))
+* System statistics administrative interface  ([a14cf47](https://gitlab.com/tms-elte/frontend-react/commit/a14cf47423acfc0e066628b3c36950be1ec9c947))
+
+
+### Bug Fixes
+
+* admins should be able to add instructors to group ([d9a48a1](https://gitlab.com/tms-elte/frontend-react/commit/d9a48a1d3ad0d32e85afa08577a24e86d1901f34))
+* Web application tester default run time can be out of valid interval ([2373110](https://gitlab.com/tms-elte/frontend-react/commit/23731103352b44992b862991d1b866f1fbd23452))
+
 ### [4.2.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.2.0...v4.2.1) (2024-10-08)
 
 
