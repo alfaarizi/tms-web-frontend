@@ -8,13 +8,13 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 * Rename all Neptun code occurrences to User code ([62c2c83](https://gitlab.com/tms-elte/frontend-react/commit/62c2c83e623057f85b25b645a8f81979265f4317))
-* set the default submission view based on the screen size ([8f3d79f](https://gitlab.com/tms-elte/frontend-react/commit/8f3d79fdb96b9eb65643c44d7bce2da9b8b3032c))
+* Set the default submission view based on the screen size ([8f3d79f](https://gitlab.com/tms-elte/frontend-react/commit/8f3d79fdb96b9eb65643c44d7bce2da9b8b3032c))
 * System statistics administrative interface  ([a14cf47](https://gitlab.com/tms-elte/frontend-react/commit/a14cf47423acfc0e066628b3c36950be1ec9c947))
 
 
 ### Bug Fixes
 
-* admins should be able to add instructors to group ([d9a48a1](https://gitlab.com/tms-elte/frontend-react/commit/d9a48a1d3ad0d32e85afa08577a24e86d1901f34))
+* Admins should be able to add instructors to group ([d9a48a1](https://gitlab.com/tms-elte/frontend-react/commit/d9a48a1d3ad0d32e85afa08577a24e86d1901f34))
 * Web application tester default run time can be out of valid interval ([2373110](https://gitlab.com/tms-elte/frontend-react/commit/23731103352b44992b862991d1b866f1fbd23452))
 
 ### [4.2.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.2.0...v4.2.1) (2024-10-08)
@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* downgrading remark-gfm to v3, as v4 is not working correctly. ([8a5360d](https://gitlab.com/tms-elte/frontend-react/commit/8a5360dfef14a680af744aedf0c202d225d03ed4))
+* Downgrading remark-gfm to v3, as v4 is not working correctly ([8a5360d](https://gitlab.com/tms-elte/frontend-react/commit/8a5360dfef14a680af744aedf0c202d225d03ed4))
 * Improved regex validation of Neptun codes ([1606bd7](https://gitlab.com/tms-elte/frontend-react/commit/1606bd70398e988941566e7c1d2324f0c3f671db))
 
 ## [4.2.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.1.0...v4.2.0) (2024-10-07)
@@ -39,7 +39,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* Added Frontend and Backend version to About page. ([709efe2](https://gitlab.com/tms-elte/frontend-react/commit/709efe21f910268c1ae57e80c18a2b1034eaf40f))
+* Added Frontend and Backend version to About page ([709efe2](https://gitlab.com/tms-elte/frontend-react/commit/709efe21f910268c1ae57e80c18a2b1034eaf40f))
 * Support LaTeX formulas in markdown descriptions ([f12c74c](https://gitlab.com/tms-elte/frontend-react/commit/f12c74c739ac6a459639e0f265aad1c2d888eade))
 
 ### [4.0.2](https://gitlab.com/tms-elte/frontend-react/compare/v4.0.1...v4.0.2) (2024-06-21)
