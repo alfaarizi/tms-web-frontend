@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { AddUserCard } from 'components/UserListCard/AddUserCard';
+import { AddUserCard } from 'components/AddUsers/AddUserCard';
 import { UserListCard } from 'components/UserListCard/UserListCard';
 import {
     useAddLecturerMutation,

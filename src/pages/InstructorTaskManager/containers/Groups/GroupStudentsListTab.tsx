@@ -6,7 +6,7 @@ import { useRouteMatch } from 'react-router';
 
 import { useDeleteStudentMutation, useAddStudentsMutation, useGroupStudents } from 'hooks/instructor/GroupHooks';
 
-import { AddUserCard } from 'components/UserListCard/AddUserCard';
+import { AddUserCard } from 'components/AddUsers/AddUserCard';
 import { UserListCard } from 'components/UserListCard/UserListCard';
 import { Group } from 'resources/instructor/Group';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
@@ -56,6 +56,7 @@ export function GroupStudentsListTab({ group }: Props) {
             {actualSemester.check(group.semesterID) && !group.isCanvasCourse
                 ? (
                     <AddUserCard
+                        allowNew
                         id="add-students"
                         title={t('group.addStudents')}
                         onAdd={handleAdd}
