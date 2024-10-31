@@ -6,7 +6,7 @@ import {
     useDeleteInstructorMutation,
     useGroupInstructors,
 } from 'hooks/instructor/GroupHooks';
-import { AddUserCard } from 'components/UserListCard/AddUserCard';
+import { AddUserCard } from 'components/AddUsers/AddUserCard';
 import { UserListCard } from 'components/UserListCard/UserListCard';
 import { Group } from 'resources/instructor/Group';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
