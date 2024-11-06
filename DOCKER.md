@@ -36,9 +36,21 @@ docker run \
 Make sure the image name `tms-frontend` is correctly included in both the `docker build` and `docker run` commands to ensure clarity and prevent errors.
 
 
+### Environment variables
+
+The runtime configurable environment variables mentioned in the [README](README.md#variables) are configurable without rebuilding the docker image.
+
+| Name                                    | Description                                                                                               |
+|:----------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| `REACT_APP_API_BASEURL`                 | TMS API baseurl.                                                                                          |
+| `REACT_APP_LOGIN_METHOD`                | Set login method. Possible values: `LDAP`, `MOCK`                                                         |
+| `REACT_APP_THEME`                       | UI theme.  Possible values: `dark`, `blue`.                                                               |
+| `REACT_APP_GOOGLE_ANALYTICS_ID`         | Google Analytics (GA4) tracking ID for website monitoring. If empty or undefined, tracking is disabled.   |
+
+
 ### Execute commands in the container
 
-E.g. to change Runtime configurable variables
+E.g. to change Runtime configurable variables:
 ```bash
 docker exec tms-frontend-container npx react-inject-env set
 ```
