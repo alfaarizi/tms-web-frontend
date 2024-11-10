@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.3.0...v4.4.0) (2024-11-10)
+
+
+### Features
+
+* Assigning a lecturer is mandatory when creating a new course ([24caad0](https://gitlab.com/tms-elte/frontend-react/commit/24caad075c76588213f2fcc5d25563243bc9de1c))
+* Create Docker image for frontend ([fc4f71c](https://gitlab.com/tms-elte/frontend-react/commit/fc4f71c19bc0396d614b2e2c664b01c3c4c625a7))
+
 ## [4.3.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.2.1...v4.3.0) (2024-10-29)
 
 
