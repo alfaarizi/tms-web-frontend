@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -44,6 +44,15 @@ export const TaskPage = () => {
     const downloadTestReport = useDownloadTestReport();
     const canvasSyncSubmissionMutation = useCanvasSyncSubmissionMutation(taskIDInt);
     const zipCreator = useSolutionZipFileCreator();
+    const [isSubmissionLimitReached, setSubmissionLimitReached] = useState(true);
+
+    useEffect(() => {
+        setSubmissionLimitReached(
+            task.data !== undefined
+            && task.data.isSubmissionCountRestricted
+            && task.data.submissions[0].uploadCount >= task.data.submissionLimit,
+        );
+    }, [task]);
 
     if (!task.data) {
         return null;
@@ -89,6 +98,9 @@ export const TaskPage = () => {
                 file: computedFiles,
             };
             await uploadMutation.mutateAsync(data);
+            setSubmissionLimitReached(
+                task.data.isSubmissionCountRestricted && submission.uploadCount <= task.data.submissionLimit,
+            );
             setUploadErrorMsg(null);
         } catch (e) {
             if (e instanceof ServerSideValidationError) {
@@ -111,8 +123,9 @@ export const TaskPage = () => {
     };
 
     let uploadCard;
-    if ((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && submission.status !== 'Accepted')
-        || submission.status === 'Late Submission') {
+    if (((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && submission.status !== 'Accepted')
+        || submission.status === 'Late Submission')
+        && !isSubmissionLimitReached) {
         if (task.data.canvasUrl) {
             uploadCard = <CanvasUploadInfo />;
         } else {
@@ -137,6 +150,7 @@ export const TaskPage = () => {
         <>
             <TaskDetails
                 task={task.data}
+                submission={submission}
                 canvasSyncInProgress={canvasSyncSubmissionMutation.isLoading}
                 onCanvasSync={handleCanvasSync}
             />

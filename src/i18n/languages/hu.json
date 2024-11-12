@@ -274,6 +274,11 @@
       "classworkTasks": "Órai munkák",
       "exams": "Vizsga feladatok"
     },
+    "restrictSubmissionAttempts": {
+      "maxAttempts": "Maximum beküldési próbálkozások száma",
+      "unlimited": "Korlátlan",
+      "remaining": "Maradék beküldési próbálkozások száma"
+    },
     "deadlineStatus": {
       "notAvailable": "Nem elérhető",
       "softDeadlineExpired": "A pótolható határidő lejárt",

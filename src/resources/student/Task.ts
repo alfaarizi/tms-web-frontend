@@ -22,4 +22,6 @@ export interface Task {
     passwordProtected: boolean;
     canvasUrl?: string;
     appType?: string;
+    isSubmissionCountRestricted: boolean;
+    submissionLimit: number;
 }
