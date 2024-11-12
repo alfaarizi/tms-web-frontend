@@ -30,6 +30,24 @@ type TreeNode = {
     isBranch?: boolean
 };
 
+function sortTree(root: TreeNode): TreeNode {
+    // Folders come first, then files
+    root.children.sort((a, b) => {
+        if (a.isBranch === b.isBranch) {
+            return 0;
+        }
+        if (a.isBranch) {
+            return -1;
+        }
+        return 1;
+    });
+    // Sort recursively (where might be needed)
+    root.children
+        .filter((c) => c.children.length > 1)
+        .forEach((c) => sortTree(c));
+    return root;
+}
+
 export function StudentCodeViewerPage() {
     const { t } = useTranslation();
     const params = useParams<Params>();
@@ -91,7 +109,7 @@ export function StudentCodeViewerPage() {
                 currentPart = child;
             });
         });
-        setTreeData(flattenTree(root));
+        setTreeData(flattenTree(sortTree(root)));
     }, [jsZip]);
 
     useEffect(() => {
