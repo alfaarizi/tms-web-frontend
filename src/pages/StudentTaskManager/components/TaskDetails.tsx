@@ -11,15 +11,18 @@ import { LocaleDateTime } from 'components/LocaleDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { Submission } from 'resources/student/Submission';
 
 type Props = {
     task: Task,
+    submission: Submission,
     canvasSyncInProgress: boolean,
     onCanvasSync: () => void,
 }
 
 export const TaskDetails = ({
     task,
+    submission,
     canvasSyncInProgress,
     onCanvasSync,
 }: Props) => {
@@ -43,7 +46,9 @@ export const TaskDetails = ({
             <DataRow label={t('task.category')}>{task.translatedCategory}</DataRow>
             {task.canvasUrl ? (
                 <DataRow label={t('task.canvasAssignment')}>
-                    <a href={task.canvasUrl} target="_blank" rel="noreferrer">{task.canvasUrl}</a>
+                    <a href={task.canvasUrl} target="_blank" rel="noreferrer">
+                        {task.canvasUrl}
+                    </a>
                 </DataRow>
             ) : null}
             <DataRow label={t('task.available')}>
@@ -55,6 +60,18 @@ export const TaskDetails = ({
             <DataRow label={t('task.hardDeadLine')}>
                 <LocaleDateTime value={task.hardDeadline} />
             </DataRow>
+            <DataRow label={t('task.restrictSubmissionAttempts.maxAttempts')}>
+                {task.isSubmissionCountRestricted
+                    ? task.submissionLimit
+                    : t('task.restrictSubmissionAttempts.unlimited')}
+            </DataRow>
+            {task.isSubmissionCountRestricted ? (
+                <DataRow label={t('task.restrictSubmissionAttempts.remaining')}>
+                    {task.submissionLimit - submission.uploadCount > 0
+                        ? task.submissionLimit - submission.uploadCount
+                        : 0}
+                </DataRow>
+            ) : null}
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
             <hr />
             <DataRow label={t('task.description')}>

@@ -62,6 +62,11 @@ export const TaskDetails = ({
             <DataRow label={t('task.hardDeadLine')}>
                 <GroupDateTime value={task.hardDeadline} timezone={task.group?.timezone || ''} />
             </DataRow>
+            <DataRow label={t('task.restrictSubmissionAttempts.maxAttempts')}>
+                {task.isSubmissionCountRestricted
+                    ? task.submissionLimit
+                    : t('task.restrictSubmissionAttempts.unlimited')}
+            </DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
             <DataRow label={t('passwordProtected.passwordProtected')}>
                 {(!task.password || task.password.length === 0) ? t('common.no') : (

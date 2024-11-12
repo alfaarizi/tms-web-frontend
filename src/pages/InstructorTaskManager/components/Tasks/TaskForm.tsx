@@ -49,6 +49,7 @@ export function TaskForm({
     } = useForm<Task>({
         defaultValues: editData,
     });
+
     useServersideFormErrors<Task>(clearErrors, setError, serverSideError);
 
     const onSubmit = handleSubmit((data) => {
@@ -143,6 +144,26 @@ export function TaskForm({
                         control={control}
                     />
                     {errors.hardDeadline && <FormError message={errors.hardDeadline.message} />}
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('task.restrictSubmissionAttempts.maxAttempts')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        type="number"
+                        size="sm"
+                        defaultValue={0}
+                        {...register('submissionLimit', {
+                            min: {
+                                value: 0,
+                                message: t('common.minValueRequired', { value: 0 }).toString(),
+                            },
+                            required: t('common.fieldRequired').toString(),
+                        })}
+                    />
+                    {errors.submissionLimit && <FormError message={errors.submissionLimit.message} />}
                 </Form.Group>
 
                 <Form.Group>

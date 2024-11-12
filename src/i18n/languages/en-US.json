@@ -273,6 +273,11 @@
       "classworkTasks": "Classwork Tasks",
       "exams": "Exams"
     },
+    "restrictSubmissionAttempts": {
+      "maxAttempts": "Maximum number of submission attempts",
+      "unlimited": "Unlimited",
+      "remaining": "Remaining number of submission attempts"
+    },
     "deadlineStatus": {
       "notAvailable": "Not available",
       "softDeadlineExpired": "Soft deadline expired",

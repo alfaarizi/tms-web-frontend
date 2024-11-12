@@ -35,4 +35,6 @@ export interface Task {
     codeCheckerToggles?: string;
     codeCheckerSkipFile?: string;
     taskLevelGitRepo?: string;
+    isSubmissionCountRestricted: boolean;
+    submissionLimit: number;
 }
