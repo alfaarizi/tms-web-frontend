@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.4.0...v4.5.0) (2024-11-19)
+
+
+### Features
+
+* Added configuration for restrictable number of submission attempts ([55182d3](https://gitlab.com/tms-elte/frontend-react/commit/55182d39acb630060e4f93f085c78cd952c08be9))
+* Show directories before files in code browser ([6f115d7](https://gitlab.com/tms-elte/frontend-react/commit/6f115d7e7165b5fc1f22399e51927ac0bb842acd))
+
 ## [4.4.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.3.0...v4.4.0) (2024-11-10)
 
 
