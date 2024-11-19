@@ -164,6 +164,7 @@ export function TaskForm({
                         })}
                     />
                     {errors.submissionLimit && <FormError message={errors.submissionLimit.message} />}
+                    <Form.Text className="text-muted">{t('task.submissionLimitHelp')}</Form.Text>
                 </Form.Group>
 
                 <Form.Group>

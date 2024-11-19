@@ -263,6 +263,7 @@
     "graderName": "Grader",
     "newSolution": "Upload new solution",
     "solutions": "Solutions",
+	"submissionLimitHelp": "Zero (0) means unlimited attempts.",
     "passwordProtectedHelp": "For password-protected tasks the solutions must be verified after uploading. Leave the password field blank to turn off password protection. Important: after removing the password all solutions will be verified!",
     "passwordProtectedGitPush": "For password-protected tasks the 'git push' command is disabled.",
     "isVersionControlled": "Version controlled",

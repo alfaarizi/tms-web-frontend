@@ -264,6 +264,7 @@
     "graderName": "Értékelte",
     "newSolution": "Új megoldás feltöltése",
     "solutions": "Megoldások",
+	"submissionLimitHelp": "A nulla (0) korlátlan számú feltöltést jelent.",
     "passwordProtectedHelp": "A jelszóvédett feladatok esetében a hitelesíteni kell a  megoldásokat a feltöltést követően. A védelem kikapcsolásához hagyja üresen a jelszó mezőt. Fontos: a jelszó eltávolítását követően az összes megoldás hitelesítve lesz!",
     "passwordProtectedGitPush": "A jelszóvédett feladatok esetében a 'git push' nem használható.",
     "isVersionControlled": "Verziókezelt",
