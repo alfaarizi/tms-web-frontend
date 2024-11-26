@@ -7,6 +7,7 @@ import { Submission } from 'resources/student/Submission';
 import { SubmissionUpload } from 'resources/student/SubmissionUpload';
 import { useDownloader } from 'hooks/common/useDownloader';
 import { VerifyItem } from 'resources/student/VerifyItem';
+import { UnlockItem } from 'resources/student/UnlockItem';
 
 export const QUERY_KEY = 'student/tasks';
 
@@ -39,6 +40,20 @@ export function useUploadSubmissionMutation() {
                         submissions: [submission],
                     });
                 }
+            },
+        },
+    );
+}
+
+export function useUnlockTaskMutation(taskId: number) {
+    const queryClient = useQueryClient();
+
+    return useMutation<Task, Error, UnlockItem>(
+        (data) => TasksService.unlock(taskId, data),
+        {
+            onSuccess: async (task) => {
+                const taskKey = [QUERY_KEY, { taskID: task.id }];
+                await queryClient.invalidateQueries(taskKey);
             },
         },
     );

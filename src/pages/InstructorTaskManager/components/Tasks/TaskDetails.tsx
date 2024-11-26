@@ -69,13 +69,13 @@ export const TaskDetails = ({
             </DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
             <DataRow label={t('passwordProtected.passwordProtected')}>
-                {(!task.password || task.password.length === 0) ? t('common.no') : (
+                {(!task.entryPassword || task.entryPassword.length === 0) ? t('common.no') : (
                     <>
                         {t('common.yes')}
                         <IconTooltip
                             tooltipID={`task-${task.id}-password`}
                             icon={faKey}
-                            text={`${t('login.password')}: ${task.password}`}
+                            text={`${t('login.password')}: ${task.entryPassword}`}
                         />
                     </>
                 )}

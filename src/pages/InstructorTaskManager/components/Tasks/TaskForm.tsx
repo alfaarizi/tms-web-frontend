@@ -174,11 +174,24 @@ export function TaskForm({
                     </Form.Label>
                     <Form.Control
                         type="text"
-                        {...register('password')}
+                        {...register('exitPassword')}
                         size="sm"
                     />
-                    {errors.password && <FormError message={errors.password.message} />}
+                    {errors.exitPassword && <FormError message={errors.exitPassword.message} />}
                     <Form.Text className="text-muted">{t('task.passwordProtectedHelp')}</Form.Text>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('login.entryPassword')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        type="text"
+                        {...register('entryPassword')}
+                        size="sm"
+                    />
+                    {errors.entryPassword && <FormError message={errors.entryPassword.message} />}
                 </Form.Group>
 
                 {showVersionControl

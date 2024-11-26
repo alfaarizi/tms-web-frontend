@@ -19,7 +19,9 @@ export interface Task {
         usage: string
     }
     autoTest: number;
-    passwordProtected: boolean;
+    exitPasswordProtected: boolean;
+    entryPasswordProtected: boolean;
+    entryPasswordUnlocked: boolean;
     canvasUrl?: string;
     appType?: string;
     isSubmissionCountRestricted: boolean;

@@ -8,7 +8,7 @@ import {
     useDownloadTaskFile,
     useDownloadSubmission, useDownloadTestReport,
     useTask,
-    useUploadSubmissionMutation, useVerifySubmissionMutation,
+    useUploadSubmissionMutation, useVerifySubmissionMutation, useUnlockTaskMutation,
 } from 'hooks/student/TaskHooks';
 import { TaskDetails } from 'pages/StudentTaskManager/components/TaskDetails';
 import { SubmissionDetails } from 'pages/StudentTaskManager/components/SubmissionDetails';
@@ -24,6 +24,7 @@ import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUplo
 import { CodeCheckerReportsList } from 'components/CodeChecker/CodeCheckerReportsList';
 import { useCanvasSyncSubmissionMutation } from 'hooks/student/CanvasHooks';
 import { useSolutionZipFileCreator } from 'hooks/student/useSolutionZipFileCreator';
+import { UnlockItem } from 'resources/student/UnlockItem';
 
 type Params = {
     id?: string
@@ -38,9 +39,11 @@ export const TaskPage = () => {
     const downloadSubmission = useDownloadSubmission();
     const downloadTaskFile = useDownloadTaskFile();
     const verifyMutation = useVerifySubmissionMutation();
+    const unlockMutation = useUnlockTaskMutation(taskIDInt);
     const notifications = useNotifications();
     const [uploadErrorMsg, setUploadErrorMsg] = useState<string | null>(null);
     const [verifyError, setVerifyError] = useState<ValidationErrorBody | null>(null);
+    const [unlockError, setUnlockError] = useState<ValidationErrorBody | null>(null);
     const downloadTestReport = useDownloadTestReport();
     const canvasSyncSubmissionMutation = useCanvasSyncSubmissionMutation(taskIDInt);
     const zipCreator = useSolutionZipFileCreator();
@@ -62,6 +65,22 @@ export const TaskPage = () => {
     const handleSubmissionDownload = () => {
         if (submission.name !== undefined) {
             downloadSubmission.download(submission.name, submission.id);
+        }
+    };
+
+    const handleUnlock = async (data: UnlockItem) => {
+        try {
+            await unlockMutation.mutateAsync({ ...data });
+            notifications.push(
+                {
+                    message: t('passwordProtected.unlockSuccess'),
+                    variant: 'success',
+                },
+            );
+        } catch (e) {
+            if (e instanceof ServerSideValidationError) {
+                setUnlockError(e.body);
+            }
         }
     };
 
@@ -125,7 +144,8 @@ export const TaskPage = () => {
     let uploadCard;
     if (((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && submission.status !== 'Accepted')
         || submission.status === 'Late Submission')
-        && !isSubmissionLimitReached) {
+        && !isSubmissionLimitReached
+        && task.data.entryPasswordUnlocked) {
         if (task.data.canvasUrl) {
             uploadCard = <CanvasUploadInfo />;
         } else {
@@ -153,14 +173,32 @@ export const TaskPage = () => {
                 submission={submission}
                 canvasSyncInProgress={canvasSyncSubmissionMutation.isLoading}
                 onCanvasSync={handleCanvasSync}
+                showDescription={task.data.entryPasswordUnlocked ?? true}
             />
 
-            {(!submission.verified)
+            {(!submission.verified && task.data.entryPasswordUnlocked)
             && (
                 <VerifyItemForm
                     onSave={handleVerify}
                     serverSideError={verifyError}
                     isLoading={verifyMutation.isLoading}
+                    cardTitle={t('passwordProtected.verifyRequired')}
+                    cardLabel={t('login.password')}
+                    cardWarning={t('passwordProtected.studentWarning')}
+                    submitButtonLabel={t('passwordProtected.verify')}
+                />
+            )}
+
+            {(!task.data.entryPasswordUnlocked)
+            && (
+                <VerifyItemForm
+                    onSave={handleUnlock}
+                    serverSideError={unlockError}
+                    isLoading={unlockMutation.isLoading}
+                    cardTitle={t('passwordProtected.unlockRequired')}
+                    cardLabel={t('login.entryPassword')}
+                    cardWarning={t('passwordProtected.unlockWarning')}
+                    submitButtonLabel={t('passwordProtected.unlock')}
                 />
             )}
 
@@ -171,7 +209,7 @@ export const TaskPage = () => {
                 <GitInfo
                     path={task.data.gitInfo.path}
                     usage={task.data.gitInfo.usage}
-                    passwordProtected={task.data.passwordProtected}
+                    passwordProtected={task.data.exitPasswordProtected}
                 />
             )}
 
