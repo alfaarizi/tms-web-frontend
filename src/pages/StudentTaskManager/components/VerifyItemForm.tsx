@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import {
     Alert, Form, Button, Spinner,
@@ -17,16 +17,29 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 type Props = {
     onSave: (data: VerifyItem) => void,
     serverSideError: ValidationErrorBody | null,
-    isLoading:boolean
+    isLoading: boolean,
+    cardTitle: string,
+    cardLabel: string,
+    cardWarning: string,
+    submitButtonLabel: string,
+    children?: ReactNode
 };
 
 /**
  * Displays password field for password protected tasks and tests
  * @param onSave
  * @param serverSideError
+ * @param isLoading
+ * @param children
+ * @param cardTitle
+ * @param cardLabel
+ * @param cardWarning
+ * @param submitButtonLabel
  * @constructor
  */
-export function VerifyItemForm({ onSave, serverSideError, isLoading }: Props) {
+export function VerifyItemForm({
+    onSave, serverSideError, isLoading, children, cardTitle, cardLabel, cardWarning, submitButtonLabel,
+}: Props) {
     const { t } = useTranslation();
     const {
         register,
@@ -47,13 +60,13 @@ export function VerifyItemForm({ onSave, serverSideError, isLoading }: Props) {
     return (
         <Alert variant="warning" className="shadow-sm border-warning">
             <CustomCardHeader>
-                <CustomCardTitle>{t('passwordProtected.verifyRequired')}</CustomCardTitle>
+                <CustomCardTitle>{cardTitle}</CustomCardTitle>
             </CustomCardHeader>
-            <p className="text-danger">{t('passwordProtected.studentWarning')}</p>
+            <p className="text-danger">{cardWarning}</p>
             <Form onSubmit={onSubmit}>
                 <Form.Group>
                     <Form.Label>
-                        {t('login.password')}
+                        {cardLabel}
                         :
                     </Form.Label>
                     <Form.Control
@@ -65,20 +78,12 @@ export function VerifyItemForm({ onSave, serverSideError, isLoading }: Props) {
                     {errors.password && <FormError message={errors.password.message} />}
                 </Form.Group>
 
-                <Form.Group>
-                    <Form.Check
-                        type="checkbox"
-                        id="disableIpCheck"
-                        label={t('passwordProtected.verifyDisableIpCheck')}
-                        {...register('disableIpCheck')}
-                    />
-                    {errors.disableIpCheck && <FormError message={errors.disableIpCheck.message} />}
-                </Form.Group>
+                {children}
 
                 <Button variant="primary" size="sm" type="submit" disabled={isLoading}>
                     {isLoading ? <Spinner animation="border" size="sm" /> : <FontAwesomeIcon icon={faLockOpen} />}
                     {' '}
-                    {t('passwordProtected.verify')}
+                    {submitButtonLabel}
                 </Button>
             </Form>
         </Alert>

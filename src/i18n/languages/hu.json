@@ -76,7 +76,11 @@
     "verifySuccess": "Sikeres hitelesítés",
     "verifyDisableIpCheck": "IP-cím ellenőrzés kikapcsolása",
     "verified": "Hitelesített",
-    "studentWarning": "A megoldást hitelesítenie kell az oktatónak, egyébként az érvénytelen lesz!"
+    "studentWarning": "A megoldást hitelesítenie kell az oktatónak, egyébként az érvénytelen lesz!",
+    "unlockSuccess": "Sikeresen feloldva",
+    "unlock": "Feloldás",
+    "unlockRequired": "Feloldás szükséges",
+    "unlockWarning": "A feladat jelszóvédett, add meg a jelszót a feloldáshoz!"
   },
   "fileUpload": {
     "success": "{{count}} fájl feltöltése sikeres",
@@ -118,7 +122,8 @@
   "login": {
     "login": "Bejelentkezés",
     "username": "Felhasználónév",
-    "password": "Jelszó",
+    "password": "Jelszó a beadott megoldások megerősítéséhez",
+    "entryPassword": "A feladat megtekintéséhez szükséges jelszó",
     "ldapHelp": "Bejelentkezés INF-es azonosítóval. (Az ELTE IK számítógépeire bejelentkezéshez használt.)",
     "student": "Hallgatói hozzáférés",
     "instructor": "Oktatói hozzáférés",

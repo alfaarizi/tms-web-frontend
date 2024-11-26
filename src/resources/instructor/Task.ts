@@ -18,7 +18,8 @@ export interface Task {
     testOS: string;
     appType?: 'Console' | 'Web';
     showFullErrorMsg: number;
-    password?: string;
+    entryPassword?: string;
+    exitPassword?: string;
     imageName?: string;
     compileInstructions: string;
     runInstructions?: string;

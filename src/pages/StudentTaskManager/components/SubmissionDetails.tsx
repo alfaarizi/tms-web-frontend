@@ -12,6 +12,7 @@ import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
 import { useAutoTestResults } from 'hooks/student/SubmissionHooks';
+import { useTask } from 'hooks/student/TaskHooks';
 
 type SubmissionDetailsProps = {
     submission: Submission,
@@ -26,6 +27,7 @@ export const SubmissionDetails = ({
 } : SubmissionDetailsProps) => {
     const { t } = useTranslation();
     const autoTesterResults = useAutoTestResults(submission.id);
+    const task = useTask(submission.taskID);
 
     return (
         <CustomCard>
@@ -34,6 +36,7 @@ export const SubmissionDetails = ({
                 {submission.uploadCount > 0
                     ? (
                         <ToolbarButton
+                            disabled={!task?.data?.entryPasswordUnlocked}
                             onClick={onDownload}
                             icon={faDownload}
                             text={t('common.download')}

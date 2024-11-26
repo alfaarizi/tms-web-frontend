@@ -75,7 +75,11 @@
     "verifySuccess": "Successful verification",
     "verifyDisableIpCheck": "Disable IP address check",
     "verified": "Verified",
-    "studentWarning": "The solution must be validated by the instructor, otherwise it will be invalid!"
+    "studentWarning": "The solution must be validated by the instructor, otherwise it will be invalid!",
+    "unlockSuccess": "Successfully unlocked",
+    "unlock": "Unlock",
+    "unlockRequired": "Unlock required",
+    "unlockWarning": "The task is password protected, please provide the password to unlock it!"
   },
   "fileUpload": {
     "success": "{{count}} file(s) uploaded successfully",
@@ -117,7 +121,8 @@
   "login": {
     "login": "Login",
     "username": "Username",
-    "password": "Password",
+    "password": "Password required to verify a submission",
+    "entryPassword": "Password required to view a task",
     "ldapHelp": "You can log in with your INF.ELTE.HU account. (The one used to login on ELTE FI faculty computers.)",
     "student": "Student access",
     "instructor": "Instructor access",

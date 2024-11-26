@@ -18,6 +18,7 @@ type Props = {
     submission: Submission,
     canvasSyncInProgress: boolean,
     onCanvasSync: () => void,
+    showDescription: boolean
 }
 
 export const TaskDetails = ({
@@ -25,6 +26,7 @@ export const TaskDetails = ({
     submission,
     canvasSyncInProgress,
     onCanvasSync,
+    showDescription,
 }: Props) => {
     const { t } = useTranslation();
 
@@ -74,11 +76,14 @@ export const TaskDetails = ({
             ) : null}
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
             <hr />
-            <DataRow label={t('task.description')}>
-                {task.category === 'Canvas tasks'
-                    ? <MultiLineTextBlock text={task.description} />
-                    : <MarkdownRenderer source={task.description} />}
-            </DataRow>
+            {(showDescription)
+                && (
+                    <DataRow label={t('task.description')}>
+                        {task.category === 'Canvas tasks'
+                            ? <MultiLineTextBlock text={task.description} />
+                            : <MarkdownRenderer source={task.description} />}
+                    </DataRow>
+                )}
         </CustomCard>
     );
 };
