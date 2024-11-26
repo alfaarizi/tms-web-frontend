@@ -11,6 +11,7 @@ import { Breakpoint } from 'components/Buttons/ResponsiveButtonText';
 type Props = {
     displayTextBreakpoint?: Breakpoint,
     onDelete: () => void,
+    itemName?: string,
     isLoading?: boolean,
     disabled?: boolean,
 }
@@ -21,13 +22,15 @@ type Props = {
  * @param onDelete A callback function to execute after delete confirmation
  * @param className Custom className applied to the Bootstrap Button component
  * @param displayTextBreakpoint The first viewport size where the button text is visible
+ * @param itemName Name of the file, which will be mentioned in the dialogue
  * @param isLoading Show a spinner instead of the icon
  * @param disabled Disable button
  * @constructor
  */
 export function DeleteToolbarButton({
-    onDelete,
     displayTextBreakpoint,
+    onDelete,
+    itemName,
     isLoading,
     disabled,
 }: Props) {
@@ -53,7 +56,9 @@ export function DeleteToolbarButton({
                 <Modal.Header closeButton>
                     <Modal.Title>{t('common.confirmation')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{t('common.confirmDelete')}</Modal.Body>
+                <Modal.Body>
+                    { itemName ? t('common.confirmDeleteItem', { itemName }) : t('common.confirmDelete')}
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" size="sm" onClick={handleConfirm}>
                         <FontAwesomeIcon icon={faTrash} />

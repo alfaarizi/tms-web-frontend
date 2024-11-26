@@ -15,6 +15,7 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "confirmDelete": "Are you sure you want to delete the selected item?",
+    "confirmDeleteItem": "Are you sure you want to delete {{itemName}}?",
     "duplicate": "Duplicate",
     "edit": "Edit",
     "options": "Options",
