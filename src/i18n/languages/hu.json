@@ -15,6 +15,7 @@
     "cancel": "Mégsem",
     "delete": "Törlés",
     "confirmDelete": "Valóban törölni szeretné a kiválasztott elemet?",
+    "confirmDeleteItem": "Valóban törölni szeretné a(z) {{itemNme}}-t?",
     "duplicate": "Duplikálás",
     "edit": "Szerkesztés",
     "options": "Opciók",

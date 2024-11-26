@@ -40,7 +40,9 @@ export function FileListItem({
                         icon={faDownload}
                         onClick={onDownload}
                     />
-                    {onRemove ? <DeleteToolbarButton displayTextBreakpoint="none" onDelete={onRemove} /> : null}
+                    {onRemove
+                        ? <DeleteToolbarButton displayTextBreakpoint="none" onDelete={onRemove} itemName={name} />
+                        : null}
                 </ButtonGroup>
             </div>
         </ListCardItem>
