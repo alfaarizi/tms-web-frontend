@@ -70,7 +70,7 @@ export function GroupStudentsListTab({ group }: Props) {
                 : null}
 
             <UserListCard
-                title={t('common.students')}
+                title={`${t('common.students')} (${students.data.length})`}
                 users={students.data}
                 renderUserButtons={(user) => (
                     <>
