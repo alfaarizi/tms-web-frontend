@@ -183,7 +183,7 @@ export const TaskPage = () => {
                     serverSideError={verifyError}
                     isLoading={verifyMutation.isLoading}
                     cardTitle={t('passwordProtected.verifyRequired')}
-                    cardLabel={t('login.exitPassword')}
+                    cardLabel={t('task.exitPassword')}
                     cardWarning={t('passwordProtected.studentWarning')}
                     submitButtonLabel={t('passwordProtected.verify')}
                 />
@@ -196,7 +196,7 @@ export const TaskPage = () => {
                     serverSideError={unlockError}
                     isLoading={unlockMutation.isLoading}
                     cardTitle={t('passwordProtected.unlockRequired')}
-                    cardLabel={t('login.entryPassword')}
+                    cardLabel={t('task.entryPassword')}
                     cardWarning={t('passwordProtected.unlockWarning')}
                     submitButtonLabel={t('passwordProtected.unlock')}
                 />

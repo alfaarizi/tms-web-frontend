@@ -169,7 +169,7 @@ export function TaskForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('login.entryPassword')}
+                        {t('task.entryPassword')}
                         :
                     </Form.Label>
                     <Form.Control
@@ -183,7 +183,7 @@ export function TaskForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('login.exitPassword')}
+                        {t('task.exitPassword')}
                         :
                     </Form.Label>
                     <Form.Control

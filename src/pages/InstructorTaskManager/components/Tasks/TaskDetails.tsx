@@ -75,7 +75,7 @@ export const TaskDetails = ({
                         <IconTooltip
                             tooltipID={`task-${task.id}-entryPassword`}
                             icon={faKey}
-                            text={`${t('login.password')}: ${task.entryPassword}`}
+                            text={`${t('task.entryPassword')}: ${task.entryPassword}`}
                         />
                     </>
                 )}
@@ -88,7 +88,7 @@ export const TaskDetails = ({
                         <IconTooltip
                             tooltipID={`task-${task.id}-exitPassword`}
                             icon={faKey}
-                            text={`${t('login.password')}: ${task.exitPassword}`}
+                            text={`${t('task.exitPassword')}: ${task.exitPassword}`}
                         />
                     </>
                 )}
