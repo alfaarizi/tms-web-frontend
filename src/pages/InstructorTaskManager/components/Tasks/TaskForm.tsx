@@ -169,20 +169,6 @@ export function TaskForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('login.password')}
-                        :
-                    </Form.Label>
-                    <Form.Control
-                        type="text"
-                        {...register('exitPassword')}
-                        size="sm"
-                    />
-                    {errors.exitPassword && <FormError message={errors.exitPassword.message} />}
-                    <Form.Text className="text-muted">{t('task.passwordProtectedHelp')}</Form.Text>
-                </Form.Group>
-
-                <Form.Group>
-                    <Form.Label>
                         {t('login.entryPassword')}
                         :
                     </Form.Label>
@@ -192,6 +178,21 @@ export function TaskForm({
                         size="sm"
                     />
                     {errors.entryPassword && <FormError message={errors.entryPassword.message} />}
+                    <Form.Text className="text-muted">{t('task.entryPasswordHelp')}</Form.Text>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('login.exitPassword')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        type="text"
+                        {...register('exitPassword')}
+                        size="sm"
+                    />
+                    {errors.exitPassword && <FormError message={errors.exitPassword.message} />}
+                    <Form.Text className="text-muted">{t('task.exitPasswordHelp')}</Form.Text>
                 </Form.Group>
 
                 {showVersionControl
@@ -206,7 +207,7 @@ export function TaskForm({
                             <Form.Text className="text-muted">
                                 {t('task.versionControlledHelp')}
                                 {' '}
-                                {t('task.passwordProtectedGitPush')}
+                                {t('task.exitPasswordGitPush')}
                             </Form.Text>
                         </Form.Group>
                     )

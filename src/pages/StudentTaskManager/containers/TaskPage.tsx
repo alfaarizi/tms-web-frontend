@@ -183,7 +183,7 @@ export const TaskPage = () => {
                     serverSideError={verifyError}
                     isLoading={verifyMutation.isLoading}
                     cardTitle={t('passwordProtected.verifyRequired')}
-                    cardLabel={t('login.password')}
+                    cardLabel={t('login.exitPassword')}
                     cardWarning={t('passwordProtected.studentWarning')}
                     submitButtonLabel={t('passwordProtected.verify')}
                 />

@@ -70,7 +70,8 @@
     "operations": "Műveletek"
   },
   "passwordProtected": {
-    "passwordProtected": "Jelszóval védett",
+    "exitPasswordProtected": "Kimeneti jelszó",
+    "entryPasswordProtected": "Bemeneti jelszó",
     "verify": "Hitelesítés",
     "verifyRequired": "Hitelesítés szükséges",
     "verifySuccess": "Sikeres hitelesítés",
@@ -122,8 +123,8 @@
   "login": {
     "login": "Bejelentkezés",
     "username": "Felhasználónév",
-    "password": "Jelszó a beadott megoldások megerősítéséhez",
-    "entryPassword": "A feladat megtekintéséhez szükséges jelszó",
+    "exitPassword": "Jelszó a beadott megoldások megerősítéséhez",
+    "entryPassword": "Jelszó a feladat megtekintéséhez",
     "ldapHelp": "Bejelentkezés INF-es azonosítóval. (Az ELTE IK számítógépeire bejelentkezéshez használt.)",
     "student": "Hallgatói hozzáférés",
     "instructor": "Oktatói hozzáférés",
@@ -271,8 +272,9 @@
     "newSolution": "Új megoldás feltöltése",
     "solutions": "Megoldások",
 	"submissionLimitHelp": "A nulla (0) korlátlan számú feltöltést jelent.",
-    "passwordProtectedHelp": "A jelszóvédett feladatok esetében a hitelesíteni kell a  megoldásokat a feltöltést követően. A védelem kikapcsolásához hagyja üresen a jelszó mezőt. Fontos: a jelszó eltávolítását követően az összes megoldás hitelesítve lesz!",
-    "passwordProtectedGitPush": "A jelszóvédett feladatok esetében a 'git push' nem használható.",
+    "exitPasswordHelp": "A kimeneti jelszóval védett feladatok esetében a hitelesíteni kell a  megoldásokat a feltöltést követően. A védelem kikapcsolásához hagyja üresen a jelszó mezőt. Fontos: a jelszó eltávolítását követően az összes megoldás hitelesítve lesz!",
+    "exitPasswordGitPush": "A kimeneti jelszóval védett feladatok esetében a 'git push' nem használható.",	
+    "entryPasswordHelp": "A bemeneti jelszóval védett feladatok részletei csak a jelszó megadása után érhetőek el a hallgatóknak. A jelszó csak abban a böngészőben oldja fel a feladatot, ahol megadták.",
     "isVersionControlled": "Verziókezelt",
     "versionControlledHelp": "Hallgatónként saját Git tároló használata. A feladat létrehozása után nem módosítható!",
     "categories": {

@@ -68,14 +68,27 @@ export const TaskDetails = ({
                     : t('task.restrictSubmissionAttempts.unlimited')}
             </DataRow>
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
-            <DataRow label={t('passwordProtected.passwordProtected')}>
+            <DataRow label={t('passwordProtected.entryPasswordProtected')}>
                 {(!task.entryPassword || task.entryPassword.length === 0) ? t('common.no') : (
                     <>
                         {t('common.yes')}
                         <IconTooltip
-                            tooltipID={`task-${task.id}-password`}
+                            tooltipID={`task-${task.id}-entryPassword`}
                             icon={faKey}
                             text={`${t('login.password')}: ${task.entryPassword}`}
+                        />
+                    </>
+                )}
+
+            </DataRow>
+            <DataRow label={t('passwordProtected.exitPasswordProtected')}>
+                {(!task.exitPassword || task.exitPassword.length === 0) ? t('common.no') : (
+                    <>
+                        {t('common.yes')}
+                        <IconTooltip
+                            tooltipID={`task-${task.id}-exitPassword`}
+                            icon={faKey}
+                            text={`${t('login.password')}: ${task.exitPassword}`}
                         />
                     </>
                 )}
