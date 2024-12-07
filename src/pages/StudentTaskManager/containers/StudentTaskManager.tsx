@@ -20,7 +20,12 @@ export function StudentTaskManager() {
             sidebarTitle={t('common.groups')}
             sidebarItems={
                 groups.data?.map((group) => (
-                    <SideBarItem title={group.course.name} key={group.id} to={`${url}/groups/${group.id}`}>
+                    <SideBarItem
+                        title={group.course.name}
+                        key={group.id}
+                        to={`${url}/groups/${group.id}`}
+                        isCanvasSync={group.isCanvasCourse}
+                    >
                         <p>
                             {group.course.codes.join(', ')}
                             {' | '}

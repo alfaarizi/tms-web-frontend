@@ -94,6 +94,7 @@ export function InstructorTaskManager() {
                         key={group.id}
                         title={group.course.name}
                         to={`${url}/groups/${group.id}`}
+                        isCanvasSync={group.isCanvasCourse}
                     >
                         <p>
                             {t('group.number')}
