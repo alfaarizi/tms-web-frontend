@@ -53,7 +53,8 @@ export const TaskPage = () => {
         setSubmissionLimitReached(
             task.data !== undefined
             && task.data.isSubmissionCountRestricted
-            && task.data.submissions[0].uploadCount >= task.data.submissionLimit,
+            && task.data.submissions[0].uploadCount >= task.data.submissionLimit
+            && task.data.submissions[0].status !== 'Late Submission',
         );
     }, [task]);
 
