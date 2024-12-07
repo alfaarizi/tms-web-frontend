@@ -30,6 +30,14 @@ export const TaskDetails = ({
 }: Props) => {
     const { t } = useTranslation();
 
+    let remainingSubmissions = 0;
+
+    if (task.submissionLimit - submission.uploadCount > 0) {
+        remainingSubmissions = task.submissionLimit - submission.uploadCount;
+    } else if (task.isSubmissionCountRestricted && submission.status === 'Late Submission') {
+        remainingSubmissions = 1;
+    }
+
     return (
         <CustomCard>
             <CustomCardHeader>
@@ -69,9 +77,7 @@ export const TaskDetails = ({
             </DataRow>
             {task.isSubmissionCountRestricted ? (
                 <DataRow label={t('task.restrictSubmissionAttempts.remaining')}>
-                    {task.submissionLimit - submission.uploadCount > 0
-                        ? task.submissionLimit - submission.uploadCount
-                        : 0}
+                    {remainingSubmissions}
                 </DataRow>
             ) : null}
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
