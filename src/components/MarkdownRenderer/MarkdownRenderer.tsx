@@ -9,7 +9,8 @@ import 'katex/dist/katex.min.css';
 import styles from 'components/MarkdownRenderer/MarkdownRenderer.module.css';
 
 type Props = {
-    source: string
+    source: string,
+    hasLengthLimit?: boolean
 }
 
 /**
@@ -19,12 +20,12 @@ type Props = {
  * @param source
  * @constructor
  */
-export function MarkdownRenderer({ source }: Props) {
+export function MarkdownRenderer({ source, hasLengthLimit }: Props) {
     const transformImgUrl = (url: string) => (url.startsWith('/examination') ? createImageUrl(url) : url);
 
     return (
         <ReactMarkdown
-            className={styles.markdownRenderer}
+            className={`${styles.markdownRenderer} ${hasLengthLimit ? styles.textTruncate : ''}`}
             transformImageUri={transformImgUrl}
             remarkPlugins={[remarkGfm, remarkMath]}
             rehypePlugins={[rehypeKatex]}

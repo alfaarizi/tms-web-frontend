@@ -102,8 +102,8 @@ export const TaskDetails = ({
             <hr />
             <DataRow label={t('task.description')}>
                 {task.category === 'Canvas tasks'
-                    ? <MultiLineTextBlock text={task.description} />
-                    : <MarkdownRenderer source={task.description} />}
+                    ? <MultiLineTextBlock hasLengthLimit text={task.description} />
+                    : <MarkdownRenderer hasLengthLimit source={task.description} />}
             </DataRow>
         </CustomCard>
     );
