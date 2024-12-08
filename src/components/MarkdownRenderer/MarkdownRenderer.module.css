@@ -138,3 +138,11 @@ GitHub repository: https://github.com/andrerpena/react-mde
     border: 1px solid #c8ccd0;
 }
 
+.textTruncate {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    text-overflow: ellipsis;
+}

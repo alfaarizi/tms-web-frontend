@@ -18,7 +18,8 @@ import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/Serve
 import { Submission } from 'resources/instructor/Submission';
 import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 import { useStartCodeCompassMutation, useStopCodeCompassMutation } from 'hooks/instructor/SubmissionHooks';
-import { CodeCompassTab } from './CodeCompassTab';
+import { CodeCompassTab } from 'pages/InstructorTaskManager/containers/Tasks/CodeCompassTab';
+import { TaskDescriptionTab } from 'pages/InstructorTaskManager/containers/Tasks/TaskDescriptionTab';
 
 type Params = {
     id?: string
@@ -121,6 +122,9 @@ export const TaskDetailsPage = () => {
                         handleStartCodeCompass={handleStartCodeCompass}
                         handleStopCodeCompass={handleStopCodeCompass}
                     />
+                </Tab>
+                <Tab eventKey="description" title={t('task.description')}>
+                    <TaskDescriptionTab taskCategory={task.data.category} taskDescription={task.data.description} />
                 </Tab>
                 <Tab eventKey="taskFiles" title={t('task.taskFiles')}>
                     <TaskFilesTab task={task.data} />
