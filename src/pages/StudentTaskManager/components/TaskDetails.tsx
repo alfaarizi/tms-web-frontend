@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { DataRow } from 'components/DataRow';
 import { Task } from 'resources/student/Task';
@@ -12,6 +11,7 @@ import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextB
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 import { Submission } from 'resources/student/Submission';
+import { RemainingTimeForDeadLine } from 'components/RemainingTimeForDeadLine';
 
 type Props = {
     task: Task,
@@ -66,9 +66,21 @@ export const TaskDetails = ({
             </DataRow>
             <DataRow label={t('task.softDeadLine')}>
                 <LocaleDateTime value={task.softDeadline} />
+                {' ('}
+                <RemainingTimeForDeadLine
+                    value={task.softDeadline}
+                    hasSubmission={task.submissions[0].uploadCount > 0}
+                />
+                )
             </DataRow>
             <DataRow label={t('task.hardDeadLine')}>
                 <LocaleDateTime value={task.hardDeadline} />
+                {' ('}
+                <RemainingTimeForDeadLine
+                    value={task.hardDeadline}
+                    hasSubmission={task.submissions[0].uploadCount > 0}
+                />
+                )
             </DataRow>
             <DataRow label={t('task.restrictSubmissionAttempts.maxAttempts')}>
                 {task.isSubmissionCountRestricted
