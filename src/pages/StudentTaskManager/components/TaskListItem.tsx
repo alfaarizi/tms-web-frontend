@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { Task } from 'resources/student/Task';
 import { LocaleDateTime } from 'components/LocaleDateTime';
+import { RemainingTimeForDeadLine } from 'components/RemainingTimeForDeadLine';
 
 type Props = {
     task: Task,
@@ -28,17 +28,31 @@ export const TaskListItem = ({
             </div>
 
             {task.softDeadline && task.softDeadline !== '' ? (
-                <span>
-                    {t('task.softDeadLine')}
-                    {': '}
-                    <LocaleDateTime value={task.softDeadline} />
-                    {' | '}
-                </span>
+                <>
+                    <span>
+                        {t('task.softDeadLine')}
+                        {': '}
+                        <LocaleDateTime value={task.softDeadline} />
+                        {' ('}
+                        <RemainingTimeForDeadLine
+                            value={task.softDeadline}
+                            hasSubmission={task.submissions[0].uploadCount > 0}
+                        />
+                        )
+                        {' | '}
+                    </span>
+                </>
             ) : null}
             <span>
                 {t('task.hardDeadLine')}
                 {': '}
                 <LocaleDateTime value={task.hardDeadline} />
+                {' ('}
+                <RemainingTimeForDeadLine
+                    value={task.hardDeadline}
+                    hasSubmission={task.submissions[0].uploadCount > 0}
+                />
+                )
             </span>
         </ListCardItem>
     );
