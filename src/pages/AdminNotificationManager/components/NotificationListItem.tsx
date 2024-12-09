@@ -41,9 +41,7 @@ export function NotificationListItem({ notification }: Props) {
                 <LocaleDateTime value={notification.endTime} />
             </td>
             <td>
-                {notification.isAvailableForAll
-                    ? <FontAwesomeIcon icon={faCheck} />
-                    : <FontAwesomeIcon icon={faXmark} />}
+                {t(`notification.scopes.${notification.scope}`)}
             </td>
             <td>
                 {notification.dismissable

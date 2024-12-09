@@ -195,8 +195,13 @@
     "message": "Message",
     "startTime": "Starting time",
     "endTime": "Ending time",
-    "isAvailableForAll": "Available for everyone",
-    "isAvailableForAllHelp": "If checked, the notification will be available for not logged in users as well.",
+    "scope": "Scope",
+    "scopes": {
+      "everyone": "Everyone",
+      "user": "Logged in users",
+      "student": "Logged in students",
+      "faculty": "Logged in instructors"
+    },
     "dismissable": "Dismissable",
     "dismissableHelp": "If checked, the notification can be dismissed by the user."
   },
@@ -273,7 +278,7 @@
     "graderName": "Grader",
     "newSolution": "Upload new solution",
     "solutions": "Solutions",
-	"submissionLimitHelp": "Zero (0) means unlimited attempts.",	
+	"submissionLimitHelp": "Zero (0) means unlimited attempts.",
     "exitPassword": "Password required to verify submissions",
     "entryPassword": "Password required to view task",
     "exitPasswordHelp": "For exit password-protected tasks the solutions must be verified after uploading. Leave the password field blank to turn off password protection. Important: after removing the password all solutions will be verified!",
