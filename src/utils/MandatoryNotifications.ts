@@ -5,6 +5,6 @@ export function getClockDifferenceNotification(diff: number, t: TFunction<'trans
     return {
         id: -1,
         message: t('errorPage.serverTimeDiff', { diff }),
-        dismissable: false,
+        dismissible: false,
     };
 }

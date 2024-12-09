@@ -202,8 +202,8 @@
       "student": "Bejelentkezett hallgatók",
       "faculty": "Bejelentkezett oktatók"
     },
-    "dismissable": "Elrejthető",
-    "dismissableHelp": "Ha be van jelölve, akkor a felhasználók elrejthetik az értesítést."
+    "dismissible": "Elrejthető",
+    "dismissibleHelp": "Ha be van jelölve, akkor a felhasználók elrejthetik az értesítést."
   },
   "group": {
     "number": "Csoport Kód",

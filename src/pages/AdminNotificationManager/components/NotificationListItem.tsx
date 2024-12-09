@@ -44,7 +44,7 @@ export function NotificationListItem({ notification }: Props) {
                 {t(`notification.scopes.${notification.scope}`)}
             </td>
             <td>
-                {notification.dismissable
+                {notification.dismissible
                     ? <FontAwesomeIcon icon={faCheck} />
                     : <FontAwesomeIcon icon={faXmark} />}
             </td>

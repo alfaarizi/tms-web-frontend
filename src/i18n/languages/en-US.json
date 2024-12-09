@@ -202,8 +202,8 @@
       "student": "Logged in students",
       "faculty": "Logged in instructors"
     },
-    "dismissable": "Dismissable",
-    "dismissableHelp": "If checked, the notification can be dismissed by the user."
+    "dismissible": "Dismissible",
+    "dismissibleHelp": "If checked, the notification can be dismissed by the user."
   },
   "group": {
     "number": "Group code",

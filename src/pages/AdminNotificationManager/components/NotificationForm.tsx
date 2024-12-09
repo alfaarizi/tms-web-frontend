@@ -130,12 +130,12 @@ export function NotificationForm({
                 <Form.Group>
                     <Form.Check
                         type="checkbox"
-                        id="notificationForm-dismissable"
-                        label={t('notification.dismissable')}
-                        {...register('dismissable')}
+                        id="notificationForm-dismissible"
+                        label={t('notification.dismissible')}
+                        {...register('dismissible')}
                     />
                     <Form.Text className="text-muted">
-                        {t('notification.dismissableHelp')}
+                        {t('notification.dismissibleHelp')}
                     </Form.Text>
                 </Form.Group>
 
