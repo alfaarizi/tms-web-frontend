@@ -110,15 +110,21 @@ export function NotificationForm({
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Check
-                        type="checkbox"
-                        id="notificationForm-isAvailableForAll"
-                        label={t('notification.isAvailableForAll')}
-                        {...register('isAvailableForAll')}
-                    />
-                    <Form.Text className="text-muted">
-                        {t('notification.isAvailableForAllHelp')}
-                    </Form.Text>
+                    <Form.Label>
+                        {t('notification.scope')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        as="select"
+                        id="notificationForm-scope"
+                        placeholder={t('notification.scope')}
+                        {...register('scope', { required: true })}
+                    >
+                        <option value="everyone">{t('notification.scopes.everyone')}</option>
+                        <option value="user">{t('notification.scopes.user')}</option>
+                        <option value="student">{t('notification.scopes.student')}</option>
+                        <option value="faculty">{t('notification.scopes.faculty')}</option>
+                    </Form.Control>
                 </Form.Group>
 
                 <Form.Group>

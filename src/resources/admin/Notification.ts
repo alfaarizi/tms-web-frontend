@@ -3,6 +3,6 @@ export interface Notification {
     message: string;
     startTime: string;
     endTime: string;
-    isAvailableForAll: boolean;
+    scope?: 'everyone' | 'user' | 'student' | 'faculty';
     dismissable: boolean;
 }
