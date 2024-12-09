@@ -23,8 +23,9 @@ async function afterSync(queryClient: QueryClient, groupID: number) {
 /**
  * Synchronizes the given group
  * @param groupID
+ * @param semesterID
  */
-export function useCanvasSetupMutation(groupID: number) {
+export function useCanvasSetupMutation(groupID: number, semesterID?: number) {
     const queryClient = useQueryClient();
 
     return useMutation(
@@ -33,6 +34,9 @@ export function useCanvasSetupMutation(groupID: number) {
             // the queries should be invalidated both in case of success and error
             onSettled: async () => {
                 await afterSync(queryClient, groupID);
+                if (semesterID) {
+                    await queryClient.invalidateQueries([GROUP_QUERY_KEY, { semesterID }]);
+                }
             },
         },
     );

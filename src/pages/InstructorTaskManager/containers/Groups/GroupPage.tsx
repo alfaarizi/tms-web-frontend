@@ -41,7 +41,7 @@ export function GroupPage() {
     const removeMutation = useRemoveGroupMutation();
     const duplicateMutation = useDuplicateGroupMutation();
     const canvasSyncMutation = useCanvasSyncMutation(groupID);
-    const canvasSetupMutation = useCanvasSetupMutation(groupID);
+    const canvasSetupMutation = useCanvasSetupMutation(groupID, group.data?.semesterID);
     const showCanvasSetupModal = useShow();
     const actualSemester = useActualSemester();
     const [editErrorBody, setEditErrorBody] = useState<ValidationErrorBody | null>(null);
