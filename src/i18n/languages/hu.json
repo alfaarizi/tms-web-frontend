@@ -248,7 +248,12 @@
     "groupTime": "Csoport idő",
     "notes": "Megjegyzések",
     "addNotes": "Megjegyzés hozzáadása",
-    "studentNotes": "Megjegyzések a hallgatónak"
+    "studentNotes": "Megjegyzések a hallgatónak",
+    "syncLevel": "Canvas szinkronizáció szintje",
+    "syncLevels": {
+      "nameLists": "Csak az oktatói és hallgatói névsor szinkronizálása",
+      "nameListsAndTasks": "Csak az oktatói és hallgatói névsor szinkronizálása"
+    }
   },
   "task": {
     "task": "Beadandó",

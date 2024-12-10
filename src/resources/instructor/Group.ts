@@ -1,5 +1,6 @@
 import { Course } from 'resources/common/Course';
 import { Instructor } from 'resources/instructor/Instructor';
+import { CanvasSyncLevel } from 'resources/instructor/CanvasSyncLevel';
 
 export interface Group {
     id: number;
@@ -10,6 +11,7 @@ export interface Group {
     semesterID: number;
     canvasCanBeSynchronized: boolean;
     isCanvasCourse: boolean;
+    syncLevelArray: CanvasSyncLevel[];
     timezone: string;
     canvasUrl?: string;
     lastSyncTime?: string;

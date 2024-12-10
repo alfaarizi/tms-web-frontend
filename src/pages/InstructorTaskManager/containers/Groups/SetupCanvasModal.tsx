@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
-import { Form, Modal } from 'react-bootstrap';
+import {
+    Button, ButtonGroup, Form, Modal, Spinner,
+} from 'react-bootstrap';
 
 import { FormError } from 'components/FormError';
-import { FormButtons } from 'components/Buttons/FormButtons';
 import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
+import { CanvasSyncLevel } from 'resources/instructor/CanvasSyncLevel';
 import { useCanvasCourses, useCanvasSections } from 'hooks/instructor/CanvasHooks';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
     show: boolean,
@@ -23,6 +28,15 @@ export function SetupCanvasModal({
     show, onSave, onCancel, inProgress,
 }: Props) {
     const { t } = useTranslation();
+
+    // Available sync levels
+    const syncLevels = [
+        { key: 'group.syncLevels.nameListsAndTasks', value: ['Name lists', 'Tasks'] },
+        { key: 'group.syncLevels.nameLists', value: ['Name lists'] },
+    ];
+    // Current selected sync level
+    const [selectedSyncLevel, setSelectedSyncLevel] = useState<{key: string; value: string[]}>(syncLevels[0]);
+
     const {
         handleSubmit,
         register,
@@ -69,9 +83,20 @@ export function SetupCanvasModal({
         }
     }, [watchCourseID]);
 
+    // Handle sync level selection
+    const onSelect = (eventKey: string | null) => {
+        const selectedItem = syncLevels.find((item) => item.key === eventKey);
+        if (selectedItem) {
+            setSelectedSyncLevel(selectedItem);
+        }
+    };
+
     // Handle form submit
     const onSubmit = handleSubmit((data) => {
-        onSave(data);
+        onSave({
+            ...data,
+            syncLevel: selectedSyncLevel.value as CanvasSyncLevel[],
+        });
     });
 
     // Render modal
@@ -123,10 +148,59 @@ export function SetupCanvasModal({
                         {errors.canvasSection && <FormError message={errors.canvasSection.message} />}
                     </Form.Group>
 
-                    <FormButtons
-                        onCancel={onCancel}
-                        isLoading={inProgress || courses.isFetching || sections.isFetching}
-                    />
+                    <div className="my-1">
+                        <Dropdown
+                            as={ButtonGroup}
+                            size="sm"
+                            onSelect={onSelect}
+                        >
+                            <Button
+                                variant="primary"
+                                type="submit"
+                                size="sm"
+                                disabled={inProgress || courses.isFetching || sections.isFetching}
+                            >
+                                {inProgress || courses.isFetching || sections.isFetching
+                                    ? <Spinner animation="border" size="sm" />
+                                    : <FontAwesomeIcon icon={faSave} />}
+                                {' '}
+                                {t(selectedSyncLevel.key)}
+                            </Button>
+
+                            <Dropdown.Toggle
+                                split
+                                variant="primary"
+                                id="dropdown-split-basic"
+                                disabled={inProgress || courses.isFetching || sections.isFetching}
+                            />
+
+                            <Dropdown.Menu>
+                                {syncLevels.map((item) => (
+                                    <Dropdown.Item
+                                        key={item.key}
+                                        eventKey={item.key}
+                                        active={item.key === selectedSyncLevel.key}
+                                    >
+                                        {t(item.key)}
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                        {onCancel ? (
+                            <Button
+                                variant="secondary"
+                                className="ml-1"
+                                size="sm"
+                                onClick={onCancel}
+                                disabled={inProgress || courses.isFetching || sections.isFetching}
+                            >
+                                <FontAwesomeIcon icon={faTimes} />
+                                {' '}
+                                {t('common.cancel')}
+                            </Button>
+                        ) : null}
+                    </div>
                 </Form>
             </Modal.Body>
         </Modal>

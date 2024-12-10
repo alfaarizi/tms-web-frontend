@@ -247,7 +247,12 @@
     "groupTime": "Group time",
     "notes": "Notes",
     "addNotes": "Add Notes",
-    "studentNotes": "Notes for the Student"
+    "studentNotes": "Notes for the Student",
+    "syncLevel": "Canvas synchronization level",
+    "syncLevels": {
+      "nameLists": "Only synchronize student and lecturer name lists",
+      "nameListsAndTasks": "Synchronize name lists and tasks"
+    }
   },
   "task": {
     "task": "Assignment",

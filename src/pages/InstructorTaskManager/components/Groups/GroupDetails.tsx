@@ -34,6 +34,16 @@ export function GroupDetails({
 }: Props) {
     const { t } = useTranslation();
 
+    const renderSyncLevel = () => {
+        if (group.syncLevelArray.includes('Tasks') && group.syncLevelArray.includes('Name lists')) {
+            return <DataRow label={t('group.syncLevel')}>{t('group.syncLevels.nameListsAndTasks')}</DataRow>;
+        }
+        if (group.syncLevelArray.includes('Name lists')) {
+            return <DataRow label={t('group.syncLevel')}>{t('group.syncLevels.nameLists')}</DataRow>;
+        }
+        return null;
+    };
+
     const tooltipContent = (
         <>
             <p>{t('group.canvasSyncTooltip.part1')}</p>
@@ -76,6 +86,7 @@ export function GroupDetails({
                     <a href={group.canvasUrl} target="_blank" rel="noreferrer">{group.canvasUrl}</a>
                 </DataRow>
             ) : null}
+            {group.isCanvasCourse && group.syncLevelArray ? renderSyncLevel() : null}
             {group.canvasUrl ? (
                 <DataRow
                     label={t('group.lastSyncTime')}
