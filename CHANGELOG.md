@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.5.0...v4.6.0) (2024-12-12)
+
+
+### Features
+
+* added scope to notifications ([eed8990](https://gitlab.com/tms-elte/frontend-react/commit/eed89906a6ef4ab850af198b5ab20c3074c14836))
+* Display remaining submission time for students ([59cc723](https://gitlab.com/tms-elte/frontend-react/commit/59cc7235057e47e2a556a7b9b4dc55cbfe34de75))
+* Display student count on tab header ([2a4b86d](https://gitlab.com/tms-elte/frontend-react/commit/2a4b86d007d876bfe62bccf27662d46d36492c78))
+* Entry level password for tasks ([a17b344](https://gitlab.com/tms-elte/frontend-react/commit/a17b3449fb5c05114528e9086820def41aa0a347))
+* Handle long task descriptions ([ade1c87](https://gitlab.com/tms-elte/frontend-react/commit/ade1c87f9c1692ac6103b036154af24f597ae2f4))
+* Late submissions should be uploadable regardless the upload count ([425927c](https://gitlab.com/tms-elte/frontend-react/commit/425927c6911e97f3b02b2ed0e299dd70fd19928f))
+* partial Canvas synchronization ([35b278d](https://gitlab.com/tms-elte/frontend-react/commit/35b278d41e3a874c188b3496f3315e77bf4198e6))
+* Show icon on left sidebar for Canvas groups ([7cbe9c2](https://gitlab.com/tms-elte/frontend-react/commit/7cbe9c2c96a2180d2bfb1eba08ed7195aebf33fd))
+* Specify file name in confirmation dialog when deleting Task File ([e514b8f](https://gitlab.com/tms-elte/frontend-react/commit/e514b8fc87c6b063fb359f6195d325a0f52b0071))
+
 ## [4.5.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.4.0...v4.5.0) (2024-11-19)
 
 
