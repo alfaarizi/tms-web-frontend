@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import { ButtonGroup, Col, Row } from 'react-bootstrap';
 import {
     faCode,
-    faCompass, faDownload, faEdit, faInfoCircle, faList, faStop,
+    faCompass, faDownload, faEdit, faInfoCircle, faList, faStop, faHistory,
 } from '@fortawesome/free-solid-svg-icons';
 import { useShow } from 'ui-hooks/useShow';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +27,7 @@ type Props = {
     onStartCodeCompass: (file: Submission) => void,
     onStopCodeCompass: (file: Submission) => void,
     onGrade: (file: Submission) => void,
+    onIpLog: (file: Submission) => void,
     task?: Task,
 }
 
@@ -42,6 +43,7 @@ export function SubmissionListItem({
     onStartCodeCompass,
     onStopCodeCompass,
     onGrade,
+    onIpLog,
 }: Props) {
     const { t } = useTranslation();
     const showAutoTesterResults = useShow();
@@ -143,6 +145,17 @@ export function SubmissionListItem({
                                     onClick={() => onCodeView(file)}
                                     icon={faCode}
                                     text={t('task.viewCode')}
+                                    displayTextBreakpoint="none"
+                                />
+                            )
+                            : null}
+
+                        {file.uploadCount > 0
+                            ? (
+                                <ToolbarButton
+                                    onClick={() => onIpLog(file)}
+                                    icon={faHistory}
+                                    text={t('task.ipLog')}
                                     displayTextBreakpoint="none"
                                 />
                             )

@@ -1,5 +1,6 @@
 import { Submission } from 'resources/instructor/Submission';
 import { AutoTesterResult } from 'resources/common/AutoTesterResult';
+import { IpAddress } from 'resources/instructor/IpAddress';
 import { axiosInstance } from 'api/axiosInstance';
 
 export async function listForTask(taskID: number) {
@@ -97,7 +98,7 @@ export async function startCodeCompass(file: Submission) {
 export async function stopCodeCompass(file: Submission) {
     const res = await axiosInstance
         .post<Submission>(
-            `/instructor/submissions/${file.id}/stop-code-compass?expand=uploader,task,task.group`
+            `/instructor/submissions/${file.id}/stop-code-compass?expand=uploader,task,task.group,`
                 + 'codeCompass,codeCheckerResult',
         );
     return res.data;
@@ -106,6 +107,14 @@ export async function stopCodeCompass(file: Submission) {
 export async function autoTesterResults(id: number) {
     const res = await axiosInstance.get<AutoTesterResult[]>(
         `/instructor/submissions/${id}/auto-tester-results`,
+    );
+    return res.data;
+}
+
+export async function ipAddresses(id: number) {
+    const res = await axiosInstance.get<IpAddress[]>(
+        `/instructor/submissions/${id}/ip-addresses?expand=submission,submission.task,submission.task.group,`
+            + 'submission.task.group.course',
     );
     return res.data;
 }

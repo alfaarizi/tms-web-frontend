@@ -5,6 +5,7 @@ import * as SubmissionsService from 'api/instructor/SubmissionsService';
 import { useDownloader } from 'hooks/common/useDownloader';
 import { QUERY_KEY as GROUP_QUERY_KEY } from 'hooks/instructor/GroupHooks';
 import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/instructor/TaskHooks';
+import * as GroupService from 'api/instructor/GroupsService';
 
 export const QUERY_KEY = 'instructor/submissions';
 
@@ -151,6 +152,14 @@ export function useAutoTestResults(id: number, enabled: boolean = true) {
     return useQuery(
         [QUERY_KEY, 'auto-tester-results', { id }],
         () => SubmissionsService.autoTesterResults(id),
+        { enabled },
+    );
+}
+
+export function useIpAddresses(id: number, enabled: boolean = true) {
+    return useQuery(
+        [QUERY_KEY, 'ip-addresses', { id }],
+        () => SubmissionsService.ipAddresses(id),
         { enabled },
     );
 }

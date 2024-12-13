@@ -15,6 +15,7 @@ import {
 import { Submission } from 'resources/instructor/Submission';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { GraderModal } from 'pages/InstructorTaskManager/components/Submissions/GraderModal';
+import { IpLogModal } from 'pages/InstructorTaskManager/containers/Submissions/IpLogModal';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
@@ -44,6 +45,7 @@ export function SubmissionPage() {
     const downloadSubmission = useDownloadSubmission();
     const downloadTestReport = useDownloadTestReport();
     const showGrader = useShow();
+    const showIpLog = useShow();
     const actualSemester = useActualSemester();
     const notifications = useNotifications();
     const privateSystemInfo = usePrivateSystemInfoQuery();
@@ -158,6 +160,7 @@ export function SubmissionPage() {
                     onStartCodeCompass={handleStartCodeCompass}
                     onStopCodeCompass={handleStopCodeCompass}
                     onGrade={showGrader.toShow}
+                    onIpLog={showIpLog.toShow}
                     task={submission.data.task}
                 />
             </CustomCard>
@@ -176,6 +179,12 @@ export function SubmissionPage() {
                 onSave={handleGradeSave}
                 onCancel={showGrader.toHide}
                 isLoading={gradeMutation.isLoading}
+            />
+
+            <IpLogModal
+                submission={submission.data}
+                show={showIpLog.show}
+                onClose={showIpLog.toHide}
             />
         </>
 
