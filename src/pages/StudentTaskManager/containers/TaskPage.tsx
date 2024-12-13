@@ -187,6 +187,7 @@ export const TaskPage = () => {
                     cardLabel={t('task.exitPassword')}
                     cardWarning={t('passwordProtected.studentWarning')}
                     submitButtonLabel={t('passwordProtected.verify')}
+                    hasIpCheck
                 />
             )}
 
@@ -200,6 +201,7 @@ export const TaskPage = () => {
                     cardLabel={t('task.entryPassword')}
                     cardWarning={t('passwordProtected.unlockWarning')}
                     submitButtonLabel={t('passwordProtected.unlock')}
+                    hasIpCheck={false}
                 />
             )}
 

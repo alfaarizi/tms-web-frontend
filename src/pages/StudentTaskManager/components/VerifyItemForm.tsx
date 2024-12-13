@@ -18,11 +18,11 @@ type Props = {
     onSave: (data: VerifyItem) => void,
     serverSideError: ValidationErrorBody | null,
     isLoading: boolean,
+    hasIpCheck: boolean,
     cardTitle: string,
     cardLabel: string,
     cardWarning: string,
-    submitButtonLabel: string,
-    children?: ReactNode
+    submitButtonLabel: string
 };
 
 /**
@@ -30,7 +30,7 @@ type Props = {
  * @param onSave
  * @param serverSideError
  * @param isLoading
- * @param children
+ * @param hasIpCheck
  * @param cardTitle
  * @param cardLabel
  * @param cardWarning
@@ -38,7 +38,7 @@ type Props = {
  * @constructor
  */
 export function VerifyItemForm({
-    onSave, serverSideError, isLoading, children, cardTitle, cardLabel, cardWarning, submitButtonLabel,
+    onSave, serverSideError, isLoading, hasIpCheck, cardTitle, cardLabel, cardWarning, submitButtonLabel,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -78,7 +78,17 @@ export function VerifyItemForm({
                     {errors.password && <FormError message={errors.password.message} />}
                 </Form.Group>
 
-                {children}
+                { hasIpCheck && (
+                    <Form.Group>
+                        <Form.Check
+                            type="checkbox"
+                            id="disableIpCheck"
+                            label={t('passwordProtected.verifyDisableIpCheck')}
+                            {...register('disableIpCheck')}
+                        />
+                        {errors.disableIpCheck && <FormError message={errors.disableIpCheck.message} />}
+                    </Form.Group>
+                )}
 
                 <Button variant="primary" size="sm" type="submit" disabled={isLoading}>
                     {isLoading ? <Spinner animation="border" size="sm" /> : <FontAwesomeIcon icon={faLockOpen} />}
