@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* readding IP verification checkbox to exit password verification form ([63d3841](https://gitlab.com/tms-elte/frontend-react/commit/63d384115bba93fc5e222d137cd030f8b0dc4d28))
+* Readding IP verification checkbox to exit password verification form ([63d3841](https://gitlab.com/tms-elte/frontend-react/commit/63d384115bba93fc5e222d137cd030f8b0dc4d28))
 
 ## [4.6.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.5.0...v4.6.0) (2024-12-12)
 
