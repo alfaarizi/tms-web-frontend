@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Submission } from 'resources/instructor/Submission';
 import { GraderModal } from 'pages/InstructorTaskManager/components/Submissions/GraderModal';
+import { IpLogModal } from 'pages/InstructorTaskManager/containers/Submissions/IpLogModal';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { useDownloadSubmission, useDownloadTestReport, useGradeMutation } from 'hooks/instructor/SubmissionHooks';
 import { SubmissionListItem } from 'pages/InstructorTaskManager/components/Students/SubmissionListItem';
@@ -38,7 +39,8 @@ export function SubmissionsList({
     renderItem,
     task,
 }: Props) {
-    const [gradedFile, setGradedFile] = useState<Submission | null>(null);
+    const [gradedSubmission, setGradedSubmission] = useState<Submission | null>(null);
+    const [ipLogSubmission, setIpLogSubmission] = useState<Submission | null>(null);
     const actualSemester = useActualSemester();
     const gradeMutation = useGradeMutation();
     const downloadfile = useDownloadSubmission();
@@ -68,13 +70,13 @@ export function SubmissionsList({
     };
 
     // Set graded file
-    const handleGradeStart = (file: Submission) => {
-        setGradedFile(file);
+    const handleGradeStart = (submission: Submission) => {
+        setGradedSubmission(submission);
     };
 
-    // Close grade modal and clear gradedFile value
+    // Close grade modal and clear gradedSubmission value
     const handleGradeFinish = () => {
-        setGradedFile(null);
+        setGradedSubmission(null);
     };
 
     // GraderModel save function
@@ -89,6 +91,16 @@ export function SubmissionsList({
         } catch (e) {
             // Already handled globally
         }
+    };
+
+    // Set submission for IP log
+    const handleIpLogStart = (submission: Submission) => {
+        setIpLogSubmission(submission);
+    };
+
+    // Close IP log modal and clear ipLogSubmission value
+    const handleIpLogFinish = () => {
+        setIpLogSubmission(null);
     };
 
     // Render
@@ -108,17 +120,24 @@ export function SubmissionsList({
                         onStopCodeCompass={handleStopCodeCompass}
                         onReportDownload={handleReportDownload}
                         onGrade={handleGradeStart}
+                        onIpLog={handleIpLogStart}
                         task={task != null ? task : file.task}
                     />
                 ))
             }
 
             <GraderModal
-                file={gradedFile}
-                show={gradedFile !== null}
+                file={gradedSubmission}
+                show={gradedSubmission !== null}
                 onSave={handleGradeSave}
                 onCancel={handleGradeFinish}
                 isLoading={gradeMutation.isLoading}
+            />
+
+            <IpLogModal
+                submission={ipLogSubmission}
+                show={ipLogSubmission !== null} // TODO: always true with this approach
+                onClose={handleIpLogFinish}
             />
         </>
     );

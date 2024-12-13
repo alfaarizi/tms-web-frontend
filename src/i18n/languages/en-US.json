@@ -425,7 +425,13 @@
     "canvasAssignment": "Canvas assignment",
     "canvasUpload": "Visit the Canvas page of the assignment to upload a new solution!",
     "viewCode": "View code",
-    "toggleIndent": "Toggle indentation"
+    "toggleIndent": "Toggle indentation",
+    "ipLog": {
+      "title": "IP Log",
+      "date": "Date",
+      "activity": "Activity",
+      "address": "IP address"
+    }
   },
   "status": {
     "accepted": "Accepted",

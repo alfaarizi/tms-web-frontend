@@ -426,7 +426,13 @@
     "canvasAssignment": "Canvas-feladat",
     "canvasUpload": "Látogasson el a feladat Canvas-oldalára új megoldás feltöltéséhez!",
     "viewCode": "Kód megtekintése",
-    "toggleIndent": "Fájlok indentálása"
+    "toggleIndent": "Fájlok indentálása",
+    "ipLog": {
+      "title": "IP Napló",
+      "date": "Dátum",
+      "activity": "Aktivitás",
+      "address": "IP cím"
+    }
   },
   "status": {
     "accepted": "Elfogadva",

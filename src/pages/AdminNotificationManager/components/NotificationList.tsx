@@ -39,12 +39,12 @@ export function NotificationList({
                 <Table responsive>
                     <thead>
                         <tr>
-                            <th style={{ borderTop: 'none' }}>{t('notification.message')}</th>
-                            <th style={{ borderTop: 'none' }}>{t('notification.startTime')}</th>
-                            <th style={{ borderTop: 'none' }}>{t('notification.endTime')}</th>
-                            <th style={{ borderTop: 'none' }}>{t('notification.scope')}</th>
-                            <th style={{ borderTop: 'none' }}>{t('notification.dismissible')}</th>
-                            <th style={{ borderTop: 'none' }}>{t('common.operations')}</th>
+                            <th className="border-top-0">{t('notification.message')}</th>
+                            <th className="border-top-0">{t('notification.startTime')}</th>
+                            <th className="border-top-0">{t('notification.endTime')}</th>
+                            <th className="border-top-0">{t('notification.scope')}</th>
+                            <th className="border-top-0">{t('notification.dismissible')}</th>
+                            <th className="border-top-0">{t('common.operations')}</th>
                         </tr>
                     </thead>
                     <tbody>
