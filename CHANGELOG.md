@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.6.1...v4.7.0) (2024-12-13)
+
+
+### Features
+
+* Added IP log viewer for submissions on the instructor panel ([5a960c4](https://gitlab.com/tms-elte/frontend-react/commit/5a960c4a92b8c46bf5528e44b446442f78939702))
+
 ### [4.6.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.6.0...v4.6.1) (2024-12-13)
 
 
