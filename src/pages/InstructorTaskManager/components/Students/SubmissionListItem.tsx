@@ -155,7 +155,7 @@ export function SubmissionListItem({
                                 <ToolbarButton
                                     onClick={() => onIpLog(file)}
                                     icon={faHistory}
-                                    text={t('task.ipLog')}
+                                    text={t('task.ipLog.title')}
                                     displayTextBreakpoint="none"
                                 />
                             )
