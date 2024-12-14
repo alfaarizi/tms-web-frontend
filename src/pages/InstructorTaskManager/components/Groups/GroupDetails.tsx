@@ -20,7 +20,7 @@ type Props = {
     onEdit: () => void,
     onDuplicate: () => void,
     onRemove: () => void,
-    onCanvasSync: () => void
+    onCanvasSync: () => void,
 }
 
 export function GroupDetails({

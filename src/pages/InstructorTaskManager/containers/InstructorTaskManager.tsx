@@ -26,6 +26,8 @@ import DropdownItem from 'react-bootstrap/DropdownItem';
 import { Group } from 'resources/instructor/Group';
 import { StudentCodeViewerPage }
     from 'pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage';
+import { NewNotificationPage } from 'pages/InstructorTaskManager/containers/Notifications/NewNotificationPage';
+import { EditNotificationPage } from 'pages/InstructorTaskManager/containers/Notifications/EditNotificationPage';
 
 enum GroupView {
     ALL = 'all',
@@ -156,6 +158,12 @@ export function InstructorTaskManager() {
                     </Route>
                     <Route path={`${url}/groups/:groupID/new-task`}>
                         <NewTaskPage />
+                    </Route>
+                    <Route path={`${url}/groups/:groupID/new-notification`}>
+                        <NewNotificationPage />
+                    </Route>
+                    <Route path={`${url}/groups/:groupID/edit-notification/:notificationID`}>
+                        <EditNotificationPage />
                     </Route>
                     <Route path={`${url}/groups/:groupID/students/:userID`}>
                         <StudentDetailsPage />

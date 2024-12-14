@@ -55,7 +55,7 @@ export function NotificationAlert({ notification }: Props) {
     if (show) {
         return (
             <Alert
-                variant="warning"
+                variant={notification.isGroupNotification ? 'info' : 'warning'}
                 className="m-0 p-1 d-flex align-items-center"
                 onClose={() => handleDismiss()}
                 dismissible={notification.dismissible}

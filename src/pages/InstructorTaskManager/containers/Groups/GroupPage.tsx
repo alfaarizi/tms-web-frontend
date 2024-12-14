@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import { Tab } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +16,7 @@ import { GroupStudentsListTab } from 'pages/InstructorTaskManager/containers/Gro
 import { GroupInstructorsListTab } from 'pages/InstructorTaskManager/containers/Groups/GroupInstructorsListTab';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { GroupStatsTab } from 'pages/InstructorTaskManager/containers/Groups/GroupStatsTab';
+import { GroupNotificationsTab } from 'pages/InstructorTaskManager/containers/Notifications/GroupNotificationsTab';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { GroupDetails } from 'pages/InstructorTaskManager/components/Groups/GroupDetails';
 import { TabbedInterface } from 'components/TabbedInterface';
@@ -27,15 +28,19 @@ import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
 import { GroupTasksTab } from 'pages/InstructorTaskManager/containers/Groups/GroupTasksTab';
 
 type Params = {
-    id?: string
+    id?: string,
+    activeTab?: string,
 }
 
 export function GroupPage() {
     const { t } = useTranslation();
     const history = useHistory();
     const params = useParams<Params>();
+    const location = useLocation();
     const groupID = parseInt(params.id || '-1', 10);
     const group = useGroup(groupID);
+    const searchParams = new URLSearchParams(location.search);
+    const activeTab = searchParams.get('tab') || 'tasks';
     const updateMutation = useUpdateGroupMutation();
     const showEditForm = useShow();
     const removeMutation = useRemoveGroupMutation();
@@ -149,7 +154,7 @@ export function GroupPage() {
                     />
                 )}
 
-            <TabbedInterface defaultActiveKey="tasks" id="group-tabs">
+            <TabbedInterface defaultActiveKey={activeTab} id="group-tabs">
                 <Tab eventKey="tasks" title={t('task.tasks')}>
                     <GroupTasksTab group={group.data} />
                 </Tab>
@@ -161,6 +166,9 @@ export function GroupPage() {
                 </Tab>
                 <Tab eventKey="stats" title={t('group.stats.stats')}>
                     <GroupStatsTab group={group.data} />
+                </Tab>
+                <Tab eventKey="notifications" title={t('common.notifications')}>
+                    <GroupNotificationsTab group={group.data} />
                 </Tab>
             </TabbedInterface>
 
