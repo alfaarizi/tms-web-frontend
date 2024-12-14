@@ -36,6 +36,28 @@ export function IpAddressListItem({ submission, ipAddress }: Props) {
                             </span>
                         </>
                     )}
+                {submission.id === ipAddress.submission?.id && ipAddress.activity === 'Submission upload'
+                    && (
+                        <>
+                            <br />
+                            <span className="font-italic">
+                                (
+                                {t('task.ipLog.sameTaskUpload')}
+                                )
+                            </span>
+                        </>
+                    )}
+                {submission.id === ipAddress.submission?.id && ipAddress.activity === 'Submission download'
+                    && (
+                        <>
+                            <br />
+                            <span className="font-italic">
+                                (
+                                {t('task.ipLog.sameTaskDownload')}
+                                )
+                            </span>
+                        </>
+                    )}
             </td>
             <td>
                 {ipAddress.ipAddress}
