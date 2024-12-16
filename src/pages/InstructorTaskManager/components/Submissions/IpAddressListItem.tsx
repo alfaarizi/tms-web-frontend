@@ -23,13 +23,13 @@ export function IpAddressListItem({ submission, ipAddress }: Props) {
                     && (
                         <>
                             <br />
-                            <span>
+                            <span className="font-italic">
                                 {t('course.course')}
                                 {': '}
                                 {ipAddress.submission?.task?.group?.course.name}
                             </span>
                             <br />
-                            <span>
+                            <span className="font-italic">
                                 {t('task.task')}
                                 {': '}
                                 {ipAddress.submission?.task?.name}

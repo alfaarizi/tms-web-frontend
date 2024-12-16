@@ -431,7 +431,9 @@
       "title": "IP Napló",
       "date": "Dátum",
       "activity": "Aktivitás",
-      "address": "IP cím"
+      "address": "IP cím",
+      "sameTaskUpload": "Jelenlegi feladathoz.",
+      "sameTaskDownload": "Jelenlegi feladat megoldását."
     }
   },
   "status": {

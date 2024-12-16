@@ -430,7 +430,9 @@
       "title": "IP Log",
       "date": "Date",
       "activity": "Activity",
-      "address": "IP address"
+      "address": "IP address",
+      "sameTaskUpload": "Current submission.",
+      "sameTaskDownload": "Current submission."
     }
   },
   "status": {
