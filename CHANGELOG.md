@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.7.0...v4.8.0) (2024-12-16)
+
+
+### Features
+
+* Add UI for group level notifications ([41e437c](https://gitlab.com/tms-elte/frontend-react/commit/41e437cab0d7469bbf9bedea3e5f7084e7ce53a6))
+
+
+### Bug Fixes
+
+* Display submission info for entries in the IP log table belonging to the viewed submission ([29be4f3](https://gitlab.com/tms-elte/frontend-react/commit/29be4f3c969a777f28808c0384e5dd3c15775314))
+* Fix tooltip on show IP log button ([559ea6d](https://gitlab.com/tms-elte/frontend-react/commit/559ea6da2be0535f784e327d12482889263c8854))
+
 ## [4.7.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.6.1...v4.7.0) (2024-12-13)
 
 
