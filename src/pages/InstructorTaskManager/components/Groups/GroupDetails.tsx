@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import {
-    faCopy, faEdit, faQuestion, faSync,
+    faCopy, faEdit, faCircleInfo, faSync,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { CustomCard } from 'components/CustomCard/CustomCard';
@@ -91,7 +91,7 @@ export function GroupDetails({
                 <DataRow
                     label={t('group.lastSyncTime')}
                     tooltipNode={tooltipContent}
-                    tooltipIcon={faQuestion}
+                    tooltipIcon={faCircleInfo}
                 >
                     <GroupDateTime value={group.lastSyncTime} timezone={group.timezone} />
                 </DataRow>
