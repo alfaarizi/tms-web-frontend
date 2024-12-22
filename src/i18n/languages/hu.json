@@ -252,7 +252,7 @@
     "syncLevel": "Canvas szinkronizáció szintje",
     "syncLevels": {
       "nameLists": "Csak az oktatói és hallgatói névsor szinkronizálása",
-      "nameListsAndTasks": "Csak az oktatói és hallgatói névsor szinkronizálása"
+      "nameListsAndTasks": "Névsorok és beadandó feladatok szinkronizálása"
     }
   },
   "task": {
