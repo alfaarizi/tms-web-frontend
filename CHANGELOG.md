@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.8.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.8.0...v4.8.1) (2024-12-23)
+
+
+### Bug Fixes
+
+* Hungarian translation of Canvas sync levels ([581eed7](https://gitlab.com/tms-elte/frontend-react/commit/581eed785cbd32c79f617a8622dcc17d4c025389))
+
 ## [4.8.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.7.0...v4.8.0) (2024-12-16)
 
 
