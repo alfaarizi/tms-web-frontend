@@ -136,7 +136,8 @@ export function SubmissionsList({
 
             <IpLogModal
                 submission={ipLogSubmission}
-                show={ipLogSubmission !== null} // TODO: always true with this approach
+                task={task}
+                show={ipLogSubmission !== null}
                 onClose={handleIpLogFinish}
             />
         </>

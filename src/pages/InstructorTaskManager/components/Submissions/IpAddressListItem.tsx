@@ -6,18 +6,19 @@ import { useTranslation } from 'react-i18next';
 
 type Props = {
     submission: Submission,
-    ipAddress: IpAddress
+    ipAddress: IpAddress,
+    isFirstAfterDeadline: boolean
 }
 
-export function IpAddressListItem({ submission, ipAddress }: Props) {
+export function IpAddressListItem({ submission, ipAddress, isFirstAfterDeadline }: Props) {
     const { t } = useTranslation();
 
     return (
         <tr>
-            <td>
+            <td className={isFirstAfterDeadline ? 'border-danger' : ''}>
                 {ipAddress.logTime}
             </td>
-            <td>
+            <td className={isFirstAfterDeadline ? 'border-danger' : ''}>
                 {ipAddress.translatedActivity}
                 {submission.id !== ipAddress.submission?.id
                     && (
@@ -59,7 +60,7 @@ export function IpAddressListItem({ submission, ipAddress }: Props) {
                         </>
                     )}
             </td>
-            <td>
+            <td className={isFirstAfterDeadline ? 'border-danger' : ''}>
                 {ipAddress.ipAddress}
             </td>
         </tr>

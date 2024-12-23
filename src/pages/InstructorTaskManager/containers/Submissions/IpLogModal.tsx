@@ -2,18 +2,21 @@ import { Modal, Table } from 'react-bootstrap';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Task } from 'resources/instructor/Task';
 import { Submission } from 'resources/instructor/Submission';
 import { useIpAddresses } from 'hooks/instructor/SubmissionHooks';
 import { IpAddressListItem } from 'pages/InstructorTaskManager/components/Submissions/IpAddressListItem';
 
 type Props = {
-    submission: Submission|null;
+    submission: Submission|null,
+    task?: Task,
     show: boolean,
     onClose: () => void,
 }
 
 export function IpLogModal({
     submission,
+    task,
     show,
     onClose,
 }: Props) {
@@ -46,13 +49,19 @@ export function IpLogModal({
                             </tr>
                         </thead>
                         <tbody>
-                            {submission && ipAddresses.data?.map((ipAddress) => (
-                                <IpAddressListItem
-                                    key={ipAddress.id}
-                                    submission={submission}
-                                    ipAddress={ipAddress}
-                                />
-                            ))}
+                            {submission && ipAddresses.data?.map((ipAddress, idx, array) => {
+                                const isFirstAfterDeadline = task !== undefined
+                                    && ipAddress.logTime > task.hardDeadline
+                                    && (idx === 0 || array[idx - 1].logTime < task.hardDeadline);
+                                return (
+                                    <IpAddressListItem
+                                        key={ipAddress.id}
+                                        submission={submission}
+                                        ipAddress={ipAddress}
+                                        isFirstAfterDeadline={isFirstAfterDeadline}
+                                    />
+                                );
+                            })}
                         </tbody>
                     </Table>
                 </Modal.Body>

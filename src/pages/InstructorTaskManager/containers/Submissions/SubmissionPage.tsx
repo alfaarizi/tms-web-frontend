@@ -183,6 +183,7 @@ export function SubmissionPage() {
 
             <IpLogModal
                 submission={submission.data}
+                task={submission.data.task}
                 show={showIpLog.show}
                 onClose={showIpLog.toHide}
             />
