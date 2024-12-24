@@ -298,9 +298,9 @@
       "exams": "Exams"
     },
     "restrictSubmissionAttempts": {
-      "maxAttempts": "Maximum number of submission attempts",
+      "maxAttempts": "Submission attempts",
       "unlimited": "Unlimited",
-      "remaining": "Remaining number of submission attempts"
+      "remaining": "Remaining attempts"
     },
     "deadlineStatus": {
       "notAvailable": "Not available",

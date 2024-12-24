@@ -299,9 +299,9 @@
       "exams": "Vizsga feladatok"
     },
     "restrictSubmissionAttempts": {
-      "maxAttempts": "Maximum beküldési próbálkozások száma",
+      "maxAttempts": "Próbálkozások száma",
       "unlimited": "Korlátlan",
-      "remaining": "Maradék beküldési próbálkozások száma"
+      "remaining": "Maradék próbálkozás"
     },
     "deadlineStatus": {
       "notAvailable": "Nem elérhető",
