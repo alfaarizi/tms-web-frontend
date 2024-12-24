@@ -53,12 +53,16 @@ export const TaskDetails = ({
                     <a href={task.canvasUrl} target="_blank" rel="noreferrer">{task.canvasUrl}</a>
                 </DataRow>
             ) : null}
-            <DataRow label={t('task.available')}>
-                <GroupDateTime value={task.available} timezone={task.group?.timezone || ''} />
-            </DataRow>
-            <DataRow label={t('task.softDeadLine')}>
-                <GroupDateTime value={task.softDeadline} timezone={task.group?.timezone || ''} />
-            </DataRow>
+            {task.available ? (
+                <DataRow label={t('task.available')}>
+                    <GroupDateTime value={task.available} timezone={task.group?.timezone || ''} />
+                </DataRow>
+            ) : null}
+            {task.softDeadline ? (
+                <DataRow label={t('task.softDeadLine')}>
+                    <GroupDateTime value={task.softDeadline} timezone={task.group?.timezone || ''} />
+                </DataRow>
+            ) : null}
             <DataRow label={t('task.hardDeadLine')}>
                 <GroupDateTime value={task.hardDeadline} timezone={task.group?.timezone || ''} />
             </DataRow>

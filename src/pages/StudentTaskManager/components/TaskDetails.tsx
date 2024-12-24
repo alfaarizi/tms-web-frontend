@@ -61,18 +61,22 @@ export const TaskDetails = ({
                     </a>
                 </DataRow>
             ) : null}
-            <DataRow label={t('task.available')}>
-                <LocaleDateTime value={task.available} />
-            </DataRow>
-            <DataRow label={t('task.softDeadLine')}>
-                <LocaleDateTime value={task.softDeadline} />
-                {' ('}
-                <RemainingTimeForDeadLine
-                    value={task.softDeadline}
-                    hasSubmission={task.submissions[0].uploadCount > 0}
-                />
-                )
-            </DataRow>
+            {task.available ? (
+                <DataRow label={t('task.available')}>
+                    <LocaleDateTime value={task.available} />
+                </DataRow>
+            ) : null}
+            {task.softDeadline ? (
+                <DataRow label={t('task.softDeadLine')}>
+                    <LocaleDateTime value={task.softDeadline} />
+                    {' ('}
+                    <RemainingTimeForDeadLine
+                        value={task.softDeadline}
+                        hasSubmission={task.submissions[0].uploadCount > 0}
+                    />
+                    )
+                </DataRow>
+            ) : null}
             <DataRow label={t('task.hardDeadLine')}>
                 <LocaleDateTime value={task.hardDeadline} />
                 {' ('}
