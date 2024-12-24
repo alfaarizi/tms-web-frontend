@@ -69,7 +69,7 @@ export function EvaluatorTab({ task }: Props) {
             port: selectedTemplate.port,
             compileInstructions: selectedTemplate.compileInstructions,
             runInstructions: selectedTemplate.runInstructions,
-            showFullErrorMsg: false,
+            showFullErrorMsg: true,
             reevaluateAutoTest: false,
         });
 
