@@ -12,7 +12,7 @@ export interface Task {
     hardDeadline: string;
     available?: string;
     creatorName: string;
-    submissions: Submission[];
+    submission: Submission;
     taskFiles: TaskFile[];
     gitInfo?: {
         path: string

@@ -14,7 +14,7 @@ export const QUERY_KEY = 'student/tasks';
 export function useTask(taskID: number) {
     return useQuery<Task>([QUERY_KEY, { taskID }], () => TasksService.one(taskID), {
         refetchInterval: (queryState) => (
-            !!queryState?.submissions?.some((file) => file.status === 'Uploaded')
+            (queryState?.submission.status === 'Uploaded')
                 && !!queryState?.autoTest
                 ? 60000 : false),
         refetchIntervalInBackground: false,

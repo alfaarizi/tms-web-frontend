@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-import { Submission } from 'resources/student/Submission';
 import {
     useDownloadTaskFile,
     useDownloadSubmission, useDownloadTestReport,
@@ -53,15 +51,15 @@ export const TaskPage = () => {
         setSubmissionLimitReached(
             task.data !== undefined
             && task.data.isSubmissionCountRestricted
-            && task.data.submissions[0].uploadCount >= task.data.submissionLimit
-            && task.data.submissions[0].status !== 'Late Submission',
+            && task.data.submission.uploadCount >= task.data.submissionLimit
+            && task.data.submission.status !== 'Late Submission',
         );
     }, [task]);
 
     if (!task.data) {
         return null;
     }
-    const submission: Submission = task.data.submissions[0];
+    const { submission } = task.data;
 
     const handleSubmissionDownload = () => {
         if (submission.name !== undefined) {
