@@ -72,7 +72,7 @@ export const TaskDetails = ({
                     {' ('}
                     <RemainingTimeForDeadLine
                         value={task.softDeadline}
-                        hasSubmission={task.submissions[0].uploadCount > 0}
+                        hasSubmission={task.submission.uploadCount > 0}
                     />
                     )
                 </DataRow>
@@ -82,7 +82,7 @@ export const TaskDetails = ({
                 {' ('}
                 <RemainingTimeForDeadLine
                     value={task.hardDeadline}
-                    hasSubmission={task.submissions[0].uploadCount > 0}
+                    hasSubmission={task.submission.uploadCount > 0}
                 />
                 )
             </DataRow>

@@ -21,9 +21,9 @@ export const TaskListItem = ({
             <div className="d-flex justify-content-between align-items-center w-100">
                 <strong>{task.name}</strong>
                 <strong>
-                    {task.submissions[0].translatedStatus}
+                    {task.submission.translatedStatus}
                     {' '}
-                    {task.submissions[0].grade ? ` (${task.submissions[0]?.grade})` : null}
+                    {task.submission.grade ? ` (${task.submission?.grade})` : null}
                 </strong>
             </div>
 
@@ -36,7 +36,7 @@ export const TaskListItem = ({
                         {' ('}
                         <RemainingTimeForDeadLine
                             value={task.softDeadline}
-                            hasSubmission={task.submissions[0].uploadCount > 0}
+                            hasSubmission={task.submission.uploadCount > 0}
                         />
                         )
                         {' | '}
@@ -50,7 +50,7 @@ export const TaskListItem = ({
                 {' ('}
                 <RemainingTimeForDeadLine
                     value={task.hardDeadline}
-                    hasSubmission={task.submissions[0].uploadCount > 0}
+                    hasSubmission={task.submission.uploadCount > 0}
                 />
                 )
             </span>
