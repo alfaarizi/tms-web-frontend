@@ -23,7 +23,7 @@ export function GitInfo({
             <CustomCardHeader>
                 <CustomCardTitle>{t('task.git.gitRepo')}</CustomCardTitle>
             </CustomCardHeader>
-            {passwordProtected ? <p>{t('task.task.exitPasswordGitPush')}</p> : null}
+            {passwordProtected ? <p>{t('task.exitPasswordGitPush')}</p> : null}
             <p>
                 <strong>
                     {t('task.git.path')}
