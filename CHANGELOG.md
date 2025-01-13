@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.9.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.8.1...v4.9.0) (2025-01-13)
+
+
+### Features
+
+* Add red line to IP Log after last log item in the task availability interval ([a1e01ba](https://gitlab.com/tms-elte/frontend-react/commit/a1e01ba06bb1bd63ad9d7d3a0dffd4444b55ba04))
+
+
+### Bug Fixes
+
+* Enable showing full error messages to students upon loading an evaluator template. ([e72adff](https://gitlab.com/tms-elte/frontend-react/commit/e72adffb1b1a3cdb69fd508520ba12a32857bf44))
+* Hide availability and soft deadline for tasks when not defined. ([3d35dd9](https://gitlab.com/tms-elte/frontend-react/commit/3d35dd962369fb31bc325836ac239f08ba9acae6))
+
 ### [4.8.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.8.0...v4.8.1) (2024-12-23)
 
 

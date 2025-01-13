@@ -10,7 +10,7 @@
     "automated evaluation",
     "Canvas LMS"
   ],
-  "version": "4.8.1",
+  "version": "4.9.0",
   "private": true,
   "homepage": "https://gitlab.com/tms-elte/frontend-react",
   "bugs": "https://gitlab.com/tms-elte/frontend-react/-/issues",
