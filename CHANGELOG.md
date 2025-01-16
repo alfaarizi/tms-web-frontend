@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [4.9.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.9.0...v4.9.1) (2025-01-16)
 
+
+### Bug Fixes
+
+* Submission card is not shown after the first upload ([66c4275](https://gitlab.com/tms-elte/frontend-react/commit/66c427519ac3ee9cd114743dd8f88af01c61167a))
+
 ## [4.9.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.8.1...v4.9.0) (2025-01-13)
 
 
