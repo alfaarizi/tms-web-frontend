@@ -31,13 +31,13 @@ export function useUploadSubmissionMutation() {
     return useMutation<Submission, Error, SubmissionUpload>(
         (uploadData) => SubmissionsService.upload(uploadData),
         {
-            onSuccess: (submission: Submission, variables: SubmissionUpload) => {
+            onSuccess: (submission: Submission) => {
                 const key = [QUERY_KEY, { taskID: submission.taskID }];
                 const oldTaskData = queryClient.getQueryData<Task>(key);
                 if (oldTaskData) {
                     queryClient.setQueryData(key, {
                         ...oldTaskData,
-                        submissions: [submission],
+                        submission,
                     });
                 }
             },
