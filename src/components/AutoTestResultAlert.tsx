@@ -64,9 +64,7 @@ export function AutoTestResultAlert({
                                     {result.testCaseNr}
                                 </td>
                                 <td>
-                                    {!result.isPassed
-                                        ? <pre>{result.errorMsg}</pre>
-                                        : null}
+                                    <pre>{result.errorMsg}</pre>
                                 </td>
                             </tr>
                         ))}

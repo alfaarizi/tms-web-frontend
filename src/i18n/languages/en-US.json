@@ -336,7 +336,7 @@
       "runInstructions": "Run instructions",
       "runInstructionsHelp": "Arguments of the test case are available in the \"$@\" variable. ($args in case of PowerShell.) The serial of the test case is stored in the $TEST_CASE_NR environment variable.",
       "runWebAppInstructionsHelp": "Set up web application environment and start web application. The instructions will be executed in asynchronously.",
-      "showFullErrorMsg": "When checked students can see the detailed compile or runtime error messages.",
+      "showFullErrorMsg": "When checked students can see the detailed compile or runtime messages.",
       "reevaluate": "Reevaluate already tested, but ungraded student submissions",
       "templates": "Templates",
       "templateHelp": "In case you are not familiar with the interface, it is recommended to start with a template. Please click on the Templates button and select one of the preconfigured templates.",
