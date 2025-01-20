@@ -337,7 +337,7 @@
       "runInstructions": "Futtatási beállítások",
       "runInstructionsHelp": "A teszteset parancssori argumentumai a \"$@\" változóban érhetőek el. (Powershell esetén $args.) A teszteset sorszáma a $TEST_CASE_NR környezeti változóból olvasható ki.",
       "runWebAppInstructionsHelp": "Webalkalmazás környezet konfigurációja és a web szerver indítása. A parancsok végrehajtása azonnal visszatér.",
-      "showFullErrorMsg": "A hallgatók láthatják a részletes fordítási és futtatási hibaüzeneteket.",
+      "showFullErrorMsg": "A hallgatók láthatják a részletes fordítási és futtatási üzeneteket.",
       "reevaluate": "Már tesztelt, de még nem értékelt hallgatói megoldások újratesztelése",
       "templates": "Sablonok",
       "templateHelp": "Ha először használja a felületet, javasolt valamelyik sablon használata. Kattintson a Sablonok gombra és válasszon egy konfigurációt.",
