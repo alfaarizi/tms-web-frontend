@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTasksForGrid } from 'hooks/instructor/TaskHooks';
-
 import { Group } from 'resources/instructor/Group';
-import { useDownloadAll, useExportSpreadsheet } from 'hooks/instructor/SubmissionHooks';
+import { useDownloadAll, useExportSpreadsheet, useGradeMutation } from 'hooks/instructor/SubmissionHooks';
 import { TaskGridTableBody } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableBody';
 import { TaskGridTableHeader } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableHeader';
 import { TaskGridTableCard } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableCard';
@@ -10,9 +9,14 @@ import { GridSubmission } from 'resources/instructor/GridSubmission';
 import { useGroupStudents } from 'hooks/instructor/GroupHooks';
 import { GridTask } from 'resources/instructor/GridTask.php';
 import { User } from 'resources/common/User';
+import {
+    TaskQuickGraderTableBody,
+} from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskQuickGrader/TaskQuickGraderTableBody';
+import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
 
 type Props = {
     group: Group,
+    quickgrader?: boolean,
 };
 
 /**
@@ -20,11 +24,12 @@ type Props = {
  * @param group
  * @constructor
  */
-export function GroupTaskGridView({ group }: Props) {
+export function GroupTaskGridView({ group, quickgrader = false }: Props) {
     const students = useGroupStudents(group.id);
     const tasks = useTasksForGrid(group.id);
     const exportSpreadsheet = useExportSpreadsheet();
     const downloadAll = useDownloadAll();
+    const gradeMutation = useGradeMutation();
 
     const studentList: User[] = students.data || [];
     const categorizedTasks: GridTask[][] = tasks.data || [];
@@ -52,6 +57,20 @@ export function GroupTaskGridView({ group }: Props) {
         return taskFiles?.get(studentID);
     };
 
+    /**
+     * Saves the grading data by calling the `gradeMutation` mutation.
+     *
+     * @param data - The grading data to save, including `status`, `grade`, and optional `notes`.
+     * @throws Will catch and handle any mutation errors.
+     */
+    const handleGradeSave = async (data: SubmissionGrade) => {
+        try {
+            await gradeMutation.mutateAsync(data);
+        } catch (e) {
+            // Handle error globally
+        }
+    };
+
     // Render
     if (!students.isSuccess || !tasks.isSuccess || (studentList.length === 0 && categorizedTasks.length === 0)) {
         return null;
@@ -65,11 +84,22 @@ export function GroupTaskGridView({ group }: Props) {
                 onDownloadAll={downloadAll.download}
                 onExportSpreadsheet={exportSpreadsheet.download}
             />
-            <TaskGridTableBody
-                students={studentList}
-                taskList={flatTaskList}
-                getSubmission={getSubmission}
-            />
+            {quickgrader
+                ? (
+                    <TaskQuickGraderTableBody
+                        students={studentList}
+                        taskList={flatTaskList}
+                        getSubmission={getSubmission}
+                        onGradeSave={handleGradeSave} // Pass handleGradeSave as a prop
+                    />
+                )
+                : (
+                    <TaskGridTableBody
+                        students={studentList}
+                        taskList={flatTaskList}
+                        getSubmission={getSubmission}
+                    />
+                )}
         </TaskGridTableCard>
     );
 }

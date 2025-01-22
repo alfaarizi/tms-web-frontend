@@ -5,6 +5,7 @@ import * as SubmissionsService from 'api/instructor/SubmissionsService';
 import { useDownloader } from 'hooks/common/useDownloader';
 import { QUERY_KEY as GROUP_QUERY_KEY } from 'hooks/instructor/GroupHooks';
 import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/instructor/TaskHooks';
+import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
 import * as GroupService from 'api/instructor/GroupsService';
 
 export const QUERY_KEY = 'instructor/submissions';
@@ -28,7 +29,7 @@ export function useSubmission(id: number) {
 export function useGradeMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((file: Submission) => SubmissionsService.grade(file), {
+    return useMutation((gradeData: SubmissionGrade) => SubmissionsService.grade(gradeData), {
         onSuccess: async (data) => {
             // Replace existing Submission with the returned data
             queryClient.setQueryData([QUERY_KEY, { id: data.id }], data);

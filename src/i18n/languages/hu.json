@@ -59,6 +59,7 @@
     "view": "Nézet",
     "list": "Lista",
     "grid": "Rács",
+    "quick": "Gyorsértékelő",
     "areYouSure": "Biztos benne?",
     "confirmDiscard": "Ha bezárja az ablakot, az eddigi módosításai elvesznek!",
     "confirmAddSemester": "Ha hozzáad egy új szemesztert, az lesz, az aktuális, és nem tudja visszaállítani az előzőt",
