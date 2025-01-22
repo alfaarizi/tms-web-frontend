@@ -2,6 +2,7 @@ import { Submission } from 'resources/instructor/Submission';
 import { AutoTesterResult } from 'resources/common/AutoTesterResult';
 import { IpAddress } from 'resources/instructor/IpAddress';
 import { axiosInstance } from 'api/axiosInstance';
+import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
 
 export async function listForTask(taskID: number) {
     const res = await axiosInstance.get<Submission[]>('/instructor/submissions/list-for-task', {
@@ -76,12 +77,16 @@ export async function downloadAllFiles(taskID: number, onlyUngraded: boolean) {
     return res.data;
 }
 
-export async function grade(file: Submission) {
+export async function grade(gradeData: SubmissionGrade) {
     const res = await axiosInstance.patch(
-        `/instructor/submissions/${file.id}?expand=uploader,task,task.group,codeCompass,codeCheckerResult,`
+        `/instructor/submissions/${gradeData.id}?expand=uploader,task,task.group,codeCompass,codeCheckerResult,`
         + 'codeCheckerResult.stdout,codeCheckerResult.stderr,codeCheckerResult.codeCheckerReports,'
         + 'codeCheckerResult.runnerErrorMessage',
-        file,
+        {
+            status: gradeData.status,
+            grade: gradeData.grade,
+            notes: gradeData.notes,
+        },
     );
     return res.data;
 }

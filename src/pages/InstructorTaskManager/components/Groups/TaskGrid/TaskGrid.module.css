@@ -58,3 +58,10 @@ th.taskNameCell > span {
     border: none;
     outline-offset: -1px;
 }
+
+.taskQuickGraderCellInput {
+    width: 50px;
+    padding: 5px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}

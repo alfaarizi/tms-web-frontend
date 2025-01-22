@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router';
 import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faList, faTableCells } from '@fortawesome/free-solid-svg-icons';
+import {
+    faPlus,
+    faList,
+    faTableCells,
+    faBolt,
+} from '@fortawesome/free-solid-svg-icons';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ButtonGroup } from 'react-bootstrap';
@@ -23,6 +28,7 @@ type Props = {
 enum View {
     List = 'list',
     Grid = 'grid',
+    Quick = 'quick',
 }
 
 /**
@@ -47,13 +53,17 @@ export function GroupTasksTab({ group }: Props) {
             // If it is valid set the new view
             setView(value);
             break;
+        case View.Quick:
+            // If it is valid set the new view
+            setView(value);
+            break;
         default:
             if (isMobile) {
                 setView(View.List);
             }
             break;
         }
-    }, []);
+    }, [isMobile]);
 
     /**
      * Sets the new view and saves it to local storage
@@ -63,6 +73,23 @@ export function GroupTasksTab({ group }: Props) {
         setView(newView);
         localStorage.setItem(INSTRUCTOR_TASK_VIEW_LOCAL_STORAGE_KEY, newView);
     };
+
+    // Determine the icon based on the current view
+    let icon;
+    switch (view) {
+    case View.List:
+        icon = faList;
+        break;
+    case View.Grid:
+        icon = faTableCells;
+        break;
+    case View.Quick:
+        icon = faBolt; // Use the icon for the Quick view
+        break;
+    default:
+        icon = faList; // Fallback icon if needed
+        break;
+    }
 
     // Render
     return (
@@ -77,7 +104,7 @@ export function GroupTasksTab({ group }: Props) {
                 <ToolbarDropdown
                     text={t('common.view')}
                     displayTextBreakpoint="xs"
-                    icon={view === View.List ? faList : faTableCells}
+                    icon={icon}
                 >
                     <DropdownItem onSelect={() => handleViewChange(View.List)} active={view === View.List}>
                         <FontAwesomeIcon icon={faList} />
@@ -89,9 +116,21 @@ export function GroupTasksTab({ group }: Props) {
                         {' '}
                         {t('common.grid')}
                     </DropdownItem>
+                    {actualSemester.check(group.semesterID)
+                        ? (
+                            <DropdownItem onSelect={() => handleViewChange(View.Quick)} active={view === View.Quick}>
+                                <FontAwesomeIcon icon={faBolt} />
+                                {' '}
+                                {t('common.quick')}
+                            </DropdownItem>
+                        ) : null}
                 </ToolbarDropdown>
             </ButtonGroup>
-            {view === View.List ? <GroupTaskListView group={group} /> : <GroupTaskGridView group={group} />}
+            {view === View.List ? <GroupTaskListView group={group} /> : null}
+            {view === View.Grid ? <GroupTaskGridView group={group} /> : null}
+            {view === View.Quick && actualSemester.check(group.semesterID)
+                ? <GroupTaskGridView group={group} quickgrader />
+                : null}
         </>
     );
 }
