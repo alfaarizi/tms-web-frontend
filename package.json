@@ -119,6 +119,9 @@
     "release": "standard-version",
     "release-pre": "standard-version --prerelease alpha --skip.changelog"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "browserslist": {
     "production": [
       ">0.2%",

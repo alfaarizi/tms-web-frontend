@@ -6,7 +6,7 @@ This project is the web client for <abbr title="Task Management System">TMS</abb
 
 ## Requirements
 
-Node.JS 18 or greater is required to build this application.
+Node.JS 22 or greater is required to build this application.
 
 ## Available Scripts
 

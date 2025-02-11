@@ -1,5 +1,5 @@
 # Default image (https://hub.docker.com/_/node)
-image: node:18-bullseye
+image: node:22-bookworm
 
 # Stages: lint -> test -> docker -> deploy
 stages:

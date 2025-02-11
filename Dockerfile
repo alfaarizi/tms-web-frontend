@@ -1,6 +1,6 @@
 ## STAGE 1
 # Build the React app using Node.js
-FROM node:18 AS build
+FROM node:22-bookworm AS build
 
 # Set the working directory inside the container
 WORKDIR /app
