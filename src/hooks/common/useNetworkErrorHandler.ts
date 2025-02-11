@@ -4,9 +4,10 @@ import { axiosInstance } from 'api/axiosInstance';
 import { AxiosError } from 'axios';
 
 import { useNotifications } from 'hooks/common/useNotifications';
-import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
+import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useLogoutMutation } from 'hooks/common/UserHooks';
 import { PROXY_AUTH_REDIRECT_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
+import { ServerErrorResponse } from 'resources/common/ServerErrorResponse';
 
 /**
  * Global error handler. Displays notifications about network errors and handle specific status codes.
@@ -16,11 +17,11 @@ export function useNetworkErrorHandler() {
     const logoutMutation = useLogoutMutation();
     const location = useLocation();
 
-    const errorHandler = (error: AxiosError) => {
+    const errorHandler = (error: AxiosError<ServerErrorResponse | ValidationErrorBody>) => {
         if (error.response?.status === 422) {
             const validationError = new ServerSideValidationError(
                 'Serverside validation Failed',
-                error.response.data,
+                error.response.data as ValidationErrorBody,
             );
             return Promise.reject(validationError);
         }
@@ -41,9 +42,10 @@ export function useNetworkErrorHandler() {
             }
         } else if (error.response?.data.message) {
             // If the error has a formatted json body with a detailed error message, then display the message
+            const response = error.response.data as ServerErrorResponse;
             push({
                 variant: 'error',
-                message: error.response.data.message,
+                message: response.message,
             });
         } else {
             // If it is an error without a formatted json body
