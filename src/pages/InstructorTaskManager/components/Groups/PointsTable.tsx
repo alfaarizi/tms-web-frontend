@@ -11,12 +11,12 @@ type Props = {
         points: number[],
         user?: number
     }[],
-    showUserColumn: boolean
+    showUserColumn?: boolean
 }
 
 export function PointsTable({
     stats,
-    showUserColumn,
+    showUserColumn = false,
 }: Props) {
     const { t } = useTranslation();
 
