@@ -40,6 +40,13 @@ eslint:
       - build/
     expire_in: 1 week
 
+build:
+  extends: .build
+  script:
+    - npm run build
+  rules:
+    - if: '($CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH) || $CI_PROJECT_NAMESPACE != "tms-elte"'
+
 build_staging:
   extends: .build
   script:
