@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Task } from 'resources/instructor/Task';
-import { getFirstError } from 'utils/getFirstError';
-import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
+import { Task } from '@/resources/instructor/Task';
+import { getFirstError } from '@/utils/getFirstError';
+import { TaskFilesUpload } from '@/resources/instructor/TaskFilesUpload';
 import {
     useTaskFileDownload,
     useTestTaskFileRemoveMutation,
     useTestTaskFiles,
     useTestTaskFilesUploadMutation,
-} from 'hooks/instructor/TaskFileHooks';
-import { FileUpload } from 'components/FileUpload';
-import { TaskFilesList } from 'components/TaskFilesList';
+} from '@/hooks/instructor/TaskFileHooks';
+import { FileUpload } from '@/components/FileUpload';
+import { TaskFilesList } from '@/components/TaskFilesList';
 
 type Props = {
     task: Task,

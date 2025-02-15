@@ -1,3 +1,3 @@
-import { StudentTaskManager } from 'pages/StudentTaskManager/containers/StudentTaskManager';
+import { StudentTaskManager } from '@/pages/StudentTaskManager/containers/StudentTaskManager';
 
 export default StudentTaskManager;

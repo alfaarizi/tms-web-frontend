@@ -1,9 +1,8 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-import styles from 'components/Navigation/SideBarItemWithIcon.module.css';
+import styles from '@/components/Navigation/SideBarItemWithIcon.module.css';
 
 type Props = {
     icon: IconProp

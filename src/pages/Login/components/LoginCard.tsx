@@ -1,13 +1,13 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardFooter } from 'components/CustomCard/CustomCardFooter';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { useBranding } from 'ui-hooks/useBranding';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardFooter } from '@/components/CustomCard/CustomCardFooter';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { useBranding } from '@/ui-hooks/useBranding';
 
 type Props = {
     children: ReactNode
@@ -31,7 +31,7 @@ export function LoginCard({ children }: Props) {
                         <div>{branding.organizationName[i18next.language]}</div>
                         <a href="https://tms-elte.gitlab.io/">
                             TMS v
-                            {process.env.REACT_APP_VERSION}
+                            {import.meta.env.VITE_VERSION}
                         </a>
                     </CustomCardFooter>
                 </CustomCard>

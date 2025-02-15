@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
-import { CourseForm } from 'pages/CourseManager/components/CourseForm';
-import { useCreateCourseMutation } from 'hooks/instructor/CoursesHooks';
-import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
-import { ServerSideValidationError, ValidationErrorBody } from '../../../exceptions/ServerSideValidationError';
+import { CourseForm } from '@/pages/CourseManager/components/CourseForm';
+import { useCreateCourseMutation } from '@/hooks/instructor/CoursesHooks';
+import { CreateOrUpdateCourse } from '@/resources/common/CreateOrUpdateCourse';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 
 export function NewCoursePage() {
     const { t } = useTranslation();

@@ -1,15 +1,14 @@
-import React from 'react';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { Task } from 'resources/instructor/Task';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { Task } from '@/resources/instructor/Task';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
-import { LocaleDateTime } from 'components/LocaleDateTime';
+import { LocaleDateTime } from '@/components/LocaleDateTime';
 
 type Props = {
     task: Task
 }
 
-export const TaskListItem = ({ task }: Props) => {
+export function TaskListItem({ task }: Props) {
     const { t } = useTranslation();
     const history = useHistory();
 
@@ -38,4 +37,4 @@ export const TaskListItem = ({ task }: Props) => {
             </span>
         </ListCardItem>
     );
-};
+}

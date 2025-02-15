@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Route, RouteProps } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import ErrorPage from 'pages/ErrorPage';
-import Login from 'pages/Login';
-import { useIsLoggedIn } from 'hooks/common/UserHooks';
+import ErrorPage from '@/pages/ErrorPage';
+import Login from '@/pages/Login';
+import { useIsLoggedIn } from '@/hooks/common/UserHooks';
 
 interface Props extends RouteProps {
     hasPermission?: boolean,

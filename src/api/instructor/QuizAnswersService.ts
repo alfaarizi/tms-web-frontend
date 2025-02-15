@@ -1,5 +1,5 @@
-import { QuizAnswer } from 'resources/instructor/QuizAnswer';
-import { axiosInstance } from '../axiosInstance';
+import { QuizAnswer } from '@/resources/instructor/QuizAnswer';
+import { axiosInstance } from '@/api/axiosInstance';
 
 export async function index(questionID: number) {
     const res = await axiosInstance.get<QuizAnswer[]>('/instructor/quiz-answers', {

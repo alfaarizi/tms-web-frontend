@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
+import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
 import {
     useCreateQuestionMutation,
     useQuestionsForSet,
     useRemoveQuestionMutation,
     useUpdateQuestionMutation,
-} from 'hooks/instructor/QuizQuestionHooks';
-import { QuizQuestion } from 'resources/instructor/QuizQuestion';
-import { useShow } from 'ui-hooks/useShow';
-import { QuestionList } from 'pages/InstructorExamination/components/QuestionList/QuestionsList';
-import { QuestionFormModal } from 'pages/InstructorExamination/components/QuestionSets/QuestionFormModal';
-import { QuizAnswer } from 'resources/instructor/QuizAnswer';
-import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
+} from '@/hooks/instructor/QuizQuestionHooks';
+import { QuizQuestion } from '@/resources/instructor/QuizQuestion';
+import { useShow } from '@/ui-hooks/useShow';
+import { QuestionList } from '@/pages/InstructorExamination/components/QuestionList/QuestionsList';
+import { QuestionFormModal } from '@/pages/InstructorExamination/components/QuestionSets/QuestionFormModal';
+import { QuizAnswer } from '@/resources/instructor/QuizAnswer';
+import { ServerSideValidationError } from '@/exceptions/ServerSideValidationError';
 import {
     useCreateAnswerMutation,
     useRemoveAnswerMutation,
     useUpdateAnswerMutation,
-} from 'hooks/instructor/QuizAnswerHooks';
-import { AnswerFormModal } from 'pages/InstructorExamination/components/QuestionSets/AnswerFormModal';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
-import { InsertFunc } from 'components/ReactMdeWithCommands';
-import { QuizImageGallery } from 'pages/InstructorExamination/containers/QuestionSets/QuizImageGallery';
+} from '@/hooks/instructor/QuizAnswerHooks';
+import { AnswerFormModal } from '@/pages/InstructorExamination/components/QuestionSets/AnswerFormModal';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
+import { InsertFunc } from '@/components/ReactMdeWithCommands';
+import { QuizImageGallery } from '@/pages/InstructorExamination/containers/QuestionSets/QuizImageGallery';
 
 type Props = {
     questionSet: QuizQuestionSet

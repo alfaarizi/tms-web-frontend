@@ -1,11 +1,11 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { Group } from 'resources/instructor/Group';
-import { User } from 'resources/common/User';
-import { UserAddResponse } from 'resources/instructor/UserAddResponse';
-import { GroupStats } from 'resources/instructor/GroupStats';
-import { StudentStats } from 'resources/instructor/StudentStats';
-import { StudentNotes } from 'resources/instructor/StudentNotes';
-import { safeLocaleCompare } from 'utils/safeLocaleCompare';
+import { axiosInstance } from '@/api/axiosInstance';
+import { Group } from '@/resources/instructor/Group';
+import { User } from '@/resources/common/User';
+import { UserAddResponse } from '@/resources/instructor/UserAddResponse';
+import { GroupStats } from '@/resources/instructor/GroupStats';
+import { StudentStats } from '@/resources/instructor/StudentStats';
+import { StudentNotes } from '@/resources/instructor/StudentNotes';
+import { safeLocaleCompare } from '@/utils/safeLocaleCompare';
 
 export async function index(semesterID: number, courseID?: number) {
     const res = await axiosInstance.get<Group[]>('/instructor/groups', {
@@ -44,7 +44,8 @@ export async function duplicate(id: number) {
 
 export async function addStudentNotes(groupID: number, userId: number, notes: string) {
     const res = await axiosInstance.put<StudentNotes>(
-        `/instructor/groups/${groupID}/students/${userId}/notes`, { notes },
+        `/instructor/groups/${groupID}/students/${userId}/notes`,
+        { notes },
     );
     return res.data;
 }

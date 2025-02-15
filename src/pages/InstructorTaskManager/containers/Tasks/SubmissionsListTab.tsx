@@ -1,4 +1,4 @@
-import React, {
+import {
     useMemo, useState,
 } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
@@ -10,21 +10,21 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-import { Task } from 'resources/instructor/Task';
-import { useDownloadAll, useExportSpreadsheet, useSubmissionsForTask } from 'hooks/instructor/SubmissionHooks';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { DataRow } from 'components/DataRow';
-import { SubmissionsList } from 'pages/InstructorTaskManager/containers/Submissions/SubmissionsList';
-import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
-import { SpreadsheetFormat } from 'api/instructor/SubmissionsService';
-import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { Submission } from 'resources/instructor/Submission';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
-import { TaskLevelRepoDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskLevelRepoDetails';
-import { safeLocaleCompare } from 'utils/safeLocaleCompare';
+import { Task } from '@/resources/instructor/Task';
+import { useDownloadAll, useExportSpreadsheet, useSubmissionsForTask } from '@/hooks/instructor/SubmissionHooks';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { DataRow } from '@/components/DataRow';
+import { SubmissionsList } from '@/pages/InstructorTaskManager/containers/Submissions/SubmissionsList';
+import { ToolbarDropdown } from '@/components/Buttons/ToolbarDropdown';
+import { SpreadsheetFormat } from '@/api/instructor/SubmissionsService';
+import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
+import { Submission } from '@/resources/instructor/Submission';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { TaskLevelRepoDetails } from '@/pages/InstructorTaskManager/components/Tasks/TaskLevelRepoDetails';
+import { safeLocaleCompare } from '@/utils/safeLocaleCompare';
 
 type Props = {
     task: Task

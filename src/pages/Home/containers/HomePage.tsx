@@ -1,6 +1,5 @@
-import React from 'react';
 import { Redirect } from 'react-router';
-import { useUserSettings } from 'hooks/common/UserHooks';
+import { useUserSettings } from '@/hooks/common/UserHooks';
 
 /**
  * Redirects the user to the correct homepage

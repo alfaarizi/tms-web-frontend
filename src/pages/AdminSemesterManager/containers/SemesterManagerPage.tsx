@@ -1,7 +1,6 @@
-import React from 'react';
-import { useSemesters } from 'hooks/common/SemesterHooks';
-import { useAddNextSemesterMutation, useNextSemester } from 'hooks/admin/SemesterHooks';
-import { SemesterList } from 'pages/AdminSemesterManager/components/SemesterList';
+import { useSemesters } from '@/hooks/common/SemesterHooks';
+import { useAddNextSemesterMutation, useNextSemester } from '@/hooks/admin/SemesterHooks';
+import { SemesterList } from '@/pages/AdminSemesterManager/components/SemesterList';
 
 export function SemesterManagerPage() {
     const semesters = useSemesters();

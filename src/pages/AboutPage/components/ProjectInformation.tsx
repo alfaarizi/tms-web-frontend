@@ -1,5 +1,4 @@
-import React from 'react';
-import { usePublicSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { usePublicSystemInfoQuery } from '@/hooks/common/SystemHooks';
 import { useTranslation } from 'react-i18next';
 
 export function ProjectInformation() {
@@ -14,7 +13,7 @@ export function ProjectInformation() {
             <p className="font-weight-bold">
                 {t('aboutPage.versionFrontend')}
                 : v
-                {process.env.REACT_APP_VERSION}
+                {import.meta.env.VITE_VERSION}
                 <br />
                 {t('aboutPage.versionBackend')}
                 : v

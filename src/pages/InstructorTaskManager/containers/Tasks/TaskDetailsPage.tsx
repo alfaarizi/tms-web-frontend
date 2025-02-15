@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Tab } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
-import { useRemoveTaskMutation, useTask, useUpdateTaskMutation } from 'hooks/instructor/TaskHooks';
-import { Task } from 'resources/instructor/Task';
+import { useRemoveTaskMutation, useTask, useUpdateTaskMutation } from '@/hooks/instructor/TaskHooks';
+import { Task } from '@/resources/instructor/Task';
 import { useTranslation } from 'react-i18next';
-import { TaskForm } from 'pages/InstructorTaskManager/components/Tasks/TaskForm';
-import { TaskFilesTab } from 'pages/InstructorTaskManager/containers/Tasks/TaskFilesTab';
-import { SubmissionsListTab } from 'pages/InstructorTaskManager/containers/Tasks/SubmissionsListTab';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { useShow } from 'ui-hooks/useShow';
-import { TabbedInterface } from 'components/TabbedInterface';
-import { EvaluatorTab } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/EvaluatorTab';
-import { TaskDetails } from 'pages/InstructorTaskManager/components/Tasks/TaskDetails';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { Submission } from 'resources/instructor/Submission';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
-import { useStartCodeCompassMutation, useStopCodeCompassMutation } from 'hooks/instructor/SubmissionHooks';
-import { CodeCompassTab } from 'pages/InstructorTaskManager/containers/Tasks/CodeCompassTab';
-import { TaskDescriptionTab } from 'pages/InstructorTaskManager/containers/Tasks/TaskDescriptionTab';
+import { TaskForm } from '@/pages/InstructorTaskManager/components/Tasks/TaskForm';
+import { TaskFilesTab } from '@/pages/InstructorTaskManager/containers/Tasks/TaskFilesTab';
+import { SubmissionsListTab } from '@/pages/InstructorTaskManager/containers/Tasks/SubmissionsListTab';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { useShow } from '@/ui-hooks/useShow';
+import { TabbedInterface } from '@/components/TabbedInterface';
+import { EvaluatorTab } from '@/pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/EvaluatorTab';
+import { TaskDetails } from '@/pages/InstructorTaskManager/components/Tasks/TaskDetails';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { Submission } from '@/resources/instructor/Submission';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { useStartCodeCompassMutation, useStopCodeCompassMutation } from '@/hooks/instructor/SubmissionHooks';
+import { CodeCompassTab } from '@/pages/InstructorTaskManager/containers/Tasks/CodeCompassTab';
+import { TaskDescriptionTab } from '@/pages/InstructorTaskManager/containers/Tasks/TaskDescriptionTab';
 
 type Params = {
     id?: string
 }
 
-export const TaskDetailsPage = () => {
+export function TaskDetailsPage() {
     const { t } = useTranslation();
     const { id } = useParams<Params>();
     const history = useHistory();
@@ -147,4 +147,4 @@ export const TaskDetailsPage = () => {
             </TabbedInterface>
         </>
     );
-};
+}

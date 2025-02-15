@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { ButtonGroup, Card, Col } from 'react-bootstrap';
 
-import { createImageUrl } from 'utils/createImageUrl';
-import { Image } from 'resources/common/Image';
+import { createImageUrl } from '@/utils/createImageUrl';
+import { Image } from '@/resources/common/Image';
 
 type Props = {
     img: Image,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router';
 import { Tab } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -8,29 +8,29 @@ import {
     useGroup,
     useRemoveGroupMutation,
     useUpdateGroupMutation,
-} from 'hooks/instructor/GroupHooks';
+} from '@/hooks/instructor/GroupHooks';
 
-import { GroupForm } from 'pages/InstructorTaskManager/components/Groups/GroupForm';
-import { Group } from 'resources/instructor/Group';
-import { GroupStudentsListTab } from 'pages/InstructorTaskManager/containers/Groups/GroupStudentsListTab';
-import { GroupInstructorsListTab } from 'pages/InstructorTaskManager/containers/Groups/GroupInstructorsListTab';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { GroupStatsTab } from 'pages/InstructorTaskManager/containers/Groups/GroupStatsTab';
-import { GroupNotificationsTab } from 'pages/InstructorTaskManager/containers/Notifications/GroupNotificationsTab';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { GroupDetails } from 'pages/InstructorTaskManager/components/Groups/GroupDetails';
-import { TabbedInterface } from 'components/TabbedInterface';
-import { useNotifications } from 'hooks/common/useNotifications';
+import { GroupForm } from '@/pages/InstructorTaskManager/components/Groups/GroupForm';
+import { Group } from '@/resources/instructor/Group';
+import { GroupStudentsListTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupStudentsListTab';
+import { GroupInstructorsListTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupInstructorsListTab';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { GroupStatsTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupStatsTab';
+import { GroupNotificationsTab } from '@/pages/InstructorTaskManager/containers/Notifications/GroupNotificationsTab';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { GroupDetails } from '@/pages/InstructorTaskManager/components/Groups/GroupDetails';
+import { TabbedInterface } from '@/components/TabbedInterface';
+import { useNotifications } from '@/hooks/common/useNotifications';
 import {
     useCancelCanvasSyncMutation,
     useCanvasSetupMutation,
     useCanvasSyncMutation,
-} from 'hooks/instructor/CanvasHooks';
-import { useShow } from 'ui-hooks/useShow';
-import { SetupCanvasModal } from 'pages/InstructorTaskManager/containers/Groups/SetupCanvasModal';
-import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
-import { GroupTasksTab } from 'pages/InstructorTaskManager/containers/Groups/GroupTasksTab';
-import { ConfirmModal } from 'components/Modals/ConfirmModal';
+} from '@/hooks/instructor/CanvasHooks';
+import { useShow } from '@/ui-hooks/useShow';
+import { SetupCanvasModal } from '@/pages/InstructorTaskManager/containers/Groups/SetupCanvasModal';
+import { CanvasSetupData } from '@/resources/instructor/CanvasSetupData';
+import { GroupTasksTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupTasksTab';
+import { ConfirmModal } from '@/components/Modals/ConfirmModal';
 
 type Params = {
     id?: string,

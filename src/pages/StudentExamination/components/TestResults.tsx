@@ -1,6 +1,5 @@
-import React from 'react';
-import { TestResultQuestion } from 'pages/StudentExamination/components/TestResultQuestion';
-import { QuizResultQuestion } from 'resources/student/QuizResultQuestion';
+import { TestResultQuestion } from '@/pages/StudentExamination/components/TestResultQuestion';
+import { QuizResultQuestion } from '@/resources/student/QuizResultQuestion';
 
 type Props = {
     results?: QuizResultQuestion[];

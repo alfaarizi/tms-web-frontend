@@ -1,15 +1,14 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useGroupStats } from 'hooks/instructor/GroupHooks';
-import { Group } from 'resources/instructor/Group';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { GroupHandlingTimeChart } from 'pages/InstructorTaskManager/components/Groups/GroupHandlingTimeChart';
-import { GroupHandlingTimeTable } from 'pages/InstructorTaskManager/components/Groups/GroupHandlingTimeTable';
-import { GroupPointsBoxPlot } from 'pages/InstructorTaskManager/components/Groups/GroupPointsBoxPlot';
-import { PointsTable } from 'pages/InstructorTaskManager/components/Groups/PointsTable';
+import { useGroupStats } from '@/hooks/instructor/GroupHooks';
+import { Group } from '@/resources/instructor/Group';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { GroupHandlingTimeChart } from '@/pages/InstructorTaskManager/components/Groups/GroupHandlingTimeChart';
+import { GroupHandlingTimeTable } from '@/pages/InstructorTaskManager/components/Groups/GroupHandlingTimeTable';
+import { GroupPointsBoxPlot } from '@/pages/InstructorTaskManager/components/Groups/GroupPointsBoxPlot';
+import { PointsTable } from '@/pages/InstructorTaskManager/components/Groups/PointsTable';
 
 type Props = {
     group: Group

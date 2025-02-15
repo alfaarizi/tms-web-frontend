@@ -1,7 +1,5 @@
-import React from 'react';
-
-import { Submission } from 'resources/instructor/Submission';
-import { IpAddress } from 'resources/instructor/IpAddress';
+import { Submission } from '@/resources/instructor/Submission';
+import { IpAddress } from '@/resources/instructor/IpAddress';
 import { useTranslation } from 'react-i18next';
 
 type Props = {

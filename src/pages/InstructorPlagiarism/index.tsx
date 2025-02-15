@@ -1,3 +1,3 @@
-import { InstructorPlagiarism } from 'pages/InstructorPlagiarism/containers/InstructorPlagiarism';
+import { InstructorPlagiarism } from '@/pages/InstructorPlagiarism/containers/InstructorPlagiarism';
 
 export default InstructorPlagiarism;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import {
@@ -6,14 +6,14 @@ import {
     Form,
 } from 'react-bootstrap';
 
-import { Task } from 'resources/instructor/Task';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { FormError } from 'components/FormError';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
-import { SetupAutoTester } from 'resources/instructor/SetupAutoTester';
+import { Task } from '@/resources/instructor/Task';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { FormError } from '@/components/FormError';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { EvaluatorAdditionalInformation } from '@/resources/instructor/EvaluatorAdditionalInformation';
+import { SetupAutoTester } from '@/resources/instructor/SetupAutoTester';
 
 type Props = {
     onSave: (task: SetupAutoTester) => void,

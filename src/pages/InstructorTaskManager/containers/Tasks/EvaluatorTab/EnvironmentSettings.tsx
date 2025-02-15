@@ -1,16 +1,15 @@
-import React from 'react';
-import { Task } from 'resources/instructor/Task';
+import { Task } from '@/resources/instructor/Task';
 import {
     EnvironmentSettingsForm,
-} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/EnvironmentSettingsForm';
+} from '@/pages/InstructorTaskManager/components/Tasks/EvaluatorTab/EnvironmentSettingsForm';
 import {
     useSetupEvaluatorEnvironment,
     useUpdateDockerImageMutation,
-} from 'hooks/instructor/EvaluatorHooks';
-import { SetupEvaluatorEnvironment } from 'resources/instructor/SetupEvaluatorEnvironment';
-import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
-import { TestFileManager } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/TestFileManager';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
+} from '@/hooks/instructor/EvaluatorHooks';
+import { SetupEvaluatorEnvironment } from '@/resources/instructor/SetupEvaluatorEnvironment';
+import { EvaluatorAdditionalInformation } from '@/resources/instructor/EvaluatorAdditionalInformation';
+import { TestFileManager } from '@/pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/TestFileManager';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
 
 type Props = {
     task: Task

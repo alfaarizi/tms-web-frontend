@@ -1,6 +1,5 @@
-import React from 'react';
-import { Notification } from 'resources/common/Notification';
-import { NotificationAlert } from './NotificationAlert';
+import { Notification } from '@/resources/common/Notification';
+import { NotificationAlert } from '@/components/NotificationAlerts/NotificationAlert';
 
 type Props = {
     notifications: Notification[],

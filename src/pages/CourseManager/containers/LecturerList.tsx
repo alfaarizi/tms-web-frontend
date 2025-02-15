@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { AddUserCard } from 'components/AddUsers/AddUserCard';
-import { UserListCard } from 'components/UserListCard/UserListCard';
+import { AddUserCard } from '@/components/AddUsers/AddUserCard';
+import { UserListCard } from '@/components/UserListCard/UserListCard';
 import {
     useAddLecturerMutation,
     useCourseLecturers,
     useDeleteLecturerMutation,
-} from 'hooks/instructor/CoursesHooks';
-import { Course } from 'resources/common/Course';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
-import { useSearchFacultyQuery } from 'hooks/common/UserHooks';
+} from '@/hooks/instructor/CoursesHooks';
+import { Course } from '@/resources/common/Course';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
+import { useSearchFacultyQuery } from '@/hooks/common/UserHooks';
 
 type Props = {
     course: Course,

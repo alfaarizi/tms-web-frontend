@@ -1,10 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import { User } from 'resources/common/User';
+import { User } from '@/resources/common/User';
 import { useTranslation } from 'react-i18next';
-import { ToolbarButton } from './Buttons/ToolbarButton';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 
 type Props = {
     users: User[],

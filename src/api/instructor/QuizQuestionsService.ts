@@ -1,5 +1,5 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { QuizQuestion } from 'resources/instructor/QuizQuestion';
+import { axiosInstance } from '@/api/axiosInstance';
+import { QuizQuestion } from '@/resources/instructor/QuizQuestion';
 
 export async function listForQuestionSet(questionsetID: number) {
     const res = await axiosInstance.get<QuizQuestion[]>('/instructor/quiz-questions/list-for-set', {

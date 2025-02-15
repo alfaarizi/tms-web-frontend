@@ -1,33 +1,33 @@
 import { faPlus, faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     Route, Switch, useHistory, useRouteMatch,
 } from 'react-router';
 
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
-import { SideBarItem } from 'components/Navigation/SideBarItem';
-import { INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
-import { useActualSemester, useSelectedSemester } from 'hooks/common/SemesterHooks';
-import { useUserSettings } from 'hooks/common/UserHooks';
-import { useCourses } from 'hooks/instructor/CoursesHooks';
-import { useGroups } from 'hooks/instructor/GroupHooks';
-import { SideBarLayout } from 'layouts/SideBarLayout';
-import { CanvasOAuth2 } from 'pages/InstructorTaskManager/containers/CanvasOAuth2';
-import { GroupPage } from 'pages/InstructorTaskManager/containers/Groups/GroupPage';
-import { NewGroup } from 'pages/InstructorTaskManager/containers/Groups/NewGroup';
-import { SubmissionPage } from 'pages/InstructorTaskManager/containers/Submissions/SubmissionPage';
-import { StudentDetailsPage } from 'pages/InstructorTaskManager/containers/Students/StudentDetailsPage';
-import { NewTaskPage } from 'pages/InstructorTaskManager/containers/Tasks/NewTaskPage';
-import { TaskDetailsPage } from 'pages/InstructorTaskManager/containers/Tasks/TaskDetailsPage';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { ToolbarDropdown } from '@/components/Buttons/ToolbarDropdown';
+import { SideBarItem } from '@/components/Navigation/SideBarItem';
+import { INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY } from '@/constants/localStorageKeys';
+import { useActualSemester, useSelectedSemester } from '@/hooks/common/SemesterHooks';
+import { useUserSettings } from '@/hooks/common/UserHooks';
+import { useCourses } from '@/hooks/instructor/CoursesHooks';
+import { useGroups } from '@/hooks/instructor/GroupHooks';
+import { SideBarLayout } from '@/layouts/SideBarLayout';
+import { CanvasOAuth2 } from '@/pages/InstructorTaskManager/containers/CanvasOAuth2';
+import { GroupPage } from '@/pages/InstructorTaskManager/containers/Groups/GroupPage';
+import { NewGroup } from '@/pages/InstructorTaskManager/containers/Groups/NewGroup';
+import { SubmissionPage } from '@/pages/InstructorTaskManager/containers/Submissions/SubmissionPage';
+import { StudentDetailsPage } from '@/pages/InstructorTaskManager/containers/Students/StudentDetailsPage';
+import { NewTaskPage } from '@/pages/InstructorTaskManager/containers/Tasks/NewTaskPage';
+import { TaskDetailsPage } from '@/pages/InstructorTaskManager/containers/Tasks/TaskDetailsPage';
 import DropdownItem from 'react-bootstrap/DropdownItem';
-import { Group } from 'resources/instructor/Group';
+import { Group } from '@/resources/instructor/Group';
 import { StudentCodeViewerPage }
-    from 'pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage';
-import { NewNotificationPage } from 'pages/InstructorTaskManager/containers/Notifications/NewNotificationPage';
-import { EditNotificationPage } from 'pages/InstructorTaskManager/containers/Notifications/EditNotificationPage';
+    from '@/pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage';
+import { NewNotificationPage } from '@/pages/InstructorTaskManager/containers/Notifications/NewNotificationPage';
+import { EditNotificationPage } from '@/pages/InstructorTaskManager/containers/Notifications/EditNotificationPage';
 
 enum GroupView {
     ALL = 'all',

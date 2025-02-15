@@ -1,6 +1,6 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { UserSettings } from 'resources/common/UserSettings';
-import { ConfirmEmailResponse } from 'resources/common/ConfirmEmailResponse';
+import { axiosInstance } from '@/api/axiosInstance';
+import { UserSettings } from '@/resources/common/UserSettings';
+import { ConfirmEmailResponse } from '@/resources/common/ConfirmEmailResponse';
 
 export async function getSettings() {
     const res = await axiosInstance.get<UserSettings>('/common/user-settings');

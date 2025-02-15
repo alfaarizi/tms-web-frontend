@@ -1,6 +1,8 @@
-import React, { ReactNode, createContext, useContext } from 'react';
+import {
+    Component, ReactNode, createContext, useContext, ErrorInfo,
+} from 'react';
 import { Translation } from 'react-i18next';
-import ErrorPage from 'pages/ErrorPage';
+import ErrorPage from '@/pages/ErrorPage';
 
 export interface ErrorBoundaryContextInterface {
     /**
@@ -37,7 +39,7 @@ type State = {
  * Note: Error boundaries cannot catch errors from async code, use triggerError function instead.
  * Docs: https://reactjs.org/docs/error-boundaries.html
  */
-export class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = { hasError: false, message: '' };
@@ -51,7 +53,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
         };
     }
 
-    componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    componentDidCatch(_error: Error, _errorInfo: ErrorInfo) {
         // Logging and error reporting should be placed here
     }
 
@@ -60,11 +62,13 @@ export class ErrorBoundary extends React.Component<Props, State> {
             hasError: true,
             message: error.message,
         });
-    }
+    };
 
     render() {
         const { hasError, message } = this.state;
         const { children } = this.props;
+        // Hooks are not available in class-based components
+        // eslint-disable-next-line react/jsx-no-constructed-context-values
         const contextValue = {
             triggerError: this.triggerError,
         };

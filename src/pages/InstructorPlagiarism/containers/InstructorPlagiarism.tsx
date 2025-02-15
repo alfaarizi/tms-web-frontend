@@ -1,17 +1,16 @@
-import React from 'react';
 import {
     Route, Switch, useHistory, useRouteMatch,
 } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { SideBarLayout } from 'layouts/SideBarLayout';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { SideBarLayout } from '@/layouts/SideBarLayout';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { faBriefcase, faFileAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { NewRequestPage } from 'pages/InstructorPlagiarism/containers/NewRequestPage';
-import { BaseFilesPage } from 'pages/InstructorPlagiarism/containers/BaseFilesPage';
-import { usePlagiarismList } from 'hooks/instructor/PlagiarismHooks';
-import { RequestPage } from 'pages/InstructorPlagiarism/containers/RequestPage';
-import { SideBarItemWithIcon } from 'components/Navigation/SideBarItemWithIcon';
-import { useActualSemester, useSelectedSemester } from 'hooks/common/SemesterHooks';
+import { NewRequestPage } from '@/pages/InstructorPlagiarism/containers/NewRequestPage';
+import { BaseFilesPage } from '@/pages/InstructorPlagiarism/containers/BaseFilesPage';
+import { usePlagiarismList } from '@/hooks/instructor/PlagiarismHooks';
+import { RequestPage } from '@/pages/InstructorPlagiarism/containers/RequestPage';
+import { SideBarItemWithIcon } from '@/components/Navigation/SideBarItemWithIcon';
+import { useActualSemester, useSelectedSemester } from '@/hooks/common/SemesterHooks';
 
 export function InstructorPlagiarism() {
     const history = useHistory();

@@ -1,8 +1,7 @@
-import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { GroupStats } from 'resources/instructor/GroupStats';
+import { GroupStats } from '@/resources/instructor/GroupStats';
 
 type Props = {
     stats: GroupStats[]

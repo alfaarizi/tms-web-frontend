@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { ButtonGroup, DropdownButton } from 'react-bootstrap';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ResponsiveButtonText, Breakpoint } from 'components/Buttons/ResponsiveButtonText';
+import { ResponsiveButtonText, Breakpoint } from '@/components/Buttons/ResponsiveButtonText';
 
 type Props = {
     children: ReactNode,

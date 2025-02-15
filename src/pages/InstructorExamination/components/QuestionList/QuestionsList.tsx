@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import { QuizQuestion } from 'resources/instructor/QuizQuestion';
+import { ReactNode } from 'react';
+import { QuizQuestion } from '@/resources/instructor/QuizQuestion';
 
-import { QuizAnswer } from 'resources/instructor/QuizAnswer';
-import { QuestionListItem } from './QuestionListItem';
+import { QuizAnswer } from '@/resources/instructor/QuizAnswer';
+import { QuestionListItem } from '@/pages/InstructorExamination/components/QuestionList/QuestionListItem';
 
 type Props = {
     questions: QuizQuestion[],

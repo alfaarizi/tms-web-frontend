@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { Tab } from 'react-bootstrap';
@@ -8,13 +7,13 @@ import {
     useStartCodeCompassMutation,
     useStopCodeCompassMutation,
     useSubmissionsForStudent,
-} from 'hooks/instructor/SubmissionHooks';
-import { useGroup, useGroupStudents } from 'hooks/instructor/GroupHooks';
-import { StudentSolutionsTab } from 'pages/InstructorTaskManager/containers/Students/StudentSolutionsTab';
-import { StudentStatsTab } from 'pages/InstructorTaskManager/containers/Students/StudentStatsTab';
-import { UserSwitcher } from 'components/UserSwticher';
-import { TabbedInterface } from 'components/TabbedInterface';
-import { Submission } from 'resources/instructor/Submission';
+} from '@/hooks/instructor/SubmissionHooks';
+import { useGroup, useGroupStudents } from '@/hooks/instructor/GroupHooks';
+import { StudentSolutionsTab } from '@/pages/InstructorTaskManager/containers/Students/StudentSolutionsTab';
+import { StudentStatsTab } from '@/pages/InstructorTaskManager/containers/Students/StudentStatsTab';
+import { UserSwitcher } from '@/components/UserSwticher';
+import { TabbedInterface } from '@/components/TabbedInterface';
+import { Submission } from '@/resources/instructor/Submission';
 
 type Params = {
     groupID: string;

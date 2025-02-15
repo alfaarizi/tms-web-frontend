@@ -1,9 +1,9 @@
-import React, { ReactNode, Fragment } from 'react';
+import { ReactNode, Fragment } from 'react';
 
-import { QuizTestInstance } from 'resources/student/QuizTestInstance';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCard } from 'components/CustomCard/CustomCard';
+import { QuizTestInstance } from '@/resources/student/QuizTestInstance';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
 
 type Props = {
     title: string

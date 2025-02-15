@@ -1,4 +1,4 @@
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 
 export function getFirstError(errors: ValidationErrorBody): string | null {
     const keys = Object.keys(errors);

@@ -1,14 +1,14 @@
-import React, { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import {
     Button, ButtonGroup, Container, Row, Col,
 } from 'react-bootstrap';
 
-import { SideBar } from 'components/Navigation/SideBar';
-import { useShow } from 'ui-hooks/useShow';
+import { SideBar } from '@/components/Navigation/SideBar';
+import { useShow } from '@/ui-hooks/useShow';
 import { useRouteMatch } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faColumns } from '@fortawesome/free-solid-svg-icons';
-import styles from './SideBarLayout.module.css';
+import styles from '@/layouts/SideBarLayout.module.css';
 
 type Props = {
     sidebarTitle: string,

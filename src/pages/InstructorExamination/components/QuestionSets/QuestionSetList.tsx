@@ -1,14 +1,13 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { DataRow } from 'components/DataRow';
-import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { DataRow } from '@/components/DataRow';
+import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
 
 type Props = {
     sets: QuizQuestionSet[] | undefined,

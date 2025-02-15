@@ -16,28 +16,36 @@ In the project directory, you can run:
 
 Installs the dependencies of the frontend.
 
-### `npm start`
+### `npm run dev`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.
 
-### `npm run build`
+### Build the application
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
 The application is ready to be deployed.
 
-See the section about [deployment](https://create-react-app.dev/docs/deployment/) for more information.
+See the section about [deployment](https://vite.dev/guide/static-deploy) for more information.
+
+#### `npm run build:static` or `npm run build`
+
+The artifacts produced by this command will contain environment variables that were set during the build.
+
+#### `npm run build:dynamic`
+
+In this mode some environment variables must be configured after the build.
 
 ### `npm run lint`
 
 Runs ESLint.
 
-### `npm run lint-fix`
+### `npm run lint:fix`
 
 Runs ESLint and tries to fix problems.
 
@@ -55,38 +63,53 @@ These files store the default values for environment variables. \
 If you want to override an environment variable, you should create a local .env file. \
 `.env*.local` files are excluded from version control.
 
-* `.env.development.local`: local overrides used in development mode (`npm start`)
-* `.env.production.local`: local overrides used in production mode (`npm run build`)
+* `.env.development.local`: local overrides used in development mode (`npm run dev`)
+* `.env.production.local`: local overrides used in production mode (`npm run build:static` amd `npm run build:dynamic`)
 
 ### Runtime configurable variables
 
 Some environment variables are also runtime configurable, meaning you don't need to rebuild the frontend application to change their value.
 This is especially convenient to reuse the same build in different environments.
 
-To achieve this, simply run the following command **after** you have built the frontend, and it will create an `env.js` file in your build folder.
+To achieve this, simply build the frontend with `npm run build:dynamic`, and run the following commands **after** you have built the frontend.
 ```bash
-REACT_APP_VAR1=value1 REACT_APP_API_VAR2=value2 npx react-inject-env set
+# Set environment variables (Linux/MacOS syntax)
+export VITE_VAR1=value1
+export VITE_API_VAR2=value2
+
+# Linux/MacOS
+envsubst < dist/index.html > dist/temp.html
+mv dist/temp.html dist/index.html
+
+# Node.js alternative (platform independent)
+npx envsub dist/index.html
 ```
 
-E.g. to use the *blue* theme:
+E.g. to use the *blue* theme on Linux:
 ```bash
-REACT_APP_THEME=blue npx react-inject-env set
+export VITE_THEME=blue
+
+envsubst < dist/index.html > dist/temp.html
+mv dist/temp.html dist/index.html
 ```
+
+**IMPORTANT:** the values for variables that supports dynamic configuration will be omitted from the build,
+even if they were set in the `.env` files.
+This means, you have to substitute all of them before using the application- 
 
 ### Variables
 
-| Name                                    | Development mode | Production mode | Runtime configurable | Description                                                                                                                                                                                                  |
-|:----------------------------------------|:-----------------|:----------------|:---------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PUBLIC_URL`                            | Used             | Used            | Not supported        | Frontend application baseurl. If you use this variable, you shouldn't set `homepage` in `package.json`.                                                                                                      |
-| `REACT_APP_API_BASEURL`                 | Used             | Used            | Supported            | TMS API baseurl.                                                                                                                                                                                             |
-| `REACT_APP_LOGIN_METHOD`                | Used             | Used            | Supported            | Set login method. Possible values: `LDAP`, `MOCK`                                                                                                                                                            |
-| `REACT_DEV_PROXY`                       | Used             | Ignored         | Not supported        | Backend server address that used in development mode. The development server will proxy API requests to this address.                                                                                        |
-| `REACT_APP_BACKEND_CORE_VERSION_RANGE`  | Used             | Used            | Not supported        | This variable defines the accepted `backend-core` semantic version range. Check the documentation of the [semver](https://github.com/npm/node-semver) npm package for more information about version ranges. |
-| `REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN`  | Used             | Used            | Not supported        | Timeout duration in milliseconds after a failed login attempt.                                                                                                                                               |
-| `REACT_APP_THEME`                       | Used             | Used            | Supported            | UI theme.  Possible values: `dark`, `blue`.                                                                                                                                                                  |
-| `REACT_APP_GOOGLE_ANALYTICS_ID`         | Ignored          | Used            | Supported            | Google Analytics (GA4) tracking ID for website monitoring. If empty or undefined, tracking is disabled.                                                                                                      |
+| Name                              | Development mode | Static production mode | Dynamic production mode | Description                                                                                                                                                                                                  |
+|:----------------------------------|:-----------------|:-----------------------|:------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `VITE_BASE_URL`                   | Used             | Used                   | Used (Build time)       | Frontend application baseurl. Only used in `vite.config.ts`, in the code the build in `BASE_URL` variable should be used instead.                                                                            |
+| `VITE_DEV_PROXY`                  | Used             | Ignored                | Ignored                 | Backend server address that used in development mode. The development server will proxy API requests to this address.                                                                                        |
+| `VITE_API_BASE_URL`               | Used             | Used                   | Used (Runtime)          | TMS API baseurl.                                                                                                                                                                                             |
+| `VITE_LOGIN_METHOD`               | Used             | Used                   | Used (Runtime)          | Set login method. Possible values: `LDAP`, `MOCK`                                                                                                                                                            |
+| `VITE_BACKEND_CORE_VERSION_RANGE` | Used             | Used                   | Used (Build time)       | This variable defines the accepted `backend-core` semantic version range. Check the documentation of the [semver](https://github.com/npm/node-semver) npm package for more information about version ranges. |
+| `VITE_TIMEOUT_AFTER_FAILED_LOGIN` | Used             | Used                   | Used (Build time)       | Timeout duration in milliseconds after a failed login attempt.                                                                                                                                               |
+| `VITE_THEME`                      | Used             | Used                   | Used (Runtime)          | UI theme.  Possible values: `dark`, `blue`.                                                                                                                                                                  |
+| `VITE_GOOGLE_ANALYTICS_ID`        | Ignored          | Used                   | Used (Runtime)          | Google Analytics (GA4) tracking ID for website monitoring. If empty or undefined, tracking is disabled.                                                                                                      |
 
-[Create React App specific environment variables](https://create-react-app.dev/docs/advanced-configuration/).
 
 ## Branding
 
@@ -112,6 +135,7 @@ TMS instance (e.g. organization name).
 * [Victory](https://formidable.com/open-source/victory/)
 * [Luxon](https://moment.github.io/luxon/)
 * [semver](https://github.com/npm/node-semver)
+* [vite](https://vite.dev/)
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-import { Submission } from 'resources/instructor/Submission';
+import { Submission } from '@/resources/instructor/Submission';
 
 export interface IpAddress {
     id: number;

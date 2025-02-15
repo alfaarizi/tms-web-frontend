@@ -1,10 +1,9 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { Semester } from 'resources/common/Semester';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { Semester } from '@/resources/common/Semester';
 
 type Props = {
     semester: Semester

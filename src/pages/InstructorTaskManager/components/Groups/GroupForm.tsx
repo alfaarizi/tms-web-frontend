@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { FormError } from 'components/FormError';
-import { Group } from 'resources/instructor/Group';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { Course } from 'resources/common/Course';
-import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
-import timezones from 'i18n/timezones.json';
-import { getUserTimezone } from 'utils/getUserTimezone';
+import { FormError } from '@/components/FormError';
+import { Group } from '@/resources/instructor/Group';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { Course } from '@/resources/common/Course';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
+import timezones from '@/i18n/timezones.json';
+import { getUserTimezone } from '@/utils/getUserTimezone';
 
 type Props = {
     title: string,

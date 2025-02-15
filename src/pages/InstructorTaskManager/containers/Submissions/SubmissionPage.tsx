@@ -1,32 +1,31 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 
-import { useShow } from 'ui-hooks/useShow';
-import { SubmissionListItem } from 'pages/InstructorTaskManager/components/Students/SubmissionListItem';
+import { useShow } from '@/ui-hooks/useShow';
+import { SubmissionListItem } from '@/pages/InstructorTaskManager/components/Students/SubmissionListItem';
 import {
     useDownloadSubmission,
     useGradeMutation,
     useDownloadTestReport,
     useStartCodeCompassMutation, useStopCodeCompassMutation,
     useSubmission,
-} from 'hooks/instructor/SubmissionHooks';
-import { Submission } from 'resources/instructor/Submission';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { GraderModal } from 'pages/InstructorTaskManager/components/Submissions/GraderModal';
-import { IpLogModal } from 'pages/InstructorTaskManager/containers/Submissions/IpLogModal';
-import { useNotifications } from 'hooks/common/useNotifications';
-import { DataRow } from 'components/DataRow';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
-import { TabbedInterface } from 'components/TabbedInterface';
+} from '@/hooks/instructor/SubmissionHooks';
+import { Submission } from '@/resources/instructor/Submission';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { GraderModal } from '@/pages/InstructorTaskManager/components/Submissions/GraderModal';
+import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions/IpLogModal';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { DataRow } from '@/components/DataRow';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { TabbedInterface } from '@/components/TabbedInterface';
 import { Tab } from 'react-bootstrap';
-import { StaticCodeAnalysisTab } from 'pages/InstructorTaskManager/components/Submissions/StaticCodeAnalysisTab';
+import { StaticCodeAnalysisTab } from '@/pages/InstructorTaskManager/components/Submissions/StaticCodeAnalysisTab';
 
 type Params = {
     id?: string

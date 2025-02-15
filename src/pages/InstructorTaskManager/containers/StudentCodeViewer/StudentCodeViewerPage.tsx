@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/no-unstable-nested-components */
+// This rule should be ignored because the design of the used 3rd-party library
+
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import TreeView, { flattenTree } from 'react-accessible-treeview';
 import { INode } from 'react-accessible-treeview/dist/TreeView/types';
-import { FolderIcon } from 'pages/InstructorTaskManager/components/StudentCodeViewer/FolderIcon';
+import { FolderIcon } from '@/pages/InstructorTaskManager/components/StudentCodeViewer/FolderIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FileIcon } from 'pages/InstructorTaskManager/components/StudentCodeViewer/FileIcon';
-import 'pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage.css';
+import { FileIcon } from '@/pages/InstructorTaskManager/components/StudentCodeViewer/FileIcon';
+import '@/pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage.css';
 import { ITreeViewOnNodeSelectProps } from 'react-accessible-treeview/dist/TreeView';
 import ReactCodeMirror from '@uiw/react-codemirror';
 import { LanguageSupport } from '@codemirror/language';
 import { faFolderTree, faIndent } from '@fortawesome/free-solid-svg-icons';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { Col, Row } from 'react-bootstrap';
-import { getExtension } from 'pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
+import { getExtension } from '@/pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
 import { githubLight } from '@uiw/codemirror-theme-github';
-import * as SubmissionsService from 'api/instructor/SubmissionsService';
+import * as SubmissionsService from '@/api/instructor/SubmissionsService';
 import JSZip, { JSZipLoadOptions } from 'jszip';
 import jschardet from 'jschardet';
 
@@ -67,10 +70,14 @@ export function StudentCodeViewerPage() {
             }
             const loadOptions: JSZipLoadOptions = {
                 decodeFileName: (filename: string[] | Uint8Array | Buffer) => {
-                    const buffer = Buffer.from(filename);
-                    const { encoding } = jschardet.detect(buffer);
-                    // if failed to detect encoding, fall back to utf-8
-                    const decoder = new TextDecoder(encoding || 'utf-8');
+                    const buffer: Buffer = Array.isArray(filename)
+                        ? Buffer.from(filename.map((char) => char.charCodeAt(0)))
+                        : Buffer.from(filename);
+
+                    const detected = jschardet.detect(buffer);
+                    const encoding = detected?.encoding || 'utf-8';
+                    const decoder = new TextDecoder(encoding);
+
                     return decoder.decode(buffer);
                 },
             };
@@ -178,12 +185,10 @@ export function StudentCodeViewerPage() {
                                     style={{ paddingLeft: (withPadding ? 20 : 0) * (level - 1) }}
                                 >
                                     {isBranch ? (
-                                        <>
-                                            <FolderIcon
-                                                isOpen={isExpanded}
-                                                hasChildren={element.children?.length > 0}
-                                            />
-                                        </>
+                                        <FolderIcon
+                                            isOpen={isExpanded}
+                                            hasChildren={element.children?.length > 0}
+                                        />
                                     ) : (
                                         <FileIcon filename={element.name} />
                                     )}

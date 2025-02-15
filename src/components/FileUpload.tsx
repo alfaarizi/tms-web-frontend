@@ -1,4 +1,4 @@
-import React, {
+import {
     ChangeEventHandler, MouseEventHandler, ReactNode, useState,
 } from 'react';
 import {
@@ -8,12 +8,12 @@ import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { ErrorAlert } from 'components/ErrorAlert';
-import { useFileSizeValidator } from 'hooks/common/useFileSizeValidator';
-import { FormError } from 'components/FormError';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { ErrorAlert } from '@/components/ErrorAlert';
+import { useFileSizeValidator } from '@/hooks/common/useFileSizeValidator';
+import { FormError } from '@/components/FormError';
 
 type Props = {
     children?: ReactNode,

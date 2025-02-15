@@ -18,17 +18,17 @@ COPY . .
 RUN cp docker/.env.docker ./.env.production.local
 
 # Build the app for production
-RUN npm run build
+RUN npm run build:dynamic
 
 ## STAGE 2
 # Serve the production build with Apache
 FROM httpd:alpine
 
-# Install Node and NPM in Alpine
-RUN apk add --no-cache nodejs npm
+# Install envsubst in Alpine
+RUN apk add --no-cache envsubst
 
 # Copy the production build from the previous stage to Apache's document root
-COPY --chown=www-data:www-data --from=build /app/build /usr/local/apache2/htdocs/
+COPY --chown=www-data:www-data --from=build /app/dist /usr/local/apache2/htdocs/
 
 # Enable Apache modules required for reverse proxy
 RUN apk add --no-cache apache2-utils && \
@@ -42,10 +42,13 @@ COPY docker/reverse-proxy.conf /usr/local/apache2/conf/extra/reverse-proxy.conf
 # Include the reverse proxy config in the main Apache config
 RUN echo "Include /usr/local/apache2/conf/extra/reverse-proxy.conf" >> /usr/local/apache2/conf/httpd.conf
 
+# Default values for runtime environment variables
+ENV VITE_LOGIN_METHOD=ldap
+ENV VITE_API_BASE_URL=/api
+ENV VITE_THEME=dark
+ENV VITE_GOOGLE_ANALYTICS_ID=-
+
 # Inject runtime environment variables and start Apache
-CMD REACT_APP_API_BASEURL="${REACT_APP_API_BASEURL:-/api}" \
-    REACT_APP_THEME="${REACT_APP_THEME:-dark}" \
-    REACT_APP_LOGIN_METHOD="${REACT_APP_LOGIN_METHOD:-LDAP}" \
-    REACT_APP_GOOGLE_ANALYTICS_ID="${REACT_APP_GOOGLE_ANALYTICS_ID:-}" \
-    npx react-inject-env set -d /usr/local/apache2/htdocs/ && \
+CMD envsubst < /usr/local/apache2/htdocs/index.html > /usr/local/apache2/htdocs/temp.html  && \
+    mv /usr/local/apache2/htdocs/temp.html /usr/local/apache2/htdocs/index.html  && \
     httpd-foreground

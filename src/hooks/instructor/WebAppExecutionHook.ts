@@ -1,19 +1,22 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as WebAppExecutionService from 'api/instructor/WebAppExecutionService';
-import { WebAppExecution } from 'resources/instructor/WebAppExecution';
-import { Submission } from 'resources/instructor/Submission';
-import { SetupWebAppExecution } from 'resources/instructor/SetupWebAppExecution';
-import { useDownloader } from 'hooks/common/useDownloader';
+import * as WebAppExecutionService from '@/api/instructor/WebAppExecutionService';
+import { WebAppExecution } from '@/resources/instructor/WebAppExecution';
+import { Submission } from '@/resources/instructor/Submission';
+import { SetupWebAppExecution } from '@/resources/instructor/SetupWebAppExecution';
+import { useDownloader } from '@/hooks/common/useDownloader';
 
 export const QUERY_KEY = 'instructor/web-app-execution';
 
 export function useWebAppExecution(submission: Submission) {
-    return useQuery<WebAppExecution>([QUERY_KEY, { submissionID: submission.id }],
-        () => WebAppExecutionService.one(submission.id), {
+    return useQuery<WebAppExecution>(
+        [QUERY_KEY, { submissionID: submission.id }],
+        () => WebAppExecutionService.one(submission.id),
+        {
             initialData: submission.execution,
             refetchInterval: 60000,
             refetchIntervalInBackground: false,
-        });
+        },
+    );
 }
 
 export function useStartWebAppExecutionMutation(submission: Submission) {
@@ -32,7 +35,7 @@ export function useStopWebAppExecutionMutation(submission: Submission) {
 
     return useMutation((webAppExecution: WebAppExecution) => WebAppExecutionService
         .stopWebAppExecution(webAppExecution), {
-        onSuccess: async (data) => {
+        onSuccess: async () => {
             await queryClient.invalidateQueries([QUERY_KEY, { submissionID: submission.id }]);
         },
     });

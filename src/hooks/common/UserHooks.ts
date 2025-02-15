@@ -3,19 +3,19 @@ import {
     MutationFunction, useMutation, useQuery, useQueryClient,
 } from 'react-query';
 
-import * as AuthService from 'api/common/AuthService';
-import * as UserSettingsService from 'api/common/UserSettingsService';
-import { MockLogin } from 'resources/common/MockLogin';
-import { axiosInstance } from 'api/axiosInstance';
-import { LoginResponse } from 'resources/common/LoginResponse';
-import { LdapLogin } from 'resources/common/LdapLogin';
+import * as AuthService from '@/api/common/AuthService';
+import * as UserSettingsService from '@/api/common/UserSettingsService';
+import { MockLogin } from '@/resources/common/MockLogin';
+import { axiosInstance } from '@/api/axiosInstance';
+import { LoginResponse } from '@/resources/common/LoginResponse';
+import { LdapLogin } from '@/resources/common/LdapLogin';
 import { useHistory } from 'react-router';
-import { useGlobalContext } from 'context/GlobalContext';
-import { UserSettings } from 'resources/common/UserSettings';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
-import { ACCESS_TOKEN_LOCAL_STORAGE_KEY, IMAGE_TOKEN_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
-import * as UsersService from 'api/common/UsersService';
-import { User } from 'resources/common/User';
+import { useGlobalContext } from '@/context/GlobalContext';
+import { UserSettings } from '@/resources/common/UserSettings';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { ACCESS_TOKEN_LOCAL_STORAGE_KEY, IMAGE_TOKEN_LOCAL_STORAGE_KEY } from '@/constants/localStorageKeys';
+import * as UsersService from '@/api/common/UsersService';
+import { User } from '@/resources/common/User';
 
 export const USER_SETTINGS_QUERY_KEY = 'usersettings';
 export const SEARCH_STUDENT_QUERY_KEY = 'common/users/student';

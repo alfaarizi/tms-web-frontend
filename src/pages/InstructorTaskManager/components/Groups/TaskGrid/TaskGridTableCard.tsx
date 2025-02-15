@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Table } from 'react-bootstrap';
-import { CustomCard } from 'components/CustomCard/CustomCard';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
 
-import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 
 type Props = {
     children: ReactNode,

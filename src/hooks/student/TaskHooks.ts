@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Task } from 'resources/student/Task';
-import * as TasksService from 'api/student/TasksService';
-import * as SubmissionsService from 'api/student/SubmissionsService';
-import * as TaskFilesService from 'api/student/TaskFilesService';
-import { Submission } from 'resources/student/Submission';
-import { SubmissionUpload } from 'resources/student/SubmissionUpload';
-import { useDownloader } from 'hooks/common/useDownloader';
-import { VerifyItem } from 'resources/student/VerifyItem';
-import { UnlockItem } from 'resources/student/UnlockItem';
+import { Task } from '@/resources/student/Task';
+import * as TasksService from '@/api/student/TasksService';
+import * as SubmissionsService from '@/api/student/SubmissionsService';
+import * as TaskFilesService from '@/api/student/TaskFilesService';
+import { Submission } from '@/resources/student/Submission';
+import { SubmissionUpload } from '@/resources/student/SubmissionUpload';
+import { useDownloader } from '@/hooks/common/useDownloader';
+import { VerifyItem } from '@/resources/student/VerifyItem';
+import { UnlockItem } from '@/resources/student/UnlockItem';
 
 export const QUERY_KEY = 'student/tasks';
 

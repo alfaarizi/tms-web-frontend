@@ -1,5 +1,5 @@
-import { EvaluatorTemplate } from 'resources/instructor/EvaluatorTemplate';
-import { StaticAnalyzerTool } from 'resources/instructor/StaticAnalyzerTool';
+import { EvaluatorTemplate } from '@/resources/instructor/EvaluatorTemplate';
+import { StaticAnalyzerTool } from '@/resources/instructor/StaticAnalyzerTool';
 
 export interface OsMap {
     [key: string]: string

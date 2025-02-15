@@ -1,8 +1,7 @@
-import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { DateTime } from 'luxon';
-import { StudentStats } from 'resources/instructor/StudentStats';
+import { StudentStats } from '@/resources/instructor/StudentStats';
 
 type Props = {
     data: StudentStats[]

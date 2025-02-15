@@ -1,5 +1,5 @@
-import { TestCase } from 'resources/instructor/TestCase';
-import { axiosInstance } from '../axiosInstance';
+import { TestCase } from '@/resources/instructor/TestCase';
+import { axiosInstance } from '@/api/axiosInstance';
 
 export async function index(taskID: number) {
     const res = await axiosInstance.get<TestCase[]>('/instructor/test-cases', {

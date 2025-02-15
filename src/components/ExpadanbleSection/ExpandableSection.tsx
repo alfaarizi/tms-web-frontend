@@ -1,8 +1,7 @@
-import React from 'react';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import styles from 'components/ExpadanbleSection/ExpandableSection.module.css';
+import styles from '@/components/ExpadanbleSection/ExpandableSection.module.css';
 
 type Props = {
     header: JSX.Element,

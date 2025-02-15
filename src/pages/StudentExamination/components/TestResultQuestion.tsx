@@ -1,9 +1,8 @@
-import React from 'react';
-import { QuizResultQuestion } from 'resources/student/QuizResultQuestion';
+import { QuizResultQuestion } from '@/resources/student/QuizResultQuestion';
 import { Col, Row } from 'react-bootstrap';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
-import { QuizQuestionCard } from 'components/QuizQuestionCard';
-import { IsCorrect } from 'components/IsCorrect';
+import { IsCorrect } from '@/components/IsCorrect';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { QuizQuestionCard } from '@/components/QuizQuestionCard';
 
 type Props = {
     question: QuizResultQuestion

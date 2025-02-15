@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Task } from 'resources/instructor/Task';
+import { useState } from 'react';
+import { Task } from '@/resources/instructor/Task';
 import { useTranslation } from 'react-i18next';
 import {
     useSetupAutoTester,
-} from 'hooks/instructor/EvaluatorHooks';
+} from '@/hooks/instructor/EvaluatorHooks';
 import {
     useCreateTestCaseMutation,
     useExportTestCases,
@@ -11,30 +11,29 @@ import {
     useRemoveTestCaseMutation,
     useTestCases,
     useUpdateTestCaseMutation,
-} from 'hooks/instructor/TestCasesHooks';
+} from '@/hooks/instructor/TestCasesHooks';
 import {
     useWebTestSuites,
     useWebTestSuiteRemoveMutation,
     useWebTestSuiteUploadMutation, useTaskFileDownload,
-} from 'hooks/instructor/TaskFileHooks';
-import { useDownloader } from 'hooks/common/useDownloader';
-import { WebTestSuites } from 'pages/InstructorTaskManager/components/Tasks/WebTestSuites';
-import { useShow } from 'ui-hooks/useShow';
-import { TestCase } from 'resources/instructor/TestCase';
-import { SetupAutoTester } from 'resources/instructor/SetupAutoTester';
+} from '@/hooks/instructor/TaskFileHooks';
+import { WebTestSuites } from '@/pages/InstructorTaskManager/components/Tasks/WebTestSuites';
+import { useShow } from '@/ui-hooks/useShow';
+import { TestCase } from '@/resources/instructor/TestCase';
+import { SetupAutoTester } from '@/resources/instructor/SetupAutoTester';
 import {
     AutoTesterSettingsForm,
-} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/AutoTesterSettingsForm';
+} from '@/pages/InstructorTaskManager/components/Tasks/EvaluatorTab/AutoTesterSettingsForm';
 import {
     TestCaseFormModal,
-} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/TestCaseFormModal';
-import { TestCaseList } from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/TestCasesList';
-import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
-import { FileUpload } from 'components/FileUpload';
-import { getFirstError } from 'utils/getFirstError';
-import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
+} from '@/pages/InstructorTaskManager/components/Tasks/EvaluatorTab/TestCaseFormModal';
+import { TestCaseList } from '@/pages/InstructorTaskManager/components/Tasks/EvaluatorTab/TestCasesList';
+import { EvaluatorAdditionalInformation } from '@/resources/instructor/EvaluatorAdditionalInformation';
+import { FileUpload } from '@/components/FileUpload';
+import { getFirstError } from '@/utils/getFirstError';
+import { ServerSideValidationError } from '@/exceptions/ServerSideValidationError';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { TaskFilesUpload } from '@/resources/instructor/TaskFilesUpload';
 
 type Props = {
     task: Task,

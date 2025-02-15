@@ -1,5 +1,5 @@
-import { Notification } from 'resources/instructor/Notification';
-import { axiosInstance } from 'api/axiosInstance';
+import { Notification } from '@/resources/instructor/Notification';
+import { axiosInstance } from '@/api/axiosInstance';
 
 export async function index(groupID: number) {
     const res = await axiosInstance.get<Notification[]>('/instructor/notifications', {

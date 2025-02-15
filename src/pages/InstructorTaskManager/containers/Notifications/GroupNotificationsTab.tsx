@@ -1,14 +1,13 @@
-import React from 'react';
-import { useNotifications } from 'hooks/instructor/NotificationsHooks';
+import { useNotifications } from '@/hooks/instructor/NotificationsHooks';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ButtonGroup, Table } from 'react-bootstrap';
 
-import { Group } from 'resources/instructor/Group';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { NotificationListItem } from 'pages/InstructorTaskManager/components/Notifications/NotificationListItem';
+import { Group } from '@/resources/instructor/Group';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { NotificationListItem } from '@/pages/InstructorTaskManager/components/Notifications/NotificationListItem';
 import { useRouteMatch } from 'react-router';
 
 type Props = {

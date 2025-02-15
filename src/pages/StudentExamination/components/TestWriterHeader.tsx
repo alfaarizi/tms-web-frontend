@@ -1,8 +1,7 @@
-import React from 'react';
 import { Badge } from 'react-bootstrap';
 
-import { PageHeader } from 'components/Navigation/PageHeader';
-import { Time } from 'components/Time';
+import { PageHeader } from '@/components/Navigation/PageHeader';
+import { Time } from '@/components/Time';
 
 type Props = {
     testName: string,

@@ -1,4 +1,4 @@
-import { CanvasSyncLevel } from 'resources/instructor/CanvasSyncLevel';
+import { CanvasSyncLevel } from '@/resources/instructor/CanvasSyncLevel';
 
 export interface CanvasSetupData {
     canvasCourse: number;

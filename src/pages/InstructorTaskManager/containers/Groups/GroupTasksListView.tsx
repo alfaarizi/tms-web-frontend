@@ -1,8 +1,6 @@
-import React from 'react';
-
-import { useTasks } from 'hooks/instructor/TaskHooks';
-import { Group } from 'resources/instructor/Group';
-import { TaskList } from 'pages/InstructorTaskManager/components/Groups/TaskList';
+import { useTasks } from '@/hooks/instructor/TaskHooks';
+import { Group } from '@/resources/instructor/Group';
+import { TaskList } from '@/pages/InstructorTaskManager/components/Groups/TaskList';
 
 type Props = {
     group: Group

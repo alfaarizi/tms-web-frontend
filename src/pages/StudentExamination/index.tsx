@@ -1,11 +1,10 @@
-import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router';
 
-import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
-import { HomePage } from 'pages/StudentExamination/containers/HomePage';
-import { TestInstancePage } from 'pages/StudentExamination/containers/TestInstancePage';
-import { TestWriterPage } from 'pages/StudentExamination/containers/TestWriterPage';
-import { VerifyTestPage } from 'pages/StudentExamination/containers/VerifyTestPage';
+import { SingleColumnLayout } from '@/layouts/SingleColumnLayout';
+import { HomePage } from '@/pages/StudentExamination/containers/HomePage';
+import { TestInstancePage } from '@/pages/StudentExamination/containers/TestInstancePage';
+import { TestWriterPage } from '@/pages/StudentExamination/containers/TestWriterPage';
+import { VerifyTestPage } from '@/pages/StudentExamination/containers/VerifyTestPage';
 
 export default function StudentExamination() {
     const { url } = useRouteMatch();

@@ -1,9 +1,9 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { Task } from 'resources/instructor/Task';
-import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
-import { SetupAutoTester } from 'resources/instructor/SetupAutoTester';
-import { SetupEvaluatorEnvironment } from 'resources/instructor/SetupEvaluatorEnvironment';
-import { SetupCodeChecker } from 'resources/instructor/SetupCodeChecker';
+import { axiosInstance } from '@/api/axiosInstance';
+import { Task } from '@/resources/instructor/Task';
+import { EvaluatorAdditionalInformation } from '@/resources/instructor/EvaluatorAdditionalInformation';
+import { SetupAutoTester } from '@/resources/instructor/SetupAutoTester';
+import { SetupEvaluatorEnvironment } from '@/resources/instructor/SetupEvaluatorEnvironment';
+import { SetupCodeChecker } from '@/resources/instructor/SetupCodeChecker';
 
 export async function updateDockerImage(id: number) {
     const res = await axiosInstance.post<EvaluatorAdditionalInformation>(

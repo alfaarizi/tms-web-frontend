@@ -1,13 +1,13 @@
 import { useTranslation } from 'react-i18next';
-import React from 'react';
-import { Task } from 'resources/instructor/Task';
+
+import { Task } from '@/resources/instructor/Task';
 import { Alert } from 'react-bootstrap';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
-import { useSetupCodeCompassParserMutation } from 'hooks/instructor/TaskHooks';
-import { CodeCompassForm } from 'pages/InstructorTaskManager/components/Tasks/CodeCompassForm';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CodeCompassParameters } from '@/resources/instructor/CodeCompassParameters';
+import { useSetupCodeCompassParserMutation } from '@/hooks/instructor/TaskHooks';
+import { CodeCompassForm } from '@/pages/InstructorTaskManager/components/Tasks/CodeCompassForm';
 
 type Props = {
     task: Task

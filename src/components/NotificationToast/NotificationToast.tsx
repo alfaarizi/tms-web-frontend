@@ -1,9 +1,8 @@
-import React from 'react';
-import { NotificationData } from 'context/GlobalContext';
+import { NotificationData } from '@/context/GlobalContext';
 import { Toast } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faInfoCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import styles from 'components/NotificationToast/NotificationToast.module.css';
+import styles from '@/components/NotificationToast/NotificationToast.module.css';
 import { useTranslation } from 'react-i18next';
 
 type Props = {

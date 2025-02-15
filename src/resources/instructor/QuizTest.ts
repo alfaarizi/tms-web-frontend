@@ -1,4 +1,4 @@
-import { Group } from 'resources/instructor/Group';
+import { Group } from '@/resources/instructor/Group';
 
 export interface QuizTest {
     id: number;

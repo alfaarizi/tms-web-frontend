@@ -1,7 +1,7 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
-import { Image } from 'resources/common/Image';
-import { QuizImageUploadResult } from 'resources/instructor/QuizImageUploadResult';
+import { axiosInstance } from '@/api/axiosInstance';
+import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
+import { Image } from '@/resources/common/Image';
+import { QuizImageUploadResult } from '@/resources/instructor/QuizImageUploadResult';
 
 export async function index() {
     const res = await axiosInstance.get<QuizQuestionSet[]>('/instructor/quiz-question-sets');

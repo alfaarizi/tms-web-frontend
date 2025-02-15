@@ -1,8 +1,8 @@
-import { User } from 'resources/common/User';
-import { CodeCheckerResult } from 'resources/instructor/CodeCheckerResult';
-import { Task } from './Task';
-import { CodeCompassInstance } from './CodeCompassInstance';
-import { WebAppExecution } from './WebAppExecution';
+import { User } from '@/resources/common/User';
+import { CodeCheckerResult } from '@/resources/instructor/CodeCheckerResult';
+import { Task } from '@/resources/instructor/Task';
+import { CodeCompassInstance } from '@/resources/instructor/CodeCompassInstance';
+import { WebAppExecution } from '@/resources/instructor/WebAppExecution';
 
 export interface Submission {
     id: number;

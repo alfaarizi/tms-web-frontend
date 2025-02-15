@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import {
@@ -6,15 +6,15 @@ import {
     useRemovePlagiarismMutation,
     useRunMutation,
     useUpdatePlagiarismMutation,
-} from 'hooks/instructor/PlagiarismHooks';
-import { RequestDetails } from 'pages/InstructorPlagiarism/components/RequestDetails';
-import { Result } from 'pages/InstructorPlagiarism/components/Results';
-import { useShow } from 'ui-hooks/useShow';
-import { Plagiarism } from 'resources/instructor/Plagiarism';
-import { EditForm } from 'pages/InstructorPlagiarism/components/EditForm';
-import { useNotifications } from 'hooks/common/useNotifications';
+} from '@/hooks/instructor/PlagiarismHooks';
+import { RequestDetails } from '@/pages/InstructorPlagiarism/components/RequestDetails';
+import { Result } from '@/pages/InstructorPlagiarism/components/Results';
+import { useShow } from '@/ui-hooks/useShow';
+import { Plagiarism } from '@/resources/instructor/Plagiarism';
+import { EditForm } from '@/pages/InstructorPlagiarism/components/EditForm';
+import { useNotifications } from '@/hooks/common/useNotifications';
 import { useTranslation } from 'react-i18next';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
 
 type Params = {
     id?: string

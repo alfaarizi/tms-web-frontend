@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
-import * as GroupService from 'api/student/GroupsService';
-import { Group } from 'resources/student/Group';
+import * as GroupService from '@/api/student/GroupsService';
+import { Group } from '@/resources/student/Group';
 
 export const QUERY_KEY = 'student/groups';
 

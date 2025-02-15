@@ -7,8 +7,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useShow } from 'ui-hooks/useShow';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+import { useShow } from '@/ui-hooks/useShow';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
 
 // Import all react-mde styles expect react-mde-preview
 // The MarkdownRenderer component will import the stylesheet for markdown content

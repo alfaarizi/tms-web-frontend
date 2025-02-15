@@ -1,4 +1,4 @@
-const PREFIX = process.env.REACT_APP_ENV_PREFIX || '';
+const PREFIX = process.env.VITE_ENV_PREFIX || '';
 
 export const ACCESS_TOKEN_LOCAL_STORAGE_KEY = `${PREFIX}accessToken`;
 export const IMAGE_TOKEN_LOCAL_STORAGE_KEY = `${PREFIX}imageToken`;

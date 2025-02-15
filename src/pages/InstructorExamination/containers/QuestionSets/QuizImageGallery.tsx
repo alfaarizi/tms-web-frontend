@@ -1,20 +1,19 @@
-import React from 'react';
-import { FileUpload } from 'components/FileUpload';
+import { FileUpload } from '@/components/FileUpload';
 import { faPaste } from '@fortawesome/free-solid-svg-icons';
 
-import { InsertFunc } from 'components/ReactMdeWithCommands';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
+import { InsertFunc } from '@/components/ReactMdeWithCommands';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 import { useTranslation } from 'react-i18next';
 
 import {
     useQuizImages,
     useQuizImageUploadMutation,
     useRemoveQuizImageMutation,
-} from 'hooks/instructor/QuizQuestionSetHooks';
+} from '@/hooks/instructor/QuizQuestionSetHooks';
 
-import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-import { getFirstError } from 'utils/getFirstError';
+import { ImageGallery } from '@/components/ImageGallery/ImageGallery';
+import { getFirstError } from '@/utils/getFirstError';
 
 type GalleryProps = {
     questionSetID: number;

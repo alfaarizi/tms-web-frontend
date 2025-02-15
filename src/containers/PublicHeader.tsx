@@ -1,15 +1,11 @@
-import React from 'react';
-import { Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-
-import { LanguageSwitcher } from 'components/Header/LanguageSwitcher';
-import { Header } from 'components/Header/Header';
+import { LanguageSwitcher } from '@/components/Header/LanguageSwitcher';
+import { Header } from '@/components/Header/Header';
 import { useIsFetching } from 'react-query';
-import { useClientSideLocaleChange } from 'hooks/common/UserHooks';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useClientSideLocaleChange } from '@/hooks/common/UserHooks';
 import { faBookOpenReader, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import { LinkContainer } from 'react-router-bootstrap';
-import { HeaderContent } from 'components/Header/HeaderContent';
+import { HeaderContent } from '@/components/Header/HeaderContent';
+import { NavbarLink } from '@/components/Header/NavbarLink';
 
 /**
  * Contains public navigation actions
@@ -24,23 +20,19 @@ export function PublicHeader() {
     };
 
     return (
-        <Header showFetchingIndicator={isFetching > 0}>
+        <Header showFetchingIndicator={isFetching > 0} currentRole={null}>
             <HeaderContent align="end">
-                <LinkContainer to="/about">
-                    <Nav.Link>
-                        <FontAwesomeIcon icon={faBookOpenReader} />
-                        {' '}
-                        {t('aboutPage.about')}
-                    </Nav.Link>
-                </LinkContainer>
+                <NavbarLink
+                    to="/about"
+                    icon={faBookOpenReader}
+                    text={t('aboutPage.about')}
+                />
                 <LanguageSwitcher onChange={setLocale} />
-                <LinkContainer to="/">
-                    <Nav.Link>
-                        <FontAwesomeIcon icon={faSignInAlt} />
-                        {' '}
-                        {t('login.login')}
-                    </Nav.Link>
-                </LinkContainer>
+                <NavbarLink
+                    to="/"
+                    icon={faSignInAlt}
+                    text={t('login.login')}
+                />
             </HeaderContent>
         </Header>
     );

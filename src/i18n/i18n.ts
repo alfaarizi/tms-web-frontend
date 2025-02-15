@@ -1,59 +1,48 @@
-import i18n from 'i18next';
-import LanguageDetector, { DetectorOptions } from 'i18next-browser-languagedetector';
+import i18n, { BackendModule, Resource } from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
-/**
- * Webpack context (bits important for us).
- * @todo this should be imported from Webpack, but the definition is only available in v5.62+
- * @see https://github.com/webpack/webpack/pull/14597
- * @see https://github.com/webpack/webpack/releases/tag/v5.62.0
- */
-interface Context {
-    (key: string): any;
-    keys(): string[];
-}
+export type TranslationTopContent = Resource & { autonym: string };
 
-interface LanguageList {
-    [key: string]: {name: string};
-}
+const modules = import.meta.glob('./languages/*.json');
 
-interface TranslationContent {
-    [key: string]: string|TranslationContent;
-}
+const supportedLngs: string[] = Object.keys(modules)
+    .map((path) => path.match(/([^/]+)\.json$/)?.[1])
+    .filter((path) => path !== undefined);
 
-type TranslationTopContent = TranslationContent & {autonym: string};
-
-const resources: {[language: string]: {translation: TranslationTopContent}} = {};
-const autonyms: LanguageList = {};
-
-function processLanguage(filename: string, translation: TranslationTopContent) {
-    const code = filename.replace(/^.*\/([^/]+)\.json/, '$1');
-    resources[code] = { translation };
-    autonyms[code] = { name: translation.autonym };
-}
-function importAll(r: Context) {
-    r.keys().forEach((key) => processLanguage(key, r(key)));
-}
-importAll((require as any).context('./languages', false, /\.json$/));
-
-const envPrefix = process.env.REACT_APP_ENV_PREFIX || '';
-const detectionOptions: DetectorOptions = {
-    order: ['querystring', 'localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
-    lookupLocalStorage: `${envPrefix}i18nextLng`,
+const customBackend: BackendModule = {
+    type: 'backend',
+    init: () => {},
+    read: async (language: string, _namespace: string, callback: any) => {
+        try {
+            const path = `./languages/${language}.json`;
+            const module = modules[path] as () => Promise<TranslationTopContent>;
+            const translation = (await module()).default;
+            callback(null, translation);
+        } catch (error) {
+            callback(error, null);
+        }
+    },
 };
+
+const envPrefix = import.meta.env.VITE_ENV_PREFIX || '';
 i18n
     .use(initReactI18next) // passes i18n down to react-i18next
     .use(LanguageDetector)
+    .use(customBackend)
     .init({
-        resources,
-        detection: detectionOptions,
-        supportedLngs: Object.keys(resources),
-        fallbackLng: ['en-US'],
+        detection: {
+            order: ['querystring', 'localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+            lookupLocalStorage: `${envPrefix}i18nextLng`,
+        },
+        supportedLngs,
+        fallbackLng: 'en-US',
+        preload: supportedLngs,
         keySeparator: '.',
         interpolation: {
             escapeValue: false, // react already safes from xss
         },
+        backend: {},
     });
 
 export default i18n;
-export const languages = autonyms;

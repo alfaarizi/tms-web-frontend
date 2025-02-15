@@ -1,14 +1,14 @@
+import React from 'react';
 import {
     Form, InputGroup, ToggleButton, ToggleButtonGroup,
 } from 'react-bootstrap';
-import { Controller, FieldValues } from 'react-hook-form';
-import { FormError } from 'components/FormError';
-import React from 'react';
+import { Controller } from 'react-hook-form';
+import { FormError } from '@/components/FormError';
 import { Option } from 'react-bootstrap-typeahead/types/types';
-import { User } from 'resources/common/User';
+import { User } from '@/resources/common/User';
 import { useTranslation } from 'react-i18next';
-import { extractUserCodes } from 'utils/extractUserCodes';
-import { AsyncTypeaheadControl } from 'components/AddUsers/AsyncTypeaheadControl';
+import { extractUserCodes } from '@/utils/extractUserCodes';
+import { AsyncTypeaheadControl } from '@/components/AddUsers/AsyncTypeaheadControl';
 
 type Props = {
     toggleValue: AddUserMode,

@@ -1,19 +1,18 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { QuizTest } from 'resources/instructor/QuizTest';
-import { DataRow } from 'components/DataRow';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { QuizTest } from '@/resources/instructor/QuizTest';
+import { DataRow } from '@/components/DataRow';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import {
     faCopy, faEdit, faKey, faPlay,
 } from '@fortawesome/free-solid-svg-icons';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 import { ButtonGroup } from 'react-bootstrap';
-import { DateTimeInterval } from 'pages/InstructorExamination/components/Tests/DateTimeInterval';
-import { IconTooltip } from 'components/IconTooltip';
+import { DateTimeInterval } from '@/pages/InstructorExamination/components/Tests/DateTimeInterval';
+import { IconTooltip } from '@/components/IconTooltip';
 
 type Params = {
     test: QuizTest;

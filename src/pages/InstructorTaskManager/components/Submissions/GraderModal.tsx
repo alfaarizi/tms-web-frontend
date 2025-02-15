@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { Form, Modal } from 'react-bootstrap';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Submission } from 'resources/instructor/Submission';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { ConfirmModal } from 'components/Modals/ConfirmModal';
+import { Submission } from '@/resources/instructor/Submission';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { ConfirmModal } from '@/components/Modals/ConfirmModal';
 
 type Props = {
     file: Submission | null;

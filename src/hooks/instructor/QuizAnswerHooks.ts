@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as QuizAnswersService from 'api/instructor/QuizAnswersService';
-import { QuizAnswer } from 'resources/instructor/QuizAnswer';
+import * as QuizAnswersService from '@/api/instructor/QuizAnswersService';
+import { QuizAnswer } from '@/resources/instructor/QuizAnswer';
 
 export const QUERY_KEY = 'instructor/quiz-answer';
 

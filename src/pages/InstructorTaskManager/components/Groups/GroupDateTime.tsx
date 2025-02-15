@@ -1,7 +1,7 @@
-import { LocaleDateTime } from 'components/LocaleDateTime';
-import React from 'react';
+import { LocaleDateTime } from '@/components/LocaleDateTime';
+
 import { useTranslation } from 'react-i18next';
-import { getUserTimezone } from 'utils/getUserTimezone';
+import { getUserTimezone } from '@/utils/getUserTimezone';
 
 type Props = {
     value: string | null | undefined,

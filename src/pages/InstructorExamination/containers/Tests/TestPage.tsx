@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Tab } from 'react-bootstrap';
@@ -8,19 +8,19 @@ import {
     useRemoveTestMutation,
     useTest,
     useUpdateTestMutation,
-} from 'hooks/instructor/QuizTestHooks';
-import { useShow } from 'ui-hooks/useShow';
-import { QuizTest } from 'resources/instructor/QuizTest';
-import { TestForm } from 'pages/InstructorExamination/components/Tests/TestForm';
-import { TestResultsTab } from 'pages/InstructorExamination/containers/Tests/TestResultsTab';
-import { TestQuestionsTab } from 'pages/InstructorExamination/containers/Tests/TestQuestionsTab';
-import { UniqueTestQuestionsTab } from 'pages/InstructorExamination/containers/Tests/UniqueTestQuestionsTab';
-import { TestDetails } from 'pages/InstructorExamination/components/Tests/TestDetails';
-import { useGroupsForCourse } from 'hooks/instructor/GroupHooks';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { TabbedInterface } from 'components/TabbedInterface';
-import { useNotifications } from 'hooks/common/useNotifications';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+} from '@/hooks/instructor/QuizTestHooks';
+import { useShow } from '@/ui-hooks/useShow';
+import { QuizTest } from '@/resources/instructor/QuizTest';
+import { TestForm } from '@/pages/InstructorExamination/components/Tests/TestForm';
+import { TestResultsTab } from '@/pages/InstructorExamination/containers/Tests/TestResultsTab';
+import { TestQuestionsTab } from '@/pages/InstructorExamination/containers/Tests/TestQuestionsTab';
+import { UniqueTestQuestionsTab } from '@/pages/InstructorExamination/containers/Tests/UniqueTestQuestionsTab';
+import { TestDetails } from '@/pages/InstructorExamination/components/Tests/TestDetails';
+import { useGroupsForCourse } from '@/hooks/instructor/GroupHooks';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { TabbedInterface } from '@/components/TabbedInterface';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 
 type Params = {
     id?: string
