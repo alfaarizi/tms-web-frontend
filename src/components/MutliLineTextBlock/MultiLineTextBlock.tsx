@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from 'components/MutliLineTextBlock/MultiLineTextBlock.module.css';
+import styles from '@/components/MutliLineTextBlock/MultiLineTextBlock.module.css';
 
 type Props = {
     text: string | undefined | null;

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import {
     Col, OverlayTrigger, Row, Tooltip,
 } from 'react-bootstrap';

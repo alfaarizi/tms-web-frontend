@@ -1,6 +1,5 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getIconProps } from 'pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
+import { getIconProps } from '@/pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
 
 type Props = {
     filename: string;

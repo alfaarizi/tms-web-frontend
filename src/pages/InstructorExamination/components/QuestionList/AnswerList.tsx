@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-import { QuizQuestion } from 'resources/instructor/QuizQuestion';
+import { QuizQuestion } from '@/resources/instructor/QuizQuestion';
 import {
     useAnswers,
-} from 'hooks/instructor/QuizAnswerHooks';
-import { QuizAnswer } from 'resources/instructor/QuizAnswer';
-import { AnswerListItem } from './AnswerListItem';
+} from '@/hooks/instructor/QuizAnswerHooks';
+import { QuizAnswer } from '@/resources/instructor/QuizAnswer';
+import { AnswerListItem } from '@/pages/InstructorExamination/components/QuestionList/AnswerListItem';
 
 type Props = {
     question: QuizQuestion,

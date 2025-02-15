@@ -1,4 +1,4 @@
-import { MockLogin } from 'resources/common/MockLogin';
+import { MockLogin } from '@/resources/common/MockLogin';
 
 export function generateStudentUsers(count : number) : MockLogin[] {
     const out : MockLogin[] = [];

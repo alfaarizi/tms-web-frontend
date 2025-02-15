@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Form, Modal } from 'react-bootstrap';
 
-import { FormError } from 'components/FormError';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { TestCase } from 'resources/instructor/TestCase';
-import { ConfirmModal } from 'components/Modals/ConfirmModal';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { FormError } from '@/components/FormError';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { TestCase } from '@/resources/instructor/TestCase';
+import { ConfirmModal } from '@/components/Modals/ConfirmModal';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 type Props = {
     title: string,

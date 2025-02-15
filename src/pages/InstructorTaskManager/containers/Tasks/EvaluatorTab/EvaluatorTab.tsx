@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     faDesktop,
@@ -6,26 +6,26 @@ import {
     faMagnifyingGlassChart,
 } from '@fortawesome/free-solid-svg-icons';
 import { ButtonGroup } from 'react-bootstrap';
-import { Task } from 'resources/instructor/Task';
+import { Task } from '@/resources/instructor/Task';
 import {
     useEvaluatorAdditionalInformation,
     useSetupAutoTester, useSetupCodeChecker,
     useSetupEvaluatorEnvironment,
-} from 'hooks/instructor/EvaluatorHooks';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { ExpandableSection } from 'components/ExpadanbleSection/ExpandableSection';
-import { AutoTesterSettings } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/AutoTesterSettings';
-import { EnvironmentSettings } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/EnvironmentSettings';
-import { EvaluatorTemplate } from 'resources/instructor/EvaluatorTemplate';
-import { useShow } from 'ui-hooks/useShow';
+} from '@/hooks/instructor/EvaluatorHooks';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { ExpandableSection } from '@/components/ExpadanbleSection/ExpandableSection';
+import { AutoTesterSettings } from '@/pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/AutoTesterSettings';
+import { EnvironmentSettings } from '@/pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/EnvironmentSettings';
+import { EvaluatorTemplate } from '@/resources/instructor/EvaluatorTemplate';
+import { useShow } from '@/ui-hooks/useShow';
 import {
     SectionHeaderIcon,
-} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/SectionHeaderIcon';
-import { ConfirmModal } from 'components/Modals/ConfirmModal';
-import { CodeCheckerSettings } from 'pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/CodeCheckerSettings';
+} from '@/pages/InstructorTaskManager/components/Tasks/EvaluatorTab/SectionHeaderIcon';
+import { ConfirmModal } from '@/components/Modals/ConfirmModal';
+import { CodeCheckerSettings } from '@/pages/InstructorTaskManager/containers/Tasks/EvaluatorTab/CodeCheckerSettings';
 import {
     TemplateListDropdownButton,
-} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/TemplateListDropdownButton';
+} from '@/pages/InstructorTaskManager/components/Tasks/EvaluatorTab/TemplateListDropdownButton';
 
 type Props = {
     task: Task

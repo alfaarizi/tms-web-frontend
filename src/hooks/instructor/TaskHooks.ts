@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import { Task } from 'resources/instructor/Task';
-import * as TasksService from 'api/instructor/TasksService';
-import { GridTask } from 'resources/instructor/GridTask.php';
-import { QUERY_KEY as SUBMISSION_QUERY } from 'hooks/instructor/SubmissionHooks';
-import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
+import { Task } from '@/resources/instructor/Task';
+import * as TasksService from '@/api/instructor/TasksService';
+import { GridTask } from '@/resources/instructor/GridTask.php';
+import { QUERY_KEY as SUBMISSION_QUERY } from '@/hooks/instructor/SubmissionHooks';
+import { CodeCompassParameters } from '@/resources/instructor/CodeCompassParameters';
 
 export const QUERY_KEY = 'instructor/tasks';
 
@@ -27,7 +27,11 @@ export function useTasksForGrid(groupID: number, enabled: boolean = true) {
 }
 
 export function useTaskListForCourse(
-    courseID: number | 'All', myTasks: boolean, semesterFromID: number, semesterToID: number, enabled: boolean,
+    courseID: number | 'All',
+    myTasks: boolean,
+    semesterFromID: number,
+    semesterToID: number,
+    enabled: boolean,
 ) {
     const key = [QUERY_KEY, 'forCourse', {
         courseID,
@@ -50,16 +54,14 @@ export function useUserList(taskIDs: number[], enabled: boolean) {
 export function useCreateTaskMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation(
-        (newData: Task) => TasksService.create(newData), {
-            onSuccess: async (data) => {
-                queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
-                await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
-                await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
-                await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }, 'grid']);
-            },
+    return useMutation((newData: Task) => TasksService.create(newData), {
+        onSuccess: async (data) => {
+            queryClient.setQueryData([QUERY_KEY, { taskID: data.id }], data);
+            await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
+            await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
+            await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }, 'grid']);
         },
-    );
+    });
 }
 
 export function useUpdateTaskMutation() {

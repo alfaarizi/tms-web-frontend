@@ -1,4 +1,4 @@
-import { QuizWriterQuestion } from './QuizWriterQuestion';
+import { QuizWriterQuestion } from '@/resources/student/QuizWriterQuestion';
 
 export interface QuizWriterData {
     testName: string;

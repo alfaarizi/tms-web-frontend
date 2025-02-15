@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import * as StatisticsService from 'api/admin/StatisticsService';
+import * as StatisticsService from '@/api/admin/StatisticsService';
 
 export const QUERY_KEY = 'admin/statistics';
 

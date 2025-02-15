@@ -1,4 +1,4 @@
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 
 /**
  * Generic props interface that can be used for all login forms.

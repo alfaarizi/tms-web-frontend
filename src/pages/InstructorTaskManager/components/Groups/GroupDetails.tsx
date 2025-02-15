@@ -1,17 +1,16 @@
-import React from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import {
     faCopy, faEdit, faCircleInfo, faSync, faLinkSlash,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
-import { Group } from 'resources/instructor/Group';
-import { DataRow } from 'components/DataRow';
-import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
+import { Group } from '@/resources/instructor/Group';
+import { DataRow } from '@/components/DataRow';
+import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
 
 type Props = {
     isActualSemester: boolean,

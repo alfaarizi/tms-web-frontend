@@ -1,12 +1,11 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
 
-import { CodeCheckerReport } from 'resources/common/CodeCheckerReport';
-import { DataRow } from 'components/DataRow';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { SeverityDisplay } from 'components/CodeChecker/SeverityDisplay/SeverityDisplay';
+import { CodeCheckerReport } from '@/resources/common/CodeCheckerReport';
+import { DataRow } from '@/components/DataRow';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { SeverityDisplay } from '@/components/CodeChecker/SeverityDisplay/SeverityDisplay';
 
 type Props = {
     report: CodeCheckerReport

@@ -1,12 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import { Submission } from 'resources/instructor/Submission';
-import * as SubmissionsService from 'api/instructor/SubmissionsService';
-import { useDownloader } from 'hooks/common/useDownloader';
-import { QUERY_KEY as GROUP_QUERY_KEY } from 'hooks/instructor/GroupHooks';
-import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/instructor/TaskHooks';
-import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
-import * as GroupService from 'api/instructor/GroupsService';
+import { Submission } from '@/resources/instructor/Submission';
+import * as SubmissionsService from '@/api/instructor/SubmissionsService';
+import { useDownloader } from '@/hooks/common/useDownloader';
+import { QUERY_KEY as GROUP_QUERY_KEY } from '@/hooks/instructor/GroupHooks';
+import { QUERY_KEY as TASK_QUERY_KEY } from '@/hooks/instructor/TaskHooks';
+import { SubmissionGrade } from '@/resources/instructor/SubmissionGrade';
 
 export const QUERY_KEY = 'instructor/submissions';
 
@@ -15,11 +14,13 @@ export function useSubmissionsForTask(taskID: number) {
 }
 
 export function useSubmissionsForStudent(groupID: number, uploaderID: number) {
-    return useQuery([QUERY_KEY, {
-        groupID,
-        uploaderID,
-    }],
-    () => SubmissionsService.listForStudent(groupID, uploaderID));
+    return useQuery(
+        [QUERY_KEY, {
+            groupID,
+            uploaderID,
+        }],
+        () => SubmissionsService.listForStudent(groupID, uploaderID),
+    );
 }
 
 export function useSubmission(id: number) {

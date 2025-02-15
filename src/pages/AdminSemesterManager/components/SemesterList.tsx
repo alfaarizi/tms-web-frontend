@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 
-import { Semester } from 'resources/common/Semester';
-import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { Semester } from '@/resources/common/Semester';
+import { SingleColumnLayout } from '@/layouts/SingleColumnLayout';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
 import { ButtonGroup } from 'react-bootstrap';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { SemesterListItem } from 'pages/AdminSemesterManager/components/SemesterListItem';
-import { ConfirmModal } from 'components/Modals/ConfirmModal';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { SemesterListItem } from '@/pages/AdminSemesterManager/components/SemesterListItem';
+import { ConfirmModal } from '@/components/Modals/ConfirmModal';
 
 type Props = {
     semesters?: Semester[],

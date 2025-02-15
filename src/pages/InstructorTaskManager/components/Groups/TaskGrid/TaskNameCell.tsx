@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import { ReactNode } from 'react';
+import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 
 type Props = {
     children: ReactNode,

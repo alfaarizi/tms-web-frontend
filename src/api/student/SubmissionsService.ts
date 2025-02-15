@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios';
 
-import { axiosInstance } from 'api/axiosInstance';
-import { SubmissionUpload } from 'resources/student/SubmissionUpload';
-import { Submission } from 'resources/student/Submission';
-import { VerifyItem } from 'resources/student/VerifyItem';
-import { AutoTesterResult } from 'resources/common/AutoTesterResult';
+import { axiosInstance } from '@/api/axiosInstance';
+import { SubmissionUpload } from '@/resources/student/SubmissionUpload';
+import { Submission } from '@/resources/student/Submission';
+import { VerifyItem } from '@/resources/student/VerifyItem';
+import { AutoTesterResult } from '@/resources/common/AutoTesterResult';
 
 export async function download(id: number) {
     const res = await axiosInstance.get<Blob>(`/student/submissions/${id}/download`, {

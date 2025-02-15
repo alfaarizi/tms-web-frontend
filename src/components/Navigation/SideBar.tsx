@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import styles from 'components/Navigation/SideBar.module.css';
+import { ReactNode } from 'react';
+import styles from '@/components/Navigation/SideBar.module.css';
 
 type Props = {
     show: boolean,

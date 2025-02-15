@@ -1,12 +1,12 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { ButtonGroup, Media } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 
 type Props = {
     name: string,

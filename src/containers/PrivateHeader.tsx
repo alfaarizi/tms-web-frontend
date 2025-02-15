@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -8,16 +8,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { SemesterSwitcher } from 'components/Header/SemesterSwitcher';
-import { RoleSwitcher } from 'components/Header/RoleSwitcher';
-import { Header } from 'components/Header/Header';
+import { SemesterSwitcher } from '@/components/Header/SemesterSwitcher';
+import { RoleSwitcher } from '@/components/Header/RoleSwitcher';
+import { Header } from '@/components/Header/Header';
 import { useIsFetching, useQueryClient } from 'react-query';
-import { useSemesters } from 'hooks/common/SemesterHooks';
-import { usePlagiarismServices } from 'hooks/instructor/PlagiarismHooks';
-import { useGlobalContext } from 'context/GlobalContext';
-import { Role } from 'resources/common/Role';
-import { HeaderContent } from 'components/Header/HeaderContent';
-import { UserSettings } from 'resources/common/UserSettings';
+import { useSemesters } from '@/hooks/common/SemesterHooks';
+import { usePlagiarismServices } from '@/hooks/instructor/PlagiarismHooks';
+import { useGlobalContext } from '@/context/GlobalContext';
+import { Role } from '@/resources/common/Role';
+import { HeaderContent } from '@/components/Header/HeaderContent';
+import { UserSettings } from '@/resources/common/UserSettings';
 
 type Props = {
     userSettings: UserSettings

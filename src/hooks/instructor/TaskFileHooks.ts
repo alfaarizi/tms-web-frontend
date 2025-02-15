@@ -1,19 +1,24 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import { TaskFile } from 'resources/common/TaskFile';
-import * as TaskFilesService from 'api/instructor/TaskFilesService';
-import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
-import { useDownloader } from 'hooks/common/useDownloader';
+import { TaskFile } from '@/resources/common/TaskFile';
+import * as TaskFilesService from '@/api/instructor/TaskFilesService';
+import { TaskFilesUpload } from '@/resources/instructor/TaskFilesUpload';
+import { useDownloader } from '@/hooks/common/useDownloader';
 
 export const QUERY_KEY = 'instructor/task-files';
 
 export function useTaskFiles(
-    taskID: number, includeAttachments: boolean, includeTestFiles: boolean, includeWebTestSuites: boolean,
+    taskID: number,
+    includeAttachments: boolean,
+    includeTestFiles: boolean,
+    includeWebTestSuites: boolean,
 ) {
-    return useQuery([QUERY_KEY, {
-        taskID, includeAttachments, includeTestFiles, includeWebTestSuites,
-    }],
-    () => TaskFilesService.index(taskID, includeAttachments, includeTestFiles, includeWebTestSuites));
+    return useQuery(
+        [QUERY_KEY, {
+            taskID, includeAttachments, includeTestFiles, includeWebTestSuites,
+        }],
+        () => TaskFilesService.index(taskID, includeAttachments, includeTestFiles, includeWebTestSuites),
+    );
 }
 
 export function useAttachmentTaskFiles(taskID: number) {
@@ -29,7 +34,10 @@ export function useWebTestSuites(taskID: number) {
 }
 
 export function useTaskFilesUploadMutation(
-    taskID: number, includeAttachments: boolean, includeTestFiles: boolean, includeWebTestSuites: boolean,
+    taskID: number,
+    includeAttachments: boolean,
+    includeTestFiles: boolean,
+    includeWebTestSuites: boolean,
 ) {
     const queryClient = useQueryClient();
 
@@ -59,7 +67,10 @@ export function useWebTestSuiteUploadMutation(taskID: number) {
 }
 
 export function useTaskFileRemoveMutation(
-    taskID: number, includeAttachments: boolean, includeTestFiles: boolean, includeWebTestSuites: boolean,
+    taskID: number,
+    includeAttachments: boolean,
+    includeTestFiles: boolean,
+    includeWebTestSuites: boolean,
 ) {
     const queryClient = useQueryClient();
 

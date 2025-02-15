@@ -1,18 +1,17 @@
-import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { FormError } from 'components/FormError';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { Notification } from 'resources/admin/Notification';
-import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
-import { DateTimePickerControl } from 'components/DateTimePickerControl';
-import { MarkdownFormControl } from 'components/MarkdownFormControl';
+import { FormError } from '@/components/FormError';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { Notification } from '@/resources/admin/Notification';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
+import { DateTimePickerControl } from '@/components/DateTimePickerControl';
+import { MarkdownFormControl } from '@/components/MarkdownFormControl';
 
 type Props = {
     title: string,

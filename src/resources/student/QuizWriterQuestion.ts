@@ -1,4 +1,4 @@
-import { QuizWriterAnswer } from 'resources/student/QuizWriterAnswer';
+import { QuizWriterAnswer } from '@/resources/student/QuizWriterAnswer';
 
 export interface QuizWriterQuestion {
     id: number;

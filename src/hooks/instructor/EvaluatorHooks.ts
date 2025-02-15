@@ -1,17 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as EvaluatorService from 'api/instructor/EvaluatorService';
-import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
-import { SetupEvaluatorEnvironment } from 'resources/instructor/SetupEvaluatorEnvironment';
-import { SetupAutoTester } from 'resources/instructor/SetupAutoTester';
-import { QUERY_KEY as TASKS_QUERY_KEY } from 'hooks/instructor/TaskHooks';
-import { SetupCodeChecker } from 'resources/instructor/SetupCodeChecker';
+import * as EvaluatorService from '@/api/instructor/EvaluatorService';
+import { EvaluatorAdditionalInformation } from '@/resources/instructor/EvaluatorAdditionalInformation';
+import { SetupEvaluatorEnvironment } from '@/resources/instructor/SetupEvaluatorEnvironment';
+import { SetupAutoTester } from '@/resources/instructor/SetupAutoTester';
+import { QUERY_KEY as TASKS_QUERY_KEY } from '@/hooks/instructor/TaskHooks';
+import { SetupCodeChecker } from '@/resources/instructor/SetupCodeChecker';
 
 const QUERY_KEY = 'instructor/task-evaluator';
 
 export function useEvaluatorAdditionalInformation(taskID: number, enabled: boolean) {
     return useQuery<EvaluatorAdditionalInformation>(
         [QUERY_KEY, { taskID }, 'additional-information'],
-        () => EvaluatorService.evaluatorAdditionalInformation(taskID), {
+        () => EvaluatorService.evaluatorAdditionalInformation(taskID),
+        {
             enabled,
         },
     );

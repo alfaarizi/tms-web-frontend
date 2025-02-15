@@ -1,4 +1,4 @@
-import { QuizTest } from 'resources/student/QuizTest';
+import { QuizTest } from '@/resources/student/QuizTest';
 
 export interface QuizTestInstance {
     id: number;

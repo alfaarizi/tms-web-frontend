@@ -1,6 +1,6 @@
-import { Course } from 'resources/common/Course';
-import { axiosInstance } from 'api/axiosInstance';
-import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
+import { Course } from '@/resources/common/Course';
+import { axiosInstance } from '@/api/axiosInstance';
+import { CreateOrUpdateCourse } from '@/resources/common/CreateOrUpdateCourse';
 
 export async function index() {
     const res = await axiosInstance.get<Course[]>('/admin/courses');

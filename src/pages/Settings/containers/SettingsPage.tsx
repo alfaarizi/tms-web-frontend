@@ -2,29 +2,29 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { languages } from 'i18n/i18n';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faExclamation } from '@fortawesome/free-solid-svg-icons';
 
-import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { FormError } from 'components/FormError';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useNotifications } from 'hooks/common/useNotifications';
-import { useUserSettings, useSettingsMutation } from 'hooks/common/UserHooks';
-import { NotificationTarget, UserSettings } from 'resources/common/UserSettings';
-import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { SingleColumnLayout } from '@/layouts/SingleColumnLayout';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { FormError } from '@/components/FormError';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { useUserSettings, useSettingsMutation } from '@/hooks/common/UserHooks';
+import { NotificationTarget, UserSettings } from '@/resources/common/UserSettings';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
+import { TranslationTopContent } from '@/i18n/i18n';
 
 export function SettingsPage() {
     const userSettings = useUserSettings();
     const settingsMutation = useSettingsMutation();
     const settingsData = userSettings.data;
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const notifications = useNotifications();
     const [customEmail, setCustomEmail] = useState<string | null>(null);
     const [serverSideError, setServerSideError] = useState<ValidationErrorBody | null>(null);
@@ -114,6 +114,7 @@ export function SettingsPage() {
         return targets;
     }
 
+    const languages = i18n.services.resourceStore.data;
     return (
         <SingleColumnLayout>
             <CustomCard>
@@ -227,7 +228,9 @@ export function SettingsPage() {
                         >
                             {
                                 Object.keys(languages).map((key) => (
-                                    <option key={key} value={key} lang={key}>{languages[key].name}</option>
+                                    <option key={key} value={key} lang={key}>
+                                        {(languages[key]?.translation as TranslationTopContent).autonym}
+                                    </option>
                                 ))
                             }
                         </Form.Control>

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { UseFormClearErrors, UseFormSetError } from 'react-hook-form/dist/types/form';
-import { FieldValues } from 'react-hook-form/dist/types/fields';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { FieldValues, UseFormClearErrors, UseFormSetError } from 'react-hook-form';
 
 /**
  * Extracts field validation errors from responses with status code 422

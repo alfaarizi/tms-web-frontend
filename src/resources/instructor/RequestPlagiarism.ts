@@ -1,4 +1,4 @@
-import { PlagiarismType } from './PlagiarismType';
+import { PlagiarismType } from '@/resources/instructor/PlagiarismType';
 
 export interface RequestPlagiarism {
     type: PlagiarismType;

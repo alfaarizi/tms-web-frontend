@@ -1,5 +1,5 @@
-import { User } from 'resources/common/User';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+import { User } from '@/resources/common/User';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 
 interface Failed {
     userCode: string;

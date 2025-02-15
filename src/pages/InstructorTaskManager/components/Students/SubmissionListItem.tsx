@@ -1,20 +1,20 @@
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { ButtonGroup, Col, Row } from 'react-bootstrap';
 import {
     faCode,
     faCompass, faDownload, faEdit, faInfoCircle, faList, faStop, faHistory,
 } from '@fortawesome/free-solid-svg-icons';
-import { useShow } from 'ui-hooks/useShow';
+import { useShow } from '@/ui-hooks/useShow';
 import { useTranslation } from 'react-i18next';
-import { useAutoTestResults } from 'hooks/instructor/SubmissionHooks';
-import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { CodeCompassInformationAlert } from 'components/CodeCompassInformationAlert';
-import { Status } from 'resources/instructor/CodeCompassInstance';
-import { Submission } from 'resources/instructor/Submission';
-import { Task } from 'resources/instructor/Task';
-import { WebAppExecutionControl } from '../../containers/Submissions/WebAppExecutionControl';
+import { useAutoTestResults } from '@/hooks/instructor/SubmissionHooks';
+import { AutoTestResultAlert } from '@/components/AutoTestResultAlert';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { CodeCompassInformationAlert } from '@/components/CodeCompassInformationAlert';
+import { Status } from '@/resources/instructor/CodeCompassInstance';
+import { Submission } from '@/resources/instructor/Submission';
+import { Task } from '@/resources/instructor/Task';
+import { WebAppExecutionControl } from '@/pages/InstructorTaskManager/containers/Submissions/WebAppExecutionControl';
 
 type Props = {
     renderItem: (file: Submission) => ReactNode,
@@ -68,7 +68,7 @@ export function SubmissionListItem({
         setIsCodeCompassLoading(false);
     };
 
-    const handleAutoTesterResultsDisplay = async (data: Submission) => {
+    const handleAutoTesterResultsDisplay = async () => {
         await refetchAutoTesterResults();
         setLoadAutoTesterResults(true); // keep the query enabled to get updates
         showAutoTesterResults.toShow();
@@ -85,7 +85,7 @@ export function SubmissionListItem({
                         {file.errorMsg || autoTesterResults
                             ? (
                                 <ToolbarButton
-                                    onClick={() => handleAutoTesterResultsDisplay(file)}
+                                    onClick={handleAutoTesterResultsDisplay}
                                     icon={faList}
                                     text={t('task.evaluator.results')}
                                     displayTextBreakpoint="none"

@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
-import * as SemestersService from 'api/common/SemestersService';
-import { Semester } from 'resources/common/Semester';
-import { useGlobalContext } from 'context/GlobalContext';
-import { usePrivateSystemInfoQuery } from './SystemHooks';
+import * as SemestersService from '@/api/common/SemestersService';
+import { Semester } from '@/resources/common/Semester';
+import { useGlobalContext } from '@/context/GlobalContext';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 
 export const QUERY_KEY = 'semesters';
 

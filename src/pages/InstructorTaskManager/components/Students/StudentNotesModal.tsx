@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Modal } from 'react-bootstrap';
 
-import { FormButtons } from 'components/Buttons/FormButtons';
+import { FormButtons } from '@/components/Buttons/FormButtons';
 import { useForm } from 'react-hook-form';
-import { StudentNotes } from 'resources/instructor/StudentNotes';
-import { ConfirmModal } from 'components/Modals/ConfirmModal';
-import { User } from 'resources/common/User';
+import { StudentNotes } from '@/resources/instructor/StudentNotes';
+import { ConfirmModal } from '@/components/Modals/ConfirmModal';
+import { User } from '@/resources/common/User';
 
 type Props = {
     isActualSemester: boolean,

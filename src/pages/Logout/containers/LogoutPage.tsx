@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { useLogoutMutation } from 'hooks/common/UserHooks';
-import { FullScreenSpinner } from 'components/FullScreenSpinner/FullScreenSpinner';
+import { useLogoutMutation } from '@/hooks/common/UserHooks';
+import { FullScreenSpinner } from '@/components/FullScreenSpinner/FullScreenSpinner';
 
 export function LogoutPage() {
     const logoutMutation = useLogoutMutation();

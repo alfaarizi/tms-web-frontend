@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { User } from 'resources/common/User';
-import { GridTask } from 'resources/instructor/GridTask.php';
-import { GridSubmission } from 'resources/instructor/GridSubmission';
-import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import { useEffect, useState, useRef } from 'react';
+import { User } from '@/resources/common/User';
+import { GridTask } from '@/resources/instructor/GridTask.php';
+import { GridSubmission } from '@/resources/instructor/GridSubmission';
+import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 import {
     TaskQuickGraderCellInput,
-} from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskQuickGrader/TaskQuickGraderCellInput';
-import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
+} from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskQuickGrader/TaskQuickGraderCellInput';
+import { SubmissionGrade } from '@/resources/instructor/SubmissionGrade';
 
 type Props = {
     students: User[];

@@ -1,14 +1,13 @@
-import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { FormError } from 'components/FormError';
-import { MockLogin } from 'resources/common/MockLogin';
-import { LoginProps } from 'pages/Login/components/LoginProps';
-import { LoginButton } from 'pages/Login/components/LoginButton';
-import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { FormError } from '@/components/FormError';
+import { MockLogin } from '@/resources/common/MockLogin';
+import { LoginProps } from '@/pages/Login/components/LoginProps';
+import { LoginButton } from '@/pages/Login/components/LoginButton';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 /**
  * Form component for mock-login

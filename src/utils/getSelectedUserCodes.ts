@@ -1,5 +1,5 @@
 import { Option } from 'react-bootstrap-typeahead/types/types';
-import { User } from 'resources/common/User';
+import { User } from '@/resources/common/User';
 
 export function getSelectedUserCodes(selectedOptions: Option[]) : string[] {
     const codes : string[] = [];

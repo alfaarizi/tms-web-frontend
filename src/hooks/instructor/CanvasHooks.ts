@@ -2,12 +2,12 @@ import {
     QueryClient,
     useMutation, useQuery, useQueryClient,
 } from 'react-query';
-import * as CanvasService from 'api/instructor/CanvasService';
+import * as CanvasService from '@/api/instructor/CanvasService';
 
-import { QUERY_KEY as GROUP_QUERY_KEY } from 'hooks/instructor/GroupHooks';
-import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/instructor/TaskHooks';
-import { CanvasOauth2Response } from 'resources/instructor/CanvasOauth2Response';
-import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
+import { QUERY_KEY as GROUP_QUERY_KEY } from '@/hooks/instructor/GroupHooks';
+import { QUERY_KEY as TASK_QUERY_KEY } from '@/hooks/instructor/TaskHooks';
+import { CanvasOauth2Response } from '@/resources/instructor/CanvasOauth2Response';
+import { CanvasSetupData } from '@/resources/instructor/CanvasSetupData';
 
 export const QUERY_KEY = 'instructor/canvas';
 

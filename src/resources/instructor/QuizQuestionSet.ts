@@ -1,4 +1,4 @@
-import { Course } from 'resources/common/Course';
+import { Course } from '@/resources/common/Course';
 
 export interface QuizQuestionSet {
     id: number;

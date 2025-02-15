@@ -1,9 +1,9 @@
 import { Controller } from 'react-hook-form';
 import { AsyncTypeahead, Token } from 'react-bootstrap-typeahead';
-import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { Option } from 'react-bootstrap-typeahead/types/types';
-import { User } from 'resources/common/User';
+import { User } from '@/resources/common/User';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
@@ -51,11 +51,9 @@ export function AsyncTypeaheadControl({
                     size="sm"
                     placeholder={t('common.searchForUserCodeOrName')}
                     renderMenuItemChildren={(option) => (
-                        <>
-                            <span>
-                                {formatOption(option)}
-                            </span>
-                        </>
+                        <span>
+                            {formatOption(option)}
+                        </span>
                     )}
                     renderToken={(option, { onRemove }, index) => (
                         <Token key={index} onRemove={onRemove} option={option}>

@@ -1,14 +1,13 @@
-import React from 'react';
-import { FileUpload } from 'components/FileUpload';
-import { TaskFilesList } from 'components/TaskFilesList';
+import { FileUpload } from '@/components/FileUpload';
+import { TaskFilesList } from '@/components/TaskFilesList';
 import { useTranslation } from 'react-i18next';
-import { TaskFile } from 'resources/common/TaskFile';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { Button, Card } from 'react-bootstrap';
+import { TaskFile } from '@/resources/common/TaskFile';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
 
 type Props = {
     webTestSuites: TaskFile[]|undefined,
@@ -19,14 +18,14 @@ type Props = {
     onDelete: (id: number) => void
 }
 
-export const WebTestSuites = ({
+export function WebTestSuites({
     webTestSuites,
     isLoading,
     testFileValidationError,
     onUpload,
     onDownload,
     onDelete,
-}: Props) => {
+}: Props) {
     const { t } = useTranslation();
 
     return (
@@ -37,7 +36,7 @@ export const WebTestSuites = ({
                 </CustomCardHeader>
                 <p>{t('task.evaluator.webTestTemplateDesc')}</p>
                 <Button
-                    href={`${process.env.PUBLIC_URL}/template.robot`}
+                    href={`${import.meta.env.BASE_URL}/template.robot`}
                     size="sm"
                     className="mt-2"
                 >
@@ -65,4 +64,4 @@ export const WebTestSuites = ({
                 )}
         </>
     );
-};
+}

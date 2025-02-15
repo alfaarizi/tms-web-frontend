@@ -8,8 +8,7 @@ import {
     VictoryTooltip,
 } from 'victory';
 
-import React from 'react';
-import { GroupStats } from 'resources/instructor/GroupStats';
+import { GroupStats } from '@/resources/instructor/GroupStats';
 import { useTranslation } from 'react-i18next';
 
 type Props = {

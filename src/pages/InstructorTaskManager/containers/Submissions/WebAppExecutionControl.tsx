@@ -1,31 +1,31 @@
-import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
+import { ToolbarDropdown } from '@/components/Buttons/ToolbarDropdown';
 import {
     faEye, faGlobe, faPlay, faStop, faDownload,
 } from '@fortawesome/free-solid-svg-icons';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+
 import { useTranslation } from 'react-i18next';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { SetupWebAppExecution } from 'resources/instructor/SetupWebAppExecution';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { SetupWebAppExecution } from '@/resources/instructor/SetupWebAppExecution';
 import { useForm } from 'react-hook-form';
 import {
     Button, Form, OverlayTrigger, Popover, Spinner,
 } from 'react-bootstrap';
-import { FormError } from 'components/FormError';
-import { LocaleDateTime } from 'components/LocaleDateTime';
+import { FormError } from '@/components/FormError';
+import { LocaleDateTime } from '@/components/LocaleDateTime';
 import {
     useDownloadRunLog,
     useStartWebAppExecutionMutation,
     useStopWebAppExecutionMutation,
     useWebAppExecution,
-} from 'hooks/instructor/WebAppExecutionHook';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
-import { useNotifications } from 'hooks/common/useNotifications';
-import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
-import { getFirstError } from 'utils/getFirstError';
-import { WebAppExecution } from 'resources/instructor/WebAppExecution';
-import { Submission } from 'resources/instructor/Submission';
+} from '@/hooks/instructor/WebAppExecutionHook';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { ServerSideValidationError } from '@/exceptions/ServerSideValidationError';
+import { getFirstError } from '@/utils/getFirstError';
+import { WebAppExecution } from '@/resources/instructor/WebAppExecution';
+import { Submission } from '@/resources/instructor/Submission';
 
 type Props = {
     file: Submission,
@@ -110,8 +110,10 @@ export function WebAppExecutionControl({
                                 },
                                 max: {
                                     value: privateSystemInfo.data!.maxWebAppRunTime,
-                                    message: `${t('common.maxValueRequired',
-                                        { value: privateSystemInfo.data!.maxWebAppRunTime })}`,
+                                    message: `${t(
+                                        'common.maxValueRequired',
+                                        { value: privateSystemInfo.data!.maxWebAppRunTime },
+                                    )}`,
                                 },
                             })}
                         />
@@ -130,59 +132,55 @@ export function WebAppExecutionControl({
     );
 
     return (
-        <>
-            {webAppExecution.data
-                ? (
-                    <>
-                        <ToolbarDropdown text={t('task.exec.webApp')} icon={faGlobe} disabled={isLoading}>
-                            <DropdownItem disabled>
-                                {t('task.exec.autoTearDownAt')}
-                                {': '}
-                                <LocaleDateTime value={webAppExecution.data.shutdownAt} />
-                            </DropdownItem>
-                            <DropdownItem
-                                disabled={isLoading}
-                                onSelect={() => window.open(webAppExecution.data.url, '_blank', 'noopener,noreferrer')}
-                            >
-                                <FontAwesomeIcon icon={faEye} />
-                                {' '}
-                                {t('task.exec.visit', { url: webAppExecution.data.url })}
-                            </DropdownItem>
-                            <DropdownItem
-                                disabled={isLoading}
-                                onSelect={() => handleStop()}
-                            >
-                                <FontAwesomeIcon icon={faStop} />
-                                {' '}
-                                {t('task.exec.tearDown')}
-                            </DropdownItem>
-                            <DropdownItem
-                                disabled={isLoading}
-                                onSelect={() => handleDownload(webAppExecution.data)}
-                            >
-                                <FontAwesomeIcon icon={faDownload} />
-                                {' '}
-                                {t('task.exec.downloadRunLog')}
-                            </DropdownItem>
-                        </ToolbarDropdown>
-                    </>
-                )
-                : (
-                    <OverlayTrigger
-                        trigger="click"
-                        rootClose
-                        placement="bottom"
-                        overlay={startFormPopover}
-                        defaultShow={false}
+        webAppExecution.data
+            ? (
+                <ToolbarDropdown text={t('task.exec.webApp')} icon={faGlobe} disabled={isLoading}>
+                    <DropdownItem disabled>
+                        {t('task.exec.autoTearDownAt')}
+                        {': '}
+                        <LocaleDateTime value={webAppExecution.data.shutdownAt} />
+                    </DropdownItem>
+                    <DropdownItem
+                        disabled={isLoading}
+                        onSelect={() => window.open(webAppExecution.data.url, '_blank', 'noopener,noreferrer')}
                     >
-                        <ToolbarButton
-                            icon={faPlay}
-                            text={t('task.exec.startUp')}
-                            displayTextBreakpoint="none"
-                            isLoading={isLoading}
-                        />
-                    </OverlayTrigger>
-                )}
-        </>
+                        <FontAwesomeIcon icon={faEye} />
+                        {' '}
+                        {t('task.exec.visit', { url: webAppExecution.data.url })}
+                    </DropdownItem>
+                    <DropdownItem
+                        disabled={isLoading}
+                        onSelect={() => handleStop()}
+                    >
+                        <FontAwesomeIcon icon={faStop} />
+                        {' '}
+                        {t('task.exec.tearDown')}
+                    </DropdownItem>
+                    <DropdownItem
+                        disabled={isLoading}
+                        onSelect={() => handleDownload(webAppExecution.data)}
+                    >
+                        <FontAwesomeIcon icon={faDownload} />
+                        {' '}
+                        {t('task.exec.downloadRunLog')}
+                    </DropdownItem>
+                </ToolbarDropdown>
+            )
+            : (
+                <OverlayTrigger
+                    trigger="click"
+                    rootClose
+                    placement="bottom"
+                    overlay={startFormPopover}
+                    defaultShow={false}
+                >
+                    <ToolbarButton
+                        icon={faPlay}
+                        text={t('task.exec.startUp')}
+                        displayTextBreakpoint="none"
+                        isLoading={isLoading}
+                    />
+                </OverlayTrigger>
+            )
     );
 }

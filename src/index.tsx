@@ -1,24 +1,22 @@
 // Import global css files
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import '@/index.css';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+// TODO React Bootstrap 5: This will be fixed when we can upgrade @types/react-dom to v18
+// Currently it cannot be updated because it would break React Bootstrap
+// @ts-ignore
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import ReactGA from 'react-ga4';
-import { env } from 'runtime-env';
 
-import { App } from 'containers/App';
-import './i18n/i18n';
-import { GlobalContextProvider } from 'context/GlobalContext';
-import { ErrorBoundary } from 'components/ErrorBoundary';
-import { Buffer } from 'buffer';
-import reportWebVitals from './reportWebVitals';
+import { App } from '@/containers/App';
+import '@/i18n/i18n';
+import { GlobalContextProvider } from '@/context/GlobalContext';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import reportWebVitals from '@/reportWebVitals';
 
-// in React during pollyfilling Buffer is not defined, so we need to define it
-global.Buffer = Buffer;
 /**
  * Configure React Query.
  * Defaults: https://react-query.tanstack.com/guides/important-defaults
@@ -33,23 +31,22 @@ const queryClient = new QueryClient({
 });
 
 // Google Analytics
-if (env.REACT_APP_GOOGLE_ANALYTICS_ID && process.env.NODE_ENV === 'production') {
-    ReactGA.initialize(env.REACT_APP_GOOGLE_ANALYTICS_ID);
+if (import.meta.env.VITE_GOOGLE_ANALYTICS_ID && import.meta.env.NODE_ENV === 'production') {
+    ReactGA.initialize(import.meta.env.VITE_GOOGLE_ANALYTICS_ID);
 }
 
 // Render application
-ReactDOM.render(
+createRoot(document.getElementById('root')!).render(
     <ErrorBoundary>
         <GlobalContextProvider>
             <QueryClientProvider client={queryClient}>
-                <BrowserRouter basename={process.env.PUBLIC_URL}>
+                <BrowserRouter basename={import.meta.env.BASE_URL}>
                     <App />
                     <ReactQueryDevtools initialIsOpen={false} />
                 </BrowserRouter>
             </QueryClientProvider>
         </GlobalContextProvider>
     </ErrorBoundary>,
-    document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

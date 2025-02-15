@@ -1,10 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as PlagiarismService from 'api/instructor/PlagiarismService';
-import { Plagiarism } from 'resources/instructor/Plagiarism';
-import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
-import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
-import { BaseFileUpload } from 'resources/instructor/BaseFileUpload';
-import { useDownloader } from 'hooks/common/useDownloader';
+import * as PlagiarismService from '@/api/instructor/PlagiarismService';
+import { PlagiarismBasefile } from '@/resources/instructor/PlagiarismBasefile';
+import { BaseFileUpload } from '@/resources/instructor/BaseFileUpload';
+import { useDownloader } from '@/hooks/common/useDownloader';
 
 export const QUERY_KEY = 'instructor/plagiarism-basefile';
 
@@ -22,9 +20,9 @@ export function useUploadBasefileMutation() {
     const queryClient = useQueryClient();
 
     return useMutation(async (uploadData: BaseFileUpload) => PlagiarismService.uploadBasefiles(uploadData), {
-        onSuccess: (data) => {
+        onSuccess: async () => {
             const key = [QUERY_KEY];
-            queryClient.invalidateQueries(key);
+            await queryClient.invalidateQueries(key);
         },
     });
 }

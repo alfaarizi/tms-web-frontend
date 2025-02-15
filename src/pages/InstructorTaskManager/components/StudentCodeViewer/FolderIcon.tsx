@@ -1,6 +1,5 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getIconAndColor } from '../../utils/StudentCodeViewerUtils';
+import { getIconAndColor } from '@/pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
 
 type Props = {
   isOpen: boolean;

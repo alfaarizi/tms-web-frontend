@@ -1,9 +1,9 @@
-import { QuizTest } from 'resources/instructor/QuizTest';
-import { useQuestionsForTest } from 'hooks/instructor/QuizQuestionHooks';
-import { QuestionList } from 'pages/InstructorExamination/components/QuestionList/QuestionsList';
-import { useGroupStudents } from 'hooks/instructor/GroupHooks';
-import React, { useEffect, useState } from 'react';
-import { UserSwitcher } from 'components/UserSwticher';
+import { QuizTest } from '@/resources/instructor/QuizTest';
+import { useQuestionsForTest } from '@/hooks/instructor/QuizQuestionHooks';
+import { QuestionList } from '@/pages/InstructorExamination/components/QuestionList/QuestionsList';
+import { useGroupStudents } from '@/hooks/instructor/GroupHooks';
+import { useEffect, useState } from 'react';
+import { UserSwitcher } from '@/components/UserSwticher';
 
 type Props = {
     test: QuizTest

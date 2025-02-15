@@ -1,15 +1,14 @@
-import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { LanguageSwitcher } from 'components/Header/LanguageSwitcher';
-import { Header } from 'components/Header/Header';
+import { LanguageSwitcher } from '@/components/Header/LanguageSwitcher';
+import { Header } from '@/components/Header/Header';
 import { useIsFetching } from 'react-query';
-import { useClientSideLocaleChange } from 'hooks/common/UserHooks';
+import { useClientSideLocaleChange } from '@/hooks/common/UserHooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpenReader, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { LinkContainer } from 'react-router-bootstrap';
-import { HeaderContent } from 'components/Header/HeaderContent';
+import { HeaderContent } from '@/components/Header/HeaderContent';
 
 /**
  * Contains public navigation actions

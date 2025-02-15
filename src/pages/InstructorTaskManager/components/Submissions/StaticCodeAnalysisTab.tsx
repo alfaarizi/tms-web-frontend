@@ -1,11 +1,10 @@
-import React from 'react';
 import { Alert } from 'react-bootstrap';
 
-import { CodeCheckerResult } from 'resources/instructor/CodeCheckerResult';
-import { CodeCheckerReportsList } from 'components/CodeChecker/CodeCheckerReportsList';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { CodeCheckerResult } from '@/resources/instructor/CodeCheckerResult';
+import { CodeCheckerReportsList } from '@/components/CodeChecker/CodeCheckerReportsList';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
 import { useTranslation } from 'react-i18next';
 
 type Props = {

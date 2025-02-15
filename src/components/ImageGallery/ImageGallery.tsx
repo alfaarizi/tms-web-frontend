@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Row } from 'react-bootstrap';
 
-import { Image } from 'resources/common/Image';
-import { ImageCard } from 'components/ImageGallery/ImageCard';
-import styles from 'components/ImageGallery/ImageGallery.module.css';
+import { Image } from '@/resources/common/Image';
+import { ImageCard } from '@/components/ImageGallery/ImageCard';
+import styles from '@/components/ImageGallery/ImageGallery.module.css';
 
 type Props = {
     images: Image[] | undefined,

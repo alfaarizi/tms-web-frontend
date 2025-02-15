@@ -1,13 +1,13 @@
 import { useTranslation } from 'react-i18next';
 
-import { TestCase } from 'resources/instructor/TestCase';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { DataRow } from 'components/DataRow';
+import { TestCase } from '@/resources/instructor/TestCase';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { DataRow } from '@/components/DataRow';
 import { ButtonGroup, Col, Row } from 'react-bootstrap';
-import React from 'react';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 
 type Props = {
     testCase: TestCase,

@@ -1,16 +1,15 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { DataRow } from 'components/DataRow';
+import { DataRow } from '@/components/DataRow';
 import { ButtonGroup } from 'react-bootstrap';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import { Plagiarism } from 'resources/instructor/Plagiarism';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { Plagiarism } from '@/resources/instructor/Plagiarism';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
 
 type Props = {
     report: Plagiarism,
@@ -28,7 +27,7 @@ export function RequestDetails({
     const { t } = useTranslation();
 
     const typeData = report.typeSpecificData;
-    let typeDataUI: JSX.Element;
+    let typeDataUI;
     switch (typeData.type) {
     case 'moss':
         typeDataUI = <DataRow label={t('plagiarism.moss.ignoreThreshold')}>{typeData.ignoreThreshold}</DataRow>;
@@ -42,7 +41,7 @@ export function RequestDetails({
         break;
     default:
         // Should not happen
-        typeDataUI = <></>;
+        break;
     }
 
     return (

@@ -1,12 +1,14 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { TaskGridHeaderDropdown } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridHeaderDropdown';
-import { GridTask } from 'resources/instructor/GridTask.php';
-import { DownloadAllParams, ExportSpreadsheetParams } from 'hooks/instructor/SubmissionHooks';
-import { TaskNameCell } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskNameCell';
-import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import {
+    TaskGridHeaderDropdown,
+} from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridHeaderDropdown';
+import { GridTask } from '@/resources/instructor/GridTask.php';
+import { DownloadAllParams, ExportSpreadsheetParams } from '@/hooks/instructor/SubmissionHooks';
+import { TaskNameCell } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskNameCell';
+import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 
 type Props = {
     categorizedTasks: GridTask[][],

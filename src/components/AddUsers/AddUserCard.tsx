@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     Alert, Button, Form, Spinner,
@@ -7,18 +7,18 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { UserAddResponse } from 'resources/instructor/UserAddResponse';
-import { ErrorAlert } from 'components/ErrorAlert';
-import { getFirstError } from 'utils/getFirstError';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { UserAddResponse } from '@/resources/instructor/UserAddResponse';
+import { ErrorAlert } from '@/components/ErrorAlert';
+import { getFirstError } from '@/utils/getFirstError';
 import { Option } from 'react-bootstrap-typeahead/types/types';
-import { User } from 'resources/common/User';
-import { AddUserFormControl, AddUserMode } from 'components/AddUsers/AddUserFormControl';
-import { extractUserCodes } from 'utils/extractUserCodes';
-import { getSelectedUserCodes } from 'utils/getSelectedUserCodes';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { User } from '@/resources/common/User';
+import { AddUserFormControl, AddUserMode } from '@/components/AddUsers/AddUserFormControl';
+import { extractUserCodes } from '@/utils/extractUserCodes';
+import { getSelectedUserCodes } from '@/utils/getSelectedUserCodes';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 type Props = {
     id: string,

@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 
-import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
-import { FormError } from 'components/FormError';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { Course } from 'resources/common/Course';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
+import { FormError } from '@/components/FormError';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { Course } from '@/resources/common/Course';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 type Props = {
     title: string,

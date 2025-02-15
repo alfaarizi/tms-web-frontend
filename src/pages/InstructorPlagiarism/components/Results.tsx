@@ -1,13 +1,12 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { faExternalLinkAlt, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { ButtonGroup } from 'react-bootstrap';
 
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import styles from 'pages/InstructorPlagiarism/components/Results.module.css';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import styles from '@/pages/InstructorPlagiarism/components/Results.module.css';
 
 type Props = {
     responseURL: string | null,

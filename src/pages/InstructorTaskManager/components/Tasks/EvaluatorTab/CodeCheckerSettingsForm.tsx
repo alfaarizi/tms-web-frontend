@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { ButtonGroup, Form } from 'react-bootstrap';
-import { CustomCard } from 'components/CustomCard/CustomCard';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
 
-import { SetupCodeChecker } from 'resources/instructor/SetupCodeChecker';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { FormError } from 'components/FormError';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { Task } from 'resources/instructor/Task';
-import { StaticAnalyzerTool } from 'resources/instructor/StaticAnalyzerTool';
+import { SetupCodeChecker } from '@/resources/instructor/SetupCodeChecker';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { FormError } from '@/components/FormError';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { Task } from '@/resources/instructor/Task';
+import { StaticAnalyzerTool } from '@/resources/instructor/StaticAnalyzerTool';
 
 type Props = {
     task: Task,
@@ -171,11 +171,13 @@ export function CodeCheckerSettingsForm({
                         {errors.staticCodeAnalyzerInstructions
                             && <FormError message={errors.staticCodeAnalyzerInstructions.message} />}
                         <Form.Text muted>
-                            {t('task.evaluator.staticCodeAnalyzerInstructionsHelp',
+                            {t(
+                                'task.evaluator.staticCodeAnalyzerInstructionsHelp',
                                 {
                                     outputPathLinux: selectedToolOutputPath,
                                     outputPathWindows: selectedToolOutputPath?.replace(/\//g, '\\'),
-                                })}
+                                },
+                            )}
                         </Form.Text>
                     </Form.Group>
                 </div>

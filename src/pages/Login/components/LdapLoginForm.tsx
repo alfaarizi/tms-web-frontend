@@ -1,14 +1,13 @@
-import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { LdapLogin } from 'resources/common/LdapLogin';
-import { LoginProps } from 'pages/Login/components/LoginProps';
-import { LoginButton } from 'pages/Login/components/LoginButton';
-import { FormError } from 'components/FormError';
-import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { LdapLogin } from '@/resources/common/LdapLogin';
+import { LoginProps } from '@/pages/Login/components/LoginProps';
+import { LoginButton } from '@/pages/Login/components/LoginButton';
+import { FormError } from '@/components/FormError';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 /**
  * Form component for LDAP login

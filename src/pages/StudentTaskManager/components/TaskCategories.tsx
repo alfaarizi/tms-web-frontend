@@ -1,9 +1,8 @@
-import React from 'react';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { TaskListItem } from 'pages/StudentTaskManager/components/TaskListItem';
-import { Task } from 'resources/student/Task';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { TaskListItem } from '@/pages/StudentTaskManager/components/TaskListItem';
+import { Task } from '@/resources/student/Task';
 
 type Props = {
     tasks: Task[][],

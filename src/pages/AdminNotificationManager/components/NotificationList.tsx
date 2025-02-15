@@ -1,16 +1,15 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Notification } from 'resources/admin/Notification';
-import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { NotificationListItem } from 'pages/AdminNotificationManager/components/NotificationListItem';
+import { Notification } from '@/resources/admin/Notification';
+import { SingleColumnLayout } from '@/layouts/SingleColumnLayout';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { NotificationListItem } from '@/pages/AdminNotificationManager/components/NotificationListItem';
 import { ButtonGroup, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 
 type Props = {
     notifications?: Notification[],

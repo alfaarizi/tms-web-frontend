@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
-import * as SystemService from 'api/common/SystemService';
-import { PublicSystemInfo } from 'resources/common/PublicSystemInfo';
-import { PrivateSystemInfo } from 'resources/common/PrivateSystemInfo';
+import * as SystemService from '@/api/common/SystemService';
+import { PublicSystemInfo } from '@/resources/common/PublicSystemInfo';
+import { PrivateSystemInfo } from '@/resources/common/PrivateSystemInfo';
 
 const PUBLIC_INFO_QUERY_KEY = 'common/public system info';
 export const PRIVATE_INFO_QUERY_KEY = 'common/private system info';

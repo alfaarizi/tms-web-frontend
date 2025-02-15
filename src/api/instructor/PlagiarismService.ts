@@ -1,10 +1,10 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
-import { BaseFileUpload } from 'resources/instructor/BaseFileUpload';
-import { BaseFileUploadResult } from 'resources/instructor/BaseFileUploadResult';
-import { Plagiarism } from 'resources/instructor/Plagiarism';
-import { PlagiarismType } from 'resources/instructor/PlagiarismType';
-import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
+import { axiosInstance } from '@/api/axiosInstance';
+import { PlagiarismBasefile } from '@/resources/instructor/PlagiarismBasefile';
+import { BaseFileUpload } from '@/resources/instructor/BaseFileUpload';
+import { BaseFileUploadResult } from '@/resources/instructor/BaseFileUploadResult';
+import { Plagiarism } from '@/resources/instructor/Plagiarism';
+import { PlagiarismType } from '@/resources/instructor/PlagiarismType';
+import { RequestPlagiarism } from '@/resources/instructor/RequestPlagiarism';
 
 export async function index(semesterID: number) {
     const res = await axiosInstance.get<Plagiarism[]>('/instructor/plagiarism', { params: { semesterID } });

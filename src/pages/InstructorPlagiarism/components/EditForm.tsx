@@ -1,15 +1,14 @@
 import { useTranslation } from 'react-i18next';
-import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
-import { Plagiarism } from 'resources/instructor/Plagiarism';
-import { FormError } from 'components/FormError';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { Plagiarism } from '@/resources/instructor/Plagiarism';
+import { FormError } from '@/components/FormError';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 type Props = {
     editData: Plagiarism,

@@ -1,15 +1,13 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { useStatistics, useDetailedStatistics } from 'hooks/admin/StatisticsHooks';
-import { useSemesters } from 'hooks/common/SemesterHooks';
-import { Statistics } from 'resources/admin/Statistics';
-import { StatisticsSemester } from 'resources/admin/StatisticsSemester';
-import { StatisticsLinePlot } from 'pages/AdminStatistics/components/StatisticsLinePlot';
-import { DataRow } from 'components/DataRow';
-import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { useStatistics, useDetailedStatistics } from '@/hooks/admin/StatisticsHooks';
+import { useSemesters } from '@/hooks/common/SemesterHooks';
+import { StatisticsSemester } from '@/resources/admin/StatisticsSemester';
+import { StatisticsLinePlot } from '@/pages/AdminStatistics/components/StatisticsLinePlot';
+import { DataRow } from '@/components/DataRow';
+import { SingleColumnLayout } from '@/layouts/SingleColumnLayout';
 
 export function AdminStatisticsPage() {
     const { t } = useTranslation();

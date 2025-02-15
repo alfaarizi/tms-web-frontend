@@ -1,9 +1,8 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { QuizTestInstance } from 'resources/student/QuizTestInstance';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { DataRow } from 'components/DataRow';
+import { QuizTestInstance } from '@/resources/student/QuizTestInstance';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { DataRow } from '@/components/DataRow';
 
 type Props = {
     testInstance: QuizTestInstance

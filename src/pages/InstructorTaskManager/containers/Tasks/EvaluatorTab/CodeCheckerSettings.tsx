@@ -1,10 +1,9 @@
-import React from 'react';
-import { Task } from 'resources/instructor/Task';
+import { Task } from '@/resources/instructor/Task';
 import {
     CodeCheckerSettingsForm,
-} from 'pages/InstructorTaskManager/components/Tasks/EvaluatorTab/CodeCheckerSettingsForm';
-import { useSetupCodeChecker } from 'hooks/instructor/EvaluatorHooks';
-import { StaticAnalyzerTool } from 'resources/instructor/StaticAnalyzerTool';
+} from '@/pages/InstructorTaskManager/components/Tasks/EvaluatorTab/CodeCheckerSettingsForm';
+import { useSetupCodeChecker } from '@/hooks/instructor/EvaluatorHooks';
+import { StaticAnalyzerTool } from '@/resources/instructor/StaticAnalyzerTool';
 
 type Props = {
     task: Task,

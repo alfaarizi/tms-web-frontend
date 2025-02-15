@@ -1,11 +1,8 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Table } from 'react-bootstrap';
-import { QuizTestInstance } from 'resources/instructor/QuizTestInstance';
-import { Time } from 'components/Time';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCard } from 'components/CustomCard/CustomCard';
+import { QuizTestInstance } from '@/resources/instructor/QuizTestInstance';
+import { Time } from '@/components/Time';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
 
 type Props = {
     testInstances: QuizTestInstance[]

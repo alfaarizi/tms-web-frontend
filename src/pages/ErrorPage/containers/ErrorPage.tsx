@@ -1,6 +1,5 @@
-import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
+import { SingleColumnLayout } from '@/layouts/SingleColumnLayout';
 
 type Props = {
     title: string;

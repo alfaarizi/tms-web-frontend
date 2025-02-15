@@ -1,18 +1,17 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { DataRow } from 'components/DataRow';
-import { Submission } from 'resources/student/Submission';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { AutoTestResultAlert } from 'components/AutoTestResultAlert';
-import { LocaleDateTime } from 'components/LocaleDateTime';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { useAutoTestResults } from 'hooks/student/SubmissionHooks';
-import { useTask } from 'hooks/student/TaskHooks';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { DataRow } from '@/components/DataRow';
+import { Submission } from '@/resources/student/Submission';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { AutoTestResultAlert } from '@/components/AutoTestResultAlert';
+import { LocaleDateTime } from '@/components/LocaleDateTime';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
+import { useAutoTestResults } from '@/hooks/student/SubmissionHooks';
+import { useTask } from '@/hooks/student/TaskHooks';
 
 type SubmissionDetailsProps = {
     submission: Submission,
@@ -22,9 +21,9 @@ type SubmissionDetailsProps = {
     appType?: string
 }
 
-export const SubmissionDetails = ({
+export function SubmissionDetails({
     submission, onDownload, onReportDownload, autoTest, appType,
-} : SubmissionDetailsProps) => {
+} : SubmissionDetailsProps) {
     const { t } = useTranslation();
     const autoTesterResults = useAutoTestResults(submission.id);
     const task = useTask(submission.taskID);
@@ -69,4 +68,4 @@ export const SubmissionDetails = ({
                 : null}
         </CustomCard>
     );
-};
+}

@@ -1,5 +1,4 @@
-import { CodeCheckerResult } from 'resources/student/CodeCheckerResult';
-import { AutoTesterResult } from 'resources/common/AutoTesterResult';
+import { CodeCheckerResult } from '@/resources/student/CodeCheckerResult';
 
 export interface Submission {
     id: number;

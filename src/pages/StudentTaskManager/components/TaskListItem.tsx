@@ -1,19 +1,18 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { Task } from 'resources/student/Task';
-import { LocaleDateTime } from 'components/LocaleDateTime';
-import { RemainingTimeForDeadLine } from 'components/RemainingTimeForDeadLine';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { Task } from '@/resources/student/Task';
+import { LocaleDateTime } from '@/components/LocaleDateTime';
+import { RemainingTimeForDeadLine } from '@/components/RemainingTimeForDeadLine';
 
 type Props = {
     task: Task,
     onClick: (id: number) => void
 }
 
-export const TaskListItem = ({
+export function TaskListItem({
     task,
     onClick,
-}: Props) => {
+}: Props) {
     const { t } = useTranslation();
 
     return (
@@ -28,20 +27,18 @@ export const TaskListItem = ({
             </div>
 
             {task.softDeadline && task.softDeadline !== '' ? (
-                <>
-                    <span>
-                        {t('task.softDeadLine')}
-                        {': '}
-                        <LocaleDateTime value={task.softDeadline} />
-                        {' ('}
-                        <RemainingTimeForDeadLine
-                            deadline={task.softDeadline}
-                            submissionUploadTime={task.submission.uploadTime}
-                        />
-                        )
-                        {' | '}
-                    </span>
-                </>
+                <span>
+                    {t('task.softDeadLine')}
+                    {': '}
+                    <LocaleDateTime value={task.softDeadline} />
+                    {' ('}
+                    <RemainingTimeForDeadLine
+                        deadline={task.softDeadline}
+                        submissionUploadTime={task.submission.uploadTime}
+                    />
+                    )
+                    {' | '}
+                </span>
             ) : null}
             <span>
                 {t('task.hardDeadLine')}
@@ -56,4 +53,4 @@ export const TaskListItem = ({
             </span>
         </ListCardItem>
     );
-};
+}

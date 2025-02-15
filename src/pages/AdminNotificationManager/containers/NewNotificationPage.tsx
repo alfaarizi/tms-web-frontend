@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import { Container } from 'react-bootstrap';
-import { Notification } from 'resources/admin/Notification';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useCreateNotificationMutation } from 'hooks/admin/NotificationsHooks';
-import { NotificationForm } from 'pages/AdminNotificationManager/components/NotificationForm';
-import { getUserTimezone } from 'utils/getUserTimezone';
+import { Notification } from '@/resources/admin/Notification';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useCreateNotificationMutation } from '@/hooks/admin/NotificationsHooks';
+import { NotificationForm } from '@/pages/AdminNotificationManager/components/NotificationForm';
+import { getUserTimezone } from '@/utils/getUserTimezone';
 
 export function NewNotificationPage() {
     const { t } = useTranslation();

@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import styles from 'components/ListCardItem/ListCardItem.module.css';
+import { ReactNode } from 'react';
+import styles from '@/components/ListCardItem/ListCardItem.module.css';
 
 type Props = {
     children: ReactNode,

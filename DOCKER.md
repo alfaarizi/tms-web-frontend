@@ -42,10 +42,10 @@ The runtime configurable environment variables mentioned in the [README](README.
 
 | Name                                    | Description                                                                                               |
 |:----------------------------------------|:----------------------------------------------------------------------------------------------------------|
-| `REACT_APP_API_BASEURL`                 | TMS API baseurl.                                                                                          |
-| `REACT_APP_LOGIN_METHOD`                | Set login method. Possible values: `LDAP`, `MOCK`                                                         |
-| `REACT_APP_THEME`                       | UI theme.  Possible values: `dark`, `blue`.                                                               |
-| `REACT_APP_GOOGLE_ANALYTICS_ID`         | Google Analytics (GA4) tracking ID for website monitoring. If empty or undefined, tracking is disabled.   |
+| `VITE_API_BASE_URL`                 | TMS API baseurl.                                                                                          |
+| `VITE_LOGIN_METHOD`                | Set login method. Possible values: `LDAP`, `MOCK`                                                         |
+| `VITE_THEME`                       | UI theme.  Possible values: `dark`, `blue`.                                                               |
+| `VITE_GOOGLE_ANALYTICS_ID`         | Google Analytics (GA4) tracking ID for website monitoring. If empty or undefined, tracking is disabled.   |
 
 
 ### Execute commands in the container

@@ -1,8 +1,7 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare } from '@fortawesome/free-solid-svg-icons';
 
-import styles from 'components/CodeChecker/SeverityDisplay/SeverityDisplay.module.css';
+import styles from '@/components/CodeChecker/SeverityDisplay/SeverityDisplay.module.css';
 
 type Props = {
     severity: string;

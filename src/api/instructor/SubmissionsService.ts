@@ -1,8 +1,8 @@
-import { Submission } from 'resources/instructor/Submission';
-import { AutoTesterResult } from 'resources/common/AutoTesterResult';
-import { IpAddress } from 'resources/instructor/IpAddress';
-import { axiosInstance } from 'api/axiosInstance';
-import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
+import { Submission } from '@/resources/instructor/Submission';
+import { AutoTesterResult } from '@/resources/common/AutoTesterResult';
+import { IpAddress } from '@/resources/instructor/IpAddress';
+import { axiosInstance } from '@/api/axiosInstance';
+import { SubmissionGrade } from '@/resources/instructor/SubmissionGrade';
 
 export async function listForTask(taskID: number) {
     const res = await axiosInstance.get<Submission[]>('/instructor/submissions/list-for-task', {
@@ -26,16 +26,14 @@ export async function listForStudent(groupID: number, uploaderID: number) {
 }
 
 export async function view(id: number) {
-    const res = await axiosInstance.get<Submission>(
-        `/instructor/submissions/${id}`, {
-            params: {
-                expand: 'uploader,task,task.group,execution,codeCompass,codeCheckerResult,'
+    const res = await axiosInstance.get<Submission>(`/instructor/submissions/${id}`, {
+        params: {
+            expand: 'uploader,task,task.group,execution,codeCompass,codeCheckerResult,'
                     + 'codeCheckerResult.stdout,codeCheckerResult.stderr,codeCheckerResult.codeCheckerReports,'
                     + 'codeCheckerResult.runnerErrorMessage'
-                ,
-            },
+            ,
         },
-    );
+    });
     return res.data;
 }
 

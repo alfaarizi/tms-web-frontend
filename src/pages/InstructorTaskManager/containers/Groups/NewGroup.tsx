@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 
-import { Group } from 'resources/instructor/Group';
-import { useCreateGroupMutation } from 'hooks/instructor/GroupHooks';
-import { GroupForm } from 'pages/InstructorTaskManager/components/Groups/GroupForm';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useCourses } from 'hooks/instructor/CoursesHooks';
+import { Group } from '@/resources/instructor/Group';
+import { useCreateGroupMutation } from '@/hooks/instructor/GroupHooks';
+import { GroupForm } from '@/pages/InstructorTaskManager/components/Groups/GroupForm';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useCourses } from '@/hooks/instructor/CoursesHooks';
 
 export function NewGroup() {
     const history = useHistory();

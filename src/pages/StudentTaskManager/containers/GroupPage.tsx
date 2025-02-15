@@ -1,10 +1,9 @@
-import React from 'react';
 import { useHistory, useParams } from 'react-router';
 
-import { useTasks } from 'hooks/student/TaskHooks';
-import { useGroup } from 'hooks/student/GroupHooks';
-import { GroupDetails } from 'pages/StudentTaskManager/components/GroupDetails';
-import { TaskCategories } from 'pages/StudentTaskManager/components/TaskCategories';
+import { useTasks } from '@/hooks/student/TaskHooks';
+import { useGroup } from '@/hooks/student/GroupHooks';
+import { GroupDetails } from '@/pages/StudentTaskManager/components/GroupDetails';
+import { TaskCategories } from '@/pages/StudentTaskManager/components/TaskCategories';
 
 type Params = {
     id?: string

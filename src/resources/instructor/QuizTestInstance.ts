@@ -1,4 +1,4 @@
-import { User } from 'resources/common/User';
+import { User } from '@/resources/common/User';
 
 export interface QuizTestInstance {
     id: number;

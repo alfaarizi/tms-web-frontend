@@ -1,13 +1,12 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Course } from 'resources/common/Course';
-import { DataRow } from 'components/DataRow';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { Course } from '@/resources/common/Course';
+import { DataRow } from '@/components/DataRow';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
 import { ButtonGroup } from 'react-bootstrap';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {

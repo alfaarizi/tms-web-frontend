@@ -1,8 +1,7 @@
-import { IMAGE_TOKEN_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
-import { env } from 'runtime-env';
+import { IMAGE_TOKEN_LOCAL_STORAGE_KEY } from '@/constants/localStorageKeys';
 
 export function createImageUrl(imageUrl: string) {
     const imageToken = localStorage.getItem(IMAGE_TOKEN_LOCAL_STORAGE_KEY) || '';
 
-    return `${env.REACT_APP_API_BASEURL}/${imageUrl}?imageToken=${imageToken}`;
+    return `${import.meta.env.VITE_API_BASE_URL}/${imageUrl}?imageToken=${imageToken}`;
 }

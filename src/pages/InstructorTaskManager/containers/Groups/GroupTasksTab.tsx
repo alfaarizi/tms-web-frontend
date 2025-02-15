@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router';
 import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,14 +12,14 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { ButtonGroup } from 'react-bootstrap';
 
-import { Group } from 'resources/instructor/Group';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { GroupTaskListView } from 'pages/InstructorTaskManager/containers/Groups/GroupTasksListView';
-import { GroupTaskGridView } from 'pages/InstructorTaskManager/containers/Groups/GroupTaskGridView';
-import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
+import { Group } from '@/resources/instructor/Group';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { GroupTaskListView } from '@/pages/InstructorTaskManager/containers/Groups/GroupTasksListView';
+import { GroupTaskGridView } from '@/pages/InstructorTaskManager/containers/Groups/GroupTaskGridView';
+import { ToolbarDropdown } from '@/components/Buttons/ToolbarDropdown';
 import DropdownItem from 'react-bootstrap/DropdownItem';
-import { INSTRUCTOR_TASK_VIEW_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
+import { INSTRUCTOR_TASK_VIEW_LOCAL_STORAGE_KEY } from '@/constants/localStorageKeys';
 
 type Props = {
     group: Group

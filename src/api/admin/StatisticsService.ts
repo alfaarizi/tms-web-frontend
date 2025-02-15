@@ -1,6 +1,6 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { Statistics } from 'resources/admin/Statistics';
-import { StatisticsSemester } from 'resources/admin/StatisticsSemester';
+import { axiosInstance } from '@/api/axiosInstance';
+import { Statistics } from '@/resources/admin/Statistics';
+import { StatisticsSemester } from '@/resources/admin/StatisticsSemester';
 
 export async function get() {
     const res = await axiosInstance.get<Statistics>('/admin/statistics');

@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 
-import * as SubmissionsService from 'api/student/SubmissionsService';
+import * as SubmissionsService from '@/api/student/SubmissionsService';
 
 export const QUERY_KEY = 'student/submissions';
 

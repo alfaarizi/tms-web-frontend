@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBullhorn } from '@fortawesome/free-solid-svg-icons';
-import { Notification } from 'resources/common/Notification';
+import { Notification } from '@/resources/common/Notification';
 import { Alert } from 'react-bootstrap';
-import { useGlobalContext } from 'context/GlobalContext';
-import { useDismissNotificationMutation } from 'hooks/common/NotificationsHooks';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
-import { DISMISSED_NOTIFICATIONS_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
+import { useGlobalContext } from '@/context/GlobalContext';
+import { useDismissNotificationMutation } from '@/hooks/common/NotificationsHooks';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { DISMISSED_NOTIFICATIONS_LOCAL_STORAGE_KEY } from '@/constants/localStorageKeys';
 
 type Props = {
     notification: Notification

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { FileListItem } from 'components/FileListItem';
-import { FileUpload } from 'components/FileUpload';
-import { useCourses } from 'hooks/instructor/CoursesHooks';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { FileListItem } from '@/components/FileListItem';
+import { FileUpload } from '@/components/FileUpload';
+import { useCourses } from '@/hooks/instructor/CoursesHooks';
 import {
     useBasefiles,
     useDownloadBasefileMutation,
     useRemoveBasefileMutation,
     useUploadBasefileMutation,
-} from 'hooks/instructor/PlagiarismBaseFileHooks';
-import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
-import { getFirstError } from 'utils/getFirstError';
+} from '@/hooks/instructor/PlagiarismBaseFileHooks';
+import { PlagiarismBasefile } from '@/resources/instructor/PlagiarismBasefile';
+import { getFirstError } from '@/utils/getFirstError';
 
 export function BaseFilesPage() {
     const { t } = useTranslation();

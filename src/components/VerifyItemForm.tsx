@@ -1,4 +1,3 @@
-import React, { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import {
     Alert, Form, Button, Spinner,
@@ -7,12 +6,12 @@ import { useTranslation } from 'react-i18next';
 import { faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { FormError } from 'components/FormError';
-import { VerifyItem } from 'resources/student/VerifyItem';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { FormError } from '@/components/FormError';
+import { VerifyItem } from '@/resources/student/VerifyItem';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
 
 type Props = {
     onSave: (data: VerifyItem) => void,

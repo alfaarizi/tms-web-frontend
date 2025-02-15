@@ -1,15 +1,15 @@
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Submission } from 'resources/instructor/Submission';
-import { GraderModal } from 'pages/InstructorTaskManager/components/Submissions/GraderModal';
-import { IpLogModal } from 'pages/InstructorTaskManager/containers/Submissions/IpLogModal';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { useDownloadSubmission, useDownloadTestReport, useGradeMutation } from 'hooks/instructor/SubmissionHooks';
-import { SubmissionListItem } from 'pages/InstructorTaskManager/components/Students/SubmissionListItem';
-import { useNotifications } from 'hooks/common/useNotifications';
-import { Task } from 'resources/instructor/Task';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { Submission } from '@/resources/instructor/Submission';
+import { GraderModal } from '@/pages/InstructorTaskManager/components/Submissions/GraderModal';
+import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions/IpLogModal';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { useDownloadSubmission, useDownloadTestReport, useGradeMutation } from '@/hooks/instructor/SubmissionHooks';
+import { SubmissionListItem } from '@/pages/InstructorTaskManager/components/Students/SubmissionListItem';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { Task } from '@/resources/instructor/Task';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 import { useHistory } from 'react-router';
 
 type Props = {

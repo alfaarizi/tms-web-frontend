@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import { MockLogin } from 'resources/common/MockLogin';
-import { useLdapLoginMutation, useMockLoginMutation } from 'hooks/common/UserHooks';
-import { MockLoginForm } from 'pages/Login/components/MockLoginForm';
-import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
-import { LoginCard } from 'pages/Login/components/LoginCard';
-import { LdapLoginForm } from 'pages/Login/components/LdapLoginForm';
-import { LdapLogin } from 'resources/common/LdapLogin';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { DefaultUserLogin } from 'pages/Login/components/DefaultUserLogin';
-import { LoginResponse } from 'resources/common/LoginResponse';
-import { env } from 'runtime-env';
+import { useState } from 'react';
+import { MockLogin } from '@/resources/common/MockLogin';
+import { useLdapLoginMutation, useMockLoginMutation } from '@/hooks/common/UserHooks';
+import { MockLoginForm } from '@/pages/Login/components/MockLoginForm';
+import { SingleColumnLayout } from '@/layouts/SingleColumnLayout';
+import { LoginCard } from '@/pages/Login/components/LoginCard';
+import { LdapLoginForm } from '@/pages/Login/components/LdapLoginForm';
+import { LdapLogin } from '@/resources/common/LdapLogin';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { DefaultUserLogin } from '@/pages/Login/components/DefaultUserLogin';
+import { LoginResponse } from '@/resources/common/LoginResponse';
 
 type AsyncLoginFn<TData> = (data: TData) => Promise<LoginResponse>;
 
 /**
- * Displays a login form based on the value of REACT_APP_LOGIN_METHOD env variable
+ * Displays a login form based on the value of VITE_LOGIN_METHOD env variable
  * @constructor
  */
 export function LoginPage() {
@@ -39,7 +38,7 @@ export function LoginPage() {
                 setValidationError(e.body);
             }
 
-            const ms = parseInt(process.env.REACT_APP_TIMEOUT_AFTER_FAILED_LOGIN, 10);
+            const ms = parseInt(import.meta.env.VITE_TIMEOUT_AFTER_FAILED_LOGIN, 10);
             setTimeout(() => setIsLoading(false), ms);
         }
     });
@@ -49,7 +48,7 @@ export function LoginPage() {
 
     // Select the correct login form
     let formToDisplay;
-    switch (env.REACT_APP_LOGIN_METHOD) {
+    switch (import.meta.env.VITE_LOGIN_METHOD) {
     case 'MOCK':
         formToDisplay = (
             <>
@@ -75,7 +74,7 @@ export function LoginPage() {
         );
         break;
     default:
-        formToDisplay = <p>REACT_APP_LOGIN_METHOD is invalid</p>;
+        formToDisplay = <p>VITE_LOGIN_METHOD is invalid</p>;
         break;
     }
 

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
 import {
     useUnlockTestMutation,
-} from 'hooks/student/QuizTestInstanceHooks';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { UnlockTest } from 'resources/student/UnlockTest';
-import { useNotifications } from 'hooks/common/useNotifications';
+} from '@/hooks/student/QuizTestInstanceHooks';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { UnlockTest } from '@/resources/student/UnlockTest';
+import { useNotifications } from '@/hooks/common/useNotifications';
 import { useTranslation } from 'react-i18next';
-import { VerifyItemForm } from 'components/VerifyItemForm';
+import { VerifyItemForm } from '@/components/VerifyItemForm';
 
 type Params = {
     id?: string
@@ -40,17 +40,15 @@ export function VerifyTestPage() {
     };
 
     return (
-        <>
-            <VerifyItemForm
-                onSave={handleUnlock}
-                serverSideError={unlockError}
-                isLoading={unlockMutation.isLoading}
-                hasIpCheck={false}
-                cardTitle={t('passwordProtectedTest.passwordProtected')}
-                cardLabel={t('login.password')}
-                cardWarning={t('passwordProtectedTest.studentWarning')}
-                submitButtonLabel={t('passwordProtectedTest.unlock')}
-            />
-        </>
+        <VerifyItemForm
+            onSave={handleUnlock}
+            serverSideError={unlockError}
+            isLoading={unlockMutation.isLoading}
+            hasIpCheck={false}
+            cardTitle={t('passwordProtectedTest.passwordProtected')}
+            cardLabel={t('login.password')}
+            cardWarning={t('passwordProtectedTest.studentWarning')}
+            submitButtonLabel={t('passwordProtectedTest.unlock')}
+        />
     );
 }

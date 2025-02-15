@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as CoursesService from 'api/admin/CoursesService';
-import * as InstructorCoursesService from 'api/instructor/CoursesService';
-import { User } from 'resources/common/User';
-import { Course } from 'resources/common/Course';
-import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
+import * as CoursesService from '@/api/admin/CoursesService';
+import * as InstructorCoursesService from '@/api/instructor/CoursesService';
+import { User } from '@/resources/common/User';
+import { Course } from '@/resources/common/Course';
+import { CreateOrUpdateCourse } from '@/resources/common/CreateOrUpdateCourse';
 
 export const ADMIN_QUERY_KEY = 'admin/courses';
 export const INSTRUCTOR_QUERY_KEY = 'instructor/courses';

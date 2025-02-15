@@ -1,12 +1,11 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { Button, Modal } from 'react-bootstrap';
 
-import { useShow } from 'ui-hooks/useShow';
-import { Breakpoint } from 'components/Buttons/ResponsiveButtonText';
+import { useShow } from '@/ui-hooks/useShow';
+import { Breakpoint } from '@/components/Buttons/ResponsiveButtonText';
 
 type Props = {
     displayTextBreakpoint?: Breakpoint,

@@ -1,11 +1,10 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 
-import { QuestionSetForm } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
-import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
-import { useCreateQuestionSetMutation } from 'hooks/instructor/QuizQuestionSetHooks';
-import { useCourses } from 'hooks/instructor/CoursesHooks';
+import { QuestionSetForm } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
+import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
+import { useCreateQuestionSetMutation } from '@/hooks/instructor/QuizQuestionSetHooks';
+import { useCourses } from '@/hooks/instructor/CoursesHooks';
 
 export function NewQuestionSetPage() {
     const { t } = useTranslation();

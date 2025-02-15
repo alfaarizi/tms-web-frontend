@@ -1,8 +1,7 @@
-import React from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
-import { Semester } from 'resources/common/Semester';
+import { Semester } from '@/resources/common/Semester';
 
 type Props = {
     onChange: (semester: Semester) => void,
