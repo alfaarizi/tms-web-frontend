@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
-import { useTestInstances } from 'hooks/student/ExamTestInstanceHooks';
+import { useTestInstances } from 'hooks/student/QuizTestInstanceHooks';
 import { AvailableTestListItem } from 'pages/StudentExamination/components/AvailableTestListItem';
 import { FinishedTestListItem } from 'pages/StudentExamination/components/FinishedTestListItem';
 import { TestList } from 'pages/StudentExamination/components/TestList';
@@ -19,13 +19,13 @@ export function HomePage() {
     const futureTests = useTestInstances(semesterID, false, true);
 
     const handleClick = (id: number) => {
-        history.push(`/student/exam/test-instances/${id}`);
+        history.push(`/student/quizzes/test-instances/${id}`);
     };
 
     return (
         <>
             <TestList
-                title={t('examTests.availableTests')}
+                title={t('quizTests.availableTests')}
                 testInstances={availableTests.data}
                 renderItem={(testInstance) => (
                     <AvailableTestListItem
@@ -35,7 +35,7 @@ export function HomePage() {
                 )}
             />
             <TestList
-                title={t('examTests.futureTests')}
+                title={t('quizTests.futureTests')}
                 testInstances={futureTests.data}
                 renderItem={(testInstance) => (
                     <FutureTestListItem
@@ -44,7 +44,7 @@ export function HomePage() {
                 )}
             />
             <TestList
-                title={t('examTests.finishedTests')}
+                title={t('quizTests.finishedTests')}
                 testInstances={finishedTests.data}
                 renderItem={(testInstance) => (
                     <FinishedTestListItem

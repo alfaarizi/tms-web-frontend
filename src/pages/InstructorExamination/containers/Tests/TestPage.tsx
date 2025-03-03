@@ -8,9 +8,9 @@ import {
     useRemoveTestMutation,
     useTest,
     useUpdateTestMutation,
-} from 'hooks/instructor/ExamTestHooks';
+} from 'hooks/instructor/QuizTestHooks';
 import { useShow } from 'ui-hooks/useShow';
-import { ExamTest } from 'resources/instructor/ExamTest';
+import { QuizTest } from 'resources/instructor/QuizTest';
 import { TestForm } from 'pages/InstructorExamination/components/Tests/TestForm';
 import { TestResultsTab } from 'pages/InstructorExamination/containers/Tests/TestResultsTab';
 import { TestQuestionsTab } from 'pages/InstructorExamination/containers/Tests/TestQuestionsTab';
@@ -51,7 +51,7 @@ export function TestPage() {
         return null;
     }
 
-    const handleEditSave = async (data: ExamTest) => {
+    const handleEditSave = async (data: QuizTest) => {
         try {
             await updateMutation.mutateAsync({
                 ...data,
@@ -68,7 +68,7 @@ export function TestPage() {
     const handleDelete = async () => {
         try {
             await removeMutation.mutateAsync(test.data);
-            history.replace('/instructor/exam');
+            history.replace('/instructor/quizzes');
         } catch (e) {
             // Already handled globally
         }
@@ -79,7 +79,7 @@ export function TestPage() {
             await duplicateMutation.mutateAsync(test.data.id);
             notifications.push({
                 variant: 'success',
-                message: t('examTests.successfulDuplication'),
+                message: t('quizTests.successfulDuplication'),
             });
         } catch (e) {
             // Already handled globally
@@ -91,7 +91,7 @@ export function TestPage() {
             await finalizeMutation.mutateAsync(test.data.id);
             notifications.push({
                 variant: 'success',
-                message: t('examTests.successfulFinalization'),
+                message: t('quizTests.successfulFinalization'),
             });
         } catch (e) {
             // Already handled globally
@@ -103,7 +103,7 @@ export function TestPage() {
             {showEdit.show
                 ? (
                     <TestForm
-                        title={t('examTests.editTest')}
+                        title={t('quizTests.editTest')}
                         onSave={handleEditSave}
                         onCancel={showEdit.toHide}
                         editData={test.data}
@@ -123,10 +123,10 @@ export function TestPage() {
                 )}
 
             <TabbedInterface defaultActiveKey="results" id="tests-tabs">
-                <Tab eventKey="results" title={t('examTests.results')}>
+                <Tab eventKey="results" title={t('quizTests.results')}>
                     <TestResultsTab test={test.data} />
                 </Tab>
-                <Tab eventKey="questions" title={t('examTests.questions')}>
+                <Tab eventKey="questions" title={t('quizTests.questions')}>
                     {test.data.unique ? <UniqueTestQuestionsTab test={test.data} />
                         : <TestQuestionsTab test={test.data} />}
                 </Tab>

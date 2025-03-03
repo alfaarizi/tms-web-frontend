@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 
-import { ExamQuestionSet } from 'resources/instructor/ExamQuestionSet';
+import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
 import { FormError } from 'components/FormError';
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { CustomCard } from 'components/CustomCard/CustomCard';
@@ -14,9 +14,9 @@ import { Course } from 'resources/common/Course';
 type Props = {
     title: string,
     courses?: Course[],
-    onSave: (set: ExamQuestionSet) => void,
+    onSave: (set: QuizQuestionSet) => void,
     onCancel?: () => void,
-    editData?: ExamQuestionSet,
+    editData?: QuizQuestionSet,
     isLoading:boolean
 }
 
@@ -37,7 +37,7 @@ export function QuestionSetForm({
         formState: {
             errors,
         },
-    } = useForm<ExamQuestionSet>();
+    } = useForm<QuizQuestionSet>();
 
     useEffect(() => {
         if (!!courses && courses.length > 0) {

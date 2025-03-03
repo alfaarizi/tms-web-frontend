@@ -2,13 +2,13 @@ import { ButtonGroup, Col, Row } from 'react-bootstrap';
 import React, { ReactNode } from 'react';
 
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { ExamAnswer } from 'resources/instructor/ExamAnswer';
+import { QuizAnswer } from 'resources/instructor/QuizAnswer';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
 import { IsCorrect } from 'components/IsCorrect';
 
 type Props = {
-    answer: ExamAnswer,
-    renderAnswerOptions?: (answer: ExamAnswer) => ReactNode
+    answer: QuizAnswer,
+    renderAnswerOptions?: (answer: QuizAnswer) => ReactNode
 }
 
 export function AnswerListItem({

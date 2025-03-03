@@ -2,7 +2,7 @@ import { Form } from 'react-bootstrap';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ExamTest } from 'resources/instructor/ExamTest';
+import { QuizTest } from 'resources/instructor/QuizTest';
 import { FormError } from 'components/FormError';
 import { useForm } from 'react-hook-form';
 import { FormButtons } from 'components/Buttons/FormButtons';
@@ -16,8 +16,8 @@ import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
 
 type Props = {
     title: string,
-    onSave: (test: ExamTest) => void,
-    editData?: ExamTest,
+    onSave: (test: QuizTest) => void,
+    editData?: QuizTest,
     onCancel?: () => void,
     groups: Group[] | undefined,
     serverSideError?: ValidationErrorBody | null,
@@ -46,8 +46,8 @@ export function TestForm({
         formState: {
             errors,
         },
-    } = useForm<ExamTest>();
-    useServersideFormErrors<ExamTest>(clearErrors, setError, serverSideError);
+    } = useForm<QuizTest>();
+    useServersideFormErrors<QuizTest>(clearErrors, setError, serverSideError);
 
     // Set groupID after page load
     useEffect(() => {
@@ -97,7 +97,7 @@ export function TestForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('examTests.questionAmount')}
+                        {t('quizTests.questionAmount')}
                         :
                     </Form.Label>
                     <Form.Control
@@ -112,7 +112,7 @@ export function TestForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('examTests.availablefrom')}
+                        {t('quizTests.availablefrom')}
                         :
                     </Form.Label>
                     <DateTimePickerControl
@@ -128,7 +128,7 @@ export function TestForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('examTests.availableuntil')}
+                        {t('quizTests.availableuntil')}
                         :
                     </Form.Label>
                     <DateTimePickerControl
@@ -157,7 +157,7 @@ export function TestForm({
 
                 <Form.Group>
                     <Form.Label>
-                        {t('examTests.duration')}
+                        {t('quizTests.duration')}
                         :
                     </Form.Label>
                     <Form.Control
@@ -175,7 +175,7 @@ export function TestForm({
                     <Form.Check
                         type="checkbox"
                         id="shuffled"
-                        label={t('examTests.shuffled')}
+                        label={t('quizTests.shuffled')}
                         {...register('shuffled')}
                     />
                 </Form.Group>
@@ -184,7 +184,7 @@ export function TestForm({
                     <Form.Check
                         type="checkbox"
                         id="unique"
-                        label={t('examTests.unique')}
+                        label={t('quizTests.unique')}
                         {...register('unique')}
                     />
                 </Form.Group>

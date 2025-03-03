@@ -1,15 +1,15 @@
 import React, { ReactNode } from 'react';
 
-import { ExamQuestion } from 'resources/instructor/ExamQuestion';
+import { QuizQuestion } from 'resources/instructor/QuizQuestion';
 import {
     useAnswers,
-} from 'hooks/instructor/ExamAnswerHooks';
-import { ExamAnswer } from 'resources/instructor/ExamAnswer';
+} from 'hooks/instructor/QuizAnswerHooks';
+import { QuizAnswer } from 'resources/instructor/QuizAnswer';
 import { AnswerListItem } from './AnswerListItem';
 
 type Props = {
-    question: ExamQuestion,
-    renderAnswerOptions?: (answer: ExamAnswer) => ReactNode
+    question: QuizQuestion,
+    renderAnswerOptions?: (answer: QuizAnswer) => ReactNode
 }
 
 export function AnswerList({

@@ -5,12 +5,12 @@ import { useFieldArray, useForm } from 'react-hook-form';
 
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
-import { ExamQuestionCard } from 'components/ExamQuestionCard';
-import { ExamWriterData } from 'resources/student/ExamWriterData';
-import { ExamWriterQuestion } from 'resources/student/ExamWriterQuestion';
-import { ExamWriterAnswer } from 'resources/student/ExamWriterAnswer';
-import { ExamTestInstanceAnswer } from 'resources/student/ExamTestInstanceAnswer';
-import { useStartWriteMutation, useFinishWriteMutation } from 'hooks/student/ExamTestInstanceHooks';
+import { QuizQuestionCard } from 'components/QuizQuestionCard';
+import { QuizWriterData } from 'resources/student/QuizWriterData';
+import { QuizWriterQuestion } from 'resources/student/QuizWriterQuestion';
+import { QuizWriterAnswer } from 'resources/student/QuizWriterAnswer';
+import { QuizTestInstanceAnswer } from 'resources/student/QuizTestInstanceAnswer';
+import { useStartWriteMutation, useFinishWriteMutation } from 'hooks/student/QuizTestInstanceHooks';
 import { TestWriterHeader } from 'pages/StudentExamination/components/TestWriterHeader';
 import { FullScreenSpinner } from 'components/FullScreenSpinner/FullScreenSpinner';
 
@@ -18,8 +18,8 @@ type Params = {
     id?: string
 }
 
-interface ExamWriterQuestionForm {
-    test: ExamWriterQuestion[];
+interface QuizWriterQuestionForm {
+    test: QuizWriterQuestion[];
 }
 
 export function TestWriterPage() {
@@ -44,7 +44,7 @@ export function TestWriterPage() {
         register: registerAnswer,
         control,
         handleSubmit,
-    } = useForm<ExamWriterQuestionForm>();
+    } = useForm<QuizWriterQuestionForm>();
     // React-hook-form, build writer form with a field array
     // Docs: https://react-hook-form.com/api/usefieldarray/
     const {
@@ -63,9 +63,9 @@ export function TestWriterPage() {
     // Saves results
     const handleTestSubmit = handleSubmit(async (data) => {
         try {
-            const arr: ExamTestInstanceAnswer[] = data.test.map((p) => ({ answerID: p.selectedAnswerID }));
+            const arr: QuizTestInstanceAnswer[] = data.test.map((p) => ({ answerID: p.selectedAnswerID }));
             await finishWriteMutation.mutateAsync(arr);
-            history.replace(`/student/exam/test-instances/${id}`);
+            history.replace(`/student/quizzes/test-instances/${id}`);
         } catch (e) {
             // Already handled globally
         }
@@ -75,11 +75,11 @@ export function TestWriterPage() {
     const handleStartWrite = async () => {
         try {
             // Load data from the server
-            const data: ExamWriterData = await startWriteMutation.mutateAsync(id);
+            const data: QuizWriterData = await startWriteMutation.mutateAsync(id);
             setTestName(data.testName);
             setDuration(data.duration);
             // Build field array
-            data.questions.forEach((question: ExamWriterQuestion) => append({
+            data.questions.forEach((question: QuizWriterQuestion) => append({
                 ...question,
                 selectedAnswerID: null,
             }));
@@ -119,10 +119,10 @@ export function TestWriterPage() {
             <TestWriterHeader testName={testName} duration={duration} />
             <Form onSubmit={handleTestSubmit}>
                 {
-                    questions.map((question: ExamWriterQuestion, index: number) => (
-                        <ExamQuestionCard key={question.id} text={question.text}>
+                    questions.map((question: QuizWriterQuestion, index: number) => (
+                        <QuizQuestionCard key={question.id} text={question.text}>
                             {
-                                question.answers?.map((answer: ExamWriterAnswer) => (
+                                question.answers?.map((answer: QuizWriterAnswer) => (
                                     <Form.Check
                                         type="radio"
                                         key={answer.id}
@@ -133,7 +133,7 @@ export function TestWriterPage() {
                                     />
                                 ))
                             }
-                        </ExamQuestionCard>
+                        </QuizQuestionCard>
                     ))
                 }
                 <FormButtons isLoading={finishWriteMutation.isLoading} />

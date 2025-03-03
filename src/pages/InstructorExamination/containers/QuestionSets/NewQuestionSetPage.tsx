@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 
 import { QuestionSetForm } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
-import { ExamQuestionSet } from 'resources/instructor/ExamQuestionSet';
-import { useCreateQuestionSetMutation } from 'hooks/instructor/ExamQuestionSetHooks';
+import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
+import { useCreateQuestionSetMutation } from 'hooks/instructor/QuizQuestionSetHooks';
 import { useCourses } from 'hooks/instructor/CourseHooks';
 
 export function NewQuestionSetPage() {
@@ -13,7 +13,7 @@ export function NewQuestionSetPage() {
     const history = useHistory();
     const courses = useCourses(true, false);
 
-    const handleSave = async (data: ExamQuestionSet) => {
+    const handleSave = async (data: QuizQuestionSet) => {
         try {
             const res = await createMutation.mutateAsync(data);
             history.replace(`./${res.id}`);
@@ -23,12 +23,12 @@ export function NewQuestionSetPage() {
     };
 
     const handleSaveCancel = () => {
-        history.push('/instructor/exam');
+        history.push('/instructor/quizzes');
     };
 
     return (
         <QuestionSetForm
-            title={t('examQuestions.createQuestionSet')}
+            title={t('quizQuestions.createQuestionSet')}
             courses={courses.data}
             onSave={handleSave}
             onCancel={handleSaveCancel}

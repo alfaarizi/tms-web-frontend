@@ -1,10 +1,10 @@
 import React from 'react';
-import { ExamTest } from 'resources/instructor/ExamTest';
-import { useQuestionsForTest } from 'hooks/instructor/ExamQuestionHooks';
+import { QuizTest } from 'resources/instructor/QuizTest';
+import { useQuestionsForTest } from 'hooks/instructor/QuizQuestionHooks';
 import { QuestionList } from 'pages/InstructorExamination/components/QuestionList/QuestionsList';
 
 type Props = {
-    test: ExamTest
+    test: QuizTest
 }
 
 export function TestQuestionsTab({ test }: Props) {

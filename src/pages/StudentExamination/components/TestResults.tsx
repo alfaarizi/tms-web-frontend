@@ -1,9 +1,9 @@
 import React from 'react';
 import { TestResultQuestion } from 'pages/StudentExamination/components/TestResultQuestion';
-import { ExamResultQuestion } from 'resources/student/ExamResultQuestion';
+import { QuizResultQuestion } from 'resources/student/QuizResultQuestion';
 
 type Props = {
-    results?: ExamResultQuestion[];
+    results?: QuizResultQuestion[];
 }
 
 export function TestResult({ results }: Props) {

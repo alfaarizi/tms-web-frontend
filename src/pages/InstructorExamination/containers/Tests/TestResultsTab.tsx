@@ -1,14 +1,14 @@
 import React from 'react';
-import { ExamTest } from 'resources/instructor/ExamTest';
-import { useExamTestInstances } from 'hooks/instructor/ExamTestInstaceHooks';
+import { QuizTest } from 'resources/instructor/QuizTest';
+import { useQuizTestInstances } from 'hooks/instructor/QuizTestInstaceHooks';
 import { TestInstanceResultsList } from 'pages/InstructorExamination/components/Tests/TestInstanceResultsList';
 
 type Props = {
-    test: ExamTest
+    test: QuizTest
 }
 
 export function TestResultsTab({ test }: Props) {
-    const instances = useExamTestInstances(test.id, true);
+    const instances = useQuizTestInstances(test.id, true);
 
     if (!instances.data) {
         return null;

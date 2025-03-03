@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 
 import { TestForm } from 'pages/InstructorExamination/components/Tests/TestForm';
-import { useQuestionSet } from 'hooks/instructor/ExamQuestionSetHooks';
-import { ExamTest } from 'resources/instructor/ExamTest';
-import { useCreateTestMutation } from 'hooks/instructor/ExamTestHooks';
+import { useQuestionSet } from 'hooks/instructor/QuizQuestionSetHooks';
+import { QuizTest } from 'resources/instructor/QuizTest';
+import { useCreateTestMutation } from 'hooks/instructor/QuizTestHooks';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { useGroupsForCourse } from 'hooks/instructor/GroupHooks';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
@@ -36,13 +36,13 @@ export function NewTestPage() {
         return null;
     }
 
-    const handleSave = async (data: ExamTest) => {
+    const handleSave = async (data: QuizTest) => {
         try {
             const responseData = await createMutation.mutateAsync({
                 ...data,
                 questionsetID,
             });
-            history.replace(`/instructor/exam/tests/${responseData.id}`);
+            history.replace(`/instructor/quizzes/tests/${responseData.id}`);
         } catch (e) {
             if (e instanceof ServerSideValidationError) {
                 setAddErrorBody(e.body);
@@ -51,13 +51,13 @@ export function NewTestPage() {
     };
 
     const handleSaveCancel = () => {
-        history.push(`/instructor/exam/question-sets/${questionsetID}`);
+        history.push(`/instructor/quizzes/question-sets/${questionsetID}`);
     };
 
     return groups.data !== undefined && groups.data.length > 0
         ? (
             <TestForm
-                title={t('examTests.newTest')}
+                title={t('quizTests.newTest')}
                 groups={groups.data}
                 onSave={handleSave}
                 onCancel={handleSaveCancel}

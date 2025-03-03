@@ -17,7 +17,7 @@ export function IsCorrect({
     const icon = value ? faCheck : faTimes;
     let text = '';
     if (showText) {
-        text = value ? t('examQuestions.correct') : t('examQuestions.wrong');
+        text = value ? t('quizQuestions.correct') : t('quizQuestions.wrong');
     }
 
     return (

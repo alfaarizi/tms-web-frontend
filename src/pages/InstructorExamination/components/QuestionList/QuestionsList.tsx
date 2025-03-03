@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
-import { ExamQuestion } from 'resources/instructor/ExamQuestion';
+import { QuizQuestion } from 'resources/instructor/QuizQuestion';
 
-import { ExamAnswer } from 'resources/instructor/ExamAnswer';
+import { QuizAnswer } from 'resources/instructor/QuizAnswer';
 import { QuestionListItem } from './QuestionListItem';
 
 type Props = {
-    questions: ExamQuestion[],
-    renderQuestionOptions?: (question: ExamQuestion) => ReactNode,
-    renderAnswerOptions?: (answer: ExamAnswer) => ReactNode
+    questions: QuizQuestion[],
+    renderQuestionOptions?: (question: QuizQuestion) => ReactNode,
+    renderAnswerOptions?: (answer: QuizAnswer) => ReactNode
 }
 
 export function QuestionList({

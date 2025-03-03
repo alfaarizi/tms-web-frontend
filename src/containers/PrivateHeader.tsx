@@ -109,11 +109,11 @@ export function PrivateHeader({
                                     {t('navbar.taskmanager')}
                                 </Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to="/student/exam">
+                            <LinkContainer to="/student/quizzes">
                                 <Nav.Link>
                                     <FontAwesomeIcon icon={faPen} />
                                     {' '}
-                                    {t('navbar.exam')}
+                                    {t('navbar.quizzes')}
                                 </Nav.Link>
                             </LinkContainer>
                         </>
@@ -138,11 +138,11 @@ export function PrivateHeader({
                                         </Nav.Link>
                                     </LinkContainer>
                                 ) : null}
-                            <LinkContainer to="/instructor/exam">
+                            <LinkContainer to="/instructor/quizzes">
                                 <Nav.Link>
                                     <FontAwesomeIcon icon={faPen} />
                                     {' '}
-                                    {t('navbar.exam')}
+                                    {t('navbar.quizzes')}
                                 </Nav.Link>
                             </LinkContainer>
                         </>

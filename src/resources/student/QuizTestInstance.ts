@@ -1,11 +1,11 @@
-import { ExamTest } from 'resources/student/ExamTest';
+import { QuizTest } from 'resources/student/QuizTest';
 
-export interface ExamTestInstance {
+export interface QuizTestInstance {
     id: number;
     starttime: string;
     finishtime: string;
     submitted: number;
     score: number;
     maxScore: number;
-    test: ExamTest;
+    test: QuizTest;
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Table } from 'react-bootstrap';
-import { ExamTestInstance } from 'resources/instructor/ExamTestInstance';
+import { QuizTestInstance } from 'resources/instructor/QuizTestInstance';
 import { Time } from 'components/Time';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 
 type Props = {
-    testInstances: ExamTestInstance[]
+    testInstances: QuizTestInstance[]
 }
 
 export function TestInstanceResultsList({ testInstances }: Props) {
@@ -20,8 +20,8 @@ export function TestInstanceResultsList({ testInstances }: Props) {
                 <thead>
                     <tr>
                         <th>{t('common.studentName')}</th>
-                        <th>{t('examTests.score')}</th>
-                        <th>{t('examTests.writeDuration')}</th>
+                        <th>{t('quizTests.score')}</th>
+                        <th>{t('quizTests.writeDuration')}</th>
                     </tr>
                 </thead>
                 <tbody>

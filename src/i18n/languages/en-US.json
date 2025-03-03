@@ -165,7 +165,7 @@
   },
   "navbar": {
     "taskmanager": "Task Manager",
-    "exam": "Exam",
+    "quizzes": "Quizzes",
     "logout": "Logout ({{userCode}})",
     "role": "Role",
     "roles": {
@@ -441,7 +441,7 @@
     "rejected": "Rejected",
     "lateSubmission": "Late submission"
   },
-  "examQuestions": {
+  "quizQuestions": {
     "questionSet": "Question set",
     "questionSets": "Question sets",
     "createQuestionSet": "Create question set",
@@ -456,7 +456,7 @@
     "editQuestion": "Edit question",
     "successfulDuplicationQuestionSet": "Successfully duplicated"
   },
-  "examTests": {
+  "quizTests": {
     "testName": "Test name",
     "newTest": "New test",
     "editTest": "Edit test",
@@ -476,7 +476,7 @@
     "availableTests": "Available tests",
     "finishedTests": "Finished tests",
     "futureTests": "Future tests",
-    "writeTest": "Write tests",
+    "writeTest": "Write test",
     "successfulDuplication": "Successfully duplicated",
     "successfulFinalization": "Successfully finalized",
     "noGroupCreated": "A group must be created before creating a new test"

@@ -2,32 +2,32 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { ExamQuestionSet } from 'resources/instructor/ExamQuestionSet';
+import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
 import {
     useCreateQuestionMutation,
     useQuestionsForSet,
     useRemoveQuestionMutation,
     useUpdateQuestionMutation,
-} from 'hooks/instructor/ExamQuestionHooks';
-import { ExamQuestion } from 'resources/instructor/ExamQuestion';
+} from 'hooks/instructor/QuizQuestionHooks';
+import { QuizQuestion } from 'resources/instructor/QuizQuestion';
 import { useShow } from 'ui-hooks/useShow';
 import { QuestionList } from 'pages/InstructorExamination/components/QuestionList/QuestionsList';
 import { QuestionFormModal } from 'pages/InstructorExamination/components/QuestionSets/QuestionFormModal';
-import { ExamAnswer } from 'resources/instructor/ExamAnswer';
+import { QuizAnswer } from 'resources/instructor/QuizAnswer';
 import { ServerSideValidationError } from 'exceptions/ServerSideValidationError';
 import {
     useCreateAnswerMutation,
     useRemoveAnswerMutation,
     useUpdateAnswerMutation,
-} from 'hooks/instructor/ExamAnswerHooks';
+} from 'hooks/instructor/QuizAnswerHooks';
 import { AnswerFormModal } from 'pages/InstructorExamination/components/QuestionSets/AnswerFormModal';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { InsertFunc } from 'components/ReactMdeWithCommands';
-import { ExamImageGallery } from 'pages/InstructorExamination/containers/QuestionSets/ExamImageGallery';
+import { QuizImageGallery } from 'pages/InstructorExamination/containers/QuestionSets/QuizImageGallery';
 
 type Props = {
-    questionSet: ExamQuestionSet
+    questionSet: QuizQuestionSet
 };
 
 export function QuestionsEditor({ questionSet }: Props) {
@@ -37,21 +37,21 @@ export function QuestionsEditor({ questionSet }: Props) {
     const removeQuestionMutation = useRemoveQuestionMutation();
     const updateQuestionMutation = useUpdateQuestionMutation();
     const showNew = useShow();
-    const [editedQuestion, setEditedQuestion] = useState<ExamQuestion | null>(null);
+    const [editedQuestion, setEditedQuestion] = useState<QuizQuestion | null>(null);
 
     const createAnswerMutation = useCreateAnswerMutation();
     const removeAnswerMutation = useRemoveAnswerMutation();
     const updateAnswerMutation = useUpdateAnswerMutation();
 
     const [questionToAddAnswer, setQuestionToAddAnswer] = useState(-1);
-    const [editedAnswer, setEditedAnswer] = useState<ExamAnswer | null>(null);
+    const [editedAnswer, setEditedAnswer] = useState<QuizAnswer | null>(null);
     const [textError, setTextError] = useState<string | undefined>();
 
     if (!questions.data) {
         return null;
     }
 
-    const handleNewQuestionSave = async (data: ExamQuestion) => {
+    const handleNewQuestionSave = async (data: QuizQuestion) => {
         try {
             await createQuestionMutation.mutateAsync({
                 ...data,
@@ -63,11 +63,11 @@ export function QuestionsEditor({ questionSet }: Props) {
         }
     };
 
-    const handleRemoveQuestion = (question: ExamQuestion) => {
+    const handleRemoveQuestion = (question: QuizQuestion) => {
         removeQuestionMutation.mutate(question);
     };
 
-    const handleUpdateQuestion = async (data: ExamQuestion) => {
+    const handleUpdateQuestion = async (data: QuizQuestion) => {
         try {
             if (editedQuestion) {
                 await updateQuestionMutation.mutateAsync({
@@ -81,7 +81,7 @@ export function QuestionsEditor({ questionSet }: Props) {
         }
     };
 
-    const handleCreateAnswer = async (data: ExamAnswer) => {
+    const handleCreateAnswer = async (data: QuizAnswer) => {
         try {
             setTextError(undefined);
             await createAnswerMutation.mutateAsync({
@@ -96,11 +96,11 @@ export function QuestionsEditor({ questionSet }: Props) {
         }
     };
 
-    const handleRemoveAnswer = (answer: ExamAnswer) => {
+    const handleRemoveAnswer = (answer: QuizAnswer) => {
         removeAnswerMutation.mutate(answer);
     };
 
-    const handleUpdateAnswer = async (data: ExamAnswer) => {
+    const handleUpdateAnswer = async (data: QuizAnswer) => {
         if (!editedAnswer) {
             return;
         }
@@ -120,7 +120,7 @@ export function QuestionsEditor({ questionSet }: Props) {
     };
 
     const renderGallery = (insertFunc: InsertFunc) => (
-        <ExamImageGallery
+        <QuizImageGallery
             questionSetID={questionSet.id}
             insertFunc={insertFunc}
         />
@@ -131,7 +131,7 @@ export function QuestionsEditor({ questionSet }: Props) {
             <ToolbarButton
                 icon={faPlus}
                 onClick={showNew.toShow}
-                text={t('examQuestions.newQuestion')}
+                text={t('quizQuestions.newQuestion')}
                 displayTextBreakpoint="xs"
             />
             <QuestionList
@@ -147,7 +147,7 @@ export function QuestionsEditor({ questionSet }: Props) {
                         <ToolbarButton
                             icon={faPlus}
                             onClick={() => setQuestionToAddAnswer(question.id)}
-                            text={t('examQuestions.newAnswer')}
+                            text={t('quizQuestions.newAnswer')}
                         />
                     </>
                 )}
@@ -165,7 +165,7 @@ export function QuestionsEditor({ questionSet }: Props) {
             />
 
             <QuestionFormModal
-                title={t('examQuestions.createQuestion')}
+                title={t('quizQuestions.createQuestion')}
                 show={showNew.show}
                 renderGallery={renderGallery}
                 onSave={handleNewQuestionSave}
@@ -174,7 +174,7 @@ export function QuestionsEditor({ questionSet }: Props) {
             />
 
             <QuestionFormModal
-                title={t('examQuestions.editQuestion')}
+                title={t('quizQuestions.editQuestion')}
                 show={!!editedQuestion}
                 editData={editedQuestion}
                 renderGallery={renderGallery}
@@ -184,7 +184,7 @@ export function QuestionsEditor({ questionSet }: Props) {
             />
 
             <AnswerFormModal
-                title={t('examQuestions.newAnswer')}
+                title={t('quizQuestions.newAnswer')}
                 show={questionToAddAnswer > -1}
                 onSave={handleCreateAnswer}
                 textError={textError}
@@ -194,7 +194,7 @@ export function QuestionsEditor({ questionSet }: Props) {
             />
 
             <AnswerFormModal
-                title={t('examQuestions.editAnswer')}
+                title={t('quizQuestions.editAnswer')}
                 editData={editedAnswer}
                 show={!!editedAnswer}
                 onSave={handleUpdateAnswer}

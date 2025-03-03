@@ -8,10 +8,10 @@ import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { useTranslation } from 'react-i18next';
 
 import {
-    useExamImages,
-    useExamImageUploadMutation,
-    useRemoveExamImageMutation,
-} from 'hooks/instructor/ExamQuestionSetHooks';
+    useQuizImages,
+    useQuizImageUploadMutation,
+    useRemoveQuizImageMutation,
+} from 'hooks/instructor/QuizQuestionSetHooks';
 
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { getFirstError } from 'utils/getFirstError';
@@ -21,14 +21,14 @@ type GalleryProps = {
     insertFunc: InsertFunc
 }
 
-export function ExamImageGallery({
+export function QuizImageGallery({
     insertFunc,
     questionSetID,
 }: GalleryProps) {
     const { t } = useTranslation();
-    const images = useExamImages(questionSetID);
-    const removeMutation = useRemoveExamImageMutation(questionSetID);
-    const uploadMutation = useExamImageUploadMutation(questionSetID);
+    const images = useQuizImages(questionSetID);
+    const removeMutation = useRemoveQuizImageMutation(questionSetID);
+    const uploadMutation = useQuizImageUploadMutation(questionSetID);
 
     const handleRemove = (filename: string) => {
         removeMutation.mutate(filename);
