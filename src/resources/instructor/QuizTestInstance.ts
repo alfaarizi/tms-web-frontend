@@ -1,6 +1,6 @@
 import { User } from 'resources/common/User';
 
-export interface ExamTestInstance {
+export interface QuizTestInstance {
     id: number;
     score: number;
     user: User;

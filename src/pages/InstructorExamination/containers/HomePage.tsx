@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory, useRouteMatch } from 'react-router';
 
-import { useQuestionSets } from 'hooks/instructor/ExamQuestionSetHooks';
-import { useTests } from 'hooks/instructor/ExamTestHooks';
+import { useQuestionSets } from 'hooks/instructor/QuizQuestionSetHooks';
+import { useTests } from 'hooks/instructor/QuizTestHooks';
 import { QuestionSetList } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetList';
 import { TestList } from 'pages/InstructorExamination/components/Tests/TestList';
 import { useSelectedSemester } from 'hooks/common/SemesterHooks';

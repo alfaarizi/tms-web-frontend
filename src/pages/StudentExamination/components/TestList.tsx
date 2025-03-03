@@ -1,14 +1,14 @@
 import React, { ReactNode, Fragment } from 'react';
 
-import { ExamTestInstance } from 'resources/student/ExamTestInstance';
+import { QuizTestInstance } from 'resources/student/QuizTestInstance';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 
 type Props = {
     title: string
-    testInstances?: ExamTestInstance[],
-    renderItem: (testInstance: ExamTestInstance) => ReactNode
+    testInstances?: QuizTestInstance[],
+    renderItem: (testInstance: QuizTestInstance) => ReactNode
 }
 
 export function TestList({

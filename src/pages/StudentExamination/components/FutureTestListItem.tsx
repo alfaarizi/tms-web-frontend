@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ExamTestInstance } from 'resources/student/ExamTestInstance';
+import { QuizTestInstance } from 'resources/student/QuizTestInstance';
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { DataRow } from 'components/DataRow';
 
 type Props = {
-    testInstance: ExamTestInstance
+    testInstance: QuizTestInstance
 }
 
 export function FutureTestListItem({
@@ -16,8 +16,8 @@ export function FutureTestListItem({
     return (
         <ListCardItem>
             <DataRow label={t('course.course')}>{testInstance.test.group?.course.name}</DataRow>
-            <DataRow label={t('examTests.testName')}>{testInstance.test.name}</DataRow>
-            <DataRow label={t('examTests.availablefrom')}>{testInstance.test.availablefrom}</DataRow>
+            <DataRow label={t('quizTests.testName')}>{testInstance.test.name}</DataRow>
+            <DataRow label={t('quizTests.availablefrom')}>{testInstance.test.availablefrom}</DataRow>
         </ListCardItem>
     );
 }

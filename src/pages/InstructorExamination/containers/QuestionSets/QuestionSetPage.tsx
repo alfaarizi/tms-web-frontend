@@ -8,10 +8,10 @@ import {
     useQuestionSet,
     useRemoveQuestionSetMutation,
     useUpdateQuestionSetMutation,
-} from 'hooks/instructor/ExamQuestionSetHooks';
+} from 'hooks/instructor/QuizQuestionSetHooks';
 
 import { QuestionSetForm } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
-import { ExamQuestionSet } from 'resources/instructor/ExamQuestionSet';
+import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
 import { QuestionsEditor } from 'pages/InstructorExamination/containers/QuestionSets/QuestionsEditor';
 import { QuestionSetDetails } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetDetails';
 import { useNotifications } from 'hooks/common/useNotifications';
@@ -47,7 +47,7 @@ export function QuestionSetPage() {
         return null;
     }
 
-    const handleEditSave = async (data: ExamQuestionSet) => {
+    const handleEditSave = async (data: QuizQuestionSet) => {
         try {
             await updateMutation.mutateAsync({
                 ...data,
@@ -62,7 +62,7 @@ export function QuestionSetPage() {
     const handleDelete = async () => {
         try {
             await removeMutation.mutateAsync(questionSet.data.id);
-            history.replace('/instructor/exam');
+            history.replace('/instructor/quizzes');
         } catch (e) {
             // Already handled globally
         }
@@ -73,7 +73,7 @@ export function QuestionSetPage() {
             await duplicateMutation.mutateAsync(questionSet.data.id);
             notification.push({
                 variant: 'success',
-                message: t('examQuestions.successfulDuplicationQuestionSet'),
+                message: t('quizQuestions.successfulDuplicationQuestionSet'),
             });
         } catch (e) {
             // Already handled globally
@@ -88,7 +88,7 @@ export function QuestionSetPage() {
         }
         notification.push({
             variant: 'error',
-            message: t('examTests.noGroupCreated'),
+            message: t('quizTests.noGroupCreated'),
         });
     };
 
@@ -97,7 +97,7 @@ export function QuestionSetPage() {
             {showEdit.show
                 ? (
                     <QuestionSetForm
-                        title={t('examQuestions.editQuestionSet')}
+                        title={t('quizQuestions.editQuestionSet')}
                         courses={courses.data}
                         onSave={handleEditSave}
                         onCancel={showEdit.toHide}

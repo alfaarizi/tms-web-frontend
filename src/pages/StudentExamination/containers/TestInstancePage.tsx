@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouteMatch } from 'react-router';
 
-import { useResults, useTestInstance } from 'hooks/student/ExamTestInstanceHooks';
+import { useResults, useTestInstance } from 'hooks/student/QuizTestInstanceHooks';
 import { TestResult } from 'pages/StudentExamination/components/TestResults';
 import { TestInstanceDetails } from 'pages/StudentExamination/components/TestInstanceDetails';
 

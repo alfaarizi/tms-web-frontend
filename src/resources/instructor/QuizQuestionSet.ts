@@ -1,6 +1,6 @@
 import { Course } from 'resources/common/Course';
 
-export interface ExamQuestionSet {
+export interface QuizQuestionSet {
     id: number;
     name: string;
     courseID: number;

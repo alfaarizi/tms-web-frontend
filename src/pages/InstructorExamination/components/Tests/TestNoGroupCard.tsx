@@ -18,10 +18,10 @@ export function TestNoGroupCard({
     return (
         <CustomCard>
             <CustomCardHeader>
-                <CustomCardTitle>{t('examTests.newTest')}</CustomCardTitle>
+                <CustomCardTitle>{t('quizTests.newTest')}</CustomCardTitle>
             </CustomCardHeader>
             <p>
-                {t('examTests.noGroupCreated')}
+                {t('quizTests.noGroupCreated')}
             </p>
             <ToolbarButton icon={faArrowLeft} text={t('common.back')} onClick={onBackClick} />
         </CustomCard>

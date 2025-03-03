@@ -6,11 +6,11 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
-import { ExamTest } from 'resources/instructor/ExamTest';
+import { QuizTest } from 'resources/instructor/QuizTest';
 import { DateTimeInterval } from 'pages/InstructorExamination/components/Tests/DateTimeInterval';
 
 type Props = {
-    tests: ExamTest[] | undefined,
+    tests: QuizTest[] | undefined,
     onChange: (id: number) => void
 }
 
@@ -22,7 +22,7 @@ export function TestList({
     return (
         <CustomCard>
             <CustomCardHeader>
-                <CustomCardTitle>{t('examTests.tests')}</CustomCardTitle>
+                <CustomCardTitle>{t('quizTests.tests')}</CustomCardTitle>
             </CustomCardHeader>
 
             {tests?.map((test) => (
@@ -35,15 +35,15 @@ export function TestList({
                         {test.group?.number}
                         )
                     </DataRow>
-                    <DataRow label={t('examTests.available')}>
+                    <DataRow label={t('quizTests.available')}>
                         <DateTimeInterval
                             from={test.availablefrom}
                             to={test.availableuntil}
                             timezone={test.timezone}
                         />
                     </DataRow>
-                    <DataRow label={t('examTests.duration')}>{test.duration}</DataRow>
-                    <DataRow label={t('examTests.questionAmount')}>{test.questionamount}</DataRow>
+                    <DataRow label={t('quizTests.duration')}>{test.duration}</DataRow>
+                    <DataRow label={t('quizTests.questionAmount')}>{test.questionamount}</DataRow>
                 </ListCardItem>
             ))}
         </CustomCard>

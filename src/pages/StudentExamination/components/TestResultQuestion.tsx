@@ -1,17 +1,17 @@
 import React from 'react';
-import { ExamResultQuestion } from 'resources/student/ExamResultQuestion';
+import { QuizResultQuestion } from 'resources/student/QuizResultQuestion';
 import { Col, Row } from 'react-bootstrap';
 import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
-import { ExamQuestionCard } from 'components/ExamQuestionCard';
+import { QuizQuestionCard } from 'components/QuizQuestionCard';
 import { IsCorrect } from 'components/IsCorrect';
 
 type Props = {
-    question: ExamResultQuestion
+    question: QuizResultQuestion
 }
 
 export function TestResultQuestion({ question }: Props) {
     return (
-        <ExamQuestionCard text={question.questionText}>
+        <QuizQuestionCard text={question.questionText}>
             <Row>
                 <Col sm={10}>
                     <MarkdownRenderer source={question.answerText} />
@@ -20,6 +20,6 @@ export function TestResultQuestion({ question }: Props) {
                     <IsCorrect value={question.isCorrect} showText />
                 </Col>
             </Row>
-        </ExamQuestionCard>
+        </QuizQuestionCard>
     );
 }

@@ -1,4 +1,4 @@
-export interface ExamQuestion {
+export interface QuizQuestion {
     id: number;
     text: string;
     questionsetID: number;

@@ -1,26 +1,26 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as ExamQuestionSetsService from 'api/instructor/ExamQuestionSetsService';
-import { ExamQuestionSet } from 'resources/instructor/ExamQuestionSet';
+import * as QuizQuestionSetsService from 'api/instructor/QuizQuestionSetsService';
+import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
 import { Image } from 'resources/common/Image';
 
-export const QUERY_KEY = 'instructor/exam-question-sets';
+export const QUERY_KEY = 'instructor/quiz-question-sets';
 
 export function useQuestionSets() {
-    return useQuery(QUERY_KEY, ExamQuestionSetsService.index);
+    return useQuery(QUERY_KEY, QuizQuestionSetsService.index);
 }
 
 export function useQuestionSet(id: number) {
-    return useQuery([QUERY_KEY, { id }], () => ExamQuestionSetsService.view(id));
+    return useQuery([QUERY_KEY, { id }], () => QuizQuestionSetsService.view(id));
 }
 
 export function useCreateQuestionSetMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((data: ExamQuestionSet) => ExamQuestionSetsService.create(data), {
+    return useMutation((data: QuizQuestionSet) => QuizQuestionSetsService.create(data), {
         onSuccess: (data) => {
             queryClient.setQueryData([QUERY_KEY, { id: data.id }], data);
 
-            const oldData = queryClient.getQueryData<ExamQuestionSet[]>(QUERY_KEY);
+            const oldData = queryClient.getQueryData<QuizQuestionSet[]>(QUERY_KEY);
             if (oldData) {
                 queryClient.setQueryData(QUERY_KEY, [...oldData, data]);
             } else {
@@ -33,11 +33,11 @@ export function useCreateQuestionSetMutation() {
 export function useUpdateQuestionSetMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((data: ExamQuestionSet) => ExamQuestionSetsService.update(data), {
+    return useMutation((data: QuizQuestionSet) => QuizQuestionSetsService.update(data), {
         onSuccess: (data) => {
             queryClient.setQueryData([QUERY_KEY, { id: data.id }], data);
 
-            const oldData = queryClient.getQueryData<ExamQuestionSet[]>(QUERY_KEY);
+            const oldData = queryClient.getQueryData<QuizQuestionSet[]>(QUERY_KEY);
             if (oldData) {
                 queryClient.setQueryData(QUERY_KEY, oldData.map((set) => (set.id === data.id ? data : set)));
             }
@@ -48,9 +48,9 @@ export function useUpdateQuestionSetMutation() {
 export function useRemoveQuestionSetMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((id: number) => ExamQuestionSetsService.remove(id), {
+    return useMutation((id: number) => QuizQuestionSetsService.remove(id), {
         onSuccess: (_data, id) => {
-            const oldData = queryClient.getQueryData<ExamQuestionSet[]>(QUERY_KEY);
+            const oldData = queryClient.getQueryData<QuizQuestionSet[]>(QUERY_KEY);
             if (oldData) {
                 queryClient.setQueryData(QUERY_KEY, oldData.filter((set) => set.id !== id));
             }
@@ -61,11 +61,11 @@ export function useRemoveQuestionSetMutation() {
 export function useDuplicateQuestionSetMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((id: number) => ExamQuestionSetsService.duplicate(id), {
+    return useMutation((id: number) => QuizQuestionSetsService.duplicate(id), {
         onSuccess: (data) => {
             queryClient.setQueryData([QUERY_KEY, { id: data.id }], data);
 
-            const oldData = queryClient.getQueryData<ExamQuestionSet[]>(QUERY_KEY);
+            const oldData = queryClient.getQueryData<QuizQuestionSet[]>(QUERY_KEY);
             if (oldData) {
                 queryClient.setQueryData(QUERY_KEY, [...oldData, data]);
             } else {
@@ -75,14 +75,14 @@ export function useDuplicateQuestionSetMutation() {
     });
 }
 
-export function useExamImages(id: number) {
-    return useQuery([QUERY_KEY, 'images', { id }], () => ExamQuestionSetsService.listImages(id));
+export function useQuizImages(id: number) {
+    return useQuery([QUERY_KEY, 'images', { id }], () => QuizQuestionSetsService.listImages(id));
 }
 
-export function useExamImageUploadMutation(id: number) {
+export function useQuizImageUploadMutation(id: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((files: File[]) => ExamQuestionSetsService.uploadImages(id, files), {
+    return useMutation((files: File[]) => QuizQuestionSetsService.uploadImages(id, files), {
         onSuccess: (data) => {
             const key = [QUERY_KEY, 'images', { id }];
             const oldData = queryClient.getQueryData<Image[]>(key);
@@ -93,10 +93,10 @@ export function useExamImageUploadMutation(id: number) {
     });
 }
 
-export function useRemoveExamImageMutation(id: number) {
+export function useRemoveQuizImageMutation(id: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((filename: string) => ExamQuestionSetsService.removeImage(id, filename), {
+    return useMutation((filename: string) => QuizQuestionSetsService.removeImage(id, filename), {
         onSuccess: (_data, filename) => {
             const key = [QUERY_KEY, 'images', { id }];
             const oldData = queryClient.getQueryData<Image[]>(key);

@@ -1,4 +1,4 @@
-export interface ExamAnswer {
+export interface QuizAnswer {
     id: number;
     text: string;
     correct: number;

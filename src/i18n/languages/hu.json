@@ -166,7 +166,7 @@
   },
   "navbar": {
     "taskmanager": "Beadandókezelő",
-    "exam": "Vizsgáztató",
+    "quizzes": "Kvízek",
     "logout": "Kijelentkezés ({{userCode}})",
     "role": "Szerepkör",
     "roles": {
@@ -442,7 +442,7 @@
     "rejected": "Elutasítva",
     "lateSubmission": "Pótolható"
   },
-  "examQuestions": {
+  "quizQuestions": {
     "questionSet": "Kérdéshalmaz",
     "questionSets": "Kérdéshalmazok",
     "createQuestionSet": "Kérdéshalmaz létrehozása",
@@ -457,7 +457,7 @@
     "editQuestion": "Kérdés szerkesztése",
     "successfulDuplicationQuestionSet": "Kérdéshalmaz duplikálva"
   },
-  "examTests": {
+  "quizTests": {
     "testName": "Teszt neve",
     "newTest": "Új teszt",
     "editTest": "Teszt szerkesztése",

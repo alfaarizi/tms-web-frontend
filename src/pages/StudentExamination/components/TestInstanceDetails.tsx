@@ -8,11 +8,11 @@ import { DataRow } from 'components/DataRow';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { ExamTestInstance } from 'resources/student/ExamTestInstance';
+import { QuizTestInstance } from 'resources/student/QuizTestInstance';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 
 type Props = {
-    testInstance: ExamTestInstance
+    testInstance: QuizTestInstance
 }
 
 export function TestInstanceDetails({ testInstance }: Props) {
@@ -24,23 +24,23 @@ export function TestInstanceDetails({ testInstance }: Props) {
                 <CustomCardTitle>{testInstance.test.name}</CustomCardTitle>
                 {!testInstance.submitted
                     ? (
-                        <LinkContainer to={`/student/exam/test-instances/${testInstance.id}/writer`}>
-                            <ToolbarButton text={t('examTests.writeTest')} icon={faPenAlt} />
+                        <LinkContainer to={`/student/quizzes/test-instances/${testInstance.id}/writer`}>
+                            <ToolbarButton text={t('quizTests.writeTest')} icon={faPenAlt} />
                         </LinkContainer>
                     )
                     : null}
 
             </CustomCardHeader>
             <DataRow label={t('course.course')}>{testInstance.test.group?.course.name}</DataRow>
-            <DataRow label={t('examTests.availableuntil')}>
+            <DataRow label={t('quizTests.availableuntil')}>
                 <LocaleDateTime value={testInstance.test.availableuntil} />
             </DataRow>
-            <DataRow label={t('examTests.duration')}>
+            <DataRow label={t('quizTests.duration')}>
                 {testInstance.test.duration}
                 {' '}
                 {t('common.minutes')}
             </DataRow>
-            <DataRow label={t('examTests.score')}>
+            <DataRow label={t('quizTests.score')}>
                 {testInstance.score}
                 {' '}
                 /

@@ -9,10 +9,10 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { DataRow } from 'components/DataRow';
-import { ExamQuestionSet } from 'resources/instructor/ExamQuestionSet';
+import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
 
 type Props = {
-    questionSet: ExamQuestionSet,
+    questionSet: QuizQuestionSet,
     onNewTest: () => void,
     onDuplicate: () => void,
     onEdit: () => void,
@@ -31,9 +31,9 @@ export function QuestionSetDetails({
     return (
         <CustomCard>
             <CustomCardHeader>
-                <CustomCardTitle>{t('examQuestions.questionSet')}</CustomCardTitle>
+                <CustomCardTitle>{t('quizQuestions.questionSet')}</CustomCardTitle>
                 <ButtonGroup>
-                    <ToolbarButton icon={faFileAlt} text={t('examTests.newTest')} onClick={onNewTest} />
+                    <ToolbarButton icon={faFileAlt} text={t('quizTests.newTest')} onClick={onNewTest} />
                     <ToolbarButton icon={faCopy} text={t('common.duplicate')} onClick={onDuplicate} />
                     <ToolbarButton icon={faEdit} text={t('common.edit')} onClick={onEdit} />
                     <DeleteToolbarButton onDelete={onDelete} />

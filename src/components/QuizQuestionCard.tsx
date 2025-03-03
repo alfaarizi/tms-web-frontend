@@ -9,7 +9,7 @@ type Props = {
     children: ReactNode
 }
 
-export function ExamQuestionCard({
+export function QuizQuestionCard({
     text,
     children,
     options,

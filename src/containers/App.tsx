@@ -144,7 +144,7 @@ export function App() {
                     <ProtectedRoute hasPermission={isStudent} path="/student/task-manager">
                         <StudentTaskManager />
                     </ProtectedRoute>
-                    <ProtectedRoute hasPermission={isStudent} path="/student/exam">
+                    <ProtectedRoute hasPermission={isStudent} path="/student/quizzes">
                         <StudentExamination />
                     </ProtectedRoute>
 
@@ -157,7 +157,7 @@ export function App() {
                     <ProtectedRoute hasPermission={isFaculty} path="/instructor/plagiarism">
                         <InstructorPlagiarism />
                     </ProtectedRoute>
-                    <ProtectedRoute hasPermission={isFaculty} path="/instructor/exam">
+                    <ProtectedRoute hasPermission={isFaculty} path="/instructor/quizzes">
                         <InstructorExamination />
                     </ProtectedRoute>
 

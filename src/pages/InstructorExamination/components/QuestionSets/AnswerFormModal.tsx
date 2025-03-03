@@ -2,10 +2,9 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Form, Modal } from 'react-bootstrap';
-
 import { FormError } from 'components/FormError';
 import { MarkdownFormControl } from 'components/MarkdownFormControl';
-import { ExamAnswer } from 'resources/instructor/ExamAnswer';
+import { QuizAnswer } from 'resources/instructor/QuizAnswer';
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { InsertFunc } from 'components/ReactMdeWithCommands';
 import { ConfirmModal } from 'components/Modals/ConfirmModal';
@@ -13,8 +12,8 @@ import { ConfirmModal } from 'components/Modals/ConfirmModal';
 type Props = {
     title: string,
     show: boolean,
-    onSave: (answer: ExamAnswer) => void,
-    editData?: ExamAnswer | null
+    onSave: (answer: QuizAnswer) => void,
+    editData?: QuizAnswer | null
     onCancel: () => void,
     textError?: string,
     renderGallery: (insertFunc: InsertFunc) => ReactNode,
@@ -42,7 +41,7 @@ export function AnswerFormModal({
         formState: {
             errors, isDirty, dirtyFields,
         },
-    } = useForm<ExamAnswer>();
+    } = useForm<QuizAnswer>();
 
     const [confirmDialog, setConfirmDialog] = useState(false);
 
@@ -64,7 +63,7 @@ export function AnswerFormModal({
         }
     };
 
-    const onSubmit = handleSubmit((data: ExamAnswer) => {
+    const onSubmit = handleSubmit((data: QuizAnswer) => {
         onSave(data);
     });
 
@@ -106,7 +105,7 @@ export function AnswerFormModal({
                             <Form.Check
                                 type="checkbox"
                                 id="correct"
-                                label={t('examQuestions.correct')}
+                                label={t('quizQuestions.correct')}
                                 {...register('correct')}
                             />
                         </Form.Group>

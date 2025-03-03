@@ -1,13 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ExamTestInstance } from 'resources/student/ExamTestInstance';
+import { QuizTestInstance } from 'resources/student/QuizTestInstance';
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { DataRow } from 'components/DataRow';
 import { LocaleDateTime } from 'components/LocaleDateTime';
 
 type Props = {
-    testInstance: ExamTestInstance,
+    testInstance: QuizTestInstance,
     onClick: () => void
 }
 
@@ -19,11 +19,11 @@ export function AvailableTestListItem({
     return (
         <ListCardItem onClick={onClick}>
             <DataRow label={t('course.course')}>{testInstance.test.group?.course.name}</DataRow>
-            <DataRow label={t('examTests.testName')}>{testInstance.test.name}</DataRow>
-            <DataRow label={t('examTests.availableuntil')}>
+            <DataRow label={t('quizTests.testName')}>{testInstance.test.name}</DataRow>
+            <DataRow label={t('quizTests.availableuntil')}>
                 <LocaleDateTime value={testInstance.test.availableuntil} />
             </DataRow>
-            <DataRow label={t('examTests.duration')}>
+            <DataRow label={t('quizTests.duration')}>
                 {testInstance.test.duration}
                 {' '}
                 {t('common.minutes')}

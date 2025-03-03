@@ -1,36 +1,36 @@
-import * as ExamTestInstancesService from 'api/student/ExamTestInstancesService';
+import * as QuizTestInstancesService from 'api/student/QuizTestInstancesService';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { ExamTestInstanceAnswer } from 'resources/student/ExamTestInstanceAnswer';
+import { QuizTestInstanceAnswer } from 'resources/student/QuizTestInstanceAnswer';
 
-export const QUERY_KEY = 'student/exam-test-instances';
+export const QUERY_KEY = 'student/quiz-test-instances';
 
 export function useTestInstances(semesterID: number, submitted: boolean, future: boolean) {
     return useQuery([QUERY_KEY, {
         semesterID,
         submitted,
         future,
-    }], () => ExamTestInstancesService.index(semesterID, submitted, future));
+    }], () => QuizTestInstancesService.index(semesterID, submitted, future));
 }
 
 export function useTestInstance(id: number) {
-    return useQuery([QUERY_KEY, { id }], () => ExamTestInstancesService.view(id));
+    return useQuery([QUERY_KEY, { id }], () => QuizTestInstancesService.view(id));
 }
 
 export function useResults(id: number, enabled: boolean) {
-    return useQuery([QUERY_KEY, { id }, 'results'], () => ExamTestInstancesService.results(id || 0), {
+    return useQuery([QUERY_KEY, { id }, 'results'], () => QuizTestInstancesService.results(id || 0), {
         enabled,
     });
 }
 
 export function useStartWriteMutation() {
-    return useMutation((id: number) => ExamTestInstancesService.startWrite(id));
+    return useMutation((id: number) => QuizTestInstancesService.startWrite(id));
 }
 
 export function useFinishWriteMutation(id: number) {
     const queryClient = useQueryClient();
 
     return useMutation(
-        (arr: ExamTestInstanceAnswer[]) => ExamTestInstancesService.finishWrite(id, arr),
+        (arr: QuizTestInstanceAnswer[]) => QuizTestInstancesService.finishWrite(id, arr),
         {
             onSuccess: async () => {
                 // Invalidate all queries starting with QUERY_KEY

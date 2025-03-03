@@ -1,12 +1,12 @@
-import { ExamTest } from 'resources/instructor/ExamTest';
-import { useQuestionsForTest } from 'hooks/instructor/ExamQuestionHooks';
+import { QuizTest } from 'resources/instructor/QuizTest';
+import { useQuestionsForTest } from 'hooks/instructor/QuizQuestionHooks';
 import { QuestionList } from 'pages/InstructorExamination/components/QuestionList/QuestionsList';
 import { useGroupStudents } from 'hooks/instructor/GroupHooks';
 import React, { useEffect, useState } from 'react';
 import { UserSwitcher } from 'components/UserSwticher';
 
 type Props = {
-    test: ExamTest
+    test: QuizTest
 }
 
 export function UniqueTestQuestionsTab({ test }: Props) {

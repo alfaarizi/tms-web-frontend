@@ -1,21 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as ExamAnswersService from 'api/instructor/ExamAnswersService';
-import { ExamAnswer } from 'resources/instructor/ExamAnswer';
+import * as QuizAnswersService from 'api/instructor/QuizAnswersService';
+import { QuizAnswer } from 'resources/instructor/QuizAnswer';
 
-export const QUERY_KEY = 'instructor/exam-answer';
+export const QUERY_KEY = 'instructor/quiz-answer';
 
 export function useAnswers(questionID: number) {
-    return useQuery([QUERY_KEY, { questionID }], () => ExamAnswersService.index(questionID));
+    return useQuery([QUERY_KEY, { questionID }], () => QuizAnswersService.index(questionID));
 }
 
 export function useCreateAnswerMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((data: ExamAnswer) => ExamAnswersService.create(data), {
+    return useMutation((data: QuizAnswer) => QuizAnswersService.create(data), {
         onSuccess: async (data) => {
             const key = [QUERY_KEY, { questionID: data.questionID }];
 
-            const oldData = queryClient.getQueryData<ExamAnswer[]>(key);
+            const oldData = queryClient.getQueryData<QuizAnswer[]>(key);
             if (oldData) {
                 if (data.correct) {
                     await queryClient.invalidateQueries(key);
@@ -32,11 +32,11 @@ export function useCreateAnswerMutation() {
 export function useUpdateAnswerMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((data: ExamAnswer) => ExamAnswersService.update(data), {
+    return useMutation((data: QuizAnswer) => QuizAnswersService.update(data), {
         onSuccess: async (data) => {
             const key = [QUERY_KEY, { questionID: data.questionID }];
 
-            const oldData = queryClient.getQueryData<ExamAnswer[]>(key);
+            const oldData = queryClient.getQueryData<QuizAnswer[]>(key);
             if (oldData) {
                 if (data.correct) {
                     await queryClient.invalidateQueries(key);
@@ -51,11 +51,11 @@ export function useUpdateAnswerMutation() {
 export function useRemoveAnswerMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((data: ExamAnswer) => ExamAnswersService.remove(data.id), {
+    return useMutation((data: QuizAnswer) => QuizAnswersService.remove(data.id), {
         onSuccess: (_data, variables) => {
             const key = [QUERY_KEY, { questionID: variables.questionID }];
 
-            const oldData = queryClient.getQueryData<ExamAnswer[]>(key);
+            const oldData = queryClient.getQueryData<QuizAnswer[]>(key);
             if (oldData) {
                 queryClient.setQueryData(key, oldData.filter((answer) => answer.id !== variables.id));
             }

@@ -1,8 +1,8 @@
 import { axiosInstance } from 'api/axiosInstance';
-import { ExamTestInstance } from 'resources/instructor/ExamTestInstance';
+import { QuizTestInstance } from 'resources/instructor/QuizTestInstance';
 
 export async function index(testID: number, submitted?: boolean) {
-    const res = await axiosInstance.get<ExamTestInstance[]>('/instructor/exam-test-instances', {
+    const res = await axiosInstance.get<QuizTestInstance[]>('/instructor/quiz-test-instances', {
         params: {
             testID,
             submitted,

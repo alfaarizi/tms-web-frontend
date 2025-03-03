@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Form, Modal } from 'react-bootstrap';
 
 import { FormError } from 'components/FormError';
-import { ExamQuestion } from 'resources/instructor/ExamQuestion';
+import { QuizQuestion } from 'resources/instructor/QuizQuestion';
 import { MarkdownFormControl } from 'components/MarkdownFormControl';
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { InsertFunc } from 'components/ReactMdeWithCommands';
@@ -13,8 +13,8 @@ import { ConfirmModal } from 'components/Modals/ConfirmModal';
 type Props = {
     title: string,
     show: boolean,
-    onSave: (question: ExamQuestion) => void,
-    editData?: ExamQuestion | null,
+    onSave: (question: QuizQuestion) => void,
+    editData?: QuizQuestion | null,
     onCancel: () => void,
     renderGallery: (insertFunc: InsertFunc) => ReactNode,
     isLoading:boolean
@@ -39,7 +39,7 @@ export function QuestionFormModal({
         formState: {
             errors, dirtyFields, isDirty,
         },
-    } = useForm<ExamQuestion>();
+    } = useForm<QuizQuestion>();
 
     const handleShow = () => {
         // Set edit data or clear form fields

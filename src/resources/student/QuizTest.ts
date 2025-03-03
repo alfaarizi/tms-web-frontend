@@ -1,6 +1,6 @@
 import { Group } from 'resources/instructor/Group';
 
-export interface ExamTest {
+export interface QuizTest {
     name: string;
     availablefrom: string;
     availableuntil: string;

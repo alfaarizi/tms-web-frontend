@@ -8,10 +8,10 @@ import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { ListCardItem } from 'components/ListCardItem/ListCardItem';
 import { DataRow } from 'components/DataRow';
-import { ExamQuestionSet } from 'resources/instructor/ExamQuestionSet';
+import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
 
 type Props = {
-    sets: ExamQuestionSet[] | undefined,
+    sets: QuizQuestionSet[] | undefined,
     onNew: () => void,
     onChange: (id: number) => void
 };
@@ -26,7 +26,7 @@ export function QuestionSetList({
     return (
         <CustomCard>
             <CustomCardHeader>
-                <CustomCardTitle>{t('examQuestions.questionSets')}</CustomCardTitle>
+                <CustomCardTitle>{t('quizQuestions.questionSets')}</CustomCardTitle>
                 <ToolbarButton icon={faPlus} text={t('common.add')} onClick={onNew} />
             </CustomCardHeader>
 
