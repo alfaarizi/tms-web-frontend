@@ -9,7 +9,7 @@ export async function get() {
 
 export async function getDetailed(semesterIDs: number[]) {
     // backend should have another endpoint to accommodate for this type of request
-    const promises = semesterIDs.map((s) => axiosInstance.get<StatisticsSemester>('/admin/statistics', {
+    const promises = semesterIDs.map((s) => axiosInstance.get<StatisticsSemester>('/admin/statistics/view', {
         params: { semesterID: s },
     }));
     const results = await Promise.all(promises);
