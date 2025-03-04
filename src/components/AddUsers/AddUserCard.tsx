@@ -18,7 +18,6 @@ import { User } from 'resources/common/User';
 import { AddUserFormControl, AddUserMode } from 'components/AddUsers/AddUserFormControl';
 import { extractUserCodes } from 'utils/extractUserCodes';
 import { getSelectedUserCodes } from 'utils/getSelectedUserCodes';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 
 type Props = {
     id: string,
@@ -38,8 +37,7 @@ type FormData = {
 }
 
 function validateList(value: string[]): boolean {
-    return value.length > 0 && value.every((code) => code
-        .match(usePrivateSystemInfoQuery().data?.userCodeFormat ?? /.*/));
+    return value.length > 0 && value.every((code) => code.length === 6);
 }
 
 export function AddUserCard({

@@ -9,6 +9,5 @@ export interface PrivateSystemInfo {
     isVersionControlEnabled: boolean;
     isCanvasEnabled: boolean;
     isCodeCompassEnabled: boolean;
-    userCodeFormat: string;
     serverDateTime: string;
 }

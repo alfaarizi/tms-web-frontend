@@ -1,7 +1,7 @@
 import {
     Form, InputGroup, ToggleButton, ToggleButtonGroup,
 } from 'react-bootstrap';
-import { Controller } from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 import { FormError } from 'components/FormError';
 import React from 'react';
 import { Option } from 'react-bootstrap-typeahead/types/types';
@@ -9,7 +9,6 @@ import { User } from 'resources/common/User';
 import { useTranslation } from 'react-i18next';
 import { extractUserCodes } from 'utils/extractUserCodes';
 import { AsyncTypeaheadControl } from 'components/AddUsers/AsyncTypeaheadControl';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
 
 type Props = {
     toggleValue: AddUserMode,
@@ -43,12 +42,10 @@ export function AddUserFormControl({
     allowNew = false,
 }: Props) {
     const { t } = useTranslation();
-    const privateSystemInfo = usePrivateSystemInfoQuery();
 
     function validateImport(value: string) {
         const isValid = extractUserCodes(value)
-            .every((code) => code
-                .match(privateSystemInfo.data?.userCodeFormat ?? /.*/));
+            .every((code) => code.length === 6);
         if (!isValid) {
             return t('common.userCodesRequired');
         }
@@ -108,17 +105,8 @@ export function AddUserFormControl({
                         control={control}
                         defaultValue=""
                         name={importFieldName}
-                        rules={{
-                            validate: validateImport,
-                            required: t('common.userCodesRequired'),
-                        }}
-                        render={({
-                            field: {
-                                onChange,
-                                onBlur,
-                                value,
-                            },
-                        }) => (
+                        rules={{ validate: validateImport, required: t('common.userCodesRequired') }}
+                        render={({ field: { onChange, onBlur, value } }) => (
                             <Form.Control
                                 type="text"
                                 onChange={onChange}
@@ -131,8 +119,8 @@ export function AddUserFormControl({
                     />
                 )}
             </InputGroup>
-            {selectFieldErrorMessage && toggleValue === 'search' && <FormError message={selectFieldErrorMessage} />}
-            {importFieldErrorMessage && toggleValue === 'import' && <FormError message={importFieldErrorMessage} />}
+            {selectFieldErrorMessage && toggleValue === 'search' && <FormError message={selectFieldErrorMessage} /> }
+            {importFieldErrorMessage && toggleValue === 'import' && <FormError message={importFieldErrorMessage} /> }
         </Form.Group>
     );
 }
