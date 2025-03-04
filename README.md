@@ -1,4 +1,4 @@
-# Task Manager System - React Client
+# Task Management System - React Client
 
 [![pipeline status](https://gitlab.com/tms-elte/frontend-react/badges/develop/pipeline.svg)](https://gitlab.com/tms-elte/frontend-react/-/commits/develop)
 
