@@ -8,23 +8,25 @@ type TaskQuickGraderCellInputProps = {
     tabIndex: number; // tabIndex for managing focus order
 }
 
-export function TaskQuickGraderCellInput({
-    submission,
-    onGradeSave,
-    tabIndex,
-}: TaskQuickGraderCellInputProps) {
+export function TaskQuickGraderCellInput({ submission, onGradeSave, tabIndex }: TaskQuickGraderCellInputProps) {
     if (!submission) return null;
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+        e.target.select();
+    };
+    const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newGrade = parseFloat(e.target.value);
 
-        const updatedSubmission: SubmissionGrade = {
-            id: submission.id,
-            grade: newGrade,
-            status: 'Accepted',
-        };
+        // Check the old value do determine if saving is needed
+        if (submission.grade !== newGrade) {
+            const updatedSubmission: SubmissionGrade = {
+                id: submission.id,
+                grade: newGrade,
+                status: 'Accepted',
+            };
 
-        onGradeSave(updatedSubmission);
+            onGradeSave(updatedSubmission);
+        }
     };
 
     return (
@@ -33,8 +35,8 @@ export function TaskQuickGraderCellInput({
             className={styles.taskQuickGraderCellInput}
             defaultValue={submission.grade}
             tabIndex={tabIndex}
-            onFocus={(e) => e.target.select()}
-            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
         />
     );
 }
