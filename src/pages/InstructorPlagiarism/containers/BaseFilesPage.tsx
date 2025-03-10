@@ -7,7 +7,7 @@ import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { FileListItem } from 'components/FileListItem';
 import { FileUpload } from 'components/FileUpload';
-import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useCourses } from 'hooks/instructor/CoursesHooks';
 import {
     useBasefiles,
     useDownloadBasefileMutation,
@@ -19,7 +19,7 @@ import { getFirstError } from 'utils/getFirstError';
 
 export function BaseFilesPage() {
     const { t } = useTranslation();
-    const courses = useCourses(true, true);
+    const courses = useCourses(false, true, true);
     const [selectedCourse, setSelectedCourse] = useState(courses.data ? courses.data[0]?.id : undefined);
     const basefiles = useBasefiles();
     const uploadMutation = useUploadBasefileMutation();

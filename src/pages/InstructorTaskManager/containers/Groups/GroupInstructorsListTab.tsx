@@ -11,7 +11,7 @@ import { UserListCard } from 'components/UserListCard/UserListCard';
 import { Group } from 'resources/instructor/Group';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
-import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useCourses } from 'hooks/instructor/CoursesHooks';
 import { useSearchFacultyQuery, useUserSettings } from 'hooks/common/UserHooks';
 
 type Props = {
@@ -28,7 +28,7 @@ export function GroupInstructorsListTab({ group }: Props) {
     const facultySearchQuery = useSearchFacultyQuery(userSearchText, userSearchQueryEnabled);
     const userSettings = useUserSettings();
     const actualSemester = useActualSemester();
-    const courses = useCourses(true, false);
+    const courses = useCourses(false, true, false);
     const isLecturer = courses.data ? courses.data.some((c) => c.id === group.course.id) : false;
     const isAdmin = userSettings.data?.isAdmin;
 

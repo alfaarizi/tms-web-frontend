@@ -7,13 +7,13 @@ import {
     useAddLecturerMutation,
     useCourseLecturers,
     useDeleteLecturerMutation,
-} from 'hooks/admin/CoursesHooks';
+} from 'hooks/instructor/CoursesHooks';
 import { Course } from 'resources/common/Course';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { useSearchFacultyQuery } from 'hooks/common/UserHooks';
 
 type Props = {
-    course: Course
+    course: Course,
 }
 
 export function LecturerList({ course }: Props) {

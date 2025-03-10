@@ -128,6 +128,13 @@ export function PrivateHeader({
                                     {t('navbar.taskmanager')}
                                 </Nav.Link>
                             </LinkContainer>
+                            <LinkContainer to="/instructor/course-manager">
+                                <Nav.Link>
+                                    <FontAwesomeIcon icon={faList} />
+                                    {' '}
+                                    {t('course.courses')}
+                                </Nav.Link>
+                            </LinkContainer>
                             {availablePlagiarismServices.data?.length
                                 ? (
                                     <LinkContainer to="/instructor/plagiarism">

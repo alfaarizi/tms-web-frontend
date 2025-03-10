@@ -4,19 +4,19 @@ import {
 } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
 import { SideBarItem } from 'components/Navigation/SideBarItem';
 import { SideBarLayout } from 'layouts/SideBarLayout';
-import { useCourses } from 'hooks/admin/CoursesHooks';
-import { NewCoursePage } from 'pages/AdminCourseManager/containers/NewCoursePage';
-import { CoursePage } from 'pages/AdminCourseManager/containers/CoursePage';
+import { useCourses } from 'hooks/instructor/CoursesHooks';
+import { NewCoursePage } from 'pages/CourseManager/containers/NewCoursePage';
+import { CoursePage } from 'pages/CourseManager/containers/CoursePage';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 
 export function CourseManagerPage() {
     const history = useHistory();
     const { url } = useRouteMatch();
+    const isAdmin = url.startsWith('/admin');
     const { t } = useTranslation();
-    const courses = useCourses();
+    const courses = useCourses(isAdmin, true, false);
 
     const handleNewCourseOpen = () => {
         history.push(`${url}/courses/new`);
@@ -39,7 +39,7 @@ export function CourseManagerPage() {
                     </SideBarItem>
                 )) || []
             }
-            sidebarButtons={(
+            sidebarButtons={isAdmin && (
                 <ToolbarButton
                     icon={faPlus}
                     text={t('common.add')}

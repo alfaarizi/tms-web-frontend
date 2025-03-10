@@ -1,18 +1,25 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-
 import * as CoursesService from 'api/admin/CoursesService';
+import * as InstructorCoursesService from 'api/instructor/CoursesService';
 import { User } from 'resources/common/User';
 import { Course } from 'resources/common/Course';
 import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
 
-export const QUERY_KEY = 'admin/courses';
+export const ADMIN_QUERY_KEY = 'admin/courses';
+export const INSTRUCTOR_QUERY_KEY = 'instructor/courses';
 
 export function useCourse(courseID: number) {
-    return useQuery([QUERY_KEY, { courseID }], () => CoursesService.view(courseID));
+    return useQuery([INSTRUCTOR_QUERY_KEY, { courseID }], () => InstructorCoursesService.view(courseID));
 }
 
-export function useCourses() {
-    return useQuery([QUERY_KEY], () => CoursesService.index());
+export function useCourses(isAdmin: boolean, instructor: boolean, forGroups: boolean, enabled: boolean = true) {
+    return useQuery(
+        isAdmin ? [ADMIN_QUERY_KEY] : [INSTRUCTOR_QUERY_KEY],
+        () => (isAdmin
+            ? CoursesService.index()
+            : InstructorCoursesService.index(instructor, forGroups)),
+        { enabled },
+    );
 }
 
 export function useCreateCourseMutation() {
@@ -20,9 +27,9 @@ export function useCreateCourseMutation() {
 
     return useMutation((uploadData: CreateOrUpdateCourse) => CoursesService.create(uploadData), {
         onSuccess: async (data) => {
-            const oldCourses = queryClient.getQueryData<Course[]>(QUERY_KEY);
+            const oldCourses = queryClient.getQueryData<Course[]>(ADMIN_QUERY_KEY);
             if (oldCourses) {
-                queryClient.setQueryData(QUERY_KEY, [...oldCourses, data]);
+                queryClient.setQueryData(ADMIN_QUERY_KEY, [...oldCourses, data]);
             }
         },
     });
@@ -31,21 +38,21 @@ export function useCreateCourseMutation() {
 export function useUpdateCourseMutation(id: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((uploadData: CreateOrUpdateCourse) => CoursesService.update(id, uploadData), {
+    return useMutation((uploadData: CreateOrUpdateCourse) => InstructorCoursesService.update(id, uploadData), {
         onSuccess: (data) => {
             // Update course info with the returned data
-            const key = [QUERY_KEY, { courseID: data.id }];
+            const key = [INSTRUCTOR_QUERY_KEY, { courseID: data.id }];
             const oldCourse = queryClient.getQueryData<Course[]>(key);
             if (oldCourse) {
                 queryClient.setQueryData(key, data);
             }
 
             // Update course list with the returned data
-            const oldCourses = queryClient.getQueryData<Course[]>(QUERY_KEY);
+            const oldCourses = queryClient.getQueryData<Course[]>(INSTRUCTOR_QUERY_KEY);
 
             if (oldCourses) {
                 const newList = oldCourses.map((course) => (course.id === data.id ? data : course));
-                queryClient.setQueryData(QUERY_KEY, newList);
+                queryClient.setQueryData(INSTRUCTOR_QUERY_KEY, newList);
             }
         },
     });
@@ -53,17 +60,17 @@ export function useUpdateCourseMutation(id: number) {
 
 export function useCourseLecturers(courseID: number) {
     return useQuery<User[]>(
-        [QUERY_KEY, 'lecturers', { courseID }],
-        () => CoursesService.listLecturers(courseID),
+        [INSTRUCTOR_QUERY_KEY, 'lecturers', { courseID }],
+        () => InstructorCoursesService.listLecturers(courseID),
     );
 }
 
 export function useAddLecturerMutation(courseID: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((userCodes: string[]) => CoursesService.addLecturers(courseID, userCodes), {
+    return useMutation((userCodes: string[]) => InstructorCoursesService.addLecturers(courseID, userCodes), {
         onSuccess: (data) => {
-            const key = [QUERY_KEY, 'lecturers', { courseID }];
+            const key = [INSTRUCTOR_QUERY_KEY, 'lecturers', { courseID }];
             const oldList = queryClient.getQueryData<User[]>(key);
             if (oldList) {
                 queryClient.setQueryData(key, [...oldList, ...data.addedUsers]);
@@ -75,9 +82,9 @@ export function useAddLecturerMutation(courseID: number) {
 export function useDeleteLecturerMutation(courseID: number) {
     const queryClient = useQueryClient();
 
-    return useMutation((lecturerID: number) => CoursesService.removeLecturer(courseID, lecturerID), {
+    return useMutation((lecturerID: number) => InstructorCoursesService.removeLecturer(courseID, lecturerID), {
         onSuccess: (_data, lecturerID) => {
-            const key = [QUERY_KEY, 'lecturers', { courseID }];
+            const key = [INSTRUCTOR_QUERY_KEY, 'lecturers', { courseID }];
             const oldList = queryClient.getQueryData<User[]>(key);
             if (oldList) {
                 queryClient.setQueryData(key, oldList.filter((user) => user.id !== lecturerID));

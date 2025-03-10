@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
-
-import { CourseDetails } from 'pages/AdminCourseManager/components/CourseDetails';
-import { useCourse, useUpdateCourseMutation } from 'hooks/admin/CoursesHooks';
-import { LecturerList } from 'pages/AdminCourseManager/containers/LecturerList';
-import { CourseForm } from 'pages/AdminCourseManager/components/CourseForm';
+import { CourseDetails } from 'pages/CourseManager/components/CourseDetails';
+import { useCourse, useUpdateCourseMutation } from 'hooks/instructor/CoursesHooks';
+import { LecturerList } from 'pages/CourseManager/containers/LecturerList';
+import { CourseForm } from 'pages/CourseManager/components/CourseForm';
 import { useShow } from 'ui-hooks/useShow';
 import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
 import { ServerSideValidationError, ValidationErrorBody } from '../../../exceptions/ServerSideValidationError';

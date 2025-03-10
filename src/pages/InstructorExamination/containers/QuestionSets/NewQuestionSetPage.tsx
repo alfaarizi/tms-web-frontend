@@ -5,13 +5,13 @@ import { useHistory } from 'react-router';
 import { QuestionSetForm } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
 import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
 import { useCreateQuestionSetMutation } from 'hooks/instructor/QuizQuestionSetHooks';
-import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useCourses } from 'hooks/instructor/CoursesHooks';
 
 export function NewQuestionSetPage() {
     const { t } = useTranslation();
     const createMutation = useCreateQuestionSetMutation();
     const history = useHistory();
-    const courses = useCourses(true, false);
+    const courses = useCourses(false, true, false);
 
     const handleSave = async (data: QuizQuestionSet) => {
         try {

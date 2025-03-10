@@ -12,7 +12,7 @@ import { SideBarItem } from 'components/Navigation/SideBarItem';
 import { INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
 import { useActualSemester, useSelectedSemester } from 'hooks/common/SemesterHooks';
 import { useUserSettings } from 'hooks/common/UserHooks';
-import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useCourses } from 'hooks/instructor/CoursesHooks';
 import { useGroups } from 'hooks/instructor/GroupHooks';
 import { SideBarLayout } from 'layouts/SideBarLayout';
 import { CanvasOAuth2 } from 'pages/InstructorTaskManager/containers/CanvasOAuth2';
@@ -41,7 +41,7 @@ export function InstructorTaskManager() {
     const history = useHistory();
     const { url } = useRouteMatch();
     const { t } = useTranslation();
-    const courses = useCourses(true, false);
+    const courses = useCourses(false, true, false);
 
     const [groupView, setGroupView] = useState<GroupView>(GroupView.ALL);
 
