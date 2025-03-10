@@ -4,50 +4,74 @@ import { getUserTimezone } from 'utils/getUserTimezone';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
-    value: string | null | undefined,
-    hasSubmission: boolean,
+    deadline: string,
+    submissionUploadTime?: string,
     timezone?: string,
 }
 
 /**
  * Converts a DateTime string to the current locale
- * @param value DateTime string in ISO format
- * @param hasSubmission
+ * @param deadline DateTime string in ISO format
+ * @param submissionUploadTime DateTime string in ISO format
  * @param timezone
  */
-export function RemainingTimeForDeadLine({ value, hasSubmission, timezone }: Props) {
+export function RemainingTimeForDeadLine({
+    deadline,
+    submissionUploadTime,
+    timezone,
+}: Props) {
     const { t } = useTranslation();
+    const hasSubmission = submissionUploadTime != null;
 
-    if (!value) {
+    if (!deadline) {
         return null;
     }
 
-    const dt = DateTime.fromISO(value, { zone: timezone || getUserTimezone() });
-    const diff = dt.diffNow();
+    const dtDeadline = DateTime.fromISO(deadline, { zone: timezone || getUserTimezone() });
+    const diffNow = dtDeadline.diffNow();
+    const pastDue = diffNow.toMillis() <= 0;
 
-    if (diff.toMillis() <= 0) {
-        return <span className="text-danger">{t('task.pastDue')}</span>;
-    }
-
-    const duration = Duration.fromMillis(diff.toMillis());
+    let dueString;
+    const duration = Duration.fromMillis(diffNow.toMillis());
     const days = Math.floor(duration.as('days'));
     const hours = duration.as('hours') % 24;
     const minutes = duration.as('minutes') % 60;
 
-    let timeString;
     if (days > 0) {
-        timeString = t('task.dueInDays', { days });
+        dueString = t('task.dueInDays', { days });
     } else if (hours > 0) {
-        timeString = t('task.dueInHours', { hours: Math.floor(hours) });
+        dueString = t('task.dueInHours', { hours: Math.floor(hours) });
     } else {
-        timeString = t('task.dueInMinutes', { minutes: Math.floor(minutes) });
+        dueString = t('task.dueInMinutes', { minutes: Math.floor(minutes) });
     }
 
-    const isUrgent = days === 0 && !hasSubmission;
+    let displayString;
+    if (hasSubmission) {
+        const dtSubmissionUploadTime = DateTime
+            .fromISO(submissionUploadTime, { zone: timezone || getUserTimezone() });
+        const diffSubmissionUploadTime = dtDeadline.diff(dtSubmissionUploadTime);
+        const submittedLate = diffSubmissionUploadTime.toMillis() < 0;
+
+        if (pastDue) {
+            if (submittedLate) {
+                displayString = t('task.submittedLate');
+            } else {
+                displayString = t('task.submitted');
+            }
+        } else {
+            displayString = `${t('task.submitted')}, ${dueString}`;
+        }
+    } else if (pastDue) {
+        displayString = t('task.pastDue');
+    } else {
+        displayString = dueString;
+    }
+
+    const isUrgent = (days === 0 || pastDue) && !hasSubmission;
 
     return (
         <span className={isUrgent ? 'text-danger font-weight-bold' : undefined}>
-            {timeString}
+            {displayString}
         </span>
     );
 }

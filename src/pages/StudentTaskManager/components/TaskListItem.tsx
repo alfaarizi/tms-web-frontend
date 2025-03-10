@@ -35,8 +35,8 @@ export const TaskListItem = ({
                         <LocaleDateTime value={task.softDeadline} />
                         {' ('}
                         <RemainingTimeForDeadLine
-                            value={task.softDeadline}
-                            hasSubmission={task.submission.uploadCount > 0}
+                            deadline={task.softDeadline}
+                            submissionUploadTime={task.submission.uploadTime}
                         />
                         )
                         {' | '}
@@ -49,8 +49,8 @@ export const TaskListItem = ({
                 <LocaleDateTime value={task.hardDeadline} />
                 {' ('}
                 <RemainingTimeForDeadLine
-                    value={task.hardDeadline}
-                    hasSubmission={task.submission.uploadCount > 0}
+                    deadline={task.hardDeadline}
+                    submissionUploadTime={task.submission.uploadTime}
                 />
                 )
             </span>
