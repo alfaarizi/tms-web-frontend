@@ -15,7 +15,7 @@ import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
 import { QuestionsEditor } from 'pages/InstructorExamination/containers/QuestionSets/QuestionsEditor';
 import { QuestionSetDetails } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetDetails';
 import { useNotifications } from 'hooks/common/useNotifications';
-import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useCourses } from 'hooks/instructor/CoursesHooks';
 import { useShow } from 'ui-hooks/useShow';
 import { useGroupsForCourse } from 'hooks/instructor/GroupHooks';
 import { useActualSemester } from 'hooks/common/SemesterHooks';
@@ -35,7 +35,7 @@ export function QuestionSetPage() {
     const removeMutation = useRemoveQuestionSetMutation();
     const duplicateMutation = useDuplicateQuestionSetMutation();
     const notification = useNotifications();
-    const courses = useCourses(true, false, showEdit.show);
+    const courses = useCourses(false, true, false, showEdit.show);
     const actualSemester = useActualSemester();
     const groups = useGroupsForCourse(
         actualSemester.actualSemesterID || -1,

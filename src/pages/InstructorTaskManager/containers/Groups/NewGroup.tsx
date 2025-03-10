@@ -6,12 +6,12 @@ import { Group } from 'resources/instructor/Group';
 import { useCreateGroupMutation } from 'hooks/instructor/GroupHooks';
 import { GroupForm } from 'pages/InstructorTaskManager/components/Groups/GroupForm';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useCourses } from 'hooks/instructor/CoursesHooks';
 
 export function NewGroup() {
     const history = useHistory();
     const { t } = useTranslation();
-    const courses = useCourses(true, false);
+    const courses = useCourses(false, true, false);
     const createMutation = useCreateGroupMutation();
     const [addErrorBody, setAddErrorBody] = useState<ValidationErrorBody | null>(null);
 

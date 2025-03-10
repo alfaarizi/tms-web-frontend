@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { useSemesters } from 'hooks/common/SemesterHooks';
-import { PlagiarismType } from 'resources/instructor/PlagiarismType';
 import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
-import { useCourses } from 'hooks/instructor/CourseHooks';
+import { useCourses } from 'hooks/instructor/CoursesHooks';
 import { useTaskListForCourse, useUserList } from 'hooks/instructor/TaskHooks';
 import { useCreatePlagiarismMutation, usePlagiarismServices } from 'hooks/instructor/PlagiarismHooks';
 import { useBasefilesByTasks } from 'hooks/instructor/PlagiarismBaseFileHooks';
@@ -35,7 +34,7 @@ export function NewRequestPage() {
     // Load data for fields
     const availableTypes = usePlagiarismServices();
     const semesters = useSemesters();
-    const courses = useCourses(true, true);
+    const courses = useCourses(false, true, true);
     const tasksForCourse = useTaskListForCourse(
         courseID, myTasks, semesterFromID, semesterToID, semesterFromID > -1 && semesterToID > -1,
     );
