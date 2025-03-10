@@ -261,6 +261,8 @@
     "name": "Name",
     "softDeadLine": "Soft deadline",
     "hardDeadLine": "Hard deadline",
+    "submitted": "Submitted",
+    "submittedLate": "Submitted late",
     "pastDue": "Past due",
     "dueInDays": "due in {{days}} day(s)",
     "dueInHours": "due in {{hours}} hour(s)",

@@ -42,7 +42,7 @@ export const TaskDetails = ({
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>{task.name}</CustomCardTitle>
-                { task.canvasUrl
+                {task.canvasUrl
                     ? (
                         <ToolbarButton
                             isLoading={canvasSyncInProgress}
@@ -71,8 +71,8 @@ export const TaskDetails = ({
                     <LocaleDateTime value={task.softDeadline} />
                     {' ('}
                     <RemainingTimeForDeadLine
-                        value={task.softDeadline}
-                        hasSubmission={task.submission.uploadCount > 0}
+                        deadline={task.softDeadline}
+                        submissionUploadTime={task.submission.uploadTime}
                     />
                     )
                 </DataRow>
@@ -81,8 +81,8 @@ export const TaskDetails = ({
                 <LocaleDateTime value={task.hardDeadline} />
                 {' ('}
                 <RemainingTimeForDeadLine
-                    value={task.hardDeadline}
-                    hasSubmission={task.submission.uploadCount > 0}
+                    deadline={task.hardDeadline}
+                    submissionUploadTime={task.submission.uploadTime}
                 />
                 )
             </DataRow>

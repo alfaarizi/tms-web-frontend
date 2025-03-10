@@ -262,6 +262,8 @@
     "name": "Név",
     "softDeadLine": "Pótolható határidő",
     "hardDeadLine": "Végső határidő",
+    "submitted": "Beadva",
+    "submittedLate": "Késve beadva",
     "pastDue": "Lejárt",
     "dueInDays": "Lejár {{days}} nap múlva",
     "dueInHours": "Lejár {{hours}} óra múlva",
