@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* added course management UI for lecturers ([7810b07](https://gitlab.com/tms-elte/frontend-react/commit/7810b0704d1c7f652276713044bd89159ccae27d))
+* Added course management UI for lecturers ([7810b07](https://gitlab.com/tms-elte/frontend-react/commit/7810b0704d1c7f652276713044bd89159ccae27d))
 * Bulk grading interface ([c68094f](https://gitlab.com/tms-elte/frontend-react/commit/c68094fb25dc8a70b94fad24c7dc192eb1de46c5))
 * Display stdout and stderr to students on successful evaluation ([51d7135](https://gitlab.com/tms-elte/frontend-react/commit/51d7135f6944a6b15fce6961c38c2bfe2a275bcd))
 * use backend defined regex for user code validation ([7cdba6b](https://gitlab.com/tms-elte/frontend-react/commit/7cdba6b7127e7b5c3157ca151bbb2f6a1e1b898b))
@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* add trailing zeros to quiz duration ([73d4de0](https://gitlab.com/tms-elte/frontend-react/commit/73d4de0956469f6428ba7e035c162d0904a9332f))
+* Add trailing zeros to quiz duration ([73d4de0](https://gitlab.com/tms-elte/frontend-react/commit/73d4de0956469f6428ba7e035c162d0904a9332f))
 * Better due deadline warnings on student interface for assignments ([6ac1bf9](https://gitlab.com/tms-elte/frontend-react/commit/6ac1bf9166053c561fe3e13f5293b8ca78254c9c))
 * semester level statistics are now called with the correct path ([aff0d66](https://gitlab.com/tms-elte/frontend-react/commit/aff0d6652c89b54fa10c7cbe12c5fc22eaf17710))
 
