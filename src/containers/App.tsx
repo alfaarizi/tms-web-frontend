@@ -117,6 +117,14 @@ export function App() {
         }
     }, [isLoggedIn]);
 
+    useEffect(() => {
+        if (isLoggedIn && userSettings.data?.name) {
+            document.title = `TMS | ${userSettings.data.name} (${userSettings.data.userCode})`;
+        } else {
+            document.title = 'TMS';
+        }
+    }, [isLoggedIn, userSettings.data]);
+
     const isStudent = !!userSettings.data?.isStudent;
     const isFaculty = !!userSettings.data?.isFaculty;
     const isAdmin = !!userSettings.data?.isAdmin;
