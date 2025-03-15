@@ -115,6 +115,10 @@ export function SubmissionsListTab({
         }
     }, [sortedBy, submissions.data]);
 
+    const ungradedSubmissionCount = useMemo(() => (
+        sortedSubmissions?.filter((s) => !s.grade).length || 0
+    ), [sortedSubmissions]);
+
     if (!sortedSubmissions) {
         return null;
     }
@@ -127,7 +131,11 @@ export function SubmissionsListTab({
 
             <CustomCard>
                 <CustomCardHeader>
-                    <CustomCardTitle>{t('task.solutions')}</CustomCardTitle>
+                    <CustomCardTitle>
+                        {`${t('task.solutions')} (${sortedSubmissions.length}`}
+                        <span className="d-none d-md-inline">{`, ungraded: ${ungradedSubmissionCount})`}</span>
+                        <span className="d-md-none">{`/${ungradedSubmissionCount})`}</span>
+                    </CustomCardTitle>
                     {sortedSubmissions.length !== 0 ? (
                         <ButtonGroup>
                             <ToolbarDropdown text={t('common.export')} icon={faFileExport}>
