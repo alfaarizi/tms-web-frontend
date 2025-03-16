@@ -40,6 +40,7 @@ export function TaskForm({
         register,
         handleSubmit,
         control,
+        setValue,
         setError,
         clearErrors,
 
@@ -55,6 +56,19 @@ export function TaskForm({
     const onSubmit = handleSubmit((data) => {
         onSave(data);
     });
+
+    const handleTextPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+        e.preventDefault();
+
+        const paste = e.clipboardData.getData('text').trim();
+        const {
+            name, value, selectionStart, selectionEnd,
+        } = e.currentTarget;
+        if (selectionStart === null || selectionEnd === null) return;
+
+        setValue(name as keyof Task, value.slice(0, selectionStart) + paste + value.slice(selectionEnd));
+        e.currentTarget.setSelectionRange(selectionStart + paste.length, selectionStart + paste.length);
+    };
 
     return (
         <CustomCard>
@@ -73,6 +87,7 @@ export function TaskForm({
                         type="text"
                         {...register('name', { required: t('common.fieldRequired').toString() })}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.name && <FormError message={errors.name.message} />}
                 </Form.Group>
@@ -176,6 +191,7 @@ export function TaskForm({
                         type="text"
                         {...register('entryPassword')}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.entryPassword && <FormError message={errors.entryPassword.message} />}
                     <Form.Text className="text-muted">{t('task.entryPasswordHelp')}</Form.Text>
@@ -190,6 +206,7 @@ export function TaskForm({
                         type="text"
                         {...register('exitPassword')}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.exitPassword && <FormError message={errors.exitPassword.message} />}
                     <Form.Text className="text-muted">{t('task.exitPasswordHelp')}</Form.Text>
