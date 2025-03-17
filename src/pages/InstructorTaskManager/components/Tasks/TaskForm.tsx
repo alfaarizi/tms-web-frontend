@@ -13,6 +13,7 @@ import { DateTimePickerControl } from 'components/DateTimePickerControl';
 import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
 import { MarkdownFormControl } from 'components/MarkdownFormControl';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     title: string,
@@ -53,22 +54,11 @@ export function TaskForm({
 
     useServersideFormErrors<Task>(clearErrors, setError, serverSideError);
 
+    const handleTextPaste = useTextPaste(setValue);
+
     const onSubmit = handleSubmit((data) => {
         onSave(data);
     });
-
-    const handleTextPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-        e.preventDefault();
-
-        const paste = e.clipboardData.getData('text').trim();
-        const {
-            name, value, selectionStart, selectionEnd,
-        } = e.currentTarget;
-        if (selectionStart === null || selectionEnd === null) return;
-
-        setValue(name as keyof Task, value.slice(0, selectionStart) + paste + value.slice(selectionEnd));
-        e.currentTarget.setSelectionRange(selectionStart + paste.length, selectionStart + paste.length);
-    };
 
     return (
         <CustomCard>

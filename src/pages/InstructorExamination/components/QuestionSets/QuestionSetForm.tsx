@@ -10,6 +10,7 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { Course } from 'resources/common/Course';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     title: string,
@@ -50,6 +51,8 @@ export function QuestionSetForm({
         }
     }, [courses, editData]);
 
+    const handleTextPaste = useTextPaste(setValue);
+
     const obSubmit = handleSubmit((data) => {
         onSave(data);
     });
@@ -71,6 +74,7 @@ export function QuestionSetForm({
                             required: t('common.fieldRequired').toString(),
                         })}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.name && <FormError message={errors.name.message} />}
                 </Form.Group>
