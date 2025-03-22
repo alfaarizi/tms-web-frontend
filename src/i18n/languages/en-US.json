@@ -62,6 +62,7 @@
     "areYouSure": "Are you sure?",
     "confirmDiscard": "If you close the modal, all your changes will be lost!",
     "confirmAddSemester": "If you add a new semester, that will be the actual one and you won't be able to change back the previous one",
+    "cancelCanvasModalDesc": "Are you sure you want to cancel the Canvas synchronization?",
     "addNewUserCode": "Add new user code: ",
     "searchForUserCodeOrName": "Enter user code or name",
     "userCodeOrNameRequired": "Please provide valid user codes!",
@@ -233,6 +234,7 @@
     "successfulDuplication": "Successfully duplicated",
     "examGroupHelp": "For exam groups the group number and the identity of the instructors and submission graders are confidential toward the students.",
     "canvasSync": "Canvas synchronization",
+    "cancelCanvasSync": "Cancel Canvas synchronization",
     "canvasSyncTooltip": {
       "part1": "Only courses with a published state in Canvas will be synchronized.",
       "part2": "Only assignments will be synchronized, quizzes not.",
@@ -243,6 +245,7 @@
     "canvasSection": "Canvas section",
     "studentCount": "{{count}} students",
     "successfulCanvasSync": "Successful Canvas synchronization",
+    "successfulCancelCanvasSync": "Successfully Cancelled Canvas synchronization",
     "waitingForCanvas": "Waiting for Canvas...",
     "localTime": "Local time",
     "groupTime": "Group time",

@@ -63,6 +63,7 @@
     "areYouSure": "Biztos benne?",
     "confirmDiscard": "Ha bezárja az ablakot, az eddigi módosításai elvesznek!",
     "confirmAddSemester": "Ha hozzáad egy új szemesztert, az lesz, az aktuális, és nem tudja visszaállítani az előzőt",
+    "cancelCanvasModalDesc": "Valóban meg szeretné szakítani a Canvas szinkronizációt?",
     "addNewUserCode": "Új NEPTUN-kód hozzáadása: ",
     "searchForUserCodeOrName": "NEPTUN-kód vagy név",
     "userCodeOrNameRequired": "Érvényes NEPTUN-kódokat kell megadni!",
@@ -233,6 +234,7 @@
     "successfulDuplication": "A csoport duplikálva",
     "examGroupHelp": "Vizsgacsoportok esetén a csoport szám, valamint az oktatók és értékelők személye rejtett a hallgatók elől.",
     "canvasSync": "Canvas szinkronizáció",
+    "cancelCanvasSync": "Canvas szinkronizáció megszakítása",
     "canvasSyncTooltip": {
       "part1": "A Canvas-ból csak a publikált kurzusok kerülnek szinkronizálásra.",
       "part2": "Csak a feladatok kerülnek szinkronizálásra, a kvízek nem.",
@@ -244,6 +246,7 @@
     "canvasSection": "Canvas kurzusszekció",
     "studentCount": "{{count}} hallgató",
     "successfulCanvasSync": "A Canvas szinkronizáció sikeres volt",
+    "successfulCancelCanvasSync": "A Canvas szinkronizáció megszakítása sikeres volt",
     "waitingForCanvas": "Várakozás a Canvas szerverre...",
     "localTime": "Helyi idő",
     "groupTime": "Csoport idő",
