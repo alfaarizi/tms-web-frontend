@@ -32,8 +32,8 @@ export function QuestionSetForm({
     const { t } = useTranslation();
     const {
         register,
-        handleSubmit,
         setValue,
+        handleSubmit,
 
         formState: {
             errors,
