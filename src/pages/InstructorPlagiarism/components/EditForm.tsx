@@ -9,6 +9,7 @@ import { FormButtons } from 'components/Buttons/FormButtons';
 import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     editData: Plagiarism,
@@ -26,6 +27,7 @@ export function EditForm({
     const { t } = useTranslation();
     const {
         register,
+        setValue,
         handleSubmit,
 
         formState: {
@@ -34,6 +36,8 @@ export function EditForm({
     } = useForm<Plagiarism>({
         defaultValues: editData,
     });
+
+    const handleTextPaste = useTextPaste(setValue);
 
     const onSubmit = handleSubmit((data) => {
         onSave(data);
@@ -50,7 +54,12 @@ export function EditForm({
                         {t('common.name')}
                         :
                     </Form.Label>
-                    <Form.Control type="text" {...register('name', { required: true })} size="sm" />
+                    <Form.Control
+                        type="text"
+                        {...register('name', { required: true })}
+                        size="sm"
+                        onPaste={handleTextPaste}
+                    />
                     {errors.name && <FormError message={t('common.fieldRequired')} />}
                 </Form.Group>
 

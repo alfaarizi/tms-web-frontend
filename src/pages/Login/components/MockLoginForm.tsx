@@ -8,6 +8,7 @@ import { MockLogin } from 'resources/common/MockLogin';
 import { LoginProps } from 'pages/Login/components/LoginProps';
 import { LoginButton } from 'pages/Login/components/LoginButton';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 /**
  * Form component for mock-login
@@ -26,6 +27,7 @@ export function MockLoginForm({
         register,
         handleSubmit,
         clearErrors,
+        setValue,
         setError,
 
         formState: {
@@ -37,6 +39,9 @@ export function MockLoginForm({
         },
     });
     useServersideFormErrors<MockLogin>(clearErrors, setError, serverSideError);
+
+    const handleTextPaste = useTextPaste(setValue);
+
     const onSubmit = handleSubmit((data) => onLogin(data));
 
     return (
@@ -53,6 +58,7 @@ export function MockLoginForm({
                         minLength: 6,
                         maxLength: 6,
                     })}
+                    onPaste={handleTextPaste}
                 />
                 {errors.userCode && <FormError message={t('login.userCodeRequired')} />}
             </Form.Group>
@@ -68,6 +74,7 @@ export function MockLoginForm({
                         required: t('login.nameRequired')
                             .toString(),
                     })}
+                    onPaste={handleTextPaste}
                 />
                 {errors.name && <FormError message={errors.name.message} />}
             </Form.Group>

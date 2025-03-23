@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Col, Form, InputGroup } from 'react-bootstrap';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { set, useFieldArray, useFormContext } from 'react-hook-form';
 import { DateTime } from 'luxon';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,6 +20,7 @@ import { PlagiarismType } from 'resources/instructor/PlagiarismType';
 import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 export interface PlagiarismForm extends Omit<RequestPlagiarism, 'ignoreFiles'> {
     myTasks: boolean;
@@ -95,6 +96,7 @@ export function NewRequestForm({
     const { t } = useTranslation();
     const {
         register,
+        setValue,
         control,
         handleSubmit,
 
@@ -103,6 +105,8 @@ export function NewRequestForm({
         },
     } = useFormContext<PlagiarismForm>(); // retrieve all hook methods
     const ignoreFiles = useFieldArray({ name: 'ignoreFiles' });
+
+    const handleTextPaste = useTextPaste(setValue);
 
     const obSubmit = handleSubmit((data) => onSave({
         ...data,
@@ -232,6 +236,7 @@ export function NewRequestForm({
                                 .toString(),
                         })}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.name && <FormError message={errors.name.message} />}
                 </Form.Group>

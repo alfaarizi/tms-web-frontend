@@ -13,6 +13,7 @@ import { AsyncTypeaheadControl } from 'components/AddUsers/AsyncTypeaheadControl
 type Props = {
     toggleValue: AddUserMode,
     onToggle: () => void,
+    onPaste: (e: React.ClipboardEvent<HTMLInputElement>) => void,
     control: any,
     id: string,
     onSearch: (text: string) => void,
@@ -30,6 +31,7 @@ export type AddUserMode = 'search' | 'import';
 export function AddUserFormControl({
     toggleValue,
     onToggle,
+    onPaste,
     control,
     id,
     onSearch,
@@ -111,6 +113,7 @@ export function AddUserFormControl({
                                 type="text"
                                 onChange={onChange}
                                 onBlur={onBlur}
+                                onPaste={onPaste}
                                 value={value}
                                 size="sm"
                                 placeholder={t('common.userCodes')}

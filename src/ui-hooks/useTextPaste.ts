@@ -15,7 +15,7 @@ export function useTextPaste<T extends FieldValues>(setValue: UseFormSetValue<T>
             const {
                 name, value, selectionStart, selectionEnd,
             } = e.currentTarget;
-            if (selectionStart === null || selectionEnd === null) return;
+            if (selectionStart == null || selectionEnd == null) return;
 
             setValue(
                 name as Path<T>,
