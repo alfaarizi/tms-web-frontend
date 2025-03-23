@@ -116,7 +116,7 @@ export function SubmissionsListTab({
     }, [sortedBy, submissions.data]);
 
     const ungradedSubmissionCount = useMemo(() => (
-        sortedSubmissions?.filter((s) => !s.grade).length || 0
+        sortedSubmissions?.filter((s) => s.grade == null).length || 0
     ), [sortedSubmissions]);
 
     if (!sortedSubmissions) {
