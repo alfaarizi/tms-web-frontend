@@ -11,14 +11,18 @@ export async function index(semesterID: number, submitted: boolean, future: bool
             semesterID,
             submitted,
             future,
-            expand: 'group',
+            expand: 'test.group',
         },
     });
     return res.data;
 }
 
 export async function view(id: number) {
-    const res = await axiosInstance.get<QuizTestInstance>(`/student/quiz-test-instances/${id}`);
+    const res = await axiosInstance.get<QuizTestInstance>(`/student/quiz-test-instances/${id}`, {
+        params: {
+            expand: 'test.group',
+        },
+    });
     return res.data;
 }
 

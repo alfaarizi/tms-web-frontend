@@ -64,6 +64,7 @@ export function TestForm({
             setValue('duration', editData.duration);
             setValue('shuffled', editData.shuffled);
             setValue('unique', editData.unique);
+            setValue('password', editData.password);
         }
     }, [groups, editData]);
 
