@@ -172,6 +172,20 @@ export function TestForm({
                 </Form.Group>
 
                 <Form.Group>
+                    <Form.Label>
+                        {t('login.password')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        type="text"
+                        {...register('password')}
+                        size="sm"
+                    />
+                    {errors.password && <FormError message={errors.password.message} />}
+                    <Form.Text className="text-muted">{t('quizTests.passwordProtectedHelp')}</Form.Text>
+                </Form.Group>
+
+                <Form.Group>
                     <Form.Check
                         type="checkbox"
                         id="shuffled"

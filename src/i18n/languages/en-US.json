@@ -84,6 +84,13 @@
     "unlockRequired": "Unlock required",
     "unlockWarning": "The task is password protected, please provide the password to unlock it!"
   },
+  "passwordProtectedTest": {
+    "passwordProtected": "Password protected",
+    "unlock": "Unlock",
+    "unlockRequired": "Unlock required",
+    "unlockSuccess": "Successful unlock",
+    "studentWarning": "The test must be unlocked before starting!"
+  },
   "fileUpload": {
     "success": "{{count}} file(s) uploaded successfully",
     "failed": "File upload failed",
@@ -485,7 +492,8 @@
     "writeTest": "Write test",
     "successfulDuplication": "Successfully duplicated",
     "successfulFinalization": "Successfully finalized",
-    "noGroupCreated": "A group must be created before creating a new test"
+    "noGroupCreated": "A group must be created before creating a new test",
+    "passwordProtectedHelp": "For password-protected tests the test must be verified before starting. Leave the password field blank to turn off password protection."
   },
   "reactMde": {
     "write": "Editor",
