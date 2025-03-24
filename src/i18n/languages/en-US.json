@@ -92,6 +92,7 @@
     "upload": "Upload",
     "uploadInProgress": "Uploading...",
     "hint": {
+      "atLeastOneDockerfile": "Upload must contain a file named \"Dockerfile\"!",
       "dllExeNotAllowed": "Uploading .dll and .exe files is not allowed!",
       "gitFolderNotAllowed": "Uploading .git folders is not allowed!",
       "zipOnly": "When uploading multiple zip files, the files are packed into a single zip!",
