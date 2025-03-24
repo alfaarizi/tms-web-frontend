@@ -50,6 +50,17 @@ export function EnvironmentSettingsForm({
         },
     } = useForm<SetupEvaluatorEnvironment>();
 
+    const dockerfileFileValidator = (files: FileList | null) => {
+        if (!files) {
+            return true;
+        }
+
+        return Array.from(files)
+            .some((file) => file.name === 'Dockerfile')
+            ? fileSizeValidator.reactHookFormsValidator(files)
+            : t('fileUpload.hint.atLeastOneDockerfile');
+    };
+
     const handleResetFileUpload = () => {
         setValue('files', null);
     };
@@ -187,7 +198,7 @@ export function EnvironmentSettingsForm({
                             multiple
                             disabled={inProgress || !fileSizeValidator.ready}
                             {...register('files', {
-                                validate: fileSizeValidator.reactHookFormsValidator,
+                                validate: dockerfileFileValidator,
                             })}
                         />
                     </InputGroup>
