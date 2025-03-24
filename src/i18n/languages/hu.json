@@ -85,6 +85,13 @@
     "unlockRequired": "Feloldás szükséges",
     "unlockWarning": "A feladat jelszóvédett, add meg a jelszót a feloldáshoz!"
   },
+  "passwordProtectedTest": {
+    "passwordProtected": "Jelszóval védett",
+    "unlock": "Feloldás",
+    "unlockRequired": "Feloldás szükséges",
+    "unlockSuccess": "Sikeres feloldás",
+    "studentWarning": "A tesztet fel kell oldani a kezdés előtt!"
+  },
   "fileUpload": {
     "success": "{{count}} fájl feltöltése sikeres",
     "failed": "Sikertelen fájlfeltöltés",
@@ -486,7 +493,8 @@
     "writeTest": "Teszt kitöltése",
     "successfulDuplication": "Teszt duplikálva",
     "successfulFinalization": "Teszt véglegesítve",
-    "noGroupCreated": "Egy csoport létrehozása szükséges új teszt létrehozása előtt"
+    "noGroupCreated": "Egy csoport létrehozása szükséges új teszt létrehozása előtt",
+    "passwordProtectedHelp": "A jelszóvédett tesztek esetében hitelesíteni kell a tesztet a kitöltés megkezdése előtt. A védelem kikapcsolásához hagyja üresen a jelszó mezőt."
   },
   "reactMde": {
     "write": "Szerkesztő",

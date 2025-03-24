@@ -15,7 +15,7 @@ import { SubmissionUpload } from 'resources/student/SubmissionUpload';
 import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { FileUpload } from 'components/FileUpload';
 import { GitInfo } from 'pages/StudentTaskManager/components/GitInfo';
-import { VerifyItemForm } from 'pages/StudentTaskManager/components/VerifyItemForm';
+import { VerifyItemForm } from 'components/VerifyItemForm';
 import { VerifyItem } from 'resources/student/VerifyItem';
 import { useNotifications } from 'hooks/common/useNotifications';
 import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUploadInfo';
@@ -201,6 +201,7 @@ export const TaskPage = () => {
                     submitButtonLabel={t('passwordProtected.unlock')}
                     hasIpCheck={false}
                 />
+
             )}
 
             {uploadCard}
