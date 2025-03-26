@@ -10,15 +10,15 @@ All notable changes to this project will be documented in this file. See [standa
 * Cancel Canvas synchronization ([0ca505f](https://gitlab.com/tms-elte/frontend-react/commit/0ca505f2e3ec9e3de441eebe6965d7dee42125b1))
 * Display total submissions and ungraded count in the Solutions header ([40a1bb6](https://gitlab.com/tms-elte/frontend-react/commit/40a1bb6a45a43ba8cb1dfe57aa10c40f7371ab42))
 * Display users' names and codes in the title ([2d5d701](https://gitlab.com/tms-elte/frontend-react/commit/2d5d7011467228f91540e13854a429560a6bc73e))
-* protect exams with entry password ([ffa5f15](https://gitlab.com/tms-elte/frontend-react/commit/ffa5f150a9b3f45d0e94d6636475134c7c202809))
+* Protect exams with entry password ([ffa5f15](https://gitlab.com/tms-elte/frontend-react/commit/ffa5f150a9b3f45d0e94d6636475134c7c202809))
 * Reduce gap between labels and their values on the task view page ([d5fe3d6](https://gitlab.com/tms-elte/frontend-react/commit/d5fe3d62be1f1c53a1947dc6ce20cd1a14c86ebf))
 
 
 ### Bug Fixes
 
 * Course name is not shown on exam test page ([85b40fe](https://gitlab.com/tms-elte/frontend-react/commit/85b40fe96b0bf45c4538344827a6d9ae6bcdd1ed))
-* require Dockerfile when setting up custom Docker image ([c616a20](https://gitlab.com/tms-elte/frontend-react/commit/c616a20ab95b422edb4e05c31e4fbf79508439bb))
-* show test case report table when there was no previous error message ([a10d78d](https://gitlab.com/tms-elte/frontend-react/commit/a10d78db4f4ef9911bdc155392ab1e24bd797e76))
+* Require Dockerfile when setting up custom Docker image ([c616a20](https://gitlab.com/tms-elte/frontend-react/commit/c616a20ab95b422edb4e05c31e4fbf79508439bb))
+* Show test case report table when there was no previous error message ([a10d78d](https://gitlab.com/tms-elte/frontend-react/commit/a10d78db4f4ef9911bdc155392ab1e24bd797e76))
 
 ## [4.10.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.9.1...v4.10.0) (2025-03-13)
 
@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file. See [standa
 * Added course management UI for lecturers ([7810b07](https://gitlab.com/tms-elte/frontend-react/commit/7810b0704d1c7f652276713044bd89159ccae27d))
 * Bulk grading interface ([c68094f](https://gitlab.com/tms-elte/frontend-react/commit/c68094fb25dc8a70b94fad24c7dc192eb1de46c5))
 * Display stdout and stderr to students on successful evaluation ([51d7135](https://gitlab.com/tms-elte/frontend-react/commit/51d7135f6944a6b15fce6961c38c2bfe2a275bcd))
-* use backend defined regex for user code validation ([7cdba6b](https://gitlab.com/tms-elte/frontend-react/commit/7cdba6b7127e7b5c3157ca151bbb2f6a1e1b898b))
+* Use backend defined regex for user code validation ([7cdba6b](https://gitlab.com/tms-elte/frontend-react/commit/7cdba6b7127e7b5c3157ca151bbb2f6a1e1b898b))
 
 
 ### Bug Fixes
