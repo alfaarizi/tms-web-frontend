@@ -133,9 +133,7 @@ export function SubmissionsListTab({
                 <CustomCardHeader>
                     <CustomCardTitle>
                         {`${t('task.solutions')} (${sortedSubmissions.length}`}
-                        <span className="d-none d-md-inline">
-                            {`, ${t('task.ungraded')}: ${ungradedSubmissionCount})`}
-                        </span>
+                        <span className="d-none d-md-inline">{`, ungraded: ${ungradedSubmissionCount})`}</span>
                         <span className="d-md-none">{`/${ungradedSubmissionCount})`}</span>
                     </CustomCardTitle>
                     {sortedSubmissions.length !== 0 ? (
