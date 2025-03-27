@@ -12,17 +12,29 @@ export async function index(semesterID: number) {
 }
 
 export async function view(id: number) {
-    const res = await axiosInstance.get<QuizTest>(`/instructor/quiz-tests/${id}`);
+    const res = await axiosInstance.get<QuizTest>(`/instructor/quiz-tests/${id}`, {
+        params: {
+            expand: 'group',
+        },
+    });
     return res.data;
 }
 
 export async function create(test: QuizTest) {
-    const res = await axiosInstance.post<QuizTest>('/instructor/quiz-tests', test);
+    const res = await axiosInstance.post<QuizTest>('/instructor/quiz-tests', test, {
+        params: {
+            expand: 'group',
+        },
+    });
     return res.data;
 }
 
 export async function update(test: QuizTest) {
-    const res = await axiosInstance.put<QuizTest>(`/instructor/quiz-tests/${test.id}`, test);
+    const res = await axiosInstance.put<QuizTest>(`/instructor/quiz-tests/${test.id}`, test, {
+        params: {
+            expand: 'group',
+        },
+    });
     return res.data;
 }
 

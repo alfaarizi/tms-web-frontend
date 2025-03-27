@@ -8,4 +8,5 @@ export interface QuizTestInstance {
     score: number;
     maxScore: number;
     test: QuizTest;
+    isUnlocked: boolean;
 }

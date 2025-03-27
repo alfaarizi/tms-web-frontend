@@ -64,6 +64,7 @@ export function TestForm({
             setValue('duration', editData.duration);
             setValue('shuffled', editData.shuffled);
             setValue('unique', editData.unique);
+            setValue('password', editData.password);
         }
     }, [groups, editData]);
 
@@ -169,6 +170,20 @@ export function TestForm({
                         size="sm"
                     />
                     {errors.duration && <FormError message={errors.duration?.message} />}
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('login.password')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        type="text"
+                        {...register('password')}
+                        size="sm"
+                    />
+                    {errors.password && <FormError message={errors.password.message} />}
+                    <Form.Text className="text-muted">{t('quizTests.passwordProtectedHelp')}</Form.Text>
                 </Form.Group>
 
                 <Form.Group>

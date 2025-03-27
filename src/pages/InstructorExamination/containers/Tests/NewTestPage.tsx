@@ -26,7 +26,7 @@ export function NewTestPage() {
     const actualSemester = useActualSemester();
     const groups = useGroupsForCourse(
         actualSemester.actualSemesterID || -1,
-        questionSet.data?.course.id || -1,
+        questionSet.data?.courseID || -1,
         !!actualSemester.actualSemesterID && !!questionSet.data,
     );
     const createMutation = useCreateTestMutation();
