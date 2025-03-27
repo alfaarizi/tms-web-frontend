@@ -11,7 +11,6 @@ type Props = {
     tooltipNode?: ReactNode,
     tooltipPlacement?: 'top' | 'bottom' | 'left' | 'right';
     tooltipIcon?: IconProp,
-    labelWidth?: number,
 }
 
 /**
@@ -29,7 +28,6 @@ export function DataRow({
     tooltipNode,
     tooltipPlacement = 'right',
     tooltipIcon,
-    labelWidth = 2,
 }: Props) {
     let iconToolTip: ReactNode | null;
 
@@ -53,7 +51,7 @@ export function DataRow({
 
     return (
         <Row>
-            <Col md={labelWidth}>
+            <Col md={3}>
                 <strong>
                     {label}
                     {': '}

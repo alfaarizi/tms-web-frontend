@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import {
-    faCopy, faEdit, faCircleInfo, faSync, faLinkSlash,
+    faCopy, faEdit, faCircleInfo, faSync,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { CustomCard } from 'components/CustomCard/CustomCard';
@@ -21,7 +21,6 @@ type Props = {
     onDuplicate: () => void,
     onRemove: () => void,
     onCanvasSync: () => void,
-    onCancelCanvasSync: () => void,
 }
 
 export function GroupDetails({
@@ -32,7 +31,6 @@ export function GroupDetails({
     onEdit,
     onRemove,
     onCanvasSync,
-    onCancelCanvasSync,
 }: Props) {
     const { t } = useTranslation();
 
@@ -75,16 +73,6 @@ export function GroupDetails({
                                 text={t('group.canvasSync')}
                                 icon={faSync}
                                 onClick={onCanvasSync}
-                            />
-                        )
-                        : null}
-                    {group.isCanvasCourse
-                        ? (
-                            <ToolbarButton
-                                isLoading={canvasSyncInProgress}
-                                text={t('group.cancelCanvasSync')}
-                                icon={faLinkSlash}
-                                onClick={onCancelCanvasSync}
                             />
                         )
                         : null}

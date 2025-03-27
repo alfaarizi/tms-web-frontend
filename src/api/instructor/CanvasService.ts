@@ -12,10 +12,6 @@ export async function sync(groupID: number) {
     await axiosInstance.post<void>(`/instructor/canvas/sync?groupID=${groupID}`);
 }
 
-export async function cancelSync(groupID: number) {
-    await axiosInstance.post<void>(`/instructor/canvas/cancel-sync?groupID=${groupID}`);
-}
-
 export async function oauth2Response(data: CanvasOauth2Response) {
     await axiosInstance.post<void>('/instructor/canvas/oauth2-response', data);
 }

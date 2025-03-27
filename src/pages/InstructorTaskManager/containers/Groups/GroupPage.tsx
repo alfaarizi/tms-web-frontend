@@ -21,16 +21,11 @@ import { useActualSemester } from 'hooks/common/SemesterHooks';
 import { GroupDetails } from 'pages/InstructorTaskManager/components/Groups/GroupDetails';
 import { TabbedInterface } from 'components/TabbedInterface';
 import { useNotifications } from 'hooks/common/useNotifications';
-import {
-    useCancelCanvasSyncMutation,
-    useCanvasSetupMutation,
-    useCanvasSyncMutation,
-} from 'hooks/instructor/CanvasHooks';
+import { useCanvasSetupMutation, useCanvasSyncMutation } from 'hooks/instructor/CanvasHooks';
 import { useShow } from 'ui-hooks/useShow';
 import { SetupCanvasModal } from 'pages/InstructorTaskManager/containers/Groups/SetupCanvasModal';
 import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
 import { GroupTasksTab } from 'pages/InstructorTaskManager/containers/Groups/GroupTasksTab';
-import { ConfirmModal } from 'components/Modals/ConfirmModal';
 
 type Params = {
     id?: string,
@@ -51,10 +46,8 @@ export function GroupPage() {
     const removeMutation = useRemoveGroupMutation();
     const duplicateMutation = useDuplicateGroupMutation();
     const canvasSyncMutation = useCanvasSyncMutation(groupID);
-    const cancelCanvasSyncMutation = useCancelCanvasSyncMutation(groupID, group.data?.semesterID);
     const canvasSetupMutation = useCanvasSetupMutation(groupID, group.data?.semesterID);
     const showCanvasSetupModal = useShow();
-    const showCancelCanvasSetupModal = useShow();
     const actualSemester = useActualSemester();
     const [editErrorBody, setEditErrorBody] = useState<ValidationErrorBody | null>(null);
     const notifications = useNotifications();
@@ -120,22 +113,6 @@ export function GroupPage() {
         }
     };
 
-    // Cancel Canvas synchronization
-    const handleCancelCanvasSync = async () => {
-        if (group.data.isCanvasCourse) {
-            try {
-                await cancelCanvasSyncMutation.mutateAsync();
-                notifications.push({
-                    variant: 'success',
-                    message: t('group.successfulCancelCanvasSync'),
-                });
-                showCancelCanvasSetupModal.toHide();
-            } catch (e) {
-                // Already handled globally
-            }
-        }
-    };
-
     // Save Canvas synchronization settings
     const handleCanvasSetup = async (data: CanvasSetupData) => {
         try {
@@ -168,15 +145,12 @@ export function GroupPage() {
                 : (
                     <GroupDetails
                         isActualSemester={actualSemester.check(group.data.semesterID)}
-                        canvasSyncInProgress={canvasSyncMutation.isLoading
-                            || canvasSetupMutation.isLoading
-                            || cancelCanvasSyncMutation.isLoading}
+                        canvasSyncInProgress={canvasSyncMutation.isLoading || canvasSetupMutation.isLoading}
                         group={group.data}
                         onEdit={showEditForm.toShow}
                         onDuplicate={handleDuplicate}
                         onRemove={handleRemove}
                         onCanvasSync={handleCanvasSync}
-                        onCancelCanvasSync={showCancelCanvasSetupModal.toShow}
                     />
                 )}
 
@@ -203,15 +177,6 @@ export function GroupPage() {
                 onSave={handleCanvasSetup}
                 onCancel={showCanvasSetupModal.toHide}
                 inProgress={canvasSetupMutation.isLoading}
-            />
-
-            <ConfirmModal
-                description={t('common.cancelCanvasModalDesc')}
-                isConfirmDialogOpen={showCancelCanvasSetupModal.show}
-                onCancel={() => { showCancelCanvasSetupModal.toHide(); }}
-                onConfirm={handleCancelCanvasSync}
-                title={t('common.areYouSure')}
-                isLoading={cancelCanvasSyncMutation.isLoading}
             />
         </>
     );

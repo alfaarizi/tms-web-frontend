@@ -1,7 +1,6 @@
 import * as QuizTestInstancesService from 'api/student/QuizTestInstancesService';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { QuizTestInstanceAnswer } from 'resources/student/QuizTestInstanceAnswer';
-import { UnlockTest } from 'resources/student/UnlockTest';
 
 export const QUERY_KEY = 'student/quiz-test-instances';
 
@@ -38,11 +37,5 @@ export function useFinishWriteMutation(id: number) {
                 await queryClient.invalidateQueries(QUERY_KEY);
             },
         },
-    );
-}
-
-export function useUnlockTestMutation() {
-    return useMutation(
-        (data: UnlockTest) => QuizTestInstancesService.unlock(data),
     );
 }

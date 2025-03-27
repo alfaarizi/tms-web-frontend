@@ -82,7 +82,7 @@ export function SubmissionListItem({
                 </Col>
                 <Col md={2} className="d-flex align-items-start justify-content-end">
                     <ButtonGroup>
-                        {file.errorMsg || autoTesterResults
+                        {file.errorMsg
                             ? (
                                 <ToolbarButton
                                     onClick={() => handleAutoTesterResultsDisplay(file)}

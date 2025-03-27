@@ -7,13 +7,10 @@ import { CustomCard } from 'components/CustomCard/CustomCard';
 import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import {
-    faCopy, faEdit, faKey, faPlay,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCopy, faEdit, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
 import { ButtonGroup } from 'react-bootstrap';
 import { DateTimeInterval } from 'pages/InstructorExamination/components/Tests/DateTimeInterval';
-import { IconTooltip } from 'components/IconTooltip';
 
 type Params = {
     test: QuizTest;
@@ -59,19 +56,6 @@ export function TestDetails({
             </DataRow>
             <DataRow label={t('quizTests.duration')}>{test.duration}</DataRow>
             <DataRow label={t('quizTests.questionAmount')}>{test.questionamount}</DataRow>
-            <DataRow label={t('passwordProtectedTest.passwordProtected')}>
-                {(!test.password || test.password.length === 0) ? t('common.no') : (
-                    <>
-                        {t('common.yes')}
-                        <IconTooltip
-                            tooltipID={`test-${test.id}-password`}
-                            icon={faKey}
-                            text={`${t('login.password')}: ${test.password}`}
-                        />
-                    </>
-                )}
-
-            </DataRow>
         </CustomCard>
     );
 }

@@ -11,12 +11,7 @@ import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
 
 export const QUERY_KEY = 'instructor/canvas';
 
-async function afterSync(queryClient: QueryClient, groupID: number, semesterID?: number) {
-    // Reload group list for the given semester if needed
-    if (semesterID) {
-        await queryClient.invalidateQueries([GROUP_QUERY_KEY, { semesterID }]);
-    }
-
+async function afterSync(queryClient: QueryClient, groupID: number) {
     // Invalidate all queries that can be affected by synchronization
     await queryClient.invalidateQueries([TASK_QUERY_KEY, { groupID }]);
     await queryClient.invalidateQueries([GROUP_QUERY_KEY, { groupID }]);
@@ -38,7 +33,10 @@ export function useCanvasSetupMutation(groupID: number, semesterID?: number) {
         {
             // the queries should be invalidated both in case of success and error
             onSettled: async () => {
-                await afterSync(queryClient, groupID, semesterID);
+                await afterSync(queryClient, groupID);
+                if (semesterID) {
+                    await queryClient.invalidateQueries([GROUP_QUERY_KEY, { semesterID }]);
+                }
             },
         },
     );
@@ -57,25 +55,6 @@ export function useCanvasSyncMutation(groupID: number) {
             // the queries should be invalidated both in case of success and error
             onSettled: async () => {
                 await afterSync(queryClient, groupID);
-            },
-        },
-    );
-}
-
-/**
- * Cancel synchronization of the given group
- * @param groupID
- * @param semesterID
- */
-export function useCancelCanvasSyncMutation(groupID: number, semesterID?: number) {
-    const queryClient = useQueryClient();
-
-    return useMutation(
-        () => CanvasService.cancelSync(groupID),
-        {
-            // the queries should be invalidated both in case of success and error
-            onSettled: async () => {
-                await afterSync(queryClient, groupID, semesterID);
             },
         },
     );

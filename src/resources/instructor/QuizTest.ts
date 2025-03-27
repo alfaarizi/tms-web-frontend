@@ -14,6 +14,4 @@ export interface QuizTest {
     semesterID: number;
     timezone: string;
     group?: Group;
-    password: string|null;
-    isPasswordProtected: boolean;
 }

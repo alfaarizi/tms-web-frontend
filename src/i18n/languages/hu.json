@@ -63,7 +63,6 @@
     "areYouSure": "Biztos benne?",
     "confirmDiscard": "Ha bezárja az ablakot, az eddigi módosításai elvesznek!",
     "confirmAddSemester": "Ha hozzáad egy új szemesztert, az lesz, az aktuális, és nem tudja visszaállítani az előzőt",
-    "cancelCanvasModalDesc": "Valóban meg szeretné szakítani a Canvas szinkronizációt?",
     "addNewUserCode": "Új NEPTUN-kód hozzáadása: ",
     "searchForUserCodeOrName": "NEPTUN-kód vagy név",
     "userCodeOrNameRequired": "Érvényes NEPTUN-kódokat kell megadni!",
@@ -85,13 +84,6 @@
     "unlockRequired": "Feloldás szükséges",
     "unlockWarning": "A feladat jelszóvédett, add meg a jelszót a feloldáshoz!"
   },
-  "passwordProtectedTest": {
-    "passwordProtected": "Jelszóval védett",
-    "unlock": "Feloldás",
-    "unlockRequired": "Feloldás szükséges",
-    "unlockSuccess": "Sikeres feloldás",
-    "studentWarning": "A tesztet fel kell oldani a kezdés előtt!"
-  },
   "fileUpload": {
     "success": "{{count}} fájl feltöltése sikeres",
     "failed": "Sikertelen fájlfeltöltés",
@@ -100,7 +92,6 @@
     "upload": "Feltöltés",
     "uploadInProgress": "Feltöltés...",
     "hint": {
-      "atLeastOneDockerfile": "A feltöltésnek tartalmaznia kell egy \"Dockerfile\" nevű fájlt!",
       "dllExeNotAllowed": "A .dll és .exe fájlok feltöltése nem engedélyezett!",
       "gitFolderNotAllowed": "A .git mappa feltöltése nem engedélyezett!",
       "zipOnly": "Több zip fájl feltöltése esetében a fájlok becsomagolódnak egy zip-be!",
@@ -133,7 +124,7 @@
   "login": {
     "login": "Bejelentkezés",
     "username": "Felhasználónév",
-    "password": "Jelszó",
+	"password": "Jelszó",
     "ldapHelp": "Bejelentkezés INF-es azonosítóval. (Az ELTE IK számítógépeire bejelentkezéshez használt.)",
     "student": "Hallgatói hozzáférés",
     "instructor": "Oktatói hozzáférés",
@@ -242,7 +233,6 @@
     "successfulDuplication": "A csoport duplikálva",
     "examGroupHelp": "Vizsgacsoportok esetén a csoport szám, valamint az oktatók és értékelők személye rejtett a hallgatók elől.",
     "canvasSync": "Canvas szinkronizáció",
-    "cancelCanvasSync": "Canvas szinkronizáció megszakítása",
     "canvasSyncTooltip": {
       "part1": "A Canvas-ból csak a publikált kurzusok kerülnek szinkronizálásra.",
       "part2": "Csak a feladatok kerülnek szinkronizálásra, a kvízek nem.",
@@ -254,7 +244,6 @@
     "canvasSection": "Canvas kurzusszekció",
     "studentCount": "{{count}} hallgató",
     "successfulCanvasSync": "A Canvas szinkronizáció sikeres volt",
-    "successfulCancelCanvasSync": "A Canvas szinkronizáció megszakítása sikeres volt",
     "waitingForCanvas": "Várakozás a Canvas szerverre...",
     "localTime": "Helyi idő",
     "groupTime": "Csoport idő",
@@ -298,7 +287,7 @@
     "graderName": "Értékelte",
     "newSolution": "Új megoldás feltöltése",
     "solutions": "Megoldások",
-    "submissionLimitHelp": "A nulla (0) korlátlan számú feltöltést jelent.",
+	"submissionLimitHelp": "A nulla (0) korlátlan számú feltöltést jelent.",
     "exitPassword": "Jelszó a beadott megoldások megerősítéséhez",
     "entryPassword": "Jelszó a feladat megtekintéséhez",
     "exitPasswordHelp": "A kimeneti jelszóval védett feladatok esetében a hitelesíteni kell a  megoldásokat a feltöltést követően. A védelem kikapcsolásához hagyja üresen a jelszó mezőt. Fontos: a jelszó eltávolítását követően az összes megoldás hitelesítve lesz!",
@@ -493,8 +482,7 @@
     "writeTest": "Teszt kitöltése",
     "successfulDuplication": "Teszt duplikálva",
     "successfulFinalization": "Teszt véglegesítve",
-    "noGroupCreated": "Egy csoport létrehozása szükséges új teszt létrehozása előtt",
-    "passwordProtectedHelp": "A jelszóvédett tesztek esetében hitelesíteni kell a tesztet a kitöltés megkezdése előtt. A védelem kikapcsolásához hagyja üresen a jelszó mezőt."
+    "noGroupCreated": "Egy csoport létrehozása szükséges új teszt létrehozása előtt"
   },
   "reactMde": {
     "write": "Szerkesztő",
@@ -556,7 +544,7 @@
     "submissionsUnderTesting": "Tesztelés alatt álló beadandók",
     "submissionsToBeTested": "Tesztelésre váró beadandók",
     "freeDiskSpace": "Szabad lemezterület",
-    "statisticsOverSemesters": "Statisztikák szemeszterekre",
+    "statisticsOverSemesters":"Statisztikák szemeszterekre",
     "groupsCount": "Csoportok száma",
     "tasksCount": "Feladatok száma",
     "submissionsCount": "Megoldások száma",
