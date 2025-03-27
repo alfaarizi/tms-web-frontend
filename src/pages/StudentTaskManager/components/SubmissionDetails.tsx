@@ -56,7 +56,7 @@ export const SubmissionDetails = ({
             <DataRow label={t('task.notes')}>
                 <MultiLineTextBlock text={submission.notes} />
             </DataRow>
-            {autoTest === 1 && submission?.errorMsg
+            {autoTest === 1 && (submission?.errorMsg || autoTesterResults.data)
                 ? (
                     <AutoTestResultAlert
                         status={submission?.status}

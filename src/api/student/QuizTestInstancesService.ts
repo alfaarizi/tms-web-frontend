@@ -3,6 +3,7 @@ import { QuizResultQuestion } from 'resources/student/QuizResultQuestion';
 import { axiosInstance } from 'api/axiosInstance';
 import { QuizWriterData } from 'resources/student/QuizWriterData';
 import { QuizTestInstanceAnswer } from 'resources/student/QuizTestInstanceAnswer';
+import { UnlockTest } from 'resources/student/UnlockTest';
 
 export async function index(semesterID: number, submitted: boolean, future: boolean) {
     const res = await axiosInstance.get<QuizTestInstance[]>('/student/quiz-test-instances', {
@@ -10,14 +11,18 @@ export async function index(semesterID: number, submitted: boolean, future: bool
             semesterID,
             submitted,
             future,
-            expand: 'group',
+            expand: 'test.group',
         },
     });
     return res.data;
 }
 
 export async function view(id: number) {
-    const res = await axiosInstance.get<QuizTestInstance>(`/student/quiz-test-instances/${id}`);
+    const res = await axiosInstance.get<QuizTestInstance>(`/student/quiz-test-instances/${id}`, {
+        params: {
+            expand: 'test.group',
+        },
+    });
     return res.data;
 }
 
@@ -37,4 +42,8 @@ export async function finishWrite(id: number, arr: QuizTestInstanceAnswer[]) {
         arr,
     );
     return res.data;
+}
+
+export async function unlock(data: UnlockTest) {
+    await axiosInstance.post('/student/quiz-test-instances/unlock', data);
 }

@@ -24,7 +24,10 @@ export function TestInstanceDetails({ testInstance }: Props) {
                 <CustomCardTitle>{testInstance.test.name}</CustomCardTitle>
                 {!testInstance.submitted
                     ? (
-                        <LinkContainer to={`/student/quizzes/test-instances/${testInstance.id}/writer`}>
+                        <LinkContainer to={testInstance.isUnlocked
+                            ? `/student/quizzes/test-instances/${testInstance.id}/writer`
+                            : `/student/quizzes/test-instances/${testInstance.id}/unlock`}
+                        >
                             <ToolbarButton text={t('quizTests.writeTest')} icon={faPenAlt} />
                         </LinkContainer>
                     )
