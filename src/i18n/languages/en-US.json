@@ -196,7 +196,8 @@
     "addLecturers": "Add lecturers",
     "newCourse": "New Course",
     "editCourse": "Edit Course",
-    "invalidCourseCodes": "The maximum length of a course code is {{maxLength}} characters, the following codes are not valid: {{codes}}."
+    "invalidCourseCodes": "The maximum length of a course code is {{maxLength}} characters, the following codes are not valid: {{codes}}.",
+    "sort": "Sort Courses"
   },
   "notification": {
     "notification": "Notification",
