@@ -196,7 +196,9 @@
     "lecturers": "Előadók",
     "addLecturers": "Előadók hozzáadása",
     "newCourse": "Új kurzus",
-    "editCourse": "Kurzus szerkesztése"
+    "editCourse": "Kurzus szerkesztése",
+    "invalidCourseCodes": "A kurzus kódok maximális hossza {{maxLength}} karakter, a következő kódok helytelenek: {{codes}}.",
+    "sort": "Kurzusok rendezése"
   },
   "notification": {
     "notification": "Értesítés",
