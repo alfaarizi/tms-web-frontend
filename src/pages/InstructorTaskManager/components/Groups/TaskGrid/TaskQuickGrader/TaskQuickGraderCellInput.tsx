@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
 import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
 
@@ -9,10 +10,26 @@ type TaskQuickGraderCellInputProps = {
 }
 
 export function TaskQuickGraderCellInput({ submission, onGradeSave, tabIndex }: TaskQuickGraderCellInputProps) {
+    const [savedStated, setSavedState] = useState<'saved' | 'modified' | 'unchanged'>('unchanged');
+
     if (!submission) return null;
+
+    const getClassNameFromState = () => {
+        switch (savedStated) {
+        case 'saved':
+            return 'border-success';
+        case 'modified':
+            return 'border-danger';
+        default:
+            return '';
+        }
+    };
 
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         e.target.select();
+    };
+    const handleChange = () => {
+        setSavedState('modified');
     };
     const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newGrade = parseFloat(e.target.value);
@@ -26,16 +43,20 @@ export function TaskQuickGraderCellInput({ submission, onGradeSave, tabIndex }: 
             };
 
             onGradeSave(updatedSubmission);
+            setSavedState('saved');
+        } else {
+            setSavedState('unchanged');
         }
     };
 
     return (
-        <input
+        <Form.Control
             type="number"
-            className={styles.taskQuickGraderCellInput}
+            className={`${styles.taskQuickGraderCellInput} border ${getClassNameFromState()}`}
             defaultValue={submission.grade}
             tabIndex={tabIndex}
             onFocus={handleFocus}
+            onChange={handleChange}
             onBlur={handleBlur}
         />
     );
