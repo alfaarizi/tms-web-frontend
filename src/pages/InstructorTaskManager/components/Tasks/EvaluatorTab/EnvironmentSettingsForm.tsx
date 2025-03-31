@@ -16,6 +16,7 @@ import { ToolbarButton } from 'components/Buttons/ToolbarButton';
 import { useFileSizeValidator } from 'hooks/common/useFileSizeValidator';
 import { getUserTimezone } from 'utils/getUserTimezone';
 import { SetupEvaluatorEnvironment } from 'resources/instructor/SetupEvaluatorEnvironment';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     onSave: (task: SetupEvaluatorEnvironment) => void,
@@ -64,6 +65,8 @@ export function EnvironmentSettingsForm({
     const handleResetFileUpload = () => {
         setValue('files', null);
     };
+
+    const handleTextPaste = useTextPaste(setValue);
 
     const onSubmit = handleSubmit((data: SetupEvaluatorEnvironment) => {
         onSave(data);
@@ -158,6 +161,7 @@ export function EnvironmentSettingsForm({
                                     },
                                 },
                             })}
+                            onPaste={handleTextPaste}
                             disabled={inProgress || (!!watchFiles && watchFiles.length > 0)}
                         />
                         <InputGroup.Append>

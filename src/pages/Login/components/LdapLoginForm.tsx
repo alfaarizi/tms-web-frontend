@@ -8,6 +8,7 @@ import { LoginProps } from 'pages/Login/components/LoginProps';
 import { LoginButton } from 'pages/Login/components/LoginButton';
 import { FormError } from 'components/FormError';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 /**
  * Form component for LDAP login
@@ -26,6 +27,7 @@ export function LdapLoginForm({
         register,
         handleSubmit,
         clearErrors,
+        setValue,
         setError,
 
         formState: {
@@ -33,6 +35,8 @@ export function LdapLoginForm({
         },
     } = useForm<LdapLogin>();
     useServersideFormErrors<LdapLogin>(clearErrors, setError, serverSideError);
+
+    const handleTextPaste = useTextPaste(setValue);
 
     const onSubmit = handleSubmit((data) => onLogin(data));
 
@@ -50,6 +54,7 @@ export function LdapLoginForm({
                         required: t('common.fieldRequired')
                             .toString(),
                     })}
+                    onPaste={handleTextPaste}
                 />
                 {errors.username && <FormError message={errors.username.message} />}
             </Form.Group>

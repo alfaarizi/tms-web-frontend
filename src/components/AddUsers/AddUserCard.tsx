@@ -18,6 +18,7 @@ import { User } from 'resources/common/User';
 import { AddUserFormControl, AddUserMode } from 'components/AddUsers/AddUserFormControl';
 import { extractUserCodes } from 'utils/extractUserCodes';
 import { getSelectedUserCodes } from 'utils/getSelectedUserCodes';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     id: string,
@@ -68,6 +69,8 @@ export function AddUserCard({
         setToggleValue((prevState) => (prevState === 'search' ? 'import' : 'search'));
     };
 
+    const handleTextPaste = useTextPaste(setValue);
+
     const onSubmit = handleSubmit((formData: FormData) => {
         if (toggleValue === 'import') {
             const codes = extractUserCodes(formData.importedUserCodes);
@@ -106,6 +109,7 @@ export function AddUserCard({
                     allowNew={allowNew}
                     toggleValue={toggleValue}
                     onToggle={handleToggleChange}
+                    onPaste={handleTextPaste}
                     control={control}
                     id={id}
                     onSearch={onSearch}

@@ -7,6 +7,7 @@ import { FormError } from 'components/FormError';
 import { FormButtons } from 'components/Buttons/FormButtons';
 import { TestCase } from 'resources/instructor/TestCase';
 import { ConfirmModal } from 'components/Modals/ConfirmModal';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     title: string,
@@ -51,6 +52,8 @@ export function TestCaseFormModal({
         }
     }, [show]);
 
+    const handleTextPaste = useTextPaste(setValue);
+
     const onSubmit = handleSubmit((data) => {
         onSave(data);
     });
@@ -82,7 +85,11 @@ export function TestCaseFormModal({
                                 {t('task.evaluator.arguments')}
                                 :
                             </Form.Label>
-                            <Form.Control type="text" {...register('arguments', { required: false })} />
+                            <Form.Control
+                                type="text"
+                                {...register('arguments', { required: false })}
+                                onPaste={handleTextPaste}
+                            />
                             <Form.Text className="text-muted">
                                 {t('task.evaluator.argumentsHelp')}
                             </Form.Text>

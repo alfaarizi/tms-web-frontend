@@ -18,6 +18,7 @@ import { useNotifications } from 'hooks/common/useNotifications';
 import { useUserSettings, useSettingsMutation } from 'hooks/common/UserHooks';
 import { NotificationTarget, UserSettings } from 'resources/common/UserSettings';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 export function SettingsPage() {
     const userSettings = useUserSettings();
@@ -58,6 +59,9 @@ export function SettingsPage() {
             setValue('locale', settingsData.locale);
         }
     }, [settingsData]);
+
+    const handleTextPaste = useTextPaste(setValue);
+
     if (!settingsData) {
         return null;
     }
@@ -130,6 +134,7 @@ export function SettingsPage() {
                             {...register('name', {
                                 required: false,
                             })}
+                            onPaste={handleTextPaste}
                         />
                     </Form.Group>
                     <Form.Group>
@@ -143,6 +148,7 @@ export function SettingsPage() {
                             {...register('userCode', {
                                 required: false,
                             })}
+                            onPaste={handleTextPaste}
                         />
                     </Form.Group>
                     <Form.Group>

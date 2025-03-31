@@ -16,6 +16,7 @@ import { extractUserCodes } from 'utils/extractUserCodes';
 import { Option } from 'react-bootstrap-typeahead/types/types';
 import { getSelectedUserCodes } from 'utils/getSelectedUserCodes';
 import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     onSave: (course: CreateOrUpdateCourse) => void,
@@ -45,9 +46,9 @@ export function CourseForm({
         control,
         register,
         handleSubmit,
+        setValue,
         setError,
         clearErrors,
-        setValue,
 
         formState: {
             errors,
@@ -92,6 +93,8 @@ export function CourseForm({
         .map((code) => code.trim())
         .filter((code) => code !== '')
         .filter((code, index, self) => self.indexOf(code) === index);
+
+    const handleTextPaste = useTextPaste(setValue);
 
     const onSubmit = handleSubmit(async (courseData: CourseFormData) => {
         let lecturerUserCodes: string[] = [];
@@ -139,6 +142,7 @@ export function CourseForm({
                             maxLength: { value: 100, message: t('common.fieldMaxLength', { length: 100 }) },
                         })}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.name && <FormError message={errors.name.message} />}
                 </Form.Group>
@@ -157,6 +161,7 @@ export function CourseForm({
                             })
                         }
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     <Form.Text className="text-muted">
                         {t('course.separateCodes')}
@@ -173,6 +178,7 @@ export function CourseForm({
                         <AddUserFormControl
                             toggleValue={addLecturerModeToggle}
                             onToggle={handleToggleChange}
+                            onPaste={handleTextPaste}
                             control={control}
                             id="course-lecturers"
                             onSearch={handleSearch}
