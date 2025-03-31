@@ -13,6 +13,7 @@ import { Group } from 'resources/instructor/Group';
 import { DateTimePickerControl } from 'components/DateTimePickerControl';
 import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     title: string,
@@ -72,6 +73,8 @@ export function TestForm({
     // eslint-disable-next-line eqeqeq
     const selectedGroupTimezone = groups?.find((group) => group.id == selectedGroupID)?.timezone || '';
 
+    const handleTextPaste = useTextPaste(setValue);
+
     const onSubmit = handleSubmit((data) => onSave(data));
 
     return (
@@ -91,6 +94,7 @@ export function TestForm({
                             required: t('common.fieldRequired').toString(),
                         })}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.name && <FormError message={errors.name.message} />}
                 </Form.Group>

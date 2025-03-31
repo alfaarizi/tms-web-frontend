@@ -13,6 +13,7 @@ import { DateTimePickerControl } from 'components/DateTimePickerControl';
 import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
 import { MarkdownFormControl } from 'components/MarkdownFormControl';
+import { useTextPaste } from 'ui-hooks/useTextPaste';
 
 type Props = {
     title: string,
@@ -40,6 +41,7 @@ export function TaskForm({
         register,
         handleSubmit,
         control,
+        setValue,
         setError,
         clearErrors,
 
@@ -51,6 +53,8 @@ export function TaskForm({
     });
 
     useServersideFormErrors<Task>(clearErrors, setError, serverSideError);
+
+    const handleTextPaste = useTextPaste(setValue);
 
     const onSubmit = handleSubmit((data) => {
         onSave(data);
@@ -73,6 +77,7 @@ export function TaskForm({
                         type="text"
                         {...register('name', { required: t('common.fieldRequired').toString() })}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.name && <FormError message={errors.name.message} />}
                 </Form.Group>
@@ -176,6 +181,7 @@ export function TaskForm({
                         type="text"
                         {...register('entryPassword')}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.entryPassword && <FormError message={errors.entryPassword.message} />}
                     <Form.Text className="text-muted">{t('task.entryPasswordHelp')}</Form.Text>
@@ -190,6 +196,7 @@ export function TaskForm({
                         type="text"
                         {...register('exitPassword')}
                         size="sm"
+                        onPaste={handleTextPaste}
                     />
                     {errors.exitPassword && <FormError message={errors.exitPassword.message} />}
                     <Form.Text className="text-muted">{t('task.exitPasswordHelp')}</Form.Text>
