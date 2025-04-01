@@ -36,8 +36,10 @@ function importAll(r: Context) {
 }
 importAll((require as any).context('./languages', false, /\.json$/));
 
+const envPrefix = process.env.REACT_APP_ENV_PREFIX || '';
 const detectionOptions: DetectorOptions = {
-    order: ['querystring', 'navigator', 'htmlTag', 'path', 'subdomain'],
+    order: ['querystring', 'localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+    lookupLocalStorage: `${envPrefix}i18nextLng`,
 };
 i18n
     .use(initReactI18next) // passes i18n down to react-i18next
