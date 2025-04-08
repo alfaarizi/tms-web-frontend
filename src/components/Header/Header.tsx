@@ -1,16 +1,14 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 
 import { BrandLogo } from '@/components/Header/BrandLogo';
 import { AvailableTheme, useGlobalContext } from '@/context/GlobalContext';
-import { Role } from '@/resources/common/Role';
-import { useMediaQuery } from 'react-responsive';
 
 type Props = {
     children: ReactNode,
     showFetchingIndicator: boolean,
-    currentRole: Role,
+    currentRole: 'admin' | 'student' | 'instructor' | null,
 }
 
 /**
@@ -31,19 +29,6 @@ function getNavBarVariant(theme: AvailableTheme): Variant {
 }
 
 /**
- * Gets the custom breakpoint for compact navbar mode
- * @param role the role of the user
- */
-function getCompactBreakpoint(role: Role): string {
-    return {
-        admin: 'xl',
-        instructor: 'lg',
-        student: 'lg',
-        default: 'md',
-    }[role ?? 'default'];
-}
-
-/**
  * A reusable header component for navigation links and other application-wide actions
  * @param children
  * @param showFetchingIndicator show fetching indicator instead of the application icon
@@ -52,18 +37,27 @@ function getCompactBreakpoint(role: Role): string {
  */
 export function Header({ children, showFetchingIndicator, currentRole }: Props) {
     const globalContext = useGlobalContext();
-    const [expanded, setExpanded] = useState(false);
-    const isMobile = useMediaQuery({ maxWidth: 575.98 }); /* sm */
+    const [expand, setExpand] = useState(false);
+
+    useEffect(() => {
+        const roleMinWidths: Record<string, number> = {
+            admin: 965, student: 770, instructor: 850, null: 768,
+        };
+        const handleResize = () => setExpand(
+            window.innerWidth >= roleMinWidths[currentRole || 'null'],
+        );
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [currentRole]);
 
     return (
         <Navbar
             bg={getNavBarVariant(globalContext.theme)}
             variant="dark"
             sticky="top"
-            expand="sm"
-            expanded={expanded}
-            onToggle={setExpanded}
-            className={`p-0 compact-${getCompactBreakpoint(currentRole)} ${expanded && isMobile ? 'sidebar-show' : ''}`}
+            className="p-0"
+            expand={expand}
         >
             <BrandLogo showFetchingIndicator={showFetchingIndicator} />
             <Navbar.Toggle aria-controls="navbar-nav" />

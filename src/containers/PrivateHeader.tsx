@@ -15,7 +15,7 @@ import { useGlobalContext } from '@/context/GlobalContext';
 import { Role } from '@/resources/common/Role';
 import { HeaderContent } from '@/components/Header/HeaderContent';
 import { UserSettings } from '@/resources/common/UserSettings';
-import { NavbarLink } from '@/components/Header/NavbarLink';
+import { LinkContent } from '@/components/Header/LinkContent';
 
 type Props = {
     userSettings: UserSettings
@@ -100,12 +100,12 @@ export function PrivateHeader({
                 {currentRole === 'student'
                     ? (
                         <>
-                            <NavbarLink
+                            <LinkContent
                                 to="/student/task-manager"
                                 icon={faFile}
                                 text={t('navbar.taskmanager')}
                             />
-                            <NavbarLink
+                            <LinkContent
                                 to="/student/quizzes"
                                 icon={faPen}
                                 text={t('navbar.quizzes')}
@@ -115,25 +115,25 @@ export function PrivateHeader({
                 {currentRole === 'instructor'
                     ? (
                         <>
-                            <NavbarLink
+                            <LinkContent
                                 to="/instructor/task-manager"
                                 icon={faFile}
                                 text={t('navbar.taskmanager')}
                             />
-                            <NavbarLink
+                            <LinkContent
                                 to="/instructor/course-manager"
                                 icon={faList}
                                 text={t('course.courses')}
                             />
                             {availablePlagiarismServices.data?.length
                                 ? (
-                                    <NavbarLink
+                                    <LinkContent
                                         to="/instructor/plagiarism"
                                         icon={faCrosshairs}
                                         text={t('navbar.plagiarism')}
                                     />
                                 ) : null}
-                            <NavbarLink
+                            <LinkContent
                                 to="/instructor/quizzes"
                                 icon={faPen}
                                 text={t('navbar.quizzes')}
@@ -143,22 +143,22 @@ export function PrivateHeader({
                 {currentRole === 'admin'
                     ? (
                         <>
-                            <NavbarLink
+                            <LinkContent
                                 to="/admin/course-manager"
                                 icon={faList}
                                 text={t('course.courses')}
                             />
-                            <NavbarLink
+                            <LinkContent
                                 to="/admin/semester-manager"
                                 icon={faCalendar}
                                 text={t('navbar.semesterManager')}
                             />
-                            <NavbarLink
+                            <LinkContent
                                 to="/admin/notification-manager/notifications"
                                 icon={faBullhorn}
                                 text={t('navbar.notificationManager')}
                             />
-                            <NavbarLink
+                            <LinkContent
                                 to="/admin/statistics"
                                 icon={faChartBar}
                                 text={t('navbar.statistics')}
@@ -167,7 +167,7 @@ export function PrivateHeader({
                     ) : null}
             </HeaderContent>
             <HeaderContent align="end">
-                <NavbarLink
+                <LinkContent
                     to="/about"
                     icon={faBookOpenReader}
                     text={t('aboutPage.about')}
@@ -178,12 +178,12 @@ export function PrivateHeader({
                     onChange={globalContext.setSelectedSemester}
                     onRefetch={refetchSemesters}
                 />
-                <NavbarLink
+                <LinkContent
                     to="/settings"
                     icon={faCog}
                     text={t('common.settings')}
                 />
-                <NavbarLink
+                <LinkContent
                     to="/logout"
                     icon={faSignOutAlt}
                     text={t('navbar.logout', { userCode: userSettings.userCode })}
