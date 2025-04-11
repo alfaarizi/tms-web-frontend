@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* add empty JS file for dynamic environment variables ([7d3493c](https://gitlab.com/tms-elte/frontend-react/commit/7d3493c738b5bdef349a982db0f69d97d980e1ed))
+* Add empty JS file for dynamic environment variables ([7d3493c](https://gitlab.com/tms-elte/frontend-react/commit/7d3493c738b5bdef349a982db0f69d97d980e1ed))
 * Prefix local storage keys to support multiple TMS installations per domain ([ad736a4](https://gitlab.com/tms-elte/frontend-react/commit/ad736a433ed80890492b365b965849d31412ecef))
 
 ## [4.11.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.10.0...v4.11.0) (2025-03-26)
