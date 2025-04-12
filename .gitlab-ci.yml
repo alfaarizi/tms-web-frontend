@@ -4,8 +4,8 @@ image: node:22-bookworm
 # Stages: lint -> test -> docker -> deploy
 stages:
   - lint
+  - build
   - test
-  - docker
   - deploy
 
 # Cached files between builds
@@ -14,10 +14,12 @@ cache:
   paths:
     - node_modules/
 
-# Dependency scanning & SAST
+# Built-in security scanners
 include:
   - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
   - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Container-Scanning.gitlab-ci.yml
 
 # ESLint
 eslint:
@@ -74,7 +76,7 @@ build_production:
 
 # Docker build and push for frontend
 .docker:
-  stage: docker
+  stage: build
   image: docker:latest
   services:
     - docker:dind
@@ -164,3 +166,26 @@ deploy_production:
     url: https://tms.inf.elte.hu/
   rules:
     - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v[^-]*$/ && $CI_PROJECT_NAMESPACE == "tms-elte"'
+
+# Container Scanning
+container_scanning:
+  variables:
+    # Default inherited strategy is "none", but the Dockerfile is needed, 
+    # so the container scanner (Trivy) can recommend direct remediations
+    GIT_STRATEGY: fetch
+    CS_SEVERITY_THRESHOLD: MEDIUM
+    CS_IGNORE_UNFIXED: true
+  before_script:
+    - |
+      if [ "$CI_COMMIT_BRANCH" == "master" ]; then
+        IMAGE_TAG="latest"
+      elif [ "$CI_COMMIT_BRANCH" == "develop" ]; then
+        IMAGE_TAG="nightly"
+      elif [ "$CI_COMMIT_TAG" ]; then
+        IMAGE_TAG=${CI_COMMIT_TAG#v}
+      fi
+      export CS_IMAGE="$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master" && $CI_PROJECT_NAMESPACE == "tms-elte"
+    - if: $CI_COMMIT_BRANCH == "develop" && $CI_PROJECT_NAMESPACE == "tms-elte"
+    - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v[^-].*$/ && $CI_PROJECT_NAMESPACE == "tms-elte"'
