@@ -1,19 +1,18 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Form } from 'react-bootstrap';
-import { FormError } from 'components/FormError';
+import { FormError } from '@/components/FormError';
 import { useTranslation } from 'react-i18next';
-import { Task } from 'resources/instructor/Task';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { DateTimePickerControl } from 'components/DateTimePickerControl';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
-import { MarkdownFormControl } from 'components/MarkdownFormControl';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { Task } from '@/resources/instructor/Task';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { DateTimePickerControl } from '@/components/DateTimePickerControl';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
+import { MarkdownFormControl } from '@/components/MarkdownFormControl';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 type Props = {
     title: string,

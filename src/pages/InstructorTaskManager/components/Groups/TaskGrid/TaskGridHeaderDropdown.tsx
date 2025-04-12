@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     faFileArchive,
@@ -19,11 +18,11 @@ import DropdownItem from 'react-bootstrap/DropdownItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DateTime } from 'luxon';
 
-import { GridTask } from 'resources/instructor/GridTask.php';
-import { SpreadsheetFormat } from 'api/instructor/SubmissionsService';
-import { DownloadAllParams, ExportSpreadsheetParams } from 'hooks/instructor/SubmissionHooks';
+import { GridTask } from '@/resources/instructor/GridTask.php';
+import { SpreadsheetFormat } from '@/api/instructor/SubmissionsService';
+import { DownloadAllParams, ExportSpreadsheetParams } from '@/hooks/instructor/SubmissionHooks';
 
-import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 
 type Props = {
     task: GridTask,

@@ -1,4 +1,4 @@
-import { useGlobalContext } from 'context/GlobalContext';
+import { useGlobalContext } from '@/context/GlobalContext';
 
 export function useNotifications() {
     const appCtx = useGlobalContext();

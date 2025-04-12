@@ -1,7 +1,7 @@
 import { Controller } from 'react-hook-form';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-import { InsertFunc, ReactMdeWithCommands } from 'components/ReactMdeWithCommands';
+import { InsertFunc, ReactMdeWithCommands } from '@/components/ReactMdeWithCommands';
 
 interface Props {
     name: string,

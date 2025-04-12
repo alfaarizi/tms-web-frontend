@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
 import { useTranslation } from 'react-i18next';
-import { CodeCheckerReportListItem } from 'components/CodeChecker/CodeCheckerReportListItem';
-import { CodeCheckerReport, SeverityOrder } from 'resources/common/CodeCheckerReport';
-import { CodeCheckerResultStatus } from 'resources/common/CodeCheckerResultStatus';
+import { CodeCheckerReportListItem } from '@/components/CodeChecker/CodeCheckerReportListItem';
+import { CodeCheckerReport, SeverityOrder } from '@/resources/common/CodeCheckerReport';
+import { CodeCheckerResultStatus } from '@/resources/common/CodeCheckerResultStatus';
 
 type Props = {
     status: CodeCheckerResultStatus,

@@ -1,12 +1,11 @@
-import React from 'react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
 import { DateTime } from 'luxon';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { LocaleDateTime } from 'components/LocaleDateTime';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { LocaleDateTime } from '@/components/LocaleDateTime';
 
 type PickerProps = {
     value: string | null,

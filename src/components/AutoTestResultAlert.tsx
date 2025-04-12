@@ -1,10 +1,9 @@
-import React from 'react';
 import { Alert, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faCircleXmark, faDownload } from '@fortawesome/free-solid-svg-icons';
-import { AutoTesterResult } from 'resources/common/AutoTesterResult';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { AutoTesterResult } from '@/resources/common/AutoTesterResult';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 
 type Props = {
     status: string | null | undefined,

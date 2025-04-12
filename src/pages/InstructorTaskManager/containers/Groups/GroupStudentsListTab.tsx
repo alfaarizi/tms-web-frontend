@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useRouteMatch } from 'react-router';
 
-import { useDeleteStudentMutation, useAddStudentsMutation, useGroupStudents } from 'hooks/instructor/GroupHooks';
+import { useDeleteStudentMutation, useAddStudentsMutation, useGroupStudents } from '@/hooks/instructor/GroupHooks';
 
-import { AddUserCard } from 'components/AddUsers/AddUserCard';
-import { UserListCard } from 'components/UserListCard/UserListCard';
-import { Group } from 'resources/instructor/Group';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
-import { StudentNotesContainer } from 'pages/InstructorTaskManager/containers/Groups/StudentNotesContainer';
-import { useSearchStudentQuery } from 'hooks/common/UserHooks';
+import { AddUserCard } from '@/components/AddUsers/AddUserCard';
+import { UserListCard } from '@/components/UserListCard/UserListCard';
+import { Group } from '@/resources/instructor/Group';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
+import { StudentNotesContainer } from '@/pages/InstructorTaskManager/containers/Groups/StudentNotesContainer';
+import { useSearchStudentQuery } from '@/hooks/common/UserHooks';
 
 type Props = {
     group: Group

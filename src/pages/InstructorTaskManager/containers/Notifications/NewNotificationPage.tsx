@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import { Container } from 'react-bootstrap';
-import { Notification } from 'resources/instructor/Notification';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useCreateNotificationMutation } from 'hooks/instructor/NotificationsHooks';
-import { NotificationForm } from 'pages/InstructorTaskManager/components/Notifications/NotificationForm';
-import { getUserTimezone } from 'utils/getUserTimezone';
+import { Notification } from '@/resources/instructor/Notification';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useCreateNotificationMutation } from '@/hooks/instructor/NotificationsHooks';
+import { NotificationForm } from '@/pages/InstructorTaskManager/components/Notifications/NotificationForm';
+import { getUserTimezone } from '@/utils/getUserTimezone';
 import { useParams } from 'react-router-dom';
 
 type Params = {

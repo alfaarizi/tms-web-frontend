@@ -1,13 +1,12 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Route, Switch, useRouteMatch } from 'react-router';
 
-import { useGroups } from 'hooks/student/GroupHooks';
-import { SideBarLayout } from 'layouts/SideBarLayout';
-import { SideBarItem } from 'components/Navigation/SideBarItem';
-import { TaskPage } from 'pages/StudentTaskManager/containers/TaskPage';
-import { GroupPage } from 'pages/StudentTaskManager/containers/GroupPage';
-import { useSelectedSemester } from 'hooks/common/SemesterHooks';
+import { useGroups } from '@/hooks/student/GroupHooks';
+import { SideBarLayout } from '@/layouts/SideBarLayout';
+import { SideBarItem } from '@/components/Navigation/SideBarItem';
+import { TaskPage } from '@/pages/StudentTaskManager/containers/TaskPage';
+import { GroupPage } from '@/pages/StudentTaskManager/containers/GroupPage';
+import { useSelectedSemester } from '@/hooks/common/SemesterHooks';
 
 export function StudentTaskManager() {
     const { selectedSemesterID } = useSelectedSemester();

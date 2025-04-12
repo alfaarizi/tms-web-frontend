@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import i18next from 'i18next';
 
-import { useClientSideLocaleChange, useConfirmEmailMutation } from 'hooks/common/UserHooks';
-import { SingleColumnLayout } from 'layouts/SingleColumnLayout';
-import { FullScreenSpinner } from 'components/FullScreenSpinner/FullScreenSpinner';
-import { LanguageSwitcher } from 'components/Header/LanguageSwitcher';
-import { BrandLogo } from 'components/Header/BrandLogo';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardFooter } from 'components/CustomCard/CustomCardFooter';
-import { useBranding } from 'ui-hooks/useBranding';
+import { useClientSideLocaleChange, useConfirmEmailMutation } from '@/hooks/common/UserHooks';
+import { SingleColumnLayout } from '@/layouts/SingleColumnLayout';
+import { FullScreenSpinner } from '@/components/FullScreenSpinner/FullScreenSpinner';
+import { LanguageSwitcher } from '@/components/Header/LanguageSwitcher';
+import { BrandLogo } from '@/components/Header/BrandLogo';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardFooter } from '@/components/CustomCard/CustomCardFooter';
+import { useBranding } from '@/ui-hooks/useBranding';
 
 enum ConfirmationState { BeforeSend, Sending, SuccessSameUser, SuccessDifferentUser, Failed }
 
@@ -99,7 +99,7 @@ export default function ConfirmEmailPage({
                                 <div>{branding.organizationName[i18next.language]}</div>
                                 <a href="https://tms-elte.gitlab.io/">
                                     TMS v
-                                    {process.env.REACT_APP_VERSION}
+                                    {import.meta.env.VITE_VERSION}
                                 </a>
                             </CustomCardFooter>
                         </CustomCard>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useHistory, useRouteMatch } from 'react-router';
@@ -8,17 +7,17 @@ import {
     useQuestionSet,
     useRemoveQuestionSetMutation,
     useUpdateQuestionSetMutation,
-} from 'hooks/instructor/QuizQuestionSetHooks';
+} from '@/hooks/instructor/QuizQuestionSetHooks';
 
-import { QuestionSetForm } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
-import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
-import { QuestionsEditor } from 'pages/InstructorExamination/containers/QuestionSets/QuestionsEditor';
-import { QuestionSetDetails } from 'pages/InstructorExamination/components/QuestionSets/QuestionSetDetails';
-import { useNotifications } from 'hooks/common/useNotifications';
-import { useCourses } from 'hooks/instructor/CoursesHooks';
-import { useShow } from 'ui-hooks/useShow';
-import { useGroupsForCourse } from 'hooks/instructor/GroupHooks';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
+import { QuestionSetForm } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
+import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
+import { QuestionsEditor } from '@/pages/InstructorExamination/containers/QuestionSets/QuestionsEditor';
+import { QuestionSetDetails } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetDetails';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { useCourses } from '@/hooks/instructor/CoursesHooks';
+import { useShow } from '@/ui-hooks/useShow';
+import { useGroupsForCourse } from '@/hooks/instructor/GroupHooks';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
 
 type Params = {
     id?: string

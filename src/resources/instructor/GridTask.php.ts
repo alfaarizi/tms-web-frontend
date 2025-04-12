@@ -1,4 +1,4 @@
-import { GridSubmission } from 'resources/instructor/GridSubmission';
+import { GridSubmission } from '@/resources/instructor/GridSubmission';
 
 export interface GridTask {
     id: number;

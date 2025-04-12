@@ -1,8 +1,8 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { Course } from 'resources/common/Course';
-import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
-import { User } from 'resources/common/User';
-import { UserAddResponse } from 'resources/instructor/UserAddResponse';
+import { axiosInstance } from '@/api/axiosInstance';
+import { Course } from '@/resources/common/Course';
+import { CreateOrUpdateCourse } from '@/resources/common/CreateOrUpdateCourse';
+import { User } from '@/resources/common/User';
+import { UserAddResponse } from '@/resources/instructor/UserAddResponse';
 
 export async function index(instructor: boolean, forGroups: boolean) {
     const res = await axiosInstance.get<Course[]>('/instructor/courses', {

@@ -1,5 +1,5 @@
-import { Submission } from 'resources/student/Submission';
-import { TaskFile } from 'resources/common/TaskFile';
+import { Submission } from '@/resources/student/Submission';
+import { TaskFile } from '@/resources/common/TaskFile';
 
 export interface Task {
     id: number;

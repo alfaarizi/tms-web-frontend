@@ -1,19 +1,19 @@
 import { Form } from 'react-bootstrap';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { QuizTest } from 'resources/instructor/QuizTest';
-import { FormError } from 'components/FormError';
+import { QuizTest } from '@/resources/instructor/QuizTest';
+import { FormError } from '@/components/FormError';
 import { useForm } from 'react-hook-form';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { Group } from 'resources/instructor/Group';
-import { DateTimePickerControl } from 'components/DateTimePickerControl';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useServersideFormErrors } from 'ui-hooks/useServersideFormErrors';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { Group } from '@/resources/instructor/Group';
+import { DateTimePickerControl } from '@/components/DateTimePickerControl';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 type Props = {
     title: string,

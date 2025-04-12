@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+
 import { faFileCsv, faFileExcel, faFileExport } from '@fortawesome/free-solid-svg-icons';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { useTranslation } from 'react-i18next';
-import { SpreadsheetFormat } from 'api/instructor/SubmissionsService';
-import { ExportSpreadsheetParams } from 'hooks/instructor/SubmissionHooks';
-import { Task } from 'resources/instructor/Task';
-import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
+import { SpreadsheetFormat } from '@/api/instructor/SubmissionsService';
+import { ExportSpreadsheetParams } from '@/hooks/instructor/SubmissionHooks';
+import { Task } from '@/resources/instructor/Task';
+import { ToolbarDropdown } from '@/components/Buttons/ToolbarDropdown';
 
 type Props = {
     task: Task,

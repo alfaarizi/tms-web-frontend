@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from 'components/Navigation/SideBarItem.module.css';
+import styles from '@/components/Navigation/SideBarItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 

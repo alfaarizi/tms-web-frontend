@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { useSemesters } from 'hooks/common/SemesterHooks';
-import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
-import { useCourses } from 'hooks/instructor/CoursesHooks';
-import { useTaskListForCourse, useUserList } from 'hooks/instructor/TaskHooks';
-import { useCreatePlagiarismMutation, usePlagiarismServices } from 'hooks/instructor/PlagiarismHooks';
-import { useBasefilesByTasks } from 'hooks/instructor/PlagiarismBaseFileHooks';
+import { useSemesters } from '@/hooks/common/SemesterHooks';
+import { RequestPlagiarism } from '@/resources/instructor/RequestPlagiarism';
+import { useCourses } from '@/hooks/instructor/CoursesHooks';
+import { useTaskListForCourse, useUserList } from '@/hooks/instructor/TaskHooks';
+import { useCreatePlagiarismMutation, usePlagiarismServices } from '@/hooks/instructor/PlagiarismHooks';
+import { useBasefilesByTasks } from '@/hooks/instructor/PlagiarismBaseFileHooks';
 import { useHistory } from 'react-router';
-import { NewRequestForm, PlagiarismForm } from 'pages/InstructorPlagiarism/components/NewRequestForm';
+import { NewRequestForm, PlagiarismForm } from '@/pages/InstructorPlagiarism/components/NewRequestForm';
 
 export function NewRequestPage() {
     const history = useHistory();
@@ -36,7 +36,11 @@ export function NewRequestPage() {
     const semesters = useSemesters();
     const courses = useCourses(false, true, true);
     const tasksForCourse = useTaskListForCourse(
-        courseID, myTasks, semesterFromID, semesterToID, semesterFromID > -1 && semesterToID > -1,
+        courseID,
+        myTasks,
+        semesterFromID,
+        semesterToID,
+        semesterFromID > -1 && semesterToID > -1,
     );
     const users = useUserList(selectedTasks, selectedTasks.length > 0);
     const basefiles = useBasefilesByTasks(selectedTasks, selectedTasks.length > 0);

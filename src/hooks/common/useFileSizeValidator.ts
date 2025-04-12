@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 
 /**
  * Provides functions to validate the total size of the uploaded files.

@@ -1,13 +1,13 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Form, Modal } from 'react-bootstrap';
-import { FormError } from 'components/FormError';
-import { MarkdownFormControl } from 'components/MarkdownFormControl';
-import { QuizAnswer } from 'resources/instructor/QuizAnswer';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { InsertFunc } from 'components/ReactMdeWithCommands';
-import { ConfirmModal } from 'components/Modals/ConfirmModal';
+import { FormError } from '@/components/FormError';
+import { MarkdownFormControl } from '@/components/MarkdownFormControl';
+import { QuizAnswer } from '@/resources/instructor/QuizAnswer';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { InsertFunc } from '@/components/ReactMdeWithCommands';
+import { ConfirmModal } from '@/components/Modals/ConfirmModal';
 
 type Props = {
     title: string,

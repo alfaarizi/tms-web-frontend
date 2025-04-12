@@ -1,16 +1,15 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRemoveNotificationMutation } from 'hooks/admin/NotificationsHooks';
+import { useRemoveNotificationMutation } from '@/hooks/admin/NotificationsHooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faXmark } from '@fortawesome/free-solid-svg-icons';
 
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { Notification } from 'resources/admin/Notification';
-import { LocaleDateTime } from 'components/LocaleDateTime';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { Notification } from '@/resources/admin/Notification';
+import { LocaleDateTime } from '@/components/LocaleDateTime';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 import { ButtonGroup } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
 
 type Props = {
     notification: Notification

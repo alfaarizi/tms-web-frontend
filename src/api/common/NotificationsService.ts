@@ -1,5 +1,5 @@
-import { Notification } from 'resources/common/Notification';
-import { axiosInstance } from 'api/axiosInstance';
+import { Notification } from '@/resources/common/Notification';
+import { axiosInstance } from '@/api/axiosInstance';
 
 export async function index() {
     const res = await axiosInstance.get<Notification[]>('/common/notifications');

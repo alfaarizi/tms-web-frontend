@@ -1,9 +1,8 @@
-import React from 'react';
 import { Navbar, Spinner } from 'react-bootstrap';
-import { AvailableTheme, useGlobalContext } from 'context/GlobalContext';
-import styles from 'components/Header/BrandLogo.module.css';
-import logoDark from 'assets/logo192.png';
-import logoBlue from 'assets/logo192_blue.png';
+import { AvailableTheme, useGlobalContext } from '@/context/GlobalContext';
+import styles from '@/components/Header/BrandLogo.module.css';
+import logoDark from '@/assets/logo192.png';
+import logoBlue from '@/assets/logo192_blue.png';
 
 const classes = ['d-inline-block', 'align-top', styles.logo].join(' ');
 

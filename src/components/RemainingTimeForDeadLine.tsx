@@ -1,6 +1,5 @@
-import React from 'react';
 import { DateTime, Duration } from 'luxon';
-import { getUserTimezone } from 'utils/getUserTimezone';
+import { getUserTimezone } from '@/utils/getUserTimezone';
 import { useTranslation } from 'react-i18next';
 
 type Props = {

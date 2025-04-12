@@ -1,4 +1,3 @@
-import React from 'react';
 // @ts-ignore
 import DualListBox from 'react-dual-listbox';
 import 'react-dual-listbox/lib/react-dual-listbox.css';
@@ -66,7 +65,7 @@ export function DualListBoxControl<TFieldValues extends FieldValues, TName exten
             name={name}
             control={control}
             rules={rules}
-            defaultValue={([] as any)} // TODO can we express in the type sytem that control[name] should be an array?
+            defaultValue={([] as any)} // TODO can we express in the type system that control[name] should be an array?
             render={({ field }) => (
                 <DualListBox
                     canFilter

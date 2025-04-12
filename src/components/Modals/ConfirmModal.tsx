@@ -1,6 +1,6 @@
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+
 import { Modal, Button, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 

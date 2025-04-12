@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { Form, Alert, InputGroup } from 'react-bootstrap';
 import { DateTime } from 'luxon';
 
-import { Task } from 'resources/instructor/Task';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { FormError } from 'components/FormError';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { EvaluatorAdditionalInformation } from 'resources/instructor/EvaluatorAdditionalInformation';
+import { Task } from '@/resources/instructor/Task';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { FormError } from '@/components/FormError';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { EvaluatorAdditionalInformation } from '@/resources/instructor/EvaluatorAdditionalInformation';
 import { faRefresh, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { useFileSizeValidator } from 'hooks/common/useFileSizeValidator';
-import { getUserTimezone } from 'utils/getUserTimezone';
-import { SetupEvaluatorEnvironment } from 'resources/instructor/SetupEvaluatorEnvironment';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { useFileSizeValidator } from '@/hooks/common/useFileSizeValidator';
+import { getUserTimezone } from '@/utils/getUserTimezone';
+import { SetupEvaluatorEnvironment } from '@/resources/instructor/SetupEvaluatorEnvironment';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 type Props = {
     onSave: (task: SetupEvaluatorEnvironment) => void,

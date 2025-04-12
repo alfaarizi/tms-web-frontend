@@ -1,6 +1,6 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { WebAppExecution } from 'resources/instructor/WebAppExecution';
-import { SetupWebAppExecution } from 'resources/instructor/SetupWebAppExecution';
+import { axiosInstance } from '@/api/axiosInstance';
+import { WebAppExecution } from '@/resources/instructor/WebAppExecution';
+import { SetupWebAppExecution } from '@/resources/instructor/SetupWebAppExecution';
 
 export async function one(submissionID: number) {
     const res = await axiosInstance.get<WebAppExecution>('/instructor/web-app-execution', {

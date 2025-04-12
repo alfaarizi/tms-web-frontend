@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import {
     Button, ButtonGroup, Form, Modal, Spinner,
 } from 'react-bootstrap';
 
-import { FormError } from 'components/FormError';
-import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
-import { CanvasSyncLevel } from 'resources/instructor/CanvasSyncLevel';
-import { useCanvasCourses, useCanvasSections } from 'hooks/instructor/CanvasHooks';
+import { FormError } from '@/components/FormError';
+import { CanvasSetupData } from '@/resources/instructor/CanvasSetupData';
+import { CanvasSyncLevel } from '@/resources/instructor/CanvasSyncLevel';
+import { useCanvasCourses, useCanvasSections } from '@/hooks/instructor/CanvasHooks';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';

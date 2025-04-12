@@ -1,13 +1,12 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
-import { DataRow } from 'components/DataRow';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { QuizTest } from 'resources/instructor/QuizTest';
-import { DateTimeInterval } from 'pages/InstructorExamination/components/Tests/DateTimeInterval';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
+import { DataRow } from '@/components/DataRow';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { QuizTest } from '@/resources/instructor/QuizTest';
+import { DateTimeInterval } from '@/pages/InstructorExamination/components/Tests/DateTimeInterval';
 
 type Props = {
     tests: QuizTest[] | undefined,

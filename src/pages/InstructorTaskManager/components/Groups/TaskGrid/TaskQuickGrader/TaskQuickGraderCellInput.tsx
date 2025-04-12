@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
-import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
-import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
+import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import { SubmissionGrade } from '@/resources/instructor/SubmissionGrade';
 
 type TaskQuickGraderCellInputProps = {
     submission: SubmissionGrade; // Directly accept the submission object

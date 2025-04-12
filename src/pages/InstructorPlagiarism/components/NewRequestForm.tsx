@@ -1,26 +1,26 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Col, Form, InputGroup } from 'react-bootstrap';
-import { set, useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { DateTime } from 'luxon';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { FormError } from 'components/FormError';
-import { DualListBoxControl } from 'pages/InstructorPlagiarism/components/DualListBoxControl';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { Course } from 'resources/common/Course';
-import { Semester } from 'resources/common/Semester';
-import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
-import { Task } from 'resources/instructor/Task';
-import { User } from 'resources/common/User';
-import { PlagiarismType } from 'resources/instructor/PlagiarismType';
-import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { FormError } from '@/components/FormError';
+import { DualListBoxControl } from '@/pages/InstructorPlagiarism/components/DualListBoxControl';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { Course } from '@/resources/common/Course';
+import { Semester } from '@/resources/common/Semester';
+import { PlagiarismBasefile } from '@/resources/instructor/PlagiarismBasefile';
+import { Task } from '@/resources/instructor/Task';
+import { User } from '@/resources/common/User';
+import { PlagiarismType } from '@/resources/instructor/PlagiarismType';
+import { RequestPlagiarism } from '@/resources/instructor/RequestPlagiarism';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 export interface PlagiarismForm extends Omit<RequestPlagiarism, 'ignoreFiles'> {
     myTasks: boolean;
@@ -125,7 +125,7 @@ export function NewRequestForm({
     })) || [];
     const basefileList = basefiles ? formatBaseFileList(basefiles) : [];
 
-    let typeSettings: JSX.Element;
+    let typeSettings;
     switch (selectedType) {
     case 'moss':
         typeSettings = (
@@ -213,7 +213,7 @@ export function NewRequestForm({
         break;
     default:
         // should not happen
-        typeSettings = <></>;
+        typeSettings = null;
     }
 
     return (

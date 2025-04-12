@@ -1,11 +1,10 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { TaskFile } from 'resources/common/TaskFile';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { FileListItem } from 'components/FileListItem';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { TaskFile } from '@/resources/common/TaskFile';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { FileListItem } from '@/components/FileListItem';
 
 type Props = {
     taskFiles: TaskFile[],
@@ -14,12 +13,12 @@ type Props = {
     title?: string
 }
 
-export const TaskFilesList = ({
+export function TaskFilesList({
     taskFiles,
     onDownload,
     onRemove,
     title,
-}: Props) => {
+}: Props) {
     const { t } = useTranslation();
 
     return (
@@ -37,4 +36,4 @@ export const TaskFilesList = ({
             ))}
         </CustomCard>
     );
-};
+}

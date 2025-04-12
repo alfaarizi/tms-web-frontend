@@ -1,19 +1,18 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ButtonGroup } from 'react-bootstrap';
 import { faEdit, faKey } from '@fortawesome/free-solid-svg-icons';
 
-import { DataRow } from 'components/DataRow';
-import { Task } from 'resources/instructor/Task';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
-import { DeleteToolbarButton } from 'components/Buttons/DeleteToolbarButton';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { IconTooltip } from 'components/IconTooltip';
+import { DataRow } from '@/components/DataRow';
+import { Task } from '@/resources/instructor/Task';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
+import { IconTooltip } from '@/components/IconTooltip';
 
 type Props = {
     task: Task,
@@ -23,13 +22,13 @@ type Props = {
     showVersionControl: boolean
 }
 
-export const TaskDetails = ({
+export function TaskDetails({
     isActualSemester,
     onRemove,
     onEdit,
     task,
     showVersionControl,
-}: Props) => {
+}: Props) {
     const { t } = useTranslation();
 
     return (
@@ -111,4 +110,4 @@ export const TaskDetails = ({
             </DataRow>
         </CustomCard>
     );
-};
+}

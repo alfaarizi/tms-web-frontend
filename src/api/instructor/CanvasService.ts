@@ -1,8 +1,8 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { CanvasOauth2Response } from 'resources/instructor/CanvasOauth2Response';
-import { CanvasCourse } from 'resources/instructor/CanvasCourse';
-import { CanvasSection } from 'resources/instructor/CanvasSection';
-import { CanvasSetupData } from 'resources/instructor/CanvasSetupData';
+import { axiosInstance } from '@/api/axiosInstance';
+import { CanvasOauth2Response } from '@/resources/instructor/CanvasOauth2Response';
+import { CanvasCourse } from '@/resources/instructor/CanvasCourse';
+import { CanvasSection } from '@/resources/instructor/CanvasSection';
+import { CanvasSetupData } from '@/resources/instructor/CanvasSetupData';
 
 export async function setup(groupID: number, data: CanvasSetupData) {
     await axiosInstance.post<void>(`/instructor/canvas/setup?groupID=${groupID}`, data);

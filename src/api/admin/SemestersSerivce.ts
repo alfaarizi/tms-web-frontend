@@ -1,5 +1,5 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { Semester } from 'resources/common/Semester';
+import { axiosInstance } from '@/api/axiosInstance';
+import { Semester } from '@/resources/common/Semester';
 
 export async function getNext() {
     const res = await axiosInstance.get<Semester>('/admin/semesters/get-next');

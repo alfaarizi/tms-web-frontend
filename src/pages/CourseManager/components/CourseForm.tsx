@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { FormError } from 'components/FormError';
-import { Course } from 'resources/common/Course';
-import { FormButtons } from 'components/Buttons/FormButtons';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CreateOrUpdateCourse } from 'resources/common/CreateOrUpdateCourse';
-import { AddUserFormControl, AddUserMode } from 'components/AddUsers/AddUserFormControl';
-import { useSearchFacultyQuery } from 'hooks/common/UserHooks';
-import { extractUserCodes } from 'utils/extractUserCodes';
+import { FormError } from '@/components/FormError';
+import { Course } from '@/resources/common/Course';
+import { FormButtons } from '@/components/Buttons/FormButtons';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CreateOrUpdateCourse } from '@/resources/common/CreateOrUpdateCourse';
+import { AddUserFormControl, AddUserMode } from '@/components/AddUsers/AddUserFormControl';
+import { useSearchFacultyQuery } from '@/hooks/common/UserHooks';
+import { extractUserCodes } from '@/utils/extractUserCodes';
 import { Option } from 'react-bootstrap-typeahead/types/types';
-import { getSelectedUserCodes } from 'utils/getSelectedUserCodes';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useTextPaste } from 'ui-hooks/useTextPaste';
+import { getSelectedUserCodes } from '@/utils/getSelectedUserCodes';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useTextPaste } from '@/ui-hooks/useTextPaste';
 
 type Props = {
     onSave: (course: CreateOrUpdateCourse) => void,

@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { User } from 'resources/common/User';
-import { UserListItem } from 'components/UserListCard/UserListItem';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { User } from '@/resources/common/User';
+import { UserListItem } from '@/components/UserListCard/UserListItem';
 
 type Props = {
     title: string,

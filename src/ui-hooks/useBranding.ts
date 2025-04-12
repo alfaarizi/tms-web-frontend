@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { createFrontendUrl } from '@/utils/createFrontendUrl';
 
-import brandingDefault from 'branding.dist.json';
+import brandingDefault from '@/branding.dist.json';
 
 export type Branding = {
     organizationName: Record<string, string>;
@@ -13,7 +14,7 @@ function getDefaultBranding() : Branding {
 
 async function getLocalBranding() : Promise<Branding> {
     let branding = brandingDefault;
-    await axios.get(`${process.env.PUBLIC_URL}/branding.json`)
+    await axios.get(createFrontendUrl('branding.json'))
         .then((response) => {
             const brandingLocal = response.data;
             branding = { ...brandingDefault, ...brandingLocal };

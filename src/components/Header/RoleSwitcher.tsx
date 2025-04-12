@@ -1,10 +1,9 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGraduationCap, faBriefcase, faWrench } from '@fortawesome/free-solid-svg-icons';
 import { NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { Role } from 'resources/common/Role';
+import { Role } from '@/resources/common/Role';
 
 type Props = {
     isStudent: boolean,

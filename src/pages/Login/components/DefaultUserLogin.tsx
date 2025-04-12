@@ -1,14 +1,13 @@
-import React from 'react';
 import { Container, Row } from 'react-bootstrap';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import { MockLogin } from 'resources/common/MockLogin';
+import { MockLogin } from '@/resources/common/MockLogin';
 import { useTranslation } from 'react-i18next';
 import {
     generateAdminUsers,
     generateStudentUsers,
     generateInstructorUsers,
-} from 'pages/Login/components/MockLoginDefaultUsers';
+} from '@/pages/Login/components/MockLoginDefaultUsers';
 
 type Props = {
     onLogin : (data: MockLogin) => void,

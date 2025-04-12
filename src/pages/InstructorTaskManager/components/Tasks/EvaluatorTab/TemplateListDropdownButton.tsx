@@ -1,11 +1,10 @@
-import React from 'react';
 import { faClipboardList, faListCheck, faMagnifyingGlassChart } from '@fortawesome/free-solid-svg-icons';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { EvaluatorTemplate } from 'resources/instructor/EvaluatorTemplate';
+import { EvaluatorTemplate } from '@/resources/instructor/EvaluatorTemplate';
 import { useTranslation } from 'react-i18next';
 
-import { ToolbarDropdown } from 'components/Buttons/ToolbarDropdown';
+import { ToolbarDropdown } from '@/components/Buttons/ToolbarDropdown';
 
 type Props = {
     disabled: boolean,

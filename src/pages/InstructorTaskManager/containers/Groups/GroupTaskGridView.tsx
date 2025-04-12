@@ -1,18 +1,18 @@
-import React, { useMemo } from 'react';
-import { useTasksForGrid } from 'hooks/instructor/TaskHooks';
-import { Group } from 'resources/instructor/Group';
-import { useDownloadAll, useExportSpreadsheet, useGradeMutation } from 'hooks/instructor/SubmissionHooks';
-import { TaskGridTableBody } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableBody';
-import { TaskGridTableHeader } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableHeader';
-import { TaskGridTableCard } from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableCard';
-import { GridSubmission } from 'resources/instructor/GridSubmission';
-import { useGroupStudents } from 'hooks/instructor/GroupHooks';
-import { GridTask } from 'resources/instructor/GridTask.php';
-import { User } from 'resources/common/User';
+import { useMemo } from 'react';
+import { useTasksForGrid } from '@/hooks/instructor/TaskHooks';
+import { Group } from '@/resources/instructor/Group';
+import { useDownloadAll, useExportSpreadsheet, useGradeMutation } from '@/hooks/instructor/SubmissionHooks';
+import { TaskGridTableBody } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableBody';
+import { TaskGridTableHeader } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableHeader';
+import { TaskGridTableCard } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableCard';
+import { GridSubmission } from '@/resources/instructor/GridSubmission';
+import { useGroupStudents } from '@/hooks/instructor/GroupHooks';
+import { GridTask } from '@/resources/instructor/GridTask.php';
+import { User } from '@/resources/common/User';
 import {
     TaskQuickGraderTableBody,
-} from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskQuickGrader/TaskQuickGraderTableBody';
-import { SubmissionGrade } from 'resources/instructor/SubmissionGrade';
+} from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskQuickGrader/TaskQuickGraderTableBody';
+import { SubmissionGrade } from '@/resources/instructor/SubmissionGrade';
 
 type Props = {
     group: Group,

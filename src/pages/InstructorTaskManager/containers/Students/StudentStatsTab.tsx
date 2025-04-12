@@ -1,15 +1,14 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Group } from 'resources/instructor/Group';
-import { User } from 'resources/common/User';
-import { useStudentStats } from 'hooks/instructor/GroupHooks';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { GroupPointsBoxPlot } from 'pages/InstructorTaskManager/components/Groups/GroupPointsBoxPlot';
-import { PointsTable } from 'pages/InstructorTaskManager/components/Groups/PointsTable';
-import { StudentHandlingTimeTable } from 'pages/InstructorTaskManager/components/Students/StudentHandlingTimeTable';
+import { Group } from '@/resources/instructor/Group';
+import { User } from '@/resources/common/User';
+import { useStudentStats } from '@/hooks/instructor/GroupHooks';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { GroupPointsBoxPlot } from '@/pages/InstructorTaskManager/components/Groups/GroupPointsBoxPlot';
+import { PointsTable } from '@/pages/InstructorTaskManager/components/Groups/PointsTable';
+import { StudentHandlingTimeTable } from '@/pages/InstructorTaskManager/components/Students/StudentHandlingTimeTable';
 
 type Props = {
     group: Group;

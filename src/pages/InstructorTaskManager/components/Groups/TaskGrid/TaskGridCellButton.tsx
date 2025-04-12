@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -17,9 +16,9 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 import { useTranslation } from 'react-i18next';
 
-import { GridSubmission } from 'resources/instructor/GridSubmission';
+import { GridSubmission } from '@/resources/instructor/GridSubmission';
 
-import styles from 'pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 
 type Props = {
     submission: GridSubmission,

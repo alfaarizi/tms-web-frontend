@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 
-import { TaskForm } from 'pages/InstructorTaskManager/components/Tasks/TaskForm';
-import { Task } from 'resources/instructor/Task';
-import { useCreateTaskMutation } from 'hooks/instructor/TaskHooks';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useGroup } from 'hooks/instructor/GroupHooks';
-import { usePrivateSystemInfoQuery } from 'hooks/common/SystemHooks';
+import { TaskForm } from '@/pages/InstructorTaskManager/components/Tasks/TaskForm';
+import { Task } from '@/resources/instructor/Task';
+import { useCreateTaskMutation } from '@/hooks/instructor/TaskHooks';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useGroup } from '@/hooks/instructor/GroupHooks';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 
 type Params = {
     groupID?: string

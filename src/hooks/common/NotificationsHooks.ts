@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import * as NotificationsService from 'api/common/NotificationsService';
-import { Notification } from 'resources/common/Notification';
+import * as NotificationsService from '@/api/common/NotificationsService';
+import { Notification } from '@/resources/common/Notification';
 
 export const QUERY_KEY = 'common/notifications';
 

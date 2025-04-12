@@ -1,6 +1,4 @@
-import React from 'react';
 import { Form } from 'react-bootstrap';
-import { CustomCard } from 'components/CustomCard/CustomCard';
 
 type Props = {
     toggleID: string,

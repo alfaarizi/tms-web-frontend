@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { index } from 'api/instructor/QuizTestInstancesService';
+import { index } from '@/api/instructor/QuizTestInstancesService';
 
 export const QUERY_KEY = 'instructor/quiz-test-instances';
 

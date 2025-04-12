@@ -1,6 +1,7 @@
-import React, { ReactNode, useContext, useState } from 'react';
-import { Semester } from 'resources/common/Semester';
-import { env } from 'runtime-env';
+import {
+    createContext, ReactNode, useContext, useMemo, useState,
+} from 'react';
+import { Semester } from '@/resources/common/Semester';
 
 /**
  * Describes the public interface of the global client-side state
@@ -31,14 +32,14 @@ export interface NotificationData {
 export type AvailableTheme = 'dark'|'blue';
 const availableThemes = ['dark', 'blue'];
 const defaultTheme: AvailableTheme = 'dark';
-const configuredTheme = availableThemes.includes(env.REACT_APP_THEME)
-    ? env.REACT_APP_THEME as AvailableTheme
+const configuredTheme = availableThemes.includes(import.meta.env.VITE_THEME)
+    ? import.meta.env.VITE_THEME as AvailableTheme
     : defaultTheme;
 
 /**
  * Set initial values for the new React context
  */
-const GlobalContext = React.createContext<GlobalContextInterface>({
+const GlobalContext = createContext<GlobalContextInterface>({
     selectedSemester: null,
     setSelectedSemester: () => {
         throw new Error('Context in not initialized');
@@ -81,7 +82,7 @@ export function GlobalContextProvider({ children }: Props) {
         setTheme(configuredTheme);
     };
 
-    const ctx: GlobalContextInterface = {
+    const ctx: GlobalContextInterface = useMemo(() => ({
         selectedSemester,
         setSelectedSemester,
         currentNotification,
@@ -91,7 +92,7 @@ export function GlobalContextProvider({ children }: Props) {
         theme,
         setTheme,
         resetState,
-    };
+    }), [selectedSemester, currentNotification, isLoggedIn, theme]);
 
     return (
         <GlobalContext.Provider value={ctx}>

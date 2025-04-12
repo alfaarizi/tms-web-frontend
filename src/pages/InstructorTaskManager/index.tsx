@@ -1,3 +1,3 @@
-import { InstructorTaskManager } from 'pages/InstructorTaskManager/containers/InstructorTaskManager';
+import { InstructorTaskManager } from '@/pages/InstructorTaskManager/containers/InstructorTaskManager';
 
 export default InstructorTaskManager;

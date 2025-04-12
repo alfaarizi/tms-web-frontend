@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

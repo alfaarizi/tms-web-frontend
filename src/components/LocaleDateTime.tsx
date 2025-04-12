@@ -1,7 +1,6 @@
-import React from 'react';
 import { DateTime } from 'luxon';
 
-import { getUserTimezone } from 'utils/getUserTimezone';
+import { getUserTimezone } from '@/utils/getUserTimezone';
 
 type Props = {
     value: string | null | undefined,

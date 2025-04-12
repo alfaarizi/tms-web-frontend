@@ -1,7 +1,7 @@
-import * as QuizTestInstancesService from 'api/student/QuizTestInstancesService';
+import * as QuizTestInstancesService from '@/api/student/QuizTestInstancesService';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { QuizTestInstanceAnswer } from 'resources/student/QuizTestInstanceAnswer';
-import { UnlockTest } from 'resources/student/UnlockTest';
+import { QuizTestInstanceAnswer } from '@/resources/student/QuizTestInstanceAnswer';
+import { UnlockTest } from '@/resources/student/UnlockTest';
 
 export const QUERY_KEY = 'student/quiz-test-instances';
 

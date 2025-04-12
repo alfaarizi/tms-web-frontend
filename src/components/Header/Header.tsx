@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 
-import { BrandLogo } from 'components/Header/BrandLogo';
-import { AvailableTheme, useGlobalContext } from 'context/GlobalContext';
+import { BrandLogo } from '@/components/Header/BrandLogo';
+import { AvailableTheme, useGlobalContext } from '@/context/GlobalContext';
 
 type Props = {
     children: ReactNode,

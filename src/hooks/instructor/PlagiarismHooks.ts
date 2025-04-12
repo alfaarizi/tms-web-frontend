@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as PlagiarismService from 'api/instructor/PlagiarismService';
-import { Plagiarism } from 'resources/instructor/Plagiarism';
-import { RequestPlagiarism } from 'resources/instructor/RequestPlagiarism';
+import * as PlagiarismService from '@/api/instructor/PlagiarismService';
+import { Plagiarism } from '@/resources/instructor/Plagiarism';
+import { RequestPlagiarism } from '@/resources/instructor/RequestPlagiarism';
 
 export const QUERY_KEY = 'instructor/plagiarism';
 

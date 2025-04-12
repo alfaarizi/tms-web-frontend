@@ -1,8 +1,7 @@
-import React from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { ResponsiveButtonText, Breakpoint } from 'components/Buttons/ResponsiveButtonText';
+import { ResponsiveButtonText, Breakpoint } from '@/components/Buttons/ResponsiveButtonText';
 
 type Props = {
     icon: IconProp,

@@ -1,7 +1,6 @@
-import React from 'react';
-import { QuizTest } from 'resources/instructor/QuizTest';
-import { useQuestionsForTest } from 'hooks/instructor/QuizQuestionHooks';
-import { QuestionList } from 'pages/InstructorExamination/components/QuestionList/QuestionsList';
+import { QuizTest } from '@/resources/instructor/QuizTest';
+import { useQuestionsForTest } from '@/hooks/instructor/QuizQuestionHooks';
+import { QuestionList } from '@/pages/InstructorExamination/components/QuestionList/QuestionsList';
 
 type Props = {
     test: QuizTest

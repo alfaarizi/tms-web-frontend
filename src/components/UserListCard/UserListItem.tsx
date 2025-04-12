@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
-import { User } from 'resources/common/User';
+import { ReactNode } from 'react';
+import { User } from '@/resources/common/User';
 import { ButtonGroup } from 'react-bootstrap';
-import { ListCardItem } from 'components/ListCardItem/ListCardItem';
+import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
 
 type Props = {
     user: User,

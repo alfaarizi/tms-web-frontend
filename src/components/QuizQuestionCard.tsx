@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
 
 type Props = {
     text: string,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -7,28 +7,28 @@ import {
     useDownloadSubmission, useDownloadTestReport,
     useTask,
     useUploadSubmissionMutation, useVerifySubmissionMutation, useUnlockTaskMutation,
-} from 'hooks/student/TaskHooks';
-import { TaskDetails } from 'pages/StudentTaskManager/components/TaskDetails';
-import { SubmissionDetails } from 'pages/StudentTaskManager/components/SubmissionDetails';
-import { TaskFilesList } from 'components/TaskFilesList';
-import { SubmissionUpload } from 'resources/student/SubmissionUpload';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { FileUpload } from 'components/FileUpload';
-import { GitInfo } from 'pages/StudentTaskManager/components/GitInfo';
-import { VerifyItemForm } from 'components/VerifyItemForm';
-import { VerifyItem } from 'resources/student/VerifyItem';
-import { useNotifications } from 'hooks/common/useNotifications';
-import { CanvasUploadInfo } from 'pages/StudentTaskManager/components/CanvasUploadInfo';
-import { CodeCheckerReportsList } from 'components/CodeChecker/CodeCheckerReportsList';
-import { useCanvasSyncSubmissionMutation } from 'hooks/student/CanvasHooks';
-import { useSolutionZipFileCreator } from 'hooks/student/useSolutionZipFileCreator';
-import { UnlockItem } from 'resources/student/UnlockItem';
+} from '@/hooks/student/TaskHooks';
+import { TaskDetails } from '@/pages/StudentTaskManager/components/TaskDetails';
+import { SubmissionDetails } from '@/pages/StudentTaskManager/components/SubmissionDetails';
+import { TaskFilesList } from '@/components/TaskFilesList';
+import { SubmissionUpload } from '@/resources/student/SubmissionUpload';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { FileUpload } from '@/components/FileUpload';
+import { GitInfo } from '@/pages/StudentTaskManager/components/GitInfo';
+import { VerifyItemForm } from '@/components/VerifyItemForm';
+import { VerifyItem } from '@/resources/student/VerifyItem';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { CanvasUploadInfo } from '@/pages/StudentTaskManager/components/CanvasUploadInfo';
+import { CodeCheckerReportsList } from '@/components/CodeChecker/CodeCheckerReportsList';
+import { useCanvasSyncSubmissionMutation } from '@/hooks/student/CanvasHooks';
+import { useSolutionZipFileCreator } from '@/hooks/student/useSolutionZipFileCreator';
+import { UnlockItem } from '@/resources/student/UnlockItem';
 
 type Params = {
     id?: string
 }
 
-export const TaskPage = () => {
+export function TaskPage() {
     const { t } = useTranslation();
     const { id } = useParams<Params>();
     const taskIDInt = parseInt(id || '-1', 10);
@@ -243,4 +243,4 @@ export const TaskPage = () => {
             )}
         </>
     );
-};
+}

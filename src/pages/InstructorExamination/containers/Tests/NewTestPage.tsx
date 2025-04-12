@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 
-import { TestForm } from 'pages/InstructorExamination/components/Tests/TestForm';
-import { useQuestionSet } from 'hooks/instructor/QuizQuestionSetHooks';
-import { QuizTest } from 'resources/instructor/QuizTest';
-import { useCreateTestMutation } from 'hooks/instructor/QuizTestHooks';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { useGroupsForCourse } from 'hooks/instructor/GroupHooks';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { TestNoGroupCard } from 'pages/InstructorExamination/components/Tests/TestNoGroupCard';
+import { TestForm } from '@/pages/InstructorExamination/components/Tests/TestForm';
+import { useQuestionSet } from '@/hooks/instructor/QuizQuestionSetHooks';
+import { QuizTest } from '@/resources/instructor/QuizTest';
+import { useCreateTestMutation } from '@/hooks/instructor/QuizTestHooks';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { useGroupsForCourse } from '@/hooks/instructor/GroupHooks';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { TestNoGroupCard } from '@/pages/InstructorExamination/components/Tests/TestNoGroupCard';
 
 type Params = {
     questionsetID: string

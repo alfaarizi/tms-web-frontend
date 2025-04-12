@@ -1,5 +1,5 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { User } from 'resources/common/User';
+import { axiosInstance } from '@/api/axiosInstance';
+import { User } from '@/resources/common/User';
 
 export async function searchStudent(text: string) {
     const res = await axiosInstance.get<User[]>(`common/users/student?text=${text}`);

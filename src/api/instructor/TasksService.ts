@@ -1,8 +1,8 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { Task } from 'resources/instructor/Task';
-import { User } from 'resources/common/User';
-import { GridTask } from 'resources/instructor/GridTask.php';
-import { CodeCompassParameters } from 'resources/instructor/CodeCompassParameters';
+import { axiosInstance } from '@/api/axiosInstance';
+import { Task } from '@/resources/instructor/Task';
+import { User } from '@/resources/common/User';
+import { GridTask } from '@/resources/instructor/GridTask.php';
+import { CodeCompassParameters } from '@/resources/instructor/CodeCompassParameters';
 
 /**
  * Loads task list
@@ -48,7 +48,10 @@ export async function create(task: Task) {
 }
 
 export async function update(task: Task) {
-    const res = await axiosInstance.patch<Task>(`/instructor/tasks/${task.id}?expand=group,taskLevelGitRepo`, task);
+    const res = await axiosInstance.patch<Task>(
+        `/instructor/tasks/${task.id}?expand=group,taskLevelGitRepo`,
+        task,
+    );
     return res.data;
 }
 
@@ -57,7 +60,10 @@ export async function remove(id: number) {
 }
 
 export async function plagiarismListForCourse(
-    courseID: number | 'All', myTasks: boolean, semesterFromID: number, semesterToID: number,
+    courseID: number | 'All',
+    myTasks: boolean,
+    semesterFromID: number,
+    semesterToID: number,
 ) {
     const res = await axiosInstance.get<Task[]>('/instructor/tasks/list-for-course', {
         params: {

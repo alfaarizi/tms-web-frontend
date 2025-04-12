@@ -1,5 +1,5 @@
-import { PlagiarismBasefile } from 'resources/instructor/PlagiarismBasefile';
-import { ValidationErrorBody } from 'exceptions/ServerSideValidationError';
+import { PlagiarismBasefile } from '@/resources/instructor/PlagiarismBasefile';
+import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 
 export interface BaseFileUploadResult {
     uploaded: PlagiarismBasefile[];

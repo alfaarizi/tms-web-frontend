@@ -1,4 +1,4 @@
-import { Semester } from './Semester';
+import { Semester } from '@/resources/common/Semester';
 
 export interface PrivateSystemInfo {
     uploadMaxFilesize: number;

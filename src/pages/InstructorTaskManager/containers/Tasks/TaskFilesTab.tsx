@@ -3,14 +3,14 @@ import {
     useTaskFileDownload,
     useAttachmentTaskFilesUploadMutation,
     useAttachmentTaskFileRemoveMutation,
-} from 'hooks/instructor/TaskFileHooks';
-import { FileUpload } from 'components/FileUpload';
-import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
-import { Task } from 'resources/instructor/Task';
-import { useActualSemester } from 'hooks/common/SemesterHooks';
-import { TaskFilesList } from 'components/TaskFilesList';
-import { getFirstError } from 'utils/getFirstError';
-import React, { useEffect } from 'react';
+} from '@/hooks/instructor/TaskFileHooks';
+import { FileUpload } from '@/components/FileUpload';
+import { TaskFilesUpload } from '@/resources/instructor/TaskFilesUpload';
+import { Task } from '@/resources/instructor/Task';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { TaskFilesList } from '@/components/TaskFilesList';
+import { getFirstError } from '@/utils/getFirstError';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
@@ -83,11 +83,9 @@ export function TaskFilesTab({ task }: Props) {
             </>
         )
         : (
-            <>
-                <TaskFilesList
-                    taskFiles={taskFiles.data}
-                    onDownload={handleDownload}
-                />
-            </>
+            <TaskFilesList
+                taskFiles={taskFiles.data}
+                onDownload={handleDownload}
+            />
         );
 }

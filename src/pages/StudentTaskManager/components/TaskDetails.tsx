@@ -1,17 +1,16 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { DataRow } from 'components/DataRow';
-import { Task } from 'resources/student/Task';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
-import { LocaleDateTime } from 'components/LocaleDateTime';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { ToolbarButton } from 'components/Buttons/ToolbarButton';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { DataRow } from '@/components/DataRow';
+import { Task } from '@/resources/student/Task';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { LocaleDateTime } from '@/components/LocaleDateTime';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
-import { Submission } from 'resources/student/Submission';
-import { RemainingTimeForDeadLine } from 'components/RemainingTimeForDeadLine';
+import { Submission } from '@/resources/student/Submission';
+import { RemainingTimeForDeadLine } from '@/components/RemainingTimeForDeadLine';
 
 type Props = {
     task: Task,
@@ -21,13 +20,13 @@ type Props = {
     showDescription: boolean
 }
 
-export const TaskDetails = ({
+export function TaskDetails({
     task,
     submission,
     canvasSyncInProgress,
     onCanvasSync,
     showDescription,
-}: Props) => {
+}: Props) {
     const { t } = useTranslation();
 
     let remainingSubmissions = 0;
@@ -108,4 +107,4 @@ export const TaskDetails = ({
                 )}
         </CustomCard>
     );
-};
+}

@@ -1,6 +1,6 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { PublicSystemInfo } from 'resources/common/PublicSystemInfo';
-import { PrivateSystemInfo } from 'resources/common/PrivateSystemInfo';
+import { axiosInstance } from '@/api/axiosInstance';
+import { PublicSystemInfo } from '@/resources/common/PublicSystemInfo';
+import { PrivateSystemInfo } from '@/resources/common/PrivateSystemInfo';
 
 export async function publicInfo() {
     const res = await axiosInstance.get<PublicSystemInfo>('/common/system/public-info');

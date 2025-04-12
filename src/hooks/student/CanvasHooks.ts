@@ -1,8 +1,8 @@
 import {
     useMutation, useQueryClient,
 } from 'react-query';
-import * as CanvasService from 'api/student/CanvasService';
-import { QUERY_KEY as TASK_QUERY_KEY } from 'hooks/student/TaskHooks';
+import * as CanvasService from '@/api/student/CanvasService';
+import { QUERY_KEY as TASK_QUERY_KEY } from '@/hooks/student/TaskHooks';
 
 /**
  * Synchronizes the given task submission

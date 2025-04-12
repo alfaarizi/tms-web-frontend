@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as QuizQuestionSetsService from 'api/instructor/QuizQuestionSetsService';
-import { QuizQuestionSet } from 'resources/instructor/QuizQuestionSet';
-import { Image } from 'resources/common/Image';
+import * as QuizQuestionSetsService from '@/api/instructor/QuizQuestionSetsService';
+import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
+import { Image } from '@/resources/common/Image';
 
 export const QUERY_KEY = 'instructor/quiz-question-sets';
 

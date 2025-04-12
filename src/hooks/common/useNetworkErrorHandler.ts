@@ -1,13 +1,13 @@
 import { useLocation } from 'react-router';
 import { useEffect } from 'react';
-import { axiosInstance } from 'api/axiosInstance';
+import { axiosInstance } from '@/api/axiosInstance';
 import { AxiosError } from 'axios';
 
-import { useNotifications } from 'hooks/common/useNotifications';
-import { ServerSideValidationError, ValidationErrorBody } from 'exceptions/ServerSideValidationError';
-import { useLogoutMutation } from 'hooks/common/UserHooks';
-import { PROXY_AUTH_REDIRECT_LOCAL_STORAGE_KEY } from 'constants/localStorageKeys';
-import { ServerErrorResponse } from 'resources/common/ServerErrorResponse';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useLogoutMutation } from '@/hooks/common/UserHooks';
+import { PROXY_AUTH_REDIRECT_LOCAL_STORAGE_KEY } from '@/constants/localStorageKeys';
+import { ServerErrorResponse } from '@/resources/common/ServerErrorResponse';
 
 /**
  * Global error handler. Displays notifications about network errors and handle specific status codes.

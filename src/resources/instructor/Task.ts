@@ -1,5 +1,5 @@
-import { Group } from 'resources/instructor/Group';
-import { Semester } from 'resources/common/Semester';
+import { Group } from '@/resources/instructor/Group';
+import { Semester } from '@/resources/common/Semester';
 
 export interface Task {
     id: number;

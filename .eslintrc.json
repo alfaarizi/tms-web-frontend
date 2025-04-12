@@ -41,10 +41,31 @@
                 "tsx": "never"
             }
         ],
+        "import/no-extraneous-dependencies": ["error", {
+            "devDependencies": true
+        }],
+        "no-restricted-imports": [
+            "error",
+            {
+                "patterns": [
+                    {
+                        "group": ["../*"],
+                        "message": "Please use absolute imports with '@' alias instead of relative imports"
+                    },
+                    {
+                        "group": ["./"],
+                        "message": "Please use absolute imports with '@' alias instead of relative imports"
+                    }
+                ]
+            }
+        ],
         "react/jsx-filename-extension": ["warn", {"extensions": [".tsx"]}],
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
         "react/jsx-props-no-spreading": ["off"],
+        "react/jsx-no-useless-fragment": ["error", {"allowExpressions": true}],
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off",
         "react/require-default-props": ["off"],
         "react-hooks/rules-of-hooks": "error",
         "react/prop-types": "off",
@@ -53,7 +74,15 @@
     },
     "settings": {
         "import/resolver": {
-            "typescript": {}
+            "typescript": {
+                "project": "./tsconfig.json"
+            },
+            "alias": {
+                "map": [
+                    ["@", "./src"]
+                ],
+                "extensions": [".ts", ".tsx", ".js", ".jsx", ".json"]
+            }
         }
     },
     "globals": {

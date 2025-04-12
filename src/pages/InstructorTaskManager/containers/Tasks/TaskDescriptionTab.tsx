@@ -1,17 +1,16 @@
-import React from 'react';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
 import { useTranslation } from 'react-i18next';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { MarkdownRenderer } from 'components/MarkdownRenderer/MarkdownRenderer';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
 
 interface TaskDescriptionTabProps {
     taskCategory: string,
     taskDescription: string,
 }
 
-export const TaskDescriptionTab = ({ taskCategory, taskDescription }: TaskDescriptionTabProps) => {
+export function TaskDescriptionTab({ taskCategory, taskDescription }: TaskDescriptionTabProps) {
     const { t } = useTranslation();
 
     return (
@@ -26,4 +25,4 @@ export const TaskDescriptionTab = ({ taskCategory, taskDescription }: TaskDescri
                 : <MarkdownRenderer source={taskDescription} />}
         </CustomCard>
     );
-};
+}

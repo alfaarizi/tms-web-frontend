@@ -1,5 +1,5 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { Group } from 'resources/student/Group';
+import { axiosInstance } from '@/api/axiosInstance';
+import { Group } from '@/resources/student/Group';
 
 export async function index(semesterID: number) {
     const res = await axiosInstance.get<Group[]>('/student/groups', {

@@ -1,17 +1,16 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Group } from 'resources/instructor/Group';
-import { CustomCard } from 'components/CustomCard/CustomCard';
-import { CustomCardHeader } from 'components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from 'components/CustomCard/CustomCardTitle';
-import { SubmissionsList } from 'pages/InstructorTaskManager/containers/Submissions/SubmissionsList';
-import { DataRow } from 'components/DataRow';
-import { useSubmissionsForStudent } from 'hooks/instructor/SubmissionHooks';
-import { User } from 'resources/common/User';
-import { GroupDateTime } from 'pages/InstructorTaskManager/components/Groups/GroupDateTime';
-import { MultiLineTextBlock } from 'components/MutliLineTextBlock/MultiLineTextBlock';
-import { Submission } from 'resources/instructor/Submission';
+import { Group } from '@/resources/instructor/Group';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { SubmissionsList } from '@/pages/InstructorTaskManager/containers/Submissions/SubmissionsList';
+import { DataRow } from '@/components/DataRow';
+import { useSubmissionsForStudent } from '@/hooks/instructor/SubmissionHooks';
+import { User } from '@/resources/common/User';
+import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
+import { Submission } from '@/resources/instructor/Submission';
 
 type Props = {
     group: Group;

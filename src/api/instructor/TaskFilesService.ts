@@ -1,10 +1,13 @@
-import { axiosInstance } from 'api/axiosInstance';
-import { TaskFile } from 'resources/common/TaskFile';
-import { TaskFilesUpload } from 'resources/instructor/TaskFilesUpload';
-import { TaskFilesUploadResult } from 'resources/instructor/TaskFilesUploadResult';
+import { axiosInstance } from '@/api/axiosInstance';
+import { TaskFile } from '@/resources/common/TaskFile';
+import { TaskFilesUpload } from '@/resources/instructor/TaskFilesUpload';
+import { TaskFilesUploadResult } from '@/resources/instructor/TaskFilesUploadResult';
 
 export async function index(
-    taskID: number, includeAttachments?: boolean, includeTestFiles?: boolean, includeWebTestSuites?: boolean,
+    taskID: number,
+    includeAttachments?: boolean,
+    includeTestFiles?: boolean,
+    includeWebTestSuites?: boolean,
 ) {
     const res = await axiosInstance.get<TaskFile[]>('/instructor/task-files', {
         params: {
