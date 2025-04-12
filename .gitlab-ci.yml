@@ -32,7 +32,7 @@ eslint:
 
 # Build
 .build:
-  stage: test
+  stage: build
   before_script:
     - npm ci
   script:
