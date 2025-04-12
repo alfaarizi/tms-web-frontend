@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { createFrontendUrl } from '@/utils/createFrontendUrl';
 
 type Props = {
     webTestSuites: TaskFile[]|undefined,
@@ -36,7 +37,7 @@ export function WebTestSuites({
                 </CustomCardHeader>
                 <p>{t('task.evaluator.webTestTemplateDesc')}</p>
                 <Button
-                    href={`${import.meta.env.BASE_URL}/template.robot`}
+                    href={createFrontendUrl('template.robot')}
                     size="sm"
                     className="mt-2"
                 >
