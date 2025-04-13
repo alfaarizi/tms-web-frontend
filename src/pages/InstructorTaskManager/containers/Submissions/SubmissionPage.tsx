@@ -1,9 +1,18 @@
+import { Breadcrumb, Tab } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { useShow } from '@/ui-hooks/useShow';
-import { SubmissionListItem } from '@/pages/InstructorTaskManager/components/Students/SubmissionListItem';
+import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
+import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
+import { DataRow } from '@/components/DataRow';
+import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
+import { TabbedInterface } from '@/components/TabbedInterface';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { useNotifications } from '@/hooks/common/useNotifications';
 import {
     useDownloadSubmission,
     useGradeMutation,
@@ -11,21 +20,13 @@ import {
     useStartCodeCompassMutation, useStopCodeCompassMutation,
     useSubmission,
 } from '@/hooks/instructor/SubmissionHooks';
-import { Submission } from '@/resources/instructor/Submission';
-import { useActualSemester } from '@/hooks/common/SemesterHooks';
-import { GraderModal } from '@/pages/InstructorTaskManager/components/Submissions/GraderModal';
-import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions/IpLogModal';
-import { useNotifications } from '@/hooks/common/useNotifications';
-import { DataRow } from '@/components/DataRow';
-import { CustomCard } from '@/components/CustomCard/CustomCard';
-import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
-import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
 import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
-import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
-import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
-import { TabbedInterface } from '@/components/TabbedInterface';
-import { Tab } from 'react-bootstrap';
+import { SubmissionListItem } from '@/pages/InstructorTaskManager/components/Students/SubmissionListItem';
+import { GraderModal } from '@/pages/InstructorTaskManager/components/Submissions/GraderModal';
 import { StaticCodeAnalysisTab } from '@/pages/InstructorTaskManager/components/Submissions/StaticCodeAnalysisTab';
+import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions/IpLogModal';
+import { Submission } from '@/resources/instructor/Submission';
+import { useShow } from '@/ui-hooks/useShow';
 
 type Params = {
     id?: string
@@ -111,6 +112,36 @@ export function SubmissionPage() {
     // Render
     return (
         <>
+            {(submission.data.task && submission.data.task.group)
+                ? (
+                    <Breadcrumb>
+                        <LinkContainer to="/instructor/task-manager">
+                            <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
+                        </LinkContainer>
+                        <LinkContainer to={`/instructor/course-manager/courses/${submission.data.task.group.courseID}`}>
+                            <Breadcrumb.Item>{submission.data.task.group.course.name}</Breadcrumb.Item>
+                        </LinkContainer>
+                        <LinkContainer to={`/instructor/task-manager/groups/${submission.data.task.groupID}`}>
+                            <Breadcrumb.Item>{submission.data.task.groupID}</Breadcrumb.Item>
+                        </LinkContainer>
+                        <LinkContainer to={`/instructor/task-manager/tasks/${submission.data.taskID}`}>
+                            <Breadcrumb.Item>{submission.data.task.name}</Breadcrumb.Item>
+                        </LinkContainer>
+                        <LinkContainer
+                            to={`/instructor/task-manager/groups/${submission.data.task.groupID}
+                            /students/${submission.data.uploaderID}`}
+                        >
+                            <Breadcrumb.Item>
+                                {`${submission.data.uploader.name}(${submission.data.uploader.userCode})`}
+                            </Breadcrumb.Item>
+                        </LinkContainer>
+                        <LinkContainer to={`/instructor/task-manager/submissions/${submission.data.id}`}>
+                            <Breadcrumb.Item active>
+                                {submission.data.name ?? submission.data.translatedStatus}
+                            </Breadcrumb.Item>
+                        </LinkContainer>
+                    </Breadcrumb>
+                ) : null}
             <CustomCard>
                 <CustomCardHeader>
                     <CustomCardTitle>{t('task.solution')}</CustomCardTitle>

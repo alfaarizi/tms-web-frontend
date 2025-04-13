@@ -1,10 +1,12 @@
+import { Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
+import { useCourses } from '@/hooks/instructor/CoursesHooks';
+import { useCreateQuestionSetMutation } from '@/hooks/instructor/QuizQuestionSetHooks';
 import { QuestionSetForm } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
 import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
-import { useCreateQuestionSetMutation } from '@/hooks/instructor/QuizQuestionSetHooks';
-import { useCourses } from '@/hooks/instructor/CoursesHooks';
 
 export function NewQuestionSetPage() {
     const { t } = useTranslation();
@@ -26,12 +28,25 @@ export function NewQuestionSetPage() {
     };
 
     return (
-        <QuestionSetForm
-            title={t('quizQuestions.createQuestionSet')}
-            courses={courses.data}
-            onSave={handleSave}
-            onCancel={handleSaveCancel}
-            isLoading={createMutation.isLoading}
-        />
+        <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/quizzes">
+                    <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to="/instructor/quizzes">
+                    <Breadcrumb.Item>{t('quizQuestions.questionSets')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to="/instructor/quizzes/question-sets/new">
+                    <Breadcrumb.Item active>{t('quizQuestions.createQuestionSet')}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
+            <QuestionSetForm
+                title={t('quizQuestions.createQuestionSet')}
+                courses={courses.data}
+                onSave={handleSave}
+                onCancel={handleSaveCancel}
+                isLoading={createMutation.isLoading}
+            />
+        </>
     );
 }

@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useParams } from 'react-router-dom';
 
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { useGroup } from '@/hooks/instructor/GroupHooks';
+import { useCreateTaskMutation } from '@/hooks/instructor/TaskHooks';
 import { TaskForm } from '@/pages/InstructorTaskManager/components/Tasks/TaskForm';
 import { Task } from '@/resources/instructor/Task';
-import { useCreateTaskMutation } from '@/hooks/instructor/TaskHooks';
-import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
-import { useGroup } from '@/hooks/instructor/GroupHooks';
-import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 
 type Params = {
     groupID?: string
@@ -47,14 +49,30 @@ export function NewTaskPage() {
     }
 
     return (
-        <TaskForm
-            title={t('task.newTask')}
-            onSave={handleSave}
-            onCancel={handleSaveCancel}
-            showVersionControl={!!privateSystemInfo.data && privateSystemInfo.data.isVersionControlEnabled}
-            serverSideError={addErrorBody}
-            timezone={group.data.timezone}
-            isLoading={createMutation.isLoading}
-        />
+        <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/task-manager">
+                    <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/course-manager/courses/${group.data.courseID}`}>
+                    <Breadcrumb.Item>{group.data.course.name}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}`}>
+                    <Breadcrumb.Item>{group.data.id}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}/new-task`}>
+                    <Breadcrumb.Item active>{t('task.newTask')}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
+            <TaskForm
+                title={t('task.newTask')}
+                onSave={handleSave}
+                onCancel={handleSaveCancel}
+                showVersionControl={!!privateSystemInfo.data && privateSystemInfo.data.isVersionControlEnabled}
+                serverSideError={addErrorBody}
+                timezone={group.data.timezone}
+                isLoading={createMutation.isLoading}
+            />
+        </>
     );
 }

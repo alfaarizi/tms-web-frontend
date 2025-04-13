@@ -1,28 +1,32 @@
-import { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+
+import { CodeCheckerReportsList } from '@/components/CodeChecker/CodeCheckerReportsList';
+import { FileUpload } from '@/components/FileUpload';
+import { TaskFilesList } from '@/components/TaskFilesList';
+import { VerifyItemForm } from '@/components/VerifyItemForm';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { useCanvasSyncSubmissionMutation } from '@/hooks/student/CanvasHooks';
+import { useGroup } from '@/hooks/student/GroupHooks';
 import {
     useDownloadTaskFile,
     useDownloadSubmission, useDownloadTestReport,
     useTask,
     useUploadSubmissionMutation, useVerifySubmissionMutation, useUnlockTaskMutation,
 } from '@/hooks/student/TaskHooks';
-import { TaskDetails } from '@/pages/StudentTaskManager/components/TaskDetails';
-import { SubmissionDetails } from '@/pages/StudentTaskManager/components/SubmissionDetails';
-import { TaskFilesList } from '@/components/TaskFilesList';
-import { SubmissionUpload } from '@/resources/student/SubmissionUpload';
-import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
-import { FileUpload } from '@/components/FileUpload';
-import { GitInfo } from '@/pages/StudentTaskManager/components/GitInfo';
-import { VerifyItemForm } from '@/components/VerifyItemForm';
-import { VerifyItem } from '@/resources/student/VerifyItem';
-import { useNotifications } from '@/hooks/common/useNotifications';
-import { CanvasUploadInfo } from '@/pages/StudentTaskManager/components/CanvasUploadInfo';
-import { CodeCheckerReportsList } from '@/components/CodeChecker/CodeCheckerReportsList';
-import { useCanvasSyncSubmissionMutation } from '@/hooks/student/CanvasHooks';
 import { useSolutionZipFileCreator } from '@/hooks/student/useSolutionZipFileCreator';
+import { CanvasUploadInfo } from '@/pages/StudentTaskManager/components/CanvasUploadInfo';
+import { GitInfo } from '@/pages/StudentTaskManager/components/GitInfo';
+import { SubmissionDetails } from '@/pages/StudentTaskManager/components/SubmissionDetails';
+import { TaskDetails } from '@/pages/StudentTaskManager/components/TaskDetails';
+import { SubmissionUpload } from '@/resources/student/SubmissionUpload';
 import { UnlockItem } from '@/resources/student/UnlockItem';
+import { VerifyItem } from '@/resources/student/VerifyItem';
 
 type Params = {
     id?: string
@@ -33,6 +37,7 @@ export function TaskPage() {
     const { id } = useParams<Params>();
     const taskIDInt = parseInt(id || '-1', 10);
     const task = useTask(taskIDInt);
+    const group = useGroup(task.data?.groupID || -1);
     const uploadMutation = useUploadSubmissionMutation();
     const downloadSubmission = useDownloadSubmission();
     const downloadTaskFile = useDownloadTaskFile();
@@ -85,7 +90,10 @@ export function TaskPage() {
 
     const handleVerify = async (data: VerifyItem) => {
         try {
-            await verifyMutation.mutateAsync({ ...data, id: submission.id });
+            await verifyMutation.mutateAsync({
+                ...data,
+                id: submission.id,
+            });
             notifications.push(
                 {
                     message: t('passwordProtected.verifySuccess'),
@@ -142,7 +150,7 @@ export function TaskPage() {
 
     let uploadCard;
     if (((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && submission.status !== 'Accepted')
-        || submission.status === 'Late Submission')
+            || submission.status === 'Late Submission')
         && !isSubmissionLimitReached
         && task.data.entryPasswordUnlocked) {
         if (task.data.canvasUrl) {
@@ -167,6 +175,19 @@ export function TaskPage() {
 
     return (
         <>
+            {group.data ? (
+                <Breadcrumb>
+                    <LinkContainer to="/student/task-manager">
+                        <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/student/task-manager/groups/${group.data.id}`}>
+                        <Breadcrumb.Item>{`${group.data.course.name} (${group.data.id})`}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/student/task-manager/tasks/${task.data.id}`}>
+                        <Breadcrumb.Item active>{task.data.name}</Breadcrumb.Item>
+                    </LinkContainer>
+                </Breadcrumb>
+            ) : null}
             <TaskDetails
                 task={task.data}
                 submission={submission}
@@ -176,55 +197,55 @@ export function TaskPage() {
             />
 
             {(!submission.verified && task.data.entryPasswordUnlocked)
-            && (
-                <VerifyItemForm
-                    onSave={handleVerify}
-                    serverSideError={verifyError}
-                    isLoading={verifyMutation.isLoading}
-                    cardTitle={t('passwordProtected.verifyRequired')}
-                    cardLabel={t('task.exitPassword')}
-                    cardWarning={t('passwordProtected.studentWarning')}
-                    submitButtonLabel={t('passwordProtected.verify')}
-                    hasIpCheck
-                />
-            )}
+                && (
+                    <VerifyItemForm
+                        onSave={handleVerify}
+                        serverSideError={verifyError}
+                        isLoading={verifyMutation.isLoading}
+                        cardTitle={t('passwordProtected.verifyRequired')}
+                        cardLabel={t('task.exitPassword')}
+                        cardWarning={t('passwordProtected.studentWarning')}
+                        submitButtonLabel={t('passwordProtected.verify')}
+                        hasIpCheck
+                    />
+                )}
 
             {(!task.data.entryPasswordUnlocked)
-            && (
-                <VerifyItemForm
-                    onSave={handleUnlock}
-                    serverSideError={unlockError}
-                    isLoading={unlockMutation.isLoading}
-                    cardTitle={t('passwordProtected.unlockRequired')}
-                    cardLabel={t('task.entryPassword')}
-                    cardWarning={t('passwordProtected.unlockWarning')}
-                    submitButtonLabel={t('passwordProtected.unlock')}
-                    hasIpCheck={false}
-                />
+                && (
+                    <VerifyItemForm
+                        onSave={handleUnlock}
+                        serverSideError={unlockError}
+                        isLoading={unlockMutation.isLoading}
+                        cardTitle={t('passwordProtected.unlockRequired')}
+                        cardLabel={t('task.entryPassword')}
+                        cardWarning={t('passwordProtected.unlockWarning')}
+                        submitButtonLabel={t('passwordProtected.unlock')}
+                        hasIpCheck={false}
+                    />
 
-            )}
+                )}
 
             {uploadCard}
 
             {task.data.gitInfo
-            && (
-                <GitInfo
-                    path={task.data.gitInfo.path}
-                    usage={task.data.gitInfo.usage}
-                    passwordProtected={task.data.exitPasswordProtected}
-                />
-            )}
+                && (
+                    <GitInfo
+                        path={task.data.gitInfo.path}
+                        usage={task.data.gitInfo.usage}
+                        passwordProtected={task.data.exitPasswordProtected}
+                    />
+                )}
 
             {submission.status !== 'No Submission'
-            && (
-                <SubmissionDetails
-                    submission={submission}
-                    onDownload={handleSubmissionDownload}
-                    onReportDownload={handleTestReportDownload}
-                    autoTest={task.data.autoTest}
-                    appType={task.data.appType}
-                />
-            )}
+                && (
+                    <SubmissionDetails
+                        submission={submission}
+                        onDownload={handleSubmissionDownload}
+                        onReportDownload={handleTestReportDownload}
+                        autoTest={task.data.autoTest}
+                        appType={task.data.appType}
+                    />
+                )}
 
             {submission?.codeCheckerResult
                 && (
@@ -235,12 +256,12 @@ export function TaskPage() {
                 )}
 
             {task.data.taskFiles.length !== 0
-            && (
-                <TaskFilesList
-                    taskFiles={task.data.taskFiles}
-                    onDownload={handleTaskFileDownload}
-                />
-            )}
+                && (
+                    <TaskFilesList
+                        taskFiles={task.data.taskFiles}
+                        onDownload={handleTaskFileDownload}
+                    />
+                )}
         </>
     );
 }

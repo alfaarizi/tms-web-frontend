@@ -3,7 +3,7 @@ import { useQuestionsForTest } from '@/hooks/instructor/QuizQuestionHooks';
 import { QuestionList } from '@/pages/InstructorExamination/components/QuestionList/QuestionsList';
 import { useGroupStudents } from '@/hooks/instructor/GroupHooks';
 import { useEffect, useState } from 'react';
-import { UserSwitcher } from '@/components/UserSwticher';
+import { UserSwitcher } from '@/components/UserSwitcher';
 
 type Props = {
     test: QuizTest
