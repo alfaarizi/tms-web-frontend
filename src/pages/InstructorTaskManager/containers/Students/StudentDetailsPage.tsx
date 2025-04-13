@@ -1,18 +1,19 @@
+import { Breadcrumb, Tab } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
-import { Tab } from 'react-bootstrap';
 import { useHistory } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useParams } from 'react-router-dom';
 
+import { useGroup, useGroupStudents } from '@/hooks/instructor/GroupHooks';
 import {
     useStartCodeCompassMutation,
     useStopCodeCompassMutation,
     useSubmissionsForStudent,
 } from '@/hooks/instructor/SubmissionHooks';
-import { useGroup, useGroupStudents } from '@/hooks/instructor/GroupHooks';
+import { TabbedInterface } from '@/components/TabbedInterface';
+import { UserSwitcher } from '@/components/UserSwitcher';
 import { StudentSolutionsTab } from '@/pages/InstructorTaskManager/containers/Students/StudentSolutionsTab';
 import { StudentStatsTab } from '@/pages/InstructorTaskManager/containers/Students/StudentStatsTab';
-import { UserSwitcher } from '@/components/UserSwticher';
-import { TabbedInterface } from '@/components/TabbedInterface';
 import { Submission } from '@/resources/instructor/Submission';
 
 type Params = {
@@ -64,6 +65,20 @@ export function StudentDetailsPage() {
 
     return (
         <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/task-manager">
+                    <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/course-manager/courses/${group.data.courseID}`}>
+                    <Breadcrumb.Item>{group.data.course.name}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}`}>
+                    <Breadcrumb.Item>{group.data.id}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}/students/${selectedUser.id}`}>
+                    <Breadcrumb.Item active>{`${selectedUser.name}(${selectedUser.userCode})`}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
             <UserSwitcher users={students.data} onChange={handleStudentSwitch} selectedID={selectedUserID} />
 
             <TabbedInterface defaultActiveKey="solutions" id="student-tabs">

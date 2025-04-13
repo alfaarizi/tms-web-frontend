@@ -1,22 +1,27 @@
 import { useState } from 'react';
+import { Breadcrumb, Container } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router';
-import { Container } from 'react-bootstrap';
-import { Notification } from '@/resources/instructor/Notification';
+import { LinkContainer } from 'react-router-bootstrap';
+
 import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useGroup } from '@/hooks/instructor/GroupHooks';
 import { useNotification, useUpdateNotificationMutation } from '@/hooks/instructor/NotificationsHooks';
 import { NotificationForm } from '@/pages/InstructorTaskManager/components/Notifications/NotificationForm';
+import { Notification } from '@/resources/instructor/Notification';
 import { getUserTimezone } from '@/utils/getUserTimezone';
 
 type Params = {
     notificationID: string,
     groupID?: string
 }
+
 export function EditNotificationPage() {
     const { t } = useTranslation();
     const history = useHistory();
     const params = useParams<Params>();
     const groupID = parseInt(params.groupID || '-1', 10);
+    const group = useGroup(groupID);
     const notification = useNotification(parseInt(params.notificationID, 10));
     const updateMutation = useUpdateNotificationMutation();
     const [editErrorBody, setEditErrorBody] = useState<ValidationErrorBody | null>(null);
@@ -42,16 +47,37 @@ export function EditNotificationPage() {
     }
 
     return (
-        <Container fluid={false} className="mt-3">
-            <NotificationForm
-                title={t('notification.editNotification')}
-                editData={notification.data}
-                onSave={handleEditSave}
-                onCancel={handleSaveCancel}
-                serverSideError={editErrorBody}
-                timezone={getUserTimezone()}
-                isLoading={updateMutation.isLoading}
-            />
-        </Container>
+        <>
+            {group.data ? (
+                <Breadcrumb>
+                    <LinkContainer to="/instructor/task-manager">
+                        <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/course-manager/courses/${group.data.courseID}`}>
+                        <Breadcrumb.Item>{group.data.course.name}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}?tab=notifications`}>
+                        <Breadcrumb.Item>{group.data.id}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer
+                        to={`/instructor/task-manager/groups/${group.data.id}
+                            /edit-notification/${notification.data.id}`}
+                    >
+                        <Breadcrumb.Item active>{t('notification.editNotification')}</Breadcrumb.Item>
+                    </LinkContainer>
+                </Breadcrumb>
+            ) : null}
+            <Container fluid={false} className="mt-3">
+                <NotificationForm
+                    title={t('notification.editNotification')}
+                    editData={notification.data}
+                    onSave={handleEditSave}
+                    onCancel={handleSaveCancel}
+                    serverSideError={editErrorBody}
+                    timezone={getUserTimezone()}
+                    isLoading={updateMutation.isLoading}
+                />
+            </Container>
+        </>
     );
 }

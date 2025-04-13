@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Breadcrumb, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import { CustomCard } from '@/components/CustomCard/CustomCard';
 import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
@@ -60,6 +61,14 @@ export function BaseFilesPage() {
 
     return (
         <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/plagiarism">
+                    <Breadcrumb.Item>{t('navbar.plagiarism')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to="/instructor/plagiarism/basefiles">
+                    <Breadcrumb.Item active>{t('plagiarism.basefiles.basefiles')}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
             <FileUpload
                 multiple
                 disableSelect={uploadDisabled}

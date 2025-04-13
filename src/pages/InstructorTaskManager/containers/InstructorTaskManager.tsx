@@ -1,6 +1,7 @@
 import { faPlus, faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useMemo, useState } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import {
     Route, Switch, useHistory, useRouteMatch,
@@ -18,16 +19,16 @@ import { SideBarLayout } from '@/layouts/SideBarLayout';
 import { CanvasOAuth2 } from '@/pages/InstructorTaskManager/containers/CanvasOAuth2';
 import { GroupPage } from '@/pages/InstructorTaskManager/containers/Groups/GroupPage';
 import { NewGroup } from '@/pages/InstructorTaskManager/containers/Groups/NewGroup';
-import { SubmissionPage } from '@/pages/InstructorTaskManager/containers/Submissions/SubmissionPage';
 import { StudentDetailsPage } from '@/pages/InstructorTaskManager/containers/Students/StudentDetailsPage';
+import { SubmissionPage } from '@/pages/InstructorTaskManager/containers/Submissions/SubmissionPage';
 import { NewTaskPage } from '@/pages/InstructorTaskManager/containers/Tasks/NewTaskPage';
 import { TaskDetailsPage } from '@/pages/InstructorTaskManager/containers/Tasks/TaskDetailsPage';
-import DropdownItem from 'react-bootstrap/DropdownItem';
-import { Group } from '@/resources/instructor/Group';
-import { StudentCodeViewerPage }
-    from '@/pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage';
-import { NewNotificationPage } from '@/pages/InstructorTaskManager/containers/Notifications/NewNotificationPage';
 import { EditNotificationPage } from '@/pages/InstructorTaskManager/containers/Notifications/EditNotificationPage';
+import { NewNotificationPage } from '@/pages/InstructorTaskManager/containers/Notifications/NewNotificationPage';
+import {
+    StudentCodeViewerPage,
+} from '@/pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage';
+import { Group } from '@/resources/instructor/Group';
 
 enum GroupView {
     ALL = 'all',
@@ -127,22 +128,22 @@ export function InstructorTaskManager() {
                                 displayTextBreakpoint="xs"
                                 icon={groupView === GroupView.ALL ? faUserGroup : faUser}
                             >
-                                <DropdownItem
+                                <Dropdown.Item
                                     onSelect={() => handleGroupTypeChange(GroupView.ALL)}
                                     active={groupView === GroupView.ALL}
                                 >
                                     <FontAwesomeIcon icon={faUserGroup} />
                                     {' '}
                                     {t('common.all')}
-                                </DropdownItem>
-                                <DropdownItem
+                                </Dropdown.Item>
+                                <Dropdown.Item
                                     onSelect={() => handleGroupTypeChange(GroupView.INSTRUCTOR)}
                                     active={groupView === GroupView.INSTRUCTOR}
                                 >
                                     <FontAwesomeIcon icon={faUser} />
                                     {' '}
                                     {t('common.asInstructor')}
-                                </DropdownItem>
+                                </Dropdown.Item>
                             </ToolbarDropdown>
                         </>
                     )

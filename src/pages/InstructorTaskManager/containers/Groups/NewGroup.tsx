@@ -1,12 +1,14 @@
 import { useState } from 'react';
+import { Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
-import { Group } from '@/resources/instructor/Group';
-import { useCreateGroupMutation } from '@/hooks/instructor/GroupHooks';
-import { GroupForm } from '@/pages/InstructorTaskManager/components/Groups/GroupForm';
 import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 import { useCourses } from '@/hooks/instructor/CoursesHooks';
+import { useCreateGroupMutation } from '@/hooks/instructor/GroupHooks';
+import { GroupForm } from '@/pages/InstructorTaskManager/components/Groups/GroupForm';
+import { Group } from '@/resources/instructor/Group';
 
 export function NewGroup() {
     const history = useHistory();
@@ -31,13 +33,23 @@ export function NewGroup() {
     };
 
     return (
-        <GroupForm
-            title={t('group.newGroup')}
-            courses={courses.data}
-            onSave={handleSave}
-            onCancel={handleSaveCancel}
-            serverSideError={addErrorBody}
-            isLoading={createMutation.isLoading}
-        />
+        <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/task-manager">
+                    <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to="/instructor/task-manager/groups/new">
+                    <Breadcrumb.Item active>{t('group.newGroup')}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
+            <GroupForm
+                title={t('group.newGroup')}
+                courses={courses.data}
+                onSave={handleSave}
+                onCancel={handleSaveCancel}
+                serverSideError={addErrorBody}
+                isLoading={createMutation.isLoading}
+            />
+        </>
     );
 }

@@ -1,8 +1,11 @@
+import { Breadcrumb } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useRouteMatch } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import { useResults, useTestInstance } from '@/hooks/student/QuizTestInstanceHooks';
-import { TestResult } from '@/pages/StudentExamination/components/TestResults';
 import { TestInstanceDetails } from '@/pages/StudentExamination/components/TestInstanceDetails';
+import { TestResult } from '@/pages/StudentExamination/components/TestResults';
 
 type Params = {
     id?: string
@@ -10,6 +13,7 @@ type Params = {
 
 export function TestInstancePage() {
     const { params } = useRouteMatch<Params>();
+    const { t } = useTranslation();
     const id = parseInt(params.id || '-1', 10);
     const testInstance = useTestInstance(id);
     const results = useResults(id, !!testInstance.data?.submitted);
@@ -20,6 +24,14 @@ export function TestInstancePage() {
 
     return (
         <>
+            <Breadcrumb>
+                <LinkContainer to="/student/quizzes">
+                    <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/student/quizzes/test-instances/${id}`}>
+                    <Breadcrumb.Item active>{testInstance.data.test.name}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
             <TestInstanceDetails testInstance={testInstance.data} />
             <hr />
             <TestResult results={results.data} />

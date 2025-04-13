@@ -1,17 +1,21 @@
 import { useEffect } from 'react';
+import { Breadcrumb } from 'react-bootstrap';
 import { useForm, FormProvider } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import { useSemesters } from '@/hooks/common/SemesterHooks';
-import { RequestPlagiarism } from '@/resources/instructor/RequestPlagiarism';
 import { useCourses } from '@/hooks/instructor/CoursesHooks';
-import { useTaskListForCourse, useUserList } from '@/hooks/instructor/TaskHooks';
-import { useCreatePlagiarismMutation, usePlagiarismServices } from '@/hooks/instructor/PlagiarismHooks';
 import { useBasefilesByTasks } from '@/hooks/instructor/PlagiarismBaseFileHooks';
-import { useHistory } from 'react-router';
+import { useCreatePlagiarismMutation, usePlagiarismServices } from '@/hooks/instructor/PlagiarismHooks';
+import { useTaskListForCourse, useUserList } from '@/hooks/instructor/TaskHooks';
 import { NewRequestForm, PlagiarismForm } from '@/pages/InstructorPlagiarism/components/NewRequestForm';
+import { RequestPlagiarism } from '@/resources/instructor/RequestPlagiarism';
 
 export function NewRequestPage() {
     const history = useHistory();
+    const { t } = useTranslation();
     // Setup react hook form
     const formMethods = useForm<PlagiarismForm>({
         defaultValues: {
@@ -75,21 +79,31 @@ export function NewRequestPage() {
 
     // Render
     return (
-        <FormProvider {...formMethods}>
-            <NewRequestForm
-                onSave={handleSave}
-                onCancel={handleCancel}
-                semesterToID={semesterToID}
-                semesterFromID={semesterFromID}
-                courses={courses.data}
-                semesters={semesters.data}
-                tasks={tasksForCourse.data}
-                users={users.data}
-                basefiles={basefiles.data}
-                availableTypes={availableTypes.data}
-                selectedType={type}
-                isLoading={createMutation.isLoading}
-            />
-        </FormProvider>
+        <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/plagiarism">
+                    <Breadcrumb.Item>{t('navbar.plagiarism')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to="/instructor/plagiarism/new">
+                    <Breadcrumb.Item active>{t('plagiarism.newPlagiarismCheck')}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
+            <FormProvider {...formMethods}>
+                <NewRequestForm
+                    onSave={handleSave}
+                    onCancel={handleCancel}
+                    semesterToID={semesterToID}
+                    semesterFromID={semesterFromID}
+                    courses={courses.data}
+                    semesters={semesters.data}
+                    tasks={tasksForCourse.data}
+                    users={users.data}
+                    basefiles={basefiles.data}
+                    availableTypes={availableTypes.data}
+                    selectedType={type}
+                    isLoading={createMutation.isLoading}
+                />
+            </FormProvider>
+        </>
     );
 }

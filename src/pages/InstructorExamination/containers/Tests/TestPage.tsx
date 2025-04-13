@@ -1,26 +1,27 @@
 import { useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router';
+import { Breadcrumb, Tab } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { Tab } from 'react-bootstrap';
+import { useHistory, useRouteMatch } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
+import { TabbedInterface } from '@/components/TabbedInterface';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { useGroupsForCourse } from '@/hooks/instructor/GroupHooks';
 import {
     useDuplicateTestMutation, useFinalizeTestMutation,
     useRemoveTestMutation,
     useTest,
     useUpdateTestMutation,
 } from '@/hooks/instructor/QuizTestHooks';
-import { useShow } from '@/ui-hooks/useShow';
 import { QuizTest } from '@/resources/instructor/QuizTest';
-import { TestForm } from '@/pages/InstructorExamination/components/Tests/TestForm';
-import { TestResultsTab } from '@/pages/InstructorExamination/containers/Tests/TestResultsTab';
-import { TestQuestionsTab } from '@/pages/InstructorExamination/containers/Tests/TestQuestionsTab';
-import { UniqueTestQuestionsTab } from '@/pages/InstructorExamination/containers/Tests/UniqueTestQuestionsTab';
 import { TestDetails } from '@/pages/InstructorExamination/components/Tests/TestDetails';
-import { useGroupsForCourse } from '@/hooks/instructor/GroupHooks';
-import { useActualSemester } from '@/hooks/common/SemesterHooks';
-import { TabbedInterface } from '@/components/TabbedInterface';
-import { useNotifications } from '@/hooks/common/useNotifications';
-import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { TestForm } from '@/pages/InstructorExamination/components/Tests/TestForm';
+import { TestQuestionsTab } from '@/pages/InstructorExamination/containers/Tests/TestQuestionsTab';
+import { TestResultsTab } from '@/pages/InstructorExamination/containers/Tests/TestResultsTab';
+import { UniqueTestQuestionsTab } from '@/pages/InstructorExamination/containers/Tests/UniqueTestQuestionsTab';
+import { useShow } from '@/ui-hooks/useShow';
 
 type Params = {
     id?: string
@@ -100,6 +101,17 @@ export function TestPage() {
 
     return (
         <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/quizzes">
+                    <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to="/instructor/quizzes">
+                    <Breadcrumb.Item>{t('quizTests.tests')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/quizzes/tests/${test.data.id}`}>
+                    <Breadcrumb.Item active>{test.data.name}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
             {showEdit.show
                 ? (
                     <TestForm
@@ -121,7 +133,6 @@ export function TestPage() {
                         onFinalize={handleFinalize}
                     />
                 )}
-
             <TabbedInterface defaultActiveKey="results" id="tests-tabs">
                 <Tab eventKey="results" title={t('quizTests.results')}>
                     <TestResultsTab test={test.data} />
