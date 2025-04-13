@@ -1,16 +1,18 @@
 import { useState } from 'react';
+import { Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useParams } from 'react-router-dom';
 
-import { TestForm } from '@/pages/InstructorExamination/components/Tests/TestForm';
-import { useQuestionSet } from '@/hooks/instructor/QuizQuestionSetHooks';
-import { QuizTest } from '@/resources/instructor/QuizTest';
-import { useCreateTestMutation } from '@/hooks/instructor/QuizTestHooks';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 import { useActualSemester } from '@/hooks/common/SemesterHooks';
 import { useGroupsForCourse } from '@/hooks/instructor/GroupHooks';
-import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useQuestionSet } from '@/hooks/instructor/QuizQuestionSetHooks';
+import { useCreateTestMutation } from '@/hooks/instructor/QuizTestHooks';
+import { TestForm } from '@/pages/InstructorExamination/components/Tests/TestForm';
 import { TestNoGroupCard } from '@/pages/InstructorExamination/components/Tests/TestNoGroupCard';
+import { QuizTest } from '@/resources/instructor/QuizTest';
 
 type Params = {
     questionsetID: string
@@ -56,14 +58,30 @@ export function NewTestPage() {
 
     return groups.data !== undefined && groups.data.length > 0
         ? (
-            <TestForm
-                title={t('quizTests.newTest')}
-                groups={groups.data}
-                onSave={handleSave}
-                onCancel={handleSaveCancel}
-                serverSideError={addErrorBody}
-                isLoading={createMutation.isLoading}
-            />
+            <>
+                <Breadcrumb>
+                    <LinkContainer to="/instructor/quizzes">
+                        <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/instructor/quizzes">
+                        <Breadcrumb.Item>{t('quizQuestions.questionSets')}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/quizzes/question-sets/${questionSet.data.id}`}>
+                        <Breadcrumb.Item>{questionSet.data.name}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/quizzes/question-sets/${questionSet.data.id}/create-test`}>
+                        <Breadcrumb.Item active>{t('quizTests.newTest')}</Breadcrumb.Item>
+                    </LinkContainer>
+                </Breadcrumb>
+                <TestForm
+                    title={t('quizTests.newTest')}
+                    groups={groups.data}
+                    onSave={handleSave}
+                    onCancel={handleSaveCancel}
+                    serverSideError={addErrorBody}
+                    isLoading={createMutation.isLoading}
+                />
+            </>
         )
         : <TestNoGroupCard onBackClick={handleSaveCancel} />;
 }

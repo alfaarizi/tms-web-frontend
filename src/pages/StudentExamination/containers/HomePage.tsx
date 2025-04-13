@@ -1,12 +1,14 @@
-import { useHistory } from 'react-router';
+import { Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
+import { useSelectedSemester } from '@/hooks/common/SemesterHooks';
 import { useTestInstances } from '@/hooks/student/QuizTestInstanceHooks';
 import { AvailableTestListItem } from '@/pages/StudentExamination/components/AvailableTestListItem';
 import { FinishedTestListItem } from '@/pages/StudentExamination/components/FinishedTestListItem';
-import { TestList } from '@/pages/StudentExamination/components/TestList';
-import { useSelectedSemester } from '@/hooks/common/SemesterHooks';
 import { FutureTestListItem } from '@/pages/StudentExamination/components/FutureTestListItem';
+import { TestList } from '@/pages/StudentExamination/components/TestList';
 
 export function HomePage() {
     const { selectedSemesterID } = useSelectedSemester();
@@ -23,6 +25,11 @@ export function HomePage() {
 
     return (
         <>
+            <Breadcrumb>
+                <LinkContainer to="/student/quizzes">
+                    <Breadcrumb.Item active>{t('navbar.quizzes')}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
             <TestList
                 title={t('quizTests.availableTests')}
                 testInstances={availableTests.data}

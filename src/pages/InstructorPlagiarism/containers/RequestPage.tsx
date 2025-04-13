@@ -1,20 +1,22 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router';
 
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { useNotifications } from '@/hooks/common/useNotifications';
 import {
     usePlagiarismRequest,
     useRemovePlagiarismMutation,
     useRunMutation,
     useUpdatePlagiarismMutation,
 } from '@/hooks/instructor/PlagiarismHooks';
+import { Plagiarism } from '@/resources/instructor/Plagiarism';
+import { EditForm } from '@/pages/InstructorPlagiarism/components/EditForm';
 import { RequestDetails } from '@/pages/InstructorPlagiarism/components/RequestDetails';
 import { Result } from '@/pages/InstructorPlagiarism/components/Results';
 import { useShow } from '@/ui-hooks/useShow';
-import { Plagiarism } from '@/resources/instructor/Plagiarism';
-import { EditForm } from '@/pages/InstructorPlagiarism/components/EditForm';
-import { useNotifications } from '@/hooks/common/useNotifications';
-import { useTranslation } from 'react-i18next';
-import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { Breadcrumb } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 type Params = {
     id?: string
@@ -77,6 +79,14 @@ export function RequestPage() {
 
     return (
         <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/plagiarism">
+                    <Breadcrumb.Item>{t('navbar.plagiarism')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/plagiarism/${request.data.id}`}>
+                    <Breadcrumb.Item active>{request.data.name}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
             {
                 showEdit.show
                     ? (

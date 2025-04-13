@@ -1,36 +1,36 @@
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router';
-import { Tab } from 'react-bootstrap';
+import { Breadcrumb, Tab } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useHistory, useLocation, useParams } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
-import {
-    useDuplicateGroupMutation,
-    useGroup,
-    useRemoveGroupMutation,
-    useUpdateGroupMutation,
-} from '@/hooks/instructor/GroupHooks';
-
-import { GroupForm } from '@/pages/InstructorTaskManager/components/Groups/GroupForm';
-import { Group } from '@/resources/instructor/Group';
-import { GroupStudentsListTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupStudentsListTab';
-import { GroupInstructorsListTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupInstructorsListTab';
-import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
-import { GroupStatsTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupStatsTab';
-import { GroupNotificationsTab } from '@/pages/InstructorTaskManager/containers/Notifications/GroupNotificationsTab';
-import { useActualSemester } from '@/hooks/common/SemesterHooks';
-import { GroupDetails } from '@/pages/InstructorTaskManager/components/Groups/GroupDetails';
+import { ConfirmModal } from '@/components/Modals/ConfirmModal';
 import { TabbedInterface } from '@/components/TabbedInterface';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
 import { useNotifications } from '@/hooks/common/useNotifications';
 import {
     useCancelCanvasSyncMutation,
     useCanvasSetupMutation,
     useCanvasSyncMutation,
 } from '@/hooks/instructor/CanvasHooks';
-import { useShow } from '@/ui-hooks/useShow';
-import { SetupCanvasModal } from '@/pages/InstructorTaskManager/containers/Groups/SetupCanvasModal';
-import { CanvasSetupData } from '@/resources/instructor/CanvasSetupData';
+import {
+    useDuplicateGroupMutation,
+    useGroup,
+    useRemoveGroupMutation,
+    useUpdateGroupMutation,
+} from '@/hooks/instructor/GroupHooks';
+import { GroupDetails } from '@/pages/InstructorTaskManager/components/Groups/GroupDetails';
+import { GroupForm } from '@/pages/InstructorTaskManager/components/Groups/GroupForm';
+import { GroupInstructorsListTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupInstructorsListTab';
+import { GroupStatsTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupStatsTab';
+import { GroupStudentsListTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupStudentsListTab';
 import { GroupTasksTab } from '@/pages/InstructorTaskManager/containers/Groups/GroupTasksTab';
-import { ConfirmModal } from '@/components/Modals/ConfirmModal';
+import { SetupCanvasModal } from '@/pages/InstructorTaskManager/containers/Groups/SetupCanvasModal';
+import { GroupNotificationsTab } from '@/pages/InstructorTaskManager/containers/Notifications/GroupNotificationsTab';
+import { CanvasSetupData } from '@/resources/instructor/CanvasSetupData';
+import { Group } from '@/resources/instructor/Group';
+import { useShow } from '@/ui-hooks/useShow';
 
 type Params = {
     id?: string,
@@ -154,6 +154,17 @@ export function GroupPage() {
     // Render
     return (
         <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/task-manager">
+                    <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/course-manager/courses/${group.data.courseID}`}>
+                    <Breadcrumb.Item>{group.data.course.name}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}`}>
+                    <Breadcrumb.Item active>{group.data.id}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
             {showEditForm.show
                 ? (
                     <GroupForm
@@ -208,7 +219,9 @@ export function GroupPage() {
             <ConfirmModal
                 description={t('common.cancelCanvasModalDesc')}
                 isConfirmDialogOpen={showCancelCanvasSetupModal.show}
-                onCancel={() => { showCancelCanvasSetupModal.toHide(); }}
+                onCancel={() => {
+                    showCancelCanvasSetupModal.toHide();
+                }}
                 onConfirm={handleCancelCanvasSync}
                 title={t('common.areYouSure')}
                 isLoading={cancelCanvasSyncMutation.isLoading}

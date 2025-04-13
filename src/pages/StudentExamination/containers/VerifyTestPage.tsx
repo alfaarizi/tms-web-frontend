@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useRouteMatch } from 'react-router';
+
+import { VerifyItemForm } from '@/components/VerifyItemForm';
+import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useNotifications } from '@/hooks/common/useNotifications';
 import {
     useUnlockTestMutation,
 } from '@/hooks/student/QuizTestInstanceHooks';
-import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 import { UnlockTest } from '@/resources/student/UnlockTest';
-import { useNotifications } from '@/hooks/common/useNotifications';
-import { useTranslation } from 'react-i18next';
-import { VerifyItemForm } from '@/components/VerifyItemForm';
 
 type Params = {
     id?: string

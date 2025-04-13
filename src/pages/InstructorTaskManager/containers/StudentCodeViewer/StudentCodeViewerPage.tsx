@@ -1,26 +1,28 @@
 /* eslint-disable react/no-unstable-nested-components */
 // This rule should be ignored because the design of the used 3rd-party library
 
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router';
-import TreeView, { flattenTree } from 'react-accessible-treeview';
-import { INode } from 'react-accessible-treeview/dist/TreeView/types';
-import { FolderIcon } from '@/pages/InstructorTaskManager/components/StudentCodeViewer/FolderIcon';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FileIcon } from '@/pages/InstructorTaskManager/components/StudentCodeViewer/FileIcon';
-import '@/pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage.css';
-import { ITreeViewOnNodeSelectProps } from 'react-accessible-treeview/dist/TreeView';
-import ReactCodeMirror from '@uiw/react-codemirror';
 import { LanguageSupport } from '@codemirror/language';
 import { faFolderTree, faIndent } from '@fortawesome/free-solid-svg-icons';
-import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
-import { Col, Row } from 'react-bootstrap';
-import { getExtension } from '@/pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { githubLight } from '@uiw/codemirror-theme-github';
-import * as SubmissionsService from '@/api/instructor/SubmissionsService';
+import ReactCodeMirror from '@uiw/react-codemirror';
 import JSZip, { JSZipLoadOptions } from 'jszip';
 import jschardet from 'jschardet';
+import { useEffect, useState } from 'react';
+import TreeView, { flattenTree, INode, ITreeViewOnNodeSelectProps } from 'react-accessible-treeview';
+import { useTranslation } from 'react-i18next';
+import { Breadcrumb, Col, Row } from 'react-bootstrap';
+import { useParams } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
+
+import * as SubmissionsService from '@/api/instructor/SubmissionsService';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
+import { useSubmission } from '@/hooks/instructor/SubmissionHooks';
+import { FileIcon } from '@/pages/InstructorTaskManager/components/StudentCodeViewer/FileIcon';
+import { FolderIcon } from '@/pages/InstructorTaskManager/components/StudentCodeViewer/FolderIcon';
+import { getExtension } from '@/pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
+
+import '@/pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage.css';
 
 type Params = {
     id?: string
@@ -55,6 +57,7 @@ export function StudentCodeViewerPage() {
     const { t } = useTranslation();
     const params = useParams<Params>();
     const id = parseInt(params.id || '-1', 10);
+    const submission = useSubmission(id);
     const [jsZip, setJsZip] = useState<JSZip | undefined>(undefined);
     const [treeData, setTreeData] = useState<INode[]>([]);
     const [selectedNode, setSelectedNode] = useState<ITreeViewOnNodeSelectProps | undefined>(undefined);
@@ -90,11 +93,16 @@ export function StudentCodeViewerPage() {
 
     useEffect(() => {
         // Convert files to be able to flatten them
-        const root: TreeNode = { id: 'root', name: '', children: [] };
+        const root: TreeNode = {
+            id: 'root',
+            name: '',
+            children: [],
+        };
 
         jsZip?.forEach((relativePath, zipEntry) => {
             // Split the path to get each component
-            const pathParts = relativePath.split('/').filter((part) => part.length);
+            const pathParts = relativePath.split('/')
+                .filter((part) => part.length);
             let currentPart = root;
 
             pathParts.forEach((part, index) => {
@@ -104,7 +112,8 @@ export function StudentCodeViewerPage() {
                 if (!child) {
                     // If it doesn't exist, we create a new child
                     child = {
-                        id: pathParts.slice(0, index + 1).join('/'),
+                        id: pathParts.slice(0, index + 1)
+                            .join('/'),
                         name: part,
                         children: [],
                         isBranch: zipEntry.dir,
@@ -149,72 +158,104 @@ export function StudentCodeViewerPage() {
     }, [selectedNode]);
 
     return (
-        <Row className="directory m-2">
-            {(treeData[0]?.children?.length > 0) ? (
-                <>
-                    <Col
-                        xs={4}
-                        sm={4}
-                        md={4}
-                        lg={4}
-                        xl={4}
-                        className="shadow p-2"
+        <>
+            {submission.data && submission.data.task && submission.data.task.group ? (
+                <Breadcrumb>
+                    <LinkContainer to="/instructor/task-manager">
+                        <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/course-manager/courses/${submission.data.task.group.courseID}`}>
+                        <Breadcrumb.Item>{submission.data.task.group.course.name}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/task-manager/groups/${submission.data.task.groupID}`}>
+                        <Breadcrumb.Item>{submission.data.task.groupID}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/task-manager/tasks/${submission.data.taskID}`}>
+                        <Breadcrumb.Item>{submission.data.task.name}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer
+                        to={`/instructor/task-manager/groups/${submission.data.task.groupID}
+                        /students/${submission.data.uploaderID}`}
                     >
-                        <div className="tree-view-header">
-                            <FontAwesomeIcon className="fa-fw mr-3" icon={faFolderTree} />
-                            <ToolbarButton
-                                onClick={() => setWithPadding(!withPadding)}
-                                text={t('task.toggleIndent')}
-                                icon={faIndent}
-                                flip={withPadding ? 'horizontal' : undefined}
-                            />
-                        </div>
-                        <TreeView
-                            className="scroll"
-                            data={treeData}
-                            onNodeSelect={(node) => setSelectedNode(node)}
-                            nodeRenderer={({
-                                element,
-                                isBranch,
-                                isExpanded,
-                                getNodeProps,
-                                level,
-                            }) => (
-                                <div
-                                    {...getNodeProps()} // this is responsible for the className and onClick etc.
-                                    style={{ paddingLeft: (withPadding ? 20 : 0) * (level - 1) }}
-                                >
-                                    {isBranch ? (
-                                        <FolderIcon
-                                            isOpen={isExpanded}
-                                            hasChildren={element.children?.length > 0}
-                                        />
-                                    ) : (
-                                        <FileIcon filename={element.name} />
-                                    )}
-                                    {element.name}
-                                </div>
-                            )}
-                        />
-                    </Col>
-                    <Col
-                        xs={8}
-                        sm={8}
-                        md={8}
-                        lg={8}
-                        xl={8}
-                        className="shadow p-2"
-                    >
-                        <ReactCodeMirror
-                            height="90vh"
-                            value={selectedFileContent}
-                            extensions={selectedFileExtension}
-                            theme={githubLight}
-                            readOnly
-                        />
-                    </Col>
-                </>
+                        <Breadcrumb.Item>
+                            {`${submission.data.uploader.name}(${submission.data.uploader.userCode})`}
+                        </Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/task-manager/submissions/${submission.data.id}`}>
+                        <Breadcrumb.Item>{submission.data.name ?? submission.data.translatedStatus}</Breadcrumb.Item>
+                    </LinkContainer>
+                    <LinkContainer to={`/instructor/task-manager/code-viewer/${submission.data.id}`}>
+                        <Breadcrumb.Item active>{t('task.viewCode')}</Breadcrumb.Item>
+                    </LinkContainer>
+                </Breadcrumb>
             ) : null}
-        </Row>
+            <Row className="directory m-2">
+                {(treeData[0]?.children?.length > 0) ? (
+                    <>
+                        <Col
+                            xs={4}
+                            sm={4}
+                            md={4}
+                            lg={4}
+                            xl={4}
+                            className="shadow p-2"
+                        >
+                            <div className="tree-view-header">
+                                <FontAwesomeIcon className="fa-fw mr-3" icon={faFolderTree} />
+                                <ToolbarButton
+                                    onClick={() => setWithPadding(!withPadding)}
+                                    text={t('task.toggleIndent')}
+                                    icon={faIndent}
+                                    flip={withPadding ? 'horizontal' : undefined}
+                                />
+                            </div>
+                            <TreeView
+                                className="scroll"
+                                data={treeData}
+                                onNodeSelect={(node) => setSelectedNode(node)}
+                                nodeRenderer={({
+                                    element,
+                                    isBranch,
+                                    isExpanded,
+                                    getNodeProps,
+                                    level,
+                                }) => (
+                                    <div
+                                        {...getNodeProps()} // this is responsible for the className and onClick etc.
+                                        style={{ paddingLeft: (withPadding ? 20 : 0) * (level - 1) }}
+                                    >
+                                        {isBranch ? (
+                                            <FolderIcon
+                                                isOpen={isExpanded}
+                                                hasChildren={element.children?.length > 0}
+                                            />
+                                        ) : (
+                                            <FileIcon filename={element.name} />
+                                        )}
+                                        {element.name}
+                                    </div>
+                                )}
+                            />
+                        </Col>
+                        <Col
+                            xs={8}
+                            sm={8}
+                            md={8}
+                            lg={8}
+                            xl={8}
+                            className="shadow p-2"
+                        >
+                            <ReactCodeMirror
+                                height="90vh"
+                                value={selectedFileContent}
+                                extensions={selectedFileExtension}
+                                theme={githubLight}
+                                readOnly
+                            />
+                        </Col>
+                    </>
+                ) : null}
+            </Row>
+        </>
     );
 }

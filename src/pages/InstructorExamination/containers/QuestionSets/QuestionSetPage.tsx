@@ -1,23 +1,24 @@
+import { Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
 import { useHistory, useRouteMatch } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useParams } from 'react-router-dom';
 
+import { useActualSemester } from '@/hooks/common/SemesterHooks';
+import { useNotifications } from '@/hooks/common/useNotifications';
+import { useCourses } from '@/hooks/instructor/CoursesHooks';
+import { useGroupsForCourse } from '@/hooks/instructor/GroupHooks';
 import {
     useDuplicateQuestionSetMutation,
     useQuestionSet,
     useRemoveQuestionSetMutation,
     useUpdateQuestionSetMutation,
 } from '@/hooks/instructor/QuizQuestionSetHooks';
-
-import { QuestionSetForm } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
-import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
-import { QuestionsEditor } from '@/pages/InstructorExamination/containers/QuestionSets/QuestionsEditor';
 import { QuestionSetDetails } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetDetails';
-import { useNotifications } from '@/hooks/common/useNotifications';
-import { useCourses } from '@/hooks/instructor/CoursesHooks';
+import { QuestionSetForm } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
+import { QuestionsEditor } from '@/pages/InstructorExamination/containers/QuestionSets/QuestionsEditor';
+import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
 import { useShow } from '@/ui-hooks/useShow';
-import { useGroupsForCourse } from '@/hooks/instructor/GroupHooks';
-import { useActualSemester } from '@/hooks/common/SemesterHooks';
 
 type Params = {
     id?: string
@@ -93,6 +94,17 @@ export function QuestionSetPage() {
 
     return (
         <>
+            <Breadcrumb>
+                <LinkContainer to="/instructor/quizzes">
+                    <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to="/instructor/quizzes">
+                    <Breadcrumb.Item>{t('quizQuestions.questionSets')}</Breadcrumb.Item>
+                </LinkContainer>
+                <LinkContainer to={`/instructor/quizzes/question-sets/${questionSet.data.id}`}>
+                    <Breadcrumb.Item active>{questionSet.data.name}</Breadcrumb.Item>
+                </LinkContainer>
+            </Breadcrumb>
             {showEdit.show
                 ? (
                     <QuestionSetForm
