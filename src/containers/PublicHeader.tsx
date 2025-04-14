@@ -5,7 +5,7 @@ import { useIsFetching } from 'react-query';
 import { useClientSideLocaleChange } from '@/hooks/common/UserHooks';
 import { faBookOpenReader, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { HeaderContent } from '@/components/Header/HeaderContent';
-import { LinkContent } from '@/components/Header/LinkContent';
+import { NavbarLink } from '@/components/Header/NavbarLink';
 
 /**
  * Contains public navigation actions
@@ -22,13 +22,13 @@ export function PublicHeader() {
     return (
         <Header showFetchingIndicator={isFetching > 0} currentRole={null}>
             <HeaderContent align="end">
-                <LinkContent
+                <NavbarLink
                     to="/about"
                     icon={faBookOpenReader}
                     text={t('aboutPage.about')}
                 />
                 <LanguageSwitcher onChange={setLocale} />
-                <LinkContent
+                <NavbarLink
                     to="/"
                     icon={faSignInAlt}
                     text={t('login.login')}

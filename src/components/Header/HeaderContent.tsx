@@ -13,6 +13,6 @@ type Props = {
  * @constructor
  */
 export function HeaderContent({ align, children }: Props) {
-    const classNames = align === 'start' ? 'ml-2' : 'ml-auto ml-2';
+    const classNames = align === 'start' ? 'pl-2' : 'pl-2 ml-auto ';
     return <Nav className={classNames}>{children}</Nav>;
 }
