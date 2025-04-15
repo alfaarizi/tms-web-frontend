@@ -35,12 +35,12 @@ function getNavBarVariant(theme: AvailableTheme): Variant {
  * @param role the role of the user
  */
 function getCompactBreakpoint(role: Role): string {
-    return {
+    return `compact-${{
         admin: 'xl',
         instructor: 'lg',
         student: 'lg',
         default: 'md',
-    }[role ?? 'default'];
+    }[role ?? 'default']}`;
 }
 
 /**
@@ -63,7 +63,7 @@ export function Header({ children, showFetchingIndicator, currentRole }: Props) 
             expand="sm"
             expanded={expanded}
             onToggle={setExpanded}
-            className={`p-0 compact-${getCompactBreakpoint(currentRole)} ${expanded && isMobile ? 'sidebar-show' : ''}`}
+            className={`p-0 ${getCompactBreakpoint(currentRole)} ${expanded && isMobile ? 'sidebar-show' : ''}`}
         >
             <BrandLogo showFetchingIndicator={showFetchingIndicator} />
             <Navbar.Toggle aria-controls="navbar-nav" />
