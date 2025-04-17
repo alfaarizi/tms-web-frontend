@@ -309,6 +309,8 @@
     "entryPasswordHelp": "A bemeneti jelszóval védett feladatok részletei csak a jelszó megadása után érhetőek el a hallgatóknak. A jelszó csak abban a böngészőben oldja fel a feladatot, ahol megadták.",
     "isVersionControlled": "Verziókezelt",
     "versionControlledHelp": "Hallgatónként saját Git tároló használata. A feladat létrehozása után nem módosítható!",
+    "emailNotification": "Email értesítés",
+    "emailNotificationHelp": "Email értesítés küldése a hallgatóknak, ha a határidő megváltozik.",
     "categories": {
       "smallerTasks": "Házi feladatok",
       "largerTasks": "Beadandók",

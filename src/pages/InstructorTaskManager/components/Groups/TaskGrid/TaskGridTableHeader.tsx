@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import {
     TaskGridHeaderDropdown,
 } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridHeaderDropdown';
-import { GridTask } from '@/resources/instructor/GridTask.php';
 import { DownloadAllParams, ExportSpreadsheetParams } from '@/hooks/instructor/SubmissionHooks';
 import { TaskNameCell } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskNameCell';
 import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import { GridTask } from '@/resources/instructor/GridTask';
 
 type Props = {
     categorizedTasks: GridTask[][],

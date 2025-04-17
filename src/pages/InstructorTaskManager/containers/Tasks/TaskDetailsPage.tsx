@@ -44,11 +44,16 @@ export function TaskDetailsPage() {
         return null;
     }
 
-    const handleEditSave = async (data: Task) => {
+    const handleEditSave = async (data: Task, emailNotification?: boolean) => {
         try {
             await updateMutation.mutateAsync({
-                ...data,
-                id: task.data.id,
+                task: {
+                    ...data,
+                    id: task.data.id,
+                },
+                options: {
+                    emailNotification: emailNotification ?? false,
+                },
             });
             showEdit.toHide();
             setUpdateErrorBody(null);

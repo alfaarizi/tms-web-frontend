@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-
 import { Form } from 'react-bootstrap';
 import { FormError } from '@/components/FormError';
 import { useTranslation } from 'react-i18next';
@@ -17,7 +16,7 @@ import { useTextPaste } from '@/ui-hooks/useTextPaste';
 type Props = {
     title: string,
     timezone: string,
-    onSave: (t: Task) => void,
+    onSave: (t: Task, emailNotification?: boolean) => void;
     onCancel?: () => void,
     editData?: Task,
     showVersionControl: boolean,
@@ -47,8 +46,8 @@ export function TaskForm({
         formState: {
             errors,
         },
-    } = useForm<Task>({
-        defaultValues: editData,
+    } = useForm<Task & {emailNotification?: boolean}>({
+        defaultValues: { ...editData, emailNotification: editData ? true : undefined },
     });
 
     useServersideFormErrors<Task>(clearErrors, setError, serverSideError);
@@ -56,7 +55,7 @@ export function TaskForm({
     const handleTextPaste = useTextPaste(setValue);
 
     const onSubmit = handleSubmit((data) => {
-        onSave(data);
+        onSave(data, editData ? data.emailNotification : undefined);
     });
 
     return (
@@ -149,6 +148,20 @@ export function TaskForm({
                     />
                     {errors.hardDeadline && <FormError message={errors.hardDeadline.message} />}
                 </Form.Group>
+
+                {editData && (
+                    <Form.Group>
+                        <Form.Check
+                            type="checkbox"
+                            id="email-notification"
+                            label={t('task.emailNotification')}
+                            {...register('emailNotification')}
+                        />
+                        <Form.Text className="text-muted">
+                            {t('task.emailNotificationHelp')}
+                        </Form.Text>
+                    </Form.Group>
+                )}
 
                 <Form.Group>
                     <Form.Label>

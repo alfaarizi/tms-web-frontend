@@ -2,9 +2,10 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { Task } from '@/resources/instructor/Task';
 import * as TasksService from '@/api/instructor/TasksService';
-import { GridTask } from '@/resources/instructor/GridTask.php';
+import { GridTask } from '@/resources/instructor/GridTask';
 import { QUERY_KEY as SUBMISSION_QUERY } from '@/hooks/instructor/SubmissionHooks';
 import { CodeCompassParameters } from '@/resources/instructor/CodeCompassParameters';
+import { TaskUpdate } from '@/resources/instructor/TaskUpdate';
 
 export const QUERY_KEY = 'instructor/tasks';
 
@@ -67,7 +68,7 @@ export function useCreateTaskMutation() {
 export function useUpdateTaskMutation() {
     const queryClient = useQueryClient();
 
-    return useMutation((newData: Task) => TasksService.update(newData), {
+    return useMutation((newData: TaskUpdate) => TasksService.update(newData), {
         onSuccess: async (data) => {
             const key = [QUERY_KEY, { taskID: data.id }];
             queryClient.setQueryData(key, data);

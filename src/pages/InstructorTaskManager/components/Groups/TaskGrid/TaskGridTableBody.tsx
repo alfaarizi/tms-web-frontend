@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 
 import { TaskGridCellButton } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridCellButton';
 import { User } from '@/resources/common/User';
-import { GridTask } from '@/resources/instructor/GridTask.php';
 import { GridSubmission } from '@/resources/instructor/GridSubmission';
 
 import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
+import { GridTask } from '@/resources/instructor/GridTask';
 
 type Props = {
     students: User[],
