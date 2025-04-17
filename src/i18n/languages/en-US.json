@@ -307,6 +307,8 @@
     "entryPasswordHelp": "The details of entry password-protected tasks can only be viewed by the students after entering the specified password. The password only unlocks the task in the browser, where it was provided.",
     "isVersionControlled": "Version controlled",
     "versionControlledHelp": "Uses separate Git repositories for each student. Not modifiable after task is created!",
+    "emailNotification": "Email notification",
+    "emailNotificationHelp": "Send an email notification to the students when changing the deadline.",
     "categories": {
       "smallerTasks": "Smaller Tasks",
       "largerTasks": "Larger Tasks",

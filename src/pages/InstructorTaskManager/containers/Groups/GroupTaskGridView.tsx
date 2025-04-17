@@ -7,12 +7,12 @@ import { TaskGridTableHeader } from '@/pages/InstructorTaskManager/components/Gr
 import { TaskGridTableCard } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridTableCard';
 import { GridSubmission } from '@/resources/instructor/GridSubmission';
 import { useGroupStudents } from '@/hooks/instructor/GroupHooks';
-import { GridTask } from '@/resources/instructor/GridTask.php';
 import { User } from '@/resources/common/User';
 import {
     TaskQuickGraderTableBody,
 } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskQuickGrader/TaskQuickGraderTableBody';
 import { SubmissionGrade } from '@/resources/instructor/SubmissionGrade';
+import { GridTask } from '@/resources/instructor/GridTask';
 
 type Props = {
     group: Group,

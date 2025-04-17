@@ -1,8 +1,9 @@
 import { axiosInstance } from '@/api/axiosInstance';
 import { Task } from '@/resources/instructor/Task';
 import { User } from '@/resources/common/User';
-import { GridTask } from '@/resources/instructor/GridTask.php';
 import { CodeCompassParameters } from '@/resources/instructor/CodeCompassParameters';
+import { TaskUpdate } from '@/resources/instructor/TaskUpdate';
+import { GridTask } from '@/resources/instructor/GridTask';
 
 /**
  * Loads task list
@@ -47,11 +48,9 @@ export async function create(task: Task) {
     return res.data;
 }
 
-export async function update(task: Task) {
-    const res = await axiosInstance.patch<Task>(
-        `/instructor/tasks/${task.id}?expand=group,taskLevelGitRepo`,
-        task,
-    );
+export async function update(data: TaskUpdate) {
+    const res = await axiosInstance
+        .patch<Task>(`/instructor/tasks/${data.task.id}?expand=group,taskLevelGitRepo`, data);
     return res.data;
 }
 
