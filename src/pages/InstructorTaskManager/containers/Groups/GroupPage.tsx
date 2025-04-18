@@ -162,7 +162,11 @@ export function GroupPage() {
                     <Breadcrumb.Item>{group.data.course.name}</Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}`}>
-                    <Breadcrumb.Item active>{group.data.id}</Breadcrumb.Item>
+                    <Breadcrumb.Item active>
+                        {t('common.group')}
+                        {' #'}
+                        {group.data.number}
+                    </Breadcrumb.Item>
                 </LinkContainer>
             </Breadcrumb>
             {showEditForm.show

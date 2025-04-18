@@ -181,7 +181,7 @@ export function TaskPage() {
                         <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                     </LinkContainer>
                     <LinkContainer to={`/student/task-manager/groups/${group.data.id}`}>
-                        <Breadcrumb.Item>{`${group.data.course.name} (${group.data.id})`}</Breadcrumb.Item>
+                        <Breadcrumb.Item>{`${group.data.course.name} (#${group.data.number})`}</Breadcrumb.Item>
                     </LinkContainer>
                     <LinkContainer to={`/student/task-manager/tasks/${task.data.id}`}>
                         <Breadcrumb.Item active>{task.data.name}</Breadcrumb.Item>

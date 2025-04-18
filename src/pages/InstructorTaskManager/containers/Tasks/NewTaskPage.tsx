@@ -58,7 +58,11 @@ export function NewTaskPage() {
                     <Breadcrumb.Item>{group.data.course.name}</Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}`}>
-                    <Breadcrumb.Item>{group.data.id}</Breadcrumb.Item>
+                    <Breadcrumb.Item>
+                        {t('common.group')}
+                        {' #'}
+                        {group.data.number}
+                    </Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}/new-task`}>
                     <Breadcrumb.Item active>{t('task.newTask')}</Breadcrumb.Item>

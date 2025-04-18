@@ -168,7 +168,11 @@ export function StudentCodeViewerPage() {
                         <Breadcrumb.Item>{submission.data.task.group.course.name}</Breadcrumb.Item>
                     </LinkContainer>
                     <LinkContainer to={`/instructor/task-manager/groups/${submission.data.task.groupID}`}>
-                        <Breadcrumb.Item>{submission.data.task.groupID}</Breadcrumb.Item>
+                        <Breadcrumb.Item>
+                            {t('common.group')}
+                            {' #'}
+                            {submission.data.task.group.number}
+                        </Breadcrumb.Item>
                     </LinkContainer>
                     <LinkContainer to={`/instructor/task-manager/tasks/${submission.data.taskID}`}>
                         <Breadcrumb.Item>{submission.data.task.name}</Breadcrumb.Item>
