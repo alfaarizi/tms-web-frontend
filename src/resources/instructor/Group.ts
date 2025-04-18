@@ -16,4 +16,7 @@ export interface Group {
     canvasUrl?: string;
     lastSyncTime?: string;
     instructors?: Instructor[];
+    day?: number|null;
+    startTime?: string|null;
+    roomNumber: string;
 }

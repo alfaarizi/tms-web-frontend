@@ -69,7 +69,17 @@
     "userCodeOrNameRequired": "Érvényes NEPTUN-kódokat kell megadni!",
     "basicSearch": "Importálás",
     "autoCompleteSearch": "Keresés",
-    "operations": "Műveletek"
+    "operations": "Műveletek",
+    "notSelected": "Nincs kiválasztva"
+  },
+  "days": {
+    "monday": "Hétfő",
+    "tuesday": "Kedd",
+    "wednesday": "Szerda",
+    "thursday": "Csütörtök",
+    "friday": "Péntek",
+    "saturday": "Szombat",
+    "sunday": "Vasárnap"
   },
   "passwordProtected": {
     "exitPasswordProtected": "Kimeneti jelszó",
@@ -221,12 +231,19 @@
     "number": "Csoport Kód",
     "instructors": "Oktatók",
     "examGroup": "Vizsgacsoport",
+    "day": "Nap",
+    "hasSchedule": "Óra idejének beállítása",
+    "roomNumber": "Terem száma",
+    "startTime": "Időpont",
     "newGroup": "Új csoport",
     "editGroup": "Csoport szerkesztése",
     "addStudents": "Hallgatók hozzáadása",
     "addInstructors": "Gyakorlatvezetők hozzáadása",
+    "dayRequired": "Kérem válasszon egy napot",
+    "startTimeRequired": "Kérem válasszon egy időpontot",
     "courseIDRequired": "Kérem válasszon egy kurzust",
     "studentSolutions": "Megoldások és statisztikák",
+    "defaultSort": "Alapértelmezett",
     "stats": {
       "stats": "Statisztikák",
       "intime": "Időben",

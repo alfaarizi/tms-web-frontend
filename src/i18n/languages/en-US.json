@@ -68,7 +68,17 @@
     "userCodeOrNameRequired": "Please provide valid user codes!",
     "basicSearch": "Import",
     "autoCompleteSearch": "Search",
-    "operations": "Operations"
+    "operations": "Operations",
+    "notSelected": "Not selected"
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
   },
   "passwordProtected": {
     "exitPasswordProtected": "Exit password",
@@ -220,12 +230,19 @@
     "number": "Group code",
     "instructors": "Instructors",
     "examGroup": "Exam Group",
+    "day": "Day",
+    "hasSchedule": "Set timetable for group",
+    "roomNumber": "Room number",
+    "startTime": "Start time",
     "newGroup": "New Group",
     "editGroup": "Edit Group",
     "addStudents": "Add Students",
     "addInstructors": "Add Instructors",
+    "dayRequired": "Day is required",
+    "startTimeRequired": "Start time is required",
     "courseIDRequired": "Course is required",
     "studentSolutions": "Solutions and statistics",
+    "defaultSort": "Default",
     "stats": {
       "stats": "Statistics",
       "intime": "In time",

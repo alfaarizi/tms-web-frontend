@@ -7,6 +7,8 @@ import { SideBarItem } from '@/components/Navigation/SideBarItem';
 import { TaskPage } from '@/pages/StudentTaskManager/containers/TaskPage';
 import { GroupPage } from '@/pages/StudentTaskManager/containers/GroupPage';
 import { useSelectedSemester } from '@/hooks/common/SemesterHooks';
+import { DaysOfWeek } from '@/resources/common/DaysOfTheWeek';
+import { DateTime } from 'luxon';
 
 export function StudentTaskManager() {
     const { selectedSemesterID } = useSelectedSemester();
@@ -29,6 +31,14 @@ export function StudentTaskManager() {
                             {group.course.codes.join(', ')}
                             {' | '}
                             {group.number}
+                            {group.day && group.startTime ? (
+                                <>
+                                    {' | '}
+                                    {t(`days.${DaysOfWeek[group.day].toLowerCase()}`)}
+                                    {', '}
+                                    {DateTime.fromISO(group.startTime).toFormat('HH:mm')}
+                                </>
+                            ) : null}
                         </p>
                     </SideBarItem>
                 )) || []

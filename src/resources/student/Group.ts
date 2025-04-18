@@ -11,4 +11,7 @@ export interface Group {
     lastSyncTime?: string;
     notes?: string;
     isExamGroup: boolean;
+    day: number;
+    startTime: string;
+    roomNumber: string;
 }
