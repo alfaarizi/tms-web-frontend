@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
-import { Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { LinkContainer } from 'react-router-bootstrap';
 import {
     faCalendar, faCog, faCrosshairs, faFile, faList, faPen, faSignOutAlt, faBullhorn, faBookOpenReader, faChartBar,
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { SemesterSwitcher } from '@/components/Header/SemesterSwitcher';
 import { RoleSwitcher } from '@/components/Header/RoleSwitcher';
@@ -18,6 +15,7 @@ import { useGlobalContext } from '@/context/GlobalContext';
 import { Role } from '@/resources/common/Role';
 import { HeaderContent } from '@/components/Header/HeaderContent';
 import { UserSettings } from '@/resources/common/UserSettings';
+import { NavbarLink } from '@/components/Header/NavbarLink';
 
 type Props = {
     userSettings: UserSettings
@@ -89,7 +87,7 @@ export function PrivateHeader({
     };
 
     return (
-        <Header showFetchingIndicator={isFetching > 0}>
+        <Header showFetchingIndicator={isFetching > 0} currentRole={currentRole}>
             <HeaderContent align="start">
                 <RoleSwitcher
                     currentRole={currentRole}
@@ -102,120 +100,94 @@ export function PrivateHeader({
                 {currentRole === 'student'
                     ? (
                         <>
-                            <LinkContainer to="/student/task-manager">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faFile} />
-                                    {' '}
-                                    {t('navbar.taskmanager')}
-                                </Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/student/quizzes">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faPen} />
-                                    {' '}
-                                    {t('navbar.quizzes')}
-                                </Nav.Link>
-                            </LinkContainer>
+                            <NavbarLink
+                                to="/student/task-manager"
+                                icon={faFile}
+                                text={t('navbar.taskmanager')}
+                            />
+                            <NavbarLink
+                                to="/student/quizzes"
+                                icon={faPen}
+                                text={t('navbar.quizzes')}
+                            />
                         </>
                     ) : null}
                 {currentRole === 'instructor'
                     ? (
                         <>
-                            <LinkContainer to="/instructor/task-manager">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faFile} />
-                                    {' '}
-                                    {t('navbar.taskmanager')}
-                                </Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/instructor/course-manager">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faList} />
-                                    {' '}
-                                    {t('course.courses')}
-                                </Nav.Link>
-                            </LinkContainer>
+                            <NavbarLink
+                                to="/instructor/task-manager"
+                                icon={faFile}
+                                text={t('navbar.taskmanager')}
+                            />
+                            <NavbarLink
+                                to="/instructor/course-manager"
+                                icon={faList}
+                                text={t('course.courses')}
+                            />
                             {availablePlagiarismServices.data?.length
                                 ? (
-                                    <LinkContainer to="/instructor/plagiarism">
-                                        <Nav.Link>
-                                            <FontAwesomeIcon icon={faCrosshairs} />
-                                            {' '}
-                                            {t('navbar.plagiarism')}
-                                        </Nav.Link>
-                                    </LinkContainer>
+                                    <NavbarLink
+                                        to="/instructor/plagiarism"
+                                        icon={faCrosshairs}
+                                        text={t('navbar.plagiarism')}
+                                    />
                                 ) : null}
-                            <LinkContainer to="/instructor/quizzes">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faPen} />
-                                    {' '}
-                                    {t('navbar.quizzes')}
-                                </Nav.Link>
-                            </LinkContainer>
+                            <NavbarLink
+                                to="/instructor/quizzes"
+                                icon={faPen}
+                                text={t('navbar.quizzes')}
+                            />
                         </>
                     ) : null}
                 {currentRole === 'admin'
                     ? (
                         <>
-                            <LinkContainer to="/admin/course-manager">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faList} />
-                                    {' '}
-                                    {t('course.courses')}
-                                </Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/admin/semester-manager">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faCalendar} />
-                                    {' '}
-                                    {t('navbar.semesterManager')}
-                                </Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/admin/notification-manager/notifications">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faBullhorn} />
-                                    {' '}
-                                    {t('navbar.notificationManager')}
-                                </Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/admin/statistics">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon={faChartBar} />
-                                    {' '}
-                                    {t('navbar.statistics')}
-                                </Nav.Link>
-                            </LinkContainer>
+                            <NavbarLink
+                                to="/admin/course-manager"
+                                icon={faList}
+                                text={t('course.courses')}
+                            />
+                            <NavbarLink
+                                to="/admin/semester-manager"
+                                icon={faCalendar}
+                                text={t('navbar.semesterManager')}
+                            />
+                            <NavbarLink
+                                to="/admin/notification-manager/notifications"
+                                icon={faBullhorn}
+                                text={t('navbar.notificationManager')}
+                            />
+                            <NavbarLink
+                                to="/admin/statistics"
+                                icon={faChartBar}
+                                text={t('navbar.statistics')}
+                            />
                         </>
                     ) : null}
             </HeaderContent>
             <HeaderContent align="end">
-                <LinkContainer to="/about">
-                    <Nav.Link>
-                        <FontAwesomeIcon icon={faBookOpenReader} />
-                        {' '}
-                        {t('aboutPage.about')}
-                    </Nav.Link>
-                </LinkContainer>
+                <NavbarLink
+                    to="/about"
+                    icon={faBookOpenReader}
+                    text={t('aboutPage.about')}
+                />
                 <SemesterSwitcher
                     semesters={semesters || []}
                     selected={globalContext.selectedSemester}
                     onChange={globalContext.setSelectedSemester}
                     onRefetch={refetchSemesters}
                 />
-                <LinkContainer to="/settings">
-                    <Nav.Link>
-                        <FontAwesomeIcon icon={faCog} />
-                        {' '}
-                        {t('common.settings')}
-                    </Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/logout">
-                    <Nav.Link>
-                        <FontAwesomeIcon icon={faSignOutAlt} />
-                        {' '}
-                        {t('navbar.logout', { userCode: userSettings.userCode })}
-                    </Nav.Link>
-                </LinkContainer>
+                <NavbarLink
+                    to="/settings"
+                    icon={faCog}
+                    text={t('common.settings')}
+                />
+                <NavbarLink
+                    to="/logout"
+                    icon={faSignOutAlt}
+                    text={t('navbar.logout', { userCode: userSettings.userCode })}
+                />
             </HeaderContent>
         </Header>
     );

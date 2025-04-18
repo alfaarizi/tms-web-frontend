@@ -1,0 +1,37 @@
+.navLink {
+    display: flex;
+    align-items: center;
+    width: min-content;
+    gap: 0.3rem;
+}
+
+.text {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.icon {
+    flex-shrink: 0;
+}
+
+.navLink.compact .text {
+    display: none;
+}
+
+@media (max-width: 767.98px) { /* < md */
+    :global(.compact-md):not(:global(.sidebar-show)) .navLink .text {
+        display: none;
+    }
+}
+
+@media (max-width: 991.98px) { /* < lg */
+    :global(.compact-lg):not(:global(.sidebar-show)) .navLink .text {
+        display: none;
+    }
+}
+
+@media (max-width: 1199.98px) { /* < xl */
+    :global(.compact-xl):not(:global(.sidebar-show)) .navLink .text {
+        display: none;
+    }
+}
