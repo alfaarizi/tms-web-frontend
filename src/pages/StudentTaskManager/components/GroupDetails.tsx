@@ -7,6 +7,8 @@ import { DataRow } from '@/components/DataRow';
 import { CustomCard } from '@/components/CustomCard/CustomCard';
 import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
 import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
+import { DaysOfWeek } from '@/resources/common/DaysOfTheWeek';
+import { DateTime } from 'luxon';
 
 type Props = {
     group: Group
@@ -28,6 +30,17 @@ export function GroupDetails({ group }: Props) {
             </CustomCardHeader>
             <DataRow label={t('course.codes')}>{group.course.codes.join(', ')}</DataRow>
             <DataRow label={t('group.number')}>{group.number}</DataRow>
+            {group.day && group.startTime ? (
+                <DataRow label={t('group.startTime')}>
+                    {t(`days.${DaysOfWeek[group.day].toLowerCase()}`)}
+                    ,
+                    {' '}
+                    {DateTime.fromISO(group.startTime).toFormat('HH:mm')}
+                </DataRow>
+            ) : null}
+            {group.roomNumber ? (
+                <DataRow label={t('group.roomNumber')}>{group.roomNumber}</DataRow>
+            ) : null}
             {group.canvasUrl ? (
                 <DataRow label={t('group.canvasCourse')}>
                     <a href={group.canvasUrl} target="_blank" rel="noreferrer">{group.canvasUrl}</a>

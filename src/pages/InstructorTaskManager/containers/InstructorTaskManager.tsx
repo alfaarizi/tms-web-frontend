@@ -1,4 +1,6 @@
-import { faPlus, faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import {
+    faClock, faGear, faPlus, faSort, faUser, faUserGroup,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useMemo, useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
@@ -6,11 +8,15 @@ import { useTranslation } from 'react-i18next';
 import {
     Route, Switch, useHistory, useRouteMatch,
 } from 'react-router';
+import { DateTime, WeekdayNumbers } from 'luxon';
 
 import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { ToolbarDropdown } from '@/components/Buttons/ToolbarDropdown';
 import { SideBarItem } from '@/components/Navigation/SideBarItem';
-import { INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY } from '@/constants/localStorageKeys';
+import {
+    INSTRUCTOR_GROUP_ORDER_BY_LOCAL_STORAGE_KEY,
+    INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY,
+} from '@/constants/localStorageKeys';
 import { useActualSemester, useSelectedSemester } from '@/hooks/common/SemesterHooks';
 import { useUserSettings } from '@/hooks/common/UserHooks';
 import { useCourses } from '@/hooks/instructor/CoursesHooks';
@@ -29,11 +35,17 @@ import {
     StudentCodeViewerPage,
 } from '@/pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage';
 import { Group } from '@/resources/instructor/Group';
+import { DaysOfWeek } from '@/resources/common/DaysOfTheWeek';
 
 enum GroupView {
     ALL = 'all',
     INSTRUCTOR = 'instructor'
 }
+
+enum OrderBy {
+    TIMELINE = 'timeline',
+}
+
 export function InstructorTaskManager() {
     const { selectedSemesterID } = useSelectedSemester();
     const actualSemester = useActualSemester();
@@ -45,16 +57,28 @@ export function InstructorTaskManager() {
     const courses = useCourses(false, true, false);
 
     const [groupView, setGroupView] = useState<GroupView>(GroupView.ALL);
+    const [orderByType, setOrderByType] = useState<OrderBy | null>(null);
 
     useEffect(() => {
-        const value = localStorage.getItem(INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY);
+        const view = localStorage.getItem(INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY);
 
         // Check if the loaded value is a valid view
-        switch (value) {
+        switch (view) {
         case GroupView.ALL:
         case GroupView.INSTRUCTOR:
             // If it is valid set the new view
-            setGroupView(value);
+            setGroupView(view);
+            break;
+        default:
+            break;
+        }
+
+        const orderBy = localStorage.getItem(INSTRUCTOR_GROUP_ORDER_BY_LOCAL_STORAGE_KEY);
+        // Check if the loaded value is a valid sorting
+        switch (orderBy) {
+        case OrderBy.TIMELINE:
+            // If it is valid set the new order by type
+            setOrderByType(orderBy);
             break;
         default:
             break;
@@ -74,6 +98,15 @@ export function InstructorTaskManager() {
         localStorage.setItem(INSTRUCTOR_GROUP_VIEW_LOCAL_STORAGE_KEY, newGroupView);
     };
 
+    const handleOrderByChange = (orderBy: OrderBy|null) => {
+        setOrderByType(orderBy);
+        if (orderBy) {
+            localStorage.setItem(INSTRUCTOR_GROUP_ORDER_BY_LOCAL_STORAGE_KEY, orderBy);
+        } else {
+            localStorage.removeItem(INSTRUCTOR_GROUP_ORDER_BY_LOCAL_STORAGE_KEY);
+        }
+    };
+
     const filteredGroups = useMemo(() => {
         if (groupView === GroupView.INSTRUCTOR) {
             return groups.data?.filter((group: Group) => {
@@ -86,13 +119,38 @@ export function InstructorTaskManager() {
         return groups.data;
     }, [groups.data, groupView]);
 
+    const sortedGroups = useMemo(() => {
+        if (!filteredGroups) return [];
+
+        const sorted = [...filteredGroups];
+
+        switch (orderByType) {
+        case OrderBy.TIMELINE:
+            sorted.sort((a, b) => {
+                if (!a.startTime) return 1;
+                if (!b.startTime) return -1;
+
+                const dateTimeA = DateTime.fromISO(a.startTime)
+                    .set({ weekday: a.day as WeekdayNumbers });
+                const dateTimeB = DateTime.fromISO(b.startTime)
+                    .set({ weekday: b.day as WeekdayNumbers });
+                return dateTimeA.toMillis() - dateTimeB.toMillis();
+            });
+            break;
+        default:
+            break;
+        }
+
+        return sorted;
+    }, [filteredGroups, orderByType]);
+
     const isLecturer = courses.data ? courses.data.length > 0 : false;
 
     return (
         <SideBarLayout
             sidebarTitle={t('common.groups')}
             sidebarItems={
-                filteredGroups?.map((group) => (
+                sortedGroups?.map((group) => (
                     <SideBarItem
                         key={group.id}
                         title={group.course.name}
@@ -104,6 +162,14 @@ export function InstructorTaskManager() {
                             :
                             {' '}
                             {group.number}
+                            {group.day && group.startTime ? (
+                                <>
+                                    {' | '}
+                                    {t(`days.${DaysOfWeek[group.day].toLowerCase()}`)}
+                                    {', '}
+                                    {DateTime.fromISO(group.startTime).toFormat('HH:mm')}
+                                </>
+                            ) : null}
                         </p>
                     </SideBarItem>
                 )) || []
@@ -117,14 +183,14 @@ export function InstructorTaskManager() {
                                     <ToolbarButton
                                         className="float-right"
                                         icon={faPlus}
-                                        text={t('common.add')}
+                                        text=""
                                         onClick={handleNewGroupOpen}
                                         displayTextBreakpoint="xs"
                                     />
                                 )
                                 : null}
                             <ToolbarDropdown
-                                text={t('common.groupView')}
+                                text=""
                                 displayTextBreakpoint="xs"
                                 icon={groupView === GroupView.ALL ? faUserGroup : faUser}
                             >
@@ -143,6 +209,24 @@ export function InstructorTaskManager() {
                                     <FontAwesomeIcon icon={faUser} />
                                     {' '}
                                     {t('common.asInstructor')}
+                                </Dropdown.Item>
+                            </ToolbarDropdown>
+                            <ToolbarDropdown text="" icon={faSort}>
+                                <Dropdown.Item
+                                    onSelect={() => handleOrderByChange(null)}
+                                    active={!orderByType}
+                                >
+                                    <FontAwesomeIcon icon={faGear} />
+                                    {' '}
+                                    {t('group.defaultSort')}
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    onSelect={() => handleOrderByChange(OrderBy.TIMELINE)}
+                                    active={orderByType === OrderBy.TIMELINE}
+                                >
+                                    <FontAwesomeIcon icon={faClock} />
+                                    {' '}
+                                    {t('group.startTime')}
                                 </Dropdown.Item>
                             </ToolbarDropdown>
                         </>

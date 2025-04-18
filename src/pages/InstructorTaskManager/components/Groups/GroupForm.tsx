@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +14,7 @@ import { Course } from '@/resources/common/Course';
 import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 import timezones from '@/i18n/timezones.json';
 import { getUserTimezone } from '@/utils/getUserTimezone';
+import { DaysOfWeek } from '@/resources/common/DaysOfTheWeek';
 
 type Props = {
     title: string,
@@ -59,13 +60,22 @@ export function GroupForm({
             setValue('number', editData.number);
             setValue('timezone', editData.timezone);
             setValue('isExamGroup', editData.isExamGroup);
+            setValue('day', editData.day);
+            setValue('startTime', editData.startTime?.substring(0, 5));
+            setValue('roomNumber', editData.roomNumber);
         } else {
             setValue('timezone', getUserTimezone());
         }
     }, [editData]);
 
+    const [hasSchedule, setHasSchedule] = useState(!!editData?.day);
+
     const onSubmit = handleSubmit(async (data) => {
         const newData = { ...data };
+        if (!hasSchedule) {
+            newData.day = null;
+            newData.startTime = null;
+        }
         if (editData) {
             newData.id = editData.id;
         }
@@ -129,6 +139,77 @@ export function GroupForm({
                         }
                     </Form.Control>
                     {errors.timezone && <FormError message={errors.timezone.message} />}
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Check
+                        type="checkbox"
+                        id="groupForm-hasSchedule"
+                        label={t('group.hasSchedule')}
+                        checked={hasSchedule}
+                        onChange={(e) => setHasSchedule(e.target.checked)}
+                    />
+                </Form.Group>
+
+                {hasSchedule ? (
+                    <>
+                        <Form.Group>
+                            <Form.Label>
+                                {t('group.day')}
+                                :
+                            </Form.Label>
+                            <Form.Control
+                                size="sm"
+                                as="select"
+                                {...register('day', {
+                                    required: hasSchedule
+                                        ? t('group.dayRequired').toString()
+                                        : false,
+                                })}
+                            >
+                                {Object.entries(DaysOfWeek)
+                                    .filter(([_, value]) => typeof value === 'number')
+                                    .map(([key, value]) => (
+                                        <option key={value} value={value}>
+                                            {t(`days.${key.toLowerCase()}`)}
+                                        </option>
+                                    ))}
+                            </Form.Control>
+                            {errors.day && <FormError message={errors.day.message} />}
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>
+                                {t('group.startTime')}
+                                :
+                            </Form.Label>
+                            <Form.Control
+                                type="time"
+                                {...register('startTime', {
+                                    required: hasSchedule
+                                        ? t('group.startTimeRequired').toString()
+                                        : false,
+                                })}
+                                size="sm"
+                            />
+                            {errors.startTime && <FormError message={errors.startTime.message} />}
+                        </Form.Group>
+                    </>
+                ) : null}
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('group.roomNumber')}
+                        :
+                    </Form.Label>
+                    <Form.Control
+                        type="text"
+                        {...register('roomNumber', {
+                            required: false,
+                        })}
+                        size="sm"
+                    />
+                    {errors.roomNumber && <FormError message={errors.roomNumber.message} />}
                 </Form.Group>
 
                 <Form.Group>

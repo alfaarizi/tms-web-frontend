@@ -11,6 +11,8 @@ import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 import { Group } from '@/resources/instructor/Group';
 import { DataRow } from '@/components/DataRow';
 import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
+import { DaysOfWeek } from '@/resources/common/DaysOfTheWeek';
+import { DateTime } from 'luxon';
 
 type Props = {
     isActualSemester: boolean,
@@ -92,6 +94,18 @@ export function GroupDetails({
             <DataRow label="ID">{group.id}</DataRow>
             <DataRow label={t('course.codes')}>{group.course.codes}</DataRow>
             <DataRow label={t('group.number')}>{group.number}</DataRow>
+            {group.day && group.startTime ? (
+                <DataRow label={t('group.startTime')}>
+                    {t(`days.${DaysOfWeek[group.day].toLowerCase()}`)}
+                    ,
+                    {' '}
+                    {DateTime.fromISO(group.startTime).toFormat('HH:mm')}
+                </DataRow>
+            ) : null}
+            {group.roomNumber ? (
+                <DataRow label={t('group.roomNumber')}>{group.roomNumber}</DataRow>
+            ) : null}
+
             {group.canvasUrl ? (
                 <DataRow label={t('group.canvasCourse')}>
                     <a href={group.canvasUrl} target="_blank" rel="noreferrer">{group.canvasUrl}</a>
