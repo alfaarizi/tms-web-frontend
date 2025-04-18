@@ -1,13 +1,13 @@
 import { Controller } from 'react-hook-form';
 import { ReactNode } from 'react';
 
-import { InsertFunc, ReactMdeWithCommands } from '@/components/ReactMdeWithCommands';
+import { MarkdownEditor, ImageGalleryInsertFunc } from '@/components/Markdown/MarkdownEditor/MarkdownEditor';
 
 interface Props {
     name: string,
     control: any,
     rules: object,
-    renderGallery?: (insertFunc: InsertFunc) => ReactNode
+    renderGallery?: (insertFunc: ImageGalleryInsertFunc) => ReactNode
 }
 
 /**
@@ -25,11 +25,7 @@ export function MarkdownFormControl({
             defaultValue=""
             rules={rules}
             render={({ field }) => (
-                <ReactMdeWithCommands
-                    value={field.value}
-                    onChange={field.onChange}
-                    renderGallery={renderGallery}
-                />
+                <MarkdownEditor value={field.value} onChange={field.onChange} renderGallery={renderGallery} />
             )}
         />
     );

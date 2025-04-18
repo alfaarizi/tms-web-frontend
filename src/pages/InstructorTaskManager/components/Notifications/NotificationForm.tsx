@@ -11,7 +11,7 @@ import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
 import { Notification } from '@/resources/instructor/Notification';
 import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 import { DateTimePickerControl } from '@/components/DateTimePickerControl';
-import { MarkdownFormControl } from '@/components/MarkdownFormControl';
+import { MarkdownFormControl } from '@/components/Markdown/MarkdownFormControl';
 
 type Props = {
     title: string,

@@ -23,8 +23,8 @@ import {
 import { AnswerFormModal } from '@/pages/InstructorExamination/components/QuestionSets/AnswerFormModal';
 import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
-import { InsertFunc } from '@/components/ReactMdeWithCommands';
 import { QuizImageGallery } from '@/pages/InstructorExamination/containers/QuestionSets/QuizImageGallery';
+import { ImageGalleryInsertFunc } from '@/components/Markdown/MarkdownEditor/MarkdownEditor';
 
 type Props = {
     questionSet: QuizQuestionSet
@@ -119,7 +119,7 @@ export function QuestionsEditor({ questionSet }: Props) {
         }
     };
 
-    const renderGallery = (insertFunc: InsertFunc) => (
+    const renderGallery = (insertFunc: ImageGalleryInsertFunc) => (
         <QuizImageGallery
             questionSetID={questionSet.id}
             insertFunc={insertFunc}

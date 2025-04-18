@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 import { ListCardItem } from '@/components/ListCardItem/ListCardItem';
 import { QuizAnswer } from '@/resources/instructor/QuizAnswer';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 import { IsCorrect } from '@/components/IsCorrect';
 
 type Props = {

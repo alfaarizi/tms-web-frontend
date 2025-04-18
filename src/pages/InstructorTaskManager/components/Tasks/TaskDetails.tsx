@@ -10,7 +10,7 @@ import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 import { CustomCard } from '@/components/CustomCard/CustomCard';
 import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
 import { IconTooltip } from '@/components/IconTooltip';
 

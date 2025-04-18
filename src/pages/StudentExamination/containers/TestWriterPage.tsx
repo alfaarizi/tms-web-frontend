@@ -5,7 +5,7 @@ import { useHistory, useRouteMatch } from 'react-router';
 
 import { FormButtons } from '@/components/Buttons/FormButtons';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner/FullScreenSpinner';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 import { QuizQuestionCard } from '@/components/QuizQuestionCard';
 import { useStartWriteMutation, useFinishWriteMutation } from '@/hooks/student/QuizTestInstanceHooks';
 import { TestWriterHeader } from '@/pages/StudentExamination/components/TestWriterHeader';

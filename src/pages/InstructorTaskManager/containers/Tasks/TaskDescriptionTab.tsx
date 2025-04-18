@@ -3,7 +3,7 @@ import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
 import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
 import { useTranslation } from 'react-i18next';
 import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 
 interface TaskDescriptionTabProps {
     taskCategory: string,
