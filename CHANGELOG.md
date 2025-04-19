@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.13.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.12.0...v4.13.0) (2025-04-19)
+
+
+### Features
+
+* Add breadcrumbs for easier navigation ([f12893d](https://gitlab.com/tms-elte/frontend-react/commit/f12893d84960a19c5da560d9b941c99e3dbbaa17))
+* Add timetable settings for groups ([19b99fb](https://gitlab.com/tms-elte/frontend-react/commit/19b99fbbac31b41d946e5b747da070e6469ad19e))
+* Extend task edit interface with email notification checkbox ([acca233](https://gitlab.com/tms-elte/frontend-react/commit/acca233ef9795307c700f7c6d2a6241bfb043646))
+
+
+### Bug Fixes
+
+* Adjusted top menu to properly wrap on smaller screens ([134b7a1](https://gitlab.com/tms-elte/frontend-react/commit/134b7a1b3596364cd46e0aed3aaa1129ba268bbd))
+
 ## [4.12.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.11.0...v4.12.0) (2025-04-11)
 
 
