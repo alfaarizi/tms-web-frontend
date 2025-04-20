@@ -3,22 +3,24 @@ import { useTranslation } from 'react-i18next';
 import {
     Alert, Button, Form, Spinner,
 } from 'react-bootstrap';
+import { Option } from 'react-bootstrap-typeahead/types/types';
 import { useForm } from 'react-hook-form';
+import RegExParser from 'regex-parser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import { AddUserFormControl, AddUserMode } from '@/components/AddUsers/AddUserFormControl';
 import { CustomCard } from '@/components/CustomCard/CustomCard';
 import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
-import { UserAddResponse } from '@/resources/instructor/UserAddResponse';
 import { ErrorAlert } from '@/components/ErrorAlert';
-import { getFirstError } from '@/utils/getFirstError';
-import { Option } from 'react-bootstrap-typeahead/types/types';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 import { User } from '@/resources/common/User';
-import { AddUserFormControl, AddUserMode } from '@/components/AddUsers/AddUserFormControl';
-import { extractUserCodes } from '@/utils/extractUserCodes';
-import { getSelectedUserCodes } from '@/utils/getSelectedUserCodes';
+import { UserAddResponse } from '@/resources/instructor/UserAddResponse';
 import { useTextPaste } from '@/ui-hooks/useTextPaste';
+import { extractUserCodes } from '@/utils/extractUserCodes';
+import { getFirstError } from '@/utils/getFirstError';
+import { getSelectedUserCodes } from '@/utils/getSelectedUserCodes';
 
 type Props = {
     id: string,
@@ -37,8 +39,8 @@ type FormData = {
     selectedUserCodes: Option[]
 }
 
-function validateList(value: string[]): boolean {
-    return value.length > 0 && value.every((code) => code.length === 6);
+function validateList(value: string[], format: RegExp): boolean {
+    return value.length > 0 && value.every((code) => format.test(code));
 }
 
 export function AddUserCard({
@@ -53,6 +55,7 @@ export function AddUserCard({
     allowNew = false,
 }: Props) {
     const { t } = useTranslation();
+    const userCodeFormat = RegExParser(usePrivateSystemInfoQuery().data?.userCodeFormat ?? '/.*/');
     const {
         control,
         handleSubmit,
@@ -78,7 +81,7 @@ export function AddUserCard({
             setValue('importedUserCodes', '');
         } else {
             const codes = getSelectedUserCodes(formData.selectedUserCodes);
-            if (validateList(codes)) {
+            if (validateList(codes, userCodeFormat)) {
                 onAdd(codes);
                 setValue('selectedUserCodes', []);
             }
