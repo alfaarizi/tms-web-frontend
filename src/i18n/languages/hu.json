@@ -188,6 +188,7 @@
     "quizzes": "Kvízek",
     "logout": "Kijelentkezés ({{userCode}})",
     "role": "Szerepkör",
+    "ipRestrictionManager" : "IP Cím kezelő",
     "roles": {
       "student": "Hallgató",
       "instructor": "Oktató",
@@ -307,6 +308,9 @@
     "grade": "Értékelés",
     "notes": "Megjegyzések",
     "ipAddresses": "IP címek",
+    "ipRestrictions": "IP cím korlátozások",
+    "instructorFiles": "Mellékelt fájlok",
+    "instructorFilesHelp": "Az itt feltöltött fájlok a hallgatók számára is hozzáférhetőek lesznek (amennyiben a feladat már elérhető számukra).",
     "taskFiles": "Mellékelt fájlok",
     "taskFilesHelp": "Az itt feltöltött fájlok a hallgatók számára is hozzáférhetőek lesznek (amennyiben a feladat már elérhető számukra).",
     "solution": "Megoldás",
@@ -470,6 +474,10 @@
       "address": "IP cím",
       "sameTaskUpload": "Jelenlegi feladathoz.",
       "sameTaskDownload": "Jelenlegi feladat megoldását."
+    },
+    "ipDisallowed": {
+      "title": "Nem engedélyezett IP cím",
+      "description": "A feladat leírásának megtekintése, valamint megoldás feltöltése nem engedélyezett, mivel a használt IP cím nem szerepel a feladat IP cím tartományában."
     }
   },
   "status": {
@@ -583,5 +591,19 @@
     "tasksCount": "Feladatok száma",
     "submissionsCount": "Megoldások száma",
     "testedSubmissionsCount": "Tesztelt beadások száma"
+  },
+  "ipRestriction": {
+    "ipRestrictions" : "IP cím korlátozások",
+    "name": "Név",
+    "ipAddress": "IP cím",
+    "ipMask": "IP maszk",
+    "newIpRestriction": "Új IP cím korlátozás",
+    "editIpRestriction": "IP cím korlátozás szerkesztése",
+    "enterIpAddress": "Adja meg az IP címet",
+    "enterIpMask": "Adja meg az IP maszkot",
+    "enterName": "Adja meg az IP korlátozás nevét",
+    "resetWarning" : "Megjegyzés: A feladat szerkesztése visszaállítja a korábbi IP-korlátozások kiválasztását. Újra ki kell választania őket, ha meg akarja tartani őket.",
+    "selectAddresses" : "Válaszd ki az IP cím korlátozásokat",
+    "selectedAddresses" : "Kiválasztott IP cím korlátozások"
   }
 }

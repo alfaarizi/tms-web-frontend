@@ -96,14 +96,16 @@ export function TaskDetails({
                 </DataRow>
             ) : null}
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>
-            <hr />
             {(showDescription)
                 && (
-                    <DataRow label={t('task.description')}>
-                        {task.category === 'Canvas tasks'
-                            ? <MultiLineTextBlock text={task.description} />
-                            : <MarkdownRenderer source={task.description} />}
-                    </DataRow>
+                    <>
+                        <hr />
+                        <DataRow label={t('task.description')}>
+                            {task.category === 'Canvas tasks'
+                                ? <MultiLineTextBlock text={task.description} />
+                                : <MarkdownRenderer source={task.description} />}
+                        </DataRow>
+                    </>
                 )}
         </CustomCard>
     );

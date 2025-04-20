@@ -187,6 +187,7 @@
     "quizzes": "Quizzes",
     "logout": "Logout ({{userCode}})",
     "role": "Role",
+    "ipRestrictionManager" : "IP Address Manager",
     "roles": {
       "student": "Student",
       "instructor": "Instructor",
@@ -305,6 +306,9 @@
     "grade": "Grade",
     "notes": "Notes",
     "ipAddresses": "IP Addresses",
+    "ipRestrictions": "IP Address Restrictions",
+    "instructorFiles": "Instructor files",
+    "instructorFilesHelp": "Files uploaded here will be accessible for students (once the task is available for them).",
     "taskFiles": "Task files",
     "taskFilesHelp": "Files uploaded here will be accessible for students (once the task is available for them).",
     "solution": "Solution",
@@ -468,6 +472,10 @@
       "address": "IP address",
       "sameTaskUpload": "Current submission.",
       "sameTaskDownload": "Current submission."
+    },
+    "ipDisallowed": {
+      "title": "Disallowed IP address",
+      "description": "Viewing the task description or submitting a solution is not permitted, as your IP address is not whitelisted for this task."
     }
   },
   "status": {
@@ -582,5 +590,19 @@
     "tasksCount": "Tasks count",
     "submissionsCount": "Submissions count",
     "testedSubmissionsCount": "Tested submissions count"
+  },
+  "ipRestriction": {
+    "ipRestrictions" : "IP Address Restrictions",
+    "name": "Name",
+    "ipAddress": "IP Address",
+    "ipMask": "IP Mask",
+    "newIpRestriction": "New IP Restriction",
+    "editIpRestriction": "Edit IP Restriction",
+    "enterIpAddress": "Enter IP address",
+    "enterIpMask": "Enter IP mask",
+    "enterName": "Enter IP restriction name",
+    "resetWarning": "Note: Editing the Task will reset the previous IP restrictions selections. You need to select them again if you want to keep them.",
+    "selectAddresses" : "Select IP address restrictions",
+    "selectedAddresses" : "Selected IP address restrictions:"
   }
 }

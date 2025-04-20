@@ -22,6 +22,7 @@ export interface Task {
     exitPasswordProtected: boolean;
     entryPasswordProtected: boolean;
     entryPasswordUnlocked: boolean;
+    isIpAddressAllowed: boolean;
     canvasUrl?: string;
     appType?: string;
     isSubmissionCountRestricted: boolean;

@@ -19,6 +19,7 @@ import { NotificationToast } from '@/components/NotificationToast/NotificationTo
 import Home from '@/pages/Home';
 import Logout from '@/pages/Logout';
 import ErrorPage from '@/pages/ErrorPage';
+import AdminIpRestrictionManager from '@/pages/AdminIpRestrictionManager';
 import { PrivateHeader } from '@/containers/PrivateHeader';
 import { PublicHeader } from '@/containers/PublicHeader';
 import { NotificationAlerts } from '@/components/NotificationAlerts/NotificationAlerts';
@@ -180,6 +181,9 @@ export function App() {
                     </ProtectedRoute>
                     <ProtectedRoute hasPermission={isAdmin} path="/admin/notification-manager">
                         <AdminNotificationManager />
+                    </ProtectedRoute>
+                    <ProtectedRoute hasPermission={isAdmin} path="/admin/ip-restriction-manager">
+                        <AdminIpRestrictionManager />
                     </ProtectedRoute>
                     <ProtectedRoute hasPermission={isAdmin} path="/admin/statistics">
                         <AdminStatistics />

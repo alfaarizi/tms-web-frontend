@@ -97,6 +97,22 @@ export function TaskDetails({
                 )}
 
             </DataRow>
+            {task.ipRestrictions && task.ipRestrictions.length > 0 ? (
+                <DataRow label={t('task.ipRestrictions')}>
+                    {(task.ipRestrictions ?? []).map((restriction, index) => (
+                        <div key={restriction.id}>
+                            {restriction.ipAddress}
+                            /
+                            {restriction.ipMask}
+                            {index < (task.ipRestrictions ?? []).length - 1 && ', '}
+                        </div>
+                    ))}
+                </DataRow>
+            ) : (
+                <DataRow label={t('task.ipRestrictions')}>
+                    {t('common.no')}
+                </DataRow>
+            )}
             {showVersionControl ? (
                 <DataRow label={t('task.isVersionControlled')}>
                     {task.isVersionControlled ? t('common.yes') : t('common.no')}

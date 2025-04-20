@@ -1,5 +1,6 @@
 import { Group } from '@/resources/instructor/Group';
 import { Semester } from '@/resources/common/Semester';
+import { IpRestriction } from '@/resources/instructor/IpRestriction';
 
 export interface Task {
     id: number;
@@ -38,4 +39,5 @@ export interface Task {
     taskLevelGitRepo?: string;
     isSubmissionCountRestricted: boolean;
     submissionLimit: number;
+    ipRestrictions?: Array<IpRestriction>
 }
