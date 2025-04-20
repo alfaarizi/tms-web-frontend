@@ -21,6 +21,8 @@ import { SubmissionsListTab } from '@/pages/InstructorTaskManager/containers/Tas
 import { TaskDescriptionTab } from '@/pages/InstructorTaskManager/containers/Tasks/TaskDescriptionTab';
 import { TaskFilesTab } from '@/pages/InstructorTaskManager/containers/Tasks/TaskFilesTab';
 import { useShow } from '@/ui-hooks/useShow';
+import { useIpRestrictions } from '@/hooks/instructor/IpRestrictionItemHooks';
+import { IpRestrictionItem } from '@/resources/instructor/IpRestrictionItem';
 
 type Params = {
     id?: string
@@ -39,10 +41,16 @@ export function TaskDetailsPage() {
     const startCodeCompassMutation = useStartCodeCompassMutation(parseInt(id || '-1', 10));
     const stopCodeCompassMutation = useStopCodeCompassMutation(parseInt(id || '-1', 10));
     const [updateErrorBody, setUpdateErrorBody] = useState<ValidationErrorBody | null>(null);
+    const ipRestrictions = useIpRestrictions();
+    const [selectedIpRestrictions, setSelectedIpRestrictions] = useState<IpRestrictionItem[]>([]);
 
     if (!task.data) {
         return null;
     }
+
+    const handleIpRestrictionsChange = (selectedOptions: IpRestrictionItem[]) => {
+        setSelectedIpRestrictions(selectedOptions); // Update selected restrictions
+    };
 
     const handleEditSave = async (data: Task, emailNotification?: boolean) => {
         try {
@@ -129,6 +137,9 @@ export function TaskDetailsPage() {
                     showVersionControl={false}
                     serverSideError={updateErrorBody}
                     isLoading={updateMutation.isLoading}
+                    ipRestrictions={ipRestrictions.data || []} // Pass IP restrictions to the form
+                    handleIpRestrictionsChange={handleIpRestrictionsChange} // Pass the change handler
+                    selectedIpRestrictions={selectedIpRestrictions}
                 />
             ) : (
                 <TaskDetails

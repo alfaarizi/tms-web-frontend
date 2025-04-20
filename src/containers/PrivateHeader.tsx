@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import {
-    faCalendar, faCog, faCrosshairs, faFile, faList, faPen, faSignOutAlt, faBullhorn, faBookOpenReader, faChartBar,
+    faCalendar, faCog, faCrosshairs, faFile, faList, faPen, faSignOutAlt, faBullhorn,
+    faBookOpenReader, faServer, faChartBar,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { SemesterSwitcher } from '@/components/Header/SemesterSwitcher';
@@ -152,6 +153,11 @@ export function PrivateHeader({
                                 to="/admin/semester-manager"
                                 icon={faCalendar}
                                 text={t('navbar.semesterManager')}
+                            />
+                            <NavbarLink
+                                to="/admin/ip-restriction-manager/ip-restriction"
+                                icon={faServer}
+                                text={t('navbar.ipRestrictionManager')}
                             />
                             <NavbarLink
                                 to="/admin/notification-manager/notifications"

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 import { FormError } from '@/components/FormError';
@@ -12,6 +13,8 @@ import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 import { MarkdownFormControl } from '@/components/MarkdownFormControl';
 import { useTextPaste } from '@/ui-hooks/useTextPaste';
+import { IpRestrictionDropdown } from '@/pages/InstructorTaskManager/components/Tasks/IpRestrictionDropDown';
+import { IpRestrictionItem } from '@/resources/instructor/IpRestrictionItem';
 
 type Props = {
     title: string,
@@ -21,7 +24,10 @@ type Props = {
     editData?: Task,
     showVersionControl: boolean,
     serverSideError: ValidationErrorBody | null,
-    isLoading: boolean
+    isLoading: boolean,
+    ipRestrictions: IpRestrictionItem[],
+    handleIpRestrictionsChange: (selectedOptions: IpRestrictionItem[]) => void,
+    selectedIpRestrictions: IpRestrictionItem[],
 }
 
 export function TaskForm({
@@ -33,6 +39,9 @@ export function TaskForm({
     showVersionControl,
     serverSideError,
     isLoading,
+    ipRestrictions,
+    handleIpRestrictionsChange,
+    selectedIpRestrictions,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -54,8 +63,26 @@ export function TaskForm({
 
     const handleTextPaste = useTextPaste(setValue);
 
+    useEffect(() => {
+        if (editData && editData.ipRestrictions) {
+            const mappedRestrictions = editData.ipRestrictions
+                .map((restriction: any) => ipRestrictions
+                    .find((ip: IpRestrictionItem) => ip.ipAddress === restriction.ipAddress
+                    && ip.ipMask === restriction.ipMask))
+                .filter(Boolean) as IpRestrictionItem[];
+            handleIpRestrictionsChange(mappedRestrictions);
+        }
+    }, [editData, ipRestrictions]);
+
     const onSubmit = handleSubmit((data) => {
-        onSave(data, editData ? data.emailNotification : undefined);
+        const taskData = {
+            ...data,
+            ipRestrictions: selectedIpRestrictions.map((item) => ({
+                ipAddress: item.ipAddress,
+                ipMask: item.ipMask,
+            })),
+        };
+        onSave(taskData, editData ? data.emailNotification : undefined);
     });
 
     return (
@@ -148,7 +175,6 @@ export function TaskForm({
                     />
                     {errors.hardDeadline && <FormError message={errors.hardDeadline.message} />}
                 </Form.Group>
-
                 {editData && (
                     <Form.Group>
                         <Form.Check
@@ -162,7 +188,6 @@ export function TaskForm({
                         </Form.Text>
                     </Form.Group>
                 )}
-
                 <Form.Group>
                     <Form.Label>
                         {t('task.restrictSubmissionAttempts.maxAttempts')}
@@ -231,6 +256,18 @@ export function TaskForm({
                         </Form.Group>
                     )
                     : null}
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('ipRestriction.ipRestrictions')}
+                        :
+                    </Form.Label>
+                    <IpRestrictionDropdown
+                        ipRestrictions={ipRestrictions}
+                        selectedIpRestrictions={selectedIpRestrictions}
+                        handleIpRestrictionsChange={handleIpRestrictionsChange}
+                    />
+                </Form.Group>
 
                 <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>

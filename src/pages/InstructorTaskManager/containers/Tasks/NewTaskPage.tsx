@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 
 import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { useIpRestrictions } from '@/hooks/instructor/IpRestrictionItemHooks';
+import { IpRestrictionItem } from '@/resources/instructor/IpRestrictionItem';
 import { useGroup } from '@/hooks/instructor/GroupHooks';
 import { useCreateTaskMutation } from '@/hooks/instructor/TaskHooks';
 import { TaskForm } from '@/pages/InstructorTaskManager/components/Tasks/TaskForm';
@@ -25,6 +27,12 @@ export function NewTaskPage() {
     const createMutation = useCreateTaskMutation();
     const privateSystemInfo = usePrivateSystemInfoQuery();
     const [addErrorBody, setAddErrorBody] = useState<ValidationErrorBody | null>(null);
+    const ipRestrictions = useIpRestrictions();
+    const [selectedIpRestrictions, setSelectedIpRestrictions] = useState<IpRestrictionItem[]>([]);
+
+    const handleIpRestrictionsChange = useCallback((selectedOptions: IpRestrictionItem[]): void => {
+        setSelectedIpRestrictions(selectedOptions);
+    }, []);
 
     const handleSave = async (task: Task) => {
         try {
@@ -76,6 +84,9 @@ export function NewTaskPage() {
                 serverSideError={addErrorBody}
                 timezone={group.data.timezone}
                 isLoading={createMutation.isLoading}
+                ipRestrictions={ipRestrictions.data || []}
+                handleIpRestrictionsChange={handleIpRestrictionsChange}
+                selectedIpRestrictions={selectedIpRestrictions}
             />
         </>
     );

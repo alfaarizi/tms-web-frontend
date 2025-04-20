@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
-import { Breadcrumb } from 'react-bootstrap';
+import { Alert, Breadcrumb } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -152,7 +152,8 @@ export function TaskPage() {
     if (((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && submission.status !== 'Accepted')
             || submission.status === 'Late Submission')
         && !isSubmissionLimitReached
-        && task.data.entryPasswordUnlocked) {
+        && task.data.entryPasswordUnlocked
+        && task.data.isIpAddressAllowed) {
         if (task.data.canvasUrl) {
             uploadCard = <CanvasUploadInfo />;
         } else {
@@ -193,10 +194,18 @@ export function TaskPage() {
                 submission={submission}
                 canvasSyncInProgress={canvasSyncSubmissionMutation.isLoading}
                 onCanvasSync={handleCanvasSync}
-                showDescription={task.data.entryPasswordUnlocked ?? true}
+                showDescription={(task.data.entryPasswordUnlocked && task.data.isIpAddressAllowed) ?? true}
             />
 
-            {(!submission.verified && task.data.entryPasswordUnlocked)
+            {(!task.data.isIpAddressAllowed) && (
+                <Alert variant="danger">
+                    <h5>{t('task.ipDisallowed.title')}</h5>
+                    <hr />
+                    <p>{t('task.ipDisallowed.description')}</p>
+                </Alert>
+            )}
+
+            {(!submission.verified && task.data.entryPasswordUnlocked && task.data.isIpAddressAllowed)
                 && (
                     <VerifyItemForm
                         onSave={handleVerify}
@@ -210,7 +219,7 @@ export function TaskPage() {
                     />
                 )}
 
-            {(!task.data.entryPasswordUnlocked)
+            {(!task.data.entryPasswordUnlocked && task.data.isIpAddressAllowed)
                 && (
                     <VerifyItemForm
                         onSave={handleUnlock}
