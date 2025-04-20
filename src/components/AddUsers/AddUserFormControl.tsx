@@ -2,13 +2,16 @@ import React from 'react';
 import {
     Form, InputGroup, ToggleButton, ToggleButtonGroup,
 } from 'react-bootstrap';
-import { Controller } from 'react-hook-form';
-import { FormError } from '@/components/FormError';
 import { Option } from 'react-bootstrap-typeahead/types/types';
-import { User } from '@/resources/common/User';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { extractUserCodes } from '@/utils/extractUserCodes';
+import RegExParser from 'regex-parser';
+
 import { AsyncTypeaheadControl } from '@/components/AddUsers/AsyncTypeaheadControl';
+import { FormError } from '@/components/FormError';
+import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
+import { User } from '@/resources/common/User';
+import { extractUserCodes } from '@/utils/extractUserCodes';
 
 type Props = {
     toggleValue: AddUserMode,
@@ -44,10 +47,11 @@ export function AddUserFormControl({
     allowNew = false,
 }: Props) {
     const { t } = useTranslation();
+    const userCodeFormat = RegExParser(usePrivateSystemInfoQuery().data?.userCodeFormat ?? '/.*/');
 
     function validateImport(value: string) {
         const isValid = extractUserCodes(value)
-            .every((code) => code.length === 6);
+            .every((code) => userCodeFormat.test(code));
         if (!isValid) {
             return t('common.userCodesRequired');
         }
@@ -57,7 +61,7 @@ export function AddUserFormControl({
 
     function validateOptions(value: Option[]) {
         // custom options also have an userCode field (because of labelKey)
-        const isValid = value.length > 0 && value.every((opt) => (opt as User).userCode.length === 6);
+        const isValid = value.length > 0 && value.every((opt) => userCodeFormat.test((opt as User).userCode));
         if (!isValid) {
             return t('common.userCodeOrNameRequired');
         }
@@ -127,8 +131,8 @@ export function AddUserFormControl({
                     />
                 )}
             </InputGroup>
-            {selectFieldErrorMessage && toggleValue === 'search' && <FormError message={selectFieldErrorMessage} /> }
-            {importFieldErrorMessage && toggleValue === 'import' && <FormError message={importFieldErrorMessage} /> }
+            {selectFieldErrorMessage && toggleValue === 'search' && <FormError message={selectFieldErrorMessage} />}
+            {importFieldErrorMessage && toggleValue === 'import' && <FormError message={importFieldErrorMessage} />}
         </Form.Group>
     );
 }
