@@ -67,14 +67,13 @@ build_production:
   rules:
     - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v[^-]*$/ && $CI_PROJECT_NAMESPACE == "tms-elte"'
 
-# Docker login credentials (similar to backend)
+# Docker login credentials
 .docker-login: &docker-login
   - docker version
   # Login to Docker Hub and GitLab Container Registry
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   - docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_TOKEN"
 
-# Docker build and push for frontend
 .docker:
   stage: build
   image: docker:latest
@@ -85,13 +84,12 @@ build_production:
   before_script:
     - *docker-login
   script:
-    # Build the Docker image for the frontend
+    # Build the Docker image
     - docker build . --pull -t "tmselte/frontend-react:$IMAGE_TAG" -t "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
-    # Push the Docker image to the registry
+    # Push the Docker image to the registries
     - docker push "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
     - docker push "tmselte/frontend-react:$IMAGE_TAG"
 
-# Build and push Docker image for the 'latest' tag (for the master branch)
 docker_latest:
   extends: .docker
   variables:
@@ -99,7 +97,6 @@ docker_latest:
   rules:
     - if: $CI_COMMIT_BRANCH == "master" && $CI_PROJECT_NAMESPACE == "tms-elte"
 
-# Build and push Docker image for 'nightly' builds (for the develop branch)
 docker_nightly:
   extends: .docker
   variables:
@@ -107,7 +104,6 @@ docker_nightly:
   rules:
     - if: $CI_COMMIT_BRANCH == "develop" && $CI_PROJECT_NAMESPACE == "tms-elte"
 
-# Build and push Docker image for specific version tags (similar to backend)
 docker_version:
   extends: .docker
   variables:
@@ -122,7 +118,7 @@ docker_version:
 # Deployment over SSH
 .deploy:
   stage: deploy
-  image: ubuntu:20.04
+  image: ubuntu:24.04
   variables:
     DEPLOY_PATH: /var/www/html
     TEMP_PATH: /tmp/tms_frontend_react_$CI_COMMIT_SHORT_SHA/
@@ -166,6 +162,36 @@ deploy_production:
     url: https://tms.inf.elte.hu/
   rules:
     - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /^v[^-]*$/ && $CI_PROJECT_NAMESPACE == "tms-elte"'
+
+# Deployment to review environment, hosted through GitLab Pages
+# All merge requests
+deploy_review:
+  extends: .build
+  stage: deploy
+  variables:
+    VITE_BASE_URL: "/${CI_PROJECT_NAME}/review-${CI_COMMIT_REF_SLUG}"
+    VITE_API_BASE_URL: https://tms.inf.elte.hu/dev-api
+    VITE_LOGIN_METHOD: MOCK
+    VITE_THEME: blue
+  environment:
+    name: "review/${CI_COMMIT_REF_SLUG}"
+    url: $CI_PAGES_URL
+    auto_stop_in: 2 weeks
+  pages:
+    publish: dist
+    path_prefix: "review-${CI_COMMIT_REF_SLUG}"
+    expire_in: 2 weeks
+  script:
+    - echo "$CD_BRANDING" > public/branding.json
+    - npm run build:static
+    # Create GitLab Pages redirects in Netlify style
+    - echo '/* /index.html 200' > dist/_redirects
+  artifacts:
+    paths:
+      - dist/    
+    expire_in: 1 week
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH =~ /^\d+-.*$/ && $CI_PROJECT_NAMESPACE == "tms-elte"'
 
 # Container Scanning
 container_scanning:
