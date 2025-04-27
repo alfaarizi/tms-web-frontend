@@ -82,6 +82,23 @@ export function useUpdateTaskMutation() {
     });
 }
 
+export function useUpdateCanvasTaskMutation() {
+    const queryClient = useQueryClient();
+
+    return useMutation((newData: Task) => TasksService.updateCanvas(newData), {
+        onSuccess: async (data) => {
+            const key = [QUERY_KEY, { taskID: data.id }];
+            queryClient.setQueryData(key, data);
+
+            await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }]);
+            await queryClient.invalidateQueries([QUERY_KEY, 'forCourse']);
+            await queryClient.invalidateQueries([QUERY_KEY, { groupID: data.groupID }, 'grid']);
+            await queryClient.invalidateQueries([SUBMISSION_QUERY, { taskID: data.id }]);
+            await queryClient.invalidateQueries([SUBMISSION_QUERY, { groupID: data.groupID }]);
+        },
+    });
+}
+
 export function useRemoveTaskMutation() {
     const queryClient = useQueryClient();
 

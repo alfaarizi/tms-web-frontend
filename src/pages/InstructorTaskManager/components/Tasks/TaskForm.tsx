@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 import { FormError } from '@/components/FormError';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +12,12 @@ import { DateTimePickerControl } from '@/components/DateTimePickerControl';
 import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 import { MarkdownFormControl } from '@/components/MarkdownFormControl';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { useTextPaste } from '@/ui-hooks/useTextPaste';
+import {
+    StructuralRequirementFormControl,
+} from '@/pages/InstructorTaskManager/components/Tasks/StructuralRequirementFormControl';
 import { IpRestrictionDropdown } from '@/pages/InstructorTaskManager/components/Tasks/IpRestrictionDropDown';
 import { IpRestrictionItem } from '@/resources/instructor/IpRestrictionItem';
 
@@ -57,6 +62,11 @@ export function TaskForm({
         },
     } = useForm<Task & {emailNotification?: boolean}>({
         defaultValues: { ...editData, emailNotification: editData ? true : undefined },
+    });
+
+    const { fields: requirements, append: requirementAppend, remove: requirementRemove } = useFieldArray({
+        control,
+        name: 'structuralRequirements',
     });
 
     useServersideFormErrors<Task>(clearErrors, setError, serverSideError);
@@ -175,6 +185,34 @@ export function TaskForm({
                     />
                     {errors.hardDeadline && <FormError message={errors.hardDeadline.message} />}
                 </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>
+                        {t('task.structuralRequirement')}
+                        :
+                    </Form.Label>
+                    {requirements.map((requirement, index) => (
+                        <StructuralRequirementFormControl
+                            key={requirement.id}
+                            index={index}
+                            register={register}
+                            requirementRemove={requirementRemove}
+                            errors={errors}
+                        />
+                    ))}
+                    <div>
+                        <ToolbarButton
+                            icon={faPlus}
+                            onClick={() => requirementAppend({ regexExpression: '', type: 'Includes' })}
+                            text={t('common.add')}
+                            displayTextBreakpoint="xs"
+                        />
+                    </div>
+                    {serverSideError?.regexExpression
+                        && <FormError message={serverSideError?.regexExpression[0]} /> }
+                    <Form.Text className="text-muted">{t('task.structuralRequirementHelp')}</Form.Text>
+                </Form.Group>
+
                 {editData && (
                     <Form.Group>
                         <Form.Check
@@ -188,6 +226,7 @@ export function TaskForm({
                         </Form.Text>
                     </Form.Group>
                 )}
+
                 <Form.Group>
                     <Form.Label>
                         {t('task.restrictSubmissionAttempts.maxAttempts')}

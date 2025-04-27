@@ -1,5 +1,6 @@
 import { Group } from '@/resources/instructor/Group';
 import { Semester } from '@/resources/common/Semester';
+import { StructuralRequirement } from '@/resources/instructor/StructuralRequirement';
 import { IpRestriction } from '@/resources/instructor/IpRestriction';
 
 export interface Task {
@@ -39,5 +40,6 @@ export interface Task {
     taskLevelGitRepo?: string;
     isSubmissionCountRestricted: boolean;
     submissionLimit: number;
-    ipRestrictions?: Array<IpRestriction>
+    structuralRequirements?: StructuralRequirement[];
+    ipRestrictions?: Array<IpRestriction>;
 }
