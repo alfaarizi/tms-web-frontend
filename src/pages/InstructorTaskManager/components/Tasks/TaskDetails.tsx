@@ -18,6 +18,7 @@ type Props = {
     task: Task,
     isActualSemester: boolean,
     onEdit: () => void,
+    onCanvasEdit: () => void,
     onRemove: () => void,
     showVersionControl: boolean
 }
@@ -26,23 +27,32 @@ export function TaskDetails({
     isActualSemester,
     onRemove,
     onEdit,
+    onCanvasEdit,
     task,
     showVersionControl,
 }: Props) {
     const { t } = useTranslation();
 
+    let actionButtons = null;
+
+    if (isActualSemester && task.category !== 'Canvas tasks') {
+        actionButtons = (
+            <ButtonGroup>
+                <ToolbarButton icon={faEdit} onClick={onEdit} text={t('common.edit')} />
+                <DeleteToolbarButton onDelete={onRemove} />
+            </ButtonGroup>
+        );
+    } else if (isActualSemester) {
+        actionButtons = (
+            <ToolbarButton icon={faEdit} onClick={onCanvasEdit} text={t('common.edit')} />
+        );
+    }
+
     return (
         <CustomCard>
             <CustomCardHeader>
                 <CustomCardTitle>{task.name}</CustomCardTitle>
-                {isActualSemester && task.category !== 'Canvas tasks'
-                    ? (
-                        <ButtonGroup>
-                            <ToolbarButton icon={faEdit} onClick={onEdit} text={t('common.edit')} />
-                            <DeleteToolbarButton onDelete={onRemove} />
-                        </ButtonGroup>
-                    )
-                    : null}
+                {actionButtons}
             </CustomCardHeader>
 
             <DataRow label="ID">{task.id}</DataRow>

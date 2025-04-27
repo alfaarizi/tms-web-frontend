@@ -54,6 +54,12 @@ export async function update(data: TaskUpdate) {
     return res.data;
 }
 
+export async function updateCanvas(task: Task) {
+    const res = await axiosInstance
+        .patch<Task>(`/instructor/tasks/update-canvas-task/${task.id}`, task);
+    return res.data;
+}
+
 export async function remove(id: number) {
     await axiosInstance.delete(`/instructor/tasks/${id}`);
 }

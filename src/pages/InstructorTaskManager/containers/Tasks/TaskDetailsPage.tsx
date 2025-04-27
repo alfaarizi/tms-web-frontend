@@ -10,7 +10,12 @@ import { ServerSideValidationError, ValidationErrorBody } from '@/exceptions/Ser
 import { useActualSemester } from '@/hooks/common/SemesterHooks';
 import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 import { useStartCodeCompassMutation, useStopCodeCompassMutation } from '@/hooks/instructor/SubmissionHooks';
-import { useRemoveTaskMutation, useTask, useUpdateTaskMutation } from '@/hooks/instructor/TaskHooks';
+import {
+    useRemoveTaskMutation,
+    useTask,
+    useUpdateCanvasTaskMutation,
+    useUpdateTaskMutation,
+} from '@/hooks/instructor/TaskHooks';
 import { Submission } from '@/resources/instructor/Submission';
 import { Task } from '@/resources/instructor/Task';
 import { TaskForm } from '@/pages/InstructorTaskManager/components/Tasks/TaskForm';
@@ -23,6 +28,7 @@ import { TaskFilesTab } from '@/pages/InstructorTaskManager/containers/Tasks/Tas
 import { useShow } from '@/ui-hooks/useShow';
 import { useIpRestrictions } from '@/hooks/instructor/IpRestrictionItemHooks';
 import { IpRestrictionItem } from '@/resources/instructor/IpRestrictionItem';
+import { CanvasTaskForm } from '@/pages/InstructorTaskManager/components/Tasks/CanvasTaskForm';
 
 type Params = {
     id?: string
@@ -34,13 +40,16 @@ export function TaskDetailsPage() {
     const history = useHistory();
     const task = useTask(parseInt(id || '-1', 10));
     const updateMutation = useUpdateTaskMutation();
+    const updateCanvasMutation = useUpdateCanvasTaskMutation();
     const removeMutation = useRemoveTaskMutation();
     const actualSemester = useActualSemester();
     const privateSystemInfo = usePrivateSystemInfoQuery();
     const showEdit = useShow();
+    const showCanvasEdit = useShow();
     const startCodeCompassMutation = useStartCodeCompassMutation(parseInt(id || '-1', 10));
     const stopCodeCompassMutation = useStopCodeCompassMutation(parseInt(id || '-1', 10));
     const [updateErrorBody, setUpdateErrorBody] = useState<ValidationErrorBody | null>(null);
+    const [updateCanvasErrorBody, setCanvasUpdateErrorBody] = useState<ValidationErrorBody | null>(null);
     const ipRestrictions = useIpRestrictions();
     const [selectedIpRestrictions, setSelectedIpRestrictions] = useState<IpRestrictionItem[]>([]);
 
@@ -50,6 +59,21 @@ export function TaskDetailsPage() {
 
     const handleIpRestrictionsChange = (selectedOptions: IpRestrictionItem[]) => {
         setSelectedIpRestrictions(selectedOptions); // Update selected restrictions
+    };
+
+    const handleCanvasEditSave = async (data: Task) => {
+        try {
+            await updateCanvasMutation.mutateAsync({
+                ...data,
+                id: task.data.id,
+            });
+            showCanvasEdit.toHide();
+            setCanvasUpdateErrorBody(null);
+        } catch (e) {
+            if (e instanceof ServerSideValidationError) {
+                setCanvasUpdateErrorBody(e.body);
+            }
+        }
     };
 
     const handleEditSave = async (data: Task, emailNotification?: boolean) => {
@@ -74,7 +98,9 @@ export function TaskDetailsPage() {
 
     const handleEditCancel = () => {
         showEdit.toHide();
+        showCanvasEdit.toHide();
         setUpdateErrorBody(null);
+        setCanvasUpdateErrorBody(null);
     };
 
     const handleRemove = async () => {
@@ -105,6 +131,48 @@ export function TaskDetailsPage() {
         }
     };
 
+    let pageContent;
+
+    if (showEdit.show) {
+        pageContent = (
+            <TaskForm
+                title={t('task.editTask')}
+                timezone={task.data.group?.timezone || ''}
+                onSave={handleEditSave}
+                onCancel={handleEditCancel}
+                editData={task.data}
+                showVersionControl={false}
+                serverSideError={updateErrorBody}
+                isLoading={updateMutation.isLoading}
+                ipRestrictions={ipRestrictions.data || []} // Pass IP restrictions to the form
+                handleIpRestrictionsChange={handleIpRestrictionsChange} // Pass the change handler
+                selectedIpRestrictions={selectedIpRestrictions}
+            />
+        );
+    } else if (showCanvasEdit.show) {
+        pageContent = (
+            <CanvasTaskForm
+                title={t('task.editTask')}
+                onSave={handleCanvasEditSave}
+                onCancel={handleEditCancel}
+                editData={task.data}
+                isLoading={updateCanvasMutation.isLoading}
+                serversideError={updateCanvasErrorBody}
+            />
+        );
+    } else {
+        pageContent = (
+            <TaskDetails
+                isActualSemester={actualSemester.check(task.data.semesterID)}
+                onEdit={showEdit.toShow}
+                onCanvasEdit={showCanvasEdit.toShow}
+                onRemove={handleRemove}
+                task={task.data}
+                showVersionControl={!!privateSystemInfo.data && privateSystemInfo.data.isVersionControlEnabled}
+            />
+        );
+    }
+
     return (
         <>
             {task.data.group ? (
@@ -127,29 +195,8 @@ export function TaskDetailsPage() {
                     </LinkContainer>
                 </Breadcrumb>
             ) : null}
-            {showEdit.show ? (
-                <TaskForm
-                    title={t('task.editTask')}
-                    timezone={task.data.group?.timezone || ''}
-                    onSave={handleEditSave}
-                    onCancel={handleEditCancel}
-                    editData={task.data}
-                    showVersionControl={false}
-                    serverSideError={updateErrorBody}
-                    isLoading={updateMutation.isLoading}
-                    ipRestrictions={ipRestrictions.data || []} // Pass IP restrictions to the form
-                    handleIpRestrictionsChange={handleIpRestrictionsChange} // Pass the change handler
-                    selectedIpRestrictions={selectedIpRestrictions}
-                />
-            ) : (
-                <TaskDetails
-                    isActualSemester={actualSemester.check(task.data.semesterID)}
-                    onEdit={showEdit.toShow}
-                    onRemove={handleRemove}
-                    task={task.data}
-                    showVersionControl={!!privateSystemInfo.data && privateSystemInfo.data.isVersionControlEnabled}
-                />
-            )}
+
+            {pageContent}
 
             <TabbedInterface defaultActiveKey="solutions" id="group-tabs">
                 <Tab eventKey="solutions" title={t('task.solutions')}>

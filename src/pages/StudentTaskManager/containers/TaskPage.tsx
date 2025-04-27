@@ -44,7 +44,7 @@ export function TaskPage() {
     const verifyMutation = useVerifySubmissionMutation();
     const unlockMutation = useUnlockTaskMutation(taskIDInt);
     const notifications = useNotifications();
-    const [uploadErrorMsg, setUploadErrorMsg] = useState<string | null>(null);
+    const [uploadErrorMsg, setUploadErrorMsg] = useState<string[] | null>(null);
     const [verifyError, setVerifyError] = useState<ValidationErrorBody | null>(null);
     const [unlockError, setUnlockError] = useState<ValidationErrorBody | null>(null);
     const downloadTestReport = useDownloadTestReport();
@@ -130,7 +130,7 @@ export function TaskPage() {
             setUploadErrorMsg(null);
         } catch (e) {
             if (e instanceof ServerSideValidationError) {
-                setUploadErrorMsg(e.body.file[0]);
+                setUploadErrorMsg(e.body.file);
             }
         }
     };
@@ -165,7 +165,7 @@ export function TaskPage() {
                         loading={uploadMutation.isLoading}
                         onUpload={handleSolutionUpload}
                         onChange={zipCreator.handleChangedFiles}
-                        errorMessages={uploadErrorMsg ? [uploadErrorMsg] : undefined}
+                        errorMessages={uploadErrorMsg || undefined}
                         hintMessage={zipCreator.uploadHintMsg}
                         successCount={uploadMutation.isSuccess ? 1 : 0}
                     />
