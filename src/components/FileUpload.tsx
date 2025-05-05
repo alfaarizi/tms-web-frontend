@@ -1,5 +1,5 @@
 import {
-    ChangeEventHandler, MouseEventHandler, ReactNode, useState,
+    ChangeEvent, ChangeEventHandler, MouseEventHandler, ReactNode, useState,
 } from 'react';
 import {
     Alert, Button, Form, Spinner,
@@ -21,7 +21,7 @@ type Props = {
     loading: boolean,
     disableSelect?: boolean,
     disableUpload?: boolean,
-    onUpload: (files: File[]) => void,
+    onUpload: (files: File[], override: boolean) => void,
     onChange?: (files: File[]) => void,
     accept?: string,
     errorMessages?: string[],
@@ -60,11 +60,12 @@ export function FileUpload({
     const fileSizeValidator = useFileSizeValidator();
     const [fileList, setFileList] = useState<File[]>([]);
     const [validSize, setValidSize] = useState<boolean>(true);
+    const [override, setOverride] = useState<boolean>(false);
 
     const handleUpload: MouseEventHandler<HTMLInputElement> = (evt) => {
         evt.preventDefault();
 
-        onUpload(fileList);
+        onUpload(fileList, override);
         setFileList([]);
     };
 
@@ -90,6 +91,9 @@ export function FileUpload({
         evt.target.files = null;
     };
 
+    const handleOverride: ChangeEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement>) : void => {
+        setOverride(e.target.checked);
+    };
     // Render
 
     // Build file label text from the file list
@@ -141,33 +145,43 @@ export function FileUpload({
                     {hintMessage}
                 </Form.Text>
             )}
-
-            <Button
-                variant="success"
-                size="sm"
-                className="mt-2"
-                disabled={disableUpload || loading || !validSize || fileList.length === 0 || !fileSizeValidator.ready}
-                onClick={handleUpload}
-            >
-                {
-                    loading
-                        ? (
-                            <>
-                                <Spinner animation="border" size="sm" />
-                                {' '}
-                                {t('fileUpload.uploadInProgress')}
-                                .
-                            </>
-                        )
-                        : (
-                            <>
-                                <FontAwesomeIcon icon={faUpload} />
-                                {' '}
-                                {t('fileUpload.upload')}
-                            </>
-                        )
-                }
-            </Button>
+            <div>
+                <Button
+                    variant="success"
+                    size="sm"
+                    className="mt-2"
+                    disabled={disableUpload || loading || !validSize
+                        || fileList.length === 0 || !fileSizeValidator.ready}
+                    onClick={handleUpload}
+                >
+                    {
+                        loading
+                            ? (
+                                <>
+                                    <Spinner animation="border" size="sm" />
+                                    {' '}
+                                    {t('fileUpload.uploadInProgress')}
+                                    .
+                                </>
+                            )
+                            : (
+                                <>
+                                    <FontAwesomeIcon icon={faUpload} />
+                                    {' '}
+                                    {t('fileUpload.upload')}
+                                </>
+                            )
+                    }
+                </Button>
+                <Form.Group>
+                    <Form.Check
+                        type="checkbox"
+                        onChange={handleOverride}
+                        id="overrideCheck"
+                        label={t('fileUpload.forceOverwrite')}
+                    />
+                </Form.Group>
+            </div>
         </CustomCard>
     );
 }

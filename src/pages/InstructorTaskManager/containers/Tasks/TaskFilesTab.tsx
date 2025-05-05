@@ -37,12 +37,13 @@ export function TaskFilesTab({ task }: Props) {
         removeMutation.mutate(id);
     };
 
-    const handleUpload = async (files: File[]) => {
+    const handleUpload = async (files: File[], override : boolean) => {
         try {
             const uploadData: TaskFilesUpload = {
                 taskID: task.id,
                 category: 'Attachment',
                 files,
+                override,
             };
             await uploadMutation.mutateAsync(uploadData);
         } catch (e) {
