@@ -150,11 +150,13 @@ export function useStopCodeCompassMutation(taskId: number) {
     });
 }
 
-export function useAutoTestResults(id: number, enabled: boolean = true) {
+export function useAutoTestResults(id?: number, enabled: boolean = true) {
     return useQuery(
         [QUERY_KEY, 'auto-tester-results', { id }],
-        () => SubmissionsService.autoTesterResults(id),
-        { enabled },
+        () => (id !== undefined
+            ? SubmissionsService.autoTesterResults(id)
+            : Promise.resolve([])),
+        { enabled: !!id && enabled },
     );
 }
 

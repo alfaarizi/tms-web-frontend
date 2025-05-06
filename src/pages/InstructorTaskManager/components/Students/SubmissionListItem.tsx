@@ -19,6 +19,7 @@ import { WebAppExecutionControl } from '@/pages/InstructorTaskManager/containers
 type Props = {
     renderItem: (file: Submission) => ReactNode,
     isActualSemester: boolean,
+    isAutoTesterButtonEnabled?: boolean,
     isCodeCompassEnabled: boolean,
     file: Submission,
     onCodeView: (file: Submission) => void,
@@ -34,6 +35,7 @@ type Props = {
 export function SubmissionListItem({
     file,
     isActualSemester,
+    isAutoTesterButtonEnabled = true,
     isCodeCompassEnabled,
     renderItem,
     task,
@@ -82,7 +84,7 @@ export function SubmissionListItem({
                 </Col>
                 <Col md={2} className="d-flex align-items-start justify-content-end">
                     <ButtonGroup>
-                        {file.errorMsg || autoTesterResults
+                        {isAutoTesterButtonEnabled && (file.errorMsg || autoTesterResults)
                             ? (
                                 <ToolbarButton
                                     onClick={handleAutoTesterResultsDisplay}
@@ -91,7 +93,7 @@ export function SubmissionListItem({
                                     displayTextBreakpoint="none"
                                 />
                             )
-                            : null}
+                            : null }
 
                         {isCodeCompassEnabled && !file.codeCompass && file.uploadCount > 0
                             ? (
@@ -180,7 +182,7 @@ export function SubmissionListItem({
                     </ButtonGroup>
                 </Col>
             </Row>
-            {showAutoTesterResults.show
+            {isAutoTesterButtonEnabled && showAutoTesterResults.show
                 ? (
                     <AutoTestResultAlert
                         status={file.status}

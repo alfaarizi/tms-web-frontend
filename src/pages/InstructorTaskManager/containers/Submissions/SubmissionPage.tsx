@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
-
 import { CustomCard } from '@/components/CustomCard/CustomCard';
 import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
@@ -18,7 +17,7 @@ import {
     useGradeMutation,
     useDownloadTestReport,
     useStartCodeCompassMutation, useStopCodeCompassMutation,
-    useSubmission,
+    useSubmission, useAutoTestResults,
 } from '@/hooks/instructor/SubmissionHooks';
 import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { SubmissionListItem } from '@/pages/InstructorTaskManager/components/Students/SubmissionListItem';
@@ -27,6 +26,7 @@ import { StaticCodeAnalysisTab } from '@/pages/InstructorTaskManager/components/
 import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions/IpLogModal';
 import { Submission } from '@/resources/instructor/Submission';
 import { useShow } from '@/ui-hooks/useShow';
+import { AutoTestResultAlert } from '@/components/AutoTestResultAlert';
 
 type Params = {
     id?: string
@@ -53,6 +53,10 @@ export function SubmissionPage() {
     const startCodeCompass = useStartCodeCompassMutation(submission.data?.taskID || -1);
     const stopCodeCompass = useStopCodeCompassMutation(submission.data?.taskID || -1);
     const history = useHistory();
+    const defaultTab = submission.data?.codeCheckerResult ? 'static-code-analysis' : 'auto-tester';
+    const { data: autoTesterResults } = useAutoTestResults(submission.data?.id, true);
+    const shouldShowAutoTesterTab = submission.data?.status !== 'Uploaded'
+        && ((Array.isArray(autoTesterResults) && autoTesterResults.length > 0) || submission.data?.errorMsg);
 
     if (!submission.data) {
         return null;
@@ -186,6 +190,7 @@ export function SubmissionPage() {
                         </>
                     )}
                     isActualSemester={actualSemester.check(submission.data.task?.semesterID)}
+                    isAutoTesterButtonEnabled={false}
                     isCodeCompassEnabled={isCodeCompassEnabled}
                     file={submission.data}
                     onCodeView={handleCodeView}
@@ -199,10 +204,21 @@ export function SubmissionPage() {
                 />
             </CustomCard>
 
-            <TabbedInterface id="submission-evaluator" defaultActiveKey="static-code-analysis">
+            <TabbedInterface id="submission-evaluator" defaultActiveKey={defaultTab}>
                 {submission.data.codeCheckerResult && (
                     <Tab eventKey="static-code-analysis" title={t('task.evaluator.staticCodeAnalysis')}>
                         <StaticCodeAnalysisTab result={submission.data.codeCheckerResult} />
+                    </Tab>
+                )}
+                {shouldShowAutoTesterTab && (
+                    <Tab eventKey="auto-tester" title={t('task.evaluator.results')}>
+                        <AutoTestResultAlert
+                            status={submission.data.status}
+                            errorMsg={submission.data.errorMsg}
+                            results={autoTesterResults}
+                            appType={submission.data.task?.appType || 'Console'}
+                            onReportDownload={() => handleReportDownload(submission.data)}
+                        />
                     </Tab>
                 )}
             </TabbedInterface>
