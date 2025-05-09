@@ -13,6 +13,7 @@ import {
 } from '@/pages/InstructorTaskManager/components/Tasks/StructuralRequirementFormControl';
 import { FormError } from '@/components/FormError';
 import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
+import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 
 type Props = {
   title: string;
@@ -37,11 +38,14 @@ export function CanvasTaskForm({
         register,
         handleSubmit,
         control,
+        clearErrors,
+        setError,
 
         formState: { errors },
     } = useForm<Task>({
         defaultValues: editData,
     });
+    useServersideFormErrors<Task>(clearErrors, setError, serversideError);
 
     const {
         fields: requirements,

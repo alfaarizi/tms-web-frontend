@@ -48,6 +48,11 @@ export function TaskDetails({
         );
     }
 
+    const excludedStructuralRequirements = task.structuralRequirements
+        ?.filter((req) => req.type === 'Excludes') ?? null;
+    const includedStructuralRequirements = task.structuralRequirements
+        ?.filter((req) => req.type === 'Includes') ?? null;
+
     return (
         <CustomCard>
             <CustomCardHeader>
@@ -126,6 +131,26 @@ export function TaskDetails({
             {showVersionControl ? (
                 <DataRow label={t('task.isVersionControlled')}>
                     {task.isVersionControlled ? t('common.yes') : t('common.no')}
+                </DataRow>
+            ) : null}
+            {excludedStructuralRequirements ? (
+                <DataRow label={t('task.excludedStructuralRequirements')}>
+                    {excludedStructuralRequirements.map((req, index) => (
+                        <span key={req.id}>
+                            {req.regexExpression}
+                            {index < (excludedStructuralRequirements ?? []).length - 1 && ', '}
+                        </span>
+                    ))}
+                </DataRow>
+            ) : null}
+            {includedStructuralRequirements ? (
+                <DataRow label={t('task.includedStructuralRequirements')}>
+                    {includedStructuralRequirements.map((req, index) => (
+                        <span key={req.id}>
+                            {req.regexExpression}
+                            {index < (includedStructuralRequirements ?? []).length - 1 && ', '}
+                        </span>
+                    ))}
                 </DataRow>
             ) : null}
             <hr />

@@ -49,8 +49,8 @@ export function StructuralRequirementFormControl({
                     onDelete={() => requirementRemove(index)}
                 />
             </InputGroup>
-            {errors.structuralRequirements && errors.structuralRequirements[index]
-                        && <FormError message={t('common.fieldRequired')} />}
+            {errors.structuralRequirements?.[index]?.regexExpression
+                        && <FormError message={errors.structuralRequirements[index].regexExpression.message} />}
         </div>
     );
 }
