@@ -208,8 +208,6 @@ export function TaskForm({
                             displayTextBreakpoint="xs"
                         />
                     </div>
-                    {serverSideError?.regexExpression
-                        && <FormError message={serverSideError?.regexExpression[0]} /> }
                     <Form.Text className="text-muted">{t('task.structuralRequirementHelp')}</Form.Text>
                 </Form.Group>
 
