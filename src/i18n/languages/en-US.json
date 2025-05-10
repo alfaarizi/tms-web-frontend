@@ -108,7 +108,6 @@
     "browse": "Browse",
     "upload": "Upload",
     "uploadInProgress": "Uploading...",
-    "forceOverwrite": "Overwrite existing files with same names",
     "hint": {
       "atLeastOneDockerfile": "Upload must contain a file named \"Dockerfile\"!",
       "dllExeNotAllowed": "Uploading .dll and .exe files is not allowed!",

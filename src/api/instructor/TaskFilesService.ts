@@ -28,9 +28,6 @@ export async function upload(uploadData: TaskFilesUpload) {
     const formData = new FormData();
     formData.append('taskID', uploadData.taskID.toString());
     formData.append('category', uploadData.category);
-    if (uploadData.override != null) {
-        formData.append('override', uploadData.override.toString());
-    }
     for (let i = 0; i < uploadData.files.length; ++i) {
         formData.append('files[]', uploadData.files[i]);
     }
