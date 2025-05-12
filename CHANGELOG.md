@@ -7,7 +7,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* Ask instructors whether to overwrite task files ([047657a](https://gitlab.com/tms-elte/frontend-react/commit/047657ab4c88dec896aa0c7eb4a2be6ada651a54))
 * Define and enforce structural requirements for the tasks ([13f95a8](https://gitlab.com/tms-elte/frontend-react/commit/13f95a8c60bde1fc75d6e3455c83a0e829dcc5a9))
 * Display auto tester results on single submission view ([5d056e6](https://gitlab.com/tms-elte/frontend-react/commit/5d056e6261df5955504506184d4c7f5240572c30))
 * Use backend-defined university identifier validation ([95c9fad](https://gitlab.com/tms-elte/frontend-react/commit/95c9fad59623f6850508bd1074a1ae5ecf917470))
