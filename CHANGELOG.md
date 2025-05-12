@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.14.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.13.0...v4.14.0) (2025-05-12)
+
+
+### Features
+
+* Ask instructors whether to overwrite task files ([047657a](https://gitlab.com/tms-elte/frontend-react/commit/047657ab4c88dec896aa0c7eb4a2be6ada651a54))
+* Define and enforce structural requirements for the tasks ([13f95a8](https://gitlab.com/tms-elte/frontend-react/commit/13f95a8c60bde1fc75d6e3455c83a0e829dcc5a9))
+* Display auto tester results on single submission view ([5d056e6](https://gitlab.com/tms-elte/frontend-react/commit/5d056e6261df5955504506184d4c7f5240572c30))
+* Use backend-defined university identifier validation ([95c9fad](https://gitlab.com/tms-elte/frontend-react/commit/95c9fad59623f6850508bd1074a1ae5ecf917470))
+* User interface for IP address and range whitelist management ([37ca1bc](https://gitlab.com/tms-elte/frontend-react/commit/37ca1bc339da94aa8418f19549fc12b3ebed3839))
+
 ## [4.13.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.12.0...v4.13.0) (2025-04-19)
 
 
