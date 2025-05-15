@@ -25,6 +25,11 @@ const customBackend: BackendModule = {
     },
 };
 
+// Maintain correct language in html tag
+i18n.on('languageChanged', (lng: string) => {
+    document.documentElement.lang = lng.substring(0, 2);
+});
+
 const envPrefix = import.meta.env.VITE_ENV_PREFIX || '';
 i18n
     .use(initReactI18next) // passes i18n down to react-i18next
