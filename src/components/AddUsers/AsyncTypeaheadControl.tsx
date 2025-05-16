@@ -1,11 +1,11 @@
 import { Controller } from 'react-hook-form';
 import { AsyncTypeahead, Token } from 'react-bootstrap-typeahead';
-
 import { useTranslation } from 'react-i18next';
 import { Option } from 'react-bootstrap-typeahead/types/types';
 import { User } from '@/resources/common/User';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import '@/components/AddUsers/AsyncTypeaheadControl.css';
 
 interface Props {
     name: string, // the name of the form field
@@ -22,8 +22,18 @@ export function AsyncTypeaheadControl({
     name, id, rules, control, isSearchLoading, onSearch, searchData, allowNew = false,
 }: Props) {
     const { t } = useTranslation();
-    const formatOption = (opt: Option) : string => (opt as User).userCode + ((opt as User)?.name
-        ? ` (${(opt as User).name})` : '');
+
+    const formatOption = (opt: Option) : JSX.Element => {
+        const userName = (opt as User).name;
+        const userCode = ` (${(opt as User).userCode})`;
+        return (
+            <>
+                <b>{userName}</b>
+                {userCode}
+            </>
+        );
+    };
+
     // Bypass client-side filtering by returning `true`. Results are already
     // filtered by the search endpoint, so no need to do it again.
     const filterBy = () => true;
