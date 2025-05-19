@@ -20,6 +20,9 @@ import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 import { useTextPaste } from '@/ui-hooks/useTextPaste';
 import { TranslationTopContent } from '@/i18n/i18n';
 
+import { useBranding } from '@/ui-hooks/useBranding';
+import i18next from 'i18next';
+
 export function SettingsPage() {
     const userSettings = useUserSettings();
     const settingsMutation = useSettingsMutation();
@@ -59,6 +62,8 @@ export function SettingsPage() {
             setValue('locale', settingsData.locale);
         }
     }, [settingsData]);
+
+    const branding = useBranding();
 
     const handleTextPaste = useTextPaste(setValue);
 
@@ -140,7 +145,7 @@ export function SettingsPage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
-                            {t('common.userCode')}
+                            {t('common.userCode', { uniId: branding.universityIdentifierName[i18next.language] })}
                             :
                         </Form.Label>
                         <Form.Control

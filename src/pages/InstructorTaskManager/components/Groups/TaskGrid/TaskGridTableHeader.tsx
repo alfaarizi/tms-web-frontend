@@ -10,6 +10,9 @@ import { TaskNameCell } from '@/pages/InstructorTaskManager/components/Groups/Ta
 import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 import { GridTask } from '@/resources/instructor/GridTask';
 
+import { useBranding } from '@/ui-hooks/useBranding';
+import i18next from 'i18next';
+
 type Props = {
     categorizedTasks: GridTask[][],
     taskList: GridTask[],
@@ -31,6 +34,8 @@ export function TaskGridTableHeader({
     const { t } = useTranslation();
     const ref = useRef<HTMLTableCellElement>(null);
     const [widthForLeft, setWidthForLeft] = useState<number>();
+
+    const branding = useBranding();
 
     useEffect(() => {
         if (ref.current != null) {
@@ -92,7 +97,7 @@ export function TaskGridTableHeader({
                     style={{ left: widthForLeft, backgroundColor: 'white' }}
                     className={[styles.stickyHead, styles.outlines].join(' ')}
                 >
-                    {t('common.userCode')}
+                    {t('common.userCode', { uniId: branding.universityIdentifierName[i18next.language] })}
                 </th>
                 {headerTasks}
             </tr>
