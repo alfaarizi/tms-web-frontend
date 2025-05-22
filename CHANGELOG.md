@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.14.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.14.0...v4.14.1) (2025-05-22)
+
+
+### Bug Fixes
+
+* disable Google Translate and set lang attribute correctly ([341de55](https://gitlab.com/tms-elte/frontend-react/commit/341de55dd6f60a4f64a6485fd47904e33ec19361))
+
 ## [4.14.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.13.0...v4.14.0) (2025-05-12)
 
 
