@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* disable Google Translate and set lang attribute correctly ([341de55](https://gitlab.com/tms-elte/frontend-react/commit/341de55dd6f60a4f64a6485fd47904e33ec19361))
+* Disable Google Translate and set lang attribute correctly ([341de55](https://gitlab.com/tms-elte/frontend-react/commit/341de55dd6f60a4f64a6485fd47904e33ec19361))
 
 ## [4.14.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.13.0...v4.14.0) (2025-05-12)
 
