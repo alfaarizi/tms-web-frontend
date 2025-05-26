@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useBranding } from '@/ui-hooks/useBranding';
 
 import {
     TaskGridHeaderDropdown,
@@ -28,9 +29,11 @@ type Props = {
 export function TaskGridTableHeader({
     categorizedTasks, onDownloadAll, onExportSpreadsheet, taskList,
 }: Props) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const ref = useRef<HTMLTableCellElement>(null);
     const [widthForLeft, setWidthForLeft] = useState<number>();
+
+    const branding = useBranding();
 
     useEffect(() => {
         if (ref.current != null) {
@@ -92,7 +95,7 @@ export function TaskGridTableHeader({
                     style={{ left: widthForLeft, backgroundColor: 'white' }}
                     className={[styles.stickyHead, styles.outlines].join(' ')}
                 >
-                    {t('common.userCode')}
+                    {t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}
                 </th>
                 {headerTasks}
             </tr>
