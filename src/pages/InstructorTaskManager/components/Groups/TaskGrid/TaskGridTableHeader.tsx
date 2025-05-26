@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useBranding } from '@/ui-hooks/useBranding';
 
 import {
     TaskGridHeaderDropdown,
@@ -9,9 +10,6 @@ import { DownloadAllParams, ExportSpreadsheetParams } from '@/hooks/instructor/S
 import { TaskNameCell } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskNameCell';
 import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
 import { GridTask } from '@/resources/instructor/GridTask';
-
-import { useBranding } from '@/ui-hooks/useBranding';
-import i18next from 'i18next';
 
 type Props = {
     categorizedTasks: GridTask[][],
@@ -31,7 +29,7 @@ type Props = {
 export function TaskGridTableHeader({
     categorizedTasks, onDownloadAll, onExportSpreadsheet, taskList,
 }: Props) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const ref = useRef<HTMLTableCellElement>(null);
     const [widthForLeft, setWidthForLeft] = useState<number>();
 
@@ -97,7 +95,7 @@ export function TaskGridTableHeader({
                     style={{ left: widthForLeft, backgroundColor: 'white' }}
                     className={[styles.stickyHead, styles.outlines].join(' ')}
                 >
-                    {t('common.userCode', { uniId: branding.universityIdentifierName[i18next.language] })}
+                    {t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}
                 </th>
                 {headerTasks}
             </tr>

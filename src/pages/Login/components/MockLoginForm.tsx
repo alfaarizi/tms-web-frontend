@@ -8,9 +8,7 @@ import { LoginProps } from '@/pages/Login/components/LoginProps';
 import { LoginButton } from '@/pages/Login/components/LoginButton';
 import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 import { useTextPaste } from '@/ui-hooks/useTextPaste';
-
 import { useBranding } from '@/ui-hooks/useBranding';
-import i18next from 'i18next';
 
 /**
  * Form component for mock-login
@@ -24,7 +22,7 @@ export function MockLoginForm({
     onLogin,
     serverSideError,
 }: LoginProps<MockLogin>) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const {
         register,
         handleSubmit,
@@ -52,7 +50,7 @@ export function MockLoginForm({
         <Form onSubmit={onSubmit}>
             <Form.Group>
                 <Form.Label>
-                    {t('common.userCode', { uniId: branding.universityIdentifierName[i18next.language] })}
+                    {t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}
                     :
                 </Form.Label>
                 <Form.Control
@@ -67,7 +65,7 @@ export function MockLoginForm({
                 {errors.userCode
                     && (
                         <FormError message={t('login.userCodeRequired', {
-                            uniId: branding.universityIdentifierName[i18next.language],
+                            uniId: branding.universityIdentifierName[i18n.language],
                         })}
                         />
                     )}

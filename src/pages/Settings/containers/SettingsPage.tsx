@@ -19,9 +19,7 @@ import { NotificationTarget, UserSettings } from '@/resources/common/UserSetting
 import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 import { useTextPaste } from '@/ui-hooks/useTextPaste';
 import { TranslationTopContent } from '@/i18n/i18n';
-
 import { useBranding } from '@/ui-hooks/useBranding';
-import i18next from 'i18next';
 
 export function SettingsPage() {
     const userSettings = useUserSettings();
@@ -145,7 +143,7 @@ export function SettingsPage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
-                            {t('common.userCode', { uniId: branding.universityIdentifierName[i18next.language] })}
+                            {t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}
                             :
                         </Form.Label>
                         <Form.Control
