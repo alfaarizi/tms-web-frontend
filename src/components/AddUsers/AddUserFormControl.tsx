@@ -12,6 +12,7 @@ import { FormError } from '@/components/FormError';
 import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 import { User } from '@/resources/common/User';
 import { extractUserCodes } from '@/utils/extractUserCodes';
+import { useBranding } from '@/ui-hooks/useBranding';
 
 type Props = {
     toggleValue: AddUserMode,
@@ -46,14 +47,16 @@ export function AddUserFormControl({
     selectFieldErrorMessage = undefined,
     allowNew = false,
 }: Props) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const userCodeFormat = RegExParser(usePrivateSystemInfoQuery().data?.userCodeFormat ?? '/.*/');
+
+    const branding = useBranding();
 
     function validateImport(value: string) {
         const isValid = extractUserCodes(value)
             .every((code) => userCodeFormat.test(code));
         if (!isValid) {
-            return t('common.userCodesRequired');
+            return t('common.userCodesRequired', { uniId: branding.universityIdentifierName[i18n.language] });
         }
 
         return undefined;
@@ -63,7 +66,7 @@ export function AddUserFormControl({
         // custom options also have an userCode field (because of labelKey)
         const isValid = value.length > 0 && value.every((opt) => userCodeFormat.test((opt as User).userCode));
         if (!isValid) {
-            return t('common.userCodeOrNameRequired');
+            return t('common.userCodeOrNameRequired', { uniId: branding.universityIdentifierName[i18n.language] });
         }
 
         return undefined;
@@ -96,7 +99,9 @@ export function AddUserFormControl({
                         name={selectFieldName}
                         id={id}
                         rules={{
-                            required: t('common.userCodeOrNameRequired'),
+                            required: t('common.userCodeOrNameRequired', {
+                                uniId: branding.universityIdentifierName[i18n.language],
+                            }),
                             validate: validateOptions,
                         }}
                         control={control}
@@ -111,7 +116,12 @@ export function AddUserFormControl({
                         control={control}
                         defaultValue=""
                         name={importFieldName}
-                        rules={{ validate: validateImport, required: t('common.userCodesRequired') }}
+                        rules={{
+                            validate: validateImport,
+                            required: t('common.userCodesRequired', {
+                                uniId: branding.universityIdentifierName[i18n.language],
+                            }),
+                        }}
                         render={({
                             field: {
                                 onChange, onBlur, value, name,
@@ -125,7 +135,9 @@ export function AddUserFormControl({
                                 onPaste={onPaste}
                                 value={value}
                                 size="sm"
-                                placeholder={t('common.userCodes')}
+                                placeholder={t('common.userCodes', {
+                                    uniId: branding.universityIdentifierName[i18n.language],
+                                })}
                             />
                         )}
                     />

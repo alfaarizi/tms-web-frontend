@@ -6,6 +6,7 @@ import { User } from '@/resources/common/User';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import '@/components/AddUsers/AsyncTypeaheadControl.css';
+import { useBranding } from '@/ui-hooks/useBranding';
 
 interface Props {
     name: string, // the name of the form field
@@ -21,7 +22,9 @@ interface Props {
 export function AsyncTypeaheadControl({
     name, id, rules, control, isSearchLoading, onSearch, searchData, allowNew = false,
 }: Props) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+
+    const branding = useBranding();
 
     const formatOption = (opt: Option) : JSX.Element => {
         const userName = (opt as User).name;
@@ -47,7 +50,9 @@ export function AsyncTypeaheadControl({
             render={({ field }) => (
                 <AsyncTypeahead
                     allowNew={allowNew}
-                    newSelectionPrefix={t('common.addNewUserCode')}
+                    newSelectionPrefix={t('common.addNewUserCode', {
+                        uniId: branding.universityIdentifierName[i18n.language],
+                    })}
                     filterBy={filterBy}
                     id={id}
                     multiple
@@ -59,7 +64,9 @@ export function AsyncTypeaheadControl({
                     onChange={field.onChange}
                     selected={field.value}
                     size="sm"
-                    placeholder={t('common.searchForUserCodeOrName')}
+                    placeholder={t('common.searchForUserCodeOrName', {
+                        uniId: branding.universityIdentifierName[i18n.language],
+                    })}
                     renderMenuItemChildren={(option) => (
                         <span>
                             {formatOption(option)}

@@ -19,6 +19,7 @@ import { NotificationTarget, UserSettings } from '@/resources/common/UserSetting
 import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
 import { useTextPaste } from '@/ui-hooks/useTextPaste';
 import { TranslationTopContent } from '@/i18n/i18n';
+import { useBranding } from '@/ui-hooks/useBranding';
 
 export function SettingsPage() {
     const userSettings = useUserSettings();
@@ -59,6 +60,8 @@ export function SettingsPage() {
             setValue('locale', settingsData.locale);
         }
     }, [settingsData]);
+
+    const branding = useBranding();
 
     const handleTextPaste = useTextPaste(setValue);
 
@@ -140,7 +143,7 @@ export function SettingsPage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
-                            {t('common.userCode')}
+                            {t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}
                             :
                         </Form.Label>
                         <Form.Control

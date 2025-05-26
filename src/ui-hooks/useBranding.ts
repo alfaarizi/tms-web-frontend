@@ -6,6 +6,7 @@ import brandingDefault from '@/branding.dist.json';
 
 export type Branding = {
     organizationName: Record<string, string>;
+    universityIdentifierName: Record<string, string>;
 }
 
 function getDefaultBranding() : Branding {
