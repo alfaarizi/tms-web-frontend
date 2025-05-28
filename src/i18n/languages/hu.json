@@ -431,9 +431,9 @@
         "category": "Kategória",
         "message": "Üzenet",
         "detailedStatusMessages": {
-          "noIssues": "Nem találhatóak problémák a feltölött megoldásban",
+          "noIssues": "Nem találhatóak problémák a feltöltött megoldásban",
           "inProgress": "A feltöltött megoldás kiértékelése folyamatban van",
-          "analysisFailed": "A statikus elemző futtatása sikertelen volt. Előfordulhat hogy hibás a feltölött megoldás vagy érvénytelen a feladathoz tartozó konfiguráció.",
+          "analysisFailed": "A statikus elemző futtatása sikertelen volt. Előfordulhat hogy hibás a feltöltött megoldás vagy érvénytelen a feladathoz tartozó konfiguráció.",
           "runnerError": "Sikertelen futtatás"
         }
       },
