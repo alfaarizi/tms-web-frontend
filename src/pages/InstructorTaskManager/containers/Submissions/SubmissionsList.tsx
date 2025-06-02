@@ -4,8 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Submission } from '@/resources/instructor/Submission';
 import { GraderModal } from '@/pages/InstructorTaskManager/components/Submissions/GraderModal';
 import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions/IpLogModal';
+import { PersonalDeadlineModal } from '@/pages/InstructorTaskManager/components/Submissions/PersonalDeadlineModal';
 import { useActualSemester } from '@/hooks/common/SemesterHooks';
-import { useDownloadSubmission, useDownloadTestReport, useGradeMutation } from '@/hooks/instructor/SubmissionHooks';
+import {
+    useDownloadSubmission,
+    useDownloadTestReport,
+    useGradeMutation,
+    useSetPersonalDeadlineMutation,
+} from '@/hooks/instructor/SubmissionHooks';
 import { SubmissionListItem } from '@/pages/InstructorTaskManager/components/Students/SubmissionListItem';
 import { useNotifications } from '@/hooks/common/useNotifications';
 import { Task } from '@/resources/instructor/Task';
@@ -40,9 +46,11 @@ export function SubmissionsList({
     task,
 }: Props) {
     const [gradedSubmission, setGradedSubmission] = useState<Submission | null>(null);
+    const [personalDeadlineSubmission, setPersonalDeadlineSubmission] = useState<Submission | null>(null);
     const [ipLogSubmission, setIpLogSubmission] = useState<Submission | null>(null);
     const actualSemester = useActualSemester();
     const gradeMutation = useGradeMutation();
+    const personalDeadlineMutation = useSetPersonalDeadlineMutation();
     const downloadfile = useDownloadSubmission();
     const downloadTestReport = useDownloadTestReport();
     const { t } = useTranslation();
@@ -74,9 +82,16 @@ export function SubmissionsList({
         setGradedSubmission(submission);
     };
 
+    const handlePersonalDeadlineStart = (submission: Submission) => {
+        setPersonalDeadlineSubmission(submission);
+    };
+
     // Close grade modal and clear gradedSubmission value
     const handleGradeFinish = () => {
         setGradedSubmission(null);
+    };
+    const handleSetPersonalDeadlineFinish = () => {
+        setPersonalDeadlineSubmission(null);
     };
 
     // GraderModel save function
@@ -87,6 +102,19 @@ export function SubmissionsList({
             notifications.push({
                 variant: 'success',
                 message: t('task.successfulGrade'),
+            });
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    const handleSetPersonalDeadline = async (data: Submission) => {
+        try {
+            await personalDeadlineMutation.mutateAsync(data);
+            handleSetPersonalDeadlineFinish();
+            notifications.push({
+                variant: 'success',
+                message: t('task.successfulPersonalDeadline'),
             });
         } catch (e) {
             // Already handled globally
@@ -120,6 +148,7 @@ export function SubmissionsList({
                         onStopCodeCompass={handleStopCodeCompass}
                         onReportDownload={handleReportDownload}
                         onGrade={handleGradeStart}
+                        onEditPersonalDeadline={handlePersonalDeadlineStart}
                         onIpLog={handleIpLogStart}
                         task={task != null ? task : file.task}
                     />
@@ -132,6 +161,15 @@ export function SubmissionsList({
                 onSave={handleGradeSave}
                 onCancel={handleGradeFinish}
                 isLoading={gradeMutation.isLoading}
+            />
+
+            <PersonalDeadlineModal
+                file={personalDeadlineSubmission}
+                show={personalDeadlineSubmission !== null}
+                onSave={handleSetPersonalDeadline}
+                onCancel={handleSetPersonalDeadlineFinish}
+                isLoading={personalDeadlineMutation.isLoading}
+                timezone={task?.group?.timezone ?? ''}
             />
 
             <IpLogModal

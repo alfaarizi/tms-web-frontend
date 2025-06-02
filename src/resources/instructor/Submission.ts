@@ -28,4 +28,5 @@ export interface Submission {
     verified: boolean;
     codeCompass?: CodeCompassInstance;
     codeCheckerResult?: CodeCheckerResult;
+    personalDeadline?: string;
 }

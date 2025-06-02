@@ -198,6 +198,14 @@ export function SubmissionsListTab({
                             <DataRow label={t('task.uploadTime')}>
                                 <GroupDateTime value={file.uploadTime} timezone={task.group?.timezone || ''} />
                             </DataRow>
+                            {file.personalDeadline ? (
+                                <DataRow label={t('task.personalDeadline')}>
+                                    <GroupDateTime
+                                        value={file.personalDeadline}
+                                        timezone={task.group?.timezone || ''}
+                                    />
+                                </DataRow>
+                            ) : null}
                             <DataRow label={t('task.delay')}>
                                 {file.delay}
                             </DataRow>

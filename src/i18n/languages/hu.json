@@ -311,6 +311,7 @@
     "ungraded": "Nem értékelt",
     "grade": "Értékelés",
     "notes": "Megjegyzések",
+    "personalDeadline": "Személyes határidő",
     "ipAddresses": "IP címek",
     "ipRestrictions": "IP cím korlátozások",
     "instructorFiles": "Mellékelt fájlok",
@@ -362,6 +363,7 @@
     "downloadOnlyUngraded": "Nem értékelt megoldások letöltése",
     "uploader": "Feltöltötte",
     "successfulGrade": "A beküldött megoldás osztályozása sikeres volt",
+    "successfulPersonalDeadline": "A személyes határidő beállítása sikeres volt",
     "evaluator": {
       "tabName": "Automatikus kiértékelés",
       "environment": "Környezet",
@@ -489,8 +491,7 @@
   },
   "status": {
     "accepted": "Elfogadva",
-    "rejected": "Elutasítva",
-    "lateSubmission": "Pótolható"
+    "rejected": "Elutasítva"
   },
   "quizQuestions": {
     "questionSet": "Kérdéshalmaz",

@@ -17,11 +17,13 @@ import {
     useGradeMutation,
     useDownloadTestReport,
     useStartCodeCompassMutation, useStopCodeCompassMutation,
-    useSubmission, useAutoTestResults,
+    useSubmission, useSetPersonalDeadlineMutation,
+    useAutoTestResults,
 } from '@/hooks/instructor/SubmissionHooks';
 import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { SubmissionListItem } from '@/pages/InstructorTaskManager/components/Students/SubmissionListItem';
 import { GraderModal } from '@/pages/InstructorTaskManager/components/Submissions/GraderModal';
+import { PersonalDeadlineModal } from '@/pages/InstructorTaskManager/components/Submissions/PersonalDeadlineModal';
 import { StaticCodeAnalysisTab } from '@/pages/InstructorTaskManager/components/Submissions/StaticCodeAnalysisTab';
 import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions/IpLogModal';
 import { Submission } from '@/resources/instructor/Submission';
@@ -42,9 +44,11 @@ export function SubmissionPage() {
     const id = parseInt(params.id ? params.id : '-1', 10);
     const submission = useSubmission(id);
     const gradeMutation = useGradeMutation();
+    const personalDeadlineMutation = useSetPersonalDeadlineMutation();
     const downloadSubmission = useDownloadSubmission();
     const downloadTestReport = useDownloadTestReport();
     const showGrader = useShow();
+    const showPersonalDeadline = useShow();
     const showIpLog = useShow();
     const actualSemester = useActualSemester();
     const notifications = useNotifications();
@@ -88,6 +92,19 @@ export function SubmissionPage() {
             notifications.push({
                 variant: 'success',
                 message: t('task.successfulGrade'),
+            });
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
+    const handleSetPersonalDeadline = async (data: Submission) => {
+        try {
+            await personalDeadlineMutation.mutateAsync(data);
+            showPersonalDeadline.toHide();
+            notifications.push({
+                variant: 'success',
+                message: t('task.successfulPersonalDeadline'),
             });
         } catch (e) {
             // Already handled globally
@@ -172,6 +189,14 @@ export function SubmissionPage() {
                             <DataRow label={t('task.uploadTime')}>
                                 <GroupDateTime value={item.uploadTime} timezone={item.task?.group?.timezone || ''} />
                             </DataRow>
+                            {item.personalDeadline ? (
+                                <DataRow label={t('task.personalDeadline')}>
+                                    <GroupDateTime
+                                        value={item.personalDeadline}
+                                        timezone={item.task?.group?.timezone || ''}
+                                    />
+                                </DataRow>
+                            ) : null}
                             <DataRow label={t('task.delay')}>
                                 {item.delay}
                             </DataRow>
@@ -199,6 +224,7 @@ export function SubmissionPage() {
                     onStartCodeCompass={handleStartCodeCompass}
                     onStopCodeCompass={handleStopCodeCompass}
                     onGrade={showGrader.toShow}
+                    onEditPersonalDeadline={showPersonalDeadline.toShow}
                     onIpLog={showIpLog.toShow}
                     task={submission.data.task}
                 />
@@ -229,6 +255,15 @@ export function SubmissionPage() {
                 onSave={handleGradeSave}
                 onCancel={showGrader.toHide}
                 isLoading={gradeMutation.isLoading}
+            />
+
+            <PersonalDeadlineModal
+                file={submission.data}
+                show={showPersonalDeadline.show}
+                onSave={handleSetPersonalDeadline}
+                onCancel={showPersonalDeadline.toHide}
+                isLoading={personalDeadlineMutation.isLoading}
+                timezone={submission.data.task?.group?.timezone ?? ''}
             />
 
             <IpLogModal
