@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 import { ButtonGroup, Col, Row } from 'react-bootstrap';
 import {
     faCode,
-    faCompass, faDownload, faEdit, faInfoCircle, faList, faStop, faHistory,
+    faCompass, faDownload, faEdit, faInfoCircle, faList, faStop, faHistory, faCalendarDay,
 } from '@fortawesome/free-solid-svg-icons';
 import { useShow } from '@/ui-hooks/useShow';
 import { useTranslation } from 'react-i18next';
@@ -28,6 +28,7 @@ type Props = {
     onStartCodeCompass: (file: Submission) => void,
     onStopCodeCompass: (file: Submission) => void,
     onGrade: (file: Submission) => void,
+    onEditPersonalDeadline?: (file: Submission) => void,
     onIpLog: (file: Submission) => void,
     task?: Task,
 }
@@ -45,6 +46,7 @@ export function SubmissionListItem({
     onStartCodeCompass,
     onStopCodeCompass,
     onGrade,
+    onEditPersonalDeadline,
     onIpLog,
 }: Props) {
     const { t } = useTranslation();
@@ -163,6 +165,15 @@ export function SubmissionListItem({
                             )
                             : null}
 
+                        {isActualSemester && onEditPersonalDeadline ? (
+                            <ToolbarButton
+                                onClick={() => onEditPersonalDeadline(file)}
+                                icon={faCalendarDay}
+                                text={t('task.personalDeadline')}
+                                displayTextBreakpoint="none"
+                            />
+                        ) : null}
+
                         {isActualSemester
                             ? (
                                 <ToolbarButton
@@ -173,6 +184,7 @@ export function SubmissionListItem({
                                 />
                             )
                             : null}
+
                         {isExecutable && file.uploadCount > 0
                             && (
                                 <WebAppExecutionControl

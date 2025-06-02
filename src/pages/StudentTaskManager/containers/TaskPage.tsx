@@ -57,7 +57,7 @@ export function TaskPage() {
             task.data !== undefined
             && task.data.isSubmissionCountRestricted
             && task.data.submission.uploadCount >= task.data.submissionLimit
-            && task.data.submission.status !== 'Late Submission',
+            && !task.data.submission.personalDeadline,
         );
     }, [task]);
 
@@ -149,8 +149,10 @@ export function TaskPage() {
     };
 
     let uploadCard;
-    if (((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && submission.status !== 'Accepted')
-            || submission.status === 'Late Submission')
+    const withinDeadline = DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now()
+        || DateTime.fromISO(submission?.personalDeadline ?? '') >= DateTime.now();
+    if (withinDeadline
+        && submission.status !== 'Accepted'
         && !isSubmissionLimitReached
         && task.data.entryPasswordUnlocked
         && task.data.isIpAddressAllowed) {

@@ -309,6 +309,7 @@
     "ungraded": "Ungraded",
     "grade": "Grade",
     "notes": "Notes",
+    "personalDeadline": "Personal deadline",
     "ipAddresses": "IP Addresses",
     "ipRestrictions": "IP Address Restrictions",
     "instructorFiles": "Instructor files",
@@ -360,6 +361,7 @@
     "downloadOnlyUngraded": "Download ungraded",
     "uploader": "Uploader",
     "successfulGrade": "Successfully graded",
+    "successfulPersonalDeadline": "Successfully set personal deadline",
     "evaluator": {
       "tabName": "Automatic evaluator",
       "environment": "Environment",
@@ -487,8 +489,7 @@
   },
   "status": {
     "accepted": "Accepted",
-    "rejected": "Rejected",
-    "lateSubmission": "Late submission"
+    "rejected": "Rejected"
   },
   "quizQuestions": {
     "questionSet": "Question set",

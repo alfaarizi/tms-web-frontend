@@ -6,29 +6,31 @@ import { useTranslation } from 'react-i18next';
 import { Submission } from '@/resources/instructor/Submission';
 import { FormButtons } from '@/components/Buttons/FormButtons';
 import { ConfirmModal } from '@/components/Modals/ConfirmModal';
+import { DateTimePickerControl } from '@/components/DateTimePickerControl';
 
 type Props = {
     file: Submission | null;
     show: boolean,
     onSave: (data: Submission) => void,
     onCancel: () => void,
-    isLoading: boolean
+    isLoading: boolean,
+    timezone: string
 }
 
-export function GraderModal({
+export function PersonalDeadlineModal({
     file,
     show,
     onCancel,
     onSave,
     isLoading,
+    timezone,
 }: Props) {
     const { t } = useTranslation();
     const [confirmDialog, setConfirmDialog] = useState(false);
     const {
-        register,
+        control,
         handleSubmit,
         setValue,
-        watch,
         reset,
         formState: { isDirty, dirtyFields },
     } = useForm<Submission>();
@@ -46,20 +48,11 @@ export function GraderModal({
     const handleShow = () => {
         reset();
         if (file) {
-            if (['Accepted', 'Passed'].includes(file.status)) {
-                setValue('status', 'Accepted');
-            } else if (['Rejected', 'Failed'].includes(file.status)) {
-                setValue('status', 'Rejected');
-            } else {
-                setValue('status', 'Accepted');
-            }
-            setValue('notes', file.notes);
-            setValue('grade', file.grade);
+            setValue('personalDeadline', file.personalDeadline);
         }
     };
-    const selectValue = watch('status');
 
-    const handleGraderExiting = () => {
+    const handleHideModal = () => {
         if (isDirty || (Object.keys(dirtyFields).length !== 0)) {
             setConfirmDialog(true);
         } else {
@@ -72,7 +65,6 @@ export function GraderModal({
         onCancel();
     };
 
-    // Render
     return (
         <>
             <Modal
@@ -80,51 +72,26 @@ export function GraderModal({
                 animation
                 size="lg"
                 onShow={handleShow}
-                onHide={handleGraderExiting}
+                onHide={handleHideModal}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>{t('task.grade')}</Modal.Title>
+                    <Modal.Title>{t('task.personalDeadline')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={onSubmit}>
                         <Form.Group>
                             <Form.Label>
-                                {t('task.status')}
+                                {t('task.personalDeadline')}
                                 :
                             </Form.Label>
-                            <Form.Control
-                                as="select"
-                                value={selectValue}
-                                {...register('status', { required: true })}
-                                size="sm"
-                            >
-                                <option value="Accepted">{t('status.accepted')}</option>
-                                <option value="Rejected">{t('status.rejected')}</option>
-
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>
-                                {t('task.notes')}
-                                :
-                            </Form.Label>
-                            <Form.Control as="textarea" {...register('notes', { required: false })} size="sm" />
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>
-                                {t('task.grade')}
-                                :
-                            </Form.Label>
-                            <Form.Control
-                                type="number"
-                                size="sm"
-                                step="0.01"
-                                {...register('grade', { required: false })}
+                            <DateTimePickerControl
+                                name="personalDeadline"
+                                timezone={timezone}
+                                rules={{ required: false }}
+                                control={control}
                             />
                         </Form.Group>
-                        <FormButtons onCancel={handleGraderExiting} isLoading={isLoading} />
+                        <FormButtons onCancel={handleHideModal} isLoading={isLoading} />
                     </Form>
                 </Modal.Body>
             </Modal>

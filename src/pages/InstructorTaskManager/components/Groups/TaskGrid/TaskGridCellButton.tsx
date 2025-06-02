@@ -6,7 +6,6 @@ import {
     faCheck,
     faTimes,
     faArrowUp,
-    faArrowRotateLeft,
     faLock,
     faQuestion,
     faMinus,
@@ -55,10 +54,6 @@ export function TaskGridCellButton({ submission }: Props) {
         case 'Uploaded':
             icon = faArrowUp;
             variant = 'secondary';
-            break;
-        case 'Late Submission':
-            icon = faArrowRotateLeft;
-            variant = 'dark';
             break;
         case 'No Submission':
             icon = faMinus;

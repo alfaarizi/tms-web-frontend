@@ -15,4 +15,5 @@ export interface Submission {
     taskID: number;
     verified: boolean;
     codeCheckerResult: CodeCheckerResult;
+    personalDeadline?: string;
 }
