@@ -90,6 +90,9 @@ export function PersonalDeadlineModal({
                                 rules={{ required: false }}
                                 control={control}
                             />
+                            <Form.Text className="text-muted">
+                                {t('task.personalDeadlineHelp')}
+                            </Form.Text>
                         </Form.Group>
                         <FormButtons onCancel={handleHideModal} isLoading={isLoading} />
                     </Form>

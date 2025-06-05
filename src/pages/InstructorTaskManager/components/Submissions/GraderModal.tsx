@@ -102,6 +102,7 @@ export function GraderModal({
                                 <option value="Rejected">{t('status.rejected')}</option>
 
                             </Form.Control>
+                            <Form.Text className="text-muted">{t('status.statusHelp')}</Form.Text>
                         </Form.Group>
 
                         <Form.Group>
