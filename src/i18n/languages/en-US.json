@@ -310,6 +310,7 @@
     "grade": "Grade",
     "notes": "Notes",
     "personalDeadline": "Personal deadline",
+    "personalDeadlineHelp": "After setting a personal deadline, students can submit a new solution even after the hard deadline, assuming their last upload has not yet been graded or was rejected.",
     "ipAddresses": "IP Addresses",
     "ipRestrictions": "IP Address Restrictions",
     "instructorFiles": "Instructor files",
@@ -489,7 +490,8 @@
   },
   "status": {
     "accepted": "Accepted",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+    "statusHelp": "For solutions that have been accepted, students are no longer able to upload new submissions. In the case of rejected submissions, resubmission is permitted if the deadline allows."
   },
   "quizQuestions": {
     "questionSet": "Question set",

@@ -312,6 +312,7 @@
     "grade": "Értékelés",
     "notes": "Megjegyzések",
     "personalDeadline": "Személyes határidő",
+    "personalDeadlineHelp": "A személyes határidő beállítását követően a hallgatóknak lehetőségük van a végső határidő lejárta után is beküldeniük új megoldást, amennyiben a legutolsó feltöltés még nem volt értékelve vagy el lett utasítva.",
     "ipAddresses": "IP címek",
     "ipRestrictions": "IP cím korlátozások",
     "instructorFiles": "Mellékelt fájlok",
@@ -491,7 +492,8 @@
   },
   "status": {
     "accepted": "Elfogadva",
-    "rejected": "Elutasítva"
+    "rejected": "Elutasítva",
+    "statusHelp": "Az elfogadott megoldásokhoz a hallgatók már nem tölthetnek fel új megoldásokat. Az elutasított megoldások esetében még van lehetőségük újbóli beküldésre amennyiben a határidő megengedi."
   },
   "quizQuestions": {
     "questionSet": "Kérdéshalmaz",
