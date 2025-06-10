@@ -51,7 +51,7 @@ export function AsyncTypeaheadControl({
                 <AsyncTypeahead
                     allowNew={allowNew}
                     newSelectionPrefix={t('common.addNewUserCode', {
-                        uniId: branding.universityIdentifierName[i18n.language],
+                        uniId: branding.universityIdentifierName.singular[i18n.language],
                     })}
                     filterBy={filterBy}
                     id={id}
@@ -65,7 +65,7 @@ export function AsyncTypeaheadControl({
                     selected={field.value}
                     size="sm"
                     placeholder={t('common.searchForUserCodeOrName', {
-                        uniId: branding.universityIdentifierName[i18n.language],
+                        uniId: branding.universityIdentifierName.singular[i18n.language],
                     })}
                     renderMenuItemChildren={(option) => (
                         <span>

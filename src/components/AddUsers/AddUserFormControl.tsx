@@ -56,7 +56,7 @@ export function AddUserFormControl({
         const isValid = extractUserCodes(value)
             .every((code) => userCodeFormat.test(code));
         if (!isValid) {
-            return t('common.userCodesRequired', { uniId: branding.universityIdentifierName[i18n.language] });
+            return t('common.userCodesRequired', { uniIds: branding.universityIdentifierName.plural[i18n.language] });
         }
 
         return undefined;
@@ -66,7 +66,10 @@ export function AddUserFormControl({
         // custom options also have an userCode field (because of labelKey)
         const isValid = value.length > 0 && value.every((opt) => userCodeFormat.test((opt as User).userCode));
         if (!isValid) {
-            return t('common.userCodeOrNameRequired', { uniId: branding.universityIdentifierName[i18n.language] });
+            return t(
+                'common.userCodeOrNameRequired',
+                { uniIds: branding.universityIdentifierName.plural[i18n.language] },
+            );
         }
 
         return undefined;
@@ -100,7 +103,7 @@ export function AddUserFormControl({
                         id={id}
                         rules={{
                             required: t('common.userCodeOrNameRequired', {
-                                uniId: branding.universityIdentifierName[i18n.language],
+                                uniId: branding.universityIdentifierName.singular[i18n.language],
                             }),
                             validate: validateOptions,
                         }}
@@ -119,7 +122,7 @@ export function AddUserFormControl({
                         rules={{
                             validate: validateImport,
                             required: t('common.userCodesRequired', {
-                                uniId: branding.universityIdentifierName[i18n.language],
+                                uniIds: branding.universityIdentifierName.plural[i18n.language],
                             }),
                         }}
                         render={({
@@ -136,7 +139,7 @@ export function AddUserFormControl({
                                 value={value}
                                 size="sm"
                                 placeholder={t('common.userCodes', {
-                                    uniId: branding.universityIdentifierName[i18n.language],
+                                    uniIds: branding.universityIdentifierName.plural[i18n.language],
                                 })}
                             />
                         )}

@@ -50,7 +50,7 @@ export function MockLoginForm({
         <Form onSubmit={onSubmit}>
             <Form.Group>
                 <Form.Label>
-                    {t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}
+                    {t('common.userCode', { uniId: branding.universityIdentifierName.singular[i18n.language] })}
                     :
                 </Form.Label>
                 <Form.Control
@@ -65,7 +65,7 @@ export function MockLoginForm({
                 {errors.userCode
                     && (
                         <FormError message={t('login.userCodeRequired', {
-                            uniId: branding.universityIdentifierName[i18n.language],
+                            uniId: branding.universityIdentifierName.singular[i18n.language],
                         })}
                         />
                     )}

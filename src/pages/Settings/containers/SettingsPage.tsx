@@ -143,7 +143,7 @@ export function SettingsPage() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>
-                            {t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}
+                            {t('common.userCode', { uniId: branding.universityIdentifierName.singular[i18n.language] })}
                             :
                         </Form.Label>
                         <Form.Control
