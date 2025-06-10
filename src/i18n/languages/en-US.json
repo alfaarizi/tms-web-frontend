@@ -315,6 +315,7 @@
     "ipRestrictions": "IP Address Restrictions",
     "instructorFiles": "Instructor files",
     "instructorFilesHelp": "Files uploaded here will be accessible for students (once the task is available for them).",
+    "testFiles": "Test files",
     "taskFiles": "Task files",
     "taskFilesHelp": "Files uploaded here will be accessible for students (once the task is available for them).",
     "solution": "Solution",

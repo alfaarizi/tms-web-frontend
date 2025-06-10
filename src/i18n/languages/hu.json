@@ -317,6 +317,7 @@
     "ipRestrictions": "IP cím korlátozások",
     "instructorFiles": "Mellékelt fájlok",
     "instructorFilesHelp": "Az itt feltöltött fájlok a hallgatók számára is hozzáférhetőek lesznek (amennyiben a feladat már elérhető számukra).",
+    "testFiles": "Teszt fájlok",
     "taskFiles": "Mellékelt fájlok",
     "taskFilesHelp": "Az itt feltöltött fájlok a hallgatók számára is hozzáférhetőek lesznek (amennyiben a feladat már elérhető számukra).",
     "solution": "Megoldás",
