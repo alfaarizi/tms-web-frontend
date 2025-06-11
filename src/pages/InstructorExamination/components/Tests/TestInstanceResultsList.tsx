@@ -3,13 +3,15 @@ import { Table } from 'react-bootstrap';
 import { QuizTestInstance } from '@/resources/instructor/QuizTestInstance';
 import { Time } from '@/components/Time';
 import { CustomCard } from '@/components/CustomCard/CustomCard';
+import { useBranding } from '@/ui-hooks/useBranding';
 
 type Props = {
     testInstances: QuizTestInstance[]
 }
 
 export function TestInstanceResultsList({ testInstances }: Props) {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const branding = useBranding();
 
     return (
         <CustomCard>
@@ -17,6 +19,7 @@ export function TestInstanceResultsList({ testInstances }: Props) {
                 <thead>
                     <tr>
                         <th>{t('common.studentName')}</th>
+                        <th>{t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}</th>
                         <th>{t('quizTests.score')}</th>
                         <th>{t('quizTests.writeDuration')}</th>
                     </tr>
@@ -26,6 +29,7 @@ export function TestInstanceResultsList({ testInstances }: Props) {
                         testInstances.map((instance) => (
                             <tr key={instance.id}>
                                 <td>{instance.user.name}</td>
+                                <td>{instance.user.userCode}</td>
                                 <td>{instance.score}</td>
                                 <td><Time seconds={instance.testDuration} /></td>
                             </tr>
