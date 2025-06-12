@@ -13,8 +13,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* added User Code column to quiz results table ([735408f](https://gitlab.com/tms-elte/frontend-react/commit/735408f1b29d57118a0334da39f1c2e03ed264df))
-* typo in code checker hungarian translation ([b33a5bd](https://gitlab.com/tms-elte/frontend-react/commit/b33a5bda0da922ab9125992e16cf6ed4765f1dcd))
+* Added User Code column to quiz results table ([735408f](https://gitlab.com/tms-elte/frontend-react/commit/735408f1b29d57118a0334da39f1c2e03ed264df))
+* Typo in code checker hungarian translation ([b33a5bd](https://gitlab.com/tms-elte/frontend-react/commit/b33a5bda0da922ab9125992e16cf6ed4765f1dcd))
 
 ### [4.14.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.14.0...v4.14.1) (2025-05-22)
 
