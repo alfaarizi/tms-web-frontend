@@ -19,7 +19,9 @@ export function TestInstanceResultsList({ testInstances }: Props) {
                 <thead>
                     <tr>
                         <th>{t('common.studentName')}</th>
-                        <th>{t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}</th>
+                        <th>
+                            {t('common.userCode', { uniId: branding.universityIdentifierName.singular[i18n.language] })}
+                        </th>
                         <th>{t('quizTests.score')}</th>
                         <th>{t('quizTests.writeDuration')}</th>
                     </tr>
