@@ -71,7 +71,7 @@ export function useVerifySubmissionMutation() {
                 if (oldTaskData) {
                     queryClient.setQueryData(key, {
                         ...oldTaskData,
-                        submissions: [submission],
+                        submission,
                     });
                 }
             },
