@@ -193,6 +193,7 @@ export function InstructorTaskManager() {
                                 text=""
                                 displayTextBreakpoint="xs"
                                 icon={groupView === GroupView.ALL ? faUserGroup : faUser}
+                                preventSidebarHide
                             >
                                 <Dropdown.Item
                                     onSelect={() => handleGroupTypeChange(GroupView.ALL)}
@@ -211,7 +212,11 @@ export function InstructorTaskManager() {
                                     {t('common.asInstructor')}
                                 </Dropdown.Item>
                             </ToolbarDropdown>
-                            <ToolbarDropdown text="" icon={faSort}>
+                            <ToolbarDropdown
+                                text=""
+                                icon={faSort}
+                                preventSidebarHide
+                            >
                                 <Dropdown.Item
                                     onSelect={() => handleOrderByChange(null)}
                                     active={!orderByType}

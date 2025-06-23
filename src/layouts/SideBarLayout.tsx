@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import {
     Button, ButtonGroup, Container, Row, Col,
 } from 'react-bootstrap';
@@ -39,6 +39,13 @@ export function SideBarLayout({
         }
     }, [isExact]);
 
+    const handleButtonGroupClick = (event: React.MouseEvent) => {
+        const target = event.target as HTMLElement;
+        if (!target.closest('[data-prevent-sidebar-hide="true"]')) {
+            toHide();
+        }
+    };
+
     return (
         <Container fluid>
             <Row className="justify-content-center">
@@ -48,7 +55,7 @@ export function SideBarLayout({
                             <h4>{sidebarTitle}</h4>
                             {sidebarButtons
                                 ? (
-                                    <ButtonGroup onClick={toHide}>
+                                    <ButtonGroup onClick={handleButtonGroupClick}>
                                         {sidebarButtons || null}
                                     </ButtonGroup>
                                 )

@@ -14,6 +14,7 @@ type Props = {
     isLoading?: boolean,
     disabled?: boolean,
     displayTextBreakpoint?: Breakpoint,
+    preventSidebarHide?: boolean,
 }
 
 /**
@@ -28,6 +29,7 @@ type Props = {
  * @param displayTextBreakpoint The first viewport size where the button text is visible
  * @param isLoading Show a spinner instead of the icon
  * @param disabled Disable button
+ * @param preventSidebarHide Prevents sidebar from hiding when button is clicked
  * @constructor
  */
 export function ToolbarButton({
@@ -41,6 +43,7 @@ export function ToolbarButton({
     isLoading,
     disabled,
     displayTextBreakpoint = 'lg',
+    preventSidebarHide = false,
 }: Props) {
     let displayedIcon: JSX.Element;
     if (isLoading) {
@@ -59,6 +62,7 @@ export function ToolbarButton({
             target={target}
             disabled={disabled || isLoading}
             title={text}
+            data-prevent-sidebar-hide={preventSidebarHide ? 'true' : 'false'}
         >
             {displayedIcon}
             <ResponsiveButtonText text={text} displayTextBreakpoint={displayTextBreakpoint} />

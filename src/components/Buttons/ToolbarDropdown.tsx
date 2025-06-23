@@ -10,6 +10,7 @@ type Props = {
     icon: IconProp,
     disabled?: boolean,
     displayTextBreakpoint?: Breakpoint,
+    preventSidebarHide?: boolean,
 }
 
 /**
@@ -19,6 +20,7 @@ type Props = {
  * @param text Button text
  * @param displayTextBreakpoint The first viewport size where the button text is visible
  * @param disabled Disable button
+ * @param preventSidebarHide Prevents sidebar from hiding when button is clicked
  * @constructor
  */
 export function ToolbarDropdown({
@@ -27,11 +29,13 @@ export function ToolbarDropdown({
     text,
     disabled,
     displayTextBreakpoint = 'lg',
+    preventSidebarHide = false,
 }: Props) {
     return (
         <DropdownButton
             as={ButtonGroup}
             disabled={disabled}
+            data-prevent-sidebar-hide={preventSidebarHide ? 'true' : 'false'}
             title={(
                 <span title={text}>
                     <FontAwesomeIcon className="fa-fw" icon={icon} />
