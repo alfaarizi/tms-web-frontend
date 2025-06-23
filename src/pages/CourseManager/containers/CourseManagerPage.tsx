@@ -75,6 +75,7 @@ export function CourseManagerPage() {
                         onClick={handleSort}
                         className="float-right"
                         displayTextBreakpoint="none"
+                        preventSidebarHide
                     />
                 </>
             )}
