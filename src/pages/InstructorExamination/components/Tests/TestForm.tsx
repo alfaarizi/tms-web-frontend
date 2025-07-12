@@ -171,9 +171,11 @@ export function TestForm({
                             required: t('common.fieldRequired')
                                 .toString(),
                         })}
+                        defaultValue={0}
                         size="sm"
                     />
                     {errors.duration && <FormError message={errors.duration?.message} />}
+                    <Form.Text className="text-muted">{t('quizTests.durationZeroHelp')}</Form.Text>
                 </Form.Group>
 
                 <Form.Group>

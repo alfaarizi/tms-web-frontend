@@ -533,7 +533,8 @@
     "successfulDuplication": "Successfully duplicated",
     "successfulFinalization": "Successfully finalized",
     "noGroupCreated": "A group must be created before creating a new test",
-    "passwordProtectedHelp": "For password-protected tests the test must be verified before starting. Leave the password field blank to turn off password protection."
+    "passwordProtectedHelp": "For password-protected tests the test must be verified before starting. Leave the password field blank to turn off password protection.",
+    "durationZeroHelp": "By setting duration to 0 you can allow students to write the test for the entire time it is available."
   },
   "reactMde": {
     "write": "Editor",
