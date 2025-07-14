@@ -9,6 +9,7 @@ import { useCourses } from '@/hooks/instructor/CoursesHooks';
 import { useCreateGroupMutation } from '@/hooks/instructor/GroupHooks';
 import { GroupForm } from '@/pages/InstructorTaskManager/components/Groups/GroupForm';
 import { Group } from '@/resources/instructor/Group';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 export function NewGroup() {
     const history = useHistory();
@@ -34,14 +35,14 @@ export function NewGroup() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/task-manager">
                     <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to="/instructor/task-manager/groups/new">
                     <Breadcrumb.Item active>{t('group.newGroup')}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <GroupForm
                 title={t('group.newGroup')}
                 courses={courses.data}

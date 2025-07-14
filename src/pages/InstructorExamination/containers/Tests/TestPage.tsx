@@ -22,6 +22,7 @@ import { TestQuestionsTab } from '@/pages/InstructorExamination/containers/Tests
 import { TestResultsTab } from '@/pages/InstructorExamination/containers/Tests/TestResultsTab';
 import { UniqueTestQuestionsTab } from '@/pages/InstructorExamination/containers/Tests/UniqueTestQuestionsTab';
 import { useShow } from '@/ui-hooks/useShow';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -101,7 +102,7 @@ export function TestPage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/quizzes">
                     <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
                 </LinkContainer>
@@ -111,7 +112,7 @@ export function TestPage() {
                 <LinkContainer to={`/instructor/quizzes/tests/${test.data.id}`}>
                     <Breadcrumb.Item active>{test.data.name}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             {showEdit.show
                 ? (
                     <TestForm

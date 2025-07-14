@@ -7,6 +7,7 @@ import { useCourses } from '@/hooks/instructor/CoursesHooks';
 import { useCreateQuestionSetMutation } from '@/hooks/instructor/QuizQuestionSetHooks';
 import { QuestionSetForm } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetForm';
 import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 export function NewQuestionSetPage() {
     const { t } = useTranslation();
@@ -29,7 +30,7 @@ export function NewQuestionSetPage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/quizzes">
                     <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
                 </LinkContainer>
@@ -39,7 +40,7 @@ export function NewQuestionSetPage() {
                 <LinkContainer to="/instructor/quizzes/question-sets/new">
                     <Breadcrumb.Item active>{t('quizQuestions.createQuestionSet')}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <QuestionSetForm
                 title={t('quizQuestions.createQuestionSet')}
                 courses={courses.data}

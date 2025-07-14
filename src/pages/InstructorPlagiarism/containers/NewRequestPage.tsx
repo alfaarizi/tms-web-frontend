@@ -12,6 +12,7 @@ import { useCreatePlagiarismMutation, usePlagiarismServices } from '@/hooks/inst
 import { useTaskListForCourse, useUserList } from '@/hooks/instructor/TaskHooks';
 import { NewRequestForm, PlagiarismForm } from '@/pages/InstructorPlagiarism/components/NewRequestForm';
 import { RequestPlagiarism } from '@/resources/instructor/RequestPlagiarism';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 export function NewRequestPage() {
     const history = useHistory();
@@ -80,14 +81,14 @@ export function NewRequestPage() {
     // Render
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/plagiarism">
                     <Breadcrumb.Item>{t('navbar.plagiarism')}</Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to="/instructor/plagiarism/new">
                     <Breadcrumb.Item active>{t('plagiarism.newPlagiarismCheck')}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <FormProvider {...formMethods}>
                 <NewRequestForm
                     onSave={handleSave}

@@ -10,6 +10,7 @@ import { useNotification, useUpdateNotificationMutation } from '@/hooks/instruct
 import { NotificationForm } from '@/pages/InstructorTaskManager/components/Notifications/NotificationForm';
 import { Notification } from '@/resources/instructor/Notification';
 import { getUserTimezone } from '@/utils/getUserTimezone';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     notificationID: string,
@@ -49,7 +50,7 @@ export function EditNotificationPage() {
     return (
         <>
             {group.data ? (
-                <Breadcrumb>
+                <StickyBreadcrumb>
                     <LinkContainer to="/instructor/task-manager">
                         <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                     </LinkContainer>
@@ -69,7 +70,7 @@ export function EditNotificationPage() {
                     >
                         <Breadcrumb.Item active>{t('notification.editNotification')}</Breadcrumb.Item>
                     </LinkContainer>
-                </Breadcrumb>
+                </StickyBreadcrumb>
             ) : null}
             <Container fluid={false} className="mt-3">
                 <NotificationForm

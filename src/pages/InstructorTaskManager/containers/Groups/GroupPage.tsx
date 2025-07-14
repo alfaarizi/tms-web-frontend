@@ -31,6 +31,7 @@ import { GroupNotificationsTab } from '@/pages/InstructorTaskManager/containers/
 import { CanvasSetupData } from '@/resources/instructor/CanvasSetupData';
 import { Group } from '@/resources/instructor/Group';
 import { useShow } from '@/ui-hooks/useShow';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string,
@@ -154,7 +155,7 @@ export function GroupPage() {
     // Render
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/task-manager">
                     <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                 </LinkContainer>
@@ -168,7 +169,7 @@ export function GroupPage() {
                         {group.data.number}
                     </Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             {showEditForm.show
                 ? (
                     <GroupForm
