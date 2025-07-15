@@ -1,5 +1,5 @@
 import {
-    ChangeEventHandler, MouseEventHandler, ReactNode, useState,
+    ChangeEvent, ChangeEventHandler, MouseEventHandler, ReactNode, useState,
 } from 'react';
 import {
     Alert, Button, Form, Spinner,
@@ -21,13 +21,14 @@ type Props = {
     loading: boolean,
     disableSelect?: boolean,
     disableUpload?: boolean,
-    onUpload: (files: File[]) => void,
+    onUpload: (files: File[], overwrite: boolean) => void,
     onChange?: (files: File[]) => void,
     accept?: string,
     errorMessages?: string[],
     successCount?: number,
-    hintMessage?: string
-    title?: string
+    hintMessage?: string,
+    title?: string,
+    overwritable? : boolean
 }
 
 /**
@@ -40,6 +41,7 @@ type Props = {
  * @param errorMessages Error messages (e.g. validation messages from the server)
  * @param hintMessage descriptive message for user
  * @param title Overrides default title
+ * @param overWritable If the uploading should overwrite files with already existing names
  * @constructor
  */
 export function FileUpload({
@@ -55,16 +57,18 @@ export function FileUpload({
     successCount,
     hintMessage,
     title,
+    overwritable,
 }: Props) {
     const { t } = useTranslation();
     const fileSizeValidator = useFileSizeValidator();
     const [fileList, setFileList] = useState<File[]>([]);
     const [validSize, setValidSize] = useState<boolean>(true);
+    const [overwrite, setOverwrite] = useState<boolean>(false);
 
     const handleUpload: MouseEventHandler<HTMLInputElement> = (evt) => {
         evt.preventDefault();
 
-        onUpload(fileList);
+        onUpload(fileList, overwrite);
         setFileList([]);
     };
 
@@ -90,6 +94,9 @@ export function FileUpload({
         evt.target.files = null;
     };
 
+    const handleOverwrite: ChangeEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement>) : void => {
+        setOverwrite(e.target.checked);
+    };
     // Render
 
     // Build file label text from the file list
@@ -141,33 +148,45 @@ export function FileUpload({
                     {hintMessage}
                 </Form.Text>
             )}
-
-            <Button
-                variant="success"
-                size="sm"
-                className="mt-2"
-                disabled={disableUpload || loading || !validSize || fileList.length === 0 || !fileSizeValidator.ready}
-                onClick={handleUpload}
-            >
-                {
-                    loading
-                        ? (
-                            <>
-                                <Spinner animation="border" size="sm" />
-                                {' '}
-                                {t('fileUpload.uploadInProgress')}
-                                .
-                            </>
-                        )
-                        : (
-                            <>
-                                <FontAwesomeIcon icon={faUpload} />
-                                {' '}
-                                {t('fileUpload.upload')}
-                            </>
-                        )
-                }
-            </Button>
+            <div>
+                <Button
+                    variant="success"
+                    size="sm"
+                    className="mt-2"
+                    disabled={disableUpload || loading || !validSize
+                        || fileList.length === 0 || !fileSizeValidator.ready}
+                    onClick={handleUpload}
+                >
+                    {
+                        loading
+                            ? (
+                                <>
+                                    <Spinner animation="border" size="sm" />
+                                    {' '}
+                                    {t('fileUpload.uploadInProgress')}
+                                    .
+                                </>
+                            )
+                            : (
+                                <>
+                                    <FontAwesomeIcon icon={faUpload} />
+                                    {' '}
+                                    {t('fileUpload.upload')}
+                                </>
+                            )
+                    }
+                </Button>
+                <Form.Group>
+                    { overwritable ? (
+                        <Form.Check
+                            type="checkbox"
+                            onChange={handleOverwrite}
+                            id="overwriteCheck"
+                            label={t('fileUpload.forceOverwrite')}
+                        />
+                    ) : null }
+                </Form.Group>
+            </div>
         </CustomCard>
     );
 }
