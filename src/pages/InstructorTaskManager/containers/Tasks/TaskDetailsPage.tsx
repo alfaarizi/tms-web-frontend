@@ -29,6 +29,7 @@ import { useShow } from '@/ui-hooks/useShow';
 import { useIpRestrictions } from '@/hooks/instructor/IpRestrictionItemHooks';
 import { IpRestrictionItem } from '@/resources/instructor/IpRestrictionItem';
 import { CanvasTaskForm } from '@/pages/InstructorTaskManager/components/Tasks/CanvasTaskForm';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -176,7 +177,7 @@ export function TaskDetailsPage() {
     return (
         <>
             {task.data.group ? (
-                <Breadcrumb>
+                <StickyBreadcrumb>
                     <LinkContainer to="/instructor/task-manager">
                         <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                     </LinkContainer>
@@ -193,7 +194,7 @@ export function TaskDetailsPage() {
                     <LinkContainer to={`/instructor/task-manager/tasks/${task.data.id}`}>
                         <Breadcrumb.Item active>{task.data.name}</Breadcrumb.Item>
                     </LinkContainer>
-                </Breadcrumb>
+                </StickyBreadcrumb>
             ) : null}
 
             {pageContent}

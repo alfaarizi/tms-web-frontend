@@ -9,6 +9,7 @@ import { AvailableTestListItem } from '@/pages/StudentExamination/components/Ava
 import { FinishedTestListItem } from '@/pages/StudentExamination/components/FinishedTestListItem';
 import { FutureTestListItem } from '@/pages/StudentExamination/components/FutureTestListItem';
 import { TestList } from '@/pages/StudentExamination/components/TestList';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 export function HomePage() {
     const { selectedSemesterID } = useSelectedSemester();
@@ -25,11 +26,11 @@ export function HomePage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/student/quizzes">
                     <Breadcrumb.Item active>{t('navbar.quizzes')}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <TestList
                 title={t('quizTests.availableTests')}
                 testInstances={availableTests.data}

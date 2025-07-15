@@ -15,6 +15,7 @@ import { UserSwitcher } from '@/components/UserSwitcher';
 import { StudentSolutionsTab } from '@/pages/InstructorTaskManager/containers/Students/StudentSolutionsTab';
 import { StudentStatsTab } from '@/pages/InstructorTaskManager/containers/Students/StudentStatsTab';
 import { Submission } from '@/resources/instructor/Submission';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     groupID: string;
@@ -65,7 +66,7 @@ export function StudentDetailsPage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/task-manager">
                     <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                 </LinkContainer>
@@ -82,7 +83,7 @@ export function StudentDetailsPage() {
                 <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}/students/${selectedUser.id}`}>
                     <Breadcrumb.Item active>{`${selectedUser.name}(${selectedUser.userCode})`}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <UserSwitcher users={students.data} onChange={handleStudentSwitch} selectedID={selectedUserID} />
 
             <TabbedInterface defaultActiveKey="solutions" id="student-tabs">

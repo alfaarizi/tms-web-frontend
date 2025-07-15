@@ -19,6 +19,7 @@ import { QuestionSetForm } from '@/pages/InstructorExamination/components/Questi
 import { QuestionsEditor } from '@/pages/InstructorExamination/containers/QuestionSets/QuestionsEditor';
 import { QuizQuestionSet } from '@/resources/instructor/QuizQuestionSet';
 import { useShow } from '@/ui-hooks/useShow';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -94,7 +95,7 @@ export function QuestionSetPage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/quizzes">
                     <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
                 </LinkContainer>
@@ -104,7 +105,7 @@ export function QuestionSetPage() {
                 <LinkContainer to={`/instructor/quizzes/question-sets/${questionSet.data.id}`}>
                     <Breadcrumb.Item active>{questionSet.data.name}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             {showEdit.show
                 ? (
                     <QuestionSetForm

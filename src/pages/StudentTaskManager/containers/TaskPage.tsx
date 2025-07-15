@@ -27,6 +27,7 @@ import { TaskDetails } from '@/pages/StudentTaskManager/components/TaskDetails';
 import { SubmissionUpload } from '@/resources/student/SubmissionUpload';
 import { UnlockItem } from '@/resources/student/UnlockItem';
 import { VerifyItem } from '@/resources/student/VerifyItem';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -179,7 +180,7 @@ export function TaskPage() {
     return (
         <>
             {group.data ? (
-                <Breadcrumb>
+                <StickyBreadcrumb>
                     <LinkContainer to="/student/task-manager">
                         <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                     </LinkContainer>
@@ -189,7 +190,7 @@ export function TaskPage() {
                     <LinkContainer to={`/student/task-manager/tasks/${task.data.id}`}>
                         <Breadcrumb.Item active>{task.data.name}</Breadcrumb.Item>
                     </LinkContainer>
-                </Breadcrumb>
+                </StickyBreadcrumb>
             ) : null}
             <TaskDetails
                 task={task.data}

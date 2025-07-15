@@ -6,6 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useResults, useTestInstance } from '@/hooks/student/QuizTestInstanceHooks';
 import { TestInstanceDetails } from '@/pages/StudentExamination/components/TestInstanceDetails';
 import { TestResult } from '@/pages/StudentExamination/components/TestResults';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -24,14 +25,14 @@ export function TestInstancePage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/student/quizzes">
                     <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to={`/student/quizzes/test-instances/${id}`}>
                     <Breadcrumb.Item active>{testInstance.data.test.name}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <TestInstanceDetails testInstance={testInstance.data} />
             <hr />
             <TestResult results={results.data} />

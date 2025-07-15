@@ -13,6 +13,7 @@ import { useCreateTestMutation } from '@/hooks/instructor/QuizTestHooks';
 import { TestForm } from '@/pages/InstructorExamination/components/Tests/TestForm';
 import { TestNoGroupCard } from '@/pages/InstructorExamination/components/Tests/TestNoGroupCard';
 import { QuizTest } from '@/resources/instructor/QuizTest';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     questionsetID: string
@@ -59,7 +60,7 @@ export function NewTestPage() {
     return groups.data !== undefined && groups.data.length > 0
         ? (
             <>
-                <Breadcrumb>
+                <StickyBreadcrumb>
                     <LinkContainer to="/instructor/quizzes">
                         <Breadcrumb.Item>{t('navbar.quizzes')}</Breadcrumb.Item>
                     </LinkContainer>
@@ -72,7 +73,7 @@ export function NewTestPage() {
                     <LinkContainer to={`/instructor/quizzes/question-sets/${questionSet.data.id}/create-test`}>
                         <Breadcrumb.Item active>{t('quizTests.newTest')}</Breadcrumb.Item>
                     </LinkContainer>
-                </Breadcrumb>
+                </StickyBreadcrumb>
                 <TestForm
                     title={t('quizTests.newTest')}
                     groups={groups.data}

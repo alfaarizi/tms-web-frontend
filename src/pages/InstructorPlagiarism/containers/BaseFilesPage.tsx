@@ -17,6 +17,7 @@ import {
 } from '@/hooks/instructor/PlagiarismBaseFileHooks';
 import { PlagiarismBasefile } from '@/resources/instructor/PlagiarismBasefile';
 import { getFirstError } from '@/utils/getFirstError';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 export function BaseFilesPage() {
     const { t } = useTranslation();
@@ -61,14 +62,14 @@ export function BaseFilesPage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/plagiarism">
                     <Breadcrumb.Item>{t('navbar.plagiarism')}</Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to="/instructor/plagiarism/basefiles">
                     <Breadcrumb.Item active>{t('plagiarism.basefiles.basefiles')}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <FileUpload
                 multiple
                 disableSelect={uploadDisabled}

@@ -13,6 +13,7 @@ import { useGroup } from '@/hooks/instructor/GroupHooks';
 import { useCreateTaskMutation } from '@/hooks/instructor/TaskHooks';
 import { TaskForm } from '@/pages/InstructorTaskManager/components/Tasks/TaskForm';
 import { Task } from '@/resources/instructor/Task';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     groupID?: string
@@ -58,7 +59,7 @@ export function NewTaskPage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/task-manager">
                     <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                 </LinkContainer>
@@ -75,7 +76,7 @@ export function NewTaskPage() {
                 <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}/new-task`}>
                     <Breadcrumb.Item active>{t('task.newTask')}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <TaskForm
                 title={t('task.newTask')}
                 onSave={handleSave}

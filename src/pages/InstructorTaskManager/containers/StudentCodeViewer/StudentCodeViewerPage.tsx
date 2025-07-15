@@ -23,6 +23,7 @@ import { FolderIcon } from '@/pages/InstructorTaskManager/components/StudentCode
 import { getExtension } from '@/pages/InstructorTaskManager/utils/StudentCodeViewerUtils';
 
 import '@/pages/InstructorTaskManager/containers/StudentCodeViewer/StudentCodeViewerPage.css';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -160,7 +161,7 @@ export function StudentCodeViewerPage() {
     return (
         <>
             {submission.data && submission.data.task && submission.data.task.group ? (
-                <Breadcrumb>
+                <StickyBreadcrumb>
                     <LinkContainer to="/instructor/task-manager">
                         <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                     </LinkContainer>
@@ -191,7 +192,7 @@ export function StudentCodeViewerPage() {
                     <LinkContainer to={`/instructor/task-manager/code-viewer/${submission.data.id}`}>
                         <Breadcrumb.Item active>{t('task.viewCode')}</Breadcrumb.Item>
                     </LinkContainer>
-                </Breadcrumb>
+                </StickyBreadcrumb>
             ) : null}
             <Row className="directory m-2">
                 {(treeData[0]?.children?.length > 0) ? (

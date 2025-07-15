@@ -29,6 +29,7 @@ import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions
 import { Submission } from '@/resources/instructor/Submission';
 import { useShow } from '@/ui-hooks/useShow';
 import { AutoTestResultAlert } from '@/components/AutoTestResultAlert';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -135,7 +136,7 @@ export function SubmissionPage() {
         <>
             {(submission.data.task && submission.data.task.group)
                 ? (
-                    <Breadcrumb>
+                    <StickyBreadcrumb>
                         <LinkContainer to="/instructor/task-manager">
                             <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                         </LinkContainer>
@@ -165,7 +166,7 @@ export function SubmissionPage() {
                                 {submission.data.name ?? submission.data.translatedStatus}
                             </Breadcrumb.Item>
                         </LinkContainer>
-                    </Breadcrumb>
+                    </StickyBreadcrumb>
                 ) : null}
             <CustomCard>
                 <CustomCardHeader>
