@@ -79,7 +79,10 @@
     "thursday": "Csütörtök",
     "friday": "Péntek",
     "saturday": "Szombat",
-    "sunday": "Vasárnap"
+    "sunday": "Vasárnap",
+    "yesterday": "Tegnap",
+    "today": "Ma",
+    "tomorrow": "Holnap"
   },
   "passwordProtected": {
     "exitPasswordProtected": "Kimeneti jelszó",
