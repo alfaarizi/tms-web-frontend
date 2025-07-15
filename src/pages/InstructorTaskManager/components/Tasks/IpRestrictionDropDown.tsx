@@ -38,7 +38,7 @@ export function IpRestrictionDropdown({
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     {ipRestrictions.map((restriction) => (
-                        <Dropdown.Item key={restriction.id} as="div">
+                        <div key={restriction.id} className="dropdown-item-text">
                             <Form.Check
                                 type="checkbox"
                                 id={`checkbox-${restriction.id}`}
@@ -46,7 +46,7 @@ export function IpRestrictionDropdown({
                                 checked={selectedIpRestrictions.some((r) => r.id === restriction.id)}
                                 onChange={() => handleCheckboxChange(restriction.id)}
                             />
-                        </Dropdown.Item>
+                        </div>
                     ))}
                 </Dropdown.Menu>
             </Dropdown>
