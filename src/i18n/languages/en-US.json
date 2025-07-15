@@ -78,7 +78,10 @@
     "thursday": "Thursday",
     "friday": "Friday",
     "saturday": "Saturday",
-    "sunday": "Sunday"
+    "sunday": "Sunday",
+    "yesterday": "Yesterday",
+    "today": "Today",
+    "tomorrow": "Tomorrow"
   },
   "passwordProtected": {
     "exitPasswordProtected": "Exit password",
