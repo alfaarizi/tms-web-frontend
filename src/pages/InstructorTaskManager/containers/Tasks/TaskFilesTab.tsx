@@ -37,12 +37,13 @@ export function TaskFilesTab({ task }: Props) {
         removeMutation.mutate(id);
     };
 
-    const handleUpload = async (files: File[]) => {
+    const handleUpload = async (files: File[], overwrite : boolean) => {
         try {
             const uploadData: TaskFilesUpload = {
                 taskID: task.id,
                 category: 'Attachment',
                 files,
+                overwrite,
             };
             await uploadMutation.mutateAsync(uploadData);
         } catch (e) {
@@ -73,6 +74,7 @@ export function TaskFilesTab({ task }: Props) {
                     errorMessages={failedToUpload}
                     successCount={uploadMutation.data ? uploadMutation.data.uploaded.length : 0}
                     hintMessage={t('task.taskFilesHelp')}
+                    overwritable
                 />
 
                 <TaskFilesList

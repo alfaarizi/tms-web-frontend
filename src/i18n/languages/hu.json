@@ -112,6 +112,7 @@
     "browse": "Tallózás",
     "upload": "Feltöltés",
     "uploadInProgress": "Feltöltés...",
+    "forceOverwrite": "Már létező fájlok felülírása",
     "hint": {
       "atLeastOneDockerfile": "A feltöltésnek tartalmaznia kell egy \"Dockerfile\" nevű fájlt!",
       "dllExeNotAllowed": "A .dll és .exe fájlok feltöltése nem engedélyezett!",
