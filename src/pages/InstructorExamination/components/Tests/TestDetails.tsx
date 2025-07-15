@@ -1,18 +1,20 @@
 import { useTranslation } from 'react-i18next';
 
+import {
+    faCopy, faEdit, faKey, faPlay,
+} from '@fortawesome/free-solid-svg-icons';
+import { ButtonGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { QuizTest } from '@/resources/instructor/QuizTest';
 import { DataRow } from '@/components/DataRow';
 import { CustomCard } from '@/components/CustomCard/CustomCard';
 import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
 import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
-import {
-    faCopy, faEdit, faKey, faPlay,
-} from '@fortawesome/free-solid-svg-icons';
 import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
-import { ButtonGroup } from 'react-bootstrap';
 import { DateTimeInterval } from '@/pages/InstructorExamination/components/Tests/DateTimeInterval';
 import { IconTooltip } from '@/components/IconTooltip';
+import { useQuestionSet } from '@/hooks/instructor/QuizQuestionSetHooks';
 
 type Params = {
     test: QuizTest;
@@ -30,6 +32,7 @@ export function TestDetails({
     onDelete,
 }: Params) {
     const { t } = useTranslation();
+    const questionSet = useQuestionSet(test.questionsetID);
 
     return (
         <CustomCard>
@@ -48,6 +51,9 @@ export function TestDetails({
                 (
                 {test.group?.number}
                 )
+            </DataRow>
+            <DataRow label={t('quizQuestions.questionSet')}>
+                <Link to={`/instructor/quizzes/question-sets/${test.questionsetID}`}>{questionSet.data?.name}</Link>
             </DataRow>
             <DataRow label={t('quizTests.available')}>
                 <DateTimeInterval
