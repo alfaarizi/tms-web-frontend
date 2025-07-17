@@ -24,15 +24,6 @@ export function StructuralRequirementFormControl({
         <div className="mb-2">
             <InputGroup>
                 <Form.Control
-                    {...register(`structuralRequirements.${index}.regexExpression`, {
-                        required: t('common.fieldRequired')
-                            .toString(),
-                    })}
-                    placeholder={t('task.regularExpression')}
-                    size="sm"
-                    className="mr-2"
-                />
-                <Form.Control
                     {...register(`structuralRequirements.${index}.type`, {
                         required: t('common.fieldRequired')
                             .toString(),
@@ -44,6 +35,15 @@ export function StructuralRequirementFormControl({
                     <option value="Includes">{t('task.includes')}</option>
                     <option value="Excludes">{t('task.excludes')}</option>
                 </Form.Control>
+                <Form.Control
+                    {...register(`structuralRequirements.${index}.regexExpression`, {
+                        required: t('common.fieldRequired')
+                            .toString(),
+                    })}
+                    placeholder={t('task.regularExpression')}
+                    size="sm"
+                    className="mr-2"
+                />
                 <DeleteToolbarButton
                     displayTextBreakpoint="none"
                     onDelete={() => requirementRemove(index)}
