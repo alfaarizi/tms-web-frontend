@@ -16,4 +16,5 @@ export interface QuizTest {
     group?: Group;
     password: string|null;
     isPasswordProtected: boolean;
+    finalized: boolean;
 }
