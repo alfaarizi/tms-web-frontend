@@ -540,6 +540,7 @@
     "successfulFinalization": "Teszt véglegesítve",
     "noGroupCreated": "Egy csoport létrehozása szükséges új teszt létrehozása előtt",
     "passwordProtectedHelp": "A jelszóvédett tesztek esetében hitelesíteni kell a tesztet a kitöltés megkezdése előtt. A védelem kikapcsolásához hagyja üresen a jelszó mezőt.",
+    "finalized": "Véglegesítve",
     "durationZeroHelp": "A kitöltési idő 0-ra állításával a diákok a teljes rendelkezésre álló idő alatt írhatják a tesztet."
   },
   "reactMde": {

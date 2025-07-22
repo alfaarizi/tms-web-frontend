@@ -4,6 +4,7 @@ import {
     faCopy, faEdit, faKey, faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 import { ButtonGroup } from 'react-bootstrap';
+import { DateTime } from 'luxon';
 import { Link } from 'react-router-dom';
 import { QuizTest } from '@/resources/instructor/QuizTest';
 import { DataRow } from '@/components/DataRow';
@@ -17,12 +18,12 @@ import { IconTooltip } from '@/components/IconTooltip';
 import { useQuestionSet } from '@/hooks/instructor/QuizQuestionSetHooks';
 
 type Params = {
-    test: QuizTest;
+    test: QuizTest,
     onFinalize: () => void,
     onDuplicate: () => void,
     onEdit: () => void,
-    onDelete: () => void
-}
+    onDelete: () => void,
+};
 
 export function TestDetails({
     test,
@@ -32,6 +33,7 @@ export function TestDetails({
     onDelete,
 }: Params) {
     const { t } = useTranslation();
+    const checkDateIsAfterNow = (dateString: string) => DateTime.now() < DateTime.fromISO(dateString);
     const questionSet = useQuestionSet(test.questionsetID);
 
     return (
@@ -39,10 +41,37 @@ export function TestDetails({
             <CustomCardHeader>
                 <CustomCardTitle>{test.name}</CustomCardTitle>
                 <ButtonGroup>
-                    <ToolbarButton icon={faPlay} text={t('quizTests.finalize')} onClick={onFinalize} />
-                    <ToolbarButton icon={faCopy} text={t('common.duplicate')} onClick={onDuplicate} />
-                    <ToolbarButton icon={faEdit} text={t('common.edit')} onClick={onEdit} />
-                    <DeleteToolbarButton onDelete={onDelete} />
+                    {!test.finalized
+
+                    && (
+                        <ToolbarButton
+                            icon={faPlay}
+                            text={t('quizTests.finalize')}
+                            onClick={onFinalize}
+                        />
+                    )}
+
+                    <ToolbarButton
+                        icon={faCopy}
+                        text={t('common.duplicate')}
+                        onClick={onDuplicate}
+                    />
+                    {!test.finalized
+
+                        && (
+                            <ToolbarButton
+                                icon={faEdit}
+                                text={t('common.edit')}
+                                onClick={onEdit}
+                            />
+                        )}
+                    {(!test.finalized || checkDateIsAfterNow(test.availablefrom))
+
+                            && (
+                                <DeleteToolbarButton
+                                    onDelete={onDelete}
+                                />
+                            )}
                 </ButtonGroup>
             </CustomCardHeader>
             <DataRow label={t('course.course')}>
@@ -63,9 +92,13 @@ export function TestDetails({
                 />
             </DataRow>
             <DataRow label={t('quizTests.duration')}>{test.duration}</DataRow>
-            <DataRow label={t('quizTests.questionAmount')}>{test.questionamount}</DataRow>
+            <DataRow label={t('quizTests.questionAmount')}>
+                {test.questionamount}
+            </DataRow>
             <DataRow label={t('passwordProtectedTest.passwordProtected')}>
-                {(!test.password || test.password.length === 0) ? t('common.no') : (
+                {!test.password || test.password.length === 0 ? (
+                    t('common.no')
+                ) : (
                     <>
                         {t('common.yes')}
                         <IconTooltip
@@ -75,7 +108,9 @@ export function TestDetails({
                         />
                     </>
                 )}
-
+            </DataRow>
+            <DataRow label={t('quizTests.finalized')}>
+                {test.finalized ? t('common.yes') : t('common.no')}
             </DataRow>
         </CustomCard>
     );

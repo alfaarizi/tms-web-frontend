@@ -48,6 +48,9 @@ export function TestList({
                     </DataRow>
                     <DataRow label={t('quizTests.duration')}>{test.duration}</DataRow>
                     <DataRow label={t('quizTests.questionAmount')}>{test.questionamount}</DataRow>
+                    <DataRow label={t('quizTests.finalized')}>
+                        {test.finalized ? t('common.yes') : t('common.no')}
+                    </DataRow>
                 </ListCardItem>
             ))}
         </CustomCard>
