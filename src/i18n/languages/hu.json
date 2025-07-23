@@ -319,6 +319,7 @@
     "personalDeadlineHelp": "A személyes határidő beállítását követően a hallgatóknak lehetőségük van a végső határidő lejárta után is beküldeniük új megoldást, amennyiben a legutolsó feltöltés még nem volt értékelve vagy el lett utasítva.",
     "ipAddresses": "IP címek",
     "ipRestrictions": "IP cím korlátozások",
+    "ipNoRoom": "Az IP címhez nincs terem hozzárendelve",
     "instructorFiles": "Mellékelt fájlok",
     "instructorFilesHelp": "Az itt feltöltött fájlok a hallgatók számára is hozzáférhetőek lesznek (amennyiben a feladat már elérhető számukra).",
     "testFiles": "Teszt fájlok",

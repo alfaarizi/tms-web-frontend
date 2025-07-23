@@ -317,6 +317,7 @@
     "personalDeadlineHelp": "After setting a personal deadline, students can submit a new solution even after the hard deadline, assuming their last upload has not yet been graded or was rejected.",
     "ipAddresses": "IP Addresses",
     "ipRestrictions": "IP Address Restrictions",
+    "ipNoRoom": "No room associated with this address",
     "instructorFiles": "Instructor files",
     "instructorFilesHelp": "Files uploaded here will be accessible for students (once the task is available for them).",
     "testFiles": "Test files",
