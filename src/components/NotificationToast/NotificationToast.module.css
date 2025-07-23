@@ -1,6 +1,15 @@
 .notificationContainer {
     position: fixed;
-    top: 60px;
+    bottom: 20px;
     right: 2px;
     z-index: 1100;
+}
+
+.toast {
+    transition: background-color 0.2s ease;
+}
+
+.toast:hover {
+    background-color: #b1b1b1;
+    cursor: pointer;
 }
