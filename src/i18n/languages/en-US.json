@@ -472,6 +472,12 @@
       "byName": "Student name",
       "byUploadTime": "Upload time"
     },
+    "filterSubmission": {
+      "filterSubmission": "Filter students",
+      "showAllSubmission": "All student",
+      "showWithSubmission": "Show students with uploaded submission",
+      "showWithoutSubmission": "Show students with no submission"
+    },
     "canvasAssignment": "Canvas assignment",
     "canvasUpload": "Visit the Canvas page of the assignment to upload a new solution!",
     "viewCode": "View code",
