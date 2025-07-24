@@ -479,6 +479,12 @@
       "byName": "Hallgató neve szerint",
       "byUploadTime": "Feltöltés ideje szerint"
     },
+    "filterSubmission": {
+      "filterSubmission": "Hallgatók szűrése",
+      "showAllSubmission": "Összes hallgató",
+      "showWithSubmission": "Csak azok a hallgatók akiknek van feltöltése",
+      "showWithoutSubmission": "Csak azok a hallgatók akiknek nincs feltöltése"
+    },
     "canvasAssignment": "Canvas-feladat",
     "canvasUpload": "Látogasson el a feladat Canvas-oldalára új megoldás feltöltéséhez!",
     "viewCode": "Kód megtekintése",
