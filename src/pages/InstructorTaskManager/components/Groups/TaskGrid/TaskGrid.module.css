@@ -24,7 +24,6 @@ div.taskGridTableContainer {
     outline-offset: -1px;
 }
 
-
 .taskGridDropdown > button,
 .taskGridCellButton {
     min-width: 50px;
@@ -45,7 +44,6 @@ th.taskNameCell > span {
     white-space: nowrap;
 }
 
-
 .stickyHead {
     min-width: 170px;
     position: sticky;
@@ -64,4 +62,24 @@ th.taskNameCell > span {
     padding: 5px 0;
     font-size: 1.1em;
     font-weight: bold;
+}
+
+.buttonText {
+    font-size: 1.0em;
+    width: 100%;
+    height: 100%;
+}
+
+.lockIcon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 0.8em;
+    color: #FFDE21;
+    z-index: 1000;
+    margin-right: -12px;
+    margin-top: -6px;
+    padding: 4px;
+    background-color: #000;
+    border-radius: 50%;
 }
