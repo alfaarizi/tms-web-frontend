@@ -145,7 +145,7 @@ export function TaskDetailsPage() {
                 showVersionControl={false}
                 serverSideError={updateErrorBody}
                 isLoading={updateMutation.isLoading}
-                ipRestrictions={ipRestrictions.data || []} // Pass IP restrictions to the form
+                labIps={ipRestrictions.data || []} // Pass IP restrictions to the form
                 handleIpRestrictionsChange={handleIpRestrictionsChange} // Pass the change handler
                 selectedIpRestrictions={selectedIpRestrictions}
             />

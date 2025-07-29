@@ -627,6 +627,9 @@
     "enterName": "Enter IP restriction name",
     "resetWarning": "Note: Editing the Task will reset the previous IP restrictions selections. You need to select them again if you want to keep them.",
     "selectAddresses" : "Select IP address restrictions",
-    "selectedAddresses" : "Selected IP address restrictions:"
+    "selectedAddresses" : "Selected IP address restrictions:",
+    "custom": "Custom",
+    "selectDefault": "Select an option",
+    "duplicateIpError": "IP address and mask combination must be unique"
   }
 }

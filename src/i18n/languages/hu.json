@@ -628,6 +628,9 @@
     "enterName": "Adja meg az IP korlátozás nevét",
     "resetWarning" : "Megjegyzés: A feladat szerkesztése visszaállítja a korábbi IP-korlátozások kiválasztását. Újra ki kell választania őket, ha meg akarja tartani őket.",
     "selectAddresses" : "Válaszd ki az IP cím korlátozásokat",
-    "selectedAddresses" : "Kiválasztott IP cím korlátozások"
+    "selectedAddresses" : "Kiválasztott IP cím korlátozások",
+    "custom": "Egyedi",
+    "selectDefault": "Kérjük, válasszon",
+    "duplicateIpError": "Az IP cím és maszk kombinációnak egyedinek kell lennie"
   }
 }

@@ -41,5 +41,5 @@ export interface Task {
     isSubmissionCountRestricted: boolean;
     submissionLimit: number;
     structuralRequirements?: StructuralRequirement[];
-    ipRestrictions?: Array<IpRestriction>;
+    ipRestrictions?: IpRestriction[];
 }
