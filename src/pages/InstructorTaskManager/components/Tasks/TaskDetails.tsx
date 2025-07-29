@@ -44,7 +44,7 @@ export function TaskDetails({
         actionButtons = (
             <ButtonGroup>
                 <ToolbarButton icon={faEdit} onClick={onEdit} text={t('common.edit')} />
-                <DeleteToolbarButton onDelete={onRemove} />
+                <DeleteToolbarButton onDelete={onRemove} itemName={task.name} />
             </ButtonGroup>
         );
     } else if (isActualSemester) {

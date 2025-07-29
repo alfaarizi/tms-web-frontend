@@ -70,6 +70,7 @@ export function TestDetails({
                             && (
                                 <DeleteToolbarButton
                                     onDelete={onDelete}
+                                    itemName={test.name}
                                 />
                             )}
                 </ButtonGroup>

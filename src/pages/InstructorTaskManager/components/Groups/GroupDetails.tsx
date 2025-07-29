@@ -64,7 +64,12 @@ export function GroupDetails({
                         ? <ToolbarButton text={t('common.edit')} icon={faEdit} onClick={onEdit} />
                         : null}
                     {isActualSemester && !group.isCanvasCourse
-                        ? <DeleteToolbarButton onDelete={onRemove} />
+                        ? (
+                            <DeleteToolbarButton
+                                onDelete={onRemove}
+                                itemName={`${group.course.name}${group.number ? ` (${group.number})` : ''}`}
+                            />
+                        )
                         : null}
                     {!group.isCanvasCourse
                         ? <ToolbarButton text={t('common.duplicate')} icon={faCopy} onClick={onDuplicate} />

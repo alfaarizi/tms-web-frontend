@@ -56,7 +56,7 @@ export function RequestDetails({
                                 text={t('common.edit')}
                                 onClick={onEdit}
                             />
-                            <DeleteToolbarButton onDelete={onDelete} />
+                            <DeleteToolbarButton onDelete={onDelete} itemName={report.name} />
                         </ButtonGroup>
                     )
                     : null}
