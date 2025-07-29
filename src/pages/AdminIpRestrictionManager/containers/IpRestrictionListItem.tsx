@@ -33,7 +33,7 @@ export function IpRestrictionListItem({ ipRestriction }: Props) {
                     <LinkContainer to={`edit-ip-restriction/${ipRestriction.id}`}>
                         <ToolbarButton text={t('common.edit')} icon={faEdit} />
                     </LinkContainer>
-                    <DeleteToolbarButton onDelete={handleDelete} />
+                    <DeleteToolbarButton onDelete={handleDelete} itemName={ipRestriction.name} />
                 </ButtonGroup>
             </td>
         </tr>

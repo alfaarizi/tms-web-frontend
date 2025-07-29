@@ -66,6 +66,7 @@ export function LecturerList({ course }: Props) {
                     <DeleteToolbarButton
                         displayTextBreakpoint="none"
                         onDelete={() => handleDelete(user.id)}
+                        itemName={user.name ?? user.userCode}
                     />
                 )}
             />
