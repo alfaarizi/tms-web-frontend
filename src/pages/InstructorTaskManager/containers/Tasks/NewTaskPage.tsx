@@ -85,7 +85,7 @@ export function NewTaskPage() {
                 serverSideError={addErrorBody}
                 timezone={group.data.timezone}
                 isLoading={createMutation.isLoading}
-                ipRestrictions={ipRestrictions.data || []}
+                labIps={ipRestrictions.data || []}
                 handleIpRestrictionsChange={handleIpRestrictionsChange}
                 selectedIpRestrictions={selectedIpRestrictions}
             />

@@ -57,7 +57,6 @@ export function TaskDetails({
         ?.filter((req) => req.type === 'Excludes') ?? null;
     const includedStructuralRequirements = task.structuralRequirements
         ?.filter((req) => req.type === 'Includes') ?? null;
-
     return (
         <CustomCard>
             <CustomCardHeader>

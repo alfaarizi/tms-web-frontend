@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Form } from 'react-bootstrap';
 import { FormError } from '@/components/FormError';
@@ -18,8 +17,8 @@ import { useTextPaste } from '@/ui-hooks/useTextPaste';
 import {
     StructuralRequirementFormControl,
 } from '@/pages/InstructorTaskManager/components/Tasks/StructuralRequirementFormControl';
-import { IpRestrictionDropdown } from '@/pages/InstructorTaskManager/components/Tasks/IpRestrictionDropDown';
 import { IpRestrictionItem } from '@/resources/instructor/IpRestrictionItem';
+import { IpRestrictionFormControl } from '@/pages/InstructorTaskManager/components/Tasks/IpRestrictionFormControl';
 
 type Props = {
     title: string,
@@ -30,7 +29,7 @@ type Props = {
     showVersionControl: boolean,
     serverSideError: ValidationErrorBody | null,
     isLoading: boolean,
-    ipRestrictions: IpRestrictionItem[],
+    labIps: IpRestrictionItem[],
     handleIpRestrictionsChange: (selectedOptions: IpRestrictionItem[]) => void,
     selectedIpRestrictions: IpRestrictionItem[],
 }
@@ -44,9 +43,7 @@ export function TaskForm({
     showVersionControl,
     serverSideError,
     isLoading,
-    ipRestrictions,
-    handleIpRestrictionsChange,
-    selectedIpRestrictions,
+    labIps,
 }: Props) {
     const { t } = useTranslation();
     const {
@@ -56,6 +53,7 @@ export function TaskForm({
         setValue,
         setError,
         clearErrors,
+        getValues,
 
         formState: {
             errors,
@@ -68,29 +66,18 @@ export function TaskForm({
         control,
         name: 'structuralRequirements',
     });
+    const { fields: ipRestrictions, append: ipRestrictionAppend, remove: ipRestrictionRemove } = useFieldArray({
+        control,
+        name: 'ipRestrictions',
+    });
 
     useServersideFormErrors<Task>(clearErrors, setError, serverSideError);
 
     const handleTextPaste = useTextPaste(setValue);
 
-    useEffect(() => {
-        if (editData && editData.ipRestrictions) {
-            const mappedRestrictions = editData.ipRestrictions
-                .map((restriction: any) => ipRestrictions
-                    .find((ip: IpRestrictionItem) => ip.ipAddress === restriction.ipAddress
-                    && ip.ipMask === restriction.ipMask))
-                .filter(Boolean) as IpRestrictionItem[];
-            handleIpRestrictionsChange(mappedRestrictions);
-        }
-    }, [editData, ipRestrictions]);
-
     const onSubmit = handleSubmit((data) => {
         const taskData = {
             ...data,
-            ipRestrictions: selectedIpRestrictions.map((item) => ({
-                ipAddress: item.ipAddress,
-                ipMask: item.ipMask,
-            })),
         };
         onSave(taskData, editData ? data.emailNotification : undefined);
     });
@@ -299,11 +286,26 @@ export function TaskForm({
                         {t('ipRestriction.ipRestrictions')}
                         :
                     </Form.Label>
-                    <IpRestrictionDropdown
-                        ipRestrictions={ipRestrictions}
-                        selectedIpRestrictions={selectedIpRestrictions}
-                        handleIpRestrictionsChange={handleIpRestrictionsChange}
-                    />
+                    {ipRestrictions.map((restriction, index) => (
+                        <IpRestrictionFormControl
+                            key={restriction.id}
+                            labIps={labIps}
+                            register={register}
+                            setValue={setValue}
+                            getValues={getValues}
+                            ipRestrictionRemove={ipRestrictionRemove}
+                            index={index}
+                            errors={errors}
+                        />
+                    ))}
+                    <div>
+                        <ToolbarButton
+                            icon={faPlus}
+                            onClick={() => ipRestrictionAppend({ ipAddress: '', ipMask: '', id: 0 })}
+                            text={t('common.add')}
+                            displayTextBreakpoint="xs"
+                        />
+                    </div>
                 </Form.Group>
 
                 <FormButtons onCancel={onCancel} isLoading={isLoading} />
