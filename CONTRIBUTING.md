@@ -137,10 +137,17 @@ npm run lint  # check code style
 npm run lint-fix # fix code style
 ~~~
 
+### Testing
+
+The TMS frontend comes both with E2E tests implemented with the [Cypress](https://www.cypress.io/) test frameworks You should always perform these tests as described in the [README](README.md#testing) before you submit your code for review.
+Using the *Cypress UI* is advised, where you can run the tests interactively, step by step, and even debug them in the browser. This is invaluable for writing new tests or debugging failing ones.
+
+For any new contribution, especially for adding new features, you *MUST* also provide the appropriate tests for them. Supplementing existing features with new tests where lacking is highly appreciated.
+
 ### Continuous integration
 
 Upon pushing or merging to the server, the following tests are performed on the last commit:
-* on all branches: code style check with ESLint; building the frontend web application.
+* on all branches: code style check with ESLint; building the frontend web application, E2E tests with Cypress.
 * *develop* branch: continuous deployment to staging environment.
 * *master* branch: continuous deployment to production.
 

@@ -117,6 +117,25 @@ You may create a `public/branding.json` configuration file based on the provided
 sample in `src/branding.dist.json`, to define the branding information of your
 TMS instance (e.g. organization name).
 
+## Testing
+
+This project utilizes [Cypress](https://www.cypress.io/) for robust *End-to-End (E2E)* testing. E2E tests simulate real user interactions with the application, ensuring that all components and features work together seamlessly from a user's perspective.
+
+### Running E2E Tests
+You have two primary ways to run the E2E tests:
+
+1. **Run Tests in Headless Mode (CLI):** execute all Cypress tests in a headless browser environment:  
+   ```bash
+   npm run cypress
+   ```
+   After execution, Cypress will provide a summary in the terminal, indicating which tests passed or failed.
+
+2. **Open Cypress Test Runner (Interactive UI):** launch the *Cypress Test Runner* application, providing an interactive interface to select, run, and debug the tests:  
+   ```bash
+   npm run cypress:ui
+   ```
+    This command opens the Cypress Test Runner, allowing you to visually inspect the tests as they run in a browser.
+
 ## Dependencies
 
 * [TypeScript](https://www.typescriptlang.org/)
@@ -136,6 +155,7 @@ TMS instance (e.g. organization name).
 * [Luxon](https://moment.github.io/luxon/)
 * [semver](https://github.com/npm/node-semver)
 * [vite](https://vite.dev/)
+* [Cypress](https://www.cypress.io/)
 
 ## Contributing
 
