@@ -306,6 +306,8 @@
     "regularExpression": "Regular expression",
     "includes": "Must include",
     "excludes": "Must not include",
+    "structuralRequirementErrorMessage": "Error message",
+    "structuralRequirementErrorMessageHelp": "If no custom error message is provided, one containing the violated regular expression will be generated.",
     "creator": "Creator",
     "description": "Description",
     "submittedSolution": "Solution",

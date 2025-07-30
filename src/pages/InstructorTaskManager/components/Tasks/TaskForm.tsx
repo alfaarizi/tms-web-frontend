@@ -46,6 +46,7 @@ export function TaskForm({
     labIps,
 }: Props) {
     const { t } = useTranslation();
+
     const {
         register,
         handleSubmit,
@@ -190,12 +191,17 @@ export function TaskForm({
                     <div>
                         <ToolbarButton
                             icon={faPlus}
-                            onClick={() => requirementAppend({ regexExpression: '', type: 'Includes' })}
+                            onClick={() => requirementAppend({
+                                regexExpression: '',
+                                type: 'Includes',
+                                errorMessage: '',
+                            })}
                             text={t('common.add')}
                             displayTextBreakpoint="xs"
                         />
                     </div>
                     <Form.Text className="text-muted">{t('task.structuralRequirementHelp')}</Form.Text>
+                    <Form.Text className="text-muted">{t('task.structuralRequirementErrorMessageHelp')}</Form.Text>
                 </Form.Group>
 
                 {editData && (

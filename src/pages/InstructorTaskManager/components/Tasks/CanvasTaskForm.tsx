@@ -83,7 +83,11 @@ export function CanvasTaskForm({
                     <div>
                         <ToolbarButton
                             icon={faPlus}
-                            onClick={() => requirementAppend({ regexExpression: '', type: 'Includes' })}
+                            onClick={() => requirementAppend({
+                                regexExpression: '',
+                                type: 'Includes',
+                                errorMessage: '',
+                            })}
                             text={t('common.add')}
                             displayTextBreakpoint="xs"
                         />
@@ -91,6 +95,7 @@ export function CanvasTaskForm({
                     {serversideError?.regexExpression
                         && <FormError message={serversideError?.regexExpression[0]} /> }
                     <Form.Text className="text-muted">{t('task.structuralRequirementHelp')}</Form.Text>
+                    <Form.Text className="text-muted">{t('task.structuralRequirementErrorMessageHelp')}</Form.Text>
                 </Form.Group>
                 <FormButtons onCancel={onCancel} isLoading={isLoading} />
             </Form>

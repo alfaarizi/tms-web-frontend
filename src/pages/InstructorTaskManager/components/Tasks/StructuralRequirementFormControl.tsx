@@ -44,6 +44,12 @@ export function StructuralRequirementFormControl({
                     size="sm"
                     className="mr-2"
                 />
+                <Form.Control
+                    {...register(`structuralRequirements.${index}.errorMessage`)}
+                    placeholder={t('task.structuralRequirementErrorMessage')}
+                    size="sm"
+                    className="mr-2"
+                />
                 <DeleteToolbarButton
                     displayTextBreakpoint="none"
                     onDelete={() => requirementRemove(index)}
