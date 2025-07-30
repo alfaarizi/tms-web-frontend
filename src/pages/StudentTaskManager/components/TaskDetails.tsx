@@ -33,8 +33,6 @@ export function TaskDetails({
 
     if (task.submissionLimit - submission.uploadCount > 0) {
         remainingSubmissions = task.submissionLimit - submission.uploadCount;
-    } else if (task.isSubmissionCountRestricted && submission.status === 'Late Submission') {
-        remainingSubmissions = 1;
     }
 
     return (
@@ -85,6 +83,17 @@ export function TaskDetails({
                 />
                 )
             </DataRow>
+            {submission.personalDeadline ? (
+                <DataRow label={t('task.personalDeadline')}>
+                    <LocaleDateTime value={submission.personalDeadline} />
+                    {' ('}
+                    <RemainingTimeForDeadLine
+                        deadline={submission.personalDeadline}
+                        submissionUploadTime={task.submission.uploadTime}
+                    />
+                    )
+                </DataRow>
+            ) : null}
             <DataRow label={t('task.restrictSubmissionAttempts.maxAttempts')}>
                 {task.isSubmissionCountRestricted
                     ? task.submissionLimit
@@ -92,7 +101,9 @@ export function TaskDetails({
             </DataRow>
             {task.isSubmissionCountRestricted ? (
                 <DataRow label={t('task.restrictSubmissionAttempts.remaining')}>
-                    {remainingSubmissions}
+                    {submission.personalDeadline
+                        ? t('task.restrictSubmissionAttempts.unlimited')
+                        : remainingSubmissions}
                 </DataRow>
             ) : null}
             <DataRow label={t('task.creator')}>{task.creatorName}</DataRow>

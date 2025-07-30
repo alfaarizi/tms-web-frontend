@@ -11,6 +11,7 @@ import { useCreateNotificationMutation } from '@/hooks/instructor/NotificationsH
 import { NotificationForm } from '@/pages/InstructorTaskManager/components/Notifications/NotificationForm';
 import { Notification } from '@/resources/instructor/Notification';
 import { getUserTimezone } from '@/utils/getUserTimezone';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     groupID?: string
@@ -46,7 +47,7 @@ export function NewNotificationPage() {
     return (
         <>
             {group.data ? (
-                <Breadcrumb>
+                <StickyBreadcrumb>
                     <LinkContainer to="/instructor/task-manager">
                         <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                     </LinkContainer>
@@ -63,7 +64,7 @@ export function NewNotificationPage() {
                     <LinkContainer to={`/instructor/task-manager/groups/${group.data.id}/new-notification`}>
                         <Breadcrumb.Item active>{t('notification.newNotification')}</Breadcrumb.Item>
                     </LinkContainer>
-                </Breadcrumb>
+                </StickyBreadcrumb>
             ) : null}
             <Container fluid={false} className="mt-3">
                 <NotificationForm

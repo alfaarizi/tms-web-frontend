@@ -3,6 +3,7 @@ import { AutoTesterResult } from '@/resources/common/AutoTesterResult';
 import { IpAddress } from '@/resources/instructor/IpAddress';
 import { axiosInstance } from '@/api/axiosInstance';
 import { SubmissionGrade } from '@/resources/instructor/SubmissionGrade';
+import { SubmissionPersonalDeadline } from '@/resources/instructor/SubmissionPersonalDeadline';
 
 export async function listForTask(taskID: number) {
     const res = await axiosInstance.get<Submission[]>('/instructor/submissions/list-for-task', {
@@ -84,6 +85,19 @@ export async function grade(gradeData: SubmissionGrade) {
             status: gradeData.status,
             grade: gradeData.grade,
             notes: gradeData.notes,
+        },
+    );
+    return res.data;
+}
+
+export async function setPersonalDeadline(submissionData: SubmissionPersonalDeadline) {
+    const res = await axiosInstance.patch(
+        `/instructor/submissions/${submissionData.id}/set-personal-deadline`
+        + '?expand=uploader,task,task.group,codeCompass,codeCheckerResult,'
+        + 'codeCheckerResult.stdout,codeCheckerResult.stderr,codeCheckerResult.codeCheckerReports,'
+        + 'codeCheckerResult.runnerErrorMessage',
+        {
+            personalDeadline: submissionData.personalDeadline,
         },
     );
     return res.data;

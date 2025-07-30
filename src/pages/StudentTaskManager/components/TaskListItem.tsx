@@ -51,6 +51,20 @@ export function TaskListItem({
                 />
                 )
             </span>
+            {task.submission.personalDeadline ? (
+                <span>
+                    {' | '}
+                    {t('task.personalDeadline')}
+                    {': '}
+                    <LocaleDateTime value={task.submission.personalDeadline} />
+                    {' ('}
+                    <RemainingTimeForDeadLine
+                        deadline={task.submission.personalDeadline}
+                        submissionUploadTime={task.submission.uploadTime}
+                    />
+                    )
+                </span>
+            ) : null}
         </ListCardItem>
     );
 }

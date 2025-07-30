@@ -7,6 +7,7 @@ import { useGroup } from '@/hooks/student/GroupHooks';
 import { GroupDetails } from '@/pages/StudentTaskManager/components/GroupDetails';
 import { TaskCategories } from '@/pages/StudentTaskManager/components/TaskCategories';
 import { useTranslation } from 'react-i18next';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -30,14 +31,14 @@ export function GroupPage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/student/task-manager">
                     <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to={`/student/task-manager/groups/${group.data.id}`}>
                     <Breadcrumb.Item active>{`${group.data.course.name} (#${group.data.number})`}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <GroupDetails group={group.data} />
             <TaskCategories tasks={tasks.data} onTaskClick={selectTask} />
         </>

@@ -12,7 +12,7 @@ type Props = {
     show: boolean,
     onSave: (data: Submission) => void,
     onCancel: () => void,
-    isLoading:boolean
+    isLoading: boolean
 }
 
 export function GraderModal({
@@ -50,8 +50,6 @@ export function GraderModal({
                 setValue('status', 'Accepted');
             } else if (['Rejected', 'Failed'].includes(file.status)) {
                 setValue('status', 'Rejected');
-            } else if (file.status === 'Late Submission') {
-                setValue('status', file.status);
             } else {
                 setValue('status', 'Accepted');
             }
@@ -102,9 +100,9 @@ export function GraderModal({
                             >
                                 <option value="Accepted">{t('status.accepted')}</option>
                                 <option value="Rejected">{t('status.rejected')}</option>
-                                <option value="Late Submission">{t('status.lateSubmission')}</option>
 
                             </Form.Control>
+                            <Form.Text className="text-muted">{t('status.statusHelp')}</Form.Text>
                         </Form.Group>
 
                         <Form.Group>

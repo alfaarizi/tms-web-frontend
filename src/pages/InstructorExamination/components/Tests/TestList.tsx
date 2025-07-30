@@ -7,6 +7,7 @@ import { DataRow } from '@/components/DataRow';
 import { CustomCard } from '@/components/CustomCard/CustomCard';
 import { QuizTest } from '@/resources/instructor/QuizTest';
 import { DateTimeInterval } from '@/pages/InstructorExamination/components/Tests/DateTimeInterval';
+import { useQuestionSets } from '@/hooks/instructor/QuizQuestionSetHooks';
 
 type Props = {
     tests: QuizTest[] | undefined,
@@ -18,6 +19,7 @@ export function TestList({
     onChange,
 }: Props) {
     const { t } = useTranslation();
+    const { data: questionSets } = useQuestionSets();
     return (
         <CustomCard>
             <CustomCardHeader>
@@ -34,6 +36,9 @@ export function TestList({
                         {test.group?.number}
                         )
                     </DataRow>
+                    <DataRow label={t('quizQuestions.questionSet')}>
+                        {questionSets?.find(((qSet) => qSet.id === test.questionsetID))?.name || ''}
+                    </DataRow>
                     <DataRow label={t('quizTests.available')}>
                         <DateTimeInterval
                             from={test.availablefrom}
@@ -43,6 +48,9 @@ export function TestList({
                     </DataRow>
                     <DataRow label={t('quizTests.duration')}>{test.duration}</DataRow>
                     <DataRow label={t('quizTests.questionAmount')}>{test.questionamount}</DataRow>
+                    <DataRow label={t('quizTests.finalized')}>
+                        {test.finalized ? t('common.yes') : t('common.no')}
+                    </DataRow>
                 </ListCardItem>
             ))}
         </CustomCard>

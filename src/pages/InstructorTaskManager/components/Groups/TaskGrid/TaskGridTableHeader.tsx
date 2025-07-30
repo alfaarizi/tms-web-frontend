@@ -6,6 +6,9 @@ import { useBranding } from '@/ui-hooks/useBranding';
 import {
     TaskGridHeaderDropdown,
 } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridHeaderDropdown';
+import {
+    TaskGridHeaderDeadline,
+} from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGridHeaderDeadline';
 import { DownloadAllParams, ExportSpreadsheetParams } from '@/hooks/instructor/SubmissionHooks';
 import { TaskNameCell } from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskNameCell';
 import styles from '@/pages/InstructorTaskManager/components/Groups/TaskGrid/TaskGrid.module.css';
@@ -66,6 +69,15 @@ export function TaskGridTableHeader({
         </th>
     ));
 
+    const headerDeadlines = taskList.map((task) => (
+        <th key={task.id} className="text-sm">
+            <TaskGridHeaderDeadline
+                hardDeadline={new Date(task.hardDeadline)}
+                available={task.available ? new Date(task.available) : undefined}
+            />
+        </th>
+    ));
+
     return (
         <thead className="text-center">
             <tr>
@@ -73,7 +85,7 @@ export function TaskGridTableHeader({
                     className={[styles.stickyHead, styles.outlines].join(' ')}
                     id="students"
                     colSpan={2}
-                    rowSpan={2}
+                    rowSpan={3}
                     style={{ backgroundColor: 'white' }}
                 >
                     {t('common.students')}
@@ -82,6 +94,9 @@ export function TaskGridTableHeader({
             </tr>
             <tr>
                 {headerDropdowns}
+            </tr>
+            <tr>
+                {headerDeadlines}
             </tr>
             <tr>
                 <th
@@ -95,7 +110,7 @@ export function TaskGridTableHeader({
                     style={{ left: widthForLeft, backgroundColor: 'white' }}
                     className={[styles.stickyHead, styles.outlines].join(' ')}
                 >
-                    {t('common.userCode', { uniId: branding.universityIdentifierName[i18n.language] })}
+                    {t('common.userCode', { uniId: branding.universityIdentifierName.singular[i18n.language] })}
                 </th>
                 {headerTasks}
             </tr>

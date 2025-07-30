@@ -6,10 +6,9 @@ import { useTranslation } from 'react-i18next';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faFileArchive, faFileCsv, faFileExcel, faFileExport, faFilterCircleXmark, faListUl, faSort,
+    faFileArchive, faFileCsv, faFileExcel, faFileExport, faFilter, faFilterCircleXmark, faListUl, faSort,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-
 import { Task } from '@/resources/instructor/Task';
 import { useDownloadAll, useExportSpreadsheet, useSubmissionsForTask } from '@/hooks/instructor/SubmissionHooks';
 import { CustomCard } from '@/components/CustomCard/CustomCard';
@@ -25,6 +24,10 @@ import { Submission } from '@/resources/instructor/Submission';
 import { usePrivateSystemInfoQuery } from '@/hooks/common/SystemHooks';
 import { TaskLevelRepoDetails } from '@/pages/InstructorTaskManager/components/Tasks/TaskLevelRepoDetails';
 import { safeLocaleCompare } from '@/utils/safeLocaleCompare';
+import {
+    INSTRUCTOR_SUBMISSION_FILTER_LOCAL_STORAGE_KEY,
+    INSTRUCTOR_SUBMISSION_SORT_BY_LOCAL_STORAGE_KEY,
+} from '@/constants/localStorageKeys';
 
 type Props = {
     task: Task
@@ -33,9 +36,15 @@ type Props = {
 }
 
 enum SortType {
-    ByUngradedFirst,
-    ByName,
-    ByUploadTime,
+    ByUngradedFirst = 'ByUngradedFirst',
+    ByName = 'ByName',
+    ByUploadTime = 'ByUploadTime',
+}
+
+enum FilterType {
+    AllStudent = 'AllStudent',
+    StudentWithUpload = 'StudentWithUpload',
+    StudentWithoutUpload = 'StudentWithoutUpload',
 }
 
 export function SubmissionsListTab({
@@ -46,7 +55,28 @@ export function SubmissionsListTab({
     const submissions = useSubmissionsForTask(task.id);
     const exportSpreadsheet = useExportSpreadsheet();
     const downloadAll = useDownloadAll();
-    const [sortedBy, setSortedBy] = useState<SortType>(SortType.ByUngradedFirst);
+    const [sortedBy, setSortedBy] = useState<SortType>(() => {
+        const saved = localStorage.getItem(INSTRUCTOR_SUBMISSION_SORT_BY_LOCAL_STORAGE_KEY);
+        switch (saved) {
+        case SortType.ByName:
+        case SortType.ByUploadTime:
+        case SortType.ByUngradedFirst:
+            return saved;
+        default:
+            return SortType.ByUngradedFirst;
+        }
+    });
+    const [filteredBy, setFilteredBy] = useState<FilterType>(() => {
+        const saved = localStorage.getItem(INSTRUCTOR_SUBMISSION_FILTER_LOCAL_STORAGE_KEY);
+        switch (saved) {
+        case FilterType.AllStudent:
+        case FilterType.StudentWithoutUpload:
+        case FilterType.StudentWithUpload:
+            return saved;
+        default:
+            return FilterType.StudentWithUpload;
+        }
+    });
 
     const handleExportSpreadsheet = (format: SpreadsheetFormat) => {
         exportSpreadsheet.download(`${task.name}.${format}`, { taskID: task.id, format });
@@ -56,8 +86,9 @@ export function SubmissionsListTab({
         downloadAll.download(`${task.name}.zip`, { taskID: task.id, onlyUngraded });
     };
 
-    const handleSorting = (sortingBy : SortType) => {
+    const handleSorting = (sortingBy: SortType) => {
         setSortedBy(sortingBy);
+        localStorage.setItem(INSTRUCTOR_SUBMISSION_SORT_BY_LOCAL_STORAGE_KEY, SortType[sortingBy]);
     };
 
     const sortingByUngradedFirst = () => {
@@ -115,9 +146,39 @@ export function SubmissionsListTab({
         }
     }, [sortedBy, submissions.data]);
 
+    const handleFiltering = (filteringBy : FilterType) => {
+        setFilteredBy(filteringBy);
+        localStorage.setItem(INSTRUCTOR_SUBMISSION_FILTER_LOCAL_STORAGE_KEY, FilterType[filteringBy]);
+    };
+
+    const filteredAndSortedSubmissions = useMemo(() => {
+        if (!sortedSubmissions) return [];
+
+        let filtered: Submission[];
+
+        switch (filteredBy) {
+        case FilterType.StudentWithUpload:
+            filtered = sortedSubmissions.filter((s) => s.status !== 'No Submission');
+            break;
+        case FilterType.StudentWithoutUpload:
+            filtered = sortedSubmissions.filter((s) => s.status === 'No Submission');
+            break;
+        case FilterType.AllStudent:
+        default:
+            filtered = sortedSubmissions;
+            break;
+        }
+
+        return filtered;
+    }, [filteredBy, sortedSubmissions]);
+
     const ungradedSubmissionCount = useMemo(() => (
         sortedSubmissions?.filter((s) => s.grade == null).length || 0
     ), [sortedSubmissions]);
+
+    if (!filteredAndSortedSubmissions) {
+        return null;
+    }
 
     if (!sortedSubmissions) {
         return null;
@@ -138,7 +199,7 @@ export function SubmissionsListTab({
                         </span>
                         <span className="d-md-none">{`/${ungradedSubmissionCount})`}</span>
                     </CustomCardTitle>
-                    {sortedSubmissions.length !== 0 ? (
+                    {filteredAndSortedSubmissions.length !== 0 ? (
                         <ButtonGroup>
                             <ToolbarDropdown text={t('common.export')} icon={faFileExport}>
                                 <DropdownItem onSelect={() => handleExportSpreadsheet('xlsx')}>
@@ -182,13 +243,55 @@ export function SubmissionsListTab({
                                     {t('task.sorting.byUploadTime')}
                                 </DropdownItem>
                             </ToolbarDropdown>
+                            <ToolbarDropdown text={t('task.filterSubmission.filterSubmission')} icon={faFilter}>
+                                <DropdownItem
+                                    onSelect={() => handleFiltering(FilterType.AllStudent)}
+                                    active={filteredBy === FilterType.AllStudent}
+                                >
+                                    {t('task.filterSubmission.showAllSubmission')}
+                                </DropdownItem>
+                                <DropdownItem
+                                    onSelect={() => handleFiltering(FilterType.StudentWithUpload)}
+                                    active={filteredBy === FilterType.StudentWithUpload}
+                                >
+                                    {t('task.filterSubmission.showWithSubmission')}
+                                </DropdownItem>
+                                <DropdownItem
+                                    onSelect={() => handleFiltering(FilterType.StudentWithoutUpload)}
+                                    active={filteredBy === FilterType.StudentWithoutUpload}
+                                >
+                                    {t('task.filterSubmission.showWithoutSubmission')}
+                                </DropdownItem>
+                            </ToolbarDropdown>
                         </ButtonGroup>
-                    ) : null}
+                    )
+                        : (
+                            <ToolbarDropdown text={t('task.filterSubmission.filterSubmission')} icon={faFilter}>
+                                <DropdownItem
+                                    onSelect={() => handleFiltering(FilterType.AllStudent)}
+                                    active={filteredBy === FilterType.AllStudent}
+                                >
+                                    {t('task.filterSubmission.showAllSubmission')}
+                                </DropdownItem>
+                                <DropdownItem
+                                    onSelect={() => handleFiltering(FilterType.StudentWithUpload)}
+                                    active={filteredBy === FilterType.StudentWithUpload}
+                                >
+                                    {t('task.filterSubmission.showWithSubmission')}
+                                </DropdownItem>
+                                <DropdownItem
+                                    onSelect={() => handleFiltering(FilterType.StudentWithoutUpload)}
+                                    active={filteredBy === FilterType.StudentWithoutUpload}
+                                >
+                                    {t('task.filterSubmission.showWithoutSubmission')}
+                                </DropdownItem>
+                            </ToolbarDropdown>
+                        )}
                 </CustomCardHeader>
 
                 <SubmissionsList
                     semesterID={task.semesterID}
-                    files={sortedSubmissions}
+                    files={filteredAndSortedSubmissions}
                     task={task}
                     renderItem={(file) => (
                         <>
@@ -198,6 +301,14 @@ export function SubmissionsListTab({
                             <DataRow label={t('task.uploadTime')}>
                                 <GroupDateTime value={file.uploadTime} timezone={task.group?.timezone || ''} />
                             </DataRow>
+                            {file.personalDeadline ? (
+                                <DataRow label={t('task.personalDeadline')}>
+                                    <GroupDateTime
+                                        value={file.personalDeadline}
+                                        timezone={task.group?.timezone || ''}
+                                    />
+                                </DataRow>
+                            ) : null}
                             <DataRow label={t('task.delay')}>
                                 {file.delay}
                             </DataRow>

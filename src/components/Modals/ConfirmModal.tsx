@@ -29,7 +29,7 @@ export function ConfirmModal({
     const { t } = useTranslation();
 
     return (
-        <Modal show={isConfirmDialogOpen} animation size="sm" backdrop="static">
+        <Modal show={isConfirmDialogOpen} animation size="sm" backdrop="static" onEscapeKeyDown={onCancel}>
             <Modal.Header>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>

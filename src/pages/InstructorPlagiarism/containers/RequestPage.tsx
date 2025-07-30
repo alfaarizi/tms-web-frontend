@@ -17,6 +17,7 @@ import { Result } from '@/pages/InstructorPlagiarism/components/Results';
 import { useShow } from '@/ui-hooks/useShow';
 import { Breadcrumb } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -79,14 +80,14 @@ export function RequestPage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/plagiarism">
                     <Breadcrumb.Item>{t('navbar.plagiarism')}</Breadcrumb.Item>
                 </LinkContainer>
                 <LinkContainer to={`/instructor/plagiarism/${request.data.id}`}>
                     <Breadcrumb.Item active>{request.data.name}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             {
                 showEdit.show
                     ? (

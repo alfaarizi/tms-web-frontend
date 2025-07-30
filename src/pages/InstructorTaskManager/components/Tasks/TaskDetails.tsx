@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { ButtonGroup } from 'react-bootstrap';
-import { faEdit, faKey } from '@fortawesome/free-solid-svg-icons';
+import {
+    faEdit, faInfoCircle, faKey, faWarning,
+} from '@fortawesome/free-solid-svg-icons';
 
 import { DataRow } from '@/components/DataRow';
 import { Task } from '@/resources/instructor/Task';
@@ -13,6 +15,8 @@ import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/G
 import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
 import { IconTooltip } from '@/components/IconTooltip';
+import { useIpRestrictions } from '@/hooks/instructor/IpRestrictionItemHooks';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type Props = {
     task: Task,
@@ -32,6 +36,7 @@ export function TaskDetails({
     showVersionControl,
 }: Props) {
     const { t } = useTranslation();
+    const ipRestrictions = useIpRestrictions();
 
     let actionButtons = null;
 
@@ -39,7 +44,7 @@ export function TaskDetails({
         actionButtons = (
             <ButtonGroup>
                 <ToolbarButton icon={faEdit} onClick={onEdit} text={t('common.edit')} />
-                <DeleteToolbarButton onDelete={onRemove} />
+                <DeleteToolbarButton onDelete={onRemove} itemName={task.name} />
             </ButtonGroup>
         );
     } else if (isActualSemester) {
@@ -52,7 +57,6 @@ export function TaskDetails({
         ?.filter((req) => req.type === 'Excludes') ?? null;
     const includedStructuralRequirements = task.structuralRequirements
         ?.filter((req) => req.type === 'Includes') ?? null;
-
     return (
         <CustomCard>
             <CustomCardHeader>
@@ -97,7 +101,6 @@ export function TaskDetails({
                         />
                     </>
                 )}
-
             </DataRow>
             <DataRow label={t('passwordProtected.exitPasswordProtected')}>
                 {(!task.exitPassword || task.exitPassword.length === 0) ? t('common.no') : (
@@ -110,18 +113,33 @@ export function TaskDetails({
                         />
                     </>
                 )}
-
             </DataRow>
             {task.ipRestrictions && task.ipRestrictions.length > 0 ? (
                 <DataRow label={t('task.ipRestrictions')}>
-                    {(task.ipRestrictions ?? []).map((restriction, index) => (
-                        <div key={restriction.id}>
-                            {restriction.ipAddress}
-                            /
-                            {restriction.ipMask}
-                            {index < (task.ipRestrictions ?? []).length - 1 && ', '}
-                        </div>
-                    ))}
+                    {(task.ipRestrictions ?? []).map((restriction, index) => {
+                        const roomName = ipRestrictions.data?.find(
+                            (ip) => ip.ipMask === restriction.ipMask && ip.ipAddress === restriction.ipAddress,
+                        );
+                        const addressText = `${restriction.ipAddress}/${restriction.ipMask}`;
+                        if (roomName) {
+                            return (
+                                <div key={restriction.id}>
+                                    {roomName.name}
+                                    {' '}
+                                    <FontAwesomeIcon icon={faInfoCircle} title={addressText} />
+                                    {index < (task.ipRestrictions ?? []).length - 1 && ', '}
+                                </div>
+                            );
+                        }
+                        return (
+                            <div key={restriction.id}>
+                                {addressText}
+                                {' '}
+                                <FontAwesomeIcon icon={faWarning} title={t('task.ipNoRoom')} />
+                                {index < (task.ipRestrictions ?? []).length - 1 && ', '}
+                            </div>
+                        );
+                    })}
                 </DataRow>
             ) : (
                 <DataRow label={t('task.ipRestrictions')}>

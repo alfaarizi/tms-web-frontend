@@ -93,6 +93,7 @@ export function GroupStudentsListTab({ group }: Props) {
                                 <DeleteToolbarButton
                                     displayTextBreakpoint="none"
                                     onDelete={() => handleDelete(user.id)}
+                                    itemName={user.name ?? user.userCode}
                                 />
                             )
                             : null}

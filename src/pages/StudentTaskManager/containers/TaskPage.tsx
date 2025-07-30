@@ -27,6 +27,7 @@ import { TaskDetails } from '@/pages/StudentTaskManager/components/TaskDetails';
 import { SubmissionUpload } from '@/resources/student/SubmissionUpload';
 import { UnlockItem } from '@/resources/student/UnlockItem';
 import { VerifyItem } from '@/resources/student/VerifyItem';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -57,7 +58,7 @@ export function TaskPage() {
             task.data !== undefined
             && task.data.isSubmissionCountRestricted
             && task.data.submission.uploadCount >= task.data.submissionLimit
-            && task.data.submission.status !== 'Late Submission',
+            && !task.data.submission.personalDeadline,
         );
     }, [task]);
 
@@ -149,8 +150,10 @@ export function TaskPage() {
     };
 
     let uploadCard;
-    if (((DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now() && submission.status !== 'Accepted')
-            || submission.status === 'Late Submission')
+    const withinDeadline = DateTime.fromISO(task?.data.hardDeadline) >= DateTime.now()
+        || DateTime.fromISO(submission?.personalDeadline ?? '') >= DateTime.now();
+    if (withinDeadline
+        && submission.status !== 'Accepted'
         && !isSubmissionLimitReached
         && task.data.entryPasswordUnlocked
         && task.data.isIpAddressAllowed) {
@@ -177,7 +180,7 @@ export function TaskPage() {
     return (
         <>
             {group.data ? (
-                <Breadcrumb>
+                <StickyBreadcrumb>
                     <LinkContainer to="/student/task-manager">
                         <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                     </LinkContainer>
@@ -187,7 +190,7 @@ export function TaskPage() {
                     <LinkContainer to={`/student/task-manager/tasks/${task.data.id}`}>
                         <Breadcrumb.Item active>{task.data.name}</Breadcrumb.Item>
                     </LinkContainer>
-                </Breadcrumb>
+                </StickyBreadcrumb>
             ) : null}
             <TaskDetails
                 task={task.data}

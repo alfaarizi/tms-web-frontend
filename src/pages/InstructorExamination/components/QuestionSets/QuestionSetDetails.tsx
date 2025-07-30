@@ -35,7 +35,7 @@ export function QuestionSetDetails({
                     <ToolbarButton icon={faFileAlt} text={t('quizTests.newTest')} onClick={onNewTest} />
                     <ToolbarButton icon={faCopy} text={t('common.duplicate')} onClick={onDuplicate} />
                     <ToolbarButton icon={faEdit} text={t('common.edit')} onClick={onEdit} />
-                    <DeleteToolbarButton onDelete={onDelete} />
+                    <DeleteToolbarButton onDelete={onDelete} itemName={questionSet.name} />
                 </ButtonGroup>
             </CustomCardHeader>
 

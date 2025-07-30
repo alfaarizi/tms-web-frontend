@@ -8,6 +8,7 @@ import { useQuestionSets } from '@/hooks/instructor/QuizQuestionSetHooks';
 import { useTests } from '@/hooks/instructor/QuizTestHooks';
 import { QuestionSetList } from '@/pages/InstructorExamination/components/QuestionSets/QuestionSetList';
 import { TestList } from '@/pages/InstructorExamination/components/Tests/TestList';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 export function HomePage() {
     const { url } = useRouteMatch();
@@ -32,11 +33,11 @@ export function HomePage() {
 
     return (
         <>
-            <Breadcrumb>
+            <StickyBreadcrumb>
                 <LinkContainer to="/instructor/quizzes">
                     <Breadcrumb.Item active>{t('navbar.quizzes')}</Breadcrumb.Item>
                 </LinkContainer>
-            </Breadcrumb>
+            </StickyBreadcrumb>
             <QuestionSetList sets={sets.data} onChange={handleQuestionSetChange} onNew={handleNewClick} />
             <TestList tests={tests.data} onChange={handleTestChange} />
         </>

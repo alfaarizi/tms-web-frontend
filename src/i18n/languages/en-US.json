@@ -1,7 +1,7 @@
 {
   "autonym": "English",
   "common": {
-    "userCode": "{{uniId}} code",
+    "userCode": "{{uniId}}",
     "group": "Group",
     "groups": "Groups",
     "name": "Name",
@@ -15,14 +15,13 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "confirmDelete": "Are you sure you want to delete the selected item?",
-    "confirmDeleteItem": "Are you sure you want to delete {{itemName}}?",
     "duplicate": "Duplicate",
     "edit": "Edit",
     "options": "Options",
     "userAddFailed": "Failed to add the following users",
     "userAddSuccess": "Added {{count}} user(s)",
-    "userCodes": "{{uniId}} codes separated with spaces",
-    "userCodesRequired": "Please provide valid {{uniId}} codes separated with spaces!",
+    "userCodes": "{{uniIds}} separated with spaces",
+    "userCodesRequired": "Please provide valid {{uniIds}} separated with spaces!",
     "students": "Students",
     "instructors": "Instructors",
     "asInstructor": "As an instructor",
@@ -63,9 +62,9 @@
     "confirmDiscard": "If you close the modal, all your changes will be lost!",
     "confirmAddSemester": "If you add a new semester, that will be the actual one and you won't be able to change back the previous one",
     "cancelCanvasModalDesc": "Are you sure you want to cancel the Canvas synchronization?",
-    "addNewUserCode": "Add new {{uniId}} code: ",
-    "searchForUserCodeOrName": "Enter {{uniId}} code or name",
-    "userCodeOrNameRequired": "Please provide valid {{uniId}} codes!",
+    "addNewUserCode": "Add new {{uniId}}: ",
+    "searchForUserCodeOrName": "Enter {{uniId}} or name",
+    "userCodeOrNameRequired": "Please provide valid {{uniId}}!",
     "basicSearch": "Import",
     "autoCompleteSearch": "Search",
     "operations": "Operations",
@@ -78,7 +77,10 @@
     "thursday": "Thursday",
     "friday": "Friday",
     "saturday": "Saturday",
-    "sunday": "Sunday"
+    "sunday": "Sunday",
+    "yesterday": "Yesterday",
+    "today": "Today",
+    "tomorrow": "Tomorrow"
   },
   "passwordProtected": {
     "exitPasswordProtected": "Exit password",
@@ -108,6 +110,7 @@
     "browse": "Browse",
     "upload": "Upload",
     "uploadInProgress": "Uploading...",
+    "forceOverwrite": "Overwrite existing files with same names",
     "hint": {
       "atLeastOneDockerfile": "Upload must contain a file named \"Dockerfile\"!",
       "dllExeNotAllowed": "Uploading .dll and .exe files is not allowed!",
@@ -147,7 +150,7 @@
     "student": "Student access",
     "instructor": "Instructor access",
     "admin": "Administrator access",
-    "userCodeRequired": "Invalid or missing {{uniId}} code",
+    "userCodeRequired": "Invalid or missing {{uniId}}",
     "nameRequired": "Name is required",
     "emailRequired": "Email is required",
     "mockUsers": {
@@ -301,18 +304,24 @@
     "available": "Available",
     "structuralRequirement": "Structural requirements",
     "regularExpression": "Regular expression",
-    "includes": "Includes",
-    "excludes": "Excludes",
+    "includes": "Must include",
+    "excludes": "Must not include",
+    "structuralRequirementErrorMessage": "Error message",
+    "structuralRequirementErrorMessageHelp": "If no custom error message is provided, one containing the violated regular expression will be generated.",
     "creator": "Creator",
     "description": "Description",
     "submittedSolution": "Solution",
     "ungraded": "Ungraded",
     "grade": "Grade",
     "notes": "Notes",
+    "personalDeadline": "Personal deadline",
+    "personalDeadlineHelp": "After setting a personal deadline, students can submit a new solution even after the hard deadline, assuming their last upload has not yet been graded or was rejected.",
     "ipAddresses": "IP Addresses",
     "ipRestrictions": "IP Address Restrictions",
+    "ipNoRoom": "No room associated with this address",
     "instructorFiles": "Instructor files",
     "instructorFilesHelp": "Files uploaded here will be accessible for students (once the task is available for them).",
+    "testFiles": "Test files",
     "taskFiles": "Task files",
     "taskFilesHelp": "Files uploaded here will be accessible for students (once the task is available for them).",
     "solution": "Solution",
@@ -360,6 +369,7 @@
     "downloadOnlyUngraded": "Download ungraded",
     "uploader": "Uploader",
     "successfulGrade": "Successfully graded",
+    "successfulPersonalDeadline": "Successfully set personal deadline",
     "evaluator": {
       "tabName": "Automatic evaluator",
       "environment": "Environment",
@@ -468,6 +478,12 @@
       "byName": "Student name",
       "byUploadTime": "Upload time"
     },
+    "filterSubmission": {
+      "filterSubmission": "Filter students",
+      "showAllSubmission": "All student",
+      "showWithSubmission": "Show students with uploaded submission",
+      "showWithoutSubmission": "Show students with no submission"
+    },
     "canvasAssignment": "Canvas assignment",
     "canvasUpload": "Visit the Canvas page of the assignment to upload a new solution!",
     "viewCode": "View code",
@@ -488,7 +504,7 @@
   "status": {
     "accepted": "Accepted",
     "rejected": "Rejected",
-    "lateSubmission": "Late submission"
+    "statusHelp": "For solutions that have been accepted, students are no longer able to upload new submissions. In the case of rejected submissions, resubmission is permitted if the deadline allows."
   },
   "quizQuestions": {
     "questionSet": "Question set",
@@ -529,7 +545,9 @@
     "successfulDuplication": "Successfully duplicated",
     "successfulFinalization": "Successfully finalized",
     "noGroupCreated": "A group must be created before creating a new test",
-    "passwordProtectedHelp": "For password-protected tests the test must be verified before starting. Leave the password field blank to turn off password protection."
+    "passwordProtectedHelp": "For password-protected tests the test must be verified before starting. Leave the password field blank to turn off password protection.",
+    "finalized": "Finalized",
+    "durationZeroHelp": "By setting duration to 0 you can allow students to write the test for the entire time it is available."
   },
   "markdownEditor": {
     "bold": "Bold",
@@ -626,6 +644,9 @@
     "enterName": "Enter IP restriction name",
     "resetWarning": "Note: Editing the Task will reset the previous IP restrictions selections. You need to select them again if you want to keep them.",
     "selectAddresses" : "Select IP address restrictions",
-    "selectedAddresses" : "Selected IP address restrictions:"
+    "selectedAddresses" : "Selected IP address restrictions:",
+    "custom": "Custom",
+    "selectDefault": "Select an option",
+    "duplicateIpError": "IP address and mask combination must be unique"
   }
 }

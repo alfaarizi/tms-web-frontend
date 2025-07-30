@@ -6,6 +6,7 @@ import { useDownloader } from '@/hooks/common/useDownloader';
 import { QUERY_KEY as GROUP_QUERY_KEY } from '@/hooks/instructor/GroupHooks';
 import { QUERY_KEY as TASK_QUERY_KEY } from '@/hooks/instructor/TaskHooks';
 import { SubmissionGrade } from '@/resources/instructor/SubmissionGrade';
+import { SubmissionPersonalDeadline } from '@/resources/instructor/SubmissionPersonalDeadline';
 
 export const QUERY_KEY = 'instructor/submissions';
 
@@ -60,6 +61,40 @@ export function useGradeMutation() {
                 groupID: data.groupID,
                 studentID: data.uploaderID,
             }]);
+
+            // Invalidate task grid
+            await queryClient.invalidateQueries([TASK_QUERY_KEY, { groupID: data.groupID }, 'grid']);
+        },
+    });
+}
+
+export function useSetPersonalDeadlineMutation() {
+    const queryClient = useQueryClient();
+
+    return useMutation((submissionData: SubmissionPersonalDeadline) => SubmissionsService
+        .setPersonalDeadline(submissionData), {
+        onSuccess: async (data) => {
+            // Replace existing Submission with the returned data
+            queryClient.setQueryData([QUERY_KEY, { id: data.id }], data);
+
+            // Update lists
+            const forTask = queryClient.getQueryData<Submission[]>([QUERY_KEY, { taskID: data.taskID }]);
+            if (forTask) {
+                const newList = forTask.map((file) => (file.id === data.id ? data : file));
+                queryClient.setQueryData([QUERY_KEY, { taskID: data.taskID }], newList);
+            }
+
+            const forUploader = queryClient.getQueryData<Submission[]>([QUERY_KEY, {
+                groupID: data.groupID,
+                uploaderID: data.uploaderID,
+            }]);
+            if (forUploader) {
+                const newList = forUploader.map((file) => (file.id === data.id ? data : file));
+                queryClient.setQueryData([QUERY_KEY, {
+                    groupID: data.groupID,
+                    uploaderID: data.uploaderID,
+                }], newList);
+            }
 
             // Invalidate task grid
             await queryClient.invalidateQueries([TASK_QUERY_KEY, { groupID: data.groupID }, 'grid']);

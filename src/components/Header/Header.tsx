@@ -2,16 +2,17 @@ import { ReactNode, useState } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 
+import { useMediaQuery } from 'react-responsive';
+import { Link } from 'react-router-dom';
 import { BrandLogo } from '@/components/Header/BrandLogo';
 import { AvailableTheme, useGlobalContext } from '@/context/GlobalContext';
 import { Role } from '@/resources/common/Role';
-import { useMediaQuery } from 'react-responsive';
 
 type Props = {
     children: ReactNode,
     showFetchingIndicator: boolean,
     currentRole: Role,
-}
+};
 
 /**
  * Gets the theme based variant of the top header navbar.
@@ -55,6 +56,14 @@ export function Header({ children, showFetchingIndicator, currentRole }: Props) 
     const [expanded, setExpanded] = useState(false);
     const isMobile = useMediaQuery({ maxWidth: 575.98 }); /* < sm */
 
+    const getHomePath = (role: Role) => {
+        let homePath = 'task-manager';
+        if (role === 'admin') {
+            homePath = 'course-manager';
+        }
+        return `/${role}/${homePath}`;
+    };
+
     return (
         <Navbar
             bg={getNavBarVariant(globalContext.theme)}
@@ -65,12 +74,12 @@ export function Header({ children, showFetchingIndicator, currentRole }: Props) 
             onToggle={setExpanded}
             className={`p-0 ${getCompactBreakpoint(currentRole)} ${expanded && isMobile ? 'sidebar-show' : ''}`}
         >
-            <BrandLogo showFetchingIndicator={showFetchingIndicator} />
+            <Link to={getHomePath(currentRole)}>
+                <BrandLogo showFetchingIndicator={showFetchingIndicator} />
+            </Link>
             <Navbar.Toggle aria-controls="navbar-nav" />
 
-            <Navbar.Collapse id="navbar-nav">
-                {children}
-            </Navbar.Collapse>
+            <Navbar.Collapse id="navbar-nav">{children}</Navbar.Collapse>
         </Navbar>
     );
 }

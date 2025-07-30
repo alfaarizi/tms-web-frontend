@@ -83,6 +83,7 @@ export function TestFileManager({ task, isActualSemester }: Props) {
                     taskFiles={testFiles.data}
                     onDownload={handleTestFileDownload}
                     onRemove={handleTestFileRemove}
+                    title={t('task.testFiles')}
                 />
             </>
         );
@@ -91,6 +92,7 @@ export function TestFileManager({ task, isActualSemester }: Props) {
         <TaskFilesList
             taskFiles={testFiles.data}
             onDownload={handleTestFileDownload}
+            title={t('task.testFiles')}
         />
     );
 }

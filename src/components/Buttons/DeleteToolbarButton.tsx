@@ -56,7 +56,8 @@ export function DeleteToolbarButton({
                     <Modal.Title>{t('common.confirmation')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    { itemName ? t('common.confirmDeleteItem', { itemName }) : t('common.confirmDelete')}
+                    {t('common.confirmDelete')}
+                    {itemName && <div><strong>{itemName}</strong></div>}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" size="sm" onClick={handleConfirm}>

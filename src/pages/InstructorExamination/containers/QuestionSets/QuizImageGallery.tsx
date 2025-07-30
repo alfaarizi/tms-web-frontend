@@ -60,6 +60,7 @@ export function QuizImageGallery({
                         <DeleteToolbarButton
                             displayTextBreakpoint="none"
                             onDelete={() => handleRemove(img.name)}
+                            itemName={img.name}
                         />
                     </>
                 ))}

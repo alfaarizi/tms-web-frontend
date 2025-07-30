@@ -1,9 +1,9 @@
-import { NotificationData } from '@/context/GlobalContext';
 import { Toast } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faInfoCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import styles from '@/components/NotificationToast/NotificationToast.module.css';
 import { useTranslation } from 'react-i18next';
+import styles from '@/components/NotificationToast/NotificationToast.module.css';
+import { NotificationData } from '@/context/GlobalContext';
 
 type Props = {
     data: NotificationData | null,
@@ -43,8 +43,15 @@ export function NotificationToast({
     }
 
     return (
-        <div className={styles.notificationContainer}>
-            <Toast show={data !== null} onClose={onClose} delay={10000} autohide>
+        <div className={`${styles.notificationContainer}`}>
+            <Toast
+                className={styles.toast}
+                show={data !== null}
+                onClose={onClose}
+                onClick={onClose}
+                delay={10000}
+                autohide
+            >
                 <Toast.Header>
                     <strong className="mr-auto">
                         <FontAwesomeIcon className={iconClass} icon={icon} />

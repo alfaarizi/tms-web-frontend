@@ -10,7 +10,7 @@
     "automated evaluation",
     "Canvas LMS"
   ],
-  "version": "4.14.1",
+  "version": "4.15.0",
   "private": true,
   "homepage": "https://gitlab.com/tms-elte/frontend-react",
   "bugs": "https://gitlab.com/tms-elte/frontend-react/-/issues",
@@ -87,10 +87,12 @@
     "@typescript-eslint/eslint-plugin": "^8.24.1",
     "@typescript-eslint/parser": "^8.24.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "cypress": "^14.5.2",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^3.8.3",
+    "eslint-plugin-cypress": "^3.6.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.4",
@@ -114,7 +116,9 @@
     "lint": "eslint . --ext .ts --ext .tsx",
     "lint:fix": "eslint . --ext .ts --ext .tsx --fix",
     "release": "standard-version",
-    "release:pre": "standard-version --prerelease alpha --skip.changelog"
+    "release:pre": "standard-version --prerelease alpha --skip.changelog",
+    "cypress": "cypress run",
+    "cypress:ui": "cypress open"
   },
   "engines": {
     "node": ">=22.0.0"

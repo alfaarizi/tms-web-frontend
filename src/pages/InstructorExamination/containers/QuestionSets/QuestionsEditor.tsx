@@ -143,7 +143,10 @@ export function QuestionsEditor({ questionSet }: Props) {
                             onClick={() => setEditedQuestion(question)}
                             text={t('common.edit')}
                         />
-                        <DeleteToolbarButton onDelete={() => handleRemoveQuestion(question)} />
+                        <DeleteToolbarButton
+                            onDelete={() => handleRemoveQuestion(question)}
+                            itemName={question.text}
+                        />
                         <ToolbarButton
                             icon={faPlus}
                             onClick={() => setQuestionToAddAnswer(question.id)}
@@ -159,7 +162,11 @@ export function QuestionsEditor({ questionSet }: Props) {
                             displayTextBreakpoint="none"
                             onClick={() => setEditedAnswer(answer)}
                         />
-                        <DeleteToolbarButton displayTextBreakpoint="none" onDelete={() => handleRemoveAnswer(answer)} />
+                        <DeleteToolbarButton
+                            displayTextBreakpoint="none"
+                            onDelete={() => handleRemoveAnswer(answer)}
+                            itemName={answer.text}
+                        />
                     </>
                 )}
             />

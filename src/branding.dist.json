@@ -3,8 +3,14 @@
     "hu": "",
     "en-US": ""
   },
-  "universityIdentifierName" : {
-    "hu": "Egyetemi azonosító",
-    "en-US": "University identifier"
+  "universityIdentifierName": {
+    "singular": {
+      "hu": "Egyetemi azonosító",
+      "en-US": "University identifier"
+    },
+    "plural": {
+      "hu": "Egyetemi azonosítók",
+      "en-US": "University identifiers"
+    }
   }
 }

@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.15.0](https://gitlab.com/tms-elte/frontend-react/compare/v4.14.1...v4.15.0) (2025-06-12)
+
+
+### Features
+
+* Add university identifier to branding ([d010663](https://gitlab.com/tms-elte/frontend-react/commit/d010663cf6946250070f402a5936e9e7214a3724))
+* Deadline for late submissions ([668519c](https://gitlab.com/tms-elte/frontend-react/commit/668519cef443981ad679513927effb68c602751c))
+
+
+### Bug Fixes
+
+* Added User Code column to quiz results table ([735408f](https://gitlab.com/tms-elte/frontend-react/commit/735408f1b29d57118a0334da39f1c2e03ed264df))
+* Typo in code checker hungarian translation ([b33a5bd](https://gitlab.com/tms-elte/frontend-react/commit/b33a5bda0da922ab9125992e16cf6ed4765f1dcd))
+
 ### [4.14.1](https://gitlab.com/tms-elte/frontend-react/compare/v4.14.0...v4.14.1) (2025-05-22)
 
 

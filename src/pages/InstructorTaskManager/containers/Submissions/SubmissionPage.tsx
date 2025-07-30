@@ -17,16 +17,19 @@ import {
     useGradeMutation,
     useDownloadTestReport,
     useStartCodeCompassMutation, useStopCodeCompassMutation,
-    useSubmission, useAutoTestResults,
+    useSubmission, useSetPersonalDeadlineMutation,
+    useAutoTestResults,
 } from '@/hooks/instructor/SubmissionHooks';
 import { GroupDateTime } from '@/pages/InstructorTaskManager/components/Groups/GroupDateTime';
 import { SubmissionListItem } from '@/pages/InstructorTaskManager/components/Students/SubmissionListItem';
 import { GraderModal } from '@/pages/InstructorTaskManager/components/Submissions/GraderModal';
+import { PersonalDeadlineModal } from '@/pages/InstructorTaskManager/components/Submissions/PersonalDeadlineModal';
 import { StaticCodeAnalysisTab } from '@/pages/InstructorTaskManager/components/Submissions/StaticCodeAnalysisTab';
 import { IpLogModal } from '@/pages/InstructorTaskManager/containers/Submissions/IpLogModal';
 import { Submission } from '@/resources/instructor/Submission';
 import { useShow } from '@/ui-hooks/useShow';
 import { AutoTestResultAlert } from '@/components/AutoTestResultAlert';
+import { StickyBreadcrumb } from '@/components/Header/StickyBreadcrumb';
 
 type Params = {
     id?: string
@@ -42,9 +45,11 @@ export function SubmissionPage() {
     const id = parseInt(params.id ? params.id : '-1', 10);
     const submission = useSubmission(id);
     const gradeMutation = useGradeMutation();
+    const personalDeadlineMutation = useSetPersonalDeadlineMutation();
     const downloadSubmission = useDownloadSubmission();
     const downloadTestReport = useDownloadTestReport();
     const showGrader = useShow();
+    const showPersonalDeadline = useShow();
     const showIpLog = useShow();
     const actualSemester = useActualSemester();
     const notifications = useNotifications();
@@ -94,6 +99,19 @@ export function SubmissionPage() {
         }
     };
 
+    const handleSetPersonalDeadline = async (data: Submission) => {
+        try {
+            await personalDeadlineMutation.mutateAsync(data);
+            showPersonalDeadline.toHide();
+            notifications.push({
+                variant: 'success',
+                message: t('task.successfulPersonalDeadline'),
+            });
+        } catch (e) {
+            // Already handled globally
+        }
+    };
+
     const handleStartCodeCompass = async (file: Submission) => {
         try {
             const data: Submission = await startCodeCompass.mutateAsync(file);
@@ -118,7 +136,7 @@ export function SubmissionPage() {
         <>
             {(submission.data.task && submission.data.task.group)
                 ? (
-                    <Breadcrumb>
+                    <StickyBreadcrumb>
                         <LinkContainer to="/instructor/task-manager">
                             <Breadcrumb.Item>{t('navbar.taskmanager')}</Breadcrumb.Item>
                         </LinkContainer>
@@ -148,7 +166,7 @@ export function SubmissionPage() {
                                 {submission.data.name ?? submission.data.translatedStatus}
                             </Breadcrumb.Item>
                         </LinkContainer>
-                    </Breadcrumb>
+                    </StickyBreadcrumb>
                 ) : null}
             <CustomCard>
                 <CustomCardHeader>
@@ -172,6 +190,14 @@ export function SubmissionPage() {
                             <DataRow label={t('task.uploadTime')}>
                                 <GroupDateTime value={item.uploadTime} timezone={item.task?.group?.timezone || ''} />
                             </DataRow>
+                            {item.personalDeadline ? (
+                                <DataRow label={t('task.personalDeadline')}>
+                                    <GroupDateTime
+                                        value={item.personalDeadline}
+                                        timezone={item.task?.group?.timezone || ''}
+                                    />
+                                </DataRow>
+                            ) : null}
                             <DataRow label={t('task.delay')}>
                                 {item.delay}
                             </DataRow>
@@ -199,6 +225,7 @@ export function SubmissionPage() {
                     onStartCodeCompass={handleStartCodeCompass}
                     onStopCodeCompass={handleStopCodeCompass}
                     onGrade={showGrader.toShow}
+                    onEditPersonalDeadline={showPersonalDeadline.toShow}
                     onIpLog={showIpLog.toShow}
                     task={submission.data.task}
                 />
@@ -229,6 +256,15 @@ export function SubmissionPage() {
                 onSave={handleGradeSave}
                 onCancel={showGrader.toHide}
                 isLoading={gradeMutation.isLoading}
+            />
+
+            <PersonalDeadlineModal
+                file={submission.data}
+                show={showPersonalDeadline.show}
+                onSave={handleSetPersonalDeadline}
+                onCancel={showPersonalDeadline.toHide}
+                isLoading={personalDeadlineMutation.isLoading}
+                timezone={submission.data.task?.group?.timezone ?? ''}
             />
 
             <IpLogModal

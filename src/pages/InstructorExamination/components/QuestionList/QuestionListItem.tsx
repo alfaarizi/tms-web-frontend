@@ -27,7 +27,7 @@ export function QuestionListItem({
 
     return (
         <QuizQuestionCard
-            text={question.text}
+            text={`#${question.questionNumber} ${question.text}`}
             options={(
                 <ButtonGroup>
                     {renderQuestionOptions ? renderQuestionOptions(question) : null}
