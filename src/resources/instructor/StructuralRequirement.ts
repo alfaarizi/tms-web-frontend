@@ -2,5 +2,6 @@ export interface StructuralRequirement {
     id?: number
     taskID?: number
     regexExpression: string
-    type: 'Includes' | 'Excludes'
+    type: 'Includes' | 'Excludes',
+    errorMessage?: string
 }
