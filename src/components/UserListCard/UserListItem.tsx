@@ -16,7 +16,7 @@ export function UserListItem({
         <ListCardItem className="d-flex justify-content-between">
             <span>
                 <strong>{user.name}</strong>
-                {` (${user.userCode})`}
+                <span className="font-monospace text-uppercase">{` (${user.userCode})`}</span>
             </span>
             <ButtonGroup>
                 {renderUserButtons(user)}

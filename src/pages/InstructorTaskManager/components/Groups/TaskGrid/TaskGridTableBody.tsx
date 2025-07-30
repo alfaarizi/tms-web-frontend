@@ -39,7 +39,7 @@ export function TaskGridTableBody({ getSubmission, students, taskList }: Props) 
                     {student.name}
                 </td>
                 <td style={{ left: widthForLeft }} className={styles.stickyHead}>
-                    {student.userCode}
+                    <span className="font-monospace text-uppercase">{student.userCode}</span>
                 </td>
                 {taskList.map((task) => {
                     const file = getSubmission(task.id, student.id);
