@@ -1,7 +1,6 @@
 import { FileUpload } from '@/components/FileUpload';
 import { faPaste } from '@fortawesome/free-solid-svg-icons';
 
-import { InsertFunc } from '@/components/ReactMdeWithCommands';
 import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 import { useTranslation } from 'react-i18next';
@@ -11,13 +10,13 @@ import {
     useQuizImageUploadMutation,
     useRemoveQuizImageMutation,
 } from '@/hooks/instructor/QuizQuestionSetHooks';
-
 import { ImageGallery } from '@/components/ImageGallery/ImageGallery';
 import { getFirstError } from '@/utils/getFirstError';
+import { ImageGalleryInsertFunc } from '@/components/Markdown/MarkdownEditor/MarkdownEditor';
 
 type GalleryProps = {
     questionSetID: number;
-    insertFunc: InsertFunc
+    insertFunc: ImageGalleryInsertFunc
 }
 
 export function QuizImageGallery({

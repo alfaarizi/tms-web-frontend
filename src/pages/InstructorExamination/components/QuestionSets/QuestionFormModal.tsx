@@ -5,10 +5,10 @@ import { Form, Modal } from 'react-bootstrap';
 
 import { FormError } from '@/components/FormError';
 import { QuizQuestion } from '@/resources/instructor/QuizQuestion';
-import { MarkdownFormControl } from '@/components/MarkdownFormControl';
+import { MarkdownFormControl } from '@/components/Markdown/MarkdownFormControl';
 import { FormButtons } from '@/components/Buttons/FormButtons';
-import { InsertFunc } from '@/components/ReactMdeWithCommands';
 import { ConfirmModal } from '@/components/Modals/ConfirmModal';
+import { ImageGalleryInsertFunc } from '@/components/Markdown/MarkdownEditor/MarkdownEditor';
 
 type Props = {
     title: string,
@@ -16,7 +16,7 @@ type Props = {
     onSave: (question: QuizQuestion) => void,
     editData?: QuizQuestion | null,
     onCancel: () => void,
-    renderGallery: (insertFunc: InsertFunc) => ReactNode,
+    renderGallery: (insertFunc: ImageGalleryInsertFunc) => ReactNode,
     isLoading:boolean
 }
 

@@ -4,7 +4,7 @@ import { DataRow } from '@/components/DataRow';
 import { Task } from '@/resources/student/Task';
 import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
 import { CustomCardTitle } from '@/components/CustomCard/CustomCardTitle';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 import { LocaleDateTime } from '@/components/LocaleDateTime';
 import { MultiLineTextBlock } from '@/components/MutliLineTextBlock/MultiLineTextBlock';
 import { ToolbarButton } from '@/components/Buttons/ToolbarButton';

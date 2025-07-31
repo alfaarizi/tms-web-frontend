@@ -9,7 +9,7 @@ import { LocaleDateTime } from '@/components/LocaleDateTime';
 import { DeleteToolbarButton } from '@/components/Buttons/DeleteToolbarButton';
 import { ButtonGroup } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 import { useRouteMatch } from 'react-router';
 
 type Props = {

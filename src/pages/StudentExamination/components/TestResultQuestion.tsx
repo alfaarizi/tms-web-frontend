@@ -1,7 +1,7 @@
 import { QuizResultQuestion } from '@/resources/student/QuizResultQuestion';
 import { Col, Row } from 'react-bootstrap';
 import { IsCorrect } from '@/components/IsCorrect';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 import { QuizQuestionCard } from '@/components/QuizQuestionCard';
 
 type Props = {

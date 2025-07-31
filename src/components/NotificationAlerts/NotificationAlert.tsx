@@ -5,7 +5,7 @@ import { Notification } from '@/resources/common/Notification';
 import { Alert } from 'react-bootstrap';
 import { useGlobalContext } from '@/context/GlobalContext';
 import { useDismissNotificationMutation } from '@/hooks/common/NotificationsHooks';
-import { MarkdownRenderer } from '@/components/MarkdownRenderer/MarkdownRenderer';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 import { DISMISSED_NOTIFICATIONS_LOCAL_STORAGE_KEY } from '@/constants/localStorageKeys';
 
 type Props = {

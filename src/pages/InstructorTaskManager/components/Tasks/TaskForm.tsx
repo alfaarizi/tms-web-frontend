@@ -10,7 +10,7 @@ import { CustomCardHeader } from '@/components/CustomCard/CustomCardHeader';
 import { DateTimePickerControl } from '@/components/DateTimePickerControl';
 import { ValidationErrorBody } from '@/exceptions/ServerSideValidationError';
 import { useServersideFormErrors } from '@/ui-hooks/useServersideFormErrors';
-import { MarkdownFormControl } from '@/components/MarkdownFormControl';
+import { MarkdownFormControl } from '@/components/Markdown/MarkdownFormControl';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ToolbarButton } from '@/components/Buttons/ToolbarButton';
 import { useTextPaste } from '@/ui-hooks/useTextPaste';
