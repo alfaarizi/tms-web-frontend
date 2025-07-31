@@ -79,7 +79,9 @@ export function StudentSolutionsTab({
                                             {' '}
                                             {file.gitRepo}
                                             {' '}
-                                            {user.userCode}
+                                            <span className="font-monospace text-uppercase">
+                                                {user.userCode}
+                                            </span>
                                         </kbd>
                                     ) : file.gitRepo}
                                 </DataRow>
